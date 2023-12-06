@@ -479,7 +479,7 @@ nanoui is used to open and update nano browser uis
 	if(ref)
 		param = "\ref[ref]"
 
-	addtimer(CALLBACK(user, /mob/proc/post_close_winset, window_id, param), 2)
+	addtimer(CALLBACK(user, nameof(/mob.proc/post_close_winset), window_id, param), 2)
 
 /mob/proc/post_close_winset(window_id, param)
 	if(client)
