@@ -1,1 +1,1 @@
-(docker start onyxdb) -or (docker run -d -p 3306:3306 --name onyxdb onyxdb --authentication_policy=mysql_native_password)
+(docker start onyxdb) -or (docker run -d -p 3306:3306 --name onyxdb onyxdb --default_authentication_plugin=mysql_native_password)

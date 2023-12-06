@@ -3,6 +3,7 @@
 
 	var/list/probabilities = list()
 	var/traitor_scaling = FALSE
+	var/changeling_starting_points = 0
 	var/disable_objectives = "none"
 	var/ert_admin_only = FALSE
 	var/protect_roles_from_antagonist = FALSE
@@ -17,6 +18,7 @@
 			log_misc("Unknown game mode probability configuration definition: [game_mode].")
 
 	CONFIG_LOAD_BOOL(traitor_scaling, data["traitor_scaling"])
+	CONFIG_LOAD_NUM(changeling_starting_points, data["changeling_starting_points"])
 	CONFIG_LOAD_STR(disable_objectives, data["disable_objectives"])
 
 	if(disable_objectives != null)

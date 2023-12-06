@@ -541,7 +541,7 @@
 		name = "strong resonance field"
 		resonance_damage = 30
 
-	addtimer(CALLBACK(src, .proc/burst, loc), timetoburst)
+	addtimer(CALLBACK(src, nameof(.proc/burst), loc), timetoburst)
 
 /obj/effect/resonance/Destroy()
 	if(res)

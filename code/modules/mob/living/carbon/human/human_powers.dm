@@ -473,4 +473,3 @@
 		if(SKIN_THREAT)
 			skin_state = SKIN_NORMAL
 	update_skin(1)
-

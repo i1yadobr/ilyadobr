@@ -32,7 +32,7 @@
 		new_sound = 'sound/AI/moneyhackstart.ogg'
 	)
 
-	addtimer(CALLBACK(src, .proc/end), 10 MINUTES)
+	addtimer(CALLBACK(src, nameof(.proc/end)), 10 MINUTES)
 
 /datum/event/money_hacker/proc/end()
 	SSevents.evars["money_hacker_running"] = FALSE

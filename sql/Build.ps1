@@ -1,1 +1,1 @@
-docker build ./sql -t onyxdb
+docker build -t onyxdb .

@@ -15,6 +15,21 @@
       "dmb": "${workspaceFolder}/${command:CurrentDMB}"
     },
     {
+      "type": "byond",
+      "request": "launch",
+      "name": "DD Launch",
+      "dmb": "${workspaceFolder}/${command:CurrentDMB}",
+      "dreamDaemon": true
+    },
+    {
+      "type": "byond",
+      "request": "launch",
+      "name": "Build & DD Launch",
+      "preLaunchTask": "dm: build - ${command:CurrentDME}",
+      "dmb": "${workspaceFolder}/${command:CurrentDMB}",
+      "dreamDaemon": true
+    },
+    {
       "name": "Nano Watch",
       "type": "PowerShell",
       "request": "launch",

@@ -74,7 +74,7 @@ var/global/list/protected_objects = list(
 	mimicry(o)
 
 	health = maxHealth
-	register_signal(src, SIGNAL_MOVED, .proc/_on_moved)
+	register_signal(src, SIGNAL_MOVED, nameof(.proc/_on_moved))
 
 /mob/living/simple_animal/hostile/mimic/proc/_on_moved()
 	_update_inactive_time()

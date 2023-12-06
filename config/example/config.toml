@@ -38,9 +38,6 @@ ticklag = 0.625
 ## 65 recommended.
 client_fps = 65
 
-## Defines the world fps.
-fps = 20
-
 ## Set to true to have the changelog file automatically open when a user connects and hasn't seen the latest changelog.
 aggressive_changelog = false
 
@@ -141,6 +138,10 @@ eams_blocks_ooc = false
 [gamemode]
 ## Set to true to scale amount of traitors based on amount of players.
 traitor_scaling = true
+
+## Amount of genetic points changelings receive on creation
+## Uncomment to override the value in /datum/changeling
+changeling_starting_points = 13
 
 ## Uncomment and set value to disable antag objectives.
 ## "none" enable all

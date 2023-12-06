@@ -46,6 +46,8 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 		changelingID = "[changelingID]"
 	else
 		changelingID = "[rand(1,99)]"
+	if (config.gamemode.changeling_starting_points)
+		geneticpoints = config.gamemode.changeling_starting_points
 	reset_my_mob(_M)
 	set_next_think(world.time)
 
