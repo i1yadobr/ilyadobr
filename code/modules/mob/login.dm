@@ -40,12 +40,12 @@
 			params["name"] = real_name || name
 			world.Export("[config.external.login_export_addr]?[list2params(params)]", null, 1)
 
-/mob
-	var/client/my_client // Need to keep track of this ourselves, since by the time Logout() is called the client has already been nulled
-
 /mob/Login()
 	CAN_BE_REDEFINED(TRUE)
-	SHOULD_CALL_PARENT(TRUE)
+	SHOULD_CALL_PARENT(FALSE) // Do not call parent here, see https://github.com/ParadiseSS13/Paradise/pull/20270/files
+	if(!client)
+		return
+
 	GLOB.player_list |= src
 	update_Login_details()
 	world.update_status()
@@ -56,7 +56,8 @@
 
 	next_move = 1
 	set_sight(sight|SEE_SELF)
-	..()
+
+	client.statobj = src
 
 	my_client = client
 
@@ -87,6 +88,19 @@
 		winset(src, null, "mainwindow.macro=hotkeymode hotkey_toggle.is-checked=true input.focus=false")
 	else
 		winset(src, null, "mainwindow.macro=macro hotkey_toggle.is-checked=false input.focus=true")
+
+	if(!skybox)
+		skybox = new(src)
+		skybox.owner = src
+	client.screen += skybox
+
+	if(ability_master)
+		ability_master.update_abilities(1, src)
+		ability_master.toggle_open(1)
+		if(mind && ability_master.spell_objects)
+			for(var/obj/screen/ability/spell/screen in ability_master.spell_objects)
+				var/datum/spell/S = screen.spell
+				mind.learned_spells |= S
 
 	SEND_GLOBAL_SIGNAL(SIGNAL_LOGGED_IN, src)
 	SEND_SIGNAL(src, SIGNAL_LOGGED_IN, src)

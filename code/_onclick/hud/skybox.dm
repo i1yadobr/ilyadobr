@@ -74,16 +74,3 @@
 	. = ..()
 	if(. && skybox)
 		skybox.update()
-
-/mob/Login()
-	if(!skybox)
-		skybox = new(src)
-		skybox.owner = src
-	client.screen += skybox
-	..()
-
-/mob/Destroy()
-	if(client)
-		client.screen -= skybox
-	QDEL_NULL(skybox)
-	return ..()

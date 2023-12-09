@@ -27,12 +27,6 @@
 	register_signal(L, SIGNAL_INVISIBILITY_SET, /mob/zshadow/proc/update_invisibility)
 
 
-/mob/Destroy()
-	if(shadow)
-		qdel(shadow)
-		shadow = null
-	. = ..()
-
 /mob/zshadow/Destroy()
 	if(owner)
 		unregister_signal(owner, SIGNAL_DIR_SET)

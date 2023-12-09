@@ -1,10 +1,3 @@
-#define MODIFIER_STACK_FORBID	1	// Disallows stacking entirely.
-#define MODIFIER_STACK_EXTEND	2	// Disallows a second instance, but will extend the first instance if possible.
-#define MODIFIER_STACK_ALLOWED	3	// Multiple instances are allowed.
-
-#define MODIFIER_GENETIC	1	// Modifiers with this flag will be copied to mobs who get cloned.
-
-
 // This is a datum that tells the mob that something is affecting them.
 // The advantage of using this datum verses just setting a variable on the mob directly, is that there is no risk of two different procs overwriting
 // each other, or other weirdness.  An excellent example is adjusting max health.
@@ -247,4 +240,3 @@
 	if(abs)
 		return "[abs( ((multi - 1) * 100) )]%"
 	return "[((multi - 1) * 100)]%"
-
