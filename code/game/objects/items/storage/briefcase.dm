@@ -66,7 +66,8 @@
 
 /obj/item/storage/briefcase/std/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
 	if(!authentication_complete)
-		audible_message("\The [src] blinks red.")
+		// TODO(rufus): refactor to visible message, blinking color is definitely not audible
+		audible_message("\The [src] blinks red.", runechat_message = "*blink*")
 		return
 	var/list/data = ui_data(user)
 

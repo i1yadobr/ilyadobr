@@ -54,7 +54,7 @@
 		if(LIFT_WAITING_B)
 			busy_state = null
 			return
-	
+
 	set_next_think(next_process)
 
 /datum/turbolift/proc/do_move()
@@ -80,7 +80,7 @@
 		else // We failed to close the doors - probably, someone is blocking them; stop trying to move
 			doors_closing = 0
 			open_doors()
-			control_panel_interior.audible_message("\The [current_floor.ext_panel] buzzes loudly.")
+			control_panel_interior.audible_message("\The [current_floor.ext_panel] buzzes loudly.", runechat_message = "*BUZZ-ZZ*")
 			playsound(control_panel_interior.loc, "sound/machines/buzz-two.ogg", 50, 1)
 			return 0
 

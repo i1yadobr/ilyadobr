@@ -354,7 +354,7 @@
 /obj/machinery/computer/HolodeckControl/proc/togglelock(mob/user)
 	if(cantogglelock(user))
 		islocked = !islocked
-		audible_message("<span class='notice'>\The [src] emits a series of beeps to announce it has been [islocked ? null : "un"]locked.</span>", hearing_distance = 3)
+		audible_message("<span class='notice'>\The [src] emits a series of beeps to announce it has been [islocked ? null : "un"]locked.</span>", hearing_distance = 3, runechat_message = "*beep-beep-beep*")
 		return 0
 	else
 		to_chat(user, "<span class='warning'>Access denied.</span>")

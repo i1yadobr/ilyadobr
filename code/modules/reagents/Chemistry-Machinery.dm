@@ -571,7 +571,7 @@
 		return
 
 	if(!(beaker.atom_flags & ATOM_FLAG_OPEN_CONTAINER))
-		audible_message(SPAN("warning", "<b>The [src]</b> states, \"The beaker is closed, reagent processing is impossible.\""))
+		audible_message(SPAN("warning", "<b>The [src]</b> states, \"The beaker is closed, reagent processing is impossible.\""), runechat_message = "The beaker is closed, reagent processing is impossible.")
 		playsound(src.loc, 'sound/signals/error28.ogg', 50, 1)
 		return
 

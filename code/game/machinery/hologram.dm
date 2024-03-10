@@ -121,7 +121,7 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 	targetpad.incoming_connection = 1
 	playsound(targetpad.loc, 'sound/signals/processing19.ogg', 50)
 	targetpad.icon_state = "[targetpad.base_icon]1"
-	targetpad.audible_message("<b>\The [src]</b> announces, \"Incoming communications request from [targetpad.sourcepad.loc.loc].\"")
+	targetpad.audible_message("<b>\The [src]</b> announces, \"Incoming communications request from [targetpad.sourcepad.loc.loc].\"", runechat_message = "Incoming communications request")
 	to_chat(user, "<span class='notice'>Trying to establish a connection to the holopad in [targetpad.loc.loc]... Please await confirmation from recipient.</span>")
 
 
@@ -196,12 +196,12 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	var/name_used = M.GetVoice()
 	if(targetpad) //If this is the pad you're making the call from
 		var/message = "<i><span class='game say'>Holopad received, <span class='name'>[name_used]</span> [speaking.format_message(text, verb)]</span></i>"
-		targetpad.audible_message(message)
+		targetpad.audible_message(message, runechat_message = text)
 		targetpad.last_message = message
 	if(sourcepad) //If this is a pad receiving a call
 		if(name_used==caller_id||text==last_message||findtext(text, "Holopad received")) //prevent echoes
 			return
-		sourcepad.audible_message("<i><span class='game say'>Holopad received, <span class='name'>[name_used]</span> [speaking.format_message(text, verb)]</span></i>")
+		sourcepad.audible_message("<i><span class='game say'>Holopad received, <span class='name'>[name_used]</span> [speaking.format_message(text, verb)]</span></i>", runechat_message = text)
 
 /obj/machinery/hologram/holopad/see_emote(mob/living/M, text)
 	if(M)

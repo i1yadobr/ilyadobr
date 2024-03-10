@@ -1,4 +1,4 @@
-#define WARDROBE_BLIND_MESSAGE(fool) "\The [src] flashes a light at \the [fool] as it states a message."
+#define WARDROBE_DEAF_MESSAGE(fool) "\The [src] flashes a light at \the [fool] as it states a message."
 
 /obj/structure/undies_wardrobe
 	name = "underwear wardrobe"
@@ -23,7 +23,7 @@
 		else
 			message = "No ID card detected. Thank you for your contribution."
 
-		audible_message(message, WARDROBE_BLIND_MESSAGE(user))
+		audible_message(message, WARDROBE_DEAF_MESSAGE(user), runechat_message = splittext(message, ".")[1])
 
 		var/number_of_underwear = LAZYACCESS(amount_of_underwear_by_id_card, id) - 1
 		if(number_of_underwear)
@@ -94,12 +94,12 @@
 
 		var/id = H.get_id_card()
 		if(!id)
-			audible_message("No ID card detected. Unable to acquire your underwear quota for this shift.", WARDROBE_BLIND_MESSAGE(H))
+			audible_message("No ID card detected. Unable to acquire your underwear quota for this shift.", WARDROBE_DEAF_MESSAGE(H), runechat_message = "No ID card detected")
 			return
 
 		var/current_quota = LAZYACCESS(amount_of_underwear_by_id_card, id)
 		if(current_quota >= length(GLOB.underwear.categories))
-			audible_message("You have already used up your underwear quota for this shift. Please return previously acquired items to increase it.", WARDROBE_BLIND_MESSAGE(H))
+			audible_message("You have already used up your underwear quota for this shift. Please return previously acquired items to increase it.", WARDROBE_DEAF_MESSAGE(H), runechat_message = "You have already used up your underwear quota for this shift.")
 			return
 		LAZYSET(amount_of_underwear_by_id_card, id, ++current_quota)
 
@@ -118,4 +118,4 @@
 		if(!UWI.underwear_type)
 			. -= UWI
 
-#undef WARDROBE_BLIND_MESSAGE
+#undef WARDROBE_DEAF_MESSAGE

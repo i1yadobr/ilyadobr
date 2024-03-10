@@ -308,14 +308,14 @@
 		return //don't let you cremate something twice or w/e
 
 	if(contents.len <= 0)
-		src.audible_message("<span class='warning'>You hear a hollow crackle.</span>", 1)
+		src.audible_message("<span class='warning'>You hear a hollow crackle.</span>", 1, runechat_message = "*crackle*")
 		return
 
 	else
 		if(!isemptylist(src.search_contents_for(/obj/item/disk/nuclear)))
 			to_chat(loc, "The button's status indicator flashes yellow, indicating that something important is inside the crematorium, and must be removed.")
 			return
-		src.audible_message("<span class='warning'>You hear a roar as the [src] activates.</span>", 1)
+		src.audible_message("<span class='warning'>You hear a roar as the [src] activates.</span>", 1, runechat_message = "*roaring*")
 
 		cremating = 1
 		locked = 1
@@ -366,6 +366,7 @@
 
 			if(!M.isSynthetic())
 				admin_attack_log(M, A, "Cremated their victim.", "Was cremated.", "cremated alive")
+				// TODO(rufus): refactor to crematorium's own audible message, /atom/proc/audible_message(), and add runechat message override
 				M.audible_message("[M]'s screams cease, as does any movement within the [src]. All that remains is a dull, empty silence.")
 				M.dust()
 

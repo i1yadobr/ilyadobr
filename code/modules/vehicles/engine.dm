@@ -56,10 +56,10 @@
 	return cell.use(cost_per_move * CELLRATE)
 
 /obj/item/engine/electric/rev_engine(atom/movable/M)
-	M.audible_message("\The [M] beeps, spinning up.")
+	M.audible_message("\The [M] beeps, spinning up.", runechat_message = "*beeeeep*")
 
 /obj/item/engine/electric/putter(atom/movable/M)
-	M.audible_message("\The [M] makes one depressed beep before winding down.")
+	M.audible_message("\The [M] makes one depressed beep before winding down.", runechat_message = "*beep...*")
 
 /obj/item/engine/electric/emp_act(severity)
 	if(cell)
@@ -135,7 +135,7 @@
 	return use_power()
 
 /obj/item/engine/thermal/rev_engine(atom/movable/M)
-	M.audible_message("\The [M] rumbles to life.")
+	M.audible_message("\The [M] rumbles to life.", runechat_message = "*rumble*")
 
 /obj/item/engine/electric/putter(atom/movable/M)
-	M.audible_message("\The [M] putters before turning off.")
+	M.audible_message("\The [M] putters before turning off.", runechat_message = "*pshh...*")
