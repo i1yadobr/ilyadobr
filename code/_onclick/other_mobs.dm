@@ -1,5 +1,5 @@
-// Generic damage proc (metroids and monkeys).
 /atom/proc/attack_generic(mob/user as mob)
+// Generic damage proc (metroids and monkeys).
 	return 0
 
 /*

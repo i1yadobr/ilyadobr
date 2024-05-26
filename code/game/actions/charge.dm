@@ -140,11 +140,12 @@
 		var/turf/next_turf = get_step(charger, dir)
 		if(!next_turf)
 			continue
-		if(next_turf.Adjacent(charger) && (iswall(next_turf)))
+		if(next_turf.Adjacent(charger) && (istype(next_turf, /turf/simulated/wall)))
 			if(!isanimal(charger))
 				SSexplosions.medturf += next_turf
 				continue
-			next_turf.attack_generic(charger, 40, wallbreaker=1)
+			var/turf/simulated/wall/wall_turf = next_turf
+			wall_turf.attack_generic(charger, 40, wallbreaker=1)
 			continue
 		for(var/obj/object in next_turf.contents)
 			if(!object.Adjacent(charger))
