@@ -7,8 +7,6 @@ GLOBAL_DATUM_INIT(abductor, /datum/antagonist/abductor, new)
 	role_text = "Abductor"
 	role_text_plural = "Abductors"
 	landmark_id = "Abductor"
-	leader_welcome_text = "You are the leader of the Syndicate Operatives; hail to the chief. Use :t to speak to your underlings."
-	welcome_text = "To speak on the strike team's private channel use :t."
 	flags = ANTAG_OVERRIDE_JOB | ANTAG_OVERRIDE_MOB | ANTAG_CLEAR_EQUIPMENT | ANTAG_RANDOM_EXCEPTED
 	antaghud_indicator = "hudabductor"
 	mob_path = /mob/living/carbon/human/abductor

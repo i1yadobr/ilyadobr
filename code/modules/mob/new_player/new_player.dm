@@ -1,5 +1,3 @@
-//This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:33
-
 /mob/new_player
 	var/ready = 0
 	var/spawning = 0//Referenced when you want to delete the new_player later on in the code.
@@ -127,10 +125,6 @@
 		new_player_panel_proc()
 
 	if(href_list["observe"])
-		if(GAME_STATE < RUNLEVEL_LOBBY)
-			to_chat(src, "<span class='warning'>Please wait for server initialization to complete...</span>")
-			return
-
 		if (!SSeams.CheckForAccess(client))
 			return
 
@@ -151,6 +145,8 @@
 			else
 				to_chat(src, "<span class='danger'>Could not locate an observer spawn point. Use the Teleport verb to jump to the map.</span>")
 			observer.timeofdeath = world.time // Set the time of death so that the respawn timer works correctly.
+			if (GAME_STATE < RUNLEVEL_LOBBY)
+				to_chat(usr, "<span class='boldannounce'>The world is still initializing, please be patient and expect visual glitches...")
 
 			if(QDELETED(client.holder))
 				announce_ghost_joinleave(src)

@@ -749,6 +749,7 @@ Congratulations! You are now trained for invasive xenobiology research!"}
 					M.reagents.add_reagent(chemical, inject_am )
 
 			set_next_think(world.time + 1 SECOND)
+			return
 
 	src.victim = null
 

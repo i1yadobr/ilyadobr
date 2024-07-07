@@ -9,6 +9,7 @@
 	var/blood_vamp = 0							// How much vampire blood do we have?
 	var/frenzy = 0								// A vampire's frenzy meter.
 	var/last_frenzy_message = 0					// Keeps track of when the last frenzy alert was sent.
+	var/list/last_ability_use_times = list()         // Keep track of last ability use time for cooldowns
 	var/status = 0								// Bitfield including different statuses.
 	var/stealth = TRUE							// Do you want your victims to know of your sucking?
 	var/list/datum/power/vampire/purchased_powers = list()			// List of power datums available for use.

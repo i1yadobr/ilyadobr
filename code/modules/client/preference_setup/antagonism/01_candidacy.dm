@@ -37,6 +37,8 @@
 	var/list/all_antag_types = GLOB.all_antag_types_
 	for(var/antag_type in all_antag_types)
 		var/datum/antagonist/antag = all_antag_types[antag_type]
+		if(!(antag.flags & ANTAG_DISPLAY_IN_CHARSETUP))
+			continue
 		. += "<tr><td>[antag.role_text]: </td><td>"
 		var/bannedReason = jobban_isbanned(preference_mob(), antag.id)
 		if(bannedReason == "Whitelisted Job")
@@ -125,6 +127,9 @@
 	var/list/private_valid_special_roles = list()
 
 	for(var/antag_type in GLOB.all_antag_types_)
+		var/datum/antagonist/antag = GLOB.all_antag_types_[antag_type]
+		if(!(antag.flags & ANTAG_DISPLAY_IN_CHARSETUP))
+			continue
 		private_valid_special_roles += antag_type
 
 	var/list/ghost_traps = get_ghost_traps()

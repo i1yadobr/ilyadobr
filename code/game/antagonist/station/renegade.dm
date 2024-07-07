@@ -15,13 +15,10 @@ GLOBAL_DATUM_INIT(renegades, /datum/antagonist/renegade, new)
 
 	id = MODE_RENEGADE
 	flags = ANTAG_SUSPICIOUS | ANTAG_IMPLANT_IMMUNE | ANTAG_RANDSPAWN | ANTAG_VOTABLE
-	hard_cap = 5
-	hard_cap_round = 7
-
-	hard_cap = 8
-	hard_cap_round = 12
-	initial_spawn_req = 3
-	initial_spawn_target = 6
+	hard_cap = 3
+	hard_cap_round = 3
+	initial_spawn_req = 1
+	initial_spawn_target = 2
 	antaghud_indicator = "hudrenegade"
 
 	var/list/spawn_guns = list(

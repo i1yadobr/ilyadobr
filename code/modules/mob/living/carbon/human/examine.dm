@@ -277,7 +277,7 @@
 			continue
 		msg += SPAN("danger", "[src] [T.has] \a [implant.name] sticking out of [T.his] flesh!\n")
 	if(digitalcamo)
-		msg += "[T.He] [T.is] repulsively uncanny!\n"
+		msg += "[T.He] [T.is] unsettlingly distorted!\n"
 
 	if(hasHUD(user, HUD_SECURITY))
 		var/perpname = "wot"
@@ -329,7 +329,7 @@
 	msg += applying_pressure
 
 	if (isundead(src) && !isfakeliving(src))
-		msg += SPAN("warning", "[T.He] looks unhealthy pale.\n")
+		msg += SPAN("warning", "[T.He] looks unnaturally pale.\n")
 
 	if (pose)
 		if( findtext(pose,".",length(pose)) == 0 && findtext(pose,"!",length(pose)) == 0 && findtext(pose,"?",length(pose)) == 0 )

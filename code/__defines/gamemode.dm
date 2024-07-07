@@ -22,18 +22,19 @@
 #define BE_VAMPIRE "BE_VAMPIRE"
 
 // Antagonist datum flags.
-#define ANTAG_OVERRIDE_JOB        0x1 // Assigned job is set to MODE when spawning.
-#define ANTAG_OVERRIDE_MOB        0x2 // Mob is recreated from datum mob_type var when spawning.
-#define ANTAG_CLEAR_EQUIPMENT     0x4 // All preexisting equipment is purged.
-#define ANTAG_CHOOSE_NAME         0x8 // Antagonists are prompted to enter a name.
-#define ANTAG_IMPLANT_IMMUNE     0x10 // Cannot be loyalty implanted.
-#define ANTAG_SUSPICIOUS         0x20 // Shows up on roundstart report.
-#define ANTAG_HAS_LEADER         0x40 // Generates a leader antagonist.
-#define ANTAG_HAS_NUKE           0x80 // Will spawn a nuke at supplied location.
-#define ANTAG_RANDSPAWN         0x100 // Potentially randomly spawns due to events.
-#define ANTAG_VOTABLE           0x200 // Can be voted as an additional antagonist before roundstart.
-#define ANTAG_SET_APPEARANCE    0x400 // Causes antagonists to use an appearance modifier on spawn.
-#define ANTAG_RANDOM_EXCEPTED   0x800 // If a game mode randomly selects antag types, antag types with this flag should be excluded.
+#define ANTAG_OVERRIDE_JOB              0x1 // Assigned job is set to MODE when spawning.
+#define ANTAG_OVERRIDE_MOB              0x2 // Mob is recreated from datum mob_type var when spawning.
+#define ANTAG_CLEAR_EQUIPMENT           0x4 // All preexisting equipment is purged.
+#define ANTAG_CHOOSE_NAME               0x8 // Antagonists are prompted to enter a name.
+#define ANTAG_IMPLANT_IMMUNE           0x10 // Cannot be loyalty implanted.
+#define ANTAG_SUSPICIOUS               0x20 // Shows up on roundstart report.
+#define ANTAG_HAS_LEADER               0x40 // Generates a leader antagonist.
+#define ANTAG_HAS_NUKE                 0x80 // Will spawn a nuke at supplied location.
+#define ANTAG_RANDSPAWN               0x100 // Potentially randomly spawns due to events.
+#define ANTAG_VOTABLE                 0x200 // Can be voted as an additional antagonist before roundstart.
+#define ANTAG_SET_APPEARANCE          0x400 // Causes antagonists to use an appearance modifier on spawn.
+#define ANTAG_RANDOM_EXCEPTED         0x800 // If a game mode randomly selects antag types, antag types with this flag should be excluded.
+#define ANTAG_DISPLAY_IN_CHARSETUP   0x1000 // If a game mode randomly selects antag types, antag types with this flag should be excluded.
 
 // Mode/antag template macros.
 #define MODE_ABDUCTOR "abductor"

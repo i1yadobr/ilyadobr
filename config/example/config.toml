@@ -160,36 +160,36 @@ protect_roles_from_antagonist = false
 ## Default probablity is 1, increase to make that mode more likely to be picked.
 ## Set to 0 to disable that mode.
 extended = 0
-traitor = 3
+traitor = 2
 changeling = 3
-wizard = 1
+wizard = 3
 malfunction = 1
-ninja = 1
-revolution = 2
+ninja = 2
+revolution = 0
 cult = 2
 nuke = 1
-meteor = 1
-calamity = 2
+meteor = 0
+calamity = 0
 ## Deity.
-god = 1
+god = 0
 ## Cult & wizard.
-conflux = 2
+conflux = 0
 ## Ninja & traitor.
 intrigue = 2
 ## Changelings & wizards.
 lizard = 2
 ## Changeling, malf & renegade.
-paranoia = 2
+paranoia = 0
 ## Changeling & traitor.
 traitorling = 3
 ## Revolution & wizard.
-unity = 1
+unity = 0
 ## Cult & revolution.
-uprising = 2
+uprising = 0
 ## Ninja & wizard.
-visitors = 1
+visitors = 2
 ## Nuke & revolution.
-siege = 2
+siege = 0
 heist = 0
 ## Deathsquad & xenophage.
 bughunt = 0
@@ -655,3 +655,7 @@ silence_time = 6000
 
 ## How long to wait between messaging admins about occurrences of a unique error.
 msg_delay = 50
+
+[debug]
+## Only load the first Z-level, skip the rest, intended to speed up reload-heavy testing
+only_load_z1 = false

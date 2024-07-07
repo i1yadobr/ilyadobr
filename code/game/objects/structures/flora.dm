@@ -268,8 +268,12 @@
 		dead = TRUE
 
 //No complex interactions, just make them fragile
-/obj/structure/flora/pottedplant/ex_act()
-	death()
+/obj/structure/flora/pottedplant/ex_act(severity)
+	switch(severity)
+		if(EXPLODE_DEVASTATE, EXPLODE_HEAVY)
+			Destroy()
+		if(EXPLODE_LIGHT)
+			death()
 
 /obj/structure/flora/pottedplant/fire_act()
 	death()

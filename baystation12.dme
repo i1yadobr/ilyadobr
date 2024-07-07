@@ -295,6 +295,7 @@
 #include "code\datums\configuration\ban_section.dm"
 #include "code\datums\configuration\character_setup_section.dm"
 #include "code\datums\configuration\configuration_section.dm"
+#include "code\datums\configuration\debug_section.dm"
 #include "code\datums\configuration\donations_section.dm"
 #include "code\datums\configuration\error_section.dm"
 #include "code\datums\configuration\external_section.dm"

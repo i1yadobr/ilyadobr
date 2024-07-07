@@ -11,7 +11,7 @@ GLOBAL_DATUM_INIT(changelings, /datum/antagonist/changeling, new)
 	additional_restricted_jobs = list(/datum/job/officer, /datum/job/warden, /datum/job/detective)
 	blacklisted_jobs = list(/datum/job/ai, /datum/job/cyborg)
 	welcome_text = "Use say \",g message\" to communicate with your fellow changelings. Remember: you get all of their absorbed DNA if you absorb them."
-	flags = ANTAG_SUSPICIOUS | ANTAG_RANDSPAWN | ANTAG_VOTABLE
+	flags = ANTAG_SUSPICIOUS | ANTAG_RANDSPAWN | ANTAG_VOTABLE | ANTAG_DISPLAY_IN_CHARSETUP
 	antaghud_indicator = "hudchangeling"
 
 	faction = "changeling"

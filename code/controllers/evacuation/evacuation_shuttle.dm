@@ -129,7 +129,7 @@
 	option_desc = "recall the emergency shuttle"
 	option_target = EVAC_OPT_RECALL_SHUTTLE
 	needs_syscontrol = TRUE
-	silicon_allowed = FALSE
+	silicon_allowed = TRUE
 
 /datum/evacuation_option/recall_shuttle/execute(mob/user)
 	cancel_call_proc(user)

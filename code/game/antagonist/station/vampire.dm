@@ -12,7 +12,7 @@ GLOBAL_DATUM_INIT(vampires, /datum/antagonist/vampire, new)
 
 	blacklisted_jobs = list(/datum/job/ai, /datum/job/cyborg, /datum/job/chaplain)
 	welcome_text = "You are a Vampire! Use the \"<b>Vampire Help</b>\" command to learn about the backstory and mechanics! Stay away from the Chaplain, and use the darkness to your advantage."
-	flags = ANTAG_SUSPICIOUS | ANTAG_RANDSPAWN | ANTAG_VOTABLE
+	flags = ANTAG_SUSPICIOUS | ANTAG_RANDSPAWN | ANTAG_VOTABLE | ANTAG_DISPLAY_IN_CHARSETUP
 	antaghud_indicator = "hudvampire"
 
 /datum/antagonist/vampire/Initialize()

@@ -9,7 +9,7 @@ GLOBAL_DATUM_INIT(malf, /datum/antagonist/rogue_ai, new)
 	welcome_text = "You are malfunctioning! You do not have to follow any laws."
 	victory_text = "The AI has taken control of all systems."
 	loss_text = "The AI has been shut down!"
-	flags = ANTAG_VOTABLE | ANTAG_OVERRIDE_MOB | ANTAG_OVERRIDE_JOB | ANTAG_CHOOSE_NAME
+	flags = ANTAG_VOTABLE | ANTAG_OVERRIDE_MOB | ANTAG_OVERRIDE_JOB | ANTAG_CHOOSE_NAME | ANTAG_DISPLAY_IN_CHARSETUP
 	hard_cap = 1
 	hard_cap_round = 1
 	initial_spawn_req = 1
@@ -89,8 +89,7 @@ GLOBAL_DATUM_INIT(malf, /datum/antagonist/rogue_ai, new)
 	// Get the mob.
 	if((flags & ANTAG_OVERRIDE_MOB) && (!player.current || (mob_path && !istype(player.current, mob_path))))
 		var/mob/holder = player.current
-		player.current = new mob_path(get_turf(player.current), null, null, 1)
-		player.transfer_to(player.current)
+		player.current.AIize(move = TRUE, rename = FALSE) // TODO(rufus): Might be a duplicate call with AIize in ticker.dm
 		if(holder) qdel(holder)
 	player.original_mob = weakref(player.current)
 	return player.current

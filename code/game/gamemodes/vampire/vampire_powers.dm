@@ -1,3 +1,6 @@
+// TODO(rufus): refactor all the vampire code to not rely on /mob,
+//   but rather be a self-sustained /datum/vampire in mind that exposes an interface via verbs (actual verbs instead of proc-verbs)
+
 // Contains all /mob/procs that relate to vampire.
 /mob/living/carbon/human/AltClickOn(atom/A)
 	if(mind && mind.vampire && istype(A , /turf/simulated/floor) && (/datum/vampire/proc/vampire_veilstep in verbs))
@@ -23,8 +26,16 @@
 	set category = "Vampire"
 	set name = "Drain Blood"
 	set desc = "Drain the blood of a humanoid creature."
+	var/ability_name = "Drain Blood"
 	var/power_use_cost = 0
+	var/cooldown = 180 SECONDS
+	var/cooldown_long = 240 SECONDS
+	var/use_long_cooldown = FALSE
 	var/mob/living/carbon/human/user = usr
+
+	if(!user.mind?.vampire?.check_ability_cooldown(ability_name, use_long_cooldown ? cooldown_long : cooldown))
+		return
+
 	var/datum/vampire/vampire = user?.vampire_power(power_use_cost, 0)
 	if (!vampire)
 		return
@@ -34,7 +45,7 @@
 		to_chat(user, SPAN_WARNING("You must be grabbing a victim in your active hand to drain their blood."))
 		return
 	if(!G.can_absorb())
-		to_chat(user, SPAN_WARNING("You must have a tighter grip on victim to drain their blood."))
+		to_chat(user, SPAN_WARNING("You must have a tighter grip on the victim to drain their blood."))
 		return
 
 	var/mob/living/carbon/human/T = G.affecting
@@ -42,7 +53,7 @@
 		//Added this to prevent vampires draining diona and IPCs
 		//Diona have 'blood' but its really green sap and shouldn't help vampires
 		//IPCs leak oil
-		to_chat(user, SPAN_WARNING("[T] is not a creature you can drain useful blood from."))
+		to_chat(user, SPAN_WARNING("[T] is not a creature from which you can drain useful blood."))
 		return
 	if(T.head && (T.head.item_flags & ITEM_FLAG_AIRTIGHT))
 		to_chat(user, SPAN_WARNING("[T]'s headgear is blocking the way to the neck."))
@@ -68,7 +79,7 @@
 
 	vampire.status |= VAMP_DRAINING
 
-	user.visible_message(SPAN_DANGER("[user.name] bites [T.name]'s neck!"), SPAN_DANGER("You bite [T.name]'s neck and begin to drain their blood."), SPAN_NOTICE("You hear a soft puncture and a wet sucking noise"))
+	user.visible_message(SPAN_DANGER("[user.name] bites [T.name]'s neck!"), SPAN_DANGER("You bite [T.name]'s neck and begin draining their blood."), SPAN_NOTICE("You hear a soft puncture and a wet sucking noise"))
 	var/remembrance
 	if(vampire.stealth)
 		remembrance = "forgot"
@@ -76,7 +87,7 @@
 		remembrance = "remembered"
 	admin_attack_log(user, T, "drained blood from [key_name(T)], who [remembrance] the encounter.", "had their blood drained by [key_name(user)] and [remembrance] the encounter.", "is draining blood from")
 
-	to_chat(T, SPAN("warning", FONT_LARGE("You feel yourself falling into a pleasant dream, from which even a smile appeared on your face.")))
+	to_chat(T, SPAN("warning", FONT_LARGE("You feel yourself slipping into a pleasant dream, and a smile spreading across your face.")))
 	T.paralysis = 3400
 
 	playsound(user.loc, 'sound/effects/drain_blood.ogg', 50, 1)
@@ -93,7 +104,7 @@
 		blood_usable = vampire.blood_usable
 
 		if (!T.vessel.get_reagent_amount(/datum/reagent/blood))
-			to_chat(user, SPAN_DANGER("[T] has no more blood left to give."))
+			to_chat(user, SPAN_DANGER("[T] has no more blood left to drain."))
 			break
 
 		if (!T.stunned)
@@ -140,7 +151,7 @@
 			to_chat(user, update_msg)
 
 		if (blood_drained >= 70 && blood_drained < 85)
-			to_chat(user, SPAN_WARNING("You have enough amount of drained blood."))
+			to_chat(user, SPAN_WARNING("You have drained a sufficient amount of blood."))
 
 
 		user.check_vampire_upgrade()
@@ -148,24 +159,26 @@
 
 	vampire.status &= ~VAMP_DRAINING
 
-	var/endsuckmsg = "You extract your fangs from [T.name]'s neck and stop draining them of blood."
+	if(blood_drained >= 85)
+		use_long_cooldown = TRUE
+	else
+		use_long_cooldown = FALSE
+
+	var/endsuckmsg = "You withdraw your fangs from [T.name]'s neck and stop draining their blood."
 	if(vampire.stealth)
-		endsuckmsg += "They will remember nothing of this occurance, provided they survived."
+		endsuckmsg += " They will remember nothing of this occurrence, provided they survive."
+	var/cooldown_text = use_long_cooldown ? time2text(cooldown_long, "mmm sss") : time2text(cooldown, "mmm sss")
+	endsuckmsg += " You will be ready to drain another victim in [cooldown_text]."
 	user.visible_message(SPAN_DANGER("[user.name] stops biting [T.name]'s neck!"), SPAN_NOTICE("[endsuckmsg]"))
+	T.paralysis = 0
 	if(target_aware)
-		T.paralysis = 0
 		if(T.stat != DEAD && vampire.stealth)
 			spawn()			//Spawned in the same manner the brain damage alert is, just so the proc keeps running without stops.
-				alert(T, "You remember NOTHING about the cause of your blackout. Instead, you remember having a pleasant encounter with [user.name].", "Bitten by a vampire")
+				alert(T, "You remember NOTHING about the cause of your blackout. Instead, you recall having a pleasant encounter with [user.name].", "Bitten by a vampire")
 		else if(T.stat != DEAD)
 			spawn()
-				alert(T, "You remember everything that happened. Remember how blood was sucked from your neck. It gave you pleasure, like a pleasant dream. You feel great. How you react to [owner.name]'s actions is up to you.", "Bitten by a vampire")
-	user.verbs -= /datum/vampire/proc/vampire_drain_blood
-	if(blood_drained <= 85)
-
-		ADD_VERB_IN_IF(user, 1800, /datum/vampire/proc/vampire_drain_blood, CALLBACK(user, /mob/living/carbon/human/proc/finish_vamp_timeout))
-	else
-		ADD_VERB_IN_IF(user, 2400, /datum/vampire/proc/vampire_drain_blood, CALLBACK(user, /mob/living/carbon/human/proc/finish_vamp_timeout))
+				alert(T, "You remember everything that happened: blood being drawn from your neck felt like a pleasant dream, and you feel great. How you react to [owner.name]'s actions is up to you.", "Bitten by a vampire")
+	LAZYSET(user.mind?.vampire?.last_ability_use_times, ability_name, world.time)
 
 // Check that our target is alive, logged in, and any other special cases
 /mob/living/carbon/human/proc/check_drain_target_state(mob/living/carbon/human/T)
@@ -177,8 +190,14 @@
 	set category = "Vampire"
 	set name = "Glare"
 	set desc = "Your eyes flash a bright light, stunning any who are watching."
+	var/ability_name = "Glare"
 	var/power_use_cost = 0
+	var/cooldown = 80 SECONDS
 	var/mob/living/carbon/human/user = usr
+
+	if(!user.mind?.vampire?.check_ability_cooldown(ability_name, cooldown))
+		return
+
 	if (!user.vampire_power(power_use_cost, 1))
 		return
 	if (user.eyecheck() > FLASH_PROTECTION_NONE)
@@ -204,16 +223,21 @@
 
 	admin_attacker_log_many_victims(user, victims, "used glare to stun", "was stunned by [key_name(user)] using glare", "used glare to stun")
 
-	user.verbs -= /datum/vampire/proc/vampire_glare
-	ADD_VERB_IN_IF(user, 800, /datum/vampire/proc/vampire_glare, CALLBACK(user, /mob/living/carbon/human/proc/finish_vamp_timeout))
+	LAZYSET(user.mind?.vampire?.last_ability_use_times, ability_name, world.time)
 
 // Targeted stun ability, moderate duration.
 /datum/vampire/proc/vampire_hypnotise()
 	set category = "Vampire"
 	set name = "Hypnotise (10)"
 	set desc = "Through blood magic, you dominate the victim's mind and force them into a hypnotic transe."
+	var/ability_name = "Hypnotise"
 	var/power_use_cost = 10
+	var/cooldown = 120 SECONDS
 	var/mob/living/carbon/human/user = usr
+
+	if(!user.mind?.vampire?.check_ability_cooldown(ability_name, cooldown))
+		return
+
 	var/datum/vampire/vampire = user.vampire_power(power_use_cost, 1)
 	if (!vampire)
 		return
@@ -250,8 +274,7 @@
 		vampire.use_blood(power_use_cost)
 		admin_attack_log(user, T, "used hypnotise to stun [key_name(T)]", "was stunned by [key_name(user)] using hypnotise", "used hypnotise on")
 
-		user.verbs -= /datum/vampire/proc/vampire_hypnotise
-		ADD_VERB_IN_IF(user, 1200, /datum/vampire/proc/vampire_hypnotise, CALLBACK(user, /mob/living/carbon/human/proc/finish_vamp_timeout))
+		LAZYSET(user.mind?.vampire?.last_ability_use_times, ability_name, world.time)
 	else
 		to_chat(user, SPAN_WARNING("You broke your gaze."))
 
@@ -260,8 +283,14 @@
 	set category = null
 	set name = "Veil Step (20)"
 	set desc = "For a moment, move through the Veil and emerge at a shadow of your choice."
+	var/ability_name = "Veil Step"
 	var/power_use_cost = 20
+	var/cooldown = 30 SECONDS
 	var/mob/living/carbon/human/user = usr
+
+	if(!user.mind?.vampire?.check_ability_cooldown(ability_name, cooldown))
+		return
+
 	if (!T || T.density || T.contains_dense_objects())
 		to_chat(user, SPAN_WARNING("You cannot do that."))
 		return
@@ -295,16 +324,22 @@
 	log_and_message_admins("activated veil step.")
 
 	vampire.use_blood(power_use_cost)
-	user.verbs -= /datum/vampire/proc/vampire_veilstep
-	ADD_VERB_IN_IF(user, 300, /datum/vampire/proc/vampire_veilstep, CALLBACK(user, /mob/living/carbon/human/proc/finish_vamp_timeout))
+
+	LAZYSET(user.mind?.vampire?.last_ability_use_times, ability_name, world.time)
 
 // Summons bats.
 /datum/vampire/proc/vampire_bats()
 	set category = "Vampire"
 	set name = "Summon Bats (60)"
 	set desc = "You tear open the Veil for just a moment, in order to summon a pair of bats to assist you in combat."
+	var/ability_name = "Summon Bats"
 	var/power_use_cost = 60
+	var/cooldown = 120 SECONDS
 	var/mob/living/carbon/human/user = usr
+
+	if(!user.mind?.vampire?.check_ability_cooldown(ability_name, cooldown))
+		return
+
 	var/datum/vampire/vampire = user.vampire_power(power_use_cost, 0)
 	if (!vampire)
 		return
@@ -342,16 +377,21 @@
 	log_and_message_admins("summoned bats.")
 
 	vampire.use_blood(power_use_cost)
-	user.verbs -= /datum/vampire/proc/vampire_bats
-	ADD_VERB_IN_IF(user, 1200, /datum/vampire/proc/vampire_bats, CALLBACK(user, /mob/living/carbon/human/proc/finish_vamp_timeout))
+	LAZYSET(user.mind?.vampire?.last_ability_use_times, ability_name, world.time)
 
 // Chiropteran Screech
 /datum/vampire/proc/vampire_screech()
 	set category = "Vampire"
 	set name = "Chiropteran Screech (70)"
 	set desc = "Emit a powerful screech which shatters glass within a seven-tile radius, and stuns hearers in a four-tile radius."
+	var/ability_name = "Chiropteran Screech"
 	var/power_use_cost = 70
+	var/cooldown = 360 SECONDS
 	var/mob/living/carbon/human/user = usr
+
+	if(!user.mind?.vampire?.check_ability_cooldown(ability_name, cooldown))
+		return
+
 	var/datum/vampire/vampire = user.vampire_power(power_use_cost, 0)
 	if (!vampire)
 		return
@@ -389,9 +429,7 @@
 		admin_attacker_log_many_victims(user, victims, "used chriopteran screech to stun", "was stunned by [key_name(user)] using chriopteran screech", "used chiropteran screech to stun")
 	else
 		log_and_message_admins("used chiropteran screech.")
-
-	user.verbs -= /datum/vampire/proc/vampire_screech
-	ADD_VERB_IN_IF(user, 3600, /datum/vampire/proc/vampire_screech, CALLBACK(user, /mob/living/carbon/human/proc/finish_vamp_timeout))
+	LAZYSET(user.mind?.vampire?.last_ability_use_times, ability_name, world.time)
 
 // Enables the vampire to be untouchable and walk through walls and other solid things.
 /datum/vampire/proc/vampire_veilwalk()
@@ -700,8 +738,14 @@
 	set category = "Vampire"
 	set name = "Dominate (50)"
 	set desc = "Dominate the mind of a victim, make them obey your will."
+	var/ability_name = "Dominate"
 	var/power_use_cost = 50
+	var/cooldown = 180 SECONDS
 	var/mob/living/carbon/human/user = usr
+
+	if(!user.mind?.vampire?.check_ability_cooldown(ability_name, cooldown))
+		return
+
 	var/datum/vampire/vampire = user.vampire_power(power_use_cost, 0)
 	if (!vampire)
 		return
@@ -749,16 +793,21 @@
 	user.emote("me", 1, "whispers.")
 
 	vampire.use_blood(power_use_cost)
-	user.verbs -= /datum/vampire/proc/vampire_dominate
-	ADD_VERB_IN_IF(user, 1800, /datum/vampire/proc/vampire_dominate, CALLBACK(user, /mob/living/carbon/human/proc/finish_vamp_timeout))
+	LAZYSET(user.mind?.vampire?.last_ability_use_times, ability_name, world.time)
 
 // Enthralls a person, giving the vampire a mortal slave.
 /datum/vampire/proc/vampire_enthrall()
 	set category = "Vampire"
 	set name = "Enthrall (120)"
 	set desc = "Bind a mortal soul with a bloodbond to obey your every command."
+	var/ability_name = "Enthrall"
 	var/power_use_cost = 120
+	var/cooldown = 280 SECONDS
 	var/mob/living/carbon/human/user = usr
+
+	if(!user.mind?.vampire?.check_ability_cooldown(ability_name, cooldown))
+		return
+
 	var/datum/vampire/vampire = user.vampire_power(power_use_cost, 0)
 	if (!vampire)
 		return
@@ -801,8 +850,7 @@
 	admin_attack_log(user, T, "enthralled [key_name(T)]", "was enthralled by [key_name(user)]", "successfully enthralled")
 
 	vampire.use_blood(power_use_cost)
-	user.verbs -= /datum/vampire/proc/vampire_enthrall
-	ADD_VERB_IN_IF(user, 2800, /datum/vampire/proc/vampire_enthrall, CALLBACK(user, /mob/living/carbon/human/proc/finish_vamp_timeout))
+	LAZYSET(user.mind?.vampire?.last_ability_use_times, ability_name, world.time)
 
 // Makes the vampire appear 'friendlier' to others.
 /datum/vampire/proc/vampire_presence()
@@ -938,7 +986,7 @@
 	to_chat(T, SPAN_NOTICE("You feel pure bliss as [user] touches you."))
 	vampire.use_blood(power_use_cost)
 
-	T.reagents.add_reagent(/datum/reagent/rezadone, 3)
+	T.reagents.add_reagent(/datum/reagent/rezadone, 2)
 	T.reagents.add_reagent(/datum/reagent/painkiller, 1.0) //enough to get back onto their feet
 
 // Convert a human into a vampire.
@@ -1048,11 +1096,17 @@
 	set category = "Vampire"
 	set name = "Grapple"
 	set desc = "Lunge towards a target like an animal, and grapple them."
+	var/ability_name = "Grapple"
+	var/cooldown = 80 SECONDS
 	var/mob/living/carbon/human/user = usr
+
+	if(!user.mind?.vampire?.check_ability_cooldown(ability_name, cooldown))
+		return
+
 	if (user.status_flags & LEAPING)
 		return
 	if (user.incapacitated())
-		to_chat(user, SPAN_WARNING("You cannot lean in your current state."))
+		to_chat(user, SPAN_WARNING("You cannot lunge and grapple in your current state."))
 		return
 
 	var/list/targets = list()
@@ -1062,7 +1116,7 @@
 	targets -= user
 
 	if (!targets.len)
-		to_chat(user, SPAN_WARNING("No valid targets visible or in range."))
+		to_chat(user, SPAN_WARNING("No valid targets visible in range."))
 		return
 
 	var/mob/living/carbon/human/T = pick(targets)
@@ -1091,8 +1145,7 @@
 	user.put_in_active_hand(G)
 	G.upgrade(TRUE)
 
-	user.verbs -= /datum/vampire/proc/grapple
-	ADD_VERB_IN_IF(user, 800, /datum/vampire/proc/grapple, CALLBACK(user, /mob/living/carbon/human/proc/finish_vamp_timeout, VAMP_FRENZIED))
+	LAZYSET(user.mind?.vampire?.last_ability_use_times, ability_name, world.time)
 
 /datum/vampire/proc/night_vision()
 	set category = "Vampire"

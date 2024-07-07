@@ -284,3 +284,16 @@
 	if (vamp_flags && !(mind.vampire.status & vamp_flags))
 		return FALSE
 	return TRUE
+
+/datum/vampire/proc/check_ability_cooldown(ability_name, cooldown, feedback = TRUE)
+	var/last_use_time = LAZYACCESS(last_ability_use_times, ability_name)
+	if (!last_use_time)
+		return TRUE
+	var/timediff = world.time - last_use_time
+	if (timediff < cooldown)
+		if (feedback)
+			var/cooldown_left = cooldown - timediff
+			var/cooldown_left_text = (cooldown_left > 600) ? time2text(cooldown_left, "mmm sss") : time2text(cooldown_left, "sss") // e.g. 03m 20s or just 20s
+			to_chat(usr, SPAN_WARNING("[ability_name] is still on cooldown, [cooldown_left_text] left"))
+		return FALSE
+	return TRUE
