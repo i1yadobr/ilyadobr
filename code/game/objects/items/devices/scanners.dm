@@ -123,7 +123,7 @@ REAGENT SCANNER
 	if(brain && (H.stat == DEAD || (H.status_flags & FAKEDEATH)))
 		brain_data += SPAN("notice", "<b>Time of Death:</b> [worldtime2stationtime(H.timeofdeath)]")
 
-	if(H.internal_organs_by_name[BP_STACK])
+	if(H.internal_organs_by_name[BP_NEURAL_LACE])
 		brain_data += SPAN("notice", "Subject has a neural lace implant.")
 
 	// Pulse rate.

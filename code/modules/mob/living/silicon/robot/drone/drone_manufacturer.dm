@@ -67,9 +67,7 @@
 	* That's all, folks!
 	* Have a very safe day.
 	*/
-	// there're start custom sprites code.
-
-	// there're end custom sprites code.
+	// TODO(rufus): fill this in? why is it empty?
 	return TRUE
 
 /obj/machinery/drone_fabricator/proc/create_drone(client/player)

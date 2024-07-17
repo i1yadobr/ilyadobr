@@ -544,7 +544,7 @@
 		set_pin_data(IC_OUTPUT, 7, H.internal_organs_by_name[BP_STOMACH])
 		set_pin_data(IC_OUTPUT, 8, H.internal_organs_by_name[BP_APPENDIX])
 		set_pin_data(IC_OUTPUT, 9, H.internal_organs_by_name[BP_CELL])
-		set_pin_data(IC_OUTPUT, 10, H.internal_organs_by_name[BP_STACK])
+		set_pin_data(IC_OUTPUT, 10, H.internal_organs_by_name[BP_NEURAL_LACE])
 
 	push_data()
 	activate_pin(2)

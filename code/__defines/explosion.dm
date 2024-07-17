@@ -4,6 +4,7 @@
 /proc/cheap_hypotenuse(Ax,Ay,Bx,By)
 	return sqrt(abs(Ax - Bx)**2 + abs(Ay - By)**2) //A squared + B squared = C squared
 
+// TODO(rufus): reverse these
 // The severity of explosions. Why are these inverted? I have no idea, but git blame doesn't go back far enough for me to find out.
 /// The (current) highest possible explosion severity.
 #define EXPLODE_DEVASTATE 1

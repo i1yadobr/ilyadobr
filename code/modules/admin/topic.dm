@@ -894,7 +894,7 @@
 			return
 
 		if(check_rights(R_MOD,0) && !check_rights(R_ADMIN, 0) && !config.ban.mods_can_job_tempban) // If mod and tempban disabled
-			to_chat(usr, "<span class='warning'>Mod jobbanning is disabled!</span>")
+			to_chat(usr, "<span class='warning'>Mod tempbanning is disabled!</span>")
 			return
 
 		var/mob/M = locate(href_list["newban"])
@@ -908,7 +908,7 @@
 				if(!mins)
 					return
 				if(check_rights(R_MOD, 0) && !check_rights(R_BAN, 0) && mins > config.ban.mod_tempban_max)
-					to_chat(usr, "<span class='warning'>Moderators can only job tempban up to [config.ban.mod_tempban_max] minutes!</span>")
+					to_chat(usr, "<span class='warning'>Moderators can only tempban up to [config.ban.mod_tempban_max] minutes!</span>")
 					return
 				if(mins >= 525600) mins = 525599
 				var/reason = sanitize(input(usr,"Reason?","reason","Griefer") as text|null)

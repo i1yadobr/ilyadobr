@@ -562,9 +562,9 @@
 	var/obj/screen/splash/S = new(new_character.client, TRUE)
 	S.Fade(TRUE, TRUE)
 
-	// Give them their cortical stack if we're using them.
-	if(config && config.revival.use_cortical_stacks && new_character.client && new_character.client.prefs.has_cortical_stack /*&& new_character.should_have_organ(BP_BRAIN)*/)
-		new_character.create_stack()
+	// Give them their neural lace if it's enabled.
+	if(config && config.health.use_neural_lace && new_character.client && new_character.client.prefs.has_neural_lace)
+		new_character.create_neural_lace()
 
 	return new_character
 

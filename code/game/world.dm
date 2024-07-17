@@ -1,7 +1,7 @@
 #define REBOOT_HARD 1
 #define REBOOT_REALLY_HARD 2
 
-var/server_name = "OnyxBay"
+var/server_name = "OldOnyx"
 
 /var/game_id = null
 /hook/global_init/proc/generate_gameid()
@@ -127,10 +127,6 @@ var/server_name = "OnyxBay"
 	else
 		name = "[server_name] - [GLOB.using_map.full_name]"
 
-	if(config && config.game.use_age_restriction_for_jobs != null && config.general.server_suffix && world.port > 0)
-		// dumb and hardcoded but I don't care~
-		config.general.server_name += " #[(world.port % 1000) / 100]"
-
 	watchlist = new /datum/watchlist
 
 	var/list/lobby_music_tracks = subtypesof(/lobby_music)
@@ -140,9 +136,8 @@ var/server_name = "OnyxBay"
 	GLOB.lobby_music = new lobby_music_type()
 
 	callHook("startup")
-	//Emergency Fix
+
 	load_mods()
-	//end-emergency fix
 
 	. = ..()
 
@@ -176,10 +171,10 @@ var/world_topic_spam_protect_time = world.timeofday
 		var/list/s = list()
 		s["version"] = game_version
 		s["mode"] = PUBLIC_GAME_MODE
-		s["respawn"] = config.misc.abandon_allowed
+		s["respawn"] = config.misc.respawn_allowed
 		s["enter"] = config.game.enter_allowed
 		s["vote"] = config.vote.allow_vote_mode
-		s["ai"] = config.misc.allow_ai
+		s["ai"] = TRUE
 		s["host"] = host ? host : null
 
 		// This is dumb, but spacestation13.com's banners break if player count isn't the 8th field of the reply, so... this has to go here.
@@ -527,11 +522,6 @@ var/world_topic_spam_protect_time = world.timeofday
 		if(config.external.server) //if you set a server location in config.txt, it sends you there instead of trying to reconnect to the same world address. -- NeoFite
 			send_link(C, "byond://[config.external.server]")
 
-	if(config.general.wait_for_sigusr1 && reason != 3)
-		text2file("foo", "reboot_called")
-		to_world("<span class=danger>World reboot waiting for external scripts. Please be patient.</span>")
-		return
-
 	game_log("World rebooted at [time_stamp()]")
 
 	if(blackbox)
@@ -608,45 +598,11 @@ var/world_topic_spam_protect_time = world.timeofday
 	if (config && config.general.server_name)
 		s += "<b>[config.general.server_name]</b>"
 
-//	s += "<b>[station_name()]</b>";
-//	s += " ("
-//	s += "<a href=\"http://\">" //Change this to wherever you want the hub to link to.
-//	s += "[game_version]"
-//	s += "Default"  //Replace this with something else. Or ever better, delete it and uncomment the game version.
-//	s += "</a>"
-//	s += ")"
-
 	var/list/features = list()
 
-	if(SSticker.master_mode)
-		features += SSticker.master_mode
-	else
-		features += "<b>STARTING</b>"
-
 	if (!config.game.enter_allowed)
-		features += "closed"
-
-	features += config.misc.abandon_allowed ? "respawn" : "no respawn"
-
-	if (config && config.vote.allow_vote_mode)
-		features += "vote"
-
-	if (config && config.misc.allow_ai)
-		features += "AI allowed"
-
-	var/n = 0
-	for (var/mob/M in GLOB.player_list)
-		if (M.client)
-			n++
-
-	if (n > 1)
-		features += "~[n] players"
-	else if (n > 0)
-		features += "~[n] player"
-
-
-	if (config && config.general.hosted_by)
-		features += "hosted by <b>[config.general.hosted_by]</b>"
+		features += "Limited Access"
+	// TODO(rufus): come up with a good description and potentially sprinkle some features on top, keeping it minimal for now
 
 	if (features)
 		s += ": [jointext(features, ", ")]"

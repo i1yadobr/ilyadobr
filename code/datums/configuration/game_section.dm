@@ -2,7 +2,6 @@
 	name = "game"
 
 	var/map_switching = FALSE
-	var/auto_map_switching = FALSE
 	var/auto_map_vote = FALSE
 	var/assistant_maint = FALSE
 	var/continuous_rounds = FALSE
@@ -15,23 +14,24 @@
 	var/use_age_restriction_for_antags = FALSE
 	var/ghost_spawners = FALSE
 
-	var/traitor_min_age = 0
-	var/changeling_min_age = 0
+	var/borer_min_age = 0
+	var/xeno_min_age = 0
 	var/ninja_min_age = 0
 	var/raider_min_age = 0
 	var/nuke_min_age = 0
 	var/wizard_min_age = 0
-	var/xeno_min_age = 0
-	var/malf_min_age = 0
+	var/changeling_min_age = 0
 	var/cultist_min_age = 0
+	var/malf_min_age = 0
+	var/traitor_min_age = 0
+	var/vampire_min_age = 0
+	// NOTE(rufus): rest are removed from the config and charsetup for now
 	var/blob_min_age = 0
 	var/actor_min_age = 0
 	var/ert_min_age = 0
 	var/revolutionary_min_age = 0
-	var/vampire_min_age = 0
 	var/thrall_min_age = 0
 	var/renegade_min_age = 0
-	var/borer_min_age = 0
 	var/loyalist_min_age = 0
 	var/meme_min_age = 0
 	var/deathsquad_min_age = 0
@@ -42,7 +42,7 @@
 
 	var/disable_ooc_at_roundstart = FALSE
 	var/disable_looc_at_roundstart = FALSE
-	var/use_recursive_explosions = FALSE
+	var/dynamic_explosions = FALSE
 	var/generate_asteroid = TRUE
 	var/use_loyalty_implants = FALSE
 	var/guest_jobban = TRUE
@@ -52,7 +52,6 @@
 
 /datum/configuration_section/game/load_data(list/data)
 	CONFIG_LOAD_BOOL(map_switching, data["map_switching"])
-	CONFIG_LOAD_BOOL(auto_map_switching, data["auto_map_switching"])
 	CONFIG_LOAD_BOOL(auto_map_vote, data["auto_map_vote"])
 	CONFIG_LOAD_BOOL(assistant_maint, data["assistant_maint"])
 	CONFIG_LOAD_BOOL(continuous_rounds, data["continuous_rounds"])
@@ -91,7 +90,7 @@
 
 	CONFIG_LOAD_BOOL(disable_ooc_at_roundstart, data["disable_ooc_at_roundstart"])
 	CONFIG_LOAD_BOOL(disable_looc_at_roundstart, data["disable_looc_at_roundstart"])
-	CONFIG_LOAD_BOOL(use_recursive_explosions, data["use_recursive_explosions"])
+	CONFIG_LOAD_BOOL(dynamic_explosions, data["dynamic_explosions"])
 	CONFIG_LOAD_BOOL(generate_asteroid, data["generate_asteroid"])
 	CONFIG_LOAD_BOOL(use_loyalty_implants, data["use_loyalty_implants"])
 	CONFIG_LOAD_BOOL(guest_jobban, data["guest_jobban"])

@@ -194,6 +194,7 @@
 
 	else if((config.multiaccount.panic_bunker != 0) && (get_player_age(ckey) < config.multiaccount.panic_bunker))
 		var/player_age = get_player_age(ckey)
+		// TODO(rufus): figure out what's up with this "redirect" TopicData and if disconnect after the first hop is intended behavior. Remove if unsure.
 		if(config.multiaccount.panic_server_address && TopicData != "redirect")
 			log_access("Panic Bunker: ([key_name(key, include_name = FALSE)] | age [player_age]) - attempted to connect. Redirected to [config.multiaccount.panic_server_name ? config.multiaccount.panic_server_name : config.multiaccount.panic_server_address]")
 			message_admins(SPAN("adminnotice", "Panic Bunker: ([key] | age [player_age]) - attempted to connect. Redirected to [config.multiaccount.panic_server_name ? config.multiaccount.panic_server_name : config.multiaccount.panic_server_address]"))

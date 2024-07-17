@@ -231,7 +231,7 @@
 // Robo Organs.
 #define BP_POSIBRAIN	"posibrain"
 #define BP_VOICE		"vocal synthesiser"
-#define BP_STACK		"stack"
+#define BP_NEURAL_LACE	"neural_lace"
 #define BP_OPTICS		"optics"
 
 // Limbs.

@@ -836,9 +836,9 @@ var/global/floorIsLava = 0
 	set category = "Server"
 	set desc="Toggle traitor scaling"
 	set name="Toggle Traitor Scaling"
-	config.gamemode.traitor_scaling = !config.gamemode.traitor_scaling
-	log_admin("[key_name(usr)] toggled Traitor Scaling to [config.gamemode.traitor_scaling].")
-	message_admins("[key_name_admin(usr)] toggled Traitor Scaling [config.gamemode.traitor_scaling ? "on" : "off"].", 1)
+	config.gamemode.antag_scaling = !config.gamemode.antag_scaling
+	log_admin("[key_name(usr)] toggled Traitor Scaling to [config.gamemode.antag_scaling].")
+	message_admins("[key_name_admin(usr)] toggled Traitor Scaling [config.gamemode.antag_scaling ? "on" : "off"].", 1)
 	feedback_add_details("admin_verb","TTS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/startnow()
@@ -872,67 +872,18 @@ var/global/floorIsLava = 0
 	world.update_status()
 	feedback_add_details("admin_verb","TE") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-/datum/admins/proc/toggleAI()
-	set category = "Server"
-	set desc="People can't be AI"
-	set name="Toggle AI"
-	config.misc.allow_ai = !( config.misc.allow_ai )
-	if (!( config.misc.allow_ai ))
-		to_world("<B>The AI job is no longer chooseable.</B>")
-	else
-		to_world("<B>The AI job is chooseable now.</B>")
-	log_admin("[key_name(usr)] toggled AI allowed.")
-	world.update_status()
-	feedback_add_details("admin_verb","TAI") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-
 /datum/admins/proc/toggleaban()
 	set category = "Server"
 	set desc="Respawn basically"
 	set name="Toggle Respawn"
-	config.misc.abandon_allowed = !(config.misc.abandon_allowed)
-	if(config.misc.abandon_allowed)
+	config.misc.respawn_allowed = !(config.misc.respawn_allowed)
+	if(config.misc.respawn_allowed)
 		to_world("<B>You may now respawn.</B>")
 	else
 		to_world("<B>You may no longer respawn :(</B>")
-	log_and_message_admins("toggled respawn to [config.misc.abandon_allowed ? "On" : "Off"].")
+	log_and_message_admins("toggled respawn to [config.misc.respawn_allowed ? "On" : "Off"].")
 	world.update_status()
 	feedback_add_details("admin_verb","TR") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-
-/datum/admins/proc/toggle_aliens()
-	set category = "Server"
-	set desc="Toggle alien mobs"
-	set name="Toggle Aliens"
-	if(!check_rights(R_ADMIN))
-		return
-
-	config.misc.aliens_allowed = !config.misc.aliens_allowed
-	log_admin("[key_name(usr)] toggled Aliens to [config.misc.aliens_allowed].")
-	message_admins("[key_name_admin(usr)] toggled Aliens [config.misc.aliens_allowed ? "on" : "off"].", 1)
-	feedback_add_details("admin_verb","TA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-
-/datum/admins/proc/toggle_alien_eggs()
-	set category = "Server"
-	set desc="Toggle xenomorph egg laying"
-	set name="Toggle Alien Eggs"
-
-	if(!check_rights(R_ADMIN))
-		return
-	config.misc.alien_eggs_allowed = !config.misc.alien_eggs_allowed
-	log_admin("[key_name(usr)] toggled Alien Egg Laying to [config.misc.alien_eggs_allowed].")
-	message_admins("[key_name_admin(usr)] toggled Alien Egg Laying [config.misc.alien_eggs_allowed ? "on" : "off"].", 1)
-	feedback_add_details("admin_verb","AEA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-
-
-/datum/admins/proc/toggle_space_ninja()
-	set category = "Server"
-	set desc="Toggle space ninjas spawning."
-	set name="Toggle Space Ninjas"
-	if(!check_rights(R_ADMIN))
-		return
-
-	config.misc.ninjas_allowed = !config.misc.ninjas_allowed
-	log_and_message_admins("toggled Space Ninjas [config.misc.ninjas_allowed ? "on" : "off"].")
-	feedback_add_details("admin_verb","TSN") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/delay()
 	set category = "Server"
@@ -1201,8 +1152,8 @@ var/global/floorIsLava = 0
 	set category = "Debug"
 	set desc="Reduces view range when wearing welding helmets"
 	set name="Toggle tinted welding helmets."
-	config.misc.welder_vision_allowed = !( config.misc.welder_vision_allowed )
-	if (config.misc.welder_vision_allowed)
+	config.misc.welder_tint = !( config.misc.welder_tint )
+	if (config.misc.welder_tint)
 		to_world("<B>Reduced welder vision has been enabled!</B>")
 	else
 		to_world("<B>Reduced welder vision has been disabled!</B>")

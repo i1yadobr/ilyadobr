@@ -292,7 +292,7 @@
 			consume_range = 4
 			dissipate = 0 // It cant go smaller due to e loss.
 			overlays = 0
-			if(!config.misc.forbid_singulo_following)
+			if(config.misc.singularity_follows_ghosts)
 				follows_ghosts = TRUE
 			if(chained)
 				overlays = "chain_s9"
@@ -313,7 +313,7 @@
 			consume_range = 5
 			dissipate = 0 // It cant go smaller due to e loss
 			event_chance = 25 // Events will fire off more often.
-			if(!config.misc.forbid_singulo_following)
+			if(config.misc.singularity_follows_ghosts)
 				follows_ghosts = TRUE
 			if(chained)
 				overlays = "chain_s9"

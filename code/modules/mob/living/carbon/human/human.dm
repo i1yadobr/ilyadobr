@@ -1202,8 +1202,8 @@
 	if(client)
 		Login()
 
-	if(config && config.revival.use_cortical_stacks && client && client.prefs.has_cortical_stack && !(species.spawn_flags & SPECIES_NO_LACE))
-		create_stack()
+	if(config && config.health.use_neural_lace && client && client.prefs.has_neural_lace && !(species.spawn_flags & SPECIES_NO_LACE))
+		create_neural_lace()
 	full_prosthetic = null
 
 	//recheck species-restricted clothing

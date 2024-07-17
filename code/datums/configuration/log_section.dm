@@ -10,7 +10,6 @@
 	var/attack = TRUE
 	var/vote = TRUE
 	var/admin = TRUE
-	var/adminchat = TRUE
 	var/adminwarn = TRUE
 	var/access = TRUE
 	var/game = TRUE
@@ -31,7 +30,6 @@
 	CONFIG_LOAD_BOOL(attack, data["attack"])
 	CONFIG_LOAD_BOOL(vote, data["vote"])
 	CONFIG_LOAD_BOOL(admin, data["admin"])
-	CONFIG_LOAD_BOOL(adminchat, data["adminchat"])
 	CONFIG_LOAD_BOOL(adminwarn, data["adminwarn"])
 	CONFIG_LOAD_BOOL(access, data["access"])
 	CONFIG_LOAD_BOOL(game, data["game"])

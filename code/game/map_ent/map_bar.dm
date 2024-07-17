@@ -9,7 +9,7 @@
 	var/target_bar = ev_bar
 
 	if(!target_bar)
-		target_bar = config.mapping.preferable_bar
+		target_bar = config.mapping.preferred_bar
 
 	if(target_bar == MAP_BAR_RANDOM)
 		target_bar = pick(MAP_BAR_CLASSIC, MAP_BAR_MODERN)

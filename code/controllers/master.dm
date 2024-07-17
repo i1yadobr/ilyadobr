@@ -64,11 +64,10 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 	var/static/current_ticklimit = TICK_LIMIT_RUNNING
 
 /datum/controller/master/New()
-	// Highlander-style: there can only be one! Kill off the old and replace it with the new.
 	var/list/_subsystems = list()
 	subsystems = _subsystems
 	if (Master != src)
-		if (istype(Master)) //If there is an existing MC take over his stuff and delete it
+		if (istype(Master))
 			Recover()
 			qdel(Master)
 		else

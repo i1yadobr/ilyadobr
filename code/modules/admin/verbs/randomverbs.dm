@@ -612,7 +612,7 @@ Ccomp's first proc.
 	var/flash = input("Range of flash. -1 to none", text("Input"))  as num|null
 	if(flash == null) return
 	var/shaped = 0
-	if(config.game.use_recursive_explosions)
+	if(config.game.dynamic_explosions)
 		if(alert(src, "Shaped explosion?", "Shape", "Yes", "No") == "Yes")
 			shaped = input("Shaped where to?", "Input")  as anything in list("NORTH","SOUTH","EAST","WEST")
 			shaped = text2dir(shaped)

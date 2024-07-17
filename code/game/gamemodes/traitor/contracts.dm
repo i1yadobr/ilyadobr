@@ -458,8 +458,8 @@ GLOBAL_LIST_INIT(syndicate_factions, list(
 	brain = weakref(_H.internal_organs_by_name[BP_BRAIN])
 
 	var/obj/item/organ/_target
-	if(_H.organs_by_name[BP_STACK])
-		_target = _H.internal_organs_by_name[BP_STACK]
+	if(_H.organs_by_name[BP_NEURAL_LACE])
+		_target = _H.internal_organs_by_name[BP_NEURAL_LACE]
 	else
 		_target = _H.organs_by_name[BP_HEAD]
 	target = weakref(_target)

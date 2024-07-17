@@ -16,7 +16,7 @@
 	var/disallow_occupant_types = list()
 
 	var/mob/living/carbon/human/occupant = null
-	var/obj/item/organ/internal/stack/lace = null
+	var/obj/item/organ/internal/neurolace/lace = null
 
 	var/resleeving = 0
 	var/remaining = 0
@@ -170,7 +170,7 @@
 		if(occupant)
 			to_chat(user, "<span class='warning'>You need to remove the occupant first!</span>")
 			return
-	if(istype(W, /obj/item/organ/internal/stack))
+	if(istype(W, /obj/item/organ/internal/neurolace))
 		if(QDELETED(lace))
 			if(!user.drop(W, src))
 				return

@@ -571,7 +571,7 @@
 		return SURGERY_FAILURE
 
 	var/obj/item/organ/internal/I = target.internal_organs_by_name[O.organ_tag]
-	if(I && (I.parent_organ == affected.organ_tag || istype(O, /obj/item/organ/internal/stack)))
+	if(I && (I.parent_organ == affected.organ_tag || istype(O, /obj/item/organ/internal/neurolace)))
 		to_chat(user, SPAN("warning", "\The [target] already has [o_a][O.name]."))
 		return SURGERY_FAILURE
 

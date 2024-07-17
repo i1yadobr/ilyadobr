@@ -47,8 +47,8 @@
 	else
 		var/additional_info = " The neural lace signature not found in the body."
 		var/mob/living/carbon/human/H = imp_in
-		var/obj/item/organ/internal/stack/S = H?.internal_organs_by_name[BP_STACK]
-		if(istype(S))
+		var/obj/item/organ/internal/neurolace/L = H?.internal_organs_by_name[BP_NEURAL_LACE]
+		if(istype(L))
 			additional_info = " The neural lace signature found in the body."
 		death_message = "A message from [name] has been received. [mobname] has died in [location]![additional_info]"
 	set_next_think(0)

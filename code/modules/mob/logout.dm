@@ -24,6 +24,3 @@
 		message_staff("[holder.rank] logout: [key_name(src)]")
 		if(!GLOB.admins.len) //Apparently the admin logging out is no longer an admin at this point, so we have to check this towards 0 and not towards 1. Awell.
 			message_staff("[key_name(src)] logged out - no more admins online.")
-			if(config.admin.delist_when_no_admins && world.visibility)
-				world.visibility = FALSE
-				message_staff("Toggled hub visibility. The server is now invisible ([world.visibility]).")

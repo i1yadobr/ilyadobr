@@ -177,9 +177,9 @@
 #define CAPTURE_MODE_PARTIAL 3 //Simular to regular mode, but does not do dummy check
 
 //objectives
-#define CONFIG_OBJECTIVE_NONE 2
-#define CONFIG_OBJECTIVE_VERB 1
-#define CONFIG_OBJECTIVE_ALL  0
+#define CONFIG_ANTAG_OBJECTIVES_AUTO "auto"
+#define CONFIG_ANTAG_OBJECTIVES_VERB "verb"
+#define CONFIG_ANTAG_OBJECTIVES_NONE "none"
 
 // How many times an AI tries to connect to APC before switching to low power mode.
 #define AI_POWER_RESTORE_MAX_ATTEMPTS 3

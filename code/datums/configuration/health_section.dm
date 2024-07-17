@@ -8,6 +8,8 @@
 	var/organ_health_multiplier = 0.9
 	var/organ_regeneration_multiplier = 0.25
 	var/organ_damage_spillover_multiplier = 0.5
+	var/use_neural_lace = TRUE
+	var/revival_brain_life = -1
 
 /datum/configuration_section/health/load_data(list/data)
 	CONFIG_LOAD_NUM(health_threshold_dead, data["health_threshold_dead"])
@@ -17,3 +19,5 @@
 	CONFIG_LOAD_NUM(organ_health_multiplier, data["organ_health_multiplier"])
 	CONFIG_LOAD_NUM(organ_regeneration_multiplier, data["organ_regeneration_multiplier"])
 	CONFIG_LOAD_NUM(organ_damage_spillover_multiplier, data["organ_damage_spillover_multiplier"])
+	CONFIG_LOAD_BOOL(use_neural_lace, data["use_neural_lace"])
+	CONFIG_LOAD_NUM(revival_brain_life, data["revival_brain_life"])

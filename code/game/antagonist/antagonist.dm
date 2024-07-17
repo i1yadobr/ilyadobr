@@ -2,7 +2,7 @@
 
 	// Text shown when becoming this antagonist.
 	var/list/restricted_jobs            = list()   // Jobs that cannot be this antagonist at roundstart
-	var/list/additional_restricted_jobs = list()   // Mostly security jobs which can be restricted in addition via config
+	var/list/security_restricted_jobs   = list()   // Additional list of security roles that cannot be this antagonist
 	var/list/blacklisted_jobs           = list()   // Jobs that can NEVER be this antagonist
 
 	// Strings.
@@ -87,8 +87,8 @@
 	cur_max = hard_cap
 	if(!role_text_plural)
 		role_text_plural = role_text
-	if(config.gamemode.protect_roles_from_antagonist)
-		restricted_jobs |= additional_restricted_jobs
+	if(config.gamemode.restrict_security_antag_roles)
+		restricted_jobs |= security_restricted_jobs
 	if(antaghud_indicator)
 		if(!GLOB.hud_icon_reference)
 			GLOB.hud_icon_reference = list()
@@ -100,7 +100,7 @@
 
 // Get the raw list of potential players.
 /datum/antagonist/proc/build_candidate_list(datum/game_mode/mode, ghosts_only)
-	candidates = list() // Clear.
+	candidates = list()
 
 	// Prune restricted status. Broke it up for readability.
 	// Note that this is done before jobs are handed out.

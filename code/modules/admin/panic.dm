@@ -6,17 +6,15 @@
 		to_chat(usr, "<span class='adminnotice'>The Database is not connected!</span>")
 		return
 
-	if(config.multiaccount.panic_bunker == 0 && config.multiaccount.panic_bunker != initial(config.multiaccount.panic_bunker))
-		config.multiaccount.panic_bunker = initial(config.multiaccount.panic_bunker)
-		log_and_message_admins("[key_name(usr)] has enabled the Panic Bunker for account age less then [config.multiaccount.panic_bunker]")
+	if(!config.multiaccount.panic_bunker)
+		var/age_threshold = input(usr, "Minimum player age?", "Set Panic Bunker account age threshold", 1) as num|null
+		if(!age_threshold)
+			to_chat(SPAN("adminnotice", "Skipping [age_threshold] age threshold, Panic Bunker is already disabled"))
+			return
+		config.multiaccount.panic_bunker = age_threshold
+		log_and_message_admins("[key_name(usr)] has enabled the Panic Bunker with [age_threshold] day[age_threshold != 1 ? "s" : ""] age threshold")
 		return
-	else if(config.multiaccount.panic_bunker == 0 && config.multiaccount.panic_bunker == initial(config.multiaccount.panic_bunker))
-		config.multiaccount.panic_bunker = 1
-		log_and_message_admins("[key_name(usr)] has enabled the Panic Bunker")
-		return
-	else if(config.multiaccount.panic_bunker != 0)
-		config.multiaccount.panic_bunker = 0
-		log_and_message_admins("[key_name(usr)] has disabled the Panic Bunker")
-		return
-	else
-		log_and_message_admins("Something went really wrong with Panic Bunker. Contact devs, please.")
+
+	config.multiaccount.panic_bunker = 0
+	log_and_message_admins("[key_name(usr)] has disabled the Panic Bunker")
+	return

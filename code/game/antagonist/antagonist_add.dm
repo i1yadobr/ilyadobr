@@ -32,7 +32,7 @@
 	if(faction_verb)
 		player.current.verbs |= faction_verb
 
-	if(config.gamemode.disable_objectives == CONFIG_OBJECTIVE_VERB)
+	if(config.gamemode.antag_objectives == CONFIG_ANTAG_OBJECTIVES_VERB)
 		player.current.verbs += /mob/proc/add_objectives
 
 	if(player.current.client)

@@ -337,7 +337,7 @@ var/global/list/additional_antag_types = list()
 
 /datum/game_mode/proc/create_antagonists()
 
-	if(!config.gamemode.traitor_scaling)
+	if(!config.gamemode.antag_scaling)
 		antag_scaling_coeff = 0
 
 	var/list/all_antag_types = GLOB.all_antag_types_
@@ -450,7 +450,7 @@ var/global/list/additional_antag_types = list()
 
 	if(!player || !player.current) return
 
-	if(config.gamemode.disable_objectives == CONFIG_OBJECTIVE_ALL || !player.objectives.len)
+	if(config.gamemode.antag_objectives == CONFIG_ANTAG_OBJECTIVES_NONE || !player.objectives.len)
 		return
 
 	var/obj_count = 1

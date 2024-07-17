@@ -30,7 +30,7 @@ GLOBAL_DATUM_INIT(revs, /datum/antagonist/revolutionary, new)
 
 	blacklisted_jobs = list(/datum/job/ai, /datum/job/cyborg)
 	restricted_jobs = list(/datum/job/merchant, /datum/job/captain, /datum/job/hop, /datum/job/hos, /datum/job/chief_engineer, /datum/job/rd, /datum/job/cmo, /datum/job/iaa)
-	additional_restricted_jobs = list(/datum/job/officer, /datum/job/warden, /datum/job/detective)
+	security_restricted_jobs = list(/datum/job/officer, /datum/job/warden, /datum/job/detective)
 
 /datum/antagonist/revolutionary/Initialize()
 	. = ..()

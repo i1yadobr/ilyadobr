@@ -6,7 +6,6 @@ GLOBAL_REAL(config, /datum/server_configuration) = new
 /// Represents a base configuration datum. Has everything else bundled into it
 /datum/server_configuration
 	var/datum/configuration_section/general/general = new
-	var/datum/configuration_section/lobby/lobby = new
 	var/datum/configuration_section/log/log = new
 	var/datum/configuration_section/multiaccount/multiaccount = new
 	var/datum/configuration_section/gamemode/gamemode = new
@@ -16,7 +15,6 @@ GLOBAL_REAL(config, /datum/server_configuration) = new
 	var/datum/configuration_section/character_setup/character_setup = new
 	var/datum/configuration_section/ghost/ghost = new
 	var/datum/configuration_section/health/health = new
-	var/datum/configuration_section/revival/revival = new
 	var/datum/configuration_section/movement/movement = new
 	var/datum/configuration_section/misc/misc = new
 	var/datum/configuration_section/mapping/mapping = new

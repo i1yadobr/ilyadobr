@@ -250,10 +250,10 @@
 	sort_order = 13
 	followed_type = /obj/item/card/id/captains_spare
 
-/datum/follow_holder/stack
+/datum/follow_holder/neurolace
 	sort_order = 14
-	followed_type = /obj/item/organ/internal/stack
+	followed_type = /obj/item/organ/internal/neurolace
 
-/datum/follow_holder/stack/show_entry()
-	var/obj/item/organ/internal/stack/S = followed_instance
+/datum/follow_holder/neurolace/show_entry()
+	var/obj/item/organ/internal/neurolace/S = followed_instance
 	return ..() && !S.owner

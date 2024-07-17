@@ -43,9 +43,9 @@
 	BITSET(hud_updateflag, LIFE_HUD)
 
 	//backs up lace if available.
-	var/obj/item/organ/internal/stack/s = get_organ(BP_STACK)
-	if(s)
-		s.do_backup()
+	var/obj/item/organ/internal/neurolace/l = get_organ(BP_NEURAL_LACE)
+	if(l)
+		l.do_backup()
 
 	//Handle species-specific deaths.
 	species.handle_death(src)

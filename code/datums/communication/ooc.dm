@@ -20,7 +20,7 @@
 			log_and_message_admins("has attempted to advertise in [name]: [message]")
 			return FALSE
 		if (config.multiaccount.eams_blocks_ooc && !SSeams.CheckForAccess(C))
-			to_chat(C, "<span class='danger'>Sorry! EAMS protection doesn't allow you to write in OOC.</span>")
+			to_chat(C, "<span class='danger'>Sorry! EAMS protection doesn't allow you to write in OOC. Use Adminhelp to contact administrators (F1 by default).</span>")
 			return FALSE
 
 /decl/communication_channel/ooc/do_communicate(client/C, message)

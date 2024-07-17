@@ -1,6 +1,7 @@
 //STRIKE TEAMS
 var/const/commandos_possible = 6 //if more Commandos are needed in the future
 
+// TODO(rufus): test if this verb works, especially the `attempt_random_spawn()` part
 /client/proc/strike_team()
 	set category = "Fun"
 	set name = "Spawn Strike Team"

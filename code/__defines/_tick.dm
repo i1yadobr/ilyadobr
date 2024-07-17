@@ -3,7 +3,7 @@
 #define TICK_LIMIT_MC 84                    // Tick limit for MC while running
 #define TICK_LIMIT_MC_INIT_DEFAULT 100      // Tick limit while initializing
 
-#define TICK_USAGE world.tick_usage         // For general usage
+#define TICK_USAGE world.tick_usage
 
 #define TICK_CHECK ( TICK_USAGE > Master.current_ticklimit )
 #define CHECK_TICK if TICK_CHECK stoplag()

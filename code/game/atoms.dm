@@ -170,6 +170,7 @@
 /atom/proc/HasProximity(atom/movable/AM)
 	return
 
+// TODO(rufus): refactor EMP severity to be bigger number = stronger EMP, currently 1 is strongest, 2 is weaker
 /atom/proc/emp_act(severity)
 	return
 

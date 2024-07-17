@@ -111,9 +111,6 @@
 	log_generic("ATTACK", text, location, config.log.attack, notify_admin, MESSAGE_TYPE_ATTACKLOG)
 	log_story("ATTACK", text, location)
 
-/proc/log_adminsay(text)
-	log_generic("ADMINSAY", text, null, config.log.adminchat, FALSE, MESSAGE_TYPE_ADMINLOG)
-
 /proc/log_adminwarn(text, location, notify_admin)
 	log_generic("ADMINWARN", text, location, config.log.adminwarn, notify_admin, MESSAGE_TYPE_ADMINLOG)
 

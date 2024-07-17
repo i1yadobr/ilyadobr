@@ -21,10 +21,6 @@ var/const/IAA_ban_reason = "Restricted by CentComm"
 		return FALSE
 
 	if(M && rank)
-		/*
-		if(_jobban_isbanned(M, rank)) return "Reason Unspecified"	//for old jobban
-		*/
-
 		if (guest_jobbans(rank))
 			if(config.game.guest_jobban && IsGuestKey(M.key))
 				return "Guest Job-ban"

@@ -132,8 +132,8 @@ SUBSYSTEM_DEF(ticker)
 		if(config.game.map_switching && GLOB.all_maps.len > 1)
 			if (config.game.auto_map_vote)
 				SSvote.initiate_vote(/datum/vote/map/end_game, automatic = 1)
-			else if (config.game.auto_map_switching)
-				// Select random map exclude the current
+			else
+				// Select random map excluding the current
 				var/datum/map/current_map = GLOB.using_map
 				var/datum/map/next_map = current_map
 
