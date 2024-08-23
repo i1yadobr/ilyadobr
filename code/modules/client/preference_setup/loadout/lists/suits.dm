@@ -113,9 +113,61 @@
 	jackets += /obj/item/clothing/suit/storage/black_jacket_long
 	gear_tweaks += new /datum/gear_tweak/path/specified_types_list(jackets)
 
-/datum/gear/suit/wintercoat
-	display_name = "winter coat"
+/datum/gear/suit/department_wintercoat
+	display_name = "departmental winter coat"
 	path = /obj/item/clothing/suit/storage/hooded/wintercoat
+
+/datum/gear/suit/department_wintercoat/New()
+	..()
+	var/list/paths_to_jobs = list(
+	/datum/job = list(/obj/item/clothing/suit/storage/hooded/wintercoat),
+	/datum/job/captain = list(/obj/item/clothing/suit/storage/hooded/wintercoat/captain),
+	/datum/job/hos = list(/obj/item/clothing/suit/storage/hooded/wintercoat/security),
+	/datum/job/warden = list(/obj/item/clothing/suit/storage/hooded/wintercoat/security),
+	/datum/job/detective = list(/obj/item/clothing/suit/storage/hooded/wintercoat/security),
+	/datum/job/officer = list(/obj/item/clothing/suit/storage/hooded/wintercoat/security),
+	/datum/job/chief_engineer = list(/obj/item/clothing/suit/storage/hooded/wintercoat/ce),
+	/datum/job/engineer = list(
+		/obj/item/clothing/suit/storage/hooded/wintercoat/engineering,
+		/obj/item/clothing/suit/storage/hooded/wintercoat/engineering/atmos),
+	/datum/job/hop = list(/obj/item/clothing/suit/storage/hooded/wintercoat/hop),
+	/datum/job/qm = list(
+		/obj/item/clothing/suit/storage/hooded/wintercoat/qm,
+		/obj/item/clothing/suit/storage/hooded/wintercoat/cargo),
+	/datum/job/cargo_tech = list(/obj/item/clothing/suit/storage/hooded/wintercoat/cargo),
+	/datum/job/mining = list(
+		/obj/item/clothing/suit/storage/hooded/wintercoat/miner,
+		/obj/item/clothing/suit/storage/hooded/wintercoat/cargo),
+	/datum/job/janitor = list(/obj/item/clothing/suit/storage/hooded/wintercoat/janitor),
+	/datum/job/hydro = list(/obj/item/clothing/suit/storage/hooded/wintercoat/hydro),
+	/datum/job/cmo = list(
+		/obj/item/clothing/suit/storage/hooded/wintercoat/cmo,
+		/obj/item/clothing/suit/storage/hooded/wintercoat/medical),
+	/datum/job/doctor = list(/obj/item/clothing/suit/storage/hooded/wintercoat/medical),
+	/datum/job/psychiatrist = list(/obj/item/clothing/suit/storage/hooded/wintercoat/medical),
+	/datum/job/chemist = list(
+		/obj/item/clothing/suit/storage/hooded/wintercoat/chemistry,
+		/obj/item/clothing/suit/storage/hooded/wintercoat/medical),
+	/datum/job/virologist = list(
+		/obj/item/clothing/suit/storage/hooded/wintercoat/viro,
+		/obj/item/clothing/suit/storage/hooded/wintercoat/medical),
+	/datum/job/paramedic = list(
+		/obj/item/clothing/suit/storage/hooded/wintercoat/paramed,
+		/obj/item/clothing/suit/storage/hooded/wintercoat/medical),
+	/datum/job/rd = list(
+		/obj/item/clothing/suit/storage/hooded/wintercoat/rd,
+		/obj/item/clothing/suit/storage/hooded/wintercoat/science),
+	/datum/job/scientist = list(
+		/obj/item/clothing/suit/storage/hooded/wintercoat/science),
+	/datum/job/xenobiologist = list(
+		/obj/item/clothing/suit/storage/hooded/wintercoat/science,
+		/obj/item/clothing/suit/storage/hooded/wintercoat/hydro),
+	/datum/job/roboticist = list(
+		/obj/item/clothing/suit/storage/hooded/wintercoat/robotics,
+		/obj/item/clothing/suit/storage/hooded/wintercoat/science),
+	)
+
+	gear_tweaks += new /datum/gear_tweak/departmental(paths_to_jobs)
 
 /datum/gear/suit/track
 	display_name = "track jacket selection"
