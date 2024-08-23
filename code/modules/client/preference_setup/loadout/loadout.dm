@@ -154,22 +154,9 @@ var/list/hash_to_gear = list()
 	. += "<a href='?src=\ref[src];clear_loadout=1'>Clear Loadout</a><br>"
 	. += "<a href='?src=\ref[src];random_loadout=1'>Random Loadout</a><br>"
 	. += "<a href='?src=\ref[src];toggle_hiding=1'>[hide_unavailable_gear ? "Show unavailable for your jobs and species" : "Hide unavailable for your jobs and species"]</a><br>"
-	. += "<a href='?src=\ref[src];toggle_donate=1'>[hide_donate_gear ? "Show donate gears" : "Hide donate gears"]</a><br>"
 	. += "</td>"
 
 	. += "</tr></table>"
-	. += "</td>"
-
-	. += "<td style='width: 90%; text-align: right; vertical-align: top;'>"
-
-	var/patron_tier = user.client.donator_info.get_full_patron_tier()
-	if(!patron_tier)
-		. += "<b>You are not a Patron yet.</b><br>"
-	else
-		. += "<b>Your Patreon tier is [patron_tier]</b><br>"
-	var/current_opyxes = round(user.client.donator_info.opyxes)
-	. += "<b>You have <font color='#e67300'>[current_opyxes]</font> opyx[current_opyxes != 1 ? "es" : ""].</b><br>"
-	. += "<a class='gold' href='?src=\ref[src];get_opyxes=1'><b>Get opyxes</b></a><br>"
 	. += "</td>"
 
 	. += "</tr></table>"

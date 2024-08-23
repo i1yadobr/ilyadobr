@@ -43,11 +43,11 @@
 /datum/gear/mask/gas/clear
 	display_name = "clear gas mask"
 	path = /obj/item/clothing/mask/gas/clear
-	price = 15
 
 /datum/gear/utility/music_tape_custom
 	display_name = "music tape (custom)"
 	description = {"
+		<span style=\"color: #f00; font-size: larger\">Temporarily unavailable. Ask admins or wait for the patreon system to be removed.</span><br>
 		A dusty tape, which can hold anything. Only what you need is blow the dust away and you will be able to play it again.
 		<br><br>
 		<b>Be careful!</b> Don't use it to play music/sounds which can be annoying for other players. Admins can erase your music if they consider it unacceptable or even ban you for abusing it.
@@ -58,6 +58,7 @@
 /datum/gear/utility/boombox
 	display_name = "boombox"
 	description = {"
+		<span style=\"color: #f00; font-size: larger\">Temporarily unavailable. Ask admins or wait for the patreon system to be removed.</span><br>
 		A musical audio player station, also known as boombox or ghettobox. Very robust.
 		<br><br>
 		<b>Be careful!</b> Don't use it to play music/sounds which can be annoying for other players. Admins can delete your boombox if they consider your music unacceptable or even ban you for abusing it.
