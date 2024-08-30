@@ -4,7 +4,7 @@
 	full_name = "The Example"
 	path = "example"
 
-	lobby_icon = 'maps/example/example_lobby.dmi'
+	lobby_icon = 'maps/example/example_lobby_construction.dmi'
 
 	shuttle_types = list(
 		/datum/shuttle/autodock/ferry/example

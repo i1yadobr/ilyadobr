@@ -9,6 +9,9 @@ server_id = "oldonyx"
 ## Set a different port to use.
 # server_port = 8080
 
+## Use lobbyscreen that is defined in the map_define.dm file under `lobby_icon` var.
+per_map_lobbyscreen = true
+
 ## List of paths to artworks to be used in the pre-game lobby.
 lobbyscreens = ["icons/splashes/onyx_old.png", "icons/splashes/onyx_new.png"]
 
@@ -270,7 +273,7 @@ generate_asteroid = true
 ## Set to true to have loyalty implants spawn by default on your server.
 use_loyalty_implants = false
 
-## Set to jobban "Guest-" accounts from Captain, HoS, HoP, CE, RD, CMO, Warden, Security, Detective, and AI positions.
+## Set to jobban "Guest-" accounts from Captain, HoS, HoP, CE, RD, CMO, Warden, Security, Detective, and AI positions. Can be overwritten by whitelist.
 guest_jobban = true
 
 ## Set to false to stop people connecting to your server without a registered ckey. (i.e. guest-* are all blocked from connecting)

@@ -5,6 +5,7 @@
 	var/subserver_name = null
 	var/server_id = null
 	var/server_port = null
+	var/per_map_lobbyscreen = TRUE
 	var/list/lobbyscreens = list("icons/splashes/onyx_old.png", "icons/splashes/onyx_new.png")
 	var/player_limit = 0
 	var/hard_player_limit = 0
@@ -20,12 +21,18 @@
 	CONFIG_LOAD_STR(subserver_name, data["subserver_name"])
 	CONFIG_LOAD_STR(server_id, data["server_id"])
 	CONFIG_LOAD_NUM(server_port, data["server_port"])
-	CONFIG_LOAD_LIST(lobbyscreens, data["lobbyscreens"])
-	if(lobbyscreens)
-		var/lobbyscreen_file = file(pick(lobbyscreens))
 
-		if(isfile(lobbyscreen_file))
-			GLOB.current_lobbyscreen = lobbyscreen_file
+	var/lobbyscreen_file
+	CONFIG_LOAD_BOOL(per_map_lobbyscreen, data["per_map_lobbyscreen"])
+	if(per_map_lobbyscreen && GLOB.using_map?.lobby_icon)
+		lobbyscreen_file = file(GLOB.using_map?.lobby_icon)
+	CONFIG_LOAD_LIST(lobbyscreens, data["lobbyscreens"])
+	if(!lobbyscreen_file && lobbyscreens)
+		lobbyscreen_file = file(pick(lobbyscreens))
+
+	if(isfile(lobbyscreen_file))
+		GLOB.current_lobbyscreen = lobbyscreen_file
+
 	CONFIG_LOAD_NUM(player_limit, data["player_limit"])
 	CONFIG_LOAD_NUM(hard_player_limit, data["hard_player_limit"])
 	CONFIG_LOAD_NUM(ticklag, data["ticklag"])

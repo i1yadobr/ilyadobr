@@ -4,7 +4,7 @@
 	full_name = "NSS Exodus"
 	path = "exodus"
 
-	lobby_icon = 'maps/exodus/exodus_lobby.dmi'
+	lobby_icon = 'maps/exodus/exodus_lobby_old.dmi'
 
 	shuttle_types = list(
 		/datum/shuttle/autodock/ferry/escape_pod/escape_pod1,

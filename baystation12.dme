@@ -2957,7 +2957,6 @@
 #include "maps\derelicts\snow_asteroid\snow_asteroid.dm"
 #include "maps\example\example_areas.dm"
 #include "maps\example\example_define.dm"
-#include "maps\example\example_jobs.dm"
 #include "maps\example\example_levels.dm"
 #include "maps\example\example_shuttles.dm"
 #include "maps\exodus\exodus.dm"
