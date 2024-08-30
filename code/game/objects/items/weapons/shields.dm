@@ -308,4 +308,3 @@
 	toggle(user)
 	add_fingerprint(user)
 	return
-

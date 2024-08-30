@@ -80,7 +80,10 @@ var/list/worths = list(
 					/obj/item/gun/projectile/pistol/silenced/cheap = 1500,
 					/obj/item/gun/projectile/pistol/silenced = 1700,
 //REVOLVER
-					/obj/item/gun/projectile/revolver/deckard = 3000,
+// TODO(rufus): lower the prices for .38 and 9mm revolvers as they're weaker
+//   address T9 vs holdout inconsistency, holdout just feels too good beeing stealthy and still packing the same 9mm and
+//   properly balance gun prices against more powerful options that use .357, .50 and so on.
+					/obj/item/gun/projectile/revolver/deckard = 2250,
 //GUN
 					/obj/item/gun/projectile = 1500,
 					/obj/item/gun = 500,
