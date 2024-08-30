@@ -640,7 +640,6 @@ var/world_topic_spam_protect_time = world.timeofday
 
 #define FAILED_DB_CONNECTION_CUTOFF 5
 var/failed_db_connections = 0
-var/failed_old_db_connections = 0
 var/failed_don_db_connections = 0
 
 
@@ -661,9 +660,9 @@ var/failed_don_db_connections = 0
 	if(!dbcon)
 		dbcon = new()
 
-	var/user = sql_feedback_login
-	var/pass = sql_feedback_pass
-	var/db = sql_feedback_db
+	var/user = sqllogin
+	var/pass = sqlpass
+	var/db = sqldb
 	var/address = sqladdress
 	var/port = sqlport
 
@@ -689,55 +688,6 @@ var/failed_don_db_connections = 0
 		return setup_database_connection()
 	else
 		return TRUE
-
-
-/hook/startup/proc/connectOldDB()
-	if(!config.external.sql_enabled)
-		log_to_dd("SQL disabled. Your server configured to use legacy admin and ban system.")
-	else if(!setup_old_database_connection())
-		log_to_dd("Your server failed to establish a connection with the SQL database.")
-	else
-		log_to_dd("SQL database connection established.")
-	return TRUE
-
-//These two procs are for the old database, while it's being phased out. See the tgstation.sql file in the SQL folder for more information.
-//If you don't know what any of this do, look at the same code above
-/proc/setup_old_database_connection()
-
-	if(failed_old_db_connections > FAILED_DB_CONNECTION_CUTOFF)
-		return 0
-
-	if(!dbcon_old)
-		dbcon_old = new()
-
-	var/user = sqllogin
-	var/pass = sqlpass
-	var/db = sqldb
-	var/address = sqladdress
-	var/port = sqlport
-
-	dbcon_old.Connect("dbi:mysql:[db]:[address]:[port]","[user]","[pass]")
-	. = dbcon_old.IsConnected()
-	if ( . )
-		failed_old_db_connections = 0
-	else
-		failed_old_db_connections++
-		to_world_log(dbcon.ErrorMsg())
-
-	return .
-
-/proc/establish_old_db_connection()
-	if(!config.external.sql_enabled)
-		return FALSE
-
-	if(failed_old_db_connections > FAILED_DB_CONNECTION_CUTOFF)
-		return FALSE
-
-	if(!dbcon_old || !dbcon_old.IsConnected())
-		return setup_old_database_connection()
-	else
-		return TRUE
-
 
 /hook/startup/proc/connectDonDB()
 	if(!config.external.sql_enabled)

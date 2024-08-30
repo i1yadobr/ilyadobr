@@ -33,12 +33,6 @@
 				sqllogin = value
 			if ("password")
 				sqlpass = value
-			if ("feedback_database")
-				sql_feedback_db = value
-			if ("feedback_login")
-				sql_feedback_login = value
-			if ("feedback_password")
-				sql_feedback_pass = value
 			if ("enable_stat_tracking")
 				sqllogging = TRUE
 			if ("donation_address")

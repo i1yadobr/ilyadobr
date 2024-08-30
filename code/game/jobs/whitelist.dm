@@ -36,13 +36,13 @@ var/list/whitelist = list()
 		return 1
 
 /proc/load_alienwhitelistSQL()
-	if(!establish_old_db_connection())
+	if(!establish_db_connection())
 		error("Failed to connect to database in load_alienwhitelistSQL(). Reverting to legacy system.")
 		log_misc("Failed to connect to database in load_alienwhitelistSQL(). Reverting to legacy system.")
 		config.game.use_alien_whitelist_sql = 0
 		load_alienwhitelist()
 		return FALSE
-	var/DBQuery/query = sql_query("SELECT * FROM whitelist", dbcon_old)
+	var/DBQuery/query = sql_query("SELECT * FROM whitelist", dbcon)
 	while(query.NextRow())
 		var/list/row = query.GetRowData()
 		if(alien_whitelist[row["ckey"]])

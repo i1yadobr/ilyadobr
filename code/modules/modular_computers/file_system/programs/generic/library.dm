@@ -37,7 +37,7 @@ The answer was five and a half years -ZeroBits
 		data["current_book"] = current_book
 	else
 		var/list/all_entries[0]
-		if(!establish_old_db_connection())
+		if(!establish_db_connection())
 			error_message = "Unable to contact External Archive. Please contact your system administrator for assistance."
 		else
 			var/DBQuery/query = sql_query({"
@@ -50,7 +50,7 @@ The answer was five and a half years -ZeroBits
 					library
 				ORDER BY
 					$sort_by
-				"}, dbcon_old, list(sort_by = sort_by))
+				"}, dbcon, list(sort_by = sort_by))
 
 			while(query.NextRow())
 				all_entries.Add(list(list(
@@ -118,7 +118,7 @@ The answer was five and a half years -ZeroBits
 
 		var/choice = input(usr, "Upload [B.name] by [B.author] to the External Archive?") in list("Yes", "No")
 		if(choice == "Yes")
-			if(!establish_old_db_connection())
+			if(!establish_db_connection())
 				error_message = "Network Error: Connection to the Archive has been severed."
 				return 1
 
@@ -136,7 +136,7 @@ The answer was five and a half years -ZeroBits
 					$title,
 					$content,
 					$upload_category)
-				"}, dbcon_old, list(author = B.author, title = B.name, content = B.dat, upload_category = upload_category))
+				"}, dbcon, list(author = B.author, title = B.name, content = B.dat, upload_category = upload_category))
 			if(!query)
 				error_message = "Network Error: Unable to upload to the Archive. Contact your system Administrator for assistance."
 				return 1
@@ -192,11 +192,11 @@ The answer was five and a half years -ZeroBits
 	if(current_book || !id)
 		return 0
 
-	if(!establish_old_db_connection())
+	if(!establish_db_connection())
 		error_message = "Network Error: Connection to the Archive has been severed."
 		return 1
 
-	var/DBQuery/query = sql_query("SELECT * FROM library WHERE id = $id", dbcon_old, list(id = id))
+	var/DBQuery/query = sql_query("SELECT * FROM library WHERE id = $id", dbcon, list(id = id))
 
 	while(query.NextRow())
 		current_book = list(

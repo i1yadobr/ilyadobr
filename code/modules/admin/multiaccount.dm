@@ -14,7 +14,7 @@
 			holder.showAccounts(input("Select ckey", "Ckey") in targets)
 		if("Type ckey")
 			var/target = ckey(input(usr, "Type in ckey for check.", "Ckey") as text|null)
-			if(!target) //Cancel works now
+			if(!target)
 				return
 			holder.showAccounts(target)
 
@@ -33,14 +33,14 @@
 			ip,
 			computerid
 		FROM
-			erro_player
+			ss13_player
 		WHERE
 			computerid
 			IN
 				(SELECT DISTINCT
 					computerid
 				FROM
-					erro_player
+					ss13_player
 				WHERE
 					ckey LIKE $targetkey
 				)
@@ -66,21 +66,21 @@
 			ip,
 			computerid
 		FROM
-			erro_player
+			ss13_player
 		WHERE
 			ip
 			IN
 				(SELECT DISTINCT
 					ip
 				FROM
-					erro_player
+					ss13_player
 				WHERE
 					computerid
 					IN
 						(SELECT DISTINCT
 							computerid
 						FROM
-							erro_player
+							ss13_player
 						WHERE
 							ckey LIKE $targetkey
 						)
@@ -113,21 +113,21 @@
 			SELECT
 				ckey
 			FROM
-				erro_player
+				ss13_player
 			WHERE
 				ip
 				IN
 					(SELECT DISTINCT
 						ip
 					FROM
-						erro_player
+						ss13_player
 					WHERE
 						computerid
 						IN
 							(SELECT DISTINCT
 								computerid
 							FROM
-								erro_player
+								ss13_player
 							WHERE
 								ckey LIKE $ckey
 							)
@@ -149,14 +149,14 @@
 			SELECT
 				ckey
 			FROM
-				erro_player
+				ss13_player
 			WHERE
 				computerid
 				IN
 					(SELECT DISTINCT
 						computerid
 					FROM
-						erro_player
+						ss13_player
 					WHERE
 						ckey LIKE $ckey
 					)

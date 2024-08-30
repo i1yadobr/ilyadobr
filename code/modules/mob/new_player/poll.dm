@@ -1,10 +1,11 @@
 
+// TODO(rufus): remove privacy poll related stuff
 /mob/new_player/proc/handle_privacy_poll()
 	if(!establish_db_connection())
 		return
 	var/voted = 0
 
-	var/DBQuery/query = sql_query("SELECT * FROM erro_privacy WHERE ckey = $ckey", dbcon, list(ckey = ckey))
+	var/DBQuery/query = sql_query("SELECT * FROM privacy WHERE ckey = $ckey", dbcon, list(ckey = ckey))
 
 	while(query.NextRow())
 		voted = 1
@@ -57,7 +58,7 @@
 			id,
 			question
 		FROM
-			erro_poll_question
+			poll_question
 		WHERE
 			[(isadmin ? "" : "adminonly = false AND")]
 			Now() BETWEEN starttime AND endtime
@@ -98,7 +99,7 @@
 			polltype,
 			multiplechoiceoptions
 		FROM
-			erro_poll_question
+			poll_question
 		WHERE
 			id = $pollid
 		"}, dbcon, list(pollid = pollid))
@@ -129,7 +130,7 @@
 				SELECT
 					optionid
 				FROM
-					erro_poll_vote
+					poll_vote
 				WHERE
 					pollid = $pollid
 					AND
@@ -150,7 +151,7 @@
 					id,
 					text
 				FROM
-					erro_poll_option
+					poll_option
 				WHERE
 					pollid = $pollid
 				"}, dbcon, list(pollid = pollid))
@@ -198,7 +199,7 @@
 				SELECT
 					replytext
 				FROM
-					erro_poll_textreply
+					poll_textreply
 				WHERE
 					pollid = $pollid
 					AND
@@ -249,8 +250,8 @@
 					o.text,
 					v.rating
 				FROM
-					erro_poll_option o,
-					erro_poll_vote v
+					poll_option o,
+					poll_vote v
 				WHERE
 					o.pollid = $pollid
 					AND
@@ -292,7 +293,7 @@
 						descmid,
 						descmax
 					FROM
-						erro_poll_option
+						poll_option
 					WHERE
 						pollid = $pollid
 					"}, dbcon, list(pollid = pollid))
@@ -342,7 +343,7 @@
 				SELECT
 					optionid
 				FROM
-					erro_poll_vote
+					poll_vote
 				WHERE
 					pollid = $pollid
 					AND
@@ -364,7 +365,7 @@
 					id,
 					text
 				FROM
-					erro_poll_option
+					poll_option
 				WHERE
 					pollid = $pollid
 				"}, dbcon, list(pollid = pollid))
@@ -433,7 +434,7 @@
 			polltype,
 			multiplechoiceoptions
 		FROM
-			erro_poll_question
+			poll_question
 		WHERE
 			id = $pollid
 			AND
@@ -459,7 +460,7 @@
 		SELECT
 			id
 		FROM
-			erro_poll_option
+			poll_option
 		WHERE
 			id = $optionid
 			AND
@@ -482,7 +483,7 @@
 		SELECT
 			id
 		FROM
-			erro_poll_vote
+			poll_vote
 		WHERE
 			pollid = $pollid
 			AND
@@ -509,7 +510,7 @@
 
 	sql_query({"
 		INSERT INTO
-			erro_poll_vote
+			poll_vote
 				(id,
 				datetime,
 				pollid,
@@ -547,7 +548,7 @@
 			question,
 			polltype
 		FROM
-			erro_poll_question
+			poll_question
 		WHERE
 			id = $pollid
 			AND Now() BETWEEN starttime AND endtime
@@ -571,7 +572,7 @@
 		SELECT
 			id
 		FROM
-			erro_poll_textreply
+			poll_textreply
 		WHERE
 			pollid = $pollid
 			AND
@@ -602,7 +603,7 @@
 
 	sql_query({"
 		INSERT INTO
-			erro_poll_textreply
+			poll_textreply
 				(id,
 				datetime,
 				pollid,
@@ -640,7 +641,7 @@
 			question,
 			polltype
 		FROM
-			erro_poll_question
+			poll_question
 		WHERE
 			id = $pollid
 			AND Now() BETWEEN starttime AND endtime
@@ -662,7 +663,7 @@
 		SELECT 
 			id 
 		FROM 
-			erro_poll_option 
+			poll_option 
 		WHERE 
 			id = $optionid 
 			AND 
@@ -685,7 +686,7 @@
 		SELECT
 			id
 		FROM
-			erro_poll_vote
+			poll_vote
 		WHERE
 			optionid = $optionid
 			AND
@@ -707,7 +708,7 @@
 
 	sql_query({"
 		INSERT INTO
-			erro_poll_vote
+			poll_vote
 				(id,
 				datetime,
 				pollid,

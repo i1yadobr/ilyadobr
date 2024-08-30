@@ -114,7 +114,7 @@ var/list/admin_ranks = list()								//list of all ranks with associated rights
 				`rank`, 
 				flags 
 			FROM 
-				erro_admin
+				ss13_admin
 			"}, dbcon)
 			
 		while(query.NextRow())

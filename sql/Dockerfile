@@ -2,4 +2,4 @@ FROM mariadb:latest
 
 COPY migrate/* /docker-entrypoint-initdb.d/
 
-ENV MARIADB_DATABASE=feedback MARIADB_ROOT_PASSWORD=pass
+ENV MARIADB_DATABASE=onyxdb MARIADB_ROOT_PASSWORD=pass

@@ -43,7 +43,7 @@
 		data["current_art"] = current_art
 	else
 		var/list/all_entries[0]
-		if(!establish_old_db_connection())
+		if(!establish_db_connection())
 			error_message = "Unable to contact External Archive. Please contact your system administrator for assistance."
 		else
 			try
@@ -58,7 +58,7 @@
 						art_library
 					ORDER BY
 						$sort_by
-					"}, dbcon_old, list(sort_by = sort_by))
+					"}, dbcon, list(sort_by = sort_by))
 
 				while(query.NextRow())
 					all_entries.Add(list(list(
@@ -117,7 +117,7 @@
 			return
 		var/choice = input(usr, "Upload [art_cache.painting_name] to the External Archive?") in list("Yes", "No")
 		if(choice == "Yes")
-			if(!establish_old_db_connection())
+			if(!establish_db_connection())
 				error_message = "Network Error: Connection to the Archive has been severed."
 				return TRUE
 			var/DBQuery/query = sql_query({"
@@ -132,7 +132,7 @@
 					$title,
 					$data,
 					$type)
-				"}, dbcon_old, list(ckey = art_cache.author_ckey, title = art_cache.painting_name, data = encoded_data, type = art_cache.icon_state))
+				"}, dbcon, list(ckey = art_cache.author_ckey, title = art_cache.painting_name, data = encoded_data, type = art_cache.icon_state))
 			if(!query)
 				error_message = "Network Error: Unable to upload to the Archive. Contact your system Administrator for assistance."
 				return TRUE
@@ -192,12 +192,12 @@
 	if(current_art || !id)
 		return FALSE
 
-	if(!establish_old_db_connection())
+	if(!establish_db_connection())
 		error_message = "Network Error: Connection to the Archive has been severed."
 		return TRUE
 
 	try
-		var/DBQuery/query = sql_query("SELECT * FROM art_library WHERE id = $id", dbcon_old, list(id = id))
+		var/DBQuery/query = sql_query("SELECT * FROM art_library WHERE id = $id", dbcon, list(id = id))
 
 		while(query.NextRow())
 			var/art_type = query.item[6]

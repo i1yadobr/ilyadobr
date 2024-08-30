@@ -1,3 +1,5 @@
+// TODO(rufus): reintroduce tracking of population, right now it refers to a non-existent table and doesn't fire
+// TODO(rufus): have to say, this whole file needs refactoring and fixing; or deletion.
 /proc/sql_poll_population()
 	if(!sqllogging)
 		return
@@ -10,7 +12,7 @@
 		log_game("SQL ERROR during population polling. Failed to connect.")
 	else
 		var/sqltime = time2text(world.realtime, "YYYY-MM-DD hh:mm:ss")
-		sql_query("INSERT INTO tgstation.population (playercount, admincount, time) VALUES ($playercount, $admincount, $sqltime)", dbcon_old, list(playercount = playercount, admincount = admincount, sqltime = sqltime))
+		sql_query("INSERT INTO tgstation.population (playercount, admincount, time) VALUES ($playercount, $admincount, $sqltime)", dbcon, list(playercount = playercount, admincount = admincount, sqltime = sqltime))
 
 /proc/sql_report_round_start()
 	// TODO
@@ -160,7 +162,7 @@
 		log_game("SQL ERROR during feedback reporting. Failed to connect.")
 	else
 
-		var/DBQuery/max_query = sql_query("SELECT MAX(roundid) AS max_round_id FROM erro_feedback", dbcon)
+		var/DBQuery/max_query = sql_query("SELECT MAX(roundid) AS max_round_id FROM feedback", dbcon)
 
 		var/newroundid
 
@@ -181,7 +183,7 @@
 
 			sql_query({"
 				INSERT INTO
-					erro_feedback
+					feedback
 						(id,
 						roundid,
 						time,

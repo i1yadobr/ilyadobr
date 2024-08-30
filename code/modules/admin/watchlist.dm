@@ -14,7 +14,7 @@
 			SELECT
 				ckey
 			FROM
-				erro_player
+				ss13_player
 			WHERE
 				ckey = $new_ckey
 			"}, dbcon, list(new_ckey = new_ckey))
@@ -39,7 +39,7 @@
 
 	sql_query({"
 		INSERT INTO
-			erro_watch
+			ss13_watch
 				(ckey,
 				reason,
 				adminckey,
@@ -71,7 +71,7 @@
 		SELECT
 			reason
 		FROM
-			erro_watch
+			ss13_watch
 		WHERE
 			ckey = $target_ckey
 		"}, dbcon, list(target_ckey = target_ckey))
@@ -88,7 +88,7 @@
 
 	sql_query({"
 		DELETE FROM
-			erro_watch
+			ss13_watch
 		WHERE
 			ckey = $target_ckey
 		"}, dbcon, list(target_ckey = target_ckey))
@@ -112,7 +112,7 @@
 		SELECT
 			reason
 		FROM
-			erro_watch
+			ss13_watch
 		WHERE
 			ckey = $target_ckey
 		"}, dbcon, list(target_ckey = target_ckey))
@@ -128,7 +128,7 @@
 		var/edit_text = "Edited by [admin_ckey] on [time2text(world.realtime, "YYYY-MM-DD hh:mm:ss")] from<br>[watch_reason]<br>to<br>[new_reason]<hr>"
 		sql_query({"
 			UPDATE
-				erro_watch
+				ss13_watch
 			SET
 				reason = $new_reason,
 				last_editor = $admin_ckey,
@@ -178,7 +178,7 @@
 			timestamp,
 			last_editor
 		FROM
-			erro_watch
+			ss13_watch
 		WHERE
 			ckey REGEXP $search
 		ORDER BY
@@ -255,7 +255,7 @@
 			SELECT
 				edits
 			FROM
-				erro_watch
+				ss13_watch
 			WHERE
 				ckey = $target_ckey
 			"}, dbcon, list(target_ckey = target_ckey))

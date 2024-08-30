@@ -2,7 +2,7 @@
 GLOBAL_VAR_INIT(max_explosion_range, 14)
 
 
-var/game_version        = "Baystation12"
+var/game_version        = "OldOnyx"
 var/changelog_hash      = ""
 var/game_year           = (text2num(time2text(world.realtime, "YYYY")) + 544)
 var/join_motd = null
@@ -11,10 +11,11 @@ var/secret_force_mode = "secret"   // if this is anything but "secret", the secr
 
 var/Debug2 = 0
 
+// TODO(rufus): DB update
+// NOTE(rufus): connection has been observed to close after being idle overnight, this needs reconnect mechanism
 // Database connections. A connection is established on world creation.
 // Ideally, the connection dies when the server restarts (After feedback logging.).
 var/DBConnection/dbcon     = new() // Feedback    database (New database)
-var/DBConnection/dbcon_old = new() // /tg/station database (Old database) -- see the files in the SQL folder for information on what goes where.
 var/DBConnection/dbcon_don = new() // Second database, used for bots as they cannot access main db
 
 // For FTP requests. (i.e. downloading runtime logs.)

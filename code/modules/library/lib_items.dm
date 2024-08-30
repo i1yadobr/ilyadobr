@@ -141,10 +141,10 @@
 	. = ..()
 	if(!prefit_category)
 		return
-	if(!establish_old_db_connection())
+	if(!establish_db_connection())
 		return
 	var/list/potential_books = list()
-	var/DBQuery/query = sql_query("SELECT * FROM library WHERE category = $category", dbcon_old, list(category = prefit_category))
+	var/DBQuery/query = sql_query("SELECT * FROM library WHERE category = $category", dbcon, list(category = prefit_category))
 	while(query.NextRow())
 		potential_books.Add(list(list(
 			"id" = query.item[1],
