@@ -10,6 +10,8 @@
 
 /datum/vote/map/setup_vote()
 	for(var/name in GLOB.all_maps)
+		if(name in list("Example", "Genesis", "Pathos-I", "Sunset"))
+			continue
 		choices += name
 	..()
 

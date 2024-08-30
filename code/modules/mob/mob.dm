@@ -430,6 +430,7 @@
 
 /client/verb/changes()
 	set name = "Changelog"
+	set hidden = TRUE
 	set category = "OOC"
 	getFiles(
 		'html/pie.htc',

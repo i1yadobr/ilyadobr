@@ -1,5 +1,3 @@
-//This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
-
 //cursors
 #define Default_Cursor	0
 #define Client_Cursor	1
@@ -44,7 +42,6 @@ var/DB_PORT = 3306 // This is the port your MySQL server is running on (3306 is 
 	var/user // This variable contains the username data.
 	var/password // This variable contains the password data.
 	var/default_cursor // This contains the default database cursor data.
-		//
 	var/server = ""
 	var/port = 3306
 

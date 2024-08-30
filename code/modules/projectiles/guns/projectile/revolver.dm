@@ -101,9 +101,13 @@
 
 
 // Blade Runner pistol.
+// NOTE(rufus): this and M2019 are references to the same fictional gun.
+//   The plan is to keep both, but make Deckard into an antique gun from bygone era by lore means, similar to cap's ancient gun.
+//   Deckard is intended to only be available via merchants right now. 
 /obj/item/gun/projectile/revolver/deckard
 	name = "Deckard .44"
-	desc = "A custom-built revolver, based off the semi-popular Detective Special model."
+	// TODO(rufus): lore is cool and stuff, but this has to go under an "extended description/item info" feature, extremely long
+	desc = "This frankly ancient model was discontinued and decommissioned a long time ago, giving way to its successor, the M2019. The original you're looking at right now, known simply as 'Deckard's Revolver', was crafted by an unknown manufacturer, whose identity and distribution channels remain mystery even to this day. When the M2019 series was introduced, it came with several changes, including the complete visual redesign and controversial shift to .38 SPEC cartridges, aiming for greater utility but sacrificing the raw stopping power that the .44 caliber offered.\n\nWhat you're holding is one of the few remaining units still packing the good old .44 punch and vintage craftsmanship of a bygone era. Collectors would pay a small fortune for this piece, given the rarity and the nostalgia attached to it. Though not as modern or aesthetically pleasing as the M2019, the Deckard Revolver is a power statement, both personally and ballistically. For those who know their history, it's more than just a weapon — it’s a relic of a more dangerous time, and to some, a reliable friend from the past that will always come to rescue."
 	icon_state = "deckard-empty"
 	caliber = ".44"
 	ammo_type = /obj/item/ammo_casing/c44/rubber
@@ -119,9 +123,10 @@
 		icon_state = "deckard-empty"
 
 /obj/item/gun/projectile/revolver/deckard/load_ammo(obj/item/A, mob/user)
-	if(istype(A, /obj/item/ammo_magazine))
-		flick("deckard-reload",src)
+	var/old_loaded_len = loaded.len
 	..()
+	if(old_loaded_len != loaded.len)
+		flick("deckard-reload",src)
 
 /obj/item/gun/projectile/revolver/capgun
 	name = "cap gun"

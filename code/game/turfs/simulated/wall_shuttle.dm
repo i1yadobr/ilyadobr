@@ -64,6 +64,7 @@
 			if(!corners)
 				return //fhtagn
 			tghil_si_ereth = "[ascii2text(x)][ascii2text(y)][ascii2text(z)]"
+			// TODO(rufus): this code is not robust enough to handle unexpected dirs, fixing the map issue right now but this code needs improving
 			var/datum/lighting_corner/C = corners[LIGHTING_CORNER_DIAGONAL.Find(dir)]
 			C.update_lumcount(64,64,64)
 			C = corners[LIGHTING_CORNER_DIAGONAL.Find(turn(dir, 90))]

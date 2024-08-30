@@ -35,7 +35,9 @@
 		var/obj/screen/plane_master/plane = new plane_type()
 
 		master_planes["[plane.plane]"] = plane
-		client.screen += plane
+		// TODO(rufus): temporary check to avoid runtimes, spiders port needs checking
+		if(client)
+			client.screen += plane
 
 /mob/proc/UpdatePlanes()
 	if (!master_planes)

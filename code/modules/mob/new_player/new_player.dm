@@ -229,40 +229,8 @@
 
 		AttemptLateSpawn(job, client.prefs.spawnpoint)
 		return
-
-	if(href_list["privacy_poll"])
-		if(!establish_db_connection())
-			return
-		var/voted = 0
-
-		//First check if the person has not voted yet.
-		var/DBQuery/query = sql_query("SELECT * FROM erro_privacy WHERE ckey = $ckey", dbcon, list(ckey = ckey))
-		while(query.NextRow())
-			voted = 1
-			break
-
-		//This is a safety switch, so only valid options pass through
-		var/option = "UNKNOWN"
-		switch(href_list["privacy_poll"])
-			if("signed")
-				option = "SIGNED"
-			if("anonymous")
-				option = "ANONYMOUS"
-			if("nostats")
-				option = "NOSTATS"
-			if("later")
-				close_browser(usr, "window=privacypoll")
-				return
-			if("abstain")
-				option = "ABSTAIN"
-
-		if(option == "UNKNOWN")
-			return
-
-		if(!voted)
-			sql_query("INSERT INTO erro_privacy VALUES (null, Now(), $ckey, $option)", dbcon, list(ckey = ckey, option = option))
-			to_chat(usr, "<b>Thank you for your vote!</b>")
-			close_browser(usr, "window=privacypoll")
+	
+	// TODO(rufus): remove leftovers of the privacy poll and `privacy` table in DB, https://github.com/tgstation/tgstation/pull/10440
 
 	if(!ready && href_list["preference"])
 		if(client)
