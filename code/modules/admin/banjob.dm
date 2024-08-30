@@ -14,6 +14,9 @@ var/jobban_keylist[0]		//to store the keys & ranks
 	jobban_savebanfile()
 
 var/const/IAA_ban_reason = "Restricted by CentComm"
+
+// TODO(rufus): add antag guest-jobbans too, no reason to miss out on a 1984 opportunity.
+//   Also probably worth rewriting, 12 years is a lo-o-ong time.
 //returns a reason if M is banned from rank, returns 0 otherwise
 /proc/jobban_isbanned(mob/M, rank)
 	//ckech if jobs subsystem doesn't runned yet.
@@ -22,9 +25,10 @@ var/const/IAA_ban_reason = "Restricted by CentComm"
 
 	if(M && rank)
 		if (guest_jobbans(rank))
-			if(config.game.guest_jobban && IsGuestKey(M.key))
+			var/whitelisted = check_whitelist(M.ckey)
+			if(config.game.guest_jobban && IsGuestKey(M.key) && !whitelisted)
 				return "Guest Job-ban"
-			if(config.game.use_whitelist && !check_whitelist(M))
+			if(config.game.use_whitelist && !whitelisted)
 				return "Whitelisted Job"
 
 		for (var/s in jobban_keylist)

@@ -102,6 +102,9 @@
 		if(bannedReason == "Whitelisted Job")
 			. += "<del>[rank]</del></td><td><b> \[WHITELIST]</b></td></tr>"
 			continue
+		else if (bannedReason == "Guest Job-ban")
+			. += "<del>[rank]</del></td><td><b> \[GUESTS FORBIDDEN]</b></td></tr>"
+			continue
 		else if (bannedReason == IAA_ban_reason)
 			. += "<del>[rank]</del></td><td><b> \[FIRED BY NT]</b></td></tr>"
 			continue

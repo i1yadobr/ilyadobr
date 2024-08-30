@@ -35,7 +35,7 @@
 		to_chat(communicator, "<span class='danger'>You cannot use [name] (muted).</span>")
 		return FALSE
 
-	if(C && (flags & COMMUNICATION_NO_GUESTS) && IsGuestKey(C.key))
+	if(C && (flags & COMMUNICATION_NO_GUESTS) && IsGuestKey(C.key) && !check_whitelist(C.ckey))
 		to_chat(communicator, "<span class='danger'>Guests may not use the [name] channel.</span>")
 		return FALSE
 

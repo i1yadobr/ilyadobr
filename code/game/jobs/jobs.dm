@@ -38,7 +38,7 @@ GLOBAL_LIST_EMPTY(unsorted_positions) // for nano manifest
 
 GLOBAL_LIST_INIT(commandjobs, list("Captain", "Head of Personnel", "Head of Security", "Chief Engineer", "Chief Medical Officer", "Research Director"))
 
-GLOBAL_LIST_INIT(whitejobs, list("Captain", "Head of Personnel", "Head of Security", "Chief Engineer", "Chief Medical Officer", "Research Director", "AI", "Warden", "Security Officer", "Detective"))
+GLOBAL_LIST_INIT(whitejobs, list("Captain", "Head of Personnel", "Head of Security", "Chief Engineer", "Chief Medical Officer", "Research Director", "AI", "Cyborg", "Warden", "Security Officer", "Detective"))
 
 /proc/guest_jobbans(job)
 	return (job in GLOB.whitejobs)
