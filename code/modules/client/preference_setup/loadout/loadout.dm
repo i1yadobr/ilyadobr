@@ -537,14 +537,6 @@ var/list/hash_to_gear = list()
 		hide_unavailable_gear = !hide_unavailable_gear
 		pref.loadout_is_busy = FALSE
 		return TOPIC_REFRESH
-	if(href_list["toggle_donate"])
-		pref.loadout_is_busy = TRUE
-		hide_donate_gear = !hide_donate_gear
-		pref.loadout_is_busy = FALSE
-		return TOPIC_REFRESH
-	if(href_list["get_opyxes"])
-		SSdonations.show_donations_info(user)
-		return TOPIC_NOACTION
 	return ..()
 
 /datum/category_item/player_setup_item/loadout/proc/randomize(mob/user)

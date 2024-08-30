@@ -214,20 +214,6 @@ SUBSYSTEM_DEF(donations)
 	return TRUE
 
 
-/datum/controller/subsystem/donations/proc/show_donations_info(user)
-	ASSERT(user)
-	var/ui_key = "donation_info"
-	var/list/data = list(
-		"SSdonations" = "\ref[SSdonations]"
-	)
-	var/datum/nanoui/ui = SSnano.try_update_ui(user, src, ui_key, null, data, force_open=FALSE)
-	if(!ui)
-		ui = new (user, src, ui_key, "donations_info.tmpl", "Donations Info", 500, 600, state=GLOB.interactive_state)
-		ui.set_initial_data(data)
-		ui.open()
-		ui.set_auto_update(0)
-
-
 /datum/controller/subsystem/donations/Topic(href, href_list)
 	var/mob/user = usr
 
@@ -259,11 +245,3 @@ SUBSYSTEM_DEF(donations)
 		to_chat(usr, "Discord account was successfully linked with your BYOND ckey!")
 	else
 		to_chat(usr, "Failed to link discord account with BYOND ckey!")
-
-
-/client/verb/donations_info()
-	set name = "Donations Info"
-	set desc = "View information about donations to Onyx."
-	set hidden = 1
-
-	SSdonations.show_donations_info(usr)
