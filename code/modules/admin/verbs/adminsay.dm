@@ -7,8 +7,7 @@
 	msg = sanitize(msg)
 	if(!msg)	return
 
-	if (config.log.asay)
-		log_admin("ADMIN: [key_name(src)]: [msg]")
+	log_admin("ADMIN: [key_name(src)]: [msg]")
 
 	if(check_rights(R_ADMIN,0))
 		for(var/client/C in GLOB.admins)
@@ -25,8 +24,8 @@
 	if(!check_rights(R_ADMIN|R_MOD|R_MENTOR))	return
 
 	msg = sanitize(msg)
-	if (config.log.asay)
-		log_admin("MOD: [key_name(src)]: [msg]")
+	
+	log_admin("MOD: [key_name(src)]: [msg]")
 
 	if (!msg)
 		return

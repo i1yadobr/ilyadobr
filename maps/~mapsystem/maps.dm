@@ -155,11 +155,11 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 /datum/map/proc/setup_map()
 	ASSERT(length(map_levels))
+	var/main_level_present = get_levels_with_trait(ZTRAIT_MAIN).len
 	for(var/level = 1; level <= length(map_levels); level++)
 		var/datum/space_level/L = map_levels[level]
-		if(config.debug.only_load_z1 && (level > 1) && !(L.has_trait(ZTRAIT_CENTCOM))) // centcomm always gets loaded
+		if(config.debug.load_minimum_levels && main_level_present && !(L.has_trait(ZTRAIT_MAIN) || L.has_trait(ZTRAIT_CENTCOM)))
 			continue
-
 		log_to_dd("Loading map '[L.path]' at [level]")
 		maploader.load_map(L.path, 1, 1, level, FALSE, FALSE, TRUE, FALSE)
 

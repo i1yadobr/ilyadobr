@@ -1,7 +1,7 @@
 /datum/configuration_section/debug
 	name = "debug"
 
-	var/only_load_z1 = FALSE
+	var/load_minimum_levels = FALSE
 
 /datum/configuration_section/debug/load_data(list/data)
-	CONFIG_LOAD_BOOL(only_load_z1, data["only_load_z1"])
+	CONFIG_LOAD_BOOL(load_minimum_levels, data["load_minimum_levels"])

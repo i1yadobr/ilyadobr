@@ -10,6 +10,7 @@
 	path = 'genesis-2.dmm'
 	traits = list(
 		ZTRAIT_STATION,
+		ZTRAIT_MAIN,
 		ZTRAIT_CONTACT
 	)
 	travel_chance = 5

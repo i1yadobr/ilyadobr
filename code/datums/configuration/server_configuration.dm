@@ -6,7 +6,6 @@ GLOBAL_REAL(config, /datum/server_configuration) = new
 /// Represents a base configuration datum. Has everything else bundled into it
 /datum/server_configuration
 	var/datum/configuration_section/general/general = new
-	var/datum/configuration_section/log/log = new
 	var/datum/configuration_section/multiaccount/multiaccount = new
 	var/datum/configuration_section/gamemode/gamemode = new
 	var/datum/configuration_section/admin/admin = new
@@ -21,7 +20,6 @@ GLOBAL_REAL(config, /datum/server_configuration) = new
 	var/datum/configuration_section/vote/vote = new
 	var/datum/configuration_section/link/link = new
 	var/datum/configuration_section/external/external = new
-	var/datum/configuration_section/error/error = new
 	var/datum/configuration_section/donations/donations = new
 	var/datum/configuration_section/debug/debug = new
 
@@ -58,7 +56,11 @@ GLOBAL_REAL(config, /datum/server_configuration) = new
 	var/config_file = "config/config.toml"
 
 	if(!fexists(config_file))
-		config_file = "config/example/config.toml" // Fallback to example if user hasnt setup config properly
+		// TODO(rufus): maybe we should get rid of the example config if it's such a default?
+		//   Just keep the example config in the main config folder and instruct users to adjust it in the documentation or DD console? 
+		config_file = "config/example/config.toml" // Maybe the forgot to unpack the example config, so let's handle that
+		if(!fexists(config_file))
+			throw EXCEPTION("config files not found and example config fallback didn't work")
 
 	raw_data = FROM_TOML(return_file_text(config_file))
 

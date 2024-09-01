@@ -35,61 +35,6 @@ tick_limit_mc_init = 100
 second_topic_limit = 10
 minute_topic_limit = 100
 
-[log]
-## Log client say.
-say = true
-
-## Log asay/msay.
-asay = true
-
-## Log emotes.
-emote = true
-
-## Log OOC channel.
-ooc = true
-
-## Log client whisper.
-whisper = true
-
-## Log pda messages.
-pda = true
-
-## Log attack messages.
-attack = true
-
-## Log player votes.
-vote = true
-
-## Log admin actions.
-admin = true
-
-## Log admin warning messages.
-adminwarn = true
-
-## Log client access (logon/logoff).
-access = true
-
-## Log game actions (start of round, results, etc.).
-game = true
-
-## Log debug output.
-debug = true
-
-## Log debug verbose output.
-debug_verbose = true
-
-## Log all Topic() calls (for use by coders in tracking down Topic issues).
-hrefs = true
-
-## Log world.log and runtime errors to a file.
-runtime = true
-
-## Log world.log messages.
-world_output = true
-
-## Log story output.
-story = true
-
 [multiaccount]
 ## If non-zero, redirects players below this account age to the `panic_server_address` or disconnects them.
 # panic_bunker = 0
@@ -567,19 +512,6 @@ use_irc_bot = false
 ## Uncomment this line to announce shuttle dock announcements to the main IRC channel, if `main_irc` has also been setup.
 announce_shuttle_dock_to_irc = false
 
-[error]
-## The "cooldown" time for each occurrence of a unique error.
-cooldown = 600
-
-## How many occurrences before the next will silence them.
-limit = 50
-
-## How long a unique error will be silenced for.
-silence_time = 6000
-
-## How long to wait between messaging admins about occurrences of a unique error.
-msg_delay = 150
-
 [debug]
-## Only load the first Z-level, skip the rest, intended to speed up reload-heavy testing
-only_load_z1 = false
+## Only load the main Z-level and centcomm, skip the rest, intended to speed up testing and debugging
+load_minimum_levels = false

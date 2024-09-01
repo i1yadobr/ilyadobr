@@ -97,14 +97,19 @@ var/server_name = "OldOnyx"
 
 	return match
 
-#define RECOMMENDED_VERSION 514
+#define RECOMMENDED_VERSION 515
 /world/New()
 	SetupLogs()
 
 	if(world.system_type == UNIX)
-		GLOB.converter_dll = "./libconverter.so"
+		GLOB.converter_dll = "./converter.so"
 	else
 		GLOB.converter_dll = "converter.dll"
+	if(!fexists(GLOB.converter_dll))
+		log_error("CRITICAL: [GLOB.converter_dll] not found")
+		log_error("Can't read config, shutting down...")
+		sleep(50)
+		shutdown()
 
 	changelog_hash = md5('html/changelog.html')					//used for telling if the changelog has changed recently
 
@@ -114,7 +119,13 @@ var/server_name = "OldOnyx"
 	load_sql_config("config/dbconfig.txt")
 
 	// Load up the base config.toml
-	config.load_configuration()
+	try
+		config.load_configuration()
+	catch(var/exception/e)
+		log_error("CRITICAL: failed to read config: [e.name]")
+		log_error("Can't read config, shutting down...")
+		sleep(50)
+		shutdown()
 
 	if(config.general.server_port)
 		var/port = OpenPort(config.general.server_port)
@@ -645,11 +656,11 @@ var/failed_don_db_connections = 0
 
 /hook/startup/proc/connectDB()
 	if(!config.external.sql_enabled)
-		log_to_dd("SQL disabled. Your server will not use feedback database.")
+		log_to_dd("SQL disabled. Your server will not use the main database.")
 	else if(!setup_database_connection())
-		log_to_dd("Your server failed to establish a connection with the feedback database.")
+		log_to_dd("Your server failed to establish a connection with the main database.")
 	else
-		log_to_dd("Feedback database connection established.")
+		log_to_dd("Main database connection established.")
 	return TRUE
 
 /proc/setup_database_connection()
@@ -676,7 +687,7 @@ var/failed_don_db_connections = 0
 
 	return .
 
-//This proc ensures that the connection to the feedback database (global variable dbcon) is established
+//This proc ensures that the connection to the main database (global variable dbcon) is established
 /proc/establish_db_connection()
 	if(!config.external.sql_enabled)
 		return FALSE
@@ -691,9 +702,9 @@ var/failed_don_db_connections = 0
 
 /hook/startup/proc/connectDonDB()
 	if(!config.external.sql_enabled)
-		log_to_dd("SQL disabled. Your server will not use Donations database.")
+		log_to_dd("SQL disabled. Your server will not use donations database.")
 	else if(!setup_don_database_connection())
-		log_to_dd("Your server failed to establish a connection with the Donations database.")
+		log_to_dd("Your server failed to establish a connection with the donations database.")
 	else
 		log_to_dd("Donations database connection established.")
 	return TRUE

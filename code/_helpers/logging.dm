@@ -10,10 +10,11 @@
 
 /var/global/log_end = world.system_type == UNIX ? ascii2text(13) : ""
 
+// TODO(rufus): figure out if we even need this "story" log or if the common is sufficient, admins have their scripts and regexes to clean up anyways
 /proc/log_story(type, message, location)
 	var/static/datum/text_processor/confidential/P = new()
 
-	if(!config.log.story || !GLOB.world_story_log)
+	if(!GLOB.world_story_log)
 		return
 
 	message = P.process(message)
@@ -24,8 +25,7 @@
 
 /proc/log_to_dd(text)
 	to_world_log(text)
-	if(config && config.log.world_output)
-		log_debug("\[DD]: [text]")
+	log_debug("\[DD]: [text]")
 
 /proc/error(msg)
 	log_to_dd("\[[time_stamp()]]\[ERROR] [msg][log_end]")
@@ -50,72 +50,80 @@
 /proc/testing(msg)
 	log_to_dd("\[[time_stamp()]]\[TESTING] [msg][log_end]")
 
-/proc/log_generic(type, message, location, log_to_common = TRUE, notify_admin = FALSE, message_type)
-	var/turf/T = get_turf(location)
-	if(location && T)
-		if(log_to_common)
+// TODO(rufus): get the logging system straight, this config mess was not worth it so I set it to always log everything
+// TODO(rufus): also make this robust instead of try/catching, had to go with the try/catch block because early runtimes prevent even the error handling itself
+/proc/log_generic(type, message, location, notify_admin = FALSE, message_type)
+	try
+		var/turf/T = get_turf(location)
+		if(location && T)
 			WRITE_FILE(GLOB.world_common_log, "\[[time_stamp()]] [game_id] [type]: [message] ([T.x],[T.y],[T.z])[log_end]")
-		if(notify_admin)
-			message += " (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[T.x];Y=[T.y];Z=[T.z]'>JMP</a>)"
-	else if(log_to_common)
-		WRITE_FILE(GLOB.world_common_log, "\[[time_stamp()]] [game_id] [type]: [message][log_end]")
+			if(notify_admin)
+				message += " (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[T.x];Y=[T.y];Z=[T.z]'>JMP</a>)"
+		else
+			WRITE_FILE(GLOB.world_common_log, "\[[time_stamp()]] [game_id] [type]: [message][log_end]")
 
-	var/rendered = "<span class=\"log_message\"><span class=\"prefix\">[type] LOG:</span> <span class=\"message\">[message]</span></span>"
-	if(notify_admin && SScharacter_setup.initialized) // Checking SScharacter_setup early so won't cycle through all the admins
-		for(var/client/C in GLOB.admins)
-			to_chat(C, rendered, message_type)
+		var/rendered = "<span class=\"log_message\"><span class=\"prefix\">[type] LOG:</span> <span class=\"message\">[message]</span></span>"
+		if(notify_admin && SScharacter_setup?.initialized) // Checking SScharacter_setup early so won't cycle through all the admins
+			if(type == "DEBUG")
+				message = SPAN("filter_debuglog", message)
+			for(var/client/C in GLOB.admins)
+				to_chat(C, rendered, message_type)
+	catch(var/exception/e)
+		world.log << "ATTENTION: EVEN LOGGING FAILED, SOMETHING IS REALLY WRONG, GO FIX IT OR ASK SOMEONE TO FIX IT: [e.name]"
 
 /proc/log_roundend(text)
-	log_generic("ROUNDEND", text, null, config.log.game)
+	log_generic("ROUNDEND", text, null)
 
 /proc/log_admin(text, location, notify_admin)
-	log_generic("ADMIN", text, location, config.log.admin, notify_admin, MESSAGE_TYPE_ADMINLOG)
+	log_generic("ADMIN", text, location, notify_admin, MESSAGE_TYPE_ADMINLOG)
 
 /proc/log_debug(text, location, type = MESSAGE_TYPE_DEBUG)
-	log_generic("DEBUG", SPAN("filter_debuglog", text), location, FALSE, TRUE, type)
-	if(!config.log.debug || !GLOB.world_debug_log)
+	// TODO(rufus): This goes into the generic log for admin notification purposes but it should be a separate function instead of log_generic()
+	log_generic("DEBUG", text, location, TRUE, type)
+	if(!GLOB.world_debug_log)
 		return
 	WRITE_FILE(GLOB.world_debug_log, "\[[time_stamp()]] DEBUG: [text][log_end]")
 
 /proc/log_debug_verbose(text)
-	if(!config.log.debug_verbose || !GLOB.world_debug_log)
+	if(!GLOB.world_debug_log)
 		return
 	WRITE_FILE(GLOB.world_debug_log, "\[[time_stamp()]] DEBUG VERBOSE: [text][log_end]")
 
 /proc/log_game(text, location, notify_admin)
-	log_generic("GAME", text, location, config.log.game, notify_admin)
+	log_generic("GAME", text, location, notify_admin)
 
 /proc/log_vote(text)
-	log_generic("VOTE", text, null, config.log.vote)
+	log_generic("VOTE", text, null)
 
 /proc/log_access(text, notify_admin)
-	log_generic("ACCESS", text, null, config.log.access, notify_admin, MESSAGE_TYPE_ADMINLOG)
+	log_generic("ACCESS", text, null, notify_admin, MESSAGE_TYPE_ADMINLOG)
 
 /proc/log_say(text)
-	log_generic("SAY", text, null, config.log.say)
+	log_generic("SAY", text, null)
 	log_story("SAY", text, null)
 
 /proc/log_ooc(text)
-	log_generic("OOC", text, null, config.log.ooc)
+	log_generic("OOC", text, null)
 	log_story("OOC", text, null)
 
 /proc/log_whisper(text)
-	log_generic("WHISPER", text, null, config.log.whisper)
+	log_generic("WHISPER", text, null)
 	log_story("WHISPER", text, null)
 
 /proc/log_emote(text)
-	log_generic("EMOTE", text, null, config.log.emote)
+	log_generic("EMOTE", text, null)
 	log_story("EMOTE", text, null)
 
 /proc/log_attack(text, location, notify_admin)
-	log_generic("ATTACK", text, location, config.log.attack, notify_admin, MESSAGE_TYPE_ATTACKLOG)
+	log_generic("ATTACK", text, location, notify_admin, MESSAGE_TYPE_ATTACKLOG)
 	log_story("ATTACK", text, location)
 
 /proc/log_adminwarn(text, location, notify_admin)
-	log_generic("ADMINWARN", text, location, config.log.adminwarn, notify_admin, MESSAGE_TYPE_ADMINLOG)
+	log_generic("ADMINWARN", text, location, notify_admin, MESSAGE_TYPE_ADMINLOG)
 
+// TODO(rufus): almost 100% sure this could take a location and properly log it instead of omitting it
 /proc/log_pda(text)
-	log_generic("PDA", text, null, config.log.pda)
+	log_generic("PDA", text, null)
 	log_story("PDA", text, null)
 
 /proc/log_misc(text) //Replace with log_game ?
@@ -131,8 +139,6 @@
 	WRITE_FILE(GLOB.world_qdel_log, "\[[time_stamp()]]QDEL: [text]")
 
 /proc/log_href(text)
-	if(!config.log.hrefs)
-		return
 	WRITE_FILE(GLOB.world_hrefs_log, "\[[time_stamp()]] HREF: [text]")
 
 /proc/log_href_exploit(atom/user)

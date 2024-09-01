@@ -30,17 +30,11 @@ GLOBAL_VAR_INIT(total_runtimes_skipped, 0)
 		return //Error is currently silenced, skip handling it
 	//Handle cooldowns and silencing spammy errors
 	var/silencing = FALSE
-
-	// We can runtime before config is initialized because BYOND initialize objs/map before a bunch of other stuff happens.
-	// This is a bunch of workaround code for that. Hooray!
-
-	var/configured_error_cooldown = initial(config.error.cooldown)
-	var/configured_error_limit = initial(config.error.limit)
-	var/configured_error_silence_time = initial(config.error.silence_time)
-	if(config)
-		configured_error_cooldown = config.error.cooldown
-		configured_error_limit = config.error.limit
-		configured_error_silence_time = config.error.silence_time
+	
+	// NOTE(rufus): this tried to access config variables previously, but config and early runtime don't mix well, so let's keep these values here
+	var/configured_error_cooldown = 600
+	var/configured_error_limit = 50
+	var/configured_error_silence_time = 6000
 
 
 	//Each occurence of an unique error adds to its cooldown time...
