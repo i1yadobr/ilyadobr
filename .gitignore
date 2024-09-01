@@ -1,4 +1,6 @@
-#ignore misc BYOND files
+# Common files
+__pycache__
+.idea
 Thumbs.db
 *.log
 *.int
@@ -9,21 +11,16 @@ Thumbs.db
 *.before
 *.db
 *.db-*
-*.so
+*.bak
+*.old
 data/
 cfg/
+build_log.txt
+use_map
+
 # ignore config, but not subdirs
 config/*
 !config/names/
 !config/example/
 !config/warnings_templates/
 !config/schema/
-build_log.txt
-use_map
-stopserver
-reboot_called
-atupdate
-__pycache__
-.idea
-
-sql/test_db

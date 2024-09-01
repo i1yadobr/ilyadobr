@@ -3,14 +3,17 @@
 !.git/logs/HEAD
 .github/
 .vscode/
-~code/
-code/
 docs/
 scripts/
 sql/
 test/
 tmp/
 tools/
+
+# These two folders will be copied into the server folder and backsynced via volumes and some scripting
+# For explanation see comments in docker-entrypoint.sh
+config/
+data/
 
 .dockerignore
 .gitattributes
@@ -20,3 +23,6 @@ Dockerfile
 LICENSE-*
 README.md
 SpacemanDMM.toml
+*.bat
+*.bak
+*.old
