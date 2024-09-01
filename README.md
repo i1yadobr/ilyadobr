@@ -1,4 +1,11 @@
-# OnyxBay [![Discord Shield](https://discordapp.com/api/guilds/414832443384659968/widget.png?style=shield)](https://discord.gg/4JFNdbk)
+# OldOnyx
+Данный проект является форком сборки [OnyxBay](https://github.com/ChaoticOnyx/OnyxBay) от команды [ChaoticOnyx](https://github.com/ChaoticOnyx) с последним общим [коммитом](https://github.com/rufuszero/OldOnyx/commit/2e02fad116f279105439f03593ba9ea9720bd5d8) 2 ноября 2022 года.
+
+Большая часть README и руководств от основной команды или контрибьюторов первичного проекта актуальна.
+
+Ниже приведён оригинальный текст OnyxBay README:
+
+# OnyxBay
 
 [Наш сайт](https://ss13.ru/) - [Вики](https://wiki.ss13.ru/)
 
