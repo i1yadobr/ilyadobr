@@ -226,9 +226,6 @@
 			pref.job_low |= job.title
 		return 1
 
-	if(role in GLOB.commandjobs)
-		SSwarnings.show_warning(user.client, WARNINGS_HEADS, "window=Warning;size=440x300;can_resize=0;can_minimize=0")
-
 	if(job.title == pref.job_high)
 		CorrectJobsPriorities(job, JOB_PRIORITY_HIGH)
 	else if(job.title in pref.job_medium)

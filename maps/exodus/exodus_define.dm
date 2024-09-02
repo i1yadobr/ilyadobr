@@ -4,6 +4,7 @@
 	full_name = "NSS Exodus"
 	path = "exodus"
 
+	// TODO(rufus): implement/port rotation of the lobby screens
 	lobby_icon = 'maps/exodus/exodus_lobby_old.dmi'
 
 	shuttle_types = list(

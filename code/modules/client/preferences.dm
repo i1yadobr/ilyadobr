@@ -159,7 +159,6 @@
 	"}
 	popup.set_content(content)
 	popup.open()
-	SSwarnings.show_warning(user.client, WARNINGS_NEWCOMERS, "window=Warning;size=360x240;can_resize=0;can_minimize=0")
 
 /datum/preferences/proc/update_setup_window(mob/user)
 	send_output(user, url_encode(get_content(user)), "preferences_browser.browser:update_content")

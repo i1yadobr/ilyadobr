@@ -1,8 +1,8 @@
 /obj/screen/splash
-	name = "Chaotic Onyx"
+	name = "Onyx Title Screen"
 	desc = "This shouldn't be read."
 	screen_loc = "WEST,SOUTH"
-	icon = 'maps/exodus/exodus_lobby.dmi'
+	icon = 'maps/exodus/exodus_lobby_old.dmi'
 	icon_state = "title"
 	layer = FULLSCREEN_LAYER
 	plane = FULLSCREEN_PLANE
