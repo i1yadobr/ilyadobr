@@ -33,14 +33,14 @@
 			ip,
 			computerid
 		FROM
-			ss13_player
+			player
 		WHERE
 			computerid
 			IN
 				(SELECT DISTINCT
 					computerid
 				FROM
-					ss13_player
+					player
 				WHERE
 					ckey LIKE $targetkey
 				)
@@ -66,21 +66,21 @@
 			ip,
 			computerid
 		FROM
-			ss13_player
+			player
 		WHERE
 			ip
 			IN
 				(SELECT DISTINCT
 					ip
 				FROM
-					ss13_player
+					player
 				WHERE
 					computerid
 					IN
 						(SELECT DISTINCT
 							computerid
 						FROM
-							ss13_player
+							player
 						WHERE
 							ckey LIKE $targetkey
 						)
@@ -113,21 +113,21 @@
 			SELECT
 				ckey
 			FROM
-				ss13_player
+				player
 			WHERE
 				ip
 				IN
 					(SELECT DISTINCT
 						ip
 					FROM
-						ss13_player
+						player
 					WHERE
 						computerid
 						IN
 							(SELECT DISTINCT
 								computerid
 							FROM
-								ss13_player
+								player
 							WHERE
 								ckey LIKE $ckey
 							)
@@ -149,14 +149,14 @@
 			SELECT
 				ckey
 			FROM
-				ss13_player
+				player
 			WHERE
 				computerid
 				IN
 					(SELECT DISTINCT
 						computerid
 					FROM
-						ss13_player
+						player
 					WHERE
 						ckey LIKE $ckey
 					)

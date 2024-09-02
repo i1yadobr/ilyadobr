@@ -299,7 +299,7 @@
 	if(!establish_db_connection())
 		return null
 
-	var/DBQuery/query = sql_query("SELECT datediff(Now(),firstseen) as age FROM ss13_player WHERE ckey = $ckey", dbcon, list(ckey = ckey(key)))
+	var/DBQuery/query = sql_query("SELECT datediff(Now(),firstseen) as age FROM player WHERE ckey = $ckey", dbcon, list(ckey = ckey(key)))
 
 	if(query.NextRow())
 		return text2num(query.item[1])
@@ -323,7 +323,7 @@
 	if(!establish_db_connection())
 		return
 
-	var/DBQuery/query = sql_query("SELECT id, datediff(Now(),firstseen) as age FROM ss13_player WHERE ckey = $ckey", dbcon, list(ckey = ckey))
+	var/DBQuery/query = sql_query("SELECT id, datediff(Now(),firstseen) as age FROM player WHERE ckey = $ckey", dbcon, list(ckey = ckey))
 	var/id = 0
 	player_age = 0	// New players won't have an entry so knowing we have a connection we set this to zero to be updated if their is a record.
 	while(query.NextRow())
@@ -331,13 +331,13 @@
 		player_age = text2num(query.item[2])
 		break
 
-	var/DBQuery/query_ip = sql_query("SELECT ckey FROM ss13_player WHERE ip = $address", dbcon, list(address = address || "127.0.0.1"))
+	var/DBQuery/query_ip = sql_query("SELECT ckey FROM player WHERE ip = $address", dbcon, list(address = address || "127.0.0.1"))
 	related_accounts_ip = ""
 	while(query_ip.NextRow())
 		related_accounts_ip += "[query_ip.item[1]], "
 		break
 
-	var/DBQuery/query_cid = sql_query("SELECT ckey FROM ss13_player WHERE computerid = $computer_id", dbcon, list(computer_id = computer_id))
+	var/DBQuery/query_cid = sql_query("SELECT ckey FROM player WHERE computerid = $computer_id", dbcon, list(computer_id = computer_id))
 	related_accounts_cid = ""
 	while(query_cid.NextRow())
 		related_accounts_cid += "[query_cid.item[1]], "
@@ -358,10 +358,10 @@
 
 	if(id)
 		// Player already identified previously, we need to just update the 'lastseen', 'ip' and 'computer_id' variables
-		sql_query("UPDATE ss13_player SET lastseen = Now(), ip = $address, computerid = $computer_id, lastadminrank = $admin_rank WHERE id = $id", dbcon, list(address = address || "127.0.0.1", computer_id = computer_id, admin_rank = admin_rank, id = id))
+		sql_query("UPDATE player SET lastseen = Now(), ip = $address, computerid = $computer_id, lastadminrank = $admin_rank WHERE id = $id", dbcon, list(address = address || "127.0.0.1", computer_id = computer_id, admin_rank = admin_rank, id = id))
 	else
 		// New player!! Need to insert all the stuff
-		sql_query("INSERT INTO ss13_player VALUES (null, $ckey, Now(), Now(), $address, $computer_id, $admin_rank)", dbcon, list(ckey = ckey, address = address || "127.0.0.1", computer_id = computer_id, admin_rank = admin_rank))
+		sql_query("INSERT INTO player VALUES (null, $ckey, Now(), Now(), $address, $computer_id, $admin_rank)", dbcon, list(ckey = ckey, address = address || "127.0.0.1", computer_id = computer_id, admin_rank = admin_rank))
 
 	sql_query("INSERT INTO connection(datetime, ckey, ip, computerid) VALUES (Now(), $ckey, $address, $computer_id)", dbcon, list(ckey = ckey, address = address || "127.0.0.1", computer_id = computer_id))
 

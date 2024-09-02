@@ -17,7 +17,7 @@ GLOBAL_LIST_EMPTY(IAA_approved_list)
 		GLOB.IAA_approved_list[key]++
 		sql_query({"
 			UPDATE
-				ss13_iaa_approved
+				iaa_approved
 			SET
 				approvals = approvals + 1
 			WHERE
@@ -27,7 +27,7 @@ GLOBAL_LIST_EMPTY(IAA_approved_list)
 		GLOB.IAA_approved_list[key] = 1
 		sql_query({"
 			INSERT INTO
-				ss13_iaa_approved (
+				iaa_approved (
 					`ckey`
 				)
 			VALUES
@@ -42,7 +42,7 @@ GLOBAL_LIST_EMPTY(IAA_approved_list)
 	GLOB.IAA_approved_list[key] = 0
 	sql_query({"
 		DELETE FROM
-			ss13_iaa_approved
+			iaa_approved
 		WHERE
 			ckey = $$
 		"}, dbcon, key)
@@ -56,7 +56,7 @@ GLOBAL_LIST_EMPTY(IAA_approved_list)
 			iaa_ckey,
 			other_ckeys
 		FROM
-			ss13_iaa_jobban
+			iaa_jobban
 		WHERE
 			id = $$
 		"}, dbcon, id)
@@ -91,7 +91,7 @@ GLOBAL_LIST_EMPTY(IAA_approved_list)
 	if (approved)
 		query = sql_query({"
 			UPDATE
-				ss13_iaa_jobban
+				iaa_jobban
 			SET
 				status = $status,
 				resolve_time = Now(),
@@ -109,7 +109,7 @@ GLOBAL_LIST_EMPTY(IAA_approved_list)
 	else
 		query = sql_query({"
 			UPDATE
-				ss13_iaa_jobban
+				iaa_jobban
 			SET
 				status = $status,
 				resolve_time = Now(),
@@ -127,7 +127,7 @@ GLOBAL_LIST_EMPTY(IAA_approved_list)
 			SELECT
 				expiration_time
 			FROM
-				ss13_iaa_jobban
+				iaa_jobban
 			WHERE
 				id = $$
 			"}, dbcon, id)
@@ -149,7 +149,7 @@ GLOBAL_LIST_EMPTY(IAA_approved_list)
 			status,
 			fakeid
 		FROM
-			ss13_iaa_jobban
+			iaa_jobban
 		WHERE
 			id = $$
 		"}, dbcon, id)
@@ -163,7 +163,7 @@ GLOBAL_LIST_EMPTY(IAA_approved_list)
 	log_admin("IAA jobban [id] ([fakeid]) was [action] by [ckey] ([comment])")
 	query = sql_query({"
 		UPDATE
-			ss13_iaa_jobban
+			iaa_jobban
 		SET
 			status = $status,
 			cancel_time = Now(),
@@ -198,7 +198,7 @@ GLOBAL_LIST_EMPTY(IAA_approved_list)
 			status,
 			expiration_time
 		FROM
-			ss13_iaa_jobban
+			iaa_jobban
 		WHERE
 			(status = '[IAA_STATUS_PENDING]'
 			OR
@@ -223,7 +223,7 @@ GLOBAL_LIST_EMPTY(IAA_approved_list)
 			ckey,
 			approvals
 		FROM
-			ss13_iaa_approved
+			iaa_approved
 		"}, dbcon)
 
 	while (query.NextRow())
@@ -236,7 +236,7 @@ GLOBAL_LIST_EMPTY(IAA_approved_list)
 		SELECT
 			fakeid
 		FROM
-			ss13_iaa_jobban
+			iaa_jobban
 		WHERE
 			fakeid = $$
 		"}, dbcon, fakeid)
@@ -264,7 +264,7 @@ GLOBAL_LIST_EMPTY(IAA_approved_list)
 	var/DBQuery/query
 	query = sql_query({"
 		INSERT INTO
-			ss13_iaa_jobban (
+			iaa_jobban (
 				`fakeid`,
 				`ckey`,
 				`iaa_ckey`,
@@ -298,7 +298,7 @@ GLOBAL_LIST_EMPTY(IAA_approved_list)
 			id,
 			creation_time
 		FROM
-			ss13_iaa_jobban
+			iaa_jobban
 		WHERE
 			fakeid = $$
 		"}, dbcon, fakeid)
@@ -367,7 +367,7 @@ GLOBAL_LIST_EMPTY(IAA_approved_list)
 			job, status,
 			expiration_time
 		FROM
-			ss13_iaa_jobban
+			iaa_jobban
 		ORDER BY id DESC
 		LIMIT [results_per_page]
 		OFFSET [startfrom]
@@ -415,7 +415,7 @@ GLOBAL_LIST_EMPTY(IAA_approved_list)
 			status,
 			expiration_time
 		FROM
-			ss13_iaa_jobban
+			iaa_jobban
 		WHERE
 			id = $$
 		"}, dbcon, id)

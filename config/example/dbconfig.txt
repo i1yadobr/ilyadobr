@@ -7,8 +7,8 @@ ADDRESS localhost
 # MySQL server port (default is 3306)
 PORT 3306
 
-# Database the population, death, karma, etc. tables may be found in
-DATABASE onyxdb
+# Name of the database that stores connections, bans, admins etc.
+DATABASE ss13onyx
 
 # Username/Login used to access the database
 LOGIN root

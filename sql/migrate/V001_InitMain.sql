@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS `feedback`;
-USE `feedback`;
+CREATE DATABASE IF NOT EXISTS `ss13onyx`;
+USE `ss13onyx`;
 
 
 CREATE TABLE IF NOT EXISTS `connection` (
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `eams_cache` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
-CREATE TABLE IF NOT EXISTS `ss13_admin` (
+CREATE TABLE IF NOT EXISTS `admin` (
   `id` int NOT NULL AUTO_INCREMENT,
   `ckey` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `rank` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'Administrator',
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `ss13_admin` (
   UNIQUE KEY `UNIQUE` (`ckey`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE IF NOT EXISTS `ss13_admin_log` (
+CREATE TABLE IF NOT EXISTS `admin_log` (
   `id` int NOT NULL AUTO_INCREMENT,
   `datetime` datetime NOT NULL,
   `adminckey` varchar(32) NOT NULL,
@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `ss13_admin_log` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE IF NOT EXISTS `ss13_ban` (
+CREATE TABLE IF NOT EXISTS `ban` (
   `id` int NOT NULL AUTO_INCREMENT,
   `bantime` datetime NOT NULL,
   `serverip` varchar(32) NOT NULL,
@@ -89,13 +89,13 @@ CREATE TABLE IF NOT EXISTS `ss13_ban` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 
 
-CREATE TABLE IF NOT EXISTS `ss13_iaa_approved` (
+CREATE TABLE IF NOT EXISTS `iaa_approved` (
   `ckey` varchar(32) NOT NULL,
   `approvals` int DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-CREATE TABLE IF NOT EXISTS `ss13_iaa_jobban` (
+CREATE TABLE IF NOT EXISTS `iaa_jobban` (
   `id` int NOT NULL AUTO_INCREMENT,
   `fakeid` varchar(6) NOT NULL,
   `ckey` varchar(32) NOT NULL,
@@ -116,7 +116,7 @@ CREATE TABLE IF NOT EXISTS `ss13_iaa_jobban` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-CREATE TABLE IF NOT EXISTS `ss13_player` (
+CREATE TABLE IF NOT EXISTS `player` (
   `id` int NOT NULL AUTO_INCREMENT,
   `ckey` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `firstseen` datetime NOT NULL,
@@ -129,7 +129,7 @@ CREATE TABLE IF NOT EXISTS `ss13_player` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-CREATE TABLE IF NOT EXISTS `ss13_watch` (
+CREATE TABLE IF NOT EXISTS `watch` (
   `ckey` varchar(32) NOT NULL,
   `reason` text NOT NULL,
   `adminckey` varchar(32) NOT NULL,
