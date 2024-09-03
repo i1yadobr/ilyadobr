@@ -28,8 +28,6 @@ Thanks to spacemaniac and mcdonald for help with the JS side of this.
 	mainwindow.background-color = none;
 	mainvsplit.background-color = none;
 
-	changelog.background-color = none;
-	changelog.text-color = #000000;
 	rulesb.background-color = none;
 	rulesb.text-color = #000000;
 	wikib.background-color = none;
@@ -87,8 +85,6 @@ Thanks to spacemaniac and mcdonald for help with the JS side of this.
 	mainwindow.background-color = [COLOR_DARKMODE_BACKGROUND];
 	mainvsplit.background-color = [COLOR_DARKMODE_BACKGROUND];
 
-	changelog.background-color = #494949;
-	changelog.text-color = [COLOR_DARKMODE_TEXT];
 	rulesb.background-color = #494949;
 	rulesb.text-color = [COLOR_DARKMODE_TEXT];
 	wikib.background-color = #494949;
@@ -146,8 +142,6 @@ Thanks to spacemaniac and mcdonald for help with the JS side of this.
 	mainwindow.background-color = [COLOR_MARINEMODE_BACKGROUND];
 	mainvsplit.background-color = [COLOR_MARINEMODE_BACKGROUND];
 
-	changelog.background-color = [COLOR_MARINEMODE_GRAYBUTTON];
-	changelog.text-color = [COLOR_MARINEMODE_TEXT];
 	rulesb.background-color = [COLOR_MARINEMODE_GRAYBUTTON];
 	rulesb.text-color = [COLOR_MARINEMODE_TEXT];
 	wikib.background-color = [COLOR_MARINEMODE_GRAYBUTTON];

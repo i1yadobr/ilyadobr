@@ -8,5 +8,5 @@ elseif (Test-Path $x86) {
     Start-Process -FilePath $x86
 }
 else {
-    Write-Error "IEChooser.exe не обнаружен."
+    Write-Error "IEChooser.exe not found."
 }

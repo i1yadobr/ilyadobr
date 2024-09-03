@@ -61,15 +61,6 @@
 	else
 		deferred_login()
 
-/mob/new_player/proc/handle_changelog()
-	if(client.prefs.lastchangelog == changelog_hash)
-		return
-
-	client.prefs.lastchangelog = changelog_hash
-	SScharacter_setup.queue_preferences_save(client.prefs)
-
-	to_chat(client, SPAN("info", "You have unread updates in the changelog."))
-
 // This is called when the charcter setup system has been sufficiently initialized and prefs are available.
 // Do not make any calls in mob/Login which may require prefs having been loaded.
 // It is safe to assume that any UI or sound related calls will fall into that category.
@@ -81,4 +72,3 @@
 	client.playtitlemusic()
 
 	new_player_panel(TRUE)
-	handle_changelog()

@@ -111,8 +111,6 @@ var/server_name = "OldOnyx"
 		sleep(50)
 		shutdown()
 
-	changelog_hash = md5('html/changelog.html')					//used for telling if the changelog has changed recently
-
 	if(byond_version < RECOMMENDED_VERSION)
 		to_world_log("Your server's byond version does not meet the recommended requirements for this server. Please update BYOND")
 

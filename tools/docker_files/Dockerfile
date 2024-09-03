@@ -1,3 +1,4 @@
+# TODO(rufus): switch to a lightweight ubuntu or even alpine, tg has examples
 FROM archlinux:base
 
 # You can adjust these arguments as needed

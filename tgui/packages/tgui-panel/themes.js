@@ -46,8 +46,6 @@ export const setClientTheme = (name) => {
       "mainwindow.background-color": "none",
       "mainvsplit.background-color": "none",
       // Buttons
-      "changelog.background-color": "none",
-      "changelog.text-color": "#000000",
       "rulesb.background-color": "none",
       "rulesb.text-color": "#000000",
       "wikib.background-color": "none",
@@ -103,8 +101,6 @@ export const setClientTheme = (name) => {
       "mainwindow.background-color": COLOR_DARK_BG,
       "mainvsplit.background-color": COLOR_DARK_BG,
       // Buttons
-      "changelog.background-color": "#494949",
-      "changelog.text-color": COLOR_DARK_TEXT,
       "rulesb.background-color": "#494949",
       "rulesb.text-color": COLOR_DARK_TEXT,
       "wikib.background-color": "#494949",

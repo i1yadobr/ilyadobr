@@ -1,4 +1,3 @@
-// THIS FILE IS AUTOMATICALLY CREATED BY tools/gen_globals.py
 /proc/readglobal(which)
 	switch(which)
 		if("ALL_ANTIGENS")
@@ -245,8 +244,6 @@
 			return global.cargo_supply_pack_root;
 		if("cargo_supply_packs")
 			return global.cargo_supply_packs;
-		if("changelog_hash")
-			return global.changelog_hash;
 		if("channel_to_radio_key")
 			return global.channel_to_radio_key;
 		if("chargen_robolimbs")
@@ -1116,8 +1113,6 @@
 			global.cargo_supply_pack_root=newval;
 		if("cargo_supply_packs")
 			global.cargo_supply_packs=newval;
-		if("changelog_hash")
-			global.changelog_hash=newval;
 		if("channel_to_radio_key")
 			global.channel_to_radio_key=newval;
 		if("chargen_robolimbs")
@@ -1873,7 +1868,6 @@
 	"captain_announcement",
 	"cargo_supply_pack_root",
 	"cargo_supply_packs",
-	"changelog_hash",
 	"channel_to_radio_key",
 	"chargen_robolimbs",
 	"checked_for_inactives",

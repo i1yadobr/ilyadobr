@@ -19,10 +19,6 @@
 	// Populated with an error message if loading fails.
 	var/load_failed = null
 
-	// GAME-PREFERENCES
-	// Saved changlog filesize to detect if there was a change
-	var/lastchangelog = ""
-
 	// CHARACTER PREFERENCES
 	// Used for the species selection window.
 	var/species_preview

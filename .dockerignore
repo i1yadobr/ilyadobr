@@ -4,8 +4,6 @@
 .github/
 .vscode/
 docs/
-scripts/
-sql/
 test/
 tmp/
 tools/

@@ -6,13 +6,11 @@
 	sort_order = 5
 
 /datum/category_item/player_setup_item/player_global/settings/load_preferences(datum/pref_record_reader/R)
-	pref.lastchangelog = R.read("lastchangelog")
 	pref.default_slot = R.read("default_slot")
 	pref.slot_names = R.read("slot_names")
 	pref.preference_values = R.read("preference_values")
 
 /datum/category_item/player_setup_item/player_global/settings/save_preferences(datum/pref_record_writer/W)
-	W.write("lastchangelog", pref.lastchangelog)
 	W.write("default_slot", pref.default_slot)
 	W.write("slot_names", pref.slot_names)
 	W.write("preference_values", pref.preference_values)
@@ -42,7 +40,6 @@
 		if(!(key in client_preference_keys))
 			pref.preference_values -= key
 
-	pref.lastchangelog	= sanitize_text(pref.lastchangelog, initial(pref.lastchangelog))
 	pref.default_slot	= sanitize_integer(pref.default_slot, 1, config.character_setup.character_slots, initial(pref.default_slot))
 
 /datum/category_item/player_setup_item/player_global/settings/content(mob/user)
