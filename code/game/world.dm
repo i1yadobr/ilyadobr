@@ -1,7 +1,7 @@
 #define REBOOT_HARD 1
 #define REBOOT_REALLY_HARD 2
 
-var/server_name = "OldOnyx"
+var/server_name = "ZeroOnyx"
 
 /var/game_id = null
 /hook/global_init/proc/generate_gameid()

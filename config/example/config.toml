@@ -1,10 +1,10 @@
 [general]
 ## Server and subserver name displayed in the game window title and on the BYOND hub
-server_name = "OldOnyx: 2022 fork of OnyxBay by SS13.RU team"
+server_name = "ZeroOnyx: 2022 fork of OnyxBay by SS13.RU team"
 subserver_name = ""
 
 ## Server ID if you have multiple servers working with the same DB, used to differentiate between bans, mandatory, can be any string.
-server_id = "oldonyx"
+server_id = "zeroonyx"
 
 ## Set a different port to use.
 # server_port = 8080
@@ -15,7 +15,7 @@ per_map_lobbyscreen = true
 ## List of paths to artworks to be used in the pre-game lobby.
 lobbyscreens = ["icons/splashes/onyx_old.png", "icons/splashes/onyx_new.png"]
 
-## Server player limit, 0 to disable, excess players are redirected to the configured panic server or disconnected 
+## Server player limit, 0 to disable, excess players are redirected to the configured panic server or disconnected
 player_limit = 0
 
 ## Hard cap for player limit, allows some padding for player with a living mob to reconnect, 0 to disable

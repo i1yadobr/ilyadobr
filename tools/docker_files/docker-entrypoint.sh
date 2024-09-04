@@ -10,8 +10,8 @@ if [[ "$VOLUMES_FILESYSTEM_WORKAROUND" == "true" ]]; then
     # Docker uses these filesystems to mount folders from Windows hosts into the Linux environments.
     # A proper solution for this would be to stop relying on files for persistence and move everything to DB.
     # Some could argue that a proper solution is to stop using Docker. A valid point, you do you.
-    cp -r /ss13config /home/server/oldonyx/config
-    cp -r /ss13data /home/server/oldonyx/data
+    cp -r /ss13config /home/server/zeroonyx/config
+    cp -r /ss13data /home/server/zeroonyx/data
 
     # Function to start syncing a specific directory, run this in the background
     sync_dir() {
@@ -22,13 +22,13 @@ if [[ "$VOLUMES_FILESYSTEM_WORKAROUND" == "true" ]]; then
         done
     }
     # Backsync configs and data from the server into the mounted folders so they persist on the host machine
-    sync_dir /home/server/oldonyx/config/ /ss13config/ > /dev/null 2>&1 &
-    sync_dir /home/server/oldonyx/data/ /ss13data/ > /dev/null 2>&1 &
+    sync_dir /home/server/zeroonyx/config/ /ss13config/ > /dev/null 2>&1 &
+    sync_dir /home/server/zeroonyx/data/ /ss13data/ > /dev/null 2>&1 &
 fi
 
 # Move into the server folder and start
 # Note that these two environment variables are set up in the Dockerfile
-cd /home/server/oldonyx
+cd /home/server/zeroonyx
 
 if [[ "$COMPILE_BUILD" == "true" ]]; then
     DreamMaker $DME_FILE || { echo "Compilation failed, exiting..."; exit 1; }

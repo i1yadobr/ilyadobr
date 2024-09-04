@@ -8,7 +8,7 @@ ENV DME_FILE=baystation12.dme
 ENV DMB_FILE=baystation12.dmb
 ENV SERVER_PORT=14076
 # The build be compiled from source files inside the container if true. Otherwise, will use whichever .dmb it copied from the host directory.
-# Disabling saves you the compilation time on startup, so if you're building the .dmb yourself (with VSCode build tasks for example), feel free to disable. 
+# Disabling saves you the compilation time on startup, so if you're building the .dmb yourself (with VSCode build tasks for example), feel free to disable.
 # Default is on to allow for all-in-one script behavior to just run the server, should be useful for new contributors.
 ENV COMPILE_BUILD=true
 
@@ -29,14 +29,14 @@ RUN wget https://www.byond.com/download/build/${BYOND_MAJOR}/${BYOND_MAJOR}.${BY
     cd /home/server/byond && \
     make here
 
-COPY . /home/server/oldonyx/
+COPY . /home/server/zeroonyx/
 
 # Two volumes that will be used for copying files into the server and backsyncing files from the server onto the host machine. Only relevant if VOLUMES_FILESYSTEM_WORKAROUND=true.
-# Note that if VOLUMES_FILESYSTEM_WORKAROUND is set to false, you have to use docker-build-and-run.sh script for Linux environments which already includes mounting commands or mount /config and /data folders yourself. 
+# Note that if VOLUMES_FILESYSTEM_WORKAROUND is set to false, you have to use docker-build-and-run.sh script for Linux environments which already includes mounting commands or mount /config and /data folders yourself.
 VOLUME ["/ss13config", "/ss13data"]
 
 # Expose the port our server will use
 EXPOSE $SERVER_PORT
 
 # The rest of the setup will be done inside the container with this script
-ENTRYPOINT ["/home/server/oldonyx/docker-entrypoint.sh"]
+ENTRYPOINT ["/home/server/zeroonyx/docker-entrypoint.sh"]

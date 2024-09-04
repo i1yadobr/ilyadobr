@@ -1,7 +1,7 @@
 // Bomb cap!
 GLOBAL_VAR_INIT(max_explosion_range, 14)
 
-var/game_version        = "OldOnyx"
+var/game_version        = "ZeroOnyx"
 var/game_year           = (text2num(time2text(world.realtime, "YYYY")) + 544)
 var/join_motd = null
 

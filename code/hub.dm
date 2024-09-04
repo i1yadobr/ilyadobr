@@ -4,7 +4,7 @@
  */
 #define HUB_ENABLED 1
 	hub = "Exadv1.spacestation13"
-	name = "OldOnyx: 2022 fork of Chaotic Onyx by SS13.RU team"
+	name = "ZeroOnyx: 2022 fork of Chaotic Onyx by SS13.RU team"
 #ifdef HUB_ENABLED
 	hub_password = "kMZy3U5jJHSiBQjr"
 #else
