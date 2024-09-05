@@ -20,7 +20,6 @@ GLOBAL_REAL(config, /datum/server_configuration) = new
 	var/datum/configuration_section/vote/vote = new
 	var/datum/configuration_section/link/link = new
 	var/datum/configuration_section/external/external = new
-	var/datum/configuration_section/donations/donations = new
 	var/datum/configuration_section/debug/debug = new
 
 	/// Raw data. Stored here to avoid passing data between procs constantly
@@ -57,7 +56,7 @@ GLOBAL_REAL(config, /datum/server_configuration) = new
 
 	if(!fexists(config_file))
 		// TODO(rufus): maybe we should get rid of the example config if it's such a default?
-		//   Just keep the example config in the main config folder and instruct users to adjust it in the documentation or DD console? 
+		//   Just keep the example config in the main config folder and instruct users to adjust it in the documentation or DD console?
 		config_file = "config/example/config.toml" // Maybe the forgot to unpack the example config, so let's handle that
 		if(!fexists(config_file))
 			throw EXCEPTION("config files not found and example config fallback didn't work")
@@ -74,7 +73,7 @@ GLOBAL_REAL(config, /datum/server_configuration) = new
 	for(var/V in vars)
 		if(!istype(vars[V], /datum/configuration_section))
 			continue
-		
+
 		var/datum/configuration_section/section = vars[V]
 
 		if(!raw_data[section.name])

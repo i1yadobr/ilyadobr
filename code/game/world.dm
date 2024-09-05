@@ -649,7 +649,6 @@ var/world_topic_spam_protect_time = world.timeofday
 
 #define FAILED_DB_CONNECTION_CUTOFF 5
 var/failed_db_connections = 0
-var/failed_don_db_connections = 0
 
 
 /hook/startup/proc/connectDB()
@@ -697,52 +696,3 @@ var/failed_don_db_connections = 0
 		return setup_database_connection()
 	else
 		return TRUE
-
-/hook/startup/proc/connectDonDB()
-	if(!config.external.sql_enabled)
-		log_to_dd("SQL disabled. Your server will not use donations database.")
-	else if(!setup_don_database_connection())
-		log_to_dd("Your server failed to establish a connection with the donations database.")
-	else
-		log_to_dd("Donations database connection established.")
-	return TRUE
-
-//If you don't know what any of this do, look at the same code above
-proc/setup_don_database_connection()
-
-	if(failed_don_db_connections > FAILED_DB_CONNECTION_CUTOFF)
-		return 0
-
-	if(!dbcon_don)
-		dbcon_don = new()
-
-	var/user = sqldonlogin
-	var/pass = sqldonpass
-	var/db = sqldondb
-	var/address = sqldonaddress
-	var/port = sqldonport
-	dbcon_don.Connect("dbi:mysql:[db]:[address]:[port]","[user]","[pass]")
-	log_debug("Connecting to donationsDB")
-
-	. = dbcon_don.IsConnected()
-	if ( . )
-		failed_don_db_connections = 0
-	else
-		failed_don_db_connections++
-		log_to_dd(dbcon.ErrorMsg())
-
-	return .
-
-/proc/establish_don_db_connection()
-	if(!config.external.sql_enabled)
-		return FALSE
-
-	if(failed_don_db_connections > FAILED_DB_CONNECTION_CUTOFF)
-		return FALSE
-
-	if(!dbcon_don || !dbcon_don.IsConnected())
-		return setup_don_database_connection()
-	else
-		return TRUE
-
-#undef FAILED_DB_CONNECTION_CUTOFF

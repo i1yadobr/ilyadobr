@@ -3,10 +3,10 @@ var/savefile/Banlist
 
 
 /proc/CheckBan(ckey, id, address)
-	if(!Banlist)		// if Banlist cannot be located for some reason
-		LoadBans()		// try to load the bans
-		if(!Banlist)	// uh oh, can't find bans!
-			return 0	// ABORT ABORT ABORT
+	if(!Banlist)
+		LoadBans()
+		if(!Banlist)
+			return 0
 
 	. = list()
 	var/appeal
@@ -171,7 +171,6 @@ var/savefile/Banlist
 /datum/admins/proc/unbanpanel()
 	var/count = 0
 	var/dat
-	//var/dat = "<HR><B>Unban Player:</B> <span class='notice'>(U) = Unban , (E) = Edit Ban</span> <span class='good'>(Total<HR><table border=1 rules=all frame=void cellspacing=0 cellpadding=3 ></span>"
 	Banlist.cd = "/base"
 	for (var/A in Banlist.dir)
 		count++
@@ -193,39 +192,3 @@ var/savefile/Banlist
 	dat += "</table>"
 	dat = "<HR><B>Bans:</B> <FONT COLOR=blue>(U) = Unban , (E) = Edit Ban</FONT> - <FONT COLOR=green>([count] Bans)</FONT><HR><table border=1 rules=all frame=void cellspacing=0 cellpadding=3 >[dat]"
 	show_browser(usr, dat, "window=unbanp;size=875x400")
-
-//////////////////////////////////// DEBUG ////////////////////////////////////
-
-/proc/CreateBans()
-
-	UpdateTime()
-
-	var/i
-	var/last
-
-	for(i=0, i<1001, i++)
-		var/a = pick(1,0)
-		var/b = pick(1,0)
-		if(b)
-			Banlist.cd = "/base"
-			Banlist.dir.Add("trash[i]trashid[i]")
-			Banlist.cd = "/base/trash[i]trashid[i]"
-			to_file(Banlist["key"], "trash[i]")
-		else
-			Banlist.cd = "/base"
-			Banlist.dir.Add("[last]trashid[i]")
-			Banlist.cd = "/base/[last]trashid[i]"
-			to_file(Banlist["key"], last)
-		to_file(Banlist["id"],       "trashid[i]")
-		to_file(Banlist["reason"],   "Trashban[i].")
-		to_file(Banlist["temp"],     a)
-		to_file(Banlist["minutes"],  CMinutes + rand(1,2000))
-		to_file(Banlist["bannedby"], "trashmin")
-		last = "trash[i]"
-
-	Banlist.cd = "/base"
-
-/proc/ClearAllBans()
-	Banlist.cd = "/base"
-	for (var/A in Banlist.dir)
-		RemoveBan(A)

@@ -138,15 +138,3 @@ var/list/uplink_random_selections_
 			continue
 		return I
 	return uplink.items_assoc[/datum/uplink_item/item/stealthy_weapons/soap]
-
-#ifdef DEBUG
-/proc/debug_uplink_purchage_log()
-	for(var/antag_type in GLOB.all_antag_types_)
-		var/datum/antagonist/A = GLOB.all_antag_types_[antag_type]
-		to_world(A.print_player_summary())
-
-/proc/debug_uplink_item_assoc_list()
-	for(var/key in uplink.items_assoc)
-		log_debug("[key] - [uplink.items_assoc[key]]")
-
-#endif

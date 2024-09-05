@@ -4,7 +4,6 @@
 	var/character_slots = 10
 	var/loadout_slots = 10
 	var/max_loadout_points = 10
-	var/extra_loadout_points = 0
 	var/humans_need_surnames = FALSE
 	var/allow_metadata = FALSE
 
@@ -12,7 +11,6 @@
 	CONFIG_LOAD_NUM(character_slots, data["character_slots"])
 	CONFIG_LOAD_NUM(loadout_slots, data["loadout_slots"])
 	CONFIG_LOAD_NUM(max_loadout_points, data["max_loadout_points"])
-	CONFIG_LOAD_NUM(extra_loadout_points, data["extra_loadout_points"])
 
 	if(max_loadout_points < 0)
 		max_loadout_points = INFINITY

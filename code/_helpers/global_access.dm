@@ -728,16 +728,6 @@
 			return global.sqlpass;
 		if("sqlport")
 			return global.sqlport;
-		if("sqldonaddress")
-			return global.sqldonaddress;
-		if("sqldonport")
-			return global.sqldonport;
-		if("sqldondb")
-			return global.sqldondb;
-		if("sqldonlogin")
-			return global.sqldonlogin;
-		if("sqldonpass")
-			return global.sqldonpass;
 		if("station_account")
 			return global.station_account;
 		if("station_date")
@@ -1597,16 +1587,6 @@
 			global.sqlpass=newval;
 		if("sqlport")
 			global.sqlport=newval;
-		if("sqldonaddress")
-			global.sqldonaddress=newval;
-		if("sqldonport")
-			global.sqldonport=newval;
-		if("sqldondb")
-			global.sqldondb=newval;
-		if("sqldonlogin")
-			global.sqldonlogin=newval;
-		if("sqldonpass")
-			global.sqldonpass=newval;
 		if("station_account")
 			global.station_account=newval;
 		if("station_date")
@@ -2129,11 +2109,6 @@
 	"sqllogin",
 	"sqlpass",
 	"sqlport",
-	"sqldonaddress",
-	"sqldonport",
-	"sqldondb",
-	"sqldonlogin",
-	"sqldonpass",
 	"station_account",
 	"station_date",
 	"stool_cache",

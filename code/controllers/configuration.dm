@@ -35,16 +35,6 @@
 				sqlpass = value
 			if ("enable_stat_tracking")
 				sqllogging = TRUE
-			if ("donation_address")
-				sqldonaddress = value
-			if ("donation_port")
-				sqldonport = value
-			if ("donation_database")
-				sqldondb = value
-			if ("donation_login")
-				sqldonlogin = value
-			if ("donation_password")
-				sqldonpass = value
 			else
 				log_misc("Unknown setting in configuration: '[name]'")
 

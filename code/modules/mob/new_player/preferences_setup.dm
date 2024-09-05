@@ -86,8 +86,6 @@
 		var/list/accessories = list()
 
 		var/list/gears = Gear().Copy()
-		if(trying_on_gear)
-			gears[trying_on_gear] = trying_on_tweaks.Copy()
 
 		for(var/thing in gears)
 			var/datum/gear/G = gear_datums[thing]
@@ -106,7 +104,7 @@
 
 				if(!permitted)
 					continue
-				
+
 				if(G.is_departmental() && previewJob)
 					if(previewJob)
 						G.set_selected_jobs(previewJob, selected_jobs)

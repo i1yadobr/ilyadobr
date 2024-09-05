@@ -60,20 +60,6 @@ var/const/IAA_ban_reason = "Restricted by CentComm"
 
 	return FALSE
 
-/*
-DEBUG
-/mob/verb/list_all_jobbans()
-	set name = "list all jobbans"
-
-	for(var/s in jobban_keylist)
-		log_debug(s)
-
-/mob/verb/reload_jobbans()
-	set name = "reload jobbans"
-
-	jobban_loadbanfile()
-*/
-
 /hook/startup/proc/loadJobBans()
 	jobban_loadbanfile()
 	return 1
@@ -98,14 +84,14 @@ DEBUG
 
 		//Job permabans
 		var/DBQuery/query = sql_query({"
-			SELECT 
-				ckey, 
-				job 
-			FROM 
-				ban 
-			WHERE 
-				bantype = 'JOB_PERMABAN' 
-				AND 
+			SELECT
+				ckey,
+				job
+			FROM
+				ban
+			WHERE
+				bantype = 'JOB_PERMABAN'
+				AND
 				isnull(unbanned)
 				[isnull(config.general.server_id) ? "" : " AND server_id = $sid"]
 			"}, dbcon, list(sid = config.general.server_id))

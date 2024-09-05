@@ -1,10 +1,9 @@
+// TODO(rufus): improve or remove emoji system
 /proc/emoji_parse(client/C, text) //turns :ai: into an emoji in text.
 	. = text
 	if(!config.misc.emojis_allowed)
 		return
 	if(!C)
-		return
-	if(!check_rights(0, FALSE, C) && !C.donator_info.patreon_tier_available(PATREON_SCIENTIST))
 		return
 	var/static/list/emojis = icon_states(icon('icons/emoji.dmi'))
 	var/parsed = ""

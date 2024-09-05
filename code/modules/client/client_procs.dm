@@ -242,9 +242,6 @@
 			winset(src, null, "command=\".configure graphics-hwmode on\"")
 
 	log_client_to_db()
-	SSdonations.log_client_to_db(src)
-	SSdonations.update_donator(src)
-	SSdonations.update_donator_items(src)
 
 	send_resources()
 

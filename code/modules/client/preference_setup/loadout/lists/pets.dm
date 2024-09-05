@@ -42,14 +42,3 @@
 		to_chat(H, SPAN_NOTICE("\The [animal] waiting for your commands."))
 
 	return !!animal
-
-/datum/gear/pet/wizard
-	patron_tier = PATREON_WIZARD
-	display_name = "Patron's pets"
-	description = "<span style=\"color: #f00; font-size: larger\">Temporarily unavailable. Ask admins or wait for the patreon system to be removed.</span><br>"
-	paths = list(
-		/mob/living/simple_animal/cat/fluff/pet,
-		/mob/living/simple_animal/cat/kitten/pet,
-		/mob/living/simple_animal/corgi/pet,
-		/mob/living/simple_animal/lizard/pet
-	)

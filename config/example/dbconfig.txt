@@ -8,7 +8,7 @@ ADDRESS localhost
 PORT 3306
 
 # Name of the database that stores connections, bans, admins etc.
-DATABASE ss13onyx
+DATABASE onyxdb
 
 # Username/Login used to access the database
 LOGIN root
@@ -19,11 +19,3 @@ PASSWORD pass
 # Track population and death statistics
 # Comment this out to disable
 #ENABLE_STAT_TRACKING
-
-# TODO(rufus): remove donations DB
-# Second database, external bots can only access it
-DONATION_ADDRESS localhost
-DONATION_PORT 3306
-DONATION_DATABASE donations
-DONATION_LOGIN root
-DONATION_PASSWORD pass

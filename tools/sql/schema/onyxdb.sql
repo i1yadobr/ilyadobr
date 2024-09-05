@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS `ss13onyx`;
-USE `ss13onyx`;
+CREATE DATABASE IF NOT EXISTS `onyxdb`;
+USE `onyxdb`;
 
 
 CREATE TABLE IF NOT EXISTS `connection` (
@@ -175,3 +175,14 @@ CREATE TABLE IF NOT EXISTS `whitelist_ckey` (
   `ckey` varchar(50) NOT NULL,
   PRIMARY KEY (`ckey`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `runtimes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `date` datetime NOT NULL,
+  `game_id` varchar(50) NOT NULL,
+  `build_version` varchar(50) NOT NULL,
+  `file` varchar(50) NOT NULL,
+  `line` int(11) NOT NULL,
+  `body` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;

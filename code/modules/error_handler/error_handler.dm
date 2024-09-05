@@ -1,7 +1,6 @@
 GLOBAL_VAR_INIT(total_runtimes, 0)
 GLOBAL_VAR_INIT(total_runtimes_skipped, 0)
 
-#ifdef DEBUG
 /world/Error(exception/E, datum/e_src)
 	if(!istype(E)) //Something threw an unusual exception
 		log_runtime("\[[time_stamp()]] Uncaught exception: [E]")
@@ -30,7 +29,7 @@ GLOBAL_VAR_INIT(total_runtimes_skipped, 0)
 		return //Error is currently silenced, skip handling it
 	//Handle cooldowns and silencing spammy errors
 	var/silencing = FALSE
-	
+
 	// NOTE(rufus): this tried to access config variables previously, but config and early runtime don't mix well, so let's keep these values here
 	var/configured_error_cooldown = 600
 	var/configured_error_limit = 50
@@ -90,10 +89,8 @@ GLOBAL_VAR_INIT(total_runtimes_skipped, 0)
 	for(var/line in desclines)
 		log_runtime(line)
 
-// SQL runtime logging
-	if(!config.external.sql_enabled)
-		return
-	if(!establish_don_db_connection())
+	// SQL runtime logging
+	if(!establish_db_connection())
 		return
 	sql_query({"
 		INSERT INTO runtimes
@@ -110,7 +107,7 @@ GLOBAL_VAR_INIT(total_runtimes_skipped, 0)
 			$file,
 			$line,
 			$body)"},
-			dbcon_don,
+			dbcon,
 			list(
 				game_id = game_id,
 				revision = revdata.revision,
@@ -118,5 +115,3 @@ GLOBAL_VAR_INIT(total_runtimes_skipped, 0)
 				line = E.line,
 				body = E.name + "\n" + desclines.Join("\n")
 			))
-
-#endif

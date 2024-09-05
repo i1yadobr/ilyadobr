@@ -240,9 +240,6 @@ loadout_slots = 3
 ## How many loadout points are available. Use 0 to disable loadout, and any negative number to indicate infinite points.
 max_loadout_points = 10
 
-## How many extra points patrons get (only tiers above Cargo Technician).
-extra_loadout_points = 10
-
 ## Uncomment to prevent character spawn without surname.
 humans_need_surnames = false
 
@@ -463,13 +460,6 @@ default_no_vote = true
 
 ## Ban appeals URL - usually for a forum or wherever people should go to contact your admins.
 # banappeals = "http://example.com"
-
-## Patreon URL
-# patreon = "http://example.com"
-
-[donations]
-## Set to true to enable donations subsystem. Requires DB.
-enable = false
 
 [external]
 ## Main SQL DB switch. Turn on if you have a database setup and ready to be connected to.

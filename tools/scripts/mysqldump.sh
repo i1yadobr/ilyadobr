@@ -17,7 +17,7 @@ DATE=$(/bin/date +%Y-%m-%d)
 BAK="/home/ss13/mysql-backups/MySQLdump-$DATE"
 
 #The name of the schema (database)
-SCHEMA="ss13onyx"
+SCHEMA="onyxdb"
 
 #You don't need to change this \/
 
@@ -37,5 +37,3 @@ fi
 
 #-bash: ./mysqldump.sh: Permission denied
 #You do not have execution permission on the shell script, use "chmod +x mysqldump.sh" to claim execution ownership of the file. See Linux permissions for more info.
-
-
