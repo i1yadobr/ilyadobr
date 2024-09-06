@@ -54,7 +54,7 @@ var/savefile/Banlistjob
 
 	return 1
 
-
+// TODO(rufus): cleanup
 /proc/AddBanjob(ckey, computerid, reason, bannedby, temp, minutes, rank)
 	UpdateTime()
 	var/bantimestamp

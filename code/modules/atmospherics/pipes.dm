@@ -1106,6 +1106,8 @@
 	var/start_pressure = 25*ONE_ATMOSPHERE
 
 	level = 1
+	plane = DEFAULT_PLANE
+	layer = BELOW_OBJ_LAYER
 	dir = SOUTH
 	initialize_directions = SOUTH
 	density = 1

@@ -1,4 +1,12 @@
+// BEGIN_INTERNALS
+// END_INTERNALS
+// BEGIN_FILE_DIR
 #define FILE_DIR .
+// END_FILE_DIR
+// BEGIN_PREFERENCES
+// END_PREFERENCES
+// BEGIN_INCLUDE
+// END_INCLUDE
 
 #include "code\__spaceman_dmm.dm"
 #include "code\_macros.dm"
@@ -707,7 +715,6 @@
 #include "code\game\jobs\job\civilian.dm"
 #include "code\game\jobs\job\civilian_chaplain.dm"
 #include "code\game\jobs\job\engineering.dm"
-#include "code\game\jobs\job\ghost_role.dm"
 #include "code\game\jobs\job\job.dm"
 #include "code\game\jobs\job\medical.dm"
 #include "code\game\jobs\job\science.dm"
@@ -1435,7 +1442,6 @@
 #include "code\modules\admin\verbs\antag-ooc.dm"
 #include "code\modules\admin\verbs\atmosdebug.dm"
 #include "code\modules\admin\verbs\BrokenInhands.dm"
-#include "code\modules\admin\verbs\check_customitem_activity.dm"
 #include "code\modules\admin\verbs\cinematic.dm"
 #include "code\modules\admin\verbs\custom_event.dm"
 #include "code\modules\admin\verbs\deadsay.dm"

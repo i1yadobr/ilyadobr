@@ -7,20 +7,21 @@ Thumbs.db
 *.rsc
 *.dmb
 *.lk
+*.bak
 *.backup
 *.before
 *.db
 *.db-*
-*.bak
 *.old
-data/
-cfg/
 build_log.txt
-use_map
 
-# ignore config, but not subdirs
+# Ignore docker files in the root folder, they should stay in tools/
+docker-*.bat
+docker-*.sh
+Dockerfile
+
+# Folders
+data/
 config/*
-!config/names/
+# Everything but the example config should be ignored
 !config/example/
-!config/warnings_templates/
-!config/schema/

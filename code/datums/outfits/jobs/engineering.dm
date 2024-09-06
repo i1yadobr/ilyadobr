@@ -38,5 +38,5 @@
 	name = OUTFIT_JOB_NAME("Atmospheric technician")
 	uniform = /obj/item/clothing/under/rank/atmospheric_technician
 	belt = /obj/item/storage/belt/utility/atmostech
-	id_type = /obj/item/card/id/engineering/atmos
+	id_type = /obj/item/card/id/engineering
 	pda_type = /obj/item/device/pda/atmos

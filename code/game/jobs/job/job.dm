@@ -7,6 +7,7 @@
 	var/list/access = list()              // Useful for servers which either have fewer players, so each person needs to fill more than one role, or servers which like to give more access, so players can't hide forever in their super secure departments (I'm looking at you, chemistry!)
 	var/list/software_on_spawn = list()   // Defines the software files that spawn on tablets and labtops
 	var/department_flag = 0
+	// TODO(rufus): what's the difference between total_positions and spawn_positions?
 	var/total_positions = 0               // How many players can be this job
 	var/spawn_positions = 0               // How many players can spawn in as this job
 	var/current_positions = 0             // How many players have this job

@@ -1,6 +1,7 @@
 {
   "recommendations": [
     "platymuus.dm-langclient",
+    "editorconfig.editorconfig",
     "anturk.dmi-editor"
   ]
 }

@@ -230,7 +230,7 @@ var/list/hash_to_gear = list()
 			display_class = "linkOn"
 
 		entry += "<tr>"
-		entry += "<td width=25%><a [display_class ? "class='[display_class]' " : ""]href='?src=\ref[src];select_gear=[html_encode(G.gear_hash)]'>[G.display_name] [discountText]</a></td>"
+		entry += "<td width=25%><a [display_class ? "class='[display_class]' " : ""]href='?src=\ref[src];select_gear=[html_encode(G.gear_hash)]'>[G.display_name]</a></td>"
 		entry += "</td></tr>"
 
 		gear_entries += entry

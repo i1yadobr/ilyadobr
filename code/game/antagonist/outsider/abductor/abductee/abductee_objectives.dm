@@ -1,11 +1,6 @@
 /datum/objective/abductee
 	completed = 1
 
-/datum/objective/abductee/random
-
-/datum/objective/abductee/random/New()
-	explanation_text = pick(world.file2list("config/objectives/abductee_objectives.txt"))
-
 /datum/objective/abductee/steal
 	explanation_text = "Steal all"
 

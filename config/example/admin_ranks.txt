@@ -7,32 +7,29 @@
 # +@ (or +prev) is a special shorthand which adds all the rights of the rank above it. #
 # Ranks with no keywords will just be given the most basic verbs and abilities   ~Carn #
 ########################################################################################
-# PLEASE NOTE: depending on config options, some abilities will be unavailable regardless if you have permission to use them!
-# ALSO NOTE: this is a WorkInProgress at the moment. Most of this is just arbitrarily thrown in whatever group because LoadsaWork2Do+LittleTime.
-#            I'll be doing more moving around as feedback comes in. So be sure to check the notes after updates.
 
 # KEYWORDS:
-# +ADMIN = general admin tools, verbs etc
-# +FUN = events, other event-orientated actions. Access to the fun secrets in the secrets panel.
-# +BAN = the ability to ban, jobban and fullban
-# +STEALTH = the ability to stealthmin (make yourself appear with a fake name to everyone but other admins
-# +POSSESS = the ability to possess objects
-# +REJUV (or +REJUVINATE) = the ability to heal, respawn, modify damage and use godmode
+# +ADMIN = General admin tools/verbs.
+# +FUN = Event-oriented stuff and some fun secrets in the Secrets tab.
+# +BAN = Bans, jobbans, permabans.
+# +STEALTH = Ability to hide yourself from who, adminwho and client list in the hub.
+# +POSSESS = Ability to possess objects
+# +REJUV (or +REJUVINATE) = Ability to revive and use godmode, respawning gibbed/dusted players is TODO
 # +BUILD (or +BUILDMODE) = the ability to use buildmode
-# +SERVER = higher-risk admin verbs and abilities, such as those which affect the server configuration.
-# +DEBUG = debug tools used for diagnosing and fixing problems. It's useful to give this to coders so they can investigate problems on a live server.
-# +VAREDIT = everyone may view viewvars/debugvars/whatever you call it. This keyword allows you to actually EDIT those variables.
-# +RIGHTS (or +PERMISSIONS) = allows you to promote and/or demote people.
-# +SOUND (or +SOUNDS) = allows you to upload and play sounds
-# +SPAWN (or +CREATE) = mob transformations, spawning of most atoms including mobs (high-risk atoms, e.g. blackholes, will require the +FUN flag too)
-# +EVERYTHING (or +HOST or +ALL) = Simply gives you everything without having to type every flag
+# +SERVER = High-risk actions (e.g., server config changes).
+# +DEBUG = Debug tools for troubleshooting (often for coders).
+# +VAREDIT = Edit variables (everyone can view, but this allows editing).
+# +RIGHTS (or +PERMISSIONS) = Promote/demote users, manage roles and permissions.
+# +SOUND (or +SOUNDS) = Upload/play sounds.
+# +SPAWN (or +CREATE) = Spawn/transform atoms (high-risk items need +FUN).
+# +EVERYTHING (or +HOST or +ALL) = Grants all permissions.
 
 RetiredAdmin
 
 Moderator       +MOD
 TrialModerator  +MOD
 
-Mentor		+MENTOR  
+Mentor			+MENTOR  
 TrialAdmin      +@ +ADMIN +STEALTH +SPAWN +REJUV +VAREDIT +BAN +SERVER
 GameAdmin       +@ +DEBUG +FUN +POSSESS +BUILDMODE +SOUND +PERMISSIONS
 SeniorAdmin     +@

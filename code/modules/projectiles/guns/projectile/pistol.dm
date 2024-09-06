@@ -129,6 +129,14 @@
 	magazine_type = /obj/item/ammo_magazine/c45m
 	allowed_magazines = /obj/item/ammo_magazine/c45m
 
+// TODO(rufus): generalize this repeating "empty icon" boilerplate into a proc + controlling variable
+/obj/item/gun/projectile/pistol/silenced/update_icon()
+	..()
+	if(ammo_magazine && ammo_magazine.stored_ammo.len)
+		icon_state = "silenced_pistol"
+	else
+		icon_state = "silenced_pistol-e"
+
 /obj/item/gun/projectile/pistol/magnum_pistol
 	name = ".50 magnum pistol"
 	desc = "The HelTek Magnus, a robust terran handgun that uses .50 AE ammo."
@@ -196,7 +204,7 @@
 	if(ammo_magazine && ammo_magazine.stored_ammo.len)
 		icon_state = "det-m9"
 	else
-		icon_state = "det-m9_e"
+		icon_state = "det-m9-e"
 
 /obj/item/gun/projectile/pistol/holdout
 	name = "holdout pistol"

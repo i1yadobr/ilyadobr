@@ -1,6 +1,7 @@
 //Its different so that you can add monsters to said dungeon pretty easily.
 
 //Works similarly to the supply drop in that you create it to use it instantly.
+// TODO(rufus): see if this can be made usable or clean up
 /client/proc/create_dungeon()
 	set category = "Fun"
 	set name = "Create Dungeon"

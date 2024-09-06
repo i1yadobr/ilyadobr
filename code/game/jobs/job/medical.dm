@@ -30,7 +30,7 @@
 
 	minimal_player_age = 7
 	total_positions = 5
-	spawn_positions = 3
+	spawn_positions = 5
 	supervisors = "the chief medical officer"
 	selection_color = "#013d3b"
 	economic_modifier = 7
@@ -49,8 +49,8 @@
 	department_flag = MED
 
 	minimal_player_age = 7
-	total_positions = 2
-	spawn_positions = 2
+	total_positions = 1
+	spawn_positions = 1
 	supervisors = "the chief medical officer"
 	selection_color = "#013d3b"
 	economic_modifier = 5

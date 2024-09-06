@@ -369,9 +369,6 @@ var/const/NO_EMAG_ACT = -50
 	icon_state = "eng"
 	job_access_type = /datum/job/engineer
 
-/obj/item/card/id/engineering/atmos
-	job_access_type = /datum/job/atmos
-
 /obj/item/card/id/engineering/head
 	name = "identification card"
 	desc = "A card which represents creativity and ingenuity."

@@ -18,6 +18,7 @@ var/list/whitelist = list()
 
 /var/list/alien_whitelist = list()
 
+// TODO(rufus): clean up alien whitelist
 /hook/startup/proc/loadAlienWhitelist()
 	if(config.game.use_ingame_alien_whitelist)
 		if(config.game.use_alien_whitelist_sql)

@@ -1,5 +1,4 @@
-<h1>Welcome to Space Station 13!</h1>
-
--<i>This server is running <a href="http://baystation12.net/">Baystation 12's</a> modification of the <a href="http://ss13.eu/">/tg/station13</a> SS13 code.</i>
-<br><br>
-<strong>Bugtracker:</strong> <a href="http://baystation12.net/forums/threads/issue-tracker-report-template.110/">for posting of bugs and issues.</a>
+<h1>Welcome to ZeroOnyx!</h1>
+<p>This is a 2022 fork of OnyxBay, originally developed by the <a href="https://ss13.ru/">Chaotic Onyx</a> team.<br>
+In turn, OnyxBay was forked from older Space Station 13 projects.
+A big thank you goes to <a href="https://ss13.ru">Chaotic Onyx</a>, <a href="https://baystation.xyz">Baystation 12</a>, <a href="https://tgstation13.org">/tg/station</a>, and <a href="https://goonhub.com">Goonstation</a> teams, as well as everyone else in the Space Station 13 community for making this possible.</p>

@@ -1119,6 +1119,7 @@
 		M.client.view = M.client.view == world.view ? -1 : world.view
 		log_and_message_admins("[M.client.view == world.view ? "opened" : "closed"] the game window for [key_name_admin(M)]")
 
+	// TODO(rufus): we have actual buttons for quick send to thunderdome, check and fix
 	else if(href_list["tdome1"])
 		if(!check_rights(R_FUN))	return
 
@@ -1981,10 +1982,6 @@
 	else if(href_list["ac_set_signature"])
 		src.admincaster_signature = sanitize(input(usr, "Provide your desired signature", "Network Identity Handler", ""))
 		src.access_news_network()
-
-	else if(href_list["populate_inactive_customitems"])
-		if(check_rights(R_ADMIN|R_SERVER))
-			populate_inactive_customitems_list(src.owner)
 
 	else if(href_list["vsc"])
 		if(check_rights(R_ADMIN|R_SERVER))

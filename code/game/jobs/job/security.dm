@@ -64,8 +64,8 @@
 	department = "Security"
 	department_flag = SEC
 
-	total_positions = 4
-	spawn_positions = 4
+	total_positions = 5
+	spawn_positions = 5
 	supervisors = "the head of security"
 	selection_color = "#601c1c"
 	alt_titles = list("Junior Officer")

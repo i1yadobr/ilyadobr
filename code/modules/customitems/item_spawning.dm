@@ -1,3 +1,4 @@
+// TODO(rufus): move customs to DB and build a UI for editing them, also clean up this outdated code
 // Switch this out to use a database at some point. Each ckey is
 // associated with a list of custom item datums. When the character
 // spawns, the list is checked and all appropriate datums are spawned.
@@ -138,10 +139,12 @@
 
 // Parses the config file into the custom_items list.
 /hook/startup/proc/load_custom_items()
-	ASSERT(fexists("config/custom_items.json"))
+	var/config_file_path = "config/custom_items/custom_items.json"
+	if(!fexists(config_file_path))
+		return TRUE
 	if(GLOB.using_map.loadout_blacklist && (/datum/gear/custom_item in GLOB.using_map.loadout_blacklist))
 		return
-	var/list/config_json = json_decode(file2text("config/custom_items.json"))
+	var/list/config_json = json_decode(file2text(config_file_path))
 	for(var/list/ckey_group in config_json["customs"])
 		var/ckey = ckey_group["ckey"]
 		for(var/list/item_data in ckey_group["items"])

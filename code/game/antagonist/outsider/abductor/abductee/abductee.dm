@@ -18,6 +18,6 @@
 	show_objectives(player)
 
 /datum/antagonist/abductee/create_objectives(datum/mind/player)
-	var/objtype = (prob(75) ? /datum/objective/abductee/random : pick(subtypesof(/datum/objective/abductee/) - /datum/objective/abductee/random))
+	var/objtype = pick(subtypesof(/datum/objective/abductee/))
 	var/datum/objective/abductee/O = new objtype()
 	player.objectives += O

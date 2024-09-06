@@ -6,8 +6,8 @@
 	density = 0
 	anchored = 1.0
 	w_class = ITEM_SIZE_NORMAL
+	plane = FLOOR_PLANE
 	layer = LATTICE_LAYER
-	//	obj_flags = OBJ_FLAG_CONDUCTIBLE
 
 /obj/structure/lattice/Initialize()
 	. = ..()

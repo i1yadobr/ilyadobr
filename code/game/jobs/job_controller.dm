@@ -422,7 +422,7 @@ var/global/datum/controller/occupations/job_master
 						if(!permitted)
 							to_chat(H, SPAN("warning", "Your current species, job, whitelist status or loadout configuration does not permit you to spawn with [thing]!"))
 							continue
-						
+
 						if(G.is_departmental())
 							G.set_selected_jobs(job, null)
 
@@ -551,6 +551,7 @@ var/global/datum/controller/occupations/job_master
 		BITSET(H.hud_updateflag, SPECIALROLE_HUD)
 		return H
 
+	// TODO(rufus): test if AI and Cyborg work, refactor, and introduce/port per map job limits
 	proc/LoadJobs(jobsfile) //ran during round setup, reads info from jobs.txt -- Urist
 		if(!config.misc.load_jobs_from_txt)
 			return 0
@@ -580,8 +581,6 @@ var/global/datum/controller/occupations/job_master
 				if(!J)	continue
 				J.total_positions = text2num(value)
 				J.spawn_positions = text2num(value)
-				if(name == "AI" || name == "Cyborg")//I dont like this here but it will do for now
-					J.total_positions = 0
 
 		return 1
 

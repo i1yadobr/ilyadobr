@@ -1,3 +1,4 @@
+// TODO(rufus): add an example fallback or hardcoded lists, or something else
 GLOBAL_LIST_INIT(ai_names, world.file2list("config/names/ai.txt"))
 GLOBAL_LIST_INIT(wizard_first, world.file2list("config/names/wizardfirst.txt"))
 GLOBAL_LIST_INIT(wizard_second, world.file2list("config/names/wizardsecond.txt"))
@@ -15,5 +16,3 @@ GLOBAL_LIST_INIT(rus_verbs, world.file2list("config/names/rus_verbs.txt"))
 GLOBAL_LIST_INIT(rus_occupations, world.file2list("config/names/rus_occupations.txt"))
 GLOBAL_LIST_INIT(rus_bays, world.file2list("config/names/rus_bays.txt"))
 GLOBAL_LIST_INIT(rus_local_terms, world.file2list("config/names/rus_local_terms.txt"))
-//loaded on startup because of "
-//would include in rsc if ' was used

@@ -81,7 +81,6 @@ var/list/admin_verbs_admin = list(
 	/client/proc/cmd_admin_rejuvenate,
 	/client/proc/toggleghostwriters,
 	/client/proc/toggledrones,
-	/client/proc/check_customitem_activity,
 	/client/proc/man_up,
 	/client/proc/global_man_up,
 	/client/proc/response_team, // Response Teams admin verb,
@@ -171,7 +170,6 @@ var/list/admin_verbs_server = list(
 	/datum/admins/proc/adrev,
 	/datum/admins/proc/adspawn,
 	/datum/admins/proc/adjump,
-	/client/proc/check_customitem_activity,
 	/client/proc/nanomapgen_DumpImage
 	)
 
@@ -187,7 +185,6 @@ var/list/admin_verbs_debug = list(
 	/client/proc/cmd_debug_del_all,
 	/client/proc/air_report,
 	/client/proc/reload_admins,
-	/client/proc/reload_mentors,
 	/client/proc/restart_controller,
 	/client/proc/print_random_map,
 	/client/proc/create_random_map,
@@ -422,6 +419,7 @@ var/list/admin_verbs_mentor = list(
 	if(isghost(mob))
 		//re-enter
 		var/mob/observer/ghost/ghost = mob
+		// TODO(rufus): if they are *not* a mentor, they can re-enter corpse? huh? apply a proper check for adminHUD/antagHUD
 		if(!is_mentor(usr.client))
 			ghost.can_reenter_corpse = 1
 		if(ghost.can_reenter_corpse)

@@ -438,6 +438,7 @@
 			if("undress")
 				for(var/obj/item/I in current)
 					current.drop(I)
+			// TODO(rufus): so there actually is a proc to do this, check and fix and make accessible
 			if("takeuplink")
 				take_uplink()
 				memory = null//Remove any memory they may have had.

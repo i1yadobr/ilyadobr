@@ -405,6 +405,7 @@ Ccomp's first proc.
 	Works kind of like entering the game with a new character. Character receives a new mind if they didn't have one.
 	Traitors and the like can also be revived with the previous role mostly intact.
  */
+ // TODO(rufus): check and fix
 /client/proc/respawn_character()
 	set category = "Special Verbs"
 	set name = "Respawn Character"
