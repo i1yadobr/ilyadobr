@@ -6,7 +6,7 @@
 #define TEXT_CONV		1
 #define RSC_FILE_CONV	2
 #define NUMBER_CONV		3
-//column flag values:
+//column flag values
 #define IS_NUMERIC		1
 #define IS_BINARY		2
 #define IS_NOT_NULL		4
@@ -27,14 +27,6 @@
 #define TIME		12
 #define STRING		13
 #define BLOB		14
-// TODO: Investigate more recent type additions and see if I can handle them. - Nadrew
-
-
-// Deprecated! See global.dm for new configuration vars
-/*
-var/DB_SERVER = "" // This is the location of your MySQL server (localhost is USUALLY fine)
-var/DB_PORT = 3306 // This is the port your MySQL server is running on (3306 is the default)
-*/
 
 /DBConnection
 	var/_db_con // This variable contains a reference to the actual database connection.
@@ -76,7 +68,6 @@ var/DB_PORT = 3306 // This is the port your MySQL server is running on (3306 is 
 /DBConnection/proc/ErrorMsg() return _dm_db_error_msg(_db_con)
 /DBConnection/proc/SelectDB(database_name,dbi)
 	if(IsConnected()) Disconnect()
-	//return Connect("[dbi?"[dbi]":"dbi:mysql:[database_name]:[DB_SERVER]:[DB_PORT]"]",user,password)
 	return Connect("[dbi?"[dbi]":"dbi:mysql:[database_name]:[sqladdress]:[sqlport]"]",user,password)
 /DBConnection/proc/NewQuery(sql_query,cursor_handler=src.default_cursor) return new /DBQuery(sql_query,src,cursor_handler)
 

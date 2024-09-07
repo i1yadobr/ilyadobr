@@ -26,10 +26,6 @@
 	var/list/query = list("ckey" = ckey, "message" = message)
 	webhook_send("garbage", query)
 
-/proc/webhook_send_token(ckey, token)
-	var/list/query = list("ckey" = ckey, "token" = token) //token is eng anyway
-	webhook_send("token", query)
-
 /proc/webhook_send(method, data)
 	if(!config.external.webhook_address || !config.external.webhook_key)
 		return

@@ -1,4 +1,6 @@
 <h1>Welcome to ZeroOnyx!</h1>
 <p>This is a 2022 fork of OnyxBay, originally developed by the <a href="https://ss13.ru/">Chaotic Onyx</a> team.<br>
 In turn, OnyxBay was forked from older Space Station 13 projects.
-A big thank you goes to <a href="https://ss13.ru">Chaotic Onyx</a>, <a href="https://baystation.xyz">Baystation 12</a>, <a href="https://tgstation13.org">/tg/station</a>, and <a href="https://goonhub.com">Goonstation</a> teams, as well as everyone else in the Space Station 13 community for making this possible.</p>
+A big thank you goes to <a href="https://ss13.ru">Chaotic Onyx</a>, <a href="https://baystation.xyz">Baystation 12</a>, <a href="https://tgstation13.org">/tg/station</a>, and <a href="https://goonhub.com">Goonstation</a> teams, as well as everyone else in the Space Station 13 community for making this possible.<br>
+The server is currently undergoing its initial phase, so please report bugs to the ZeroOnyx team.<br>
+Enjoy your stay!</p>

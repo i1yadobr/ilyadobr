@@ -421,7 +421,7 @@ allow_extra_antags = false
 ## Min delay (deciseconds) between voting sessions (default 10 minutes).
 delay = 6000
 
-## Time period (deciseconds) which voting session will last (default 1 minute).
+## Time period (deciseconds) which voting session will last (default 2 minutes).
 period = 1200
 
 ## Autovote initial delay (deciseconds) before first automatic transfer vote call (default 180 minutes).

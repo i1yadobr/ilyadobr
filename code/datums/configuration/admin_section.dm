@@ -1,6 +1,7 @@
 /datum/configuration_section/admin
 	name = "admin"
 
+	// TODO(rufus): unify 4 sql switches into a single one (admin, ban, alienwhitelist and sql)
 	var/admin_legacy_system = TRUE
 	var/allow_admin_ooccolor = TRUE
 	var/allow_admin_jump = TRUE

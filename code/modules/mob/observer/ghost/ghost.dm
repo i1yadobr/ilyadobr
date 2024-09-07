@@ -209,7 +209,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		return
 
 	if(!may_ghost())
-		to_chat(src, SPAN("warning", "You may not to ghost right now."))
+		to_chat(src, SPAN("warning", "You can not ghost right now."))
 		return
 
 	var/response = alert(src, "Are you -sure- you want to ghost?\n(You are alive. If you ghost, you won't be able to [config.misc.respawn_delay ? "play this round for another [config.misc.respawn_delay] minute\s" : "return to this body"]! You can't change your mind so choose wisely!)", "Are you sure you want to ghost?", "Ghost", "Stay in body")
