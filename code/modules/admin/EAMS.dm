@@ -104,7 +104,7 @@ SUBSYSTEM_DEF(eams)
 		__DBError()
 		return FALSE
 
-	var/DBQuery/query = sql_query("SELECT ckey FROM whitelist_ckey WHERE ckey = $ckey LIMIT 0,1", dbcon, list(ckey = C.ckey))
+	var/DBQuery/query = sql_query("SELECT ckey FROM eams_whitelist WHERE ckey = $ckey LIMIT 0,1", dbcon, list(ckey = C.ckey))
 	if (!query)
 		__DBError()
 		return FALSE
@@ -127,9 +127,9 @@ SUBSYSTEM_DEF(eams)
 	var/DBQuery/query = null
 
 	if (value)
-		query = sql_query("INSERT INTO whitelist_ckey (ckey) VALUES ($ckey)", dbcon, list(ckey = C.ckey))
+		query = sql_query("INSERT INTO eams_whitelist (ckey) VALUES ($ckey)", dbcon, list(ckey = C.ckey))
 	else
-		query = sql_query("DELETE FROM whitelist_ckey WHERE ckey=$ckey", dbcon, list(ckey = C.ckey))
+		query = sql_query("DELETE FROM eams_whitelist WHERE ckey=$ckey", dbcon, list(ckey = C.ckey))
 
 	if (!query)
 		__DBError()
@@ -145,7 +145,7 @@ SUBSYSTEM_DEF(eams)
 
 /datum/controller/subsystem/eams/proc/__LoadResponseFromCache(ip)
 	ASSERT(istext(ip))
-	
+
 	if(!establish_db_connection())  // Database isn't connected
 		__DBError()
 		return FALSE
@@ -264,7 +264,7 @@ SUBSYSTEM_DEF(eams)
 		if (C.eams_info.ip_country == "")
 			C.eams_info.ip_country = "unknown"
 
-		to_chat(C, SPAN_WARNING("You were blocked by EAMS! Please, contact Administrators."))
+		to_chat(C, SPAN_WARNING("You have been blocked by the regional restriction system. Please contact the server administrators through Adminhelp (F1)."))
 		log_and_message_admins("Blocked by EAMS: [C.key] ([C.address]) connected from [C.eams_info.ip_country] ([C.eams_info.ip_countryCode])", 0)
 
 		return FALSE

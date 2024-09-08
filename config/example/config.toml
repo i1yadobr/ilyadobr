@@ -1,6 +1,6 @@
 [general]
 ## Server and subserver name displayed in the game window title and on the BYOND hub
-server_name = "ZeroOnyx: 2022 fork of OnyxBay by SS13.RU team"
+server_name = "ZeroOnyx: 2022 fork of OnyxBay, originally developed by SS13.RU team"
 subserver_name = ""
 
 ## Server ID if you have multiple servers working with the same DB, used to differentiate between bans, mandatory, can be any string.

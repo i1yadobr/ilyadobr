@@ -6,6 +6,9 @@
 # This script will automatically mount your config/ and data/ folders into the container.
 # Please adjust the `docker run` command if you want to change this behavior.
 
+# After successful start you will be able to connect to your local server with the following address: `localhost:14076`.
+# Port 14076 is used by default, but may be changed in the `Dockerfile`.
+
 echo "Removing old container and image"
 
 docker rm -f zeroonyx > /dev/null 2>&1
@@ -18,7 +21,7 @@ docker build -t zeroonyx-server . || (echo "Failed to build the image" && exit)
 echo
 echo "Image built, starting..."
 
-docker run -d -p 14076:14076 -e VOLUMES_FILESYSTEM_WORKAROUND=false -v $(pwd)/config:/home/server/zeroonyx/config -v $(pwd)/data:/home/server/zeroonyx/data --network host --name zeroonyx zeroonyx-server || (echo "Failed to start the container" && exit)
+docker run -d -e VOLUMES_FILESYSTEM_WORKAROUND=false -v $(pwd)/config:/home/server/zeroonyx/config -v $(pwd)/data:/home/server/zeroonyx/data --network host --name zeroonyx zeroonyx-server || (echo "Failed to start the container" && exit)
 
 echo
 echo "Container successfully started!"

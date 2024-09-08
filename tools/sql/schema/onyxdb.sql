@@ -12,35 +12,6 @@ CREATE TABLE IF NOT EXISTS `connection` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
-CREATE TABLE IF NOT EXISTS `eams_ban_provider` (
-  `ip_as` varchar(255) NOT NULL,
-  `ip_isp` varchar(255) NOT NULL,
-  `ip_org` varchar(255) NOT NULL,
-  `ip_country` varchar(255) NOT NULL,
-  `ip_countryCode` varchar(255) NOT NULL,
-  `ip_region` varchar(255) NOT NULL,
-  `ip_regionCode` varchar(255) NOT NULL,
-  `ip_city` varchar(255) NOT NULL,
-  `ip_lat` float(7,2) NOT NULL,
-  `ip_lon` float(7,2) NOT NULL,
-  `ip_timezone` varchar(255) NOT NULL,
-  `ip_zip` varchar(255) NOT NULL,
-  `ip_reverse` varchar(255) NOT NULL,
-  `ip_mobile` bit(1) NOT NULL,
-  `ip_proxy` bit(1) NOT NULL,
-  `type` bit(1) NOT NULL,
-  `priority` bit(1) NOT NULL,
-  `ckey` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-
-CREATE TABLE IF NOT EXISTS `eams_cache` (
-  `ip` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `response` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  PRIMARY KEY (`ip`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-
 CREATE TABLE IF NOT EXISTS `admin` (
   `id` int NOT NULL AUTO_INCREMENT,
   `ckey` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
@@ -171,10 +142,18 @@ CREATE TABLE IF NOT EXISTS `whitelist` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-CREATE TABLE IF NOT EXISTS `whitelist_ckey` (
+CREATE TABLE IF NOT EXISTS `eams_whitelist` (
   `ckey` varchar(50) NOT NULL,
   PRIMARY KEY (`ckey`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+CREATE TABLE IF NOT EXISTS `eams_cache` (
+  `ip` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+  `response` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  PRIMARY KEY (`ip`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 
 CREATE TABLE IF NOT EXISTS `runtimes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

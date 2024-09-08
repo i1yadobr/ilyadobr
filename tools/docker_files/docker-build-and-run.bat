@@ -6,6 +6,13 @@
 :: This script will automatically mount your config/ and data/ folders into the container.
 :: Please adjust the `docker run` command if you want to change this behavior.
 
+:: After successful start you will be able to connect to your local server with the following address: `localhost:14076`.
+:: Port 14076 is used by default, but may be changed in the `Dockerfile`.
+
+:: Note that on Docker Desktop for Windows you have to got to Docker settings, Features in development, and tick Enable host networking.
+:: Otherwise your server will not be accessible due to a Docker limitation.
+:: Advanced: alternatively, switch networking mode from host to an internal network, but all connected players will have the same IP.
+
 @echo off
 
 echo Removing old container and image
@@ -25,7 +32,7 @@ if errorlevel 1 (
 
 echo.
 echo Image built, starting...
-docker run -d -p 14076:14076 -v %cd%\config:/ss13config -v %cd%\data:/ss13data --network host --name zeroonyx zeroonyx-server
+docker run -d -v %cd%\config:/ss13config -v %cd%\data:/ss13data --network host --name zeroonyx zeroonyx-server
 if errorlevel 1 (
 	echo Failed to start the container
 	pause
