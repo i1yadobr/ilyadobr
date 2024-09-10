@@ -1,4 +1,4 @@
-:: This is a Windows script to build and run a Docker container with the server
+:: This is a Windows script to build and run the server in a Docker container
 :: Make sure that you have Docker/Docker Desktop installed and running
 :: This script will stop any existing containers named `zeroonyx` and will remove any images named `zeroonyx-server`
 
@@ -6,12 +6,12 @@
 :: This script will automatically mount your config/ and data/ folders into the container.
 :: Please adjust the `docker run` command if you want to change this behavior.
 
-:: After successful start you will be able to connect to your local server with the following address: `localhost:14076`.
+:: After successful start you will be able to connect to your server with the following address: `localhost:14076`.
 :: Port 14076 is used by default, but may be changed in the `Dockerfile`.
 
-:: Note that on Docker Desktop for Windows you have to got to Docker settings, Features in development, and tick Enable host networking.
+:: Note that on Docker Desktop for Windows you have to go to Docker settings, Features in development, and tick Enable host networking.
 :: Otherwise your server will not be accessible due to a Docker limitation.
-:: Advanced: alternatively, switch networking mode from host to an internal network, but all connected players will have the same IP.
+:: Alternatively, switch networking mode from host to an internal network, but all connected players will have the same IP.
 
 @echo off
 

@@ -1,42 +1,70 @@
-# TODO(rufus): switch to a lightweight ubuntu or even alpine, tg has examples
-FROM archlinux:base
+# base = debian + full apt update + ca-certificates for any https connections to work at all
+FROM debian:stable-slim AS base
 
-# You can adjust these arguments as needed
-ARG BYOND_MAJOR=515
-ARG BYOND_MINOR=1643
+# Global env variables
+ENV BYOND_MAJOR=515
+ENV BYOND_MINOR=1643
 ENV DME_FILE=baystation12.dme
 ENV DMB_FILE=baystation12.dmb
 ENV SERVER_PORT=14076
-# The build be compiled from source files inside the container if true. Otherwise, will use whichever .dmb it copied from the host directory.
-# Disabling saves you the compilation time on startup, so if you're building the .dmb yourself (with VSCode build tasks for example), feel free to disable.
-# Default is on to allow for all-in-one script behavior to just run the server, should be useful for new contributors.
-ENV COMPILE_BUILD=true
-
-# NOTE(rufus): This configures a workaround for BYOND compatibility with Docker's `9p` and `grpcfuse` filesystems, which are used when mounting Windows host file systems into Linux containers. BYOND can't to access files on these filesystems but operates normally with `ext4` and `tmpfs`. To address this, files will be copied, and a background rsync loop will sync changes like logs or player data back to the host OS for persistence.
-# IMPORTANT: Set to true when using Docker Desktop on Windows to launch containers. Since this might affect performance, avoid using Windows+Linux Docker Containers. Instead, host directly from Windows or use Linux+Linux Docker containers which will mount the folders without problematic filesystems.
-# TL;DR Using Windows? Set to true. Otherwise set to false.
+# Keep true if you're running Windows, false if you're on Linux, see docker-entrypoint.sh
 ENV VOLUMES_FILESYSTEM_WORKAROUND=true
 
+RUN dpkg --add-architecture i386 \
+    && apt-get update \
+    && apt-get upgrade -y \
+    && apt-get dist-upgrade -y \
+    && apt-get install -y --no-install-recommends \
+        ca-certificates
 
-# Update system and install dependencies
-RUN pacman -Syu --noconfirm && \
-    pacman -S --noconfirm wget unzip make inotify-tools rsync lib32-glibc lib32-gcc-libs
 
-# Download and install BYOND
-RUN wget https://www.byond.com/download/build/${BYOND_MAJOR}/${BYOND_MAJOR}.${BYOND_MINOR}_byond_linux.zip -O byond.zip && \
-    unzip byond.zip -d /home/server && \
-    rm byond.zip && \
-    cd /home/server/byond && \
-    make here
+# byond = base + byond installed globally
+FROM base AS byond
 
-COPY . /home/server/zeroonyx/
+WORKDIR /byond
 
-# Two volumes that will be used for copying files into the server and backsyncing files from the server onto the host machine. Only relevant if VOLUMES_FILESYSTEM_WORKAROUND=true.
-# Note that if VOLUMES_FILESYSTEM_WORKAROUND is set to false, you have to use docker-build-and-run.sh script for Linux environments which already includes mounting commands or mount /config and /data folders yourself.
+RUN apt-get install -y --no-install-recommends \
+        curl \
+        unzip \
+        make \
+        libstdc++6:i386
+
+# Note that manual tweaking of the Makefile is required because BYOND is trying to link man pages to a missing folder
+RUN curl "http://www.byond.com/download/build/${BYOND_MAJOR}/${BYOND_MAJOR}.${BYOND_MINOR}_byond_linux.zip" -o byond.zip \
+    && unzip byond.zip \
+    && cd byond \
+    && sed -i 's|install:|&\n\tmkdir -p $(MAN_DIR)/man6|' Makefile \
+    && make install \
+    && chmod 644 /usr/local/byond/man/man6/* \
+    && apt-get purge -y --auto-remove curl unzip make \
+    && cd .. \
+    && rm -rf byond byond.zip
+
+
+# build = byond + zeroonyx compiled
+FROM byond AS build
+
+RUN groupadd -r spessmans \
+    && useradd -r -g spessmans -m -s /sbin/nologin spessman
+
+COPY --chown=spessman:spessmans . /home/spessman/zeroonyx
+
+WORKDIR /home/spessman/zeroonyx
+
+USER spessman
+
+RUN DreamMaker $DME_FILE
+
+
+# final = build isolated and started as a non-root user
+FROM build
+
+USER spessman
+
+# Create these by default for compatibility with the windows workaround
+# For Linux hosts, /config and /data should be mounted directly to /home/spessman/zeroonyx
 VOLUME ["/ss13config", "/ss13data"]
 
-# Expose the port our server will use
 EXPOSE $SERVER_PORT
 
-# The rest of the setup will be done inside the container with this script
-ENTRYPOINT ["/home/server/zeroonyx/docker-entrypoint.sh"]
+ENTRYPOINT ["./docker-entrypoint.sh"]

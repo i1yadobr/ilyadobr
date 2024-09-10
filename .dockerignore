@@ -1,3 +1,4 @@
+# Project folders
 .git/
 !.git/HEAD
 !.git/logs/HEAD
@@ -7,20 +8,25 @@ docs/
 test/
 tmp/
 tools/
-
-# These two folders will be copied into the server folder and backsynced via volumes and some scripting
-# For explanation see comments in docker-entrypoint.sh
+# These two folders have persistent data and should be mounted
 config/
 data/
 
+# Project files
 .dockerignore
+.editorconfig
 .gitattributes
 .gitignore
 COPYING
+docker-build-and-run.sh
 Dockerfile
-LICENSE-*
+LICENSE*
 README.md
 SpacemanDMM.toml
-*.bat
+
+# Common backup file extensions
 *.bak
 *.old
+# Windows-specific files are not relevant inside linux containers
+*.dll
+*.bat

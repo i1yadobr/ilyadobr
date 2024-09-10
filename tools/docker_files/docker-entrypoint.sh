@@ -1,17 +1,16 @@
 #!/bin/bash
 
-# Set up BYOND
-source /home/server/byond/bin/byondsetup
-
 if [[ "$VOLUMES_FILESYSTEM_WORKAROUND" == "true" ]]; then
     # Copy mounted configs and data and set up syncing the changes back into the mounted folders
 
-    # NOTE(rufus): this is needed because BYOND cannot read files from the `9p` and `grpcfuse` filesystems.
+    # NOTE(rufus): this is needed because BYOND *cannot* read files from the `9p` and `grpcfuse` filesystems.
     # Docker uses these filesystems to mount folders from Windows hosts into the Linux environments.
-    # A proper solution for this would be to stop relying on files for persistence and move everything to DB.
-    # Some could argue that a proper solution is to stop using Docker. A valid point, you do you.
-    cp -r /ss13config /home/server/zeroonyx/config
-    cp -r /ss13data /home/server/zeroonyx/data
+
+    # This exists exclusively for the purpose of comaptibility with Docker Desktop for *Windows*.
+    # [your files]->[container] - files only passed once, when the container is started, live changes won't be reflected
+    # [container] ->[your files] - changes will be reflected in realtime, logs and player data will update in your files as the game goes
+    cp -r /ss13config $(pwd)/config
+    cp -r /ss13data $(pwd)/data
 
     # Function to start syncing a specific directory, run this in the background
     sync_dir() {
@@ -22,16 +21,9 @@ if [[ "$VOLUMES_FILESYSTEM_WORKAROUND" == "true" ]]; then
         done
     }
     # Backsync configs and data from the server into the mounted folders so they persist on the host machine
-    sync_dir /home/server/zeroonyx/config/ /ss13config/ > /dev/null 2>&1 &
-    sync_dir /home/server/zeroonyx/data/ /ss13data/ > /dev/null 2>&1 &
+    # Note the trailing slashes in paths, these are important, otherwise you'll get infinite recursive copies
+    sync_dir $(pwd)/config/ /ss13config/ > /dev/null 2>&1 &
+    sync_dir $(pwd)/data/ /ss13data/ > /dev/null 2>&1 &
 fi
 
-# Move into the server folder and start
-# Note that these two environment variables are set up in the Dockerfile
-cd /home/server/zeroonyx
-
-if [[ "$COMPILE_BUILD" == "true" ]]; then
-    DreamMaker $DME_FILE || { echo "Compilation failed, exiting..."; exit 1; }
-fi
-
-DreamDaemon $DMB_FILE $SERVER_PORT -trusted
+LD_LIBRARY_PATH="$LD_LIBRARY_PATH:./" DreamDaemon $DMB_FILE $SERVER_PORT -trusted
