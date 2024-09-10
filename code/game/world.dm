@@ -559,14 +559,9 @@ var/world_topic_spam_protect_time = world.timeofday
 	if (config && config.general.server_name)
 		s += "<b>[config.general.server_name]</b>"
 
-	var/list/features = list()
-
-	if (!config.game.enter_allowed)
-		features += "Limited Access"
 	// TODO(rufus): come up with a good description and potentially sprinkle some features on top, keeping it minimal for now
-
-	if (features)
-		s += ": [jointext(features, ", ")]"
+	if ((!config.game.enter_allowed) || (config.game.use_whitelist) )
+		s += ", Limited Access"
 
 	/* does this help? I do not know */
 	if (src.status != s)
