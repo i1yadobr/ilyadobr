@@ -346,9 +346,9 @@ respawn_allowed = true
 ## Respawn delay in minutes before one may respawn as a crew member.
 respawn_delay = 30
 
-## TODO(rufus): experiment to find a good value and update the comment
-## Strength of ambient star light. Set to 0 or less to turn off. A value of 1 is unlikely to have a noticeable effect in most lighting systems.
-starlight = 0
+
+## Strength of ambient star light. Set to 0 or less to turn off. 1 has a very weak effect, 2 or 3 is recommended.
+starlight = 3
 
 ## Disconnect players who did nothing during the set amount of minutes.
 kick_inactive = 0

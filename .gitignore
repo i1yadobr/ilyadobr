@@ -16,11 +16,11 @@ Thumbs.db
 build_log.txt
 tmp/
 
-# Ignore docker-specific files in the root folder, they should stay in tools/docker_files
+# Ignore docker- and linux-specific files in the root folder, they should stay in tools/docker_files
 docker-*.bat
 docker-*.sh
 Dockerfile
-libmariadb.so
+/*.so
 
 # Folders
 data/

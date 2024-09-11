@@ -3,7 +3,8 @@
 	choices = list("Restart Round","Continue Playing")
 
 /datum/vote/restart/can_run(mob/creator, automatic)
-	if(!automatic && (!config.vote.allow_vote_restart || !is_admin(creator)))
+	// TODO(rufus): fix the logic for other votes
+	if(!automatic && !config.vote.allow_vote_restart && !is_admin(creator))
 		return FALSE // Admins and autovotes bypass the config setting.
 	return ..()
 
