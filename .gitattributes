@@ -1,43 +1,91 @@
+# .gitattributes helps enforce consistent handling
+# of text and binary files across different platforms
+# see https://git-scm.com/docs/gitattributes
+
+# Current standards are inspired by a combination
+# of /tg/station and goonstation configurations refined over the years
+
 * text=auto
 
-## Enforce text mode and LF line breaks
-*.bat text eol=lf
-*.cjs text eol=lf
-*.css text eol=lf
-*.dm text eol=lf
-*.dme text eol=lf
-*.dmf text eol=lf
-*.htm text eol=lf
-*.html text eol=lf
-*.js text eol=lf
-*.json text eol=lf
-*.jsx text eol=lf
-*.md text eol=lf
-*.ps1 text eol=lf
-*.py text eol=lf
-*.scss text eol=lf
-*.sh text eol=lf
-*.sql text eol=lf
-*.svg text eol=lf
-*.ts text eol=lf
-*.tsx text eol=lf
-*.txt text eol=lf
-*.yaml text eol=lf
-*.yml text eol=lf
+# BYOND-specific
+*.dm    text    eol=lf
+*.dme   text    eol=lf
+*.dms   text
+*.dmf   text
+*.dmb   binary
+# TODO(rufus): add merge drivers and instructions
+*.dmm   text    eol=lf merge=dmm
+*.dmi   binary         merge=dmi
 
-## Enforce binary mode
-*.bmp binary
-*.dll binary
-*.dmb binary
-*.exe binary
-*.gif binary
-*.jpg binary
-*.png binary
-*.so binary
-
-## Merger hooks, run tools/hooks/install.bat or install.sh to set up
-*.dmm text eol=lf merge=dmm
-*.dmi binary merge=dmi
-
-## Force tab indents on dm files
+# if spaces are used to indent a line instead of tabs
+# highlight this as error in git diff view
 *.dm whitespace=indent-with-non-tab
+
+
+# TODO(rufus): add TGUI merge drivers and instructions
+# TGUI bundles
+*.bundle.*	binary merge=tgui-merge-bundle
+*.chunk.*	binary merge=tgui-merge-bundle
+
+
+# Text files
+## text documents
+*.txt	text
+*.md	text
+## browser/frontend
+*.htm   text
+*.html	text
+*.css	text
+*.scss	text
+*.js	text
+*.jsx   text
+*.cjs	text
+*.ts    text
+*.tsx   text
+*.json	text
+*.yaml  text
+*.yml   text
+## surprisingly, svg image is a text file
+*.svg   text
+## configs
+*.ini	text
+*.conf	text
+## scripts
+*.bat	text
+*.ps1	text
+*.sh	text eol=lf
+## programming languages
+*.rb	text
+*.py	text
+*.lua	text
+*.cpp	text
+*.h		text
+## database files
+*.sql   text
+
+
+# Binary files
+*.exe   binary
+## libraries
+*.dll   binary
+*.so    binary
+## images
+*.png   binary
+*.gif   binary
+*.bmp   binary
+*.jpg   binary
+*.jpeg  binary
+*.ico   binary
+*.pdn	binary
+## sounds
+*.mp3   binary
+*.ogg   binary
+*.wav   binary
+## fonts
+*.eot binary
+*.woff binary
+*.ttf binary
+## archives
+*.zip	binary
+*.7z	binary
+*.gz	binary
