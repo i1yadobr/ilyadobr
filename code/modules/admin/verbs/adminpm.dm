@@ -37,25 +37,19 @@
 //Fetching a message if needed. src is the sender and C is the target client
 
 /client/proc/cmd_admin_pm(client/C, msg = null, datum/ticket/ticket = null)
+	if(!holder && !(C?.holder))
+		to_chat(src, "<span class='warning'>Error: Admin-PM: Non-admin to non-admin PM communication is forbidden.</span>")
+		return
+
 	if(prefs.muted & MUTE_ADMINHELP)
 		to_chat(src, "<span class='warning'>Error: Private-Message: You are unable to use PM-s (muted).</span>")
 		return
 
 	if(!istype(C,/client))
-		if(holder)	to_chat(src, "<span class='warning'>Error: Private-Message: Client not found.</span>")
-		else		to_chat(src, "<span class='warning'>Error: Private-Message: Client not found. They may have lost connection, so please be patient!</span>")
+		to_chat(src, "<span class='warning'>Error: Private-Message: Client not found. They may have lost connection!</span>")
 		return
 
-	var/recieve_pm_type = "Player"
-	if(holder)
-		//mod PMs are maroon
-		//PMs sent from admins and mods display their rank
-		if(holder)
-			recieve_pm_type = holder.rank
-
-	else if(C && !C.holder)
-		to_chat(src, "<span class='warning'>Error: Admin-PM: Non-admin to non-admin PM communication is forbidden.</span>")
-		return
+	var/recieve_pm_type = holder.rank || "Player"
 
 	msg = sanitize(msg)
 	msg = emoji_parse(C, msg)
@@ -134,7 +128,6 @@
 
 	log_admin("PM: [key_name(src)]->[key_name(C)]: [msg]")
 	webhook_send_ahelp("[src.key] -> [C.key]", msg)
-	adminmsg2adminirc(src, C, html_decode(msg))
 
 	ticket.msgs += new /datum/ticket_msg(src.ckey, C.ckey, msg)
 	update_ticket_panels()
@@ -146,30 +139,3 @@
 			continue
 		if(X.key != key && X.key != C.key && (X.holder.rights & R_ADMIN|R_MOD|R_MENTOR))
 			to_chat(X, "<span class='pm'><span class='other'>" + create_text_tag("pm_other", "PM") + " <span class='name'>[key_name(src, X, 0, ticket)]</span> to <span class='name'>[key_name(C, X, 0, ticket)]</span> (<a href='?_src_=holder;take_ticket=\ref[ticket]'>[(ticket.status == TICKET_OPEN) ? "TAKE" : "JOIN"]</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>): <span class='message linkify'>[msg]</span></span></span>")
-
-/client/proc/cmd_admin_irc_pm(sender)
-	if(prefs.muted & MUTE_ADMINHELP)
-		to_chat(src, "<span class='warning'>Error: Private-Message: You are unable to use PM-s (muted).</span>")
-		return
-
-	var/msg = input(src,"Message:", "Reply private message to [sender] on IRC / 400 character limit") as text|null
-
-	if(!msg)
-		return
-
-	// Handled on Bot32's end, unsure about other bots
-//	if(length(msg) > 400) // TODO: if message length is over 400, divide it up into seperate messages, the message length restriction is based on IRC limitations.  Probably easier to do this on the bots ends.
-//		to_chat(src, "<span class='warning'>Your message was not sent because it was more then 400 characters find your message below for ease of copy/pasting</span>")
-//		to_chat(src, "<span class='notice'>[msg]</span>")
-//		return
-
-	log_admin("PM: [key_name(src)]->IRC-[sender]: [msg]")
-	adminmsg2adminirc(src, sender, html_decode(msg))
-	admin_pm_repository.store_pm(src, "IRC-[sender]", msg)
-
-	to_chat(src, "<span class='pm'><span class='out'>" + create_text_tag("pm_out_alt", "PM") + " to <span class='name'>[sender]</span>: <span class='message linkify'>[msg]</span></span></span>")
-	for(var/client/X in GLOB.admins)
-		if(X == src)
-			continue
-		if(X.holder.rights & R_ADMIN|R_MOD)
-			to_chat(X, "<span class='pm'><span class='other'>" + create_text_tag("pm_other", "PM") + " <span class='name'>[key_name(src, X, 0)]</span> to <span class='name'>[sender]</span>: <span class='message linkify'>[msg]</span></span></span>")

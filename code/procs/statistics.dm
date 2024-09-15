@@ -23,6 +23,7 @@
 	if(!sqllogging)
 		return
 
+// TODO(rufus): refactor and clean this up
 /proc/sql_report_death(mob/living/carbon/human/H)
 	if(!sqllogging)
 		return
@@ -33,15 +34,9 @@
 
 	var/area/placeofdeath = get_area(H)
 	var/podname = placeofdeath ? placeofdeath.name : "Unknown area"
-
-	var/laname
-	var/lakey
-	if(H.last_attacker_)
-		laname = H.last_attacker_.name
-		lakey = H.last_attacker_.client.key
 	var/sqltime = time2text(world.realtime, "YYYY-MM-DD hh:mm:ss")
 	var/coord = "[H.x], [H.y], [H.z]"
-//	log_debug("INSERT INTO death (name, byondkey, job, special, pod, tod, laname, lakey, gender, bruteloss, fireloss, brainloss, oxyloss) VALUES ('[sqlname]', '[sqlkey]', '[sqljob]', '[sqlspecial]', '[sqlpod]', '[sqltime]', '[laname]', '[lakey]', '[H.gender]', [H.bruteloss], [H.getFireLoss()], [H.getBrainLoss()], [H.getOxyLoss()])")
+//	log_debug("INSERT INTO death (name, byondkey, job, special, pod, tod, gender, bruteloss, fireloss, brainloss, oxyloss) VALUES ('[sqlname]', '[sqlkey]', '[sqljob]', '[sqlspecial]', '[sqlpod]', '[sqltime]', '[H.gender]', [H.bruteloss], [H.getFireLoss()], [H.getBrainLoss()], [H.getOxyLoss()])")
 
 	if(!establish_db_connection())
 		log_game("SQL ERROR during death reporting. Failed to connect.")
@@ -55,8 +50,6 @@
 					special,
 					pod,
 					tod,
-					laname,
-					lakey,
 					gender,
 					bruteloss,
 					fireloss,
@@ -70,15 +63,13 @@
 				$special,
 				$pod,
 				$sqltime,
-				$laname,
-				$lakey,
 				$gender,
 				$brute,
 				$fire,
 				$brain,
 				$oxy,
 				$coord)
-			"}, dbcon, list(name = H.real_name, key = H.key, job = H.mind.assigned_role, special = H.mind.special_role, pod = podname, sqltime = sqltime, laname = laname, lakey = lakey, gender = H.gender, brute = H.getBruteLoss(), fire = H.getFireLoss(), brain = H.getBrainLoss(), oxy = H.getOxyLoss(), coord = coord))
+			"}, dbcon, list(name = H.real_name, key = H.key, job = H.mind.assigned_role, special = H.mind.special_role, pod = podname, sqltime = sqltime, gender = H.gender, brute = H.getBruteLoss(), fire = H.getFireLoss(), brain = H.getBrainLoss(), oxy = H.getOxyLoss(), coord = coord))
 
 
 /proc/sql_report_cyborg_death(mob/living/silicon/robot/H)
@@ -91,15 +82,9 @@
 
 	var/area/placeofdeath = get_area(H)
 	var/podname = placeofdeath ? placeofdeath.name : "Unknown area"
-
-	var/laname
-	var/lakey
-	if(H.last_attacker_)
-		laname = H.last_attacker_.name
-		lakey = H.last_attacker_.client.key
 	var/sqltime = time2text(world.realtime, "YYYY-MM-DD hh:mm:ss")
 	var/coord = "[H.x], [H.y], [H.z]"
-//	log_debug("INSERT INTO death (name, byondkey, job, special, pod, tod, laname, lakey, gender, bruteloss, fireloss, brainloss, oxyloss) VALUES ('[sqlname]', '[sqlkey]', '[sqljob]', '[sqlspecial]', '[sqlpod]', '[sqltime]', '[laname]', '[lakey]', '[H.gender]', [H.bruteloss], [H.getFireLoss()], [H.getBrainLoss()], [H.getOxyLoss()])")
+//	log_debug("INSERT INTO death (name, byondkey, job, special, pod, tod, gender, bruteloss, fireloss, brainloss, oxyloss) VALUES ('[sqlname]', '[sqlkey]', '[sqljob]', '[sqlspecial]', '[sqlpod]', '[sqltime]', '[H.gender]', [H.bruteloss], [H.getFireLoss()], [H.getBrainLoss()], [H.getOxyLoss()])")
 
 	if(!establish_db_connection())
 		log_game("SQL ERROR during death reporting. Failed to connect.")
@@ -113,8 +98,6 @@
 					special,
 					pod,
 					tod,
-					laname,
-					lakey,
 					gender,
 					bruteloss,
 					fireloss,
@@ -128,15 +111,13 @@
 				$special,
 				$pod,
 				$sqltime,
-				$laname,
-				$lakey,
 				$gender,
 				$brute,
 				$fire,
 				$brain,
 				$oxy,
 				$coord)
-			"}, dbcon, list(name = H.real_name, key = H.key, job = H.mind.assigned_role, special = H.mind.special_role, pod = podname, sqltime = sqltime, laname = laname, lakey = lakey, gender = H.gender, brute = H.getBruteLoss(), fire = H.getFireLoss(), brain = H.getBrainLoss(), oxy = H.getOxyLoss(), coord = coord))
+			"}, dbcon, list(name = H.real_name, key = H.key, job = H.mind.assigned_role, special = H.mind.special_role, pod = podname, sqltime = sqltime, gender = H.gender, brute = H.getBruteLoss(), fire = H.getFireLoss(), brain = H.getBrainLoss(), oxy = H.getOxyLoss(), coord = coord))
 
 /proc/statistic_cycle()
 	if(!sqllogging)

@@ -159,7 +159,6 @@ var/world_topic_spam_protect_time = world.timeofday
 	log_href("\"[T]\", from:[addr], master:[master][log_end]")
 
 	var/input[] = params2list(T)
-	var/key_valid = config.external.comms_password && input["key"] == config.external.comms_password
 
 	if (T == "ping")
 		var/x = 1
@@ -170,7 +169,7 @@ var/world_topic_spam_protect_time = world.timeofday
 	else if(T == "discordstatus")
 		var/list/playerlist = list()
 		for(var/client/C in GLOB.clients)
-			if(C.holder && C.is_stealthed() && !key_valid)
+			if(C.holder && C.is_stealthed())
 				continue
 			playerlist += C.key
 		var/list/response = list()
@@ -212,9 +211,6 @@ var/world_topic_spam_protect_time = world.timeofday
 	for(var/client/C in GLOB.clients)
 		C?.tgui_panel?.send_roundrestart()
 
-		if(config.external.server) //if you set a server location in config.txt, it sends you there instead of trying to reconnect to the same world address. -- NeoFite
-			send_link(C, "byond://[config.external.server]")
-
 	game_log("World rebooted at [time_stamp()]")
 
 	if(blackbox)
@@ -253,6 +249,7 @@ var/world_topic_spam_protect_time = world.timeofday
 	if (src.status != s)
 		src.status = s
 
+// TODO(rufus): there is zero reason for these to be impossible to find a reference to macros, refactor
 #define WORLD_LOG_START(X) WRITE_FILE(GLOB.world_##X##_log, "\n\nStarting up round ID [game_id]. [time2text(world.realtime, "DD.MM.YY hh:mm")]\n---------------------")
 #define WORLD_SETUP_LOG(X) GLOB.world_##X##_log = file("[log_directory]/[log_prefix][#X].log") ; WORLD_LOG_START(X)
 #define WORLD_SETUP_LOG_DETAILED(X) GLOB.world_##X##_log = file("[log_directory_detailed]/[log_prefix_detailed][#X].log") ; WORLD_LOG_START(X)

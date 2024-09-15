@@ -1,7 +1,4 @@
-	////////////
-	//SECURITY//
-	////////////
-#define UPLOAD_LIMIT		10485760	//Restricts client uploads to the server to 10MB //Boosted this thing. What's the worst that can happen?
+#define UPLOAD_LIMIT		10485760	//Restricts client uploads to the server to 10MB
 #define MIN_CLIENT_VERSION	513
 
 #define LIMITER_SIZE	5
@@ -11,37 +8,25 @@
 #define MINUTE_COUNT	4
 #define ADMINSWARNED_AT	5
 
-//#define TOPIC_DEBUGGING 1
+/*
+When somebody clicks a link in game, this Topic is called first.
+It does the stuff in this proc and  then is redirected to the Topic() proc for the src=[0xWhatever]
+(if specified in the link). ie locate(hsrc).Topic()
 
-	/*
-	When somebody clicks a link in game, this Topic is called first.
-	It does the stuff in this proc and  then is redirected to the Topic() proc for the src=[0xWhatever]
-	(if specified in the link). ie locate(hsrc).Topic()
+Such links can be spoofed.
 
-	Such links can be spoofed.
-
-	Because of this certain things MUST be considered whenever adding a Topic() for something:
-		- Can it be fed harmful values which could cause runtimes?
-		- Is the Topic call an admin-only thing?
-		- If so, does it have checks to see if the person who called it (usr.client) is an admin?
-		- Are the processes being called by Topic() particularly laggy?
-		- If so, is there any protection against somebody spam-clicking a link?
-	If you have any  questions about this stuff feel free to ask. ~Carn
-	*/
+Because of this certain things MUST be considered whenever adding a Topic() for something:
+	- Can it be fed harmful values which could cause runtimes?
+	- Is the Topic call an admin-only thing?
+	- If so, does it have checks to see if the person who called it (usr.client) is an admin?
+	- Are the processes being called by Topic() particularly laggy?
+	- If so, is there any protection against somebody spam-clicking a link?
+If you have any  questions about this stuff feel free to ask. ~Carn
+*/
 /client/Topic(href, href_list, hsrc)
-	if(!usr || usr != mob)	// stops us calling Topic for somebody else's client. Also helps prevent usr = null
+	if(!usr || usr != mob)
 		return
 
-	#if defined(TOPIC_DEBUGGING)
-	log_debug("[src]'s Topic: [href] destined for [hsrc].")
-
-	if(href_list["nano_err"]) // nano throwing errors
-		log_debug("## NanoUI, Subject [src]: " + html_decode(href_list["nano_err"]))// NANO DEBUG HOOK
-
-
-	#endif
-
-	// asset_cache
 	var/asset_cache_job = null
 	if(href_list["asset_cache_confirm_arrival"])
 		asset_cache_job = text2num(href_list["asset_cache_confirm_arrival"])
@@ -115,16 +100,6 @@
 		cmd_admin_pm(C, null, ticket)
 		return
 
-	if(href_list["irc_msg"])
-		if(!holder && received_irc_pm < world.time - 6000) //Worse they can do is spam IRC for 10 minutes
-			to_chat(usr, SPAN("warning", "You are no longer able to use this, it's been more then 10 minutes since an admin on IRC has responded to you."))
-			return
-		if(mute_irc)
-			to_chat(usr, SPAN("warning", "You cannot use this as your client has been muted from sending messages to the admins on IRC."))
-			return
-		cmd_admin_irc_pm(href_list["irc_msg"])
-		return
-
 	if(href_list["close_ticket"])
 		var/datum/ticket/ticket = locate(href_list["close_ticket"])
 
@@ -136,7 +111,6 @@
 	switch(href_list["_src_"])
 		if("holder")	hsrc = holder
 		if("usr")		hsrc = mob
-		if("prefs")		return prefs.process_link(usr, href_list)
 		if("vars")		return view_var_Topic(href, href_list, hsrc)
 
 	switch(href_list["action"])
@@ -150,19 +124,8 @@
 	if(filelength > UPLOAD_LIMIT)
 		to_chat(src, "<font color='red'>Error: AllowUpload(): File Upload too large. Upload Limit: [UPLOAD_LIMIT/1024]KiB.</font>")
 		return 0
-/*	// Don't need this at the moment. But it's here if it's needed later.
-	// Helps prevent multiple files being uploaded at once. Or right after eachother.
-	var/time_to_wait = fileaccess_timer - world.time
-	if(time_to_wait > 0)
-		to_chat(src, "<font color='red'>Error: AllowUpload(): Spam prevention. Please wait [round(time_to_wait/10)] seconds.</font>")
-		return 0
-	fileaccess_timer = world.time + FTPDELAY	*/
 	return 1
 
-
-	///////////
-	//CONNECT//
-	///////////
 /client/New(TopicData)
 	TopicData = null							// Prevent calls to client.Topic from connect
 
@@ -265,13 +228,6 @@
 		log_admin("[ckey] tried to join but the server is full (player_limit=[config.general.player_limit])")
 		qdel(src)
 		return
-
-/*	if(holder)
-		src.control_freak = 0 // Devs need 0 for profiler access
-*/
-	//////////////
-	//DISCONNECT//
-	//////////////
 
 /client/Del()
 	if(!gc_destroyed)

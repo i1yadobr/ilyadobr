@@ -235,10 +235,7 @@
 
 	// TODO(rufus): remove leftovers of the privacy poll and `privacy` table in DB, https://github.com/tgstation/tgstation/pull/10440
 
-	if(!ready && href_list["preference"])
-		if(client)
-			client.prefs.process_link(src, href_list)
-	else if(!href_list["late_join"])
+	if(!href_list["late_join"])
 		new_player_panel()
 
 	if(href_list["showpoll"])

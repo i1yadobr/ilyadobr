@@ -42,7 +42,7 @@ NTNet is stationwide network that allows users to download programs needed for t
 NTNet is under jurisdiction of both Engineering and Research. Engineering is responsible for any repairs if necessary and research is responsible for monitoring. It is similar to PDA messaging.
 Operation requires functional "NTNet Relay" which is by default placed on tcommsat. If the relay is damaged NTNet will be offline until it is replaced. Multiple relays bring extra redundancy,
 if one is destroyed the second will take over. If all relays are gone it stops working, simple as that. NTNet may be altered via administration console available to Research Director. It is
-possible to enable/disable Software Downloading, P2P file transfers and Communication (IC version of IRC, PDA messages for more than two people)
+possible to enable/disable Software Downloading, P2P file transfers and Communication (IC version of a chat system like IRC, if you even know what IRC is, basically a group chat software)
 
 5. Software
 Software would almost exclusively use NanoUI modules. Few exceptions are text editor (uses similar screen as TCS IDE used for editing and classic HTML for previewing as Nano looks differently)

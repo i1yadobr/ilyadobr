@@ -118,8 +118,6 @@
 			return global.additional_antag_types;
 		if("admin_datums")
 			return global.admin_datums;
-		if("admin_pm_repository")
-			return global.admin_pm_repository;
 		if("admin_ranks")
 			return global.admin_ranks;
 		if("admin_secrets")
@@ -208,8 +206,6 @@
 			return global.assigned_blocks;
 		if("atmosphere_alarm")
 			return global.atmosphere_alarm;
-		if("attack_log_repository")
-			return global.attack_log_repository;
 		if("autolathe_categories")
 			return global.autolathe_categories;
 		if("autolathe_recipes")
@@ -536,8 +532,6 @@
 			return global.minor_announcement;
 		if("mob_hat_cache")
 			return global.mob_hat_cache;
-		if("mob_repository")
-			return global.mob_repository;
 		if("motion_alarm")
 			return global.motion_alarm;
 		if("multi_point_spawns")
@@ -967,8 +961,6 @@
 			global.additional_antag_types=newval;
 		if("admin_datums")
 			global.admin_datums=newval;
-		if("admin_pm_repository")
-			global.admin_pm_repository=newval;
 		if("admin_ranks")
 			global.admin_ranks=newval;
 		if("admin_secrets")
@@ -1061,8 +1053,6 @@
 			global.assigned_blocks=newval;
 		if("atmosphere_alarm")
 			global.atmosphere_alarm=newval;
-		if("attack_log_repository")
-			global.attack_log_repository=newval;
 		if("autolathe_categories")
 			global.autolathe_categories=newval;
 		if("autolathe_recipes")
@@ -1389,8 +1379,6 @@
 			global.minor_announcement=newval;
 		if("mob_hat_cache")
 			global.mob_hat_cache=newval;
-		if("mob_repository")
-			global.mob_repository=newval;
 		if("motion_alarm")
 			global.motion_alarm=newval;
 		if("multi_point_spawns")
@@ -1765,7 +1753,6 @@
 	"account_hack_attempted",
 	"additional_antag_types",
 	"admin_datums",
-	"admin_pm_repository",
 	"admin_ranks",
 	"admin_secrets",
 	"admin_verbs_admin",
@@ -1817,7 +1804,6 @@
 	"assigned",
 	"assigned_blocks",
 	"atmosphere_alarm",
-	"attack_log_repository",
 	"autolathe_categories",
 	"autolathe_recipes",
 	"base_miss_chance",
@@ -1989,7 +1975,6 @@
 	"minor_air_alarms",
 	"minor_announcement",
 	"mob_hat_cache",
-	"mob_repository",
 	"motion_alarm",
 	"moving_levels",
 	"multi_point_spawns",

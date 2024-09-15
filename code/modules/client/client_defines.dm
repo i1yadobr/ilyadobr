@@ -30,21 +30,11 @@
 	// Start playing right from the start.
 	var/last_time_ambient_music_played = -AMBIENT_MUSIC_COOLDOWN
 
-	// * Security things *
-	var/received_irc_pm = -99999
-
-	// IRC admin that spoke with them last.
-	var/irc_admin
-	var/mute_irc = 0
-
 	// Prevents people from being spammed about multikeying every time their mob changes.
 	var/warned_about_multikeying = 0
 
 	var/datum/eams_info/eams_info = new
 	var/list/topiclimiter
-
-	// comment out the line below when debugging locally to enable the options & messages menu
-	// control_freak = 1
 
 	// * Database related things *
 

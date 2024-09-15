@@ -462,45 +462,13 @@ default_no_vote = true
 # banappeals = "http://example.com"
 
 [external]
+## TODO(rufus): move sql to it's own section, possibly unified with the legacy file-based systems switches
 ## Main SQL DB switch. Turn on if you have a database setup and ready to be connected to.
 sql_enabled = false
-
-## TODO(rufus): make tools that will interact with the game through these comms systems
-## Password used for authorizing ircbot and other external tools.
-# comms_password = "pass"
-
-## Password used for authorizing external tools that can apply bans
-# ban_comms_password = "word"
 
 ## Webhook usage
 # webhook_address = "address"
 # webhook_key = "key"
-
-## Set a server location for world reboot. Don't include the byond://, just give the address and port.
-# server = "server.net:port"
-
-## TODO(rufus): clean up IRC, it's been eons
-## Set a server URL for the IRC bot to use; like SERVER, don't include the byond://
-## Unlike SERVER, this one shouldn't break auto-reconnect
-# server_url = "server.net:port"
-
-## Export address where external tools that monitor logins are located
-# login_export_addr = "address"
-
-## Uncomment to enable sending data to the IRC bot.
-use_irc_bot = false
-
-## Host where the IRC bot is hosted. Port 45678 needs to be open.
-# irc_bot_host = "localhost"
-
-## IRC channel to send information to. Leave blank to disable.
-# main_irc = "#main"
-
-## IRC channel to send adminhelps to. Leave blank to disable adminhelps-to-irc.
-# admin_irc = "#admin"
-
-## Uncomment this line to announce shuttle dock announcements to the main IRC channel, if `main_irc` has also been setup.
-announce_shuttle_dock_to_irc = false
 
 [debug]
 ## Only load the main Z-level and centcomm, skip the rest, intended to speed up testing and debugging

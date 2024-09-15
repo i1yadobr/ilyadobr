@@ -363,8 +363,6 @@
 		. += ascii2text(letter)
 	. = jointext(.,null)
 
-#define starts_with(string, substring) (copytext(string,1,1+length(substring)) == substring)
-
 #define gender2text(gender) capitalize(gender)
 
 /**

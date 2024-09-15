@@ -1,6 +1,5 @@
 /*		Portable Turrets:
 		Constructed from metal, a gun of choice, and a prox sensor.
-		This code is slightly more documented than normal, as requested by XSI on IRC.
 */
 
 #define TURRET_PRIORITY_TARGET 2

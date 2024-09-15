@@ -159,20 +159,6 @@
 /datum/preferences/proc/update_setup_window(mob/user)
 	send_output(user, url_encode(get_content(user)), "preferences_browser.browser:update_content")
 
-/datum/preferences/proc/process_link(mob/user, list/href_list)
-
-	if(!user)	return
-	if(isliving(user)) return
-
-	if(href_list["preference"] == "open_whitelist_forum")
-		if(config.link.forum)
-			send_link(user, config.link.forum)
-		else
-			to_chat(user, "<span class='danger'>The forum URL is not set in the server configuration.</span>")
-			return
-	update_setup_window(usr)
-	return 1
-
 /datum/preferences/Topic(href, list/href_list)
 	if(..())
 		return 1

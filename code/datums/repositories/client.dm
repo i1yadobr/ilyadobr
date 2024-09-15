@@ -1,5 +1,5 @@
-var/const/NO_CLIENT_CKEY = "*no ckey*"
-
+#define NO_CLIENT_CKEY "*no ckey*"
+// TODO(rufus): remove outdated and unused code after tickets are refactored
 var/repository/client/client_repository = new()
 
 /repository/client
@@ -14,10 +14,11 @@ var/repository/client/client_repository = new()
 	if(isclient(M))
 		var/client/C = M // BYOND is supposed to ensure clients always have a mob
 		M = C.mob
-	. = clients_[mob2unique(M)]
+	var/unique_identifier = "[M?.ckey || NO_CLIENT_CKEY][ascii2text(7)][M?.real_name || M?.name][ascii2text(7)][any2ref(M)]"
+	. = clients_[unique_identifier]
 	if(!.)
 		. = new /datum/client_lite(M)
-		clients_[mob2unique(M)] = .
+		clients_[unique_identifier] = .
 
 /datum/client_lite
 	var/name = "*no mob*"
