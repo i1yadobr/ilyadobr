@@ -49,45 +49,45 @@
 		</div>
 	{{else data.state === 4}}
 		<div class="item">
-            <div class="itemLabel">
-                <b>General</b>:
-            </div>
-            <div class="itemContent">
-                {{:helper.link('Clear',       'trash', {'action' : 'setstatus', 'target' : 'blank'})}}
-		        {{:helper.link('Local Time',  'gear', {'action' : 'setstatus', 'target' : 'time'})}}
-		        {{:helper.link('Shuttle ETA', 'gear', {'action' : 'setstatus', 'target' : 'shuttle'})}}
-		        {{:helper.link('Message',     'gear', {'action' : 'setstatus', 'target' : 'message'})}}
-             </div>
-         </div>
-         <div class="item">
-            <div class="itemLabel">
-                <b>Message line 1</b>
-            </div>
-            <div class="itemContent">
-                {{:helper.link(data.message_line1 ? data.message_line1 : '(none)', null, {'action' : 'setstatus', 'target' : 'line1'})}}
-            </div>
-        </div>
-        <div class="item">
-            <div class="itemLabel">
-                <b>Message line 2</b>
-            </div>
-            <div class="itemContent">
-                {{:helper.link(data.message_line2 ? data.message_line2 : '(none)', null, {'action' : 'setstatus', 'target' : 'line2'})}}
-            </div>
-        </div>
-        
-        <div class="item">
-            <div class="itemLabel">
-                <b>Alert:</b>
-            </div>
-            <div class="itemContent">
-                {{:helper.link('None',                   'alert',     {'action' : 'setstatus', 'target' : 'image', 'image' : 'default'})}}
-                {{:helper.link('Current Security Level', 'alert',     {'action' : 'setstatus', 'target' : 'alert'})}}
-                {{:helper.link('Lockdown',               'caution',   {'action' : 'setstatus', 'target' : 'image', 'image' : 'lockdown'})}}
-                {{:helper.link('Biohazard',              'radiation', {'action' : 'setstatus', 'target' : 'image', 'image' : 'biohazard'})}}
-            </div>
-            {{:helper.link('Back',                   null, {'action' : 'sw_menu', 'target' : 1})}}
-        </div>
+			<div class="itemLabel">
+				<b>General</b>:
+			</div>
+			<div class="itemContent">
+				{{:helper.link('Clear',       'trash', {'action' : 'setstatus', 'target' : 'blank'})}}
+				{{:helper.link('Local Time',  'gear', {'action' : 'setstatus', 'target' : 'time'})}}
+				{{:helper.link('Shuttle ETA', 'gear', {'action' : 'setstatus', 'target' : 'shuttle'})}}
+				{{:helper.link('Message',     'gear', {'action' : 'setstatus', 'target' : 'message'})}}
+			 </div>
+		 </div>
+		 <div class="item">
+			<div class="itemLabel">
+				<b>Message line 1</b>
+			</div>
+			<div class="itemContent">
+				{{:helper.link(data.message_line1 ? data.message_line1 : '(none)', null, {'action' : 'setstatus', 'target' : 'line1'})}}
+			</div>
+		</div>
+		<div class="item">
+			<div class="itemLabel">
+				<b>Message line 2</b>
+			</div>
+			<div class="itemContent">
+				{{:helper.link(data.message_line2 ? data.message_line2 : '(none)', null, {'action' : 'setstatus', 'target' : 'line2'})}}
+			</div>
+		</div>
+
+		<div class="item">
+			<div class="itemLabel">
+				<b>Alert:</b>
+			</div>
+			<div class="itemContent">
+				{{:helper.link('None',                   'alert',     {'action' : 'setstatus', 'target' : 'image', 'image' : 'default'})}}
+				{{:helper.link('Current Security Level', 'alert',     {'action' : 'setstatus', 'target' : 'alert'})}}
+				{{:helper.link('Lockdown',               'caution',   {'action' : 'setstatus', 'target' : 'image', 'image' : 'lockdown'})}}
+				{{:helper.link('Biohazard',              'radiation', {'action' : 'setstatus', 'target' : 'image', 'image' : 'biohazard'})}}
+			</div>
+			{{:helper.link('Back',                   null, {'action' : 'sw_menu', 'target' : 1})}}
+		</div>
 	{{else data.state === 5}}
 		Security Level: {{:data.current_security_level_title}}
 		{{if data.cannot_change_security_level}}

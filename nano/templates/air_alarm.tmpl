@@ -1,4 +1,4 @@
-<!-- 
+<!--
 Title: Air Alarm
 Used In File(s): \code\game\machinery\alarm.dm
 
@@ -19,7 +19,7 @@ Used In File(s): \code\game\machinery\alarm.dm
 <H1>Air Status</H1>
 {{if data.has_environment}}
 	{{for data.environment}}
-		{{:value.name}}: 
+		{{:value.name}}:
 		{{if value.danger_level == 2}}
 			<span class='bad'>
 		{{else value.danger_level == 1}}
@@ -38,41 +38,41 @@ Used In File(s): \code\game\machinery\alarm.dm
 			<span class='good'>Optimal
 		{{/if}}
 		</span><br>
-    Area Status: {{if data.atmos_alarm}}<span class='bad'>Atmosphere alert in area</span>{{else data.fire_alarm}}<span class='bad'>Fire alarm in area</span>{{else}}No alerts{{/if}}
+	Area Status: {{if data.atmos_alarm}}<span class='bad'>Atmosphere alert in area</span>{{else data.fire_alarm}}<span class='bad'>Fire alarm in area</span>{{else}}No alerts{{/if}}
 {{else}}
 	<span class='bad'>Warning: Cannot obtain air sample for analysis.</span>
 {{/if}}
 <HR>
-    <table width="100%">
-        <tr>
-            <td>
-                <tr>
-                    <td>
-                        <H3>Remote Control</H3>
-                    </td>
-                    <td>
-                        <H3>Thermostat</H3>
-                    </td>
-                </tr>
-            </td>
-            <td>
-                <tr>
-                    <td>
-                        <div class="item">
-                            <div class="itemContent" style="width: 100%;">	
-                                {{:helper.link('Off',	null, { 'rcon' : 1}, data.remote_connection && !data.remote_access ? (data.rcon == 1 ? 'yellowButton' : 'disabled') : null, data.rcon == 1 ? 'selected' : null)}}
-                                {{:helper.link('Auto',	null, { 'rcon' : 2}, data.remote_connection && !data.remote_access ? (data.rcon == 2 ? 'yellowButton' : 'disabled') : null, data.rcon == 2 ? 'selected' : null)}}
-                                {{:helper.link('On',	null, { 'rcon' : 3}, data.remote_connection && !data.remote_access ? (data.rcon == 3 ? 'yellowButton' : 'disabled') : null, data.rcon == 3 ? 'selected' : null)}}
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        {{:helper.link(data.target_temperature, null, { 'temperature' : 1})}}
-                    </td>
-                </tr>
-            </td>
-        </tr>
-    </table>
+	<table width="100%">
+		<tr>
+			<td>
+				<tr>
+					<td>
+						<H3>Remote Control</H3>
+					</td>
+					<td>
+						<H3>Thermostat</H3>
+					</td>
+				</tr>
+			</td>
+			<td>
+				<tr>
+					<td>
+						<div class="item">
+							<div class="itemContent" style="width: 100%;">
+								{{:helper.link('Off',	null, { 'rcon' : 1}, data.remote_connection && !data.remote_access ? (data.rcon == 1 ? 'yellowButton' : 'disabled') : null, data.rcon == 1 ? 'selected' : null)}}
+								{{:helper.link('Auto',	null, { 'rcon' : 2}, data.remote_connection && !data.remote_access ? (data.rcon == 2 ? 'yellowButton' : 'disabled') : null, data.rcon == 2 ? 'selected' : null)}}
+								{{:helper.link('On',	null, { 'rcon' : 3}, data.remote_connection && !data.remote_access ? (data.rcon == 3 ? 'yellowButton' : 'disabled') : null, data.rcon == 3 ? 'selected' : null)}}
+							</div>
+						</div>
+					</td>
+					<td>
+						{{:helper.link(data.target_temperature, null, { 'temperature' : 1})}}
+					</td>
+				</tr>
+			</td>
+		</tr>
+	</table>
 <HR>
 {{if (data.locked && !data.remote_connection) || (data.remote_connection && ! data.remote_access)}}
 	{{if data.remote_connection}}
@@ -81,37 +81,37 @@ Used In File(s): \code\game\machinery\alarm.dm
 		<span class='noticePlaceholder'>(Swipe ID card to unlock interface.)</span>
 	{{/if}}
 {{else}}
-    {{if data.screen != 1}}
-        <div class="item">{{:helper.link('Main Menu', null, { 'screen' : 1})}}</div>
-    {{/if}}
-    {{if data.screen == 1}}
-        <div class="item">
-            {{if data.atmos_alarm}}
-                {{:helper.link('Reset - Area Atmospheric Alarm', null, { 'atmos_reset' : 1})}}
-            {{else}}
-                {{:helper.link('Activate - Area Atmospheric Alarm', null, { 'atmos_alarm' : 1})}}
-            {{/if}}
-        </div>
-        <hr>
-            <div class="item">
-                {{:helper.link('Scrubbers Control', null, { 'screen' : 3})}}
-            </div>
-            <div class="item">
-                {{:helper.link('Vents Control', null, { 'screen' : 2})}}
-            </div>
-            <div class="item">
-                {{:helper.link('Set Environmental Mode', null, { 'screen' : 4})}}
-            </div>
-            <div class="item">
-                {{:helper.link('Sensor Settings', null, { 'screen' : 5})}}
-            </div>
-        <hr>
-            {{if data.mode==3}}
-                {{:helper.link('PANIC SIPHON ACTIVE - Turn siphoning off', null, { 'mode' : 1}, null, 'redButton')}}
+	{{if data.screen != 1}}
+		<div class="item">{{:helper.link('Main Menu', null, { 'screen' : 1})}}</div>
+	{{/if}}
+	{{if data.screen == 1}}
+		<div class="item">
+			{{if data.atmos_alarm}}
+				{{:helper.link('Reset - Area Atmospheric Alarm', null, { 'atmos_reset' : 1})}}
 			{{else}}
-                {{:helper.link('ACTIVATE PANIC SIPHON IN AREA', null, { 'mode' : 3}, null, 'yellowButton')}}
-            {{/if}}
-    {{else data.screen == 2}}
+				{{:helper.link('Activate - Area Atmospheric Alarm', null, { 'atmos_alarm' : 1})}}
+			{{/if}}
+		</div>
+		<hr>
+			<div class="item">
+				{{:helper.link('Scrubbers Control', null, { 'screen' : 3})}}
+			</div>
+			<div class="item">
+				{{:helper.link('Vents Control', null, { 'screen' : 2})}}
+			</div>
+			<div class="item">
+				{{:helper.link('Set Environmental Mode', null, { 'screen' : 4})}}
+			</div>
+			<div class="item">
+				{{:helper.link('Sensor Settings', null, { 'screen' : 5})}}
+			</div>
+		<hr>
+			{{if data.mode==3}}
+				{{:helper.link('PANIC SIPHON ACTIVE - Turn siphoning off', null, { 'mode' : 1}, null, 'redButton')}}
+			{{else}}
+				{{:helper.link('ACTIVATE PANIC SIPHON IN AREA', null, { 'mode' : 3}, null, 'yellowButton')}}
+			{{/if}}
+	{{else data.screen == 2}}
 		{{for data.vents}}
 			<div class="item">
 			{{:value.long_name}}</div>
@@ -148,12 +148,12 @@ Used In File(s): \code\game\machinery\alarm.dm
 					{{:helper.link(helper.fixed(value.external,2), null, { 'id_tag' : value.id_tag, 'command' : 'set_external_pressure'})}}
 					{{:helper.link('Reset', null, { 'id_tag' : value.id_tag, 'command' : 'reset_external_pressure'})}}
 				</div>
-			</div>			
+			</div>
 			<HR>
 		{{empty}}
 			No vents connected.
 		{{/for}}
-    {{else data.screen == 3}}
+	{{else data.screen == 3}}
 		{{for data.scrubbers}}
 			<div class="item">
 			{{:value.long_name}}</div>
@@ -187,14 +187,14 @@ Used In File(s): \code\game\machinery\alarm.dm
 		{{empty}}
 			No scrubbers connected.
 		{{/for}}
-    {{else data.screen == 4}}
+	{{else data.screen == 4}}
 		<H3>Environmental Modes</H3>
 		{{for data.modes}}
 			<div class="item">
 				{{:helper.link(value.name, null, { 'mode' : value.mode }, null, value.selected ? (value.danger ? 'redButton' : 'selected') : null)}}
 			</div>
 		{{/for}}
-    {{else data.screen == 5}}
+	{{else data.screen == 5}}
 		<H3>Alarm Threshold</H3>
 		Partial pressure for gases.
 		<table class='fixed'>
@@ -209,9 +209,8 @@ Used In File(s): \code\game\machinery\alarm.dm
 						{{:helper.link(settingsValue.selected >= 0 ? helper.fixed(settingsValue.selected, 2) : "Off", null, { 'command' : 'set_threshold', 'env' : settingsValue.env, 'var' : settingsValue.val })}}
 					</td>
 				{{/for}}
-			</tr>			
+			</tr>
 		{{/for}}
 		<table>
-    {{/if}}
+	{{/if}}
 {{/if}}
- 

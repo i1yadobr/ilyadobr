@@ -1,5 +1,5 @@
-<!-- 
-Title: Cryo Cell Status UI 
+<!--
+Title: Cryo Cell Status UI
 Used In File(s): \code\game\machinery\cryo.dm
  -->
 {{if !data.notFunctional}}
@@ -30,7 +30,7 @@ Used In File(s): \code\game\machinery\cryo.dm
 			Beaker:
 		</div>
 		<div class="itemContent" style="width: 40%;">
-			{{if data.isBeakerLoaded}}		
+			{{if data.isBeakerLoaded}}
 				{{:data.beakerLabel ? data.beakerLabel : '<span class="average">No label</span>'}}<br>
 				{{if data.beakerVolume}}
 					<span class="highlight">{{:data.beakerVolume}} units remaining</span><br>
@@ -52,7 +52,7 @@ Used In File(s): \code\game\machinery\cryo.dm
 	{{if data.notFunctional}}
 		<div class="line">
 			<div class="statusValue">Cryo Cell is not functional</div>
-		</div>	
+		</div>
 	{{else}}
 		{{if !data.hasOccupant}}
 			<div class="line">Cell Unoccupied</div>
@@ -64,6 +64,6 @@ Used In File(s): \code\game\machinery\cryo.dm
 			<div class="statusLabel">Cell Temperature:</div><div class="statusValue">
 				<span class="{{:data.cellTemperatureStatus}}">{{:data.cellTemperature}} K</span>
 			</div>
-		</div>	
+		</div>
 	{{/if}}
 </div>

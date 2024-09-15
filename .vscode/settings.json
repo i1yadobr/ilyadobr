@@ -1,6 +1,6 @@
 {
   "files.associations": {
-    "*.tmpl": "html"
+    "*.tmpl": "plaintext"
   },
   "editor.bracketPairColorization.enabled": true,
   "gitlens.blame.ignoreWhitespace": true,

@@ -5,23 +5,23 @@
 		<p>Downloading attachment...</p>
 		<div class="item">
 		<div class="itemLabel">
-			File name: 
+			File name:
 		</div>
 		<div class="itemContent">
 			{{:data.down_filename}}&nbsp
 		</div>
 		<div class="itemLabel">
-			Progress: 
+			Progress:
 		</div>
 		<div class="itemContent">
 			{{:helper.displayBar(data.down_progress, 0, data.down_size)}} {{:data.down_progress}} / {{:data.down_size}} GQ
 		</div>
 		<div class="itemLabel">
-			Download rate: 
+			Download rate:
 		</div>
 		<div class="itemContent">
 			{{:data.down_speed}} GQ/s&nbsp
-		</div>		
+		</div>
 	</div>
 	{{:helper.link('Cancel Download', null, {'canceldownload' : 1})}}
 {{else data.current_account}}
@@ -38,7 +38,7 @@
 	{{else data.new_message}}
 		<div class="item">
 			<div class="itemLabel">
-				Title: 
+				Title:
 			</div>
 			<div class="itemContent">
 				{{:data.msg_title}}&nbsp
@@ -82,7 +82,7 @@
 	{{else data.cur_title}}
 		<div class="item">
 			<div class="itemLabel">
-				Title: 
+				Title:
 			</div>
 			<div class="itemContent">
 				{{:data.cur_title}}&nbsp
@@ -125,7 +125,7 @@
 					{{:helper.link('Save Attachment', null, {'downloadattachment' : 1})}}
 				{{/if}}
 			</div>
-		</div>		
+		</div>
 	{{else}}
 		{{:helper.link('Inbox', null, {'set_folder' : 'Inbox'}, data.folder == 'Inbox' ? 'selected' : null)}}
 		{{:helper.link('Spam', null, {'set_folder' : 'Spam'}, data.folder == 'Spam' ? 'selected' : null)}}

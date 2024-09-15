@@ -2,11 +2,11 @@
 <div class="statusDisplay">
 	<div class="item">
 		<div class="itemLabel">
-			Gravity Field: 
+			Gravity Field:
 		</div>
 		<div class="itemContent">
 			{{if data.enabled}}
-				<span class='good'>Active</span>	
+				<span class='good'>Active</span>
 			{{else}}
 				<span class='bad'>Inactive</span>
 			{{/if}}
@@ -19,12 +19,12 @@
 		</div>
 		<div class="itemContent">
 			{{if data.charging_state == 1}}
-				<span class='average'>Charging</span>	
+				<span class='average'>Charging</span>
 			{{else data.charging_state == 2}}
-				<span class='average'>Discharging</span>	
+				<span class='average'>Discharging</span>
 			{{else}}
 				{{if data.breaker}}
-					<span class='good'>Powered</span>	
+					<span class='good'>Powered</span>
 				{{else}}
 					<span class='bad'>Unpowered</span>
 				{{/if}}
@@ -38,9 +38,9 @@
 		</div>
 
 			{{:helper.displayBar(data.charger_count, 0, 100, (data.charger_count >= 50) ? 'good' : (data.charger_count >= 25) ? 'average' : 'bad')}}
-			<div class="itemContent" style="width: 60px">		
+			<div class="itemContent" style="width: 60px">
 				<b>{{:helper.round(data.charger_count*10)/10}}%</b>
-			</div>	
+			</div>
 
 	</div>
 

@@ -4,16 +4,16 @@ Used In File(s): \code\game\machinery\computer\crew.dm
  -->
  <style type="text/css">
 	table.wideTable   {
-        width:100%;
-    }
-	
+		width:100%;
+	}
+
 	td.living   {
-        width:180px;
-    }
-	
+		width:180px;
+	}
+
 	td.tracking   {
-        width:40px;
-    }
+		width:40px;
+	}
 </style>
 
 {{:helper.link('Show Tracker Map', 'pin-s', {'showMap' : 1})}}
@@ -23,7 +23,7 @@ Used In File(s): \code\game\machinery\computer\crew.dm
 			<td>{{:value.name}} ({{:value.assignment}}): </td>
 
 			{{if value.sensor_type == 1}}
-				
+
 				{{if value.pulse}}
 					<td><span class="neutral">Pulse detected</td>
 				{{else}}
@@ -37,11 +37,11 @@ Used In File(s): \code\game\machinery\computer\crew.dm
 			{{else value.sensor_type == 2}}
 
 				<td><span class="white">Pulse</span> <span class='{{:value.span}}'>{{:value.pulse}}</span> bpm | <span class="white">BP</span> {{:value.pressure}} | <span class="white">Temp</span> {{:value.bodytemp}} C | <span class="white">Location</span> <span class="neutral">Not Available</td>
-	
+
 				{{if data.isAI}}
 					<td class='tracking'>{{:helper.link('Track', null, {}, 'disabled')}}</td>
 				{{/if}}
-			
+
 			{{else value.sensor_type == 3}}
 
 				<td><span class="white">Pulse</span> <span class='{{:value.span}}'>{{:value.pulse}}</span> bpm | <span class="white">BP</span> {{:value.pressure}} | <span class="white">Temp</span> {{:value.bodytemp}} C | <span class="white">Location</span> {{:value.area}} ({{:value.x}}, {{:value.y}}, {{:value.z}})</td>
@@ -49,7 +49,7 @@ Used In File(s): \code\game\machinery\computer\crew.dm
 				{{if data.isAI}}
 					<td class='tracking'>{{:helper.link('Track', null, {'track' : value.ref})}}</td>
 				{{/if}}
-				
+
 			{{/if}}
 		</tr>
 	{{/for}}
