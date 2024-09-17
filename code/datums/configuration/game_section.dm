@@ -40,8 +40,6 @@
 	var/godcultist_min_age = 0
 	var/loyalists_min_age = 0
 
-	var/disable_ooc_at_roundstart = FALSE
-	var/disable_looc_at_roundstart = FALSE
 	var/dynamic_explosions = FALSE
 	var/generate_asteroid = TRUE
 	var/use_loyalty_implants = FALSE
@@ -88,8 +86,6 @@
 	CONFIG_LOAD_NUM(godcultist_min_age, data["godcultist_min_age"])
 	CONFIG_LOAD_NUM(loyalists_min_age, data["loyalists_min_age"])
 
-	CONFIG_LOAD_BOOL(disable_ooc_at_roundstart, data["disable_ooc_at_roundstart"])
-	CONFIG_LOAD_BOOL(disable_looc_at_roundstart, data["disable_looc_at_roundstart"])
 	CONFIG_LOAD_BOOL(dynamic_explosions, data["dynamic_explosions"])
 	CONFIG_LOAD_BOOL(generate_asteroid, data["generate_asteroid"])
 	CONFIG_LOAD_BOOL(use_loyalty_implants, data["use_loyalty_implants"])

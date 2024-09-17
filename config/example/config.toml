@@ -6,9 +6,6 @@ subserver_name = ""
 ## Server ID if you have multiple servers working with the same DB, used to differentiate between bans, mandatory, can be any string.
 server_id = "zeroonyx"
 
-## Set a different port to use.
-# server_port = 8080
-
 ## Use lobbyscreen that is defined in the map_define.dm file under `lobby_icon` var.
 per_map_lobbyscreen = true
 
@@ -201,10 +198,6 @@ ghost_spawners = true
 # malf_min_age = 14
 # traitor_min_age = 14
 # vampire_min_age = 14
-
-## Settings to disable OOC channels at roundstart.
-disable_ooc_at_roundstart = false
-disable_looc_at_roundstart = false
 
 ## Makes explosions dynamically react to environmental obstacles such as walls and airlocks
 ## This applies `explosion_block` and reduces explosion effects on everything behind the obstacle.

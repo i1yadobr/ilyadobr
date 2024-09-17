@@ -684,8 +684,6 @@
 			return global.secret_force_mode;
 		if("send_emergency_team")
 			return global.send_emergency_team;
-		if("server_name")
-			return global.server_name;
 		if("side_effects")
 			return global.side_effects;
 		if("skin_styles_female_list")
@@ -1531,8 +1529,6 @@
 			global.secret_force_mode=newval;
 		if("send_emergency_team")
 			global.send_emergency_team=newval;
-		if("server_name")
-			global.server_name=newval;
 		if("side_effects")
 			global.side_effects=newval;
 		if("skin_styles_female_list")
@@ -2058,7 +2054,6 @@
 	"secret_force_mode",
 	"send_emergency_team",
 	"sent_spiders_to_station",
-	"server_name",
 	"severity_to_string",
 	"ship_engines",
 	"side_effects",

@@ -1,106 +1,10 @@
-#define REBOOT_HARD 1
-#define REBOOT_REALLY_HARD 2
-
-var/server_name = "ZeroOnyx"
-
-/var/game_id = null
-/hook/global_init/proc/generate_gameid()
-	if(game_id != null)
-		return
-	game_id = ""
-
-	var/list/c = list("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0")
-	var/l = c.len
-
-	var/t = world.timeofday
-	for(var/_ = 1 to 4)
-		game_id = "[c[(t % l) + 1]][game_id]"
-		t = round(t / l)
-	game_id = "-[game_id]"
-	t = round(world.realtime / (10 * 60 * 60 * 24))
-	for(var/_ = 1 to 3)
-		game_id = "[c[(t % l) + 1]][game_id]"
-		t = round(t / l)
-	return 1
-
-/proc/toggle_ooc()
-	config.misc.ooc_allowed = !config.misc.ooc_allowed
-	if(config.misc.ooc_allowed)
-		to_world("<b>The OOC channel has been globally enabled!</b>")
-	else
-		to_world("<b>The OOC channel has been globally disabled!</b>")
-
-/proc/disable_ooc()
-	if(config.misc.ooc_allowed)
-		toggle_ooc()
-
-/proc/enable_ooc()
-	if(!config.misc.ooc_allowed)
-		toggle_ooc()
-
-/proc/toggle_looc()
-	config.misc.looc_allowed = !config.misc.looc_allowed
-	if(config.misc.looc_allowed)
-		to_world("<b>The LOOC channel has been globally enabled!</b>")
-	else
-		to_world("<b>The LOOC channel has been globally disabled!</b>")
-
-/proc/disable_looc()
-	if(config.misc.ooc_allowed)
-		toggle_ooc()
-
-/proc/enable_looc()
-	if(!config.misc.looc_allowed)
-		toggle_looc()
-
-// Find mobs matching a given string
-//
-// search_string: the string to search for, in params format; for example, "some_key;mob_name"
-// restrict_type: A mob type to restrict the search to, or null to not restrict
-//
-// Partial matches will be found, but exact matches will be preferred by the search
-//
-// Returns: A possibly-empty list of the strongest matches
-/proc/text_find_mobs(search_string, restrict_type = null)
-	var/list/search = params2list(search_string)
-	var/list/ckeysearch = list()
-	for(var/text in search)
-		ckeysearch += ckey(text)
-
-	var/list/match = list()
-
-	for(var/mob/M in SSmobs.mob_list)
-		if(restrict_type && !istype(M, restrict_type))
-			continue
-		var/strings = list(M.name, M.ckey)
-		if(M.mind)
-			strings += M.mind.assigned_role
-			strings += M.mind.special_role
-		if(ishuman(M))
-			var/mob/living/carbon/human/H = M
-			if(H.species)
-				strings += H.species.name
-		for(var/text in strings)
-			if(ckey(text) in ckeysearch)
-				match[M] += 10 // an exact match is far better than a partial one
-			else
-				for(var/searchstr in search)
-					if(findtext(text, searchstr))
-						match[M] += 1
-
-	var/maxstrength = 0
-	for(var/mob/M in match)
-		maxstrength = max(match[M], maxstrength)
-	for(var/mob/M in match)
-		if(match[M] < maxstrength)
-			match -= M
-
-	return match
-
-#define RECOMMENDED_VERSION 515
 /world/New()
 	SetupLogs()
 
+	if(byond_version < 515)
+		to_world_log("Your server's byond version does not meet the recommended requirements for this server. Please update BYOND")
+
+	// Load converter lib that is required for reading TOML configs
 	if(world.system_type == UNIX)
 		GLOB.converter_dll = "./converter.so"
 	else
@@ -110,9 +14,6 @@ var/server_name = "ZeroOnyx"
 		log_error("Can't read config, shutting down...")
 		sleep(50)
 		shutdown()
-
-	if(byond_version < RECOMMENDED_VERSION)
-		to_world_log("Your server's byond version does not meet the recommended requirements for this server. Please update BYOND")
 
 	load_sql_config("config/dbconfig.txt")
 
@@ -125,10 +26,7 @@ var/server_name = "ZeroOnyx"
 		sleep(50)
 		shutdown()
 
-	if(config.general.server_port)
-		var/port = OpenPort(config.general.server_port)
-		to_world_log(port ? "Changed port to [port]" : "Failed to change port")
-
+	// TODO(rufus): move the title/music/watchlist stuff into procs or something else, world creation proc should be clean
 	//set window title
 	if(config.general.subserver_name)
 		var/subserver_name = uppertext(copytext(config.general.subserver_name, 1, 2)) + copytext(config.general.subserver_name, 2)
@@ -151,8 +49,7 @@ var/server_name = "ZeroOnyx"
 	Master.Initialize(10, FALSE)
 	webhook_send_roundstatus("lobby", "[config.general.server_id]")
 
-#undef RECOMMENDED_VERSION
-
+// TODO(rufus): use this or refactor the topic protection system
 var/world_topic_spam_protect_time = world.timeofday
 
 /world/Topic(T, addr, master, key)
@@ -198,23 +95,14 @@ var/world_topic_spam_protect_time = world.timeofday
 			to_chat(target, "<span class='ooc dooc'><span class='everyone'>[sent_message]</span></span>", type = MESSAGE_TYPE_DOOC)
 
 
-/world/Reboot(reason, reboot_hardness = 0)
-	// sound_to(world, sound('sound/AI/newroundsexy.ogg')
-
-	if(reboot_hardness == REBOOT_REALLY_HARD)
-		..(reason)
-		return
-
-	if(!reboot_hardness == REBOOT_HARD)
-		Master.Shutdown()
-
+/world/Reboot(reason, force = FALSE)
 	for(var/client/C in GLOB.clients)
 		C?.tgui_panel?.send_roundrestart()
 
-	game_log("World rebooted at [time_stamp()]")
-
-	if(blackbox)
-		blackbox.save_all_data_to_sql()
+	if(!force)
+		Master.Shutdown()
+		game_log("World rebooted at [time_stamp()]")
+		blackbox?.save_all_data_to_sql()
 
 	..(reason)
 
@@ -222,32 +110,35 @@ var/world_topic_spam_protect_time = world.timeofday
 	callHook("shutdown")
 	return ..()
 
+// TODO(rufus): move to utility/gamemode-related functions, shouldn't be in the main world file
 /world/proc/save_mode(the_mode)
 	var/F = file("data/mode.txt")
 	fdel(F)
 	to_file(F, the_mode)
 
 /hook/startup/proc/loadMOTD()
-	world.load_motd()
-	return 1
-
-/world/proc/load_motd()
 	join_motd = file2text("config/motd.txt")
 	load_regular_announcement()
+	return 1
+
+/var/game_id = null
+/hook/global_init/proc/generate_gameid()
+	if(game_id != null)
+		return
+	for(var/i = 1 to 11)
+		if(i == 6)
+			game_id += "-"
+			continue
+		game_id += pick(ascii2text(rand(97,122)))
+	return TRUE
 
 /world/proc/update_status()
-	var/s = ""
-
-	if (config && config.general.server_name)
-		s += "<b>[config.general.server_name]</b>"
-
 	// TODO(rufus): come up with a good description and potentially sprinkle some features on top, keeping it minimal for now
-	if ((!config.game.enter_allowed) || (config.game.use_whitelist) )
-		s += ", Limited Access"
-
-	/* does this help? I do not know */
-	if (src.status != s)
-		src.status = s
+	var/server_name = config?.general?.server_name || "Server Initializing"
+	var/limited_access_string = ""
+	if (!config.game.enter_allowed || config.game.use_whitelist)
+		limited_access_string = ", Limited Access"
+	status = "[server_name][limited_access_string]"
 
 // TODO(rufus): there is zero reason for these to be impossible to find a reference to macros, refactor
 #define WORLD_LOG_START(X) WRITE_FILE(GLOB.world_##X##_log, "\n\nStarting up round ID [game_id]. [time2text(world.realtime, "DD.MM.YY hh:mm")]\n---------------------")
@@ -280,7 +171,7 @@ var/world_topic_spam_protect_time = world.timeofday
 #define FAILED_DB_CONNECTION_CUTOFF 5
 var/failed_db_connections = 0
 
-
+// TODO(rufus): move database related stuff into its proper folder
 /hook/startup/proc/connectDB()
 	if(!config.external.sql_enabled)
 		log_to_dd("SQL disabled. Your server will not use the main database.")
@@ -291,21 +182,19 @@ var/failed_db_connections = 0
 	return TRUE
 
 /proc/setup_database_connection()
-
 	if(failed_db_connections > FAILED_DB_CONNECTION_CUTOFF)	//If it failed to establish a connection more than 5 times in a row, don't bother attempting to connect anymore.
 		return 0
 
 	if(!dbcon)
 		dbcon = new()
 
-	var/user = sqllogin
-	var/pass = sqlpass
-	var/db = sqldb
-	var/address = sqladdress
-	var/port = sqlport
-
-	dbcon.Connect("dbi:mysql:[db]:[address]:[port]","[user]","[pass]")
+	dbcon.Connect("dbi:mysql:[sqldb]:[sqladdress]:[sqlport]","[sqllogin]","[sqlpass]")
+	if (!dbcon.IsConnected())
+		failed_db_connections++
+		log_to_dd(dbcon.ErrorMsg())
+		return FALSE
 	. = dbcon.IsConnected()
+
 	if ( . )
 		failed_db_connections = 0	//If this connection succeeded, reset the failed connections counter.
 	else

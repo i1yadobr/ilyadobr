@@ -1,3 +1,6 @@
+// TODO(rufus): remove usage of hooks and unify calls into functions
+//   We have proper development tools nowadays and can jump to source in a single click
+
 /**
  * Global init hook.
  * Called in global_init.dm when the server is initialized.

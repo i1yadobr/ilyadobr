@@ -688,26 +688,20 @@ var/global/floorIsLava = 0
 	if (!usr.client.holder)
 		return
 
-	var/list/options = list("Regular Restart", "Hard Restart (Skip MC Shutdown)", "Hardest Restart (Direct world.Reboot) \[Dangerous\]")
+	var/list/options = list("Regular Restart", "Force Restart (Direct world.Reboot)")
 
 	var/result = input(usr, "Select reboot method", "World Reboot", options[1]) as null|anything in options
 	if(result)
-		feedback_set_details("end_error","admin reboot - by [key_name(usr)]")
-		feedback_add_details("admin_verb","R") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 		var/init_by = "<span class='notice'>Initiated by [key_name(usr)].</span>"
 		switch(result)
 			if("Regular Restart")
 				to_world("<span class='danger'>Restarting world!</span> [init_by]")
 				log_admin("[key_name(usr)] initiated a reboot.")
 				world.Reboot()
-			if("Hard Restart (Skip MC Shutdown)")
-				to_world("<span class='boldannounce'>Hard world restart.</span> [init_by]")
-				log_admin("[key_name(usr)] initiated a hard reboot.")
-				world.Reboot(reboot_hardness = REBOOT_HARD)
-			if("Hardest Restart (Direct world.Reboot) \[Dangerous\]")
-				to_world("<span class='boldannounce'>Hardest world restart.</span> [init_by]")
-				log_admin("[key_name(usr)] initiated a hardest reboot.")
-				world.Reboot(reboot_hardness = REBOOT_REALLY_HARD)
+			if("Force Restart (Direct world.Reboot)")
+				to_world("<span class='boldannounce'>Force world restart.</span> [init_by]")
+				log_admin("[key_name(usr)] initiated a force reboot.")
+				world.Reboot(force = TRUE)
 
 /datum/admins/proc/end_round()
 	set category = "Server"
@@ -756,7 +750,8 @@ var/global/floorIsLava = 0
 	if(!check_rights(R_ADMIN))
 		return
 
-	toggle_ooc()
+	config.misc.ooc_allowed = !config.misc.ooc_allowed
+	to_world("<b>The OOC channel has been globally [config.misc.ooc_allowed ? "enabled" : "disabled"]!</b>")
 	log_and_message_admins("toggled OOC.")
 	feedback_add_details("admin_verb","TOOC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
@@ -784,7 +779,8 @@ var/global/floorIsLava = 0
 	if(!check_rights(R_ADMIN))
 		return
 
-	toggle_looc()
+	config.misc.looc_allowed = !config.misc.looc_allowed
+	to_world("<b>The LOOC channel has been globally [config.misc.looc_allowed ? "enabled" : "disabled"]!</b>")
 	log_and_message_admins("toggled LOOC.")
 	feedback_add_details("admin_verb","TLOOC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 

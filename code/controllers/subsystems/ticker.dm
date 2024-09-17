@@ -112,12 +112,6 @@ SUBSYSTEM_DEF(ticker)
 		//Holiday Round-start stuff	~Carn
 		Holiday_Game_Start()
 
-	if(config.game.disable_ooc_at_roundstart)
-		disable_ooc()
-
-	if(config.game.disable_looc_at_roundstart)
-		disable_looc()
-
 /datum/controller/subsystem/ticker/proc/playing_tick()
 	mode.process()
 	var/mode_finished = mode_finished()

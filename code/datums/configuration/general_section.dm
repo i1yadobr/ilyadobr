@@ -4,7 +4,6 @@
 	var/server_name = null
 	var/subserver_name = null
 	var/server_id = null
-	var/server_port = null
 	var/per_map_lobbyscreen = TRUE
 	var/list/lobbyscreens = list("icons/splashes/onyx_old.png", "icons/splashes/onyx_new.png")
 	var/player_limit = 0
@@ -20,7 +19,6 @@
 	CONFIG_LOAD_STR(server_name, data["server_name"])
 	CONFIG_LOAD_STR(subserver_name, data["subserver_name"])
 	CONFIG_LOAD_STR(server_id, data["server_id"])
-	CONFIG_LOAD_NUM(server_port, data["server_port"])
 
 	var/lobbyscreen_file
 	CONFIG_LOAD_BOOL(per_map_lobbyscreen, data["per_map_lobbyscreen"])

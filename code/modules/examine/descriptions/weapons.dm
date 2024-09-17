@@ -1,3 +1,4 @@
+// TODO(rufus): remove description defs because they override jumping to source and get in the way of exploring the code
 /*
 	Note: This file is meant for actual weapons (guns, swords, etc), and not the stupid 'every obj is a weapon, except when it's not' thing.
 */
