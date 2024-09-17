@@ -127,7 +127,7 @@
 		sound_to(C, sound('sound/effects/adminhelp.ogg'))
 
 	log_admin("PM: [key_name(src)]->[key_name(C)]: [msg]")
-	webhook_send_ahelp("[src.key] -> [C.key]", msg)
+	webhook_send_ahelp(src.key, C.key, msg)
 
 	ticket.msgs += new /datum/ticket_msg(src.ckey, C.ckey, msg)
 	update_ticket_panels()

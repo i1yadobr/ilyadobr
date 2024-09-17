@@ -459,7 +459,9 @@ default_no_vote = true
 ## Main SQL DB switch. Turn on if you have a database setup and ready to be connected to.
 sql_enabled = false
 
-## Webhook usage
+## Webhook address and key, used for webhook world.Export() calls to your external bots and programs.
+## This allows to send OOC, emote, ahelp messages and round start notifications from the server to some other program.
+## You only need to use these if you're a server host or have your own bots and want to send information to them.
 # webhook_address = "address"
 # webhook_key = "key"
 

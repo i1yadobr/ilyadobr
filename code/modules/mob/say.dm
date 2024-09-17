@@ -37,8 +37,7 @@
 
 	client?.spellcheck(message)
 
-	var/ckeyname = "[usr.ckey]/[usr.name]"
-	webhook_send_me(ckeyname, message)
+	webhook_send_emote(key, name, message)
 
 /mob/proc/say_dead(message)
 	communicate(/decl/communication_channel/dsay, client, message)

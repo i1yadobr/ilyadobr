@@ -47,7 +47,7 @@
 	. = ..()
 
 	Master.Initialize(10, FALSE)
-	webhook_send_roundstatus("lobby", "[config.general.server_id]")
+	webhook_send_world_started(config.general.server_id)
 
 // TODO(rufus): use this or refactor the topic protection system
 var/world_topic_spam_protect_time = world.timeofday
