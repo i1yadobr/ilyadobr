@@ -73,7 +73,7 @@ var/world_topic_spam_protect_time = world.timeofday
 		response["playerlist"] = playerlist
 		response["roundtime"] = roundduration2text()
 		response["map"] = GLOB.using_map.name
-		response["evac"] = evacuation_controller.is_evacuating()
+		response["evac"] = evacuation_controller?.is_evacuating()
 		return json_encode(response)
 
 	// TODO(rufus): finish refactoring this
