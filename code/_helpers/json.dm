@@ -37,6 +37,7 @@ var/list/rus_unicode_conversion = list(
 	"¨" = "\\u0401", "¸" = "\\u0451"
 	)
 
+// TODO(rufus): check if it's actually necessary or if std json_encode/decode are sufficient
 /proc/list2json(list/L)
 	var/static/json_writer/_jsonw = new()
 	return _jsonw.write(L)

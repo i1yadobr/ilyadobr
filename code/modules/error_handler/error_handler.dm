@@ -88,30 +88,3 @@ GLOBAL_VAR_INIT(total_runtimes_skipped, 0)
 	log_runtime("\[[time_stamp()]] Runtime in [E.file],[E.line]: [E]")
 	for(var/line in desclines)
 		log_runtime(line)
-
-	// SQL runtime logging
-	if(!establish_db_connection())
-		return
-	sql_query({"
-		INSERT INTO runtimes
-			(date,
-			game_id,
-			build_version,
-			file,
-			line,
-			body)
-		VALUES
-			(NOW(),
-			$game_id,
-			$revision,
-			$file,
-			$line,
-			$body)"},
-			dbcon,
-			list(
-				game_id = game_id,
-				revision = revdata.revision,
-				file = E.file,
-				line = E.line,
-				body = E.name + "\n" + desclines.Join("\n")
-			))
