@@ -94,6 +94,7 @@ var/world_topic_spam_protect_time = world.timeofday
 			if(target?.is_key_ignored(sender_key))
 				continue
 			to_chat(target, "<span class='ooc dooc'><span class='everyone'>[sent_message]</span></span>", type = MESSAGE_TYPE_DOOC)
+		return json_encode(list("code"="success"))
 
 
 /world/Reboot(reason, force = FALSE)
