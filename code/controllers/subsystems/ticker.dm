@@ -250,6 +250,8 @@ Helpers
 		if(player.client && player.ready)
 			totalPlayers++
 	//Find the relevant datum, resolving secret in the process.
+	// TODO(rufus): add proper a concise logging of what went wrong during gamemode setup
+	//   without spamming the debug log with each and every gamemode check
 	var/list/base_runnable_modes = config.get_runnable_modes_for_players(totalPlayers) //format: list(config_tag = weight)
 	if(mode_to_try == "random" || mode_to_try == "secret")
 		var/list/runnable_modes = base_runnable_modes - bad_modes

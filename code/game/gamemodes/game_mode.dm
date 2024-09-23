@@ -145,7 +145,6 @@ var/global/list/additional_antag_types = list()
 // Returns 0 if the mode can start and a message explaining the reason why it can't otherwise.
 /datum/game_mode/proc/isStartRequirementsSatisfied(totalPlayers)
 	if(totalPlayers < required_players)
-		log_debug("Not enough players for [name], [src.required_players] players needed.")
 		return FALSE
 
 	var/enemy_count = 0
