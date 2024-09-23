@@ -1,14 +1,14 @@
 /proc/webhook_send_world_started(server_name)
 	webhook_send("world_started", list("server" = server_name))
 
-/proc/webhook_send_ooc(ckey, message)
-	webhook_send("ooc", list("ckey" = ckey, "message" = message))
+/proc/webhook_send_ooc(sender_key, message)
+	webhook_send("ooc", list("sender_key" = sender_key, "message" = message))
 
-/proc/webhook_send_emote(ckey, name, message)
-	webhook_send("emote", list("ckey" = ckey, "name" = name, "message" = message))
+/proc/webhook_send_emote(sender_key, name, message)
+	webhook_send("emote", list("sender_key" = sender_key, "name" = name, "message" = message))
 
-/proc/webhook_send_ahelp(from_ckey, to_ckey, message)
-	webhook_send("ahelp", list("from" = from_ckey, "to" = to_ckey, "message" = message))
+/proc/webhook_send_ahelp(from_key, to_key, message)
+	webhook_send("ahelp", list("from" = from_key, "to" = to_key, "message" = message))
 
 /proc/webhook_send(type, data)
 	if(!config.external.webhook_address || !config.external.webhook_key)

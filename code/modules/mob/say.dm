@@ -37,7 +37,7 @@
 
 	client?.spellcheck(message)
 
-	webhook_send_emote(key, name, message)
+	webhook_send_emote(usr.key, usr.name, message)
 
 /mob/proc/say_dead(message)
 	communicate(/decl/communication_channel/dsay, client, message)
