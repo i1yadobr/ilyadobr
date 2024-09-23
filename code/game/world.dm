@@ -53,9 +53,10 @@
 var/world_topic_spam_protect_time = world.timeofday
 
 /world/Topic(T, addr, master, key)
-	log_href("\"[T]\", from:[addr], master:[master][log_end]")
+	log_href("\"[T]\", from:[addr]")
 
 	var/input[] = params2list(T)
+	var/authorized = input["key"] == config?.external?.webhook_key
 
 	if (T == "ping")
 		var/x = 1
@@ -76,21 +77,21 @@ var/world_topic_spam_protect_time = world.timeofday
 		response["evac"] = evacuation_controller?.is_evacuating()
 		return json_encode(response)
 
-	// TODO(rufus): finish refactoring this
-	else if ("ooc_message" in input)
-		var/client_key = input["sender_key"]
-		var/client_ckey = ckey(client_key)
+	else if ("dooc" in input)
+		var/sender_key = input["sender_key"]
 		var/message = html_encode(input["message"])
-		if(!client_ckey || !message)
-			return
+		if(!authorized)
+			return json_encode(list("code"="unauthorized"))
+		if(!sender_key || !message)
+			return json_encode(list("code"="malformed_data"))
 		if(!config.misc.ooc_allowed)
-			return "globally muted"
+			return json_encode(list("code"="ooc_disabled"))
 		// TODO(rufus): make a better function to look up jobbans, or replace this with a call to one if it already exists
-		if(jobban_keylist.Find("[client_ckey] - OOC"))
-			return "banned from ooc"
-		var/sent_message = "[create_text_tag("dooc", "Discord")] <EM>[client_key]:</EM> <span class='message linkify'>[message]</span>"
+		if(jobban_keylist.Find("[ckey(sender_key)] - OOC"))
+			return json_encode(list("code"="banned"))
+		var/sent_message = "[create_text_tag("dooc", "Discord")] <EM>[sender_key]:</EM> <span class='message linkify'>[message]</span>"
 		for(var/client/target in GLOB.clients)
-			if(target?.is_key_ignored(client_key))
+			if(target?.is_key_ignored(sender_key))
 				continue
 			to_chat(target, "<span class='ooc dooc'><span class='everyone'>[sent_message]</span></span>", type = MESSAGE_TYPE_DOOC)
 
