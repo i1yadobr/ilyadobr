@@ -15,4 +15,13 @@
 		return
 	var/query = "[config.external.webhook_address]?type=[type]&data=[url_encode(list2json(data))]&key=[config.external.webhook_key]"
 	spawn(-1)
-		world.Export(query)
+		try
+			var/resp[] = world.Export(query)
+			if(!resp)
+				log_debug("[type] webhook failed to connect")
+				return
+			var/status_code = resp["STATUS"]
+			if(status_code != "200")
+				log_debug("[type] webhook returned an unexpected status code: [status_code]")
+		catch(var/exception/e)
+			log_debug("[type] webhook threw an exception: [e]")
