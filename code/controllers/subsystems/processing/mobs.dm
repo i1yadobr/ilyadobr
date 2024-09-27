@@ -7,6 +7,7 @@ PROCESSING_SUBSYSTEM_DEF(mobs)
 
 	// List of Z levels where player are
 	var/static/list/player_levels = list()
+	// TODO(rufus): for some reason doesn't contain new_player's on world load? This affects "check multiaccounts" verb for example.
 	var/static/list/mob_list = list()
 
 /datum/controller/subsystem/processing/mobs/PreInit()

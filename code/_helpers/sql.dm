@@ -40,6 +40,12 @@
 		template = temp + copytext(template, current_ind + length(token_finder.match))
 
 	var/DBQuery/query = db.NewQuery(template)
-	if (!query.Execute())
-		CRASH("\[DB QUERY ERROR] query: '[template]', error: '[query.ErrorMsg()]'")
-	return query
+	if(query.Execute())
+		return query
+	if(findtext(query.ErrorMsg(), "server has gone away"))
+		log_debug("Trying to reconnect to the database after it has gone away...")
+		setup_database_connection()
+		if(query.Execute())
+			log_debug("Successfully reconnected the database!")
+			return query
+	CRASH("\[DB QUERY ERROR] query: '[template]', error: '[query.ErrorMsg()]'")
