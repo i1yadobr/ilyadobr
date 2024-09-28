@@ -1,3 +1,5 @@
+// TODO(rufus): database queries need proper error handling that should be enforced throughout the codebase
+
 //for db var look in _global_vars\configuration.dm
 //2 ways to call it
 //positional:
@@ -44,8 +46,9 @@
 		return query
 	if(findtext(query.ErrorMsg(), "server has gone away"))
 		log_debug("Trying to reconnect to the database after it has gone away...")
-		setup_database_connection()
-		if(query.Execute())
+		var/reconnected = setup_database_connection()
+		if(reconnected && query.Execute())
 			log_debug("Successfully reconnected the database!")
 			return query
+	log_debug("Database query execution failed: '[template]', error: '[query.ErrorMsg()]'")
 	CRASH("\[DB QUERY ERROR] query: '[template]', error: '[query.ErrorMsg()]'")
