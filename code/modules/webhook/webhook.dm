@@ -21,7 +21,7 @@
 				log_debug("[type] webhook failed to connect")
 				return
 			var/status_code = resp["STATUS"]
-			if(status_code != "200")
+			if(status_code != "200 OK")
 				log_debug("[type] webhook returned an unexpected status code: [status_code]")
 		catch(var/exception/e)
 			log_debug("[type] webhook threw an exception: [e]")
