@@ -491,8 +491,10 @@
 					100
 				"}, dbcon, query_arg_list)
 
-			var/now = time2text(world.realtime, "YYYY-MM-DD hh:mm:ss") // MUST BE the same format as SQL gives us the dates in, and MUST be least to most specific (i.e. year, month, day not day, month, year)
+			var/now = time2text(world.realtime, "YYYY-MM-DD hh:mm:ss", 0) // MUST BE the same format as SQL gives us the dates in, and MUST be least to most specific (i.e. year, month, day not day, month, year)
 
+			// TODO(rufus): presenting ban times with a local timezone instead of just UTC
+			// TODO(rufus): global refactoring of all time related code to handle UTC and local time properly
 			while(select_query.NextRow())
 				var/banid = select_query.item[1]
 				var/bantime = select_query.item[2]
@@ -530,16 +532,16 @@
 					if("PERMABAN")
 						typedesc = "<font color='red'><b>PERMABAN</b></font>"
 					if("TEMPBAN")
-						typedesc = "<b>TEMPBAN</b><br><font size='2'>([duration] minutes) [(unbanned || auto) ? "" : "(<a href=\"byond://?src=\ref[src];dbbanedit=duration;dbbanid=[banid]\">Edit</a>)"]<br>Expires [expiration]</font>"
+						typedesc = "<b>TEMPBAN</b><br><font size='2'>([duration] minutes) [(unbanned || auto) ? "" : "(<a href=\"byond://?src=\ref[src];dbbanedit=duration;dbbanid=[banid]\">Edit</a>)"]<br>Expires at [expiration] UTC</font>"
 					if("JOB_PERMABAN")
 						typedesc = "<b>JOBBAN</b><br><font size='2'>([job])</font>"
 					if("JOB_TEMPBAN")
-						typedesc = "<b>TEMP JOBBAN</b><br><font size='2'>([job])<br>([duration] minutes<br>Expires [expiration]</font>"
+						typedesc = "<b>TEMP JOBBAN</b><br><font size='2'>([job])<br>([duration] minutes<br>Expires at [expiration] UTC</font>"
 
 				output += "<tr bgcolor='[dcolor]'>"
 				output += "<td align='center'>[typedesc]</td>"
 				output += "<td align='center'><b>[ckey]</b></td>"
-				output += "<td align='center'>[bantime]</td>"
+				output += "<td align='center'>[bantime] UTC</td>"
 				output += "<td align='center'><b>[ackey]</b></td>"
 				output += "<td align='center'>[(unbanned || auto) ? "" : "<b><a href=\"byond://?src=\ref[src];dbbanedit=unban;dbbanid=[banid]\">Unban</a></b>"]</td>"
 				output += "</tr>"
@@ -565,11 +567,11 @@
 					output += "</tr>"
 				if(unbanned)
 					output += "<tr bgcolor='[dcolor]'>"
-					output += "<td align='center' colspan='5' bgcolor=''><b>UNBANNED by admin [unbanckey] on [unbantime]</b></td>"
+					output += "<td align='center' colspan='5' bgcolor=''><b>UNBANNED by admin [unbanckey] at [unbantime] UTC</b></td>"
 					output += "</tr>"
 				else if(auto)
 					output += "<tr bgcolor='[dcolor]'>"
-					output += "<td align='center' colspan='5' bgcolor=''><b>EXPIRED at [expiration]</b></td>"
+					output += "<td align='center' colspan='5' bgcolor=''><b>EXPIRED at [expiration] UTC</b></td>"
 					output += "</tr>"
 				output += "<tr>"
 				output += "<td colspan='5' bgcolor='white'>&nbsp</td>"
