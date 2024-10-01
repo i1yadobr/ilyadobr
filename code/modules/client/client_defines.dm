@@ -53,8 +53,11 @@
 	// For tracking shift key (world.time)
 	var/shift_released_at = 0
 
-	/// Settings window.
+	// Settings window.
 	var/datum/player_settings/settings = null
 
-	/// Messages currently seen by this client
+	// Messages currently seen by this client
 	var/list/seen_messages
+
+	// connected external accounts e.g. discord
+	var/list/connected_accounts

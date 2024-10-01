@@ -131,7 +131,7 @@ var/world_topic_spam_protect_time = world.timeofday
 		if(i == 6)
 			game_id += "-"
 			continue
-		game_id += pick(ascii2text(rand(97,122)))
+		game_id += ascii2text(rand(97,122))
 	return TRUE
 
 /world/proc/update_status()

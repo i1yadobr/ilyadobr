@@ -229,6 +229,9 @@ If you have any  questions about this stuff feel free to ask. ~Carn
 		qdel(src)
 		return
 
+	spawn(0)
+		setup_discord_verification()
+
 /client/Del()
 	if(!gc_destroyed)
 		Destroy()
