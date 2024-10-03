@@ -100,23 +100,6 @@ proc/explosion_rec(turf/epicenter, power, shaped)
 /turf/unsimulated/explosion_spread(power)
 	return //So it doesn't get to the parent proc, which simulates explosions
 
-/atom/var/explosion_resistance
 /atom/proc/get_explosion_resistance()
 	if(simulated && density)
 		return explosion_resistance
-
-/turf/space
-	explosion_resistance = 3
-
-/turf/simulated/floor
-	explosion_resistance = 1
-
-/turf/simulated/mineral
-	explosion_resistance = 2
-
-/turf/simulated/shuttle/wall
-	explosion_resistance = 10
-
-/turf/simulated/wall
-	plane = DEFAULT_PLANE
-	explosion_resistance = 10

@@ -20,6 +20,7 @@
 	var/decl/flooring/flooring
 	var/mineral = DEFAULT_WALL_MATERIAL
 
+	explosion_resistance = 1
 	thermal_conductivity = 0.040
 	heat_capacity = 10000
 	var/lava = 0

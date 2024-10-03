@@ -14,6 +14,7 @@
 	var/simulated = 1 //filter for actions - used by lighting overlays
 	var/fluorescent // Shows up under a UV light.
 
+	var/explosion_resistance
 	///Value used to increment ex_act() if reactionary_explosions is on
 	var/explosion_block = 0
 
