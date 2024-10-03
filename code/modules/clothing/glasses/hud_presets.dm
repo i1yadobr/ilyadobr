@@ -1,4 +1,7 @@
-
+// TODO(rufus): rename all of these and other metions of HUDs appropraitely
+//   It should be "Meson HUD goggles", not "meson goggles HUD"
+//   The full expanded term will then be "Meson Heads-Up Display googles", goggles enhanced with a "Meson" Heads-Up Display,
+//   which makes much more sense than "Meson goggles Heads-Up Display". This isn't a display after all, these *are* goggles.
 // Standard old-school presets
 /obj/item/clothing/glasses/hud/standard/material
 	name = "material goggles HUD"

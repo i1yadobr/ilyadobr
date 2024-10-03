@@ -520,8 +520,6 @@
 			return global.meteors_normal;
 		if("meteors_threatening")
 			return global.meteors_threatening;
-		if("minevendor_list")
-			return global.minevendor_list;
 		if("mining_floors")
 			return global.mining_floors;
 		if("mining_walls")
@@ -1365,8 +1363,6 @@
 			global.meteors_normal=newval;
 		if("meteors_threatening")
 			global.meteors_threatening=newval;
-		if("minevendor_list")
-			global.minevendor_list=newval;
 		if("mining_floors")
 			global.mining_floors=newval;
 		if("mining_walls")
@@ -1965,7 +1961,6 @@
 	"meteors_normal",
 	"meteors_threatening",
 	"mil_branches",
-	"minevendor_list",
 	"mining_floors",
 	"mining_walls",
 	"minor_air_alarms",

@@ -1,3 +1,5 @@
+// TODO(rufus): refactor the macro into automated processing of the circuit name in the Initialization/New
+//   and remove all mentions of this macro, it's so unnecessarily overused
 //Define a macro that we can use to assemble all the circuit board names
 #ifdef T_BOARD
 #error T_BOARD already defined elsewhere, we can't use it.
