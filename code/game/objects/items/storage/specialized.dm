@@ -1,14 +1,3 @@
-/*
-	Mining and plant bags, can store a ridiculous number of items in order to deal with the ridiculous amount of ores or plant products
-	that can be produced by mining or (xeno)botany, however it can only hold those items.
-
-	These storages typically should also support quick gather and quick empty to make managing large numbers of items easier.
-*/
-
-// -----------------------------
-//        Mining Satchel
-// -----------------------------
-
 /obj/item/storage/ore
 	name = "mining satchel"
 	desc = "This sturdy bag can be used to store and transport ores."
@@ -22,11 +11,6 @@
 	allow_quick_gather = 1
 	allow_quick_empty = 1
 	use_to_pickup = 1
-
-
-// -----------------------------
-//          Plant bag
-// -----------------------------
 
 /obj/item/storage/plants
 	name = "botanical satchel"
@@ -42,13 +26,17 @@
 	allow_quick_empty = 1
 	use_to_pickup = 1
 
-
-// -----------------------------
-//        Sheet Snatcher
-// -----------------------------
-// Because it stacks stacks, this doesn't operate normally.
-// However, making it a storage/bag allows us to reuse existing code in some places. -Sayu
-// This is old and terrible
+/obj/item/storage/xenobag
+	name = "xenobiology satchel"
+	desc = "This bag can be used to store all kinds of metroid extracts. As a nice bonus, monkey cubes also fit!"
+	icon = 'icons/obj/objects.dmi'
+	icon_state = "xenobag"
+	slot_flags = SLOT_BELT
+	max_storage_space = 100
+	can_hold = list(/obj/item/metroid_extract, /obj/item/reagent_containers/food/monkeycube)
+	allow_quick_gather = 1
+	allow_quick_empty = 1
+	use_to_pickup = 1
 
 /obj/item/storage/sheetsnatcher
 	name = "sheet snatcher"
@@ -58,11 +46,11 @@
 
 	storage_ui = /datum/storage_ui/default/sheetsnatcher
 
-	var/capacity = 300; //the number of sheets it can carry.
+	var/capacity = 300
 	w_class = ITEM_SIZE_NORMAL
 	storage_slots = 7
 
-	allow_quick_empty = 1 // this function is superceded
+	allow_quick_empty = 1
 	use_to_pickup = 1
 
 /obj/item/storage/sheetsnatcher/can_be_inserted(obj/item/W, mob/user, stop_messages = 0)
@@ -73,14 +61,12 @@
 	var/current = 0
 	for(var/obj/item/stack/material/S in contents)
 		current += S.amount
-	if(capacity == current)//If it's full, you're done
+	if(capacity == current)
 		if(!stop_messages)
 			to_chat(user, "<span class='warning'>The snatcher is full.</span>")
 		return 0
 	return 1
 
-
-// Modified handle_item_insertion.  Would prefer not to, but...
 /obj/item/storage/sheetsnatcher/handle_item_insertion(obj/item/W, prevent_warning = 0)
 	var/obj/item/stack/material/S = W
 	if(!istype(S))
@@ -91,7 +77,7 @@
 	var/current = 0
 	for(var/obj/item/stack/material/S2 in contents)
 		current += S2.amount
-	if(capacity < current + S.amount)//If the stack will fill it up
+	if(capacity < current + S.amount)
 		amount = capacity - current
 	else
 		amount = S.amount
@@ -110,13 +96,12 @@
 			usr.drop(S, src)
 		else
 			S.forceMove(src)
-		usr.update_icons()	//update our overlays
+		usr.update_icons()
 
 	prepare_ui(usr)
 	update_icon()
 	return 1
 
-// Modified quick_empty verb drops appropriate sized stacks
 /obj/item/storage/sheetsnatcher/quick_empty()
 	var/location = get_turf(src)
 	for(var/obj/item/stack/material/S in contents)
@@ -132,7 +117,6 @@
 		usr.s_active.show_to(usr)
 	update_icon()
 
-// Instead of removing
 /obj/item/storage/sheetsnatcher/remove_from_storage(obj/item/W as obj, atom/new_location)
 	var/obj/item/stack/material/S = W
 	if(!istype(S))
@@ -150,18 +134,12 @@
 
 	return ..(S,new_location)
 
-// -----------------------------
-//    Sheet Snatcher (Cyborg)
-// -----------------------------
-
 /obj/item/storage/sheetsnatcher/borg
 	name = "sheet snatcher 9000"
 	desc = ""
-	capacity = 500//Borgs get more because >specialization
+	capacity = 500 //Borgs get more because >specialization
 
-// -----------------------------
-//    Music Tape Boxes
-// -----------------------------
+
 /obj/item/music_tape_box
 	name = "Music Tape box"
 	desc = "You should not see that."
