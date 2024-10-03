@@ -1,5 +1,5 @@
 /obj/machinery/power/am_engine
-	icon = 'icons/am_engine.dmi'
+	icon = 'icons/obj/machines/am_engine.dmi'
 	density = 1
 	anchored = 1.0
 	atom_flags = ATOM_FLAG_CHECKS_BORDER

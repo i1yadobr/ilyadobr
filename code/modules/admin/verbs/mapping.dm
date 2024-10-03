@@ -22,8 +22,9 @@
 var/camera_range_display_status = 0
 var/intercom_range_display_status = 0
 
+// TODO(rufus): test if this is still usable and needed, the code is quite old
 /obj/effect/debugging/camera_range
-	icon = 'icons/480x480.dmi'
+	icon = 'icons/testing/mapping_debug.dmi'
 	icon_state = "25percent"
 
 	New()

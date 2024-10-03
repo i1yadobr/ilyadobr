@@ -221,12 +221,6 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 		A.send(C)
 
 //DEFINITIONS FOR ASSET DATUMS START HERE.
-/datum/asset/directories/pda
-	isTrivial =  TRUE
-	dirs = list(
-		"icons/pda_icons/",
-	)
-
 /datum/asset/simple/fontawesome
 	isTrivial = TRUE
 	verify = FALSE

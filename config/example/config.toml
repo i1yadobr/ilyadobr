@@ -10,7 +10,7 @@ server_id = "zeroonyx"
 per_map_lobbyscreen = true
 
 ## List of paths to artworks to be used in the pre-game lobby.
-lobbyscreens = ["icons/splashes/onyx_old.png", "icons/splashes/onyx_new.png"]
+lobbyscreens = ["icons/misc/lobby_splashes/onyx_old.png", "icons/misc/lobby_splashes/onyx_new.png"]
 
 ## Server player limit, 0 to disable, excess players are redirected to the configured panic server or disconnected
 player_limit = 0

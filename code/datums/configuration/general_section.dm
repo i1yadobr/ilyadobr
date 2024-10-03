@@ -5,7 +5,7 @@
 	var/subserver_name = null
 	var/server_id = null
 	var/per_map_lobbyscreen = TRUE
-	var/list/lobbyscreens = list("icons/splashes/onyx_old.png", "icons/splashes/onyx_new.png")
+	var/list/lobbyscreens = list("icons/misc/lobby_splashes/onyx_old.png", "icons/misc/lobby_splashes/onyx_new.png")
 	var/player_limit = 0
 	var/hard_player_limit = 0
 	var/ticklag = 0.625

@@ -4,7 +4,7 @@
 	full_name = "NSS Frontier"
 	path = "frontier"
 
-	lobby_icon = "icons/splashes/eos_frontier.png"
+	lobby_icon = "icons/misc/lobby_splashes/eos_frontier.png"
 
 	shuttle_types = list(
 		/datum/shuttle/autodock/ferry/escape_pod/escape_pod3,
