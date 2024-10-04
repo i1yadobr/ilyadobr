@@ -38,6 +38,10 @@ var/list/mining_floors = list()
 
 	has_resources = 1
 
+/turf/simulated/mineral/air
+	initial_gas = list("oxygen" = MOLES_O2STANDARD, "nitrogen" = MOLES_N2STANDARD)
+	mined_turf = /turf/simulated/floor/asteroid/air
+
 /turf/simulated/mineral/Initialize()
 	. = ..()
 	if (!mining_walls["[src.z]"])
@@ -441,6 +445,14 @@ var/list/mining_floors = list()
 	var/overlay_detail
 	has_resources = 1
 	footstep_sound = SFX_FOOTSTEP_ASTEROID
+
+/turf/simulated/floor/asteroid/air
+	initial_gas = list("oxygen" = MOLES_O2STANDARD, "nitrogen" = MOLES_N2STANDARD)
+
+// Increased temperature for xeno species and CO2 to make the experience less pleasant, requiring gas mask or oxygen tanks
+/turf/simulated/floor/asteroid/air/prison
+	initial_gas = list("oxygen" = 1.15 * MOLES_O2STANDARD, "nitrogen" = 1.15 * MOLES_N2STANDARD, "carbon_dioxide" = MOLES_CELLSTANDARD * 0.1)
+	temperature = 30 CELSIUS
 
 /turf/simulated/floor/asteroid/Initialize()
 	. = ..()
