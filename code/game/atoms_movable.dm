@@ -111,6 +111,7 @@
 
 	return 1
 
+// TODO(rufus): target_zone is not used, check why that is and if it can be put to use optionally
 //called when src is thrown into hit_atom
 /atom/movable/proc/throw_impact(atom/hit_atom, speed, target_zone)
 	if(isliving(hit_atom))

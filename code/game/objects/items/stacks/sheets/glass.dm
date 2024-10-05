@@ -18,6 +18,7 @@
 	var/is_reinforced = 0
 	var/list/construction_options = list("One Direction", "Full Window")
 	default_type = "glass"
+	description_info = "Use this in your hand to build a window. Can be upgraded to reinforced glass by adding metal rods, which are made from metal sheets."
 
 /obj/item/stack/material/glass/attack_self(mob/user as mob)
 	construct_window(user)
@@ -133,6 +134,7 @@
 	created_window = /obj/structure/window/reinforced
 	is_reinforced = 1
 	construction_options = list("One Direction", "Full Window", "Windoor")
+	description_info = "Use this in your hand to build a window.  Reinforced glass is much stronger against damage."
 
 /*
  * Plasma Glass sheets

@@ -1,8 +1,3 @@
-// Areas.dm
-
-
-
-// ===
 /area
 	var/global/global_uid = 0
 	var/uid

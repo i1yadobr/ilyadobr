@@ -16,6 +16,7 @@
 	center_of_mass = null
 	attack_verb = list("hit", "bludgeoned", "whacked")
 	lock_picking_level = 3
+	description_info = "Made from metal sheets. You can build a window frame by using it in your hand, or a lattice by clicking on an empty space. Clicking on a floor without tiles or lattice will create a catwalk. You can make reinforced glass by combining rods and normal glass sheets."
 
 /obj/item/stack/rods/ten
 	amount = 10

@@ -8,6 +8,7 @@
 	center_of_mass = null
 	randpixel = 3
 	storage_cost_mult = 1.25
+	description_info = "Use a tool on this or use it in your hand to bring up the recipe menu, most times welder or screwdriver will work. If you have enough sheets, click on something in the list to construct it."
 
 	var/default_type = MATERIAL_STEEL
 	var/material/material
