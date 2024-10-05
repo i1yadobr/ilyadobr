@@ -140,7 +140,7 @@
 	return 1
 
 //Diamond Drill
-/obj/item/mecha_parts/mecha_equipment/tool/drill/diamonddrill
+/obj/item/mecha_parts/mecha_equipment/tool/drill/diamond
 	name = "diamond drill"
 	desc = "This is an upgraded version of the drill that'll pierce the heavens! (Can be attached to: Combat and Engineering Exosuits)"
 	icon_state = "mecha_diamond_drill"

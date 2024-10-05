@@ -48,7 +48,7 @@
 	new /datum/data/mining_equipment("Emergency Floodlight",               /obj/item/floodlight_diy,                                          -1,   150),
 	new /datum/data/mining_equipment("Premium Cigar",                      /obj/item/clothing/mask/smokable/cigarette/cigar/havana,           30,   150),
 	new /datum/data/mining_equipment("Lottery Chip",                       /obj/item/spacecash/ewallet/lotto,                                 50,   200),
-	new /datum/data/mining_equipment("Mining Drill",                       /obj/item/pickaxe,                                                 10,   200),
+	new /datum/data/mining_equipment("Mining Drill",                       /obj/item/pickaxe/drill,                                                 10,   200),
 	new /datum/data/mining_equipment("Deep Ore Scanner",                   /obj/item/mining_scanner,                                          10,   250),
 	new /datum/data/mining_equipment("Autochisel",                         /obj/item/autochisel,                                              10,   400),
 	new /datum/data/mining_equipment("The advanced power cell",            /obj/item/cell/high,		                                           3,   450),

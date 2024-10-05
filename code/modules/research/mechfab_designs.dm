@@ -740,7 +740,7 @@
 	id = "mech_diamond_drill"
 	req_tech = list(TECH_MATERIAL = 4, TECH_ENGINEERING = 3)
 	materials = list(MATERIAL_STEEL = 10000, MATERIAL_DIAMOND = 6500)
-	build_path = /obj/item/mecha_parts/mecha_equipment/tool/drill/diamonddrill
+	build_path = /obj/item/mecha_parts/mecha_equipment/tool/drill/diamond
 
 /datum/design/item/mecha/generator_nuclear
 	name = "Nuclear reactor"

@@ -1,38 +1,8 @@
-/**********************Miner Lockers**************************/
-
-/obj/structure/closet/secure_closet/miner
-	name = "shaft miner locker"
-	icon_state = "miningsec1"
-	icon_closed = "miningsec"
-	icon_locked = "miningsec1"
-	icon_opened = "miningsecopen"
-	icon_broken = "miningsecbroken"
-	icon_off = "miningsecoff"
-	req_access = list(access_mining)
-
-/obj/structure/closet/secure_closet/miner/New()
-	..()
-	sleep(2)
-	if(prob(50))
-		new /obj/item/storage/backpack/industrial(src)
-	else
-		new /obj/item/storage/backpack/satchel/eng(src)
-	new /obj/item/device/radio/headset/headset_cargo(src)
-	new /obj/item/clothing/under/rank/miner(src)
-	new /obj/item/clothing/gloves/thick(src)
-	new /obj/item/clothing/shoes/black(src)
-	new /obj/item/device/analyzer(src)
-	new /obj/item/storage/ore(src)
-	new /obj/item/device/flashlight/lantern(src)
-	new /obj/item/shovel(src)
-	new /obj/item/pickaxe(src)
-	new /obj/item/clothing/glasses/hud/standard/meson(src)
-
-/*****************************Pickaxe********************************/
-
+// TODO(rufus): split to files, maybe in a subfolder
+//   700 lines of loosely connected items code is no way to live
 /obj/item/pickaxe
-	name = "mining drill"
-	desc = "The most basic of mining drills, for short excavations and small mineral extractions."
+	name = "pickaxe"
+	desc = "Pure classics."
 	icon = 'icons/obj/tools.dmi'
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
@@ -42,36 +12,56 @@
 	mod_reach = 1.25
 	mod_handy = 0.9
 	icon_state = "pickaxe"
-	item_state = "jackhammer"
+	item_state = "pickaxe"
 	w_class = ITEM_SIZE_HUGE
 	matter = list(MATERIAL_STEEL = 3750)
-	var/digspeed = 40 //moving the delay to an item var so R&D can make improved picks. --NEO
 	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINEERING = 1)
 	attack_verb = list("hit", "pierced", "sliced", "attacked")
-	var/drill_sound = 'sound/effects/fighting/Genhit.ogg'
-	var/drill_verb = "drilling"
 	sharp = 1
 
-	var/excavation_amount = 200
+	// a relative power of this mining tool, default rock/mineral has
+	// 100 durability, so it'll take 10 regular pickaxe hits to fully break it
+	var/mining_power = 10
+	// TODO(rufus): rename the variables below together with the separation of drills into their own subtype
+	var/drilling = FALSE
+	// TODO(rufus): improve sound for the basic pickaxe and make cooler sounds for improved picks
+	//   and optionally consider separate sounds for drills, although this is a bit trickier to get right
+	var/drill_sound = 'sound/effects/fighting/Genhit.ogg'
+	var/drill_verb = "picking"
+
+// TODO(rufus): separate drills into their own subtype, e.g. /obj/item/drill
+//   or /obj/item/mining_drill in case you're afraid of name collisions.
+//   Drills and pickaxes do share some traits, but in their core are different items with different logic.
+//   And checks for them happen separately anways, with some exceptions.
+//   Anyways, even if it produces a bit more code, please separate picks and drills into their own item trees.
+/obj/item/pickaxe/drill
+	name = "mining drill"
+	icon_state = "handdrill"
+	desc = "The most basic of mining drills, for short excavations and small mineral extractions."
+	mining_power = 100
+	drill_verb = "drilling"
+	var/dig_delay = 40 // deciseconds
 
 /obj/item/pickaxe/silver
 	name = "silver pickaxe"
 	icon_state = "spickaxe"
 	item_state = "spickaxe"
-	digspeed = 30
+	mining_power = 30
 	origin_tech = list(TECH_MATERIAL = 3)
 	desc = "This makes no metallurgic sense."
 
-/obj/item/pickaxe/drill
-	name = "advanced mining drill" // Can dig sand as well!
-	icon_state = "handdrill"
+/obj/item/pickaxe/drill/adv
+	name = "advanced mining drill"
+	icon_state = "advdrill"
 	item_state = "jackhammer"
 	force = 15.5
-	digspeed = 30
+	dig_delay = 30
 	origin_tech = list(TECH_MATERIAL = 2, TECH_POWER = 3, TECH_ENGINEERING = 2)
 	desc = "Yours is the drill that will pierce through the rock walls."
 	drill_verb = "drilling"
 
+// TODO(rufus): lost all it's charm and is just another pickaxe now
+//   research what it initially was and how to make it shine again
 /obj/item/pickaxe/jackhammer
 	name = "sonic jackhammer"
 	icon_state = "jackhammer"
@@ -80,45 +70,47 @@
 	mod_weight = 1.5
 	mod_reach = 1.35
 	mod_handy = 0.9
-	digspeed = 20 //faster than drill, but cannot dig
+	mining_power = 50
 	origin_tech = list(TECH_MATERIAL = 3, TECH_POWER = 2, TECH_ENGINEERING = 2)
-	desc = "Cracks rocks with sonic blasts, perfect for killing cave lizards."
+	desc = "Cracks rocks with sonic blasts."
 	drill_verb = "hammering"
 
 /obj/item/pickaxe/gold
 	name = "golden pickaxe"
 	icon_state = "gpickaxe"
 	item_state = "gpickaxe"
-	digspeed = 20
+	mining_power = 50
 	origin_tech = list(TECH_MATERIAL = 4)
-	desc = "This makes no metallurgic sense."
-	drill_verb = "picking"
+	desc = "This makes no metallurgic sense, expensive edition."
 
+// TODO(rufus): give all the tools in this file a better description,
+//   I mean what is this? A fact checking lesson? We get that it's a diamond pickaxe,
+//   why the heck would you just reiterate this in the description?
+//   This game is meant to be fun, not depressingly boring and obvious.
 /obj/item/pickaxe/diamond
 	name = "diamond pickaxe"
 	icon_state = "dpickaxe"
 	item_state = "dpickaxe"
 	force = 19.0
-	digspeed = 10
+	mining_power = 80
 	origin_tech = list(TECH_MATERIAL = 6, TECH_ENGINEERING = 4)
 	desc = "A pickaxe with a diamond pick head."
-	drill_verb = "picking"
 
-/obj/item/pickaxe/diamonddrill //When people ask about the badass leader of the mining tools, they are talking about ME!
+/obj/item/pickaxe/drill/diamond
 	name = "diamond mining drill"
 	icon_state = "diamonddrill"
 	item_state = "jackhammer"
 	force = 19.0
-	digspeed = 5 //Digs through walls, girders, and can dig up sand
+	dig_delay = 5
 	origin_tech = list(TECH_MATERIAL = 6, TECH_POWER = 4, TECH_ENGINEERING = 5)
 	desc = "Yours is the drill that will pierce the heavens!"
 	drill_verb = "drilling"
 
-/obj/item/pickaxe/borgdrill
+/obj/item/pickaxe/drill/cyborg
 	name = "cyborg mining drill"
-	icon_state = "pickaxe"
+	icon_state = "advdrill"
 	item_state = "jackhammer"
-	digspeed = 10
+	dig_delay = 20
 	desc = ""
 	drill_verb = "drilling"
 
@@ -136,7 +128,7 @@
 	mod_reach = 1.0
 	mod_handy = 0.4
 	drill_verb = "hammering"
-	digspeed = 20
+	mining_power = 50
 	var/wielded = 0
 
 /obj/item/pickaxe/sledgehammer/update_twohanding()
@@ -161,7 +153,6 @@
 	item_state_slots[slot_l_hand_str] = new_state
 	item_state_slots[slot_r_hand_str] = new_state
 
-/*****************************Shovel********************************/
 
 /obj/item/shovel
 	name = "shovel"
@@ -195,7 +186,6 @@
 	mod_handy = 0.9
 	w_class = ITEM_SIZE_SMALL
 
-/**********************Flags**************************/
 
 /obj/item/stack/flag
 	name = "flags"
@@ -292,19 +282,16 @@
 	overlays.Cut()
 	set_light(0)
 
-/**********************Mining car (Crate like thing, not the rail car)**************************/
 
 /obj/structure/closet/crate/miningcar
-	desc = "A mining car. This one doesn't work on rails, but has to be dragged."
-	name = "Mining car (not for rails)"
+	name = "Mining car"
+	desc = "Basically a crate on wheels. Unfortunately this doesn't work on rails, but is much easier to push around. Honestly, what a waste of potential. You should... no, you MUST file a complaint to your management and organize a union about the lack of rails."
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "miningcar"
-	density = 1
 	icon_opened = "miningcaropen"
 	icon_closed = "miningcar"
 	pull_slowdown = PULL_SLOWDOWN_LIGHT
 
-/**********************Pinpointer**********************/
 
 /obj/item/ore_radar
 	name = "scanner pad"
@@ -319,7 +306,6 @@
 	matter = list(MATERIAL_STEEL = 500)
 	var/turf/simulated/mineral/random/sonar = null
 	var/active = 0
-
 
 /obj/item/ore_radar/attack_self(mob/user)
 	if(!active)
@@ -370,7 +356,6 @@
 		if(16 to INFINITY)
 			icon_state = "pinonfar"
 
-/**********************Lazarus Injector**********************/
 
 /obj/item/lazarus_injector
 	name = "lazarus injector"
@@ -437,8 +422,9 @@
 	if(malfunctioning || emagged)
 		. += "\n<span class='info'>The display on [src] seems to be flickering.</span>"
 
-/**********************Point Transfer Card**********************/
-
+// TODO(rufus): with the removal of access check on points redemption this is obsolete.
+//   Review if there is any use for it and delete if it's really time for these to go.
+//   Honestly, I've never seen one in use over the past three years.
 /obj/item/card/mining_point_card
 	name = "mining points card"
 	desc = "A small card preloaded with mining points. Swipe your ID card over it to transfer the points, then discard."
@@ -460,7 +446,6 @@
 	. = ..()
 	. += "\nThere's [points] point\s on the card."
 
-/**********************Resonator**********************/
 
 /obj/item/resonator
 	name = "resonator"
@@ -559,7 +544,6 @@
 	qdel(src)
 
 
-/******************************Ore Magnet*******************************/
 /obj/item/oremagnet
 	name = "ore magnet"
 	icon = 'icons/obj/mining.dmi'
@@ -600,7 +584,6 @@
 		on = 0
 		to_chat(user, "You turn it off.")
 
-/******************************Ore Summoner*******************************/
 
 /obj/item/oreportal
 	name = "ore summoner"
@@ -624,7 +607,7 @@
 		limit -= 1
 		CHECK_TICK
 
-/******************************Sculpting*******************************/
+
 /obj/item/autochisel
 	name = "auto-chisel"
 	icon = 'icons/obj/mining.dmi'

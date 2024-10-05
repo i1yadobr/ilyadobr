@@ -1,3 +1,5 @@
+// TODO(rufus): unify /obj/structure/boulder, /obj/structure/rock, and /obj/strucutre/rubble,
+//   they are just reskins of the same thing
 /obj/structure/boulder
 	name = "rocky debris"
 	desc = "Leftover rock from an excavation, it's been partially dug out already but there's still a lot to go."
@@ -9,7 +11,6 @@
 	var/excavation_level = 0
 	var/datum/geosample/geological_data
 	var/datum/artifact_find/artifact_find
-	var/last_act = 0
 
 /obj/structure/boulder/New()
 	..()
@@ -43,40 +44,67 @@
 			to_chat(user, "<span class='notice'>\The [src] has been excavated to a depth of [src.excavation_level]cm.</span>")
 		return
 
+	if(istype(I, /obj/item/pickaxe/drill))
+		if(!user.canClick())
+			return
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+		var/obj/item/pickaxe/drill/D = I
+		to_chat(user, "<span class='warning'>You start [D.drill_verb] [src].</span>")
+		if(!do_after(user, D.dig_delay))
+			return
+		to_chat(user, "<span class='notice'>You finish [D.drill_verb] [src].</span>")
+		qdel(src)
+		return
+
+		// TODO(rufus): how does this even make sense with the drill update?
+		//   Historically you would carefully uncover the artifact and then, quoting an old contributor
+		//   from mine_turfs.dm, "pick hits that edge just right, you extract your find perfectly".
+		//   And now what? You carefully drill the item out with an industrial drill? Nuh-uh. Needs to be fixed.
+		//   Yes, even if this breaks xenoarchology from digging up artifacts from boulders, still commenting this out for now.
+
+		// excavation_level += D.excavation_amount
+
+		// if(excavation_level > 200)
+		// 	//failure
+		// 	user.visible_message("<span class='warning'>\The [src] suddenly crumbles away.</span>", "<span class='warning'>\The [src] has disintegrated under your onslaught, any secrets it was holding are long gone.</span>")
+		// 	qdel(src)
+		// 	return
+
+		// if(prob(excavation_level))
+		// 	//success
+		// 	if(artifact_find)
+		// 		var/spawn_type = artifact_find.artifact_find_type
+		// 		var/obj/O = new spawn_type(get_turf(src))
+		// 		if(istype(O, /obj/machinery/artifact))
+		// 			var/obj/machinery/artifact/X = O
+		// 			if(X.main_effect)
+		// 				X.main_effect.artifact_id = artifact_find.artifact_id
+		// 		src.visible_message("<span class='warning'>\The [src] suddenly crumbles away.</span>")
+		// 	else
+		// 		user.visible_message("<span class='warning'>\The [src] suddenly crumbles away.</span>", "<span class='notice'>\The [src] has been whittled away under your careful excavation, but there was nothing of interest inside.</span>")
+
 	if(istype(I, /obj/item/pickaxe))
+		// TODO(rufus): research and apply a proper way to apply cooldown for both drills and pickaxes
+		//   on /obj/structure/boulder, /obj/structure/rock, and /obj/strucutre/rubble
+		if(!user.canClick())
+			return
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		var/obj/item/pickaxe/P = I
-
-		if(last_act + P.digspeed > world.time)//prevents message spam
+		if(!P.mining_power)
+			to_chat(user, "While you're using a pickaxe-like thing, there's no way this flimsy tool will be able to strike through \a [src.name]")
 			return
-		last_act = world.time
-
-		to_chat(user, "<span class='warning'>You start [P.drill_verb] [src].</span>")
-
-		if(!do_after(user, P.digspeed))
-			return
-
-		to_chat(user, "<span class='notice'>You finish [P.drill_verb] [src].</span>")
-		excavation_level += P.excavation_amount
-
-		if(excavation_level > 200)
-			//failure
-			user.visible_message("<span class='warning'>\The [src] suddenly crumbles away.</span>", "<span class='warning'>\The [src] has disintegrated under your onslaught, any secrets it was holding are long gone.</span>")
+		playsound(user, P.drill_sound, 20, 1)
+		// basic pickaxe is 10 and silver is 30, gold at 50 and diamond at 80 bypass the check
+		if(P.mining_power <= 30)
+			if(prob(100-P.mining_power)) // basic pickaxes *should* be annoying to use, this makes 70-90% chance to fail
+				to_chat(user, "Despite your skill, \the [src] proves to be a formidable challenge for your basic [I.name], refusing to break.")
+				return
+			to_chat(user, "With some struggle on impact, you manage to hit \the [src] at the right spot and clear it out of the way.")
 			qdel(src)
 			return
-
-		if(prob(excavation_level))
-			//success
-			if(artifact_find)
-				var/spawn_type = artifact_find.artifact_find_type
-				var/obj/O = new spawn_type(get_turf(src))
-				if(istype(O, /obj/machinery/artifact))
-					var/obj/machinery/artifact/X = O
-					if(X.main_effect)
-						X.main_effect.artifact_id = artifact_find.artifact_id
-				src.visible_message("<span class='warning'>\The [src] suddenly crumbles away.</span>")
-			else
-				user.visible_message("<span class='warning'>\The [src] suddenly crumbles away.</span>", "<span class='notice'>\The [src] has been whittled away under your careful excavation, but there was nothing of interest inside.</span>")
-			qdel(src)
+		to_chat(user, "With a decisive strike, you demolish \the [src] into tiny pieces as if it's nothing.")
+		qdel(src)
+		return
 
 /obj/structure/boulder/Bumped(AM)
 	. = ..()

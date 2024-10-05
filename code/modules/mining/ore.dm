@@ -2,7 +2,7 @@
 	name = "small rock"
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "ore2"
-	randpixel = 8
+	randpixel = 10
 	w_class = ITEM_SIZE_SMALL
 	var/datum/geosample/geologic_data
 	var/ore/ore = null // set to a type to find the right instance on init
@@ -94,6 +94,8 @@
 		C.sample_item(src, user)
 		return
 	if(istype(W, /obj/item/pickaxe))
+		// TODO(rufus): test if the messages below need to stay as SPAN_NOTICE,
+		//   basically figure out if they work with chat filters properly or not
 		var/datum/gender/G = gender_datums[user.get_visible_gender()]
 		if(istype(src, /obj/item/ore/glass)) // "glass" ore is sand, duh
 			user.visible_message(

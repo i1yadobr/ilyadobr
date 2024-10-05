@@ -1286,6 +1286,7 @@
 #include "code\game\objects\structures\crates_lockers\closets\secure\guncabinet.dm"
 #include "code\game\objects\structures\crates_lockers\closets\secure\hydroponics.dm"
 #include "code\game\objects\structures\crates_lockers\closets\secure\medical.dm"
+#include "code\game\objects\structures\crates_lockers\closets\secure\mining.dm"
 #include "code\game\objects\structures\crates_lockers\closets\secure\nuke.dm"
 #include "code\game\objects\structures\crates_lockers\closets\secure\personal.dm"
 #include "code\game\objects\structures\crates_lockers\closets\secure\scientist.dm"

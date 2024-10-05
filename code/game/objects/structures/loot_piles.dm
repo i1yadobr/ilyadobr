@@ -384,7 +384,7 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 		/obj/item/borg/upgrade/vtec,
 		/obj/item/borg/upgrade/tasercooler,
 		/obj/item/mecha_parts/mecha_equipment/weapon/energy/riggedlaser,
-		/obj/item/mecha_parts/mecha_equipment/tool/drill/diamonddrill,
+		/obj/item/mecha_parts/mecha_equipment/tool/drill/diamond,
 		/obj/item/rig_module/device/drill,
 		/obj/item/rig_module/device/healthscanner,
 		/obj/item/rig_module/device/orescanner,
@@ -477,7 +477,7 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 
 	uncommon_loot = list(
 		/obj/item/mecha_parts/mecha_equipment/tool/hydraulic_clamp,
-		/obj/item/mecha_parts/mecha_equipment/tool/drill/diamonddrill,
+		/obj/item/mecha_parts/mecha_equipment/tool/drill/diamond,
 		/obj/item/mecha_parts/mecha_equipment/tool/extinguisher,
 		)
 

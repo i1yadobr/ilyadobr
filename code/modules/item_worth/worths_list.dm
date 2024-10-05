@@ -133,6 +133,7 @@ var/list/worths = list(
 					/obj/item/pickaxe/gold = 500,
 					/obj/item/gun/energy/plasmacutter = 1000,
 					/obj/item/pickaxe/diamond = 800,
+					/obj/item/pickaxe/drill/diamond = 900,
 					/obj/item/pickaxe = 200,
 					/obj/item/shovel/spade = 20,
 //COMPUTER HARDWARE

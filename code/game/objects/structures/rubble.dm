@@ -61,15 +61,37 @@
 		to_chat(user, "<span class='warning'>Someone is already rummaging here!</span>")
 
 /obj/structure/rubble/attackby(obj/item/I, mob/user)
-	if (istype(I, /obj/item/pickaxe))
-		var/obj/item/pickaxe/P = I
+	if(istype(I, /obj/item/pickaxe/drill))
+		var/obj/item/pickaxe/drill/D = I
 		visible_message("[user] starts clearing away \the [src].")
-		if(do_after(user,P.digspeed, src))
+		if(do_after(user, D.dig_delay, src))
 			visible_message("[user] clears away \the [src].")
 			if(lootleft && prob(1))
 				var/obj/item/booty = pick(loot)
 				booty = new booty(loc)
 			qdel(src)
+		return
+	if(istype(I, /obj/item/pickaxe))
+		if(!user.canClick())
+			return
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+		var/obj/item/pickaxe/P = I
+		playsound(user, P.drill_sound, 20, 1)
+		// basic pickaxe is 10 and silver is 30, gold at 50 and diamond at 80 bypass the check
+		if(P.mining_power <= 30)
+			if(prob(100-P.mining_power)) // basic pickaxes *should* be annoying to use, this makes 70-90% chance to fail
+				to_chat(user, "Despite your skill, \the [src] proves to be a formidable challenge for your basic [I.name], refusing to break.")
+				return
+			to_chat(user, "With some struggle on impact, you manage to hit \the [src] at the right spot and clear it out of the way.")
+			qdel(src)
+			return
+		to_chat(user, "With a decisive strike, you demolish \the [src] into tiny pieces as if it's nothing.")
+		if(lootleft && prob(1))
+			to_chat(user, "And notice that something odd withstood your strike...")
+			var/obj/item/booty = pick(loot)
+			booty = new booty(loc)
+		qdel(src)
+		return
 	else
 		..()
 		health -= I.force

@@ -8,7 +8,6 @@
 	anchored = 1
 	var/list/iconlist = list("asteroid_bigstone1","asteroid_bigstone2","asteroid_bigstone3","asteroid_bigstone4")
 	var/health = 40
-	var/last_act = 0
 
 /obj/structure/rock/New()
 	..()
@@ -25,25 +24,39 @@
 	return ..()
 
 /obj/structure/rock/attackby(obj/item/I, mob/user)
-	if (isMonkey(user))
+	if(isMonkey(user))
 		to_chat(user, "<span class='warning'>You don't have the dexterity to do this!</span>")
 		return
-	if (istype(I, /obj/item/pickaxe))
+	if(istype(I, /obj/item/pickaxe/drill))
+		if(!user.canClick())
+			return
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		if(!istype(user.loc, /turf))
 			return
-
-		var/obj/item/pickaxe/P = I
-		if(last_act + P.digspeed > world.time)//prevents message spam
-			return
-		last_act = world.time
-
-		playsound(user, P.drill_sound, 20, 1)
-
-		to_chat(user, "<span class='notice'>You start [P.drill_verb].</span>")
-
-		if(do_after(user,P.digspeed - P.digspeed/4, src))
-			to_chat(user, "<span class='notice'>You finish [P.drill_verb] \the [src].</span>")
+		var/obj/item/pickaxe/drill/D = I
+		playsound(user, D.drill_sound, 20, 1)
+		to_chat(user, "<span class='notice'>You start [D.drill_verb].</span>")
+		if(do_after(user, D.dig_delay, src))
+			to_chat(user, "<span class='notice'>You finish [D.drill_verb] \the [src].</span>")
 			qdel(src)
+		return
+	if(istype(I, /obj/item/pickaxe))
+		if(!user.canClick())
+			return
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+		var/obj/item/pickaxe/P = I
+		playsound(user, P.drill_sound, 20, 1)
+		// basic pickaxe is 10 and silver is 30, gold at 50 and diamond at 80 bypass the check
+		if(P.mining_power <= 30)
+			if(prob(100-P.mining_power)) // basic pickaxes *should* be annoying to use, this makes 70-90% chance to fail
+				to_chat(user, "Despite your skill, \the [src] proves to be a formidable challenge for your basic [I.name], refusing to break.")
+				return
+			to_chat(user, "With some struggle on impact, you manage to crack \the [src] and clear it out of the way.")
+			qdel(src)
+			return
+		to_chat(user, "With a decisive strike, you demolish \the [src] into tiny pieces as if it's nothing.")
+		qdel(src)
+		return
 	return ..()
 
 /obj/structure/rock/Bumped(AM)

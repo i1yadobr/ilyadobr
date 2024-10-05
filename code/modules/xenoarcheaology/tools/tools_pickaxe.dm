@@ -1,5 +1,5 @@
 /obj/item/pickaxe/archaeologist
-	name = "brush"
+	name = "invalid_item (archologist pickaxe base path)"
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "pick_hand"
 	item_state = "syringe_0"
@@ -8,10 +8,11 @@
 	mod_weight = 0.9
 	mod_reach = 1
 	mod_handy = 1.2
-	digspeed = 20
 	w_class = ITEM_SIZE_SMALL
 	drill_sound = 'sound/items/Screwdriver.ogg'
 	drill_verb = "delicately picking"
+	mining_power = 0
+	var/excavation_amount = 0
 
 /obj/item/pickaxe/archaeologist/brush
 	name = "brush"
@@ -62,7 +63,6 @@
 	name = "hand pickaxe"
 	icon_state = "pick_hand"
 	item_state = "syringe_0"
-	digspeed = 30
 	desc = "A smaller, more precise version of the pickaxe (30 centimetre excavation depth)."
 	excavation_amount = 30
 	drill_sound = 'sound/items/Crowbar.ogg'
@@ -106,15 +106,15 @@
 	sort_picks()
 
 /obj/item/storage/excavation/proc/sort_picks()
-	var/list/obj/item/pickaxe/picksToSort = list()
-	for(var/obj/item/pickaxe/P in src)
+	var/list/obj/item/pickaxe/archaeologist/picksToSort = list()
+	for(var/obj/item/pickaxe/archaeologist/P in src)
 		picksToSort += P
 		P.loc = null
 	while(picksToSort.len)
 		var/min = 200 // No pick is bigger than 200
 		var/selected = 0
 		for(var/i = 1 to picksToSort.len)
-			var/obj/item/pickaxe/current = picksToSort[i]
+			var/obj/item/pickaxe/archaeologist/current = picksToSort[i]
 			if(current.excavation_amount <= min)
 				selected = i
 				min = current.excavation_amount
