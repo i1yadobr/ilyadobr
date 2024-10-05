@@ -18,6 +18,9 @@
 	var/has  = "have"
 	var/is   = "are"
 	var/does = "do"
+	// literal "s" that might be empty or not, e.g. "they look", but "he look[s]"
+	// so the usage is "[gender.he] look[gender.s]"
+	var/s    = ""
 
 /datum/gender/male
 	key  = "male"
@@ -30,6 +33,7 @@
 	has  = "has"
 	is   = "is"
 	does = "does"
+	s    = "s"
 
 /datum/gender/female
 	key  = "female"
@@ -42,6 +46,7 @@
 	has  = "has"
 	is   = "is"
 	does = "does"
+	s    = "s"
 
 /datum/gender/neuter
 	key = "neuter"
@@ -54,3 +59,4 @@
 	has  = "has"
 	is   = "is"
 	does = "does"
+	s    = "s"

@@ -281,6 +281,7 @@
 
 				var/can_make = Clamp(ores_stored[metal],0,sheets_per_tick-sheets)
 
+				// TODO(rufus): separate out into it's own function and merge with other occurances of this code
 				var/material/M = get_material_by_name(O.smelts_to)
 				if(!istype(M) || !can_make || ores_stored[metal] < 1)
 					continue
