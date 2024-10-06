@@ -1,4 +1,4 @@
-
+// TODO(rufus): full refactoring of the adminhelp and tickets system
 // This is a list of words which are ignored by the parser when comparing message contents for names. MUST BE IN LOWER CASE!
 var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","alien","as")
 
@@ -141,7 +141,7 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 	var/admin_number_present = GLOB.admins.len - admin_number_afk
 	log_admin("HELP: [key_name(src)]: [original_msg] - heard by [admin_number_present] non-AFK admins.")
 
-	webhook_send_ahelp(src.key, null, original_msg + " - heard by [admin_number_present] non-AFK admins.")
+	webhook_send_ahelp(src.key, null, "[original_msg][(!GLOB.admins.len) ? " | No admins online!" : ""]")
 
 	feedback_add_details("admin_verb","AH") // If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	return

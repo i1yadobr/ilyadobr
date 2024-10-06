@@ -39,4 +39,32 @@
 				continue
 			to_chat(target, "<span class='ooc dooc'><span class='everyone'>[sent_message]</span></span>", type = MESSAGE_TYPE_DOOC)
 		return json_encode(list("code"="success"))
+
+	else if("ahelp" in input)
+		var/sender_key = input["sender_key"]
+		var/target_key = input["target_key"]
+		var/message = html_encode(input["message"])
+		if(!authorized)
+			return json_encode(list("code"="unauthorized"))
+		if(!sender_key || !message)
+			return json_encode(list("code"="malformed_data"))
+
+		var/client/target_client
+		for(var/client/C in GLOB.clients)
+			if(C.ckey == ckey(target_key))
+				target_client = C
+				break
+		if(!target_client)
+			return json_encode(list("code" = "no_client"))
+		var/player_message = "<font color='red'>Discord PM from <b>[sender_key]</b>: [message]</font>"
+		var/admin_message =  "<span class='info'>Discord PM from [sender_key] to <b>[key_name(target_client)]</b> : [message]</span>"
+
+		sound_to(target_client, sound('sound/effects/adminhelp.ogg'))
+		to_chat(target_client, player_message, type=MESSAGE_TYPE_ADMINPM)
+		for(var/client/A in GLOB.admins)
+			if(A == target_client)
+				continue
+			to_chat(A, admin_message)
+		return json_encode(list("code"="success"))
+
 	return json_encode(list("code"="unknown_topic"))

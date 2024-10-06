@@ -8,7 +8,7 @@
 	webhook_send("emote", list("sender_key" = sender_key, "name" = name, "message" = message))
 
 /proc/webhook_send_ahelp(from_key, to_key, message)
-	webhook_send("ahelp", list("from" = from_key, "to" = to_key, "message" = message))
+	webhook_send("ahelp", list("sender_key" = from_key, "target_key" = to_key, "message" = message))
 
 /proc/webhook_send(type, data)
 	if(!config.external.webhook_address || !config.external.webhook_key)
