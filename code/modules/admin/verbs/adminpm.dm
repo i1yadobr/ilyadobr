@@ -49,7 +49,7 @@
 		to_chat(src, "<span class='warning'>Error: Private-Message: Client not found. They may have lost connection!</span>")
 		return
 
-	var/recieve_pm_type = holder.rank || "Player"
+	var/recieve_pm_type = holder?.rank || "Player"
 
 	msg = sanitize(msg)
 	msg = emoji_parse(C, msg)
