@@ -2842,6 +2842,7 @@
 #include "code\modules\webhook\webhook.dm"
 #include "code\modules\wireless\devices.dm"
 #include "code\modules\wireless\interfaces.dm"
+#include "code\modules\world_topic\world_topic.dm"
 #include "code\modules\xenoarcheaology\anomaly_container.dm"
 #include "code\modules\xenoarcheaology\boulder.dm"
 #include "code\modules\xenoarcheaology\effect.dm"
