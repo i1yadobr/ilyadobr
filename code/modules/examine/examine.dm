@@ -63,7 +63,7 @@
 		if(client.description_holders["info"])
 			stat(null,"<font color='#084b8a'><b>[client.description_holders["info"]]</b></font>") //Blue, informative text.
 		if(client.description_holders["fluff"])
-			stat(null,"<font color='#298a08'><b>[client.description_holders["fluff"]]</b></font>") //Yellow, fluff-related text.
+			stat(null,"<font color='#298a08'><b>[client.description_holders["fluff"]]</b></font>") //Green, fluff-related text.
 		if(client.description_holders["antag"])
 			stat(null,"<font color='#8a0808'><b>[client.description_holders["antag"]]</b></font>") //Red, malicious antag-related text
 
