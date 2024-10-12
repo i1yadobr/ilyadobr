@@ -1,3 +1,10 @@
+// TODO(rufus): with the economy currently not playing a major part in the crew's life, this event can stay
+//   as it is for now. However, gameplay-wise it's just an annoyance that players don't really interact with.
+//   At best an experineced HoP or player with access will suspend the accounts temporarily through a cryptic
+//   financial console at the HoP's office. The usual case though is some people know to increase their account's
+//   security level and the rest doesn't, and then they'd just complain about the withdrawn money because they missed
+//   the event announcement.
+//   This does create *some* interactions, but needs to be imrpoved together with the global economy part of the game.
 /datum/event/money_hacker
 	id = "money_hacker"
 	name = "Money Hacker"
@@ -15,9 +22,6 @@
 /datum/event/money_hacker/check_conditions()
 	. = SSevents.evars["money_hacker_running"] != TRUE
 
-/datum/event/money_hacker/get_conditions_description()
-	. = "<em>Money Hacker</em> should not be <em>running</em>.<br>"
-
 /datum/event/money_hacker/on_fire()
 	if(!length(all_money_accounts))
 		return
@@ -29,6 +33,7 @@
 		without intervention this attack will succeed in approximately 10 minutes. Possible solutions: suspension of accounts, disabling NTnet server, \
 		increase account security level. Notifications will be sent as updates occur.",
 		"[station_name()] Firewall Subroutines",
+		// TODO(rufus): the announcement sound is borked because generated speech literally pronounces "backslash", needs fixing.
 		new_sound = 'sound/AI/moneyhackstart.ogg'
 	)
 

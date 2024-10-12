@@ -1,9 +1,16 @@
+// TODO(rufus): I love the concept of this event solely because it gives prisoners a chance to escape.
+//   However, the event code and implementation itself are ancient. There is not enough time for any engineer to react
+//   and it is annoying as hell to fix the consequences of this event. Especially so if it happens in virology or xenobio,
+//   because in brig it is at least somewhat reasonable to put effort into securing this, but not at the other two options.
+//   This has to undego heavy rethinking and re-implementation while preserving the core value of letting contained
+//   players or creatures escape. This really needs more variety, interactivity, and modernization.
+//   Keeping this enabled at an increased mtth of 4 hours, but new implementation should really be prioritized.
 /datum/event/prison_break_base
 	id = "prison_break_base"
 	name = "Containment Breach"
 	description = "The doors in some areas will be open and the lights will be turned off"
 
-	mtth = 3 HOURS
+	mtth = 4 HOURS
 	difficulty = 55
 
 	options = newlist(

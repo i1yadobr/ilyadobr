@@ -1,3 +1,10 @@
+// TODO(rufus): disabled event (unticked from .dme), not balanced and round-ending.
+//   Blob is an old thing that is basically space vines on steroids. Inherently, it
+//   is also that much more annoying and boring to deal with it.
+//   Unlike space vines, current blob implementation just griefs whole departments and
+//   chunks of the station not giving crew a fair chance at retaliation.
+//   Until this is addressed, blob should stay disabled.
+//   *Especially* as a 3 hour mtth random event. Nope.
 /datum/event/biohazard_outbreak
 	id = "biohazard_outbreak"
 	name = "Biohazard Outbreak"

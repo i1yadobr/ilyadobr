@@ -1,3 +1,7 @@
+// TODO(rufus): review if this actually works and add some interactivity
+//   like a medbay/AI notification, some way to detect and prevent, maybe
+//   some upgrade to the sensors equipment/consoles, maybe even a dedicated
+//   machine that is responsible for suit sensors tracking!
 /datum/event/sensor_suit_jamming_base
 	id = "sensor_suit_jamming_base"
 	name = "Sensor Suit Jamming"

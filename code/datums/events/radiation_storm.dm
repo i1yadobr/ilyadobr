@@ -1,3 +1,12 @@
+// TODO(rufus): add more newbie-friendly visibility to this event, maybe PDA messages.
+//   New players are completely confused as to why their character is suddenly dying.
+//   While green lighting in hallways and announcement (which is often ignored as new
+//   players are overwhelmed with infromation) are good, it'd be great to add a tiny
+//   amount of personalization and direct interaction with the players.
+//   Also crew deep inside their departments don't have any visibility of green lighting,
+//   so maybe it's worth it to provide some other sort of signal? Blinking APC/Air/Fire alarm?
+//   Also consider adding a blinking and attention-grabbing radiation warning icon to
+//   status displays (screens) throughout the station and provide instructions on examine.
 #define STATE_ENTERED_BELT 1
 #define STATE_EXITED_BELT  2
 
@@ -22,9 +31,6 @@
 	add_think_ctx("enter", CALLBACK(src, nameof(.proc/enter_belt)), 0)
 	add_think_ctx("exit", CALLBACK(src, nameof(.proc/exit_belt)), 0)
 	add_think_ctx("end", CALLBACK(src, nameof(.proc/end)), 0)
-
-/datum/event/radiation_storm/get_conditions_description()
-	. = "<em>Radiation Storm</em> should not be <em>running</em>.<br>"
 
 /datum/event/radiation_storm/check_conditions()
 	. = SSevents.evars["radiation_storm_running"] != TRUE

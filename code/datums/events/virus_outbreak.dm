@@ -1,3 +1,4 @@
+// TODO(rufus): test if these viruses actually work and note down if they need any adjustment
 /datum/event/virus_outbreak_base
 	id = "virus_outbreak_base"
 	name = "Virus Outbreak Incoming"
@@ -45,8 +46,8 @@
 		/datum/ictus/flu,
 		/datum/ictus/vulnerability,
 		/datum/ictus/xeno,
-		/datum/ictus/hisstarvation,
 		/datum/ictus/musclerace,
+		/datum/ictus/hisstarvation,
 		/datum/ictus/space_migraine)
 
 	new next_outbreak

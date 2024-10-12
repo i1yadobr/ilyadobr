@@ -1,3 +1,6 @@
+// TODO(rufus): review to which derelicts can the wormholes go and improve the derelicts in some way
+//   to give stranded people a chance at returning. Maybe some equipment, maybe a mech, maybe a slightly torn
+//   space suit and a piece of duct tape hidden nearby, etc.
 /datum/event/wormholes
 	id = "wormholes"
 	name = "Wormholes"
@@ -8,6 +11,7 @@
 
 	var/list/pick_turfs = list()
 	var/shift_frequency = 5 SECONDS // How often wormhole batches should spawn
+	// TODO(rufus): make this use some sort of station size/turfs parameter instead of hardcoding a value
 	var/number_of_wormholes = 400 // Overall number of wormholes spawned, might randomize a bit
 	var/total_duration = 90 SECONDS // Total duration of the wormholes event, 90 sec on average
 	var/end_time = 0
@@ -17,9 +21,6 @@
 
 	add_think_ctx("announce", CALLBACK(src, nameof(.proc/announce)), 0)
 	add_think_ctx("end", CALLBACK(src, nameof(.proc/end)), 0)
-
-/datum/event/wormholes/get_conditions_description()
-	. = "<em>Wormholes</em> should not be <em>running</em>.<br>"
 
 /datum/event/wormholes/check_conditions()
 	. = SSevents.evars["wormholes_running"] != TRUE
@@ -70,6 +71,10 @@
 	pick_turfs.Cut()
 
 /proc/create_wormhole(turf/enter, turf/exit)
+	// TODO(rufus): consider adding an examine text, a warning message, or some sort of visual signal
+	//   about wormhole pulling into a vacuum/unsafe location. Remove this TODO if wormholes should stay
+	//   completely random and dangerous without any way for a crew member to predict that they're about
+	//   to be dead.
 	if(!enter || !exit)
 		return
 	var/obj/effect/portal/wormhole/W = new (enter)

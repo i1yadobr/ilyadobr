@@ -22,9 +22,6 @@
 	. -= (SSevents.triggers.roles_count["Janitor"] * (15 MINUTES))
 	. = max(1 HOUR, .)
 
-/datum/event/brand_intelligence/get_conditions_description()
-	. = "<em>Brand Intelligence</em> should not be <em>running</em>.<br>"
-
 /datum/event/brand_intelligence/check_conditions()
 	. = SSevents.evars["brand_intelligence_running"] != TRUE
 

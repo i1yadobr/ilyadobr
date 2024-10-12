@@ -11,6 +11,7 @@ SUBSYSTEM_DEF(events)
 	/// list("id" = boolean)
 	var/list/disabled_events = list()
 
+	// TODO(rufus): document what evars are
 	var/list/evars = list()
 	var/datum/event_triggers/triggers = new
 

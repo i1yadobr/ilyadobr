@@ -1,3 +1,9 @@
+// TODO(rufus): 200 lines of mob variables, boy we got some work to do.
+//   Refactor all this, clean up, piece by piece. Take one variable at a time
+//   and make it pretty, as well as all the related code.
+//   Comment as you go, mob code is important and complex, help future generations.
+// TODO(rufus): unify mob defines into a single place.
+//   At the time of writing there are 16 distinct defines, can be found with a "^/mob$" search with regex mode enabled.
 /mob
 	density = 1
 

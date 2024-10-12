@@ -1,3 +1,11 @@
+// TODO(rufus): disabled event (unticked from .dme), not balanced and annoying.
+//   While the concept is great, this event causes telecomms outage for a whole round.
+//   And with regular engineers not having telecomms access, this event becomes an absolute failure
+//   in terms of interactivity and round value.
+//   Disabling this for now as the current implementation is horrible gameplay-wise.
+//   Add more variety, carefully tweak the outage times, make outage affect telecomms equipment on
+//   station two, allow crew to take measures and react to the outage happening, and in general
+//   make a proper gamedesign review of the comms outage idea.
 /datum/event/communications_blackout
 	id = "communications_blackout"
 	name = "Communications Blackout"

@@ -1,3 +1,11 @@
+// TODO(rufus): disabled event (unticked from .dme), not balanced and requires xeno rework
+//   Xenomorphs are a thing that hijacks all the attention of the round onto itself, iterrupting
+//   any and all other storylines. Just flat out spawning xenos is a very bold decision, even if
+//   event probability weights make it quite rare.
+//   See comments in `stray_facehugger.dm` event regarding xenos in general.
+//   It is best to make facehugger-related stuff much more complex and involved and unify this
+//   event with facehuggers rather than tweak xeno spawning weights until it hits that sweet spot.
+//   It won't. There is no sweet spot. *Automatically* and *randomly* spawning xenos is a bad gamedesign decision.
 /datum/event/xenomorph_infestation
 	id = "xenomorph_infestation"
 	name = "Xenomorph Infestation"

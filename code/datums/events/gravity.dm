@@ -1,9 +1,15 @@
+// TODO(rufus): an absolutely boring even that doesn't introduce anything besides a necessity
+//   for someone with access to do a few clicks at the gravgen. Causes massive annoyance for the
+//   players too as they can't do anything about it, and if gravgen is not addressed in time,
+//   this just makes gameplay more annoying for everyone.
+//   Keeping this enabled at an increased mtth of 3 hours so gravitation and gravgen stay at least somewhat relevant,
+//   but this needs to be rethought and re-implemented in some other way.
 /datum/event/gravity
 	id = "gravity"
 	name = "Gravity Failure"
 	description = "The gravity generator will be turned off for a while"
 
-	mtth = 2 HOURS
+	mtth = 3 HOURS
 	difficulty = 40
 
 	blacklisted_maps = (/datum/map/polar)

@@ -1,3 +1,6 @@
+// TODO(rufus): while some random hostile drones are cool, they are basically more dangerous space carps
+//   at the moment. Review the code of drones themselves and make them more interactive and sophisticated.
+//   After all, this is an organized swarm of hostile military drones, there *has* to be more to it.
 /datum/event/rogue_drones
 	id = "rogue_drones"
 	name = "Rogue Drones"
@@ -14,9 +17,6 @@
 	. = ..()
 
 	add_think_ctx("end", CALLBACK(src, nameof(.proc/end)), 0)
-
-/datum/event/rogue_drones/get_conditions_description()
-	. = "<em>Rogue Drones</em> should not be <em>running</em>.<br>"
 
 /datum/event/rogue_drones/check_conditions()
 	. = SSevents.evars["rogue_drones_running"] != TRUE
@@ -36,17 +36,18 @@
 	set_next_think_ctx("end", world.time + (10 MINUTES))
 
 /datum/event/rogue_drones/proc/spawn_drones()
-	// Spawn them at the same place as carp
 	var/list/possible_spawns = list()
-	for(var/obj/effect/landmark/C in GLOB.landmarks_list)
-		if(C.name == "Drone Swarm")
-			possible_spawns.Add(C)
+	for(var/obj/effect/landmark/L in GLOB.landmarks_list)
+		if(istype(L, /obj/effect/landmark/event/other/drones))
+			possible_spawns.Add(L)
+	if(!length(possible_spawns))
+		return
 
-	// 25% chance for this to be a false alarm
-	var/num = 0
-	if(length(possible_spawns) && prob(75))
-		num = rand(2, 6)
+	var/false_alarm = prob(20)
+	if(false_alarm || (!length(possible_spawns)))
+		return
 
+	var/num = rand(2, 6)
 	for(var/i = 0, i < num, i++)
 		var/mob/living/simple_animal/hostile/retaliate/malf_drone/D = new(get_turf(pick(possible_spawns)))
 		drones_list.Add(weakref(D))

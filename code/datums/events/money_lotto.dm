@@ -1,3 +1,8 @@
+// TODO(rufus): improve visibility of this event and add more fluff to it.
+//   Most of the times crew members have *no* idea that this happened because news channels
+//   are generally just ignored.
+//   Consider sending a PDA message or some sort of fax to HoP to make the event obvious and introduce
+//   at least some interactions.
 /datum/event/money_lotto
 	id = "money_lotto"
 	name = "Money Lotto"

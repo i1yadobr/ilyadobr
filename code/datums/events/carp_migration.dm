@@ -42,9 +42,6 @@
 	. -= (SSevents.triggers.roles_count["Security"] * (10 MINUTES))
 	. = max(1 HOUR, .)
 
-/datum/event/carp_migration_base/get_conditions_description()
-	. = "<em>Carp Migration</em> should not be <em>running</em>."
-
 /datum/event/carp_migration_base/check_conditions()
 	. = SSevents.evars["carp_migration_running"] != TRUE
 
@@ -87,9 +84,9 @@
 /datum/event/carp_migration/proc/spawn_fish(num_groups, group_size_min = 3, group_size_max = 5)
 	var/list/spawn_locations = list()
 
-	for(var/obj/effect/landmark/C in GLOB.landmarks_list)
-		if(C.name == "Carp Pack")
-			spawn_locations.Add(C.loc)
+	for(var/obj/effect/landmark/L in GLOB.landmarks_list)
+		if(istype(L, /obj/effect/landmark/event/other/carps))
+			spawn_locations.Add(L.loc)
 	spawn_locations = shuffle(spawn_locations)
 	num_groups = min(num_groups, spawn_locations.len)
 
@@ -130,5 +127,5 @@
 	else
 		snd = 'sound/AI/carpmigration.ogg'
 		announcement = "Unknown biological [spawned_carp.len == 1 ? "entity has" : "entities have"] been detected near the [station_name()], please stand-by."
-	
+
 	command_announcement.Announce(announcement, "[station_name()] Sensor Array", zlevels = affecting_z, new_sound = snd)

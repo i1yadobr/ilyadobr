@@ -1,3 +1,10 @@
+// TODO(rufus): this event is quite harmless, but is too weak at the moment. Only one spot on the whole station will
+//   be affected and the code to pick that spot is absolutely ancient (and adorably simplistic).
+//   The harshness of this event has to be greatly increased.
+//   Consider adding some sort of interactivity like early stages of wallrot that can be spotted beforehand,
+//   maybe random types of wallrot similar to random types of mold in real life, with some especially dangerous
+//   types rotting the wall to the point of breaking it under the pressure contrast between station and vacuum.
+//   Keeping this enabled, but this needs a good rethink and a new implementation.
 /datum/event/wallrot
 	id = "wallrot"
 	name = "Wallrot"
@@ -33,6 +40,9 @@
 	spawn()
 		var/turf/simulated/wall/center = null
 
+		// TODO(rufus): just making a hundred attempts to find a single random spot to apply wallrot
+		//   is quite a dumb bruteforce approach, but maybe it's not *that* bad of an idea?
+		//   In any case, the code is ancient and needs to be updated.
 		// 100 attempts
 		for(var/i = 0, i < 100, i++)
 			var/turf/candidate = locate(rand(1, world.maxx), rand(1, world.maxy), pick(GLOB.using_map.get_levels_with_trait(ZTRAIT_STATION)))

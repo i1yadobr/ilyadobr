@@ -1,3 +1,9 @@
+// TODO(rufus): disabled event (unticked from .dme), ignored by players and not engaging.
+//   Disabling this until the laws are reviewed, as well as other mechanics.
+//   Current laws are quite often ignored by synthetics because they are just not fun to
+//   play with. The laws should give enough freedom to the AI to pick their own playstyle,
+//   yet introduce an interesting twist to their behavior. Instead a lot of these laws
+//   are just a mundane nuisance forcing synthetics players to keep track of some useless condition.
 /datum/event/ion_storm
 	id = "ion_storm"
 	name = "Ion Storm"
@@ -43,6 +49,8 @@
 			continue
 
 		var/random_player = get_random_humanoid_player_name("The Captain")
+		// TODO(rufus): review these laws, clear out the ones that don't make sense for the current gameplay,
+		//   come up with new ones, and simplify the language where applicable to accomodate for russian-speaking community
 		var/list/laws = list(	"You must always lie.",
 								"Happiness is mandatory.",
 								"Grunt ominously whenever possible.",
@@ -114,6 +122,7 @@
 			MS.spamfilter.Cut()
 			var/i
 			for (i = 1, i <= MS.spamfilter_limit, i++)
+				// TODO(rufus): review and update the terms to accomodate for russian-speaking community
 				MS.spamfilter += pick("kitty","HONK","rev","malf","liberty","freedom","drugs", "[GLOB.using_map.station_short]", \
 					"admin","ponies","heresy","meow","Pun Pun","monkey","Ian","moron","pizza","message","spam",\
 					"director", "Hello", "Hi!"," ","nuke","crate","dwarf","xeno")

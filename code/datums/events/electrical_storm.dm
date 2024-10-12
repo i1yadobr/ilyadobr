@@ -1,3 +1,10 @@
+// TODO(rufus): disabled event (unticked from .dme), not balanced and annoying.
+//   Currently this event is just a nuisance with no way for the crew to react.
+//   The only action the crew can do is set up shields, so basically this results in
+//   "install shields or get tons of routine clicking for engineers and annoyance of the crew".
+//   The whole event needs to be reviewed and refactored, potentially even removed if there's no point in it.
+// TODO(rufus): figure out how /datum/event/electrical_storm_base and /datum/event/electrical_storm are connected
+//   and document it.
 /datum/event/electrical_storm_base
 	id = "electrical_storm_base"
 	name = "Electrical Storm Incoming"
@@ -39,9 +46,6 @@
 
 /datum/event/electrical_storm_base/get_description()
 	return "An electric storm is approaching [station_name()]"
-
-/datum/event/electrical_storm_base/get_conditions_description()
-	. = "<em>Electrical Storm</em> should not be <em>running</em>.<br>"
 
 /datum/event/electrical_storm_base/get_mtth()
 	. = ..()
@@ -89,6 +93,8 @@
 		if(EVENT_LEVEL_MAJOR)
 			command_announcement.Announce("Alert. A strong electrical storm has been detected in proximity of the [station_name()]. It is recommended to immediately secure sensitive electrical equipment until the storm passes.", "[station_name()] Sensor Array", new_sound = GLOB.using_map.electrical_storm_major_sound, zlevels = affecting_z)
 
+	// TODO(rufus): 3 seconds is absolutely not enough time to do anything about the electrical storm.
+	//   As such either the delay has to be changed or the warnings have to be adjusted to just state that the storm is already here.
 	set_next_think(world.time + 3 SECONDS)
 
 /datum/event/electrical_storm/proc/end()
@@ -137,6 +143,7 @@
 		else
 			T.energy_fail(10 * severity * rand(severity * 2, severity * 4))
 
+		// TODO(rufus): the description is misleading, no checks are performed on this except for the prob roll.
 		// Very tiny chance to completely break the APC. Has a check to ensure we don't break critical APCs such as the Engine room, or AI core. Does not occur on Mundane severity.
 		if(prob((0.2 * severity) - 0.2))
 			T.set_broken(TRUE)

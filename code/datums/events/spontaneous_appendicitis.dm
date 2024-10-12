@@ -1,3 +1,10 @@
+// TODO(rufus): disabled event (unticked from .dme), not balanced and annoying.
+//   While it makes sense to make appendixes randomly get inflamed, the current implementation
+//   is just an routinish annoyance for medbay players and a forceful disconnection from the round
+//   events for the affected player.
+//   A proper implementation should be balanced very carefully in terms of how often this is appearing
+//   and though-through in terms of gameplay.
+//   Just annoying players is not a great random event. You might as well just apply some damage randomly.
 /datum/event/spontaneous_appendicitis
 	id = "spontaneous_appendicitis"
 	name = "Spontaneous Appendicitis"

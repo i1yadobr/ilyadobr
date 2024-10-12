@@ -1,3 +1,10 @@
+// TODO(rufus): disabled event (unticked from .dme), not functional and outdated.
+//   It seems that this event spawns some "micrometeors" at random locations
+//   with no consideration about space turfs whatsoever. This definitely doesn't make sense,
+//   especially for maps like Frontier that have a large asteroid near them.
+//   Consider making this actually have a visible effect on crew and follow at least *some* logic.
+//   Potentially add more severity to it so the effects are obvious. At least some window cracks maybe.
+//   Disabling until above is addressed.
 /datum/event/space_dust_base
 	id = "space_dust_base"
 	name = "Space Dust Incoming"
@@ -33,9 +40,6 @@
 	. = ..()
 	. -= (SSevents.triggers.roles_count["Engineer"] * (5 MINUTE))
 	. = max(1 HOUR, .)
-
-/datum/event/space_dust_base/get_conditions_description()
-	. = "<em>Space Dust</em> should not be <em>running</em>.<br>"
 
 /datum/event/space_dust_base/check_conditions()
 	. = SSevents.evars["space_dust_running"] != TRUE

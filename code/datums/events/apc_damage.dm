@@ -1,3 +1,8 @@
+// TODO(rufus): disabled event (unticked from .dme), not functional.
+//   The event is quite minor and just messes with some APCs, but this is boring
+//   routine for engineers to just click through and has to be reviewed for potential ways to improve.
+//   Given that this is based on a landmark system currently and no maps actually have these landmarks,
+//   disabling until this is refactored into some other approach e.g. area- or department-based.
 /datum/event/apc_damage
 	id = "apc_damage"
 	name = "APC Damage"
@@ -6,7 +11,7 @@
 	mtth = 1 HOURS
 	difficulty = 20
 
-	var/apcSelectionRange	= 25
+	var/apcSelectionRange = 25
 
 /datum/event/apc_damage/get_mtth()
 	. = ..()
@@ -26,6 +31,10 @@
 	var/list/possibleEpicentres = list()
 	var/list/apcs = list()
 
+	// TODO(rufus): refactor this epicentre-landmark-based system into something more dynamic and automated.
+	//   Currently there are no landmarks named "lightsout" on any map.
+	//   Comparing on name is also a very bad approach because of the possibility to mistype the name,
+	//   as well as the necessity to place each such marker manually on each map.
 	for(var/obj/effect/landmark/newEpicentre in GLOB.landmarks_list)
 		if(newEpicentre.name == "lightsout")
 			possibleEpicentres += newEpicentre

@@ -20,9 +20,6 @@
 /datum/event/economic_event/check_conditions()
 	. = SSevents.evars["economic_events_running"] != TRUE
 
-/datum/event/economic_event/get_conditions_description()
-	. = "<em>Economic Event</em> should not be <em>running</em>.<br>"
-
 /datum/event/economic_event/on_fire()
 	SSevents.evars["economic_events_running"] = TRUE
 	affected_dest = util_pick_weight(weighted_randomevent_locations)

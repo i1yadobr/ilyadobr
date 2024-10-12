@@ -1,3 +1,16 @@
+// TODO(rufus): disabled event (unticked from .dme), unfair and round-ending.
+//   Ah, meteors, the classic of SS13, the event that started it all.
+//   Meteors are cool as a round-griefing final event, but right now they don't give
+//   crew enough time to react. If there are no engineers or setting up shields on
+//   some map is not a common practice (e.g. Frotier when it was singulo-engine only),
+//   the shift is basically forcibly ended by this event. Even if engineers are there,
+//   unless the shields are already set up, they can't really do anything about the announcement.
+//   Consider giving crew more warm-up time to get ready for meteors. Counter the potential
+//   "well, they'll just set up shields and forget about it" with varying levels of severity.
+//   Review meteor types, detection, counteraction systems, potential machinery upgrades and
+//   orderable stuff. Basically make this into an experience with multiple paths to choose from
+//   rather than a flat shield check with two outcomes, ignore or round end.
+//   Keeping this disabled until at the very least the warm-up time is adjusted properly.
 /datum/event/meteor_wave_base
 	id = "meteor_wave_base"
 	name = "Meteor Wave Incoming"
@@ -28,9 +41,6 @@
 			event_id = "meteor_wave";
 		}
 	)
-
-/datum/event/meteor_wave_base/get_conditions_description()
-	. = "<em>Meteor Wave</em> should not be <em>running</em>.<br>"
 
 /datum/event/meteor_wave_base/check_conditions()
 	. = SSevents.evars["meteor_wave_running"] != TRUE

@@ -1,3 +1,7 @@
+// TODO(rufus): review these news and tie them to something actually relevant in the game.
+//   At the moment these news are just ignored and scrolled through as they don't affect anything at all.
+//   Random strings seem to be well-crafted, but need a thorough review and extending if these news are
+//   to be tied to anything in the game.
 /datum/event/mundane_news
 	id = "mundane_news"
 	name = "Mundane News"
