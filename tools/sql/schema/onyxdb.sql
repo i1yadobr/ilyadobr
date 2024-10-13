@@ -172,3 +172,10 @@ CREATE TABLE IF NOT EXISTS `player_discord` (
   PRIMARY KEY (`ckey`),
   UNIQUE KEY `discord_user_id` (`discord_user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS `server_metrics` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `record_time` DATETIME NOT NULL,
+    `player_count` INT DEFAULT 0,
+    INDEX idx_record_time (record_time)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
