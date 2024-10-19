@@ -61,14 +61,14 @@
 #define WAIT_ARRIVE  3
 #define WAIT_FINISH  4
 
-// Setting this much higher than 1024 could allow spammers to DOS the server easily.
-#define MAX_MESSAGE_LEN       1024
+// High limits, or complete lack of them, open up a DoS vector. Be careful when tweaking these values.
+#define MAX_MESSAGE_LEN       2048
 #define MAX_PAPER_MESSAGE_LEN 3072
 #define MAX_BOOK_MESSAGE_LEN  9216
 #define MAX_LNAME_LEN         64
 #define MAX_NAME_LEN          26
 #define MAX_DESC_LEN          128
-#define MAX_TEXTFILE_LENGTH 128000		// 512GQ file
+#define MAX_TEXTFILE_LENGTH   128000 // 512GQ file
 
 // Event defines.
 #define EVENT_LEVEL_MUNDANE  1
