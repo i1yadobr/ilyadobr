@@ -1,4 +1,10 @@
-// TODO(rufus): test if these viruses actually work and note down if they need any adjustment
+// TODO(rufus): disabled event (unticked from .dme), annoying and impossible to deal with if there are no medics.
+//   While it makes some sense from the realism perspective, in practice the viruses just make the gameplay
+//   increasingly annoying and require some routine clicking to deal with.
+//   There are also no conditions to check for the presence of medical crew, which makes lowpop rounds
+//   unplayable as soon as something like a sleeping virus or gib virus triggers.
+//   Disabling until at least medical crew check is implemented. Ideally viruses how to be rechecked
+//   and this event should be overhauled together with virology.
 /datum/event/virus_outbreak_base
 	id = "virus_outbreak_base"
 	name = "Virus Outbreak Incoming"

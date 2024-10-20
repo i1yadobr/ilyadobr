@@ -1,3 +1,7 @@
+// TODO(rufus): disabled event (unticked from .dme), annoying, unbalanced mtth,
+//   and impossible to deal with if there are no medics.
+//   While it makes some sense from the realism perspective, in practice it's just an annoying spam
+//   of snot decals and slightly inconvenient symptoms. Needs total overhaul together with virology.
 /datum/event/space_cold
 	id = "space_cold"
 	name = "Space Cold Outbreak"
