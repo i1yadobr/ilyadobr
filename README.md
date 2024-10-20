@@ -5,7 +5,8 @@
 Большая часть README и руководств от команды оригинального проекта актуальны, но в процессе пересмотра или обновления.
 
 > [!NOTE]  
-> **Discord** сервер сообщества: https://discord.gg/PM7RQmzJBG
+> **Discord** сервер сообщества: https://discord.gg/PM7RQmzJBG  
+> Адрес сервера ZeroOnyx: `byond://zeroonyx.com:14076`
 
 ## OnyxBay
 Сайт оригинального проекта: [https://ss13.ru/](https://ss13.ru/)
