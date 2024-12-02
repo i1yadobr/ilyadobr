@@ -784,6 +784,7 @@ Ccomp's first proc.
 	feedback_add_details("admin_verb","CCSHUT") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	log_and_message_admins("admin-cancelled the evacuation.")
 
+// TODO(rufus): make the verb accessible to admins or introduce an alternative and clean up, currently unused
 /client/proc/admin_deny_shuttle()
 	set category = "Admin"
 	set name = "Toggle Deny Evac"

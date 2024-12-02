@@ -347,6 +347,8 @@ var/last_message_id = 0
 		to_chat(user, "An evacuation cannot be called at this time. Please try again later.")
 		return
 
+	// TODO(rufus): old misleading comment, the cooldown is no longer 10 minutes, but rather the amount of time
+	//   the shuttle was in transit before being recalled. Check the code and clean up the comment once cooldown stuff is checked.
 	if(evacuation_controller.is_on_cooldown()) // Ten minute grace period to let the game get going without lolmetagaming. -- TLE
 		to_chat(user, evacuation_controller.get_cooldown_message())
 

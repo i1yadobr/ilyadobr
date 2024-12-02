@@ -18,7 +18,7 @@ var/global/list/additional_antag_types = list()
 
 	var/list/disabled_jobs = list()           // Mostly used for Malf.  This check is performed in job_controller so it doesn't spawn a regular AI.
 
-	var/shuttle_delay = 1                    // Shuttle transit time is multiplied by this.
+	var/shuttle_delay_mult = 1                    // Shuttle transit time is multiplied by this.
 	var/auto_recall_shuttle = 0              // Will the shuttle automatically be recalled?
 
 	var/list/antag_tags = list()             // Core antag templates to spawn.
@@ -77,7 +77,7 @@ var/global/list/additional_antag_types = list()
 				choice = input("Enter a new shuttle delay multiplier") as num
 				if(!choice || choice < 1 || choice > 20)
 					return
-				shuttle_delay = choice
+				shuttle_delay_mult = choice
 			if("antag_scaling")
 				choice = input("Enter a new antagonist cap scaling coefficient.") as num
 				if(isnull(choice) || choice < 0 || choice > 100)

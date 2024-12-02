@@ -1,5 +1,7 @@
 /datum/shuttle/autodock/ferry/emergency
 	category = /datum/shuttle/autodock/ferry/emergency
+	// TODO(rufus): duplicate delay definition with /datum/evacuation_controller's var/evac_prep_delay.
+	//   Need to be coupled into a single source of truth.
 	move_time = 10 MINUTES
 	var/datum/evacuation_controller/shuttle/emergency_controller
 

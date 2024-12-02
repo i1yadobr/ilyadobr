@@ -8,7 +8,7 @@
 var/datum/evacuation_controller/evacuation_controller
 
 /datum/evacuation_controller
-
+	// TODO(rufus): uncommented variables with obscure meaning
 	var/name = "generic evac controller"
 	var/state = EVAC_IDLE
 	var/deny
@@ -20,6 +20,7 @@ var/datum/evacuation_controller/evacuation_controller
 	var/evac_launch_delay =  3 MINUTES
 	var/evac_transit_delay = 2 MINUTES
 
+	// TODO(rufus): unused variables, even with /datum/evacuation_controller/starship as it's also unused
 	var/autotransfer_prep_additional_delay = 0 MINUTES
 	var/emergency_prep_additional_delay = 0 MINUTES
 	var/transfer_prep_additional_delay = 0 MINUTES
@@ -67,7 +68,7 @@ var/datum/evacuation_controller/evacuation_controller
 
 	var/evac_prep_delay_multiplier = 1
 	if(SSticker.mode)
-		evac_prep_delay_multiplier = SSticker.mode.shuttle_delay
+		evac_prep_delay_multiplier = SSticker.mode.shuttle_delay_mult
 
 	var/additional_delay
 	if(_emergency_evac)
@@ -83,7 +84,9 @@ var/datum/evacuation_controller/evacuation_controller
 	evac_launch_time =  evac_ready_time +   evac_launch_delay
 	evac_arrival_time = evac_launch_time +  evac_transit_delay
 
-	var/evac_range = round((evac_launch_time - evac_called_at)/3)
+	// TODO(rufus): obscure and redundant math
+	var/evac_range = round((evac_launch_time - evac_called_at)/3) // NOTE(rufus): basically (evac_prep_delay+evac_launch_delay) / 3 = 13 minutes / 3 = 4.333 minutes
+	// TODO(rufus): has to do with gamemodes that cause shuttles to automatically recall, redundant and should be removed
 	auto_recall_time =  rand(evac_called_at + evac_range, evac_launch_time - evac_range)
 
 	state = EVAC_PREPPING

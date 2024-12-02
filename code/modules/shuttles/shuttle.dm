@@ -2,6 +2,7 @@
 
 /datum/shuttle
 	var/name = ""
+	// TODO(rufus): uncommented variable
 	var/warmup_time = 0
 	var/moving_status = SHUTTLE_IDLE
 

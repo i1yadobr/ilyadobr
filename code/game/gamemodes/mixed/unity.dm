@@ -7,6 +7,6 @@
 	required_enemies = 5
 	end_on_antag_death = 0
 	auto_recall_shuttle = 0
-	shuttle_delay = 2
+	shuttle_delay_mult = 2
 	antag_tags = list(MODE_REVOLUTIONARY, MODE_WIZARD)
 	require_all_templates = 1
