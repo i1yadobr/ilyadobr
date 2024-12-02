@@ -1030,18 +1030,22 @@ var/global/floorIsLava = 0
 	new /obj/effect/vine(get_turf(usr), SSplants.seeds[seedtype])
 	log_admin("[key_name(usr)] spawned [seedtype] vines at ([usr.x],[usr.y],[usr.z])")
 
-/datum/admins/proc/spawn_atom(object as text)
+/datum/admins/proc/spawn_atom(search_text as text)
 	set category = "Debug"
 	set desc = "(atom path) Spawn an atom"
 	set name = "Spawn"
 
 	if(!check_rights(R_SPAWN))	return
 
+	if(!length(search_text))
+		if(alert("Empty search query will list all possible atoms which will cause heavy load. Proceed?", "Empty search query", "Ok", "Cancel") != "Ok")
+			return
+
 	var/list/types = typesof(/atom)
 	var/list/matches = new()
 
 	for(var/path in types)
-		if(findtext("[path]", object))
+		if(findtext("[path]", search_text))
 			matches += path
 
 	if(matches.len==0)
