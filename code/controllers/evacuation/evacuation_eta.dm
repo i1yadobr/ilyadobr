@@ -10,6 +10,7 @@
 /datum/evacuation_controller/proc/has_eta()
 	return (state == EVAC_PREPPING || state == EVAC_LAUNCHING || state == EVAC_IN_TRANSIT || state == EVAC_COOLDOWN)
 
+// Returns ETA until the next evacuation stage in seconds or -1 if next stage time is not defined
 /datum/evacuation_controller/proc/get_eta()
 	if(state == EVAC_PREPPING)
 		return (evac_ready_time ? (evac_ready_time - world.time)/10 : -1)
