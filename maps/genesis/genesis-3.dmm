@@ -2642,7 +2642,7 @@
 "aYY" = (/obj/machinery/door/airlock{name = "Room B"; req_access = list(201)},/turf/simulated/floor/tiled,/area/merchant_station)
 "aYZ" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/trim/carpet,/area/merchant_station)
 "aZa" = (/obj/machinery/light/small{dir = 4; pixel_y = 8},/turf/simulated/floor/trim/carpet,/area/merchant_station)
-"aZb" = (/obj/structure/table/woodentable,/obj/item/material/ashtray,/obj/item/clothing/mask/smokable/cigarette/cigar/havana,/obj/machinery/light{dir = 8},/turf/simulated/floor/trim/wood,/area/merchant_station)
+"aZb" = (/obj/structure/table/woodentable,/obj/item/material/ashtray,/obj/item/clothing/mask/smokable/cigarette/cigar/havana,/obj/machinery/light{dir = 8},/obj/item/music_tape/custom,/turf/simulated/floor/trim/wood,/area/merchant_station)
 "aZc" = (/obj/structure/holostool,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/trim/wood,/area/merchant_station)
 "aZd" = (/obj/structure/table/woodentable,/obj/item/storage/box/glasses/pint,/turf/simulated/floor/trim/wood,/area/merchant_station)
 "aZe" = (/obj/item/modular_computer/console/preset/civilian,/turf/simulated/floor/trim/wood,/area/merchant_station)

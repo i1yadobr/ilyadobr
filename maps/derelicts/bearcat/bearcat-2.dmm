@@ -126,7 +126,7 @@
 "cv" = (/turf/simulated/floor/tiled/usedup,/area/ship/scrap/crew/saloon)
 "cw" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/item/stool/padded,/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 8},/turf/simulated/floor/tiled/usedup,/area/ship/scrap/crew/saloon)
 "cx" = (/obj/machinery/atmospherics/unary/vent_scrubber{dir = 8},/turf/simulated/floor/tiled/usedup,/area/ship/scrap/crew/saloon)
-"cy" = (/obj/effect/floor_decal/corner/beige{dir = 6},/obj/structure/table/standard,/obj/machinery/recharger,/obj/structure/sign/poster{pixel_x = 32},/obj/item/trash/dish/tray,/obj/item/circular_saw,/turf/simulated/floor/tiled/usedup,/area/ship/scrap/crew/saloon)
+"cy" = (/obj/effect/floor_decal/corner/beige{dir = 6},/obj/structure/table/standard,/obj/machinery/recharger,/obj/structure/sign/poster{pixel_x = 32},/obj/item/trash/dish/tray,/obj/item/circular_saw,/obj/item/music_tape/custom,/turf/simulated/floor/tiled/usedup,/area/ship/scrap/crew/saloon)
 "cz" = (/obj/machinery/light/small{dir = 8},/obj/item/crowbar,/turf/simulated/floor/tiled/usedup,/area/ship/scrap/crew/hallway/starboard)
 "cA" = (/turf/simulated/wall/r_wall,/area/ship/scrap/crew/cryo)
 "cB" = (/turf/simulated/wall,/area/ship/scrap/crew/cryo)
