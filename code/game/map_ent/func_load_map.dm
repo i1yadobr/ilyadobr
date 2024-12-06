@@ -14,6 +14,10 @@
 
 	if(istext(ev_map_path))
 		map_file = file(ev_map_path)
+	else if(isfile(ev_map_path))
+		map_file = ev_map_path
+	else
+		util_crash_with("ev_map_path is not text or a file: [ev_map_path]")
 
 // Copypasta from `map_template` 👇
 	var/list/atoms_to_initialise = list()

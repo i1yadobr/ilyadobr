@@ -49,6 +49,7 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 
 /dmm_suite/proc/load_map_impl(dmm_file, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf, clear_contents, x_lower = -INFINITY, x_upper = INFINITY, y_lower = -INFINITY, y_upper = INFINITY)
 	var/tfile = dmm_file//the map file we're creating
+	// TODO(rufus): check for edge cases, null values, and implement proper error handling and reporting
 	if(isfile(tfile))
 		tfile = file2text(tfile)
 
