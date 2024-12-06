@@ -1,0 +1,9 @@
+Grand9K Pixel Regular
+- Font family name: Grand9K Pixel
+- Сreated by: Jayvee D. Enaguas (https://tilde.club/~harvettfox96/)
+- License: Creative Commons (CC-BY-SA 3.0) https://creativecommons.org/licenses/by-sa/3.0/
+- Font Page: https://www.dafont.com/grand9k-pixel.font
+- Edits:
+ - Cyrillic support added by Zagovori (https://github.com/Zagovori)
+  - PR: https://github.com/ss220-space/Skyrat-tg/pull/25
+  - Commit: https://github.com/ss220-space/Skyrat-tg/commit/28810aa7ed180cd38fcf4be455b2e7ad51a8f227
