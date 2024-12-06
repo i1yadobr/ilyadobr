@@ -103,6 +103,7 @@
 				update_display(message1, message2)
 			return 1
 		if(STATUS_DISPLAY_MESSAGE)	//custom messages
+			// TODO(rufus): fix amount of characters per line, a line of 7 "O" already overflows and causes a third line to appear
 			var/line1
 			var/line2
 

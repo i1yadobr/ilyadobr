@@ -9,6 +9,6 @@
 /obj/map_ent/info_maptext/activate()
 	var/turf/T = get_turf(src)
 
-	T.maptext = "<font size=3 style=\"font: 'Small Fonts';\">[ev_text]</font>"
-	T.maptext_width = length_char(ev_text) * 5
+	T.maptext = replacetext("[ev_text]","\\n","\n")
+	T.maptext_width = length_char(ev_text) * 8
 	T.maptext_height = 32

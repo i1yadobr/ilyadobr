@@ -198,6 +198,7 @@
 
 #define JOINTEXT(X) jointext(X, null)
 
+// TODO(rufus): do a full check on where these need to be applied and remove the unused ones
 #define SPAN(class, X) "<span class='" + ##class + "'>" + ##X + "</span>"
 
 #define SPAN_NOTICE(X)   SPAN("notice", X)
