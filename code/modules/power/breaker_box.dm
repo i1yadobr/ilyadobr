@@ -4,6 +4,12 @@
 // Humans need 30 seconds (AI is faster when it comes to complex electronics)
 // Used for advanced grid control (read: Substations)
 
+// TODO(rufus): update this whole machine, from magically appearing/disappearing cables
+//   to cooldowns and unsanitized input (fellow hackermans, it's time to put your `alert("LMAO GET PWNED")` to work)
+//   Current system of spawning/despawning cables and artificially connecting them is hacky, although reliably served
+//   us for over ten years. This could be made into a more interactive and "modern" system,
+//   with electronic switching of the connection, a proper UI, ability to rig the internals with a signaller etc,
+//   giving engineers and traitors more power and tools to use.
 /obj/machinery/power/breakerbox
 	name = "Breaker Box"
 	icon = 'icons/obj/power.dmi'
