@@ -48,7 +48,7 @@
 "aW" = (/obj/structure/sink{dir = 4; icon_state = "sink"; pixel_x = 11; pixel_y = 0},/turf/simulated/floor/trim/wood,/area/derelict/snowasteroid)
 "aX" = (/obj/effect/floor_decal/rust,/turf/simulated/floor/holofloor/tiled/dark,/area/derelict/snowasteroid/bunker)
 "aY" = (/obj/effect/floor_decal/industrial/warning{dir = 4},/obj/effect/floor_decal/rust,/turf/simulated/floor/holofloor/tiled/dark,/area/derelict/snowasteroid/bunker)
-"aZ" = (/obj/structure/table/rack,/obj/item/gun/energy/plasmastun,/obj/machinery/door/window/brigdoor/southleft,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 8; health = 1e+006},/turf/simulated/floor/holofloor/tiled/dark,/area/derelict/snowasteroid/bunker)
+"aZ" = (/obj/structure/table/rack,/obj/item/gun/energy/plasmastun,/obj/machinery/door/window/brigdoor/southleft,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 8},/turf/simulated/floor/holofloor/tiled/dark,/area/derelict/snowasteroid/bunker)
 "ba" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 8},/obj/effect/floor_decal/rust,/obj/effect/decal/cleanable/blood/oil,/turf/simulated/floor/holofloor/tiled/dark,/area/derelict/snowasteroid/bunker)
 "bb" = (/obj/effect/decal/cleanable/cobweb2,/obj/effect/floor_decal/rust,/turf/simulated/floor/holofloor/tiled/dark,/area/derelict/snowasteroid/bunker)
 "bc" = (/obj/machinery/door/unpowered/simple/wood,/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"; pixel_y = 0},/turf/simulated/floor/trim/wood,/area/derelict/snowasteroid)

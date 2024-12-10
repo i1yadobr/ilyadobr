@@ -465,7 +465,7 @@
 "ja" = (/obj/machinery/meter,/obj/machinery/atmospherics/pipe/simple/visible/green{dir = 9},/turf/simulated/floor/tiled/dark/airless,/area/ship/scrap/maintenance/engine/aft)
 "jb" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/door/blast/regular/open{dir = 2; icon_state = "pdoor0"; id = "radaway"; layer = 5; opacity = 0},/obj/machinery/meter/turf,/turf/simulated/floor/usedup,/area/ship/scrap/maintenance/power)
 "jc" = (/obj/item/stack/rods,/turf/space,/area/ship/scrap/maintenance/power)
-"jd" = (/obj/structure/window/reinforced{dir = 4},/obj/effect/floor_decal/corner/red/diagonal{dir = 4},/obj/effect/floor_decal/corner/red/diagonal,/obj/structure/window/reinforced{health = 1e+007},/turf/simulated/floor/reinforced/airless,/area/ship/scrap/maintenance/atmos)
+"jd" = (/obj/structure/window/reinforced{dir = 4},/obj/effect/floor_decal/corner/red/diagonal{dir = 4},/obj/effect/floor_decal/corner/red/diagonal,/obj/structure/window/reinforced,/turf/simulated/floor/reinforced/airless,/area/ship/scrap/maintenance/atmos)
 "jf" = (/obj/machinery/light/small{dir = 8},/obj/machinery/atmospherics/pipe/simple/hidden/fuel,/obj/machinery/meter,/turf/simulated/floor/tiled/dark/airless,/area/ship/scrap/maintenance/engine/aft)
 "jg" = (/obj/structure/window/plasmareinforced{dir = 8; icon_state = "phoronrwindow"},/obj/machinery/atmospherics/pipe/simple/heat_exchanging,/turf/simulated/floor/reinforced/airless,/area/ship/scrap/maintenance/engine/aft)
 "jh" = (/obj/machinery/igniter{id = "engine"},/obj/machinery/atmospherics/pipe/simple/heat_exchanging,/turf/simulated/floor/reinforced/airless,/area/ship/scrap/maintenance/engine/aft)

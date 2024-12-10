@@ -828,7 +828,7 @@
 "rF" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/shuttle/wall{icon_state = "wall3"},/area/polarplanet/street)
 "rG" = (/obj/structure/cable{d2 = 8; icon_state = "0-8"},/turf/simulated/floor/plating,/area/polarplanet/street)
 "rL" = (/obj/machinery/atmospherics/unary/vent_pump/high_volume{dir = 4; frequency = 1379; id_tag = "mining_mech_pump"},/turf/simulated/floor/plating,/area/polarplanet/street)
-"rM" = (/obj/machinery/giga_drill,/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 5; health = 1e+007},/turf/simulated/floor/plating,/area/polarplanet/street)
+"rM" = (/obj/machinery/giga_drill,/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced,/turf/simulated/floor/plating,/area/polarplanet/street)
 "rO" = (/obj/structure/window_frame/rglass,/obj/structure/snow,/turf/simulated/floor/plating,/area/polarplanet/street)
 "rP" = (/obj/structure/table,/obj/item/contraband/poster,/turf/simulated/floor/plating,/area/polarplanet/street)
 "rT" = (/turf/unsimulated/floor/frozenground,/turf/simulated/shuttle/wall{dir = 4; icon_state = "diagonalWall3"},/area/polarplanet/street)
