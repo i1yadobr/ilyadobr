@@ -107,6 +107,7 @@
 		/obj/item/melee/telebaton,
 		/obj/item/melee/baton/loaded,
 		/obj/item/clothing/accessory/holster/waist,
+		/obj/item/reagent_containers/spray/pepper,
 		/obj/item/storage/box/flashbangs,
 		/obj/item/storage/belt/security,
 		/obj/item/taperoll/police,
