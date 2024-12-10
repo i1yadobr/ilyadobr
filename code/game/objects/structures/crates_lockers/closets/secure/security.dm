@@ -137,6 +137,7 @@
 		/obj/item/clothing/under/rank/warden,
 		/obj/item/clothing/under/rank/warden/corp,
 		/obj/item/clothing/glasses/hud/aviators/security,
+		/obj/item/clothing/accessory/storage/drop_pouches/black,
 		/obj/item/clothing/accessory/storage/black_vest,
 		/obj/item/clothing/accessory/holster/waist,
 		/obj/item/reagent_containers/spray/pepper,
