@@ -1,6 +1,8 @@
 /obj/item/melee/cultblade
 	name = "cult blade"
 	desc = "An arcane weapon wielded by the followers of Nar-Sie."
+	description_antag = "This sword is a powerful weapon, capable of severing limbs easily, if they are targeted. \
+	Nonbelivers are unable to use this weapon."
 	icon_state = "cultblade"
 	item_state = "cultblade"
 	edge = 1

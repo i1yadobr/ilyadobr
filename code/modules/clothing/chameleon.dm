@@ -400,6 +400,11 @@
 /obj/item/gun/energy/chameleon
 	name = "revolver"
 	desc = "A hologram projector in the shape of a gun. There is a dial on the side to change the gun's disguise."
+	description_info = null // The chameleon gun adopts the description_info of the weapon it is impersonating as.
+	description_antag = "This gun is actually a hologram projector that can alter its appearance to mimick other weapons. \
+	To change the appearance, use the appropriate verb in the chameleon items tab. \
+	Any beams or projectiles fired from this gun are actually holograms and useless for actual combat. \
+	Projecting these holograms over distance uses a little bit of charge."
 	icon_state = "revolver"
 	w_class = ITEM_SIZE_SMALL
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2, TECH_ILLEGAL = 3)
@@ -480,3 +485,6 @@
 		var/mob/M = src.loc
 		M.update_inv_r_hand()
 		M.update_inv_l_hand()
+
+	var/obj/O = gun_choices[picked]
+	description_info = initial(O.description_info)

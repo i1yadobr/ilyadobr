@@ -4,6 +4,7 @@
 /obj/machinery/atmospherics/omni/mixer
 	name = "omni gas mixer"
 	icon_state = "map_mixer"
+	description_info = "Combines gas from custom input and output directions. The percentage of combined gas can be customized."
 
 	idle_power_usage = 150 WATTS //internal circuitry, friction losses and stuff
 	power_rating = 3700			//3700 W ~ 5 HP

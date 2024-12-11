@@ -3,6 +3,8 @@ GLOBAL_LIST_INIT(registered_weapons, list())
 /obj/item/gun/energy
 	name = "energy gun"
 	desc = "A basic energy-based gun."
+	description_info = "This is an energy weapon. To fire the weapon, ensure your intent is *not* set to 'help', have your gun mode set to 'fire', \
+	then click where you want to fire. Most energy weapons can fire through windows harmlessly. To recharge this weapon, use a weapon recharger."
 	icon_state = "energy"
 	fire_sound_text = "laser blast"
 
@@ -66,7 +68,7 @@ GLOBAL_LIST_INIT(registered_weapons, list())
 
 		power_supply.give(charge_cost) //... to recharge the shot
 		update_icon()
-	
+
 	set_next_think(world.time + 1 SECOND)
 
 /obj/item/gun/energy/consume_next_projectile()

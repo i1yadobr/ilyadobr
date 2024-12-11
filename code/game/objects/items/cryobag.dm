@@ -3,6 +3,12 @@
 	name = "stasis bag"
 	desc = "A folded, non-reusable bag designed to prevent additional damage to an occupant, especially useful if short on time or in \
 	a hostile enviroment."
+	description_info = "This stasis bag will preserve the occupant, stopping most forms of harm from occuring, such as from oxygen \
+	deprivation, irradiation, shock, and chemicals inside the occupant, at least until the bag is opened again.<br><br>\
+	Stasis bags can opearate for a limited time, and are rather costly, so use them well. They are ideal for situations where someone may die \
+	before being brought back to safety, or if they are in a hostile enviroment, such as in vacuum or in a plasma leak, as \
+	the bag will protect the occupant from most outside enviromental hazards. <br><br>\
+	You can scan the occupant's vitals without opening the bag by clicking the occupied bag with a health analyzer."
 	icon = 'icons/obj/cryobag.dmi'
 	icon_state = "bodybag_folded"
 	item_state = "bodybag_folded"
@@ -22,6 +28,12 @@
 	name = "stasis bag"
 	desc = "A non-reusable plastic bag designed to prevent additional damage to an occupant, especially useful if short on time or in \
 	a hostile enviroment."
+	description_info = "This stasis bag will preserve the occupant, stopping most forms of harm from occuring, such as from oxygen \
+	deprivation, irradiation, shock, and chemicals inside the occupant, at least until the bag is opened again.<br><br>\
+	Stasis bags can opearate for a limited time, and are rather costly, so use them well. They are ideal for situations where someone may die \
+	before being brought back to safety, or if they are in a hostile enviroment, such as in vacuum or in a plasma leak, as \
+	the bag will protect the occupant from most outside enviromental hazards. <br><br>\
+	You can scan the occupant's vitals without opening the bag by clicking the occupied bag with a health analyzer."
 	icon = 'icons/obj/cryobag.dmi'
 	item_path = /obj/item/bodybag/cryobag
 

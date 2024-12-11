@@ -42,6 +42,19 @@
 		'sound/effects/machinery/medical/beep6.ogg'
 	)
 
+	description_info = "The cryogenic chamber, or 'cryo', treats most damage types, most notably genetic damage. It also stabilizes patients \
+	in critical condition by placing them in stasis, so they can be treated at a later time.<br><br>\
+	In order for it to work, it must be loaded with chemicals, and the temperature of the solution must reach a certain point. Additionally, it \
+	requires a supply of pure oxygen, provided by canisters that are attached. The most commonly used chemicals in the chambers are Cryoxadone and \
+	Clonexadone. Clonexadone is more effective in treating all damage, including Genetic damage, but is otherwise functionally identical.<br><br>\
+	Activating the freezer nearby and setting it to a temperature setting below 150K is recommended before operation! Further, any clothing \
+	the patient is wearing that act as an insulator will reduce its effectiveness, and should be removed.<br><br>\
+	Clicking the tube with a beaker full of chemicals in hand will place it in its storage to distribute when cryo is active.<br><br>\
+	Click your target with Grab intent, then click on the tube with an empty hand to place them in it. Click the tube again to open the menu. \
+	Alternatively, drag and drop the target onto the tube to place them inside. This can also be used on yourself. \
+	Press the button on the menu to activate cryo process. Once the patient is healed, right-click the cell and click 'Eject Occupant' to remove them, \
+	or use the respective UI button. Remember to turn the tube off once you've finished, save power and chemicals!"
+
 /obj/machinery/atmospherics/unary/cryo_cell/New()
 	..()
 	icon = 'icons/obj/cryogenics_split.dmi'

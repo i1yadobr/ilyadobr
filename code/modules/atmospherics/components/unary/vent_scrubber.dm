@@ -5,6 +5,9 @@
 
 	name = "Air Scrubber"
 	desc = "Has a valve and pump attached to it."
+	description_info = "This filters the atmosphere of harmful gas. Filtered gas goes to the pipes connected to it, typically a scrubber pipe. \
+	It can be controlled from an Air Alarm in the same zone, usually room or hallway. It can be configured to drain all air rapidly with a \
+	'panic syphon' from an air alarm."
 	use_power = POWER_USE_OFF
 	idle_power_usage = 150 WATTS //internal circuitry, friction losses and stuff
 	power_rating = 7500			//7500 W ~ 10 HP

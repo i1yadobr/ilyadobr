@@ -2,6 +2,7 @@
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging
 	icon = 'icons/atmos/heat.dmi'
 	icon_state = "intact"
+	description_info = "This radiates heat from the pipe's gas to space, cooling it down."
 	pipe_icon = "hepipe"
 	color = "#404040"
 	level = 2

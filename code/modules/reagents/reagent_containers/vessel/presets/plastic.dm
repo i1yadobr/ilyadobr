@@ -27,6 +27,9 @@
 /obj/item/reagent_containers/vessel/plastic/waterbottle
 	name = "bottled water"
 	desc = "Pure drinking water, imported from the Martian poles."
+	description_fluff = "This is a generic, NanoTrasen branded bottle of water, included in vending machines for the benefit of Skrellian employees. \
+	The company swears on the quality of the water, saying it comes from the Martian poles. \
+	Most people disregard that and assume it's recycled from hydroponics trays."
 	icon_state = "waterbottle"
 	item_state = "bottle"
 	center_of_mass = "x=15;y=8"

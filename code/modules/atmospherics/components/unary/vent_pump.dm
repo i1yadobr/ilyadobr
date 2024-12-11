@@ -14,6 +14,9 @@
 
 	name = "Air Vent"
 	desc = "Has a valve and pump attached to it."
+	description_info = "This pumps the contents of the attached pipe out into the atmosphere, if needed. \
+	It can be controlled from an Air Alarm in the same zone, usually room or hallway."
+
 	use_power = POWER_USE_OFF
 	idle_power_usage = 150 WATTS //internal circuitry, friction losses and stuff
 	power_rating = 7500			//7500 W ~ 10 HP

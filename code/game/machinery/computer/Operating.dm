@@ -1,7 +1,6 @@
-//This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
-
 /obj/machinery/computer/operating
 	name = "patient monitoring console"
+	description_info = "This console gives information on the status of the patient on the adjacent operating table."
 	density = 1
 	anchored = 1.0
 	icon_keyboard = "med_key"

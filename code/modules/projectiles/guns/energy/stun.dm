@@ -90,6 +90,11 @@
 /obj/item/gun/energy/crossbow
 	name = "mini energy-crossbow"
 	desc = "A crossbow that doesn't seem to have space for bolts."
+	description_info = "This is an energy weapon. To fire the weapon, ensure your intent is *not* set to 'help', have your gun mode set to 'fire', \
+	then click where you want to fire."
+	description_antag = "This is a stealthy weapon which fires poisoned bolts at your target.\
+	The bolts are toxic and have a chance to stun the target. \
+	The energy crossbow recharges itself slowly, and is compact enough to be concealed in a bag."
 	icon_state = "crossbow"
 	w_class = ITEM_SIZE_NORMAL
 	item_state = "crossbow"

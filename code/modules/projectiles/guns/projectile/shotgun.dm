@@ -1,6 +1,9 @@
 /obj/item/gun/projectile/shotgun/pump
 	name = "shotgun"
 	desc = "The mass-produced W-T Remmington 29x shotgun is a favourite of police and security forces on many worlds. Useful for sweeping alleys."
+	description_info = "This is a ballistic weapon. To fire the weapon, ensure your intent is *not* set to 'help', have your gun mode set to 'fire', \
+	then click where you want to fire. After firing, you will need to pump the gun by clicking on it in your hand. \
+	To reload, load more shotgun shells."
 	icon_state = "shotgun"
 	item_state = "shotgun"
 	wielded_item_state = "shotgun-wielded"

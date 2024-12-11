@@ -1,4 +1,3 @@
-
 /obj/item/get_description_combat()
 	. = ""
 

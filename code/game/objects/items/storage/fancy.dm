@@ -132,7 +132,12 @@
 ////////////
 /obj/item/storage/fancy/cigarettes
 	name = "pack of Trans-Stellar Duty-frees"
-	desc = "A ubiquitous brand of cigarettes, found in the facilities of every major spacefaring corporation in the universe. As mild and flavorless as it gets."
+	desc = "A ubiquitous brand of cigarettes, found in the facilities of every major spacefaring corporation in the universe. \
+	As mild and flavorless as it gets."
+	description_fluff = "The Trans-Stellar Duty-Free cigarette is an unbranded cigarette produced for the purpose of selling \
+	in areas with with high volumes of civilian and tourist traffic. They are about as average as cigarettes get, and have been \
+	regularly rated by critics as 'tasteless'. However, due to their low price, nonexistent tariffs, and omnipresent marketing, \
+	they are still the most well-known and widespread cigarettes in human space."
 	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "cigpacket"
 	item_state = "cigpacket"
@@ -191,12 +196,19 @@
 /obj/item/storage/fancy/cigarettes/dromedaryco
 	name = "pack of Dromedary Co. cigarettes"
 	desc = "A packet of six imported Dromedary Company cancer sticks. A label on the packaging reads, \"Wouldn't a slow death make a change?\"."
+	description_fluff = "DromedaryCo is one of the oldest companies that produces cigarettes. Being a company that has \
+	changed hands and names several times through the years, their cigarettes are now very different from the original, \
+	and old-timers tend to complain about the quality of their current product. While their profits have dwindled in the last \
+	decade due to media reports of of 'unethical' marketing schemes, they still remain on the forefront of the smokeable industry."
 	icon_state = "Dpacket"
 	startswith = list(/obj/item/clothing/mask/smokable/cigarette/dromedaryco = 10)
 
 /obj/item/storage/fancy/cigarettes/killthroat
 	name = "pack of Acme Co. cigarettes"
 	desc = "A packet of six Acme Company cigarettes. For those who somehow want to obtain the record for the most amount of cancerous tumors."
+	description_fluff = "AcmeCo, a Walton Industries subsidiary better known for their signature high-tar cigarettes, \
+	recently released a Killthroats as a 'Novelty Cigarette,' which pops loudly upon being lit. AcmeCo has declined to \
+	comment on the additional health risks of this new product."
 	icon_state = "Bpacket"
 	startswith = list(/obj/item/clothing/mask/smokable/cigarette/killthroat = 10)
 
@@ -209,20 +221,31 @@
 /obj/item/storage/fancy/cigarettes/luckystars
 	name = "pack of Lucky Stars"
 	desc = "A mellow blend made from synthetic, pod-grown tobacco. The commercial jingle is guaranteed to get stuck in your head."
+	description_fluff = "Lucky Stars were created on Venus by a Gilthari Exports researcher seeking to make a high-quality \
+	cigarette from pod-based tobacco plants. While some purists prefer tobacco grown on the homeworld, the researcher's \
+	company continues to make a heathy profit off of their mellow pod blend."
 	icon_state = "LSpacket"
 	item_state = "Dpacket" //I actually don't mind cig packs not showing up in the hand. whotf doesn't just keep them in their pockets/coats //
 	startswith = list(/obj/item/clothing/mask/smokable/cigarette/luckystars = 10)
 
 /obj/item/storage/fancy/cigarettes/jerichos
 	name = "pack of Jerichos"
-	desc = "Typically seen dangling from the lips of Martian soldiers and border world hustlers. Tastes like hickory smoke, feels like warm liquid death down your lungs."
+	desc = "Typically seen dangling from the lips of Martian soldiers and border world hustlers. \
+	Tastes like hickory smoke, feels like warm liquid death down your lungs."
+	description_fluff = "Originally only a cigarette case manufactured by Palm Corporation, the Jericho \
+	case eventually became the Jericho cigarette. Wind-resistant and easy to light in low oxygen environments, \
+	Jerichos are popular on less habitable border worlds."
 	icon_state = "Jpacket"
 	item_state = "Dpacket"
 	startswith = list(/obj/item/clothing/mask/smokable/cigarette/jerichos = 10)
 
 /obj/item/storage/fancy/cigarettes/menthols
 	name = "pack of Temperamento Menthols"
-	desc = "With a sharp and natural organic menthol flavor, these Temperamentos are a favorite of NDV crews. Hardly anyone knows they make 'em in non-menthol!"
+	desc = "With a sharp and natural organic menthol flavor, these Temperamentos are a favorite of NDV crews. \
+	Hardly anyone knows they make 'em in non-menthol!"
+	description_fluff = "The Temperamento Company, recently bought out by Sterling Manufacturing, is a large tobacco grower \
+	based along the lip of the Mariner Valley on Mars. While originally headquartered on Earth, Temperamento was one of the \
+	first agricultural companies to capitalize on the terraforming of Mars."
 	icon_state = "TMpacket"
 	item_state = "Dpacket"
 
@@ -231,14 +254,21 @@
 
 /obj/item/storage/fancy/cigarettes/carcinomas
 	name = "pack of Carcinoma Angels"
-	desc = "This unknown brand was slated for the chopping block, until they were publicly endorsed by an old Earthling gonzo journalist. The rest is history. They sell a variety for cats, too. Yes, actual cats."
+	desc = "This unknown brand was slated for the chopping block, until they were publicly endorsed by an old Earthling gonzo journalist. \
+	The rest is history. They sell a variety for cats, too. Yes, actual cats."
+	description_fluff = "Many slated CarcinoCo for failure after the company blatantly advertised themselves as creating \
+	the 'most cancerous cigarette'. Somehow, after endorsement from a well-known reporter, the cigarettes took off, and remain popular today."
 	icon_state = "CApacket"
 	item_state = "Dpacket"
 	startswith = list(/obj/item/clothing/mask/smokable/cigarette/carcinomas = 10)
 
 /obj/item/storage/fancy/cigarettes/professionals
 	name = "pack of Professional 120s"
-	desc = "Let's face it - if you're smoking these, you're either trying to look upper-class or you're 80 years old. That's the only excuse. They taste disgusting, too."
+	desc = "Let's face it - if you're smoking these, you're either trying to look upper-class or you're 80 years old. \
+	That's the only excuse. They taste disgusting, too."
+	description_fluff = "Gilthari Exports introduced the Professional brand in 2490, intending to market a higher-quality cigarette \
+	to the new colonial upper class. Instead, Professionals became popular with many who hadn't indulged in high-quality tobacco from earth. \
+	Today, popularity has tapered off, and Professional smokers are often seen as flashy, or out of style."
 	icon_state = "P100packet"
 	item_state = "Dpacket"
 	startswith = list(/obj/item/clothing/mask/smokable/cigarette/professionals = 10)

@@ -1,5 +1,8 @@
 /obj/structure/girder
 	icon_state = "girder"
+	description_info = "Use metal sheets on the girder to build a normal wall. Using screwdriver allows to make a reinforced wall.<br>\
+	A false wall can be made by using a crowbar on this girder, and then adding metal or plasteel.<br>\
+	You can dismantle girders with a wrench."
 	anchored = 1
 	density = 1
 	layer = BELOW_OBJ_LAYER

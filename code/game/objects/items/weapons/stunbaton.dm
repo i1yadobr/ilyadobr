@@ -2,6 +2,10 @@
 /obj/item/melee/baton
 	name = "stunbaton"
 	desc = "A stun baton for incapacitating people with."
+	description_info = "The baton needs to be turned on to apply the stunning effect. Use it in your hand to toggle it on or off. \
+	To stun your target with the enabled baton, use the 'help' intent. \
+	If your intent is set to 'harm', you will inflict brute damage, regardless of the enabled state. \
+	Each stun reduces the baton's charge, which can be replenished by putting it inside a weapon recharger."
 	icon_state = "stunbaton"
 	item_state = "baton"
 	icon = 'icons/obj/weapons.dmi'

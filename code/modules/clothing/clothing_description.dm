@@ -20,8 +20,6 @@
 			if(100)
 				return "You would be immune to [descriptive_attack_type] if you wore this."
 
-
-
 /obj/item/clothing/get_description_info()
 	. = list()
 	. += description_info + "\

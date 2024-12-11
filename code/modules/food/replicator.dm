@@ -1,6 +1,9 @@
 /obj/machinery/food_replicator
 	name = "replicator"
 	desc = "like a microwave, except better. It has label \"Voice activation device\""
+	description_info = "The food replicator is operated through voice commands. To inquire available dishes on the menu, say 'menu'. \
+	To dispense a dish, say the name of the dish listed in its menu. Dishes can only be produced as long as the replicator has biomass. \
+	To check on the biomass level of the replicator, say 'status'. Various food items or plants may be inserted to refill biomass."
 	icon = 'icons/obj/vending.dmi'
 	icon_state = "soda"
 	density = 1

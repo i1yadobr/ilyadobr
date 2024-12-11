@@ -8,6 +8,8 @@
 
 	name = "air injector"
 	desc = "Passively injects air into its surroundings. Has a valve attached to it that can control flow rate."
+	description_info = "Outputs the pipe's gas into the atmosphere, similar to an airvent.  It can be controlled by a nearby atmospherics computer. \
+	A green light on it means it is on."
 
 	use_power = POWER_USE_OFF
 	idle_power_usage = 150 WATTS //internal circuitry, friction losses and stuff

@@ -378,6 +378,8 @@
 /obj/item/clothing/mask/smokable/cigarette/cigar
 	name = "premium cigar"
 	desc = "A brown roll of tobacco and... well, you're not quite sure. This thing's huge!"
+	description_fluff = "While technically labeled as a 'premium cigar', this Walton Industries cigar is fairly average. \
+	Machine-rolled and colony grown, cigars can be a lot worse, but can also be a lot better."
 	icon_state = "cigar2off"
 	icon_on = "cigar2on"
 	ember_state = ""
@@ -411,12 +413,18 @@
 /obj/item/clothing/mask/smokable/cigarette/cigar/cohiba
 	name = "\improper Cohiba Robusto cigar"
 	desc = "There's little more you could want from a cigar."
+	description_fluff = "An older Earth company, Cohiba has made a popular cigar company for centuries. \
+	They are still based on the island of Cuba and refuse to expand, making their cigars rare and coveted all through known space. \
+	Robusto is one of their most popular cigar shapes."
 	icon_state = "cigar2off"
 	icon_on = "cigar2on"
 
 /obj/item/clothing/mask/smokable/cigarette/cigar/havana
 	name = "premium Havanian cigar"
 	desc = "A cigar fit for only the best of the best."
+	description_fluff = "'Havanian' is an umbrella term for any cigar made in the classical, handmade style of Cuba, on Earth. \
+	This particular cigar is from Sterling Manufacturing's cigar manufacturers. While the way of making quality cigars has become \
+	slightly bastardized over the years, overall quality has remained relatively the same, even if there is a higher quantity of 'Havanian' cigars."
 	icon_state = "cigar2off"
 	icon_on = "cigar2on"
 	smoketime = 1500

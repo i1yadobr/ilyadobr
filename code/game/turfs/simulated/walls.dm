@@ -1,6 +1,8 @@
 /turf/simulated/wall
 	name = "wall"
 	desc = "A huge chunk of metal used to seperate rooms."
+	description_info = "You can deconstruct walls by welding them, and then wrenching the girder.<br>\
+	You can build a wall by using metal sheets and making a girder, then adding more metal or plasteel."
 	icon = 'icons/turf/wall_masks.dmi'
 	icon_state = "generic"
 	plane = DEFAULT_PLANE

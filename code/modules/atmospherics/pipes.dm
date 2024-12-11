@@ -1,5 +1,4 @@
 /obj/machinery/atmospherics/pipe
-
 	var/datum/gas_mixture/air_temporary // used when reconstructing a pipeline that broke
 	var/datum/pipeline/parent
 	var/volume = 0
@@ -14,6 +13,9 @@
 	buckle_require_restraints = 1
 	buckle_lying = -1
 
+	description_info = "This pipe, and all other pipes, can be connected or disconnected by a wrench. The internal pressure of the pipe must \
+	be below 300 kPa to do this.  More pipes can be obtained from the pipe dispenser."
+
 /obj/machinery/atmospherics/pipe/drain_power()
 	return -1
 
@@ -21,6 +23,8 @@
 	if(istype(get_turf(src), /turf/simulated/wall) || istype(get_turf(src), /turf/simulated/shuttle/wall) || istype(get_turf(src), /turf/unsimulated/wall))
 		level = 1
 	..()
+	description_info += "<br>Most pipes and atmospheric devices can be connected or disconnected with a wrench. The pipe's pressure must not be too high, \
+	or if it is a device, it must be turned off first."
 
 /obj/machinery/atmospherics/pipe/hides_under_flooring()
 	return level != 2
@@ -350,9 +354,14 @@
 	icon_state = "intact"
 	level = 2
 
+// TODO(rufus): generalize and remove the description_info copypaste, possibly via branching paths earlier into
+//   'supply', 'scrubber', 'normal', and 'universal' trees, e.g. /obj/machinery/atmospherics/pipe/scrubbers/simple/visible.
+//   Or get rid of the pathing for params altogether and use prefabs with variables instead. Deeper look is required to determine.
 /obj/machinery/atmospherics/pipe/simple/visible/scrubbers
 	name = "Scrubbers pipe"
 	desc = "A one meter section of scrubbers pipe."
+	description_info = "This is a special 'scrubber' pipe, which does not connect to 'normal' pipes. \
+	If you want to connect it, use a Universal Pipe Adapter."
 	icon_state = "intact-scrubbers"
 	connect_types = CONNECT_TYPE_SCRUBBER
 	icon_connect_type = "-scrubbers"
@@ -361,6 +370,8 @@
 /obj/machinery/atmospherics/pipe/simple/visible/supply
 	name = "Air supply pipe"
 	desc = "A one meter section of supply pipe."
+	description_info = "This is a special 'supply' pipe, which does not connect to 'normal' pipes. \
+	If you want to connect it, use a Universal Pipe Adapter."
 	icon_state = "intact-supply"
 	connect_types = CONNECT_TYPE_SUPPLY
 	icon_connect_type = "-supply"
@@ -399,6 +410,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers
 	name = "Scrubbers pipe"
 	desc = "A one meter section of scrubbers pipe."
+	description_info = "This is a special 'scrubber' pipe, which does not connect to 'normal' pipes. \
+	If you want to connect it, use a Universal Pipe Adapter."
 	icon_state = "intact-scrubbers"
 	connect_types = CONNECT_TYPE_SCRUBBER
 	icon_connect_type = "-scrubbers"
@@ -407,6 +420,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply
 	name = "Air supply pipe"
 	desc = "A one meter section of supply pipe."
+	description_info = "This is a special 'supply' pipe, which does not connect to 'normal' pipes. \
+	If you want to connect it, use a Universal Pipe Adapter."
 	icon_state = "intact-supply"
 	connect_types = CONNECT_TYPE_SUPPLY
 	icon_connect_type = "-supply"
@@ -442,6 +457,7 @@
 	icon_state = ""
 	name = "pipe manifold"
 	desc = "A manifold composed of regular pipes."
+	description_info = "A normal pipe with three ends to connect to."
 	plane = DEFAULT_PLANE
 
 	volume = ATMOS_DEFAULT_VOLUME_PIPE * 1.5
@@ -623,6 +639,8 @@
 /obj/machinery/atmospherics/pipe/manifold/visible/scrubbers
 	name="Scrubbers pipe manifold"
 	desc = "A manifold composed of scrubbers pipes."
+	description_info = "This is a special 'scrubber' manifold, which does not connect to 'normal' pipes. \
+	If you want to connect it, use a Universal Pipe Adapter."
 	icon_state = "map-scrubbers"
 	connect_types = CONNECT_TYPE_SCRUBBER
 	icon_connect_type = "-scrubbers"
@@ -631,6 +649,8 @@
 /obj/machinery/atmospherics/pipe/manifold/visible/supply
 	name="Air supply pipe manifold"
 	desc = "A manifold composed of supply pipes."
+	description_info = "This is a special 'supply' manifold, which does not connect to 'normal' pipes. \
+	If you want to connect it, use a Universal Pipe Adapter."
 	icon_state = "map-supply"
 	connect_types = CONNECT_TYPE_SUPPLY
 	icon_connect_type = "-supply"
@@ -667,6 +687,8 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers
 	name="Scrubbers pipe manifold"
 	desc = "A manifold composed of scrubbers pipes."
+	description_info = "This is a special 'scrubber' manifold, which does not connect to 'normal' pipes. \
+	If you want to connect it, use a Universal Pipe Adapter."
 	icon_state = "map-scrubbers"
 	connect_types = CONNECT_TYPE_SCRUBBER
 	icon_connect_type = "-scrubbers"
@@ -675,6 +697,8 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply
 	name="Air supply pipe manifold"
 	desc = "A manifold composed of supply pipes."
+	description_info = "This is a special 'supply' manifold, which does not connect to 'normal' pipes. \
+	If you want to connect it, use a Universal Pipe Adapter."
 	icon_state = "map-supply"
 	connect_types = CONNECT_TYPE_SUPPLY
 	icon_connect_type = "-supply"
@@ -707,6 +731,7 @@
 	icon_state = ""
 	name = "4-way pipe manifold"
 	desc = "A manifold composed of regular pipes."
+	description_info = "This is a four-way pipe."
 
 	volume = ATMOS_DEFAULT_VOLUME_PIPE * 2
 
@@ -889,6 +914,8 @@
 /obj/machinery/atmospherics/pipe/manifold4w/visible/scrubbers
 	name="4-way scrubbers pipe manifold"
 	desc = "A manifold composed of scrubbers pipes."
+	description_info = "This is a special 'scrubber' four-way manifold, which does not connect to 'normal' pipes. \
+	If you want to connect it, use a Universal Pipe Adapter."
 	icon_state = "map_4way-scrubbers"
 	connect_types = CONNECT_TYPE_SCRUBBER
 	icon_connect_type = "-scrubbers"
@@ -897,6 +924,8 @@
 /obj/machinery/atmospherics/pipe/manifold4w/visible/supply
 	name="4-way air supply pipe manifold"
 	desc = "A manifold composed of supply pipes."
+	description_info = "This is a special 'supply' four-way manifold, which does not connect to 'normal' pipes. \
+	If you want to connect it, use a Universal Pipe Adapter."
 	icon_state = "map_4way-supply"
 	connect_types = CONNECT_TYPE_SUPPLY
 	icon_connect_type = "-supply"
@@ -932,6 +961,8 @@
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers
 	name="4-way scrubbers pipe manifold"
 	desc = "A manifold composed of scrubbers pipes."
+	description_info = "This is a special 'scrubber' four-way manifold, which does not connect to 'normal' pipes. \
+	If you want to connect it, use a Universal Pipe Adapter."
 	icon_state = "map_4way-scrubbers"
 	connect_types = CONNECT_TYPE_SCRUBBER
 	icon_connect_type = "-scrubbers"
@@ -940,6 +971,8 @@
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/supply
 	name="4-way air supply pipe manifold"
 	desc = "A manifold composed of supply pipes."
+	description_info = "This is a special 'supply' four-way manifold, which does not connect to 'normal' pipes. \
+	If you want to connect it, use a Universal Pipe Adapter."
 	icon_state = "map_4way-supply"
 	connect_types = CONNECT_TYPE_SUPPLY
 	icon_connect_type = "-supply"
@@ -971,6 +1004,9 @@
 /obj/machinery/atmospherics/pipe/cap
 	name = "pipe endcap"
 	desc = "An endcap for pipes."
+	// TODO(rufus): check if functional, old description suggested that it's not, but that was 10 years ago.
+	//   Currently the same functionality is achieved via stasis clamps.
+	description_info = "Can be used to cover an open end of the pipe to prevent leaking."
 	icon = 'icons/atmos/pipes.dmi'
 	icon_state = ""
 	level = 2
@@ -1358,6 +1394,7 @@
 /obj/machinery/atmospherics/pipe/simple/visible/universal
 	name="Universal pipe adapter"
 	desc = "An adapter for regular, supply and scrubbers pipes."
+	description_info = "This allows you to connect 'normal' pipes, red 'scrubber' pipes, and blue 'supply' pipes."
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER
 	icon_state = "map_universal"
 
@@ -1393,6 +1430,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/universal
 	name="Universal pipe adapter"
 	desc = "An adapter for regular, supply and scrubbers pipes."
+	description_info = "This allows you to connect 'normal' pipes, red 'scrubber' pipes, and blue 'supply' pipes."
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER
 	icon_state = "map_universal"
 

@@ -4,6 +4,7 @@
 
 	name = "manual valve"
 	desc = "A pipe valve."
+	description_info = "Click the valve to toggle it. If red, the pipes on each end are seperated. Otherwise, they are connected."
 
 	level = 1
 	dir = SOUTH

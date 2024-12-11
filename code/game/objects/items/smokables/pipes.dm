@@ -4,6 +4,9 @@
 /obj/item/clothing/mask/smokable/pipe
 	name = "smoking pipe"
 	desc = "A pipe, for smoking. Probably made of meershaum or something."
+	description_fluff = "ClassiCo Men's Accessories and Haberdashers is a subsidiary of Gilthari Exports based on Venus. \
+	They seek to create quality goods to give people a more 'classy' look. \
+	Most of their items are high-end and expensive, but generally high quality."
 	icon_state = "pipeoff"
 	item_state = "pipeoff"
 	w_class = ITEM_SIZE_TINY

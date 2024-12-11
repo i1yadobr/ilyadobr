@@ -208,6 +208,9 @@
 /obj/item/melee/energy/sword/one_hand
 	name = "energy sword"
 	desc = "May the force be within you."
+	description_antag = "The energy sword is a very strong melee weapon, capable of severing limbs easily if they are targeted. \
+	It can also has a chance to block projectiles and melee attacks while it is being used to block. \
+	The sword can be toggled on or off by using it in your hand. While it is off, it is small enough to fit in pockets."
 	icon_state = "sword0"
 
 /obj/item/melee/energy/sword/one_hand/New()

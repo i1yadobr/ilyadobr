@@ -1,8 +1,12 @@
 /obj/machinery/portable_atmospherics/powered/scrubber
 	name = "Portable Air Scrubber"
-
 	icon = 'icons/obj/atmos.dmi'
 	icon_state = "pscrubber:0"
+	description_info = "Filters the air, placing harmful gases into the internal gas container. The container can be emptied by \
+	connecting it to a connector port. Scrubbers can pump the air in (sucking) or out (blowing), at a specific target pressure. \
+	The powercell inside can be replaced by using a screwdriver, and then adding a new cell. \
+	A gas tank can also be attached, switching the scrubber from atmosphere to tank operation mode. \
+	This can be used to siphon out tank contents into the scrubber's internal container."
 	density = 1
 	w_class = ITEM_SIZE_NORMAL
 

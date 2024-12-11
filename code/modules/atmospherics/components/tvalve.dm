@@ -4,6 +4,7 @@
 
 	name = "manual switching valve"
 	desc = "A pipe valve."
+	description_info = "Click on the valve to toggle mode. The direction with the green light is where the gas will flow."
 
 	level = 1
 	dir = SOUTH

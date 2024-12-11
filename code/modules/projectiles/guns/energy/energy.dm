@@ -1,6 +1,10 @@
 /obj/item/gun/energy/gun
 	name = "tactical taser"
-	desc = "Crafted in underground factories of Redknight & Company Dominance Tech, the TEG02 Mjolnir is a versatile energy based sidearm, capable of switching between low, medium and high power projectile settings. In other words: stun, shock or kill."
+	desc = "Crafted in underground factories of Redknight & Company Dominance Tech, the TEG02 Mjolnir is a versatile energy based sidearm, \
+	capable of switching between low, medium and high power projectile settings. In other words: stun, shock, and kill."
+	description_info = "This is an energy weapon. To fire the weapon, ensure your intent is *not* set to 'help', have your gun mode set to 'fire', \
+	then click where you want to fire. Laser mode can fire through windows harmlessly. To switch between stun and lethal, click the weapon \
+	in your hand. To recharge this weapon, use a weapon recharger."
 	icon_state = "tasertacticalstun100"
 	item_state = null	//so the human update icon uses the icon_state instead.
 	max_shots = 10
@@ -74,6 +78,9 @@
 /obj/item/gun/energy/gun/nuclear
 	name = "advanced energy gun"
 	desc = "An energy gun with an experimental miniaturized reactor."
+	description_info = "This is an energy weapon. To fire the weapon, ensure your intent is *not* set to 'help', have your gun mode set to 'fire', \
+	then click where you want to fire. Laser mode can fire through windows harmlessly. To switch between stun and lethal, click the weapon \
+	in your hand. Unlike most energy weapons, this weapon recharges on its own."
 	icon_state = "nucgun"
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 5, TECH_POWER = 3)
 	slot_flags = SLOT_BELT

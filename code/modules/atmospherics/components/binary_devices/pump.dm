@@ -18,7 +18,10 @@ Thus, the two variables affect pump operation are set in New():
 	level = 1
 
 	name = "gas pump"
+	// TODO(rufus): make better descriptions, or merge with desc with description_info.
 	desc = "A pump."
+	description_info = "This moves gas from one pipe to another. A higher target pressure demands more energy. The side with the red end is the output."
+
 
 	var/target_pressure = ONE_ATMOSPHERE
 

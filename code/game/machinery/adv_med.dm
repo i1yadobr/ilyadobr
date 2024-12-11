@@ -7,6 +7,11 @@
 	var/obj/machinery/body_scanconsole/BSC
 	name = "Body Scanner"
 	icon = 'icons/obj/cryogenic2.dmi'
+	description_info = "The advanced scanner detects and reports internal injuries such as bone fractures, internal bleeding, and organ damage. \
+	This is useful if you are about to perform surgery.<br><br>\
+	Click your target with Grab intent, then click on the scanner to place them in it. You can also drag and drop people into the scanner. \
+	Click the red terminal to operate. Right-click the scanner and click 'Eject Occupant' to remove them, or use the respective UI button. \
+	You can enter the scanner yourself in a similar way, using the 'Enter Body Scanner' verb or by 'dragging' yourself onto it."
 	icon_state = "body_scanner_0"
 	density = 1
 	anchored = 1

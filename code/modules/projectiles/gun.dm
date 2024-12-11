@@ -28,9 +28,12 @@
 		gun.vars[propname] = settings[propname]
 
 //Parent gun type. Guns are weapons that can be aimed at mobs and act over a distance
+// TODO(rufus): optimize the copypasted description_info's with inheritance or some other apporach
 /obj/item/gun
 	name = "gun"
 	desc = "Its a gun. It's pretty terrible, though."
+	description_info = "This is a gun. To fire the weapon, ensure your intent is *not* set to 'help', have your gun mode set to 'fire', \
+	then click where you want to fire."
 	icon = 'icons/obj/gun.dmi'
 	item_icons = list(
 		slot_l_hand_str = 'icons/mob/onmob/items/lefthand_guns.dmi',
