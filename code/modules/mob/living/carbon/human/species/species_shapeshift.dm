@@ -1,3 +1,4 @@
+// TODO(rufus): check and revive this code, or clean up if it's no longer relevant and can't be put to use
 // This is something of an intermediary species used for species that
 // need to emulate the appearance of another race. Currently it is only
 // used for metroids but it may be useful for changelings later.
@@ -186,7 +187,7 @@ var/list/wrapped_species_by_ref = list()
 	if(stat)
 		to_chat(usr, SPAN_WARNING("You can't use your abilities while you unconscious."))
 		return
-	
+
 	THROTTLE_SHARED(cooldown, 30, last_special)
 	if(!cooldown)
 		to_chat(usr, SPAN_WARNING("You can't use your abilities so fast!"))

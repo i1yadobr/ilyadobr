@@ -82,9 +82,9 @@
 	user.drop(B, src)
 	brainobj = B
 	SetName("[initial(name)]: ([brainmob.real_name])")
-	register_signal(brainmob, SIGNAL_LOGGED_IN, /obj/item/device/mmi/proc/update_info)
-	register_signal(brainmob, SIGNAL_LOGGED_OUT, /obj/item/device/mmi/proc/update_info)
-	register_signal(brainmob, SIGNAL_MOB_DEATH, /obj/item/device/mmi/proc/update_info)
+	register_signal(brainmob, SIGNAL_LOGGED_IN, nameof(.proc/update_info))
+	register_signal(brainmob, SIGNAL_LOGGED_OUT, nameof(.proc/update_info))
+	register_signal(brainmob, SIGNAL_MOB_DEATH, nameof(.proc/update_info))
 	update_info()
 
 /obj/item/device/mmi/proc/remove_brain()

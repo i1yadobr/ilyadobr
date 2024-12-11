@@ -23,10 +23,10 @@ I AM TYPING!'
 	name = master.name
 	glide_size = master.glide_size
 
-	register_signal(master, SIGNAL_MOVED, /atom/movable/proc/move_to_turf_or_null)
-	register_signal(master, SIGNAL_STAT_SET, /datum/proc/qdel_self) // Making the assumption master is conscious at creation.
-	register_signal(master, SIGNAL_LOGGED_OUT, /datum/proc/qdel_self)
-	register_signal(master, SIGNAL_QDELETING, /datum/proc/qdel_self)
+	register_signal(master, SIGNAL_MOVED, nameof(/atom/movable.proc/move_to_turf_or_null))
+	register_signal(master, SIGNAL_STAT_SET, nameof(/datum.proc/qdel_self)) // Making the assumption master is conscious at creation.
+	register_signal(master, SIGNAL_LOGGED_OUT, nameof(/datum.proc/qdel_self))
+	register_signal(master, SIGNAL_QDELETING, nameof(/datum.proc/qdel_self))
 
 /atom/movable/overlay/typing_indicator/Destroy()
 	var/mob/M = master

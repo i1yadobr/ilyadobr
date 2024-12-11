@@ -66,7 +66,7 @@
 /datum/event/sensor_suit_jamming/New()
 	. = ..()
 
-	add_think_ctx("announce", CALLBACK(GLOB.using_map, /datum/map/proc/ion_storm_announcement), 0)
+	add_think_ctx("announce", CALLBACK(GLOB.using_map, nameof(/datum/map.proc/ion_storm_announcement)), 0)
 	add_think_ctx("end", CALLBACK(src, nameof(.proc/end)), 0)
 
 /datum/event/sensor_suit_jamming/on_fire()

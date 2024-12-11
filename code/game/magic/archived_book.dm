@@ -1,3 +1,5 @@
+// TODO(rufus): fix defined paths to a standardized leading slash format,
+//   e.g. "/datum/book_manager" instead of "datum/book_manager"
 //This file was auto-corrected by findeclaration.exe on 29/05/2012 15:03:04
 
 #define BOOK_VERSION_MIN	1

@@ -96,7 +96,7 @@
 
 	var/turf/a_loc = get_turf(assembly)
 	var/turf/b_loc = locate(Clamp(get_pin_data(IC_INPUT, 1), 0, world.maxx), Clamp(get_pin_data(IC_INPUT, 2), 0, world.maxy), a_loc.z)
-	var/list/P = AStar(a_loc, b_loc, /turf/proc/CardinalTurfsWithAccess, /turf/proc/Distance, 0, 200, id = assembly.access_card, exclude=get_turf(get_pin_data_as_type(IC_INPUT, 3, /atom)))
+	var/list/P = AStar(a_loc, b_loc, nameof(/turf.proc/CardinalTurfsWithAccess), nameof(/turf.proc/Distance), 0, 200, id = assembly.access_card, exclude=get_turf(get_pin_data_as_type(IC_INPUT, 3, /atom)))
 
 	if(!islist(P))
 		activate_pin(3)

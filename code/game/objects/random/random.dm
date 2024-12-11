@@ -6,7 +6,7 @@
 	alpha = 128
 	var/spawn_nothing_percentage = 0 // this variable determines the likelyhood that this random object will not spawn anything
 
-	var/spawn_method = /obj/random/proc/spawn_item
+	var/spawn_method = nameof(.proc/spawn_item)
 
 // creates a new object and deletes itself
 /obj/random/Initialize()

@@ -120,7 +120,7 @@ GLOBAL_DATUM_INIT(sound_player, /decl/sound_player, new)
 	register_signal(source, SIGNAL_QDELETING, nameof(.proc/qdel_self))
 
 	if(ismovable(source))
-		proxy_listener = new(source, /datum/sound_token/proc/PrivAddListener, /datum/sound_token/proc/PrivLocateListeners, range, proc_owner = src)
+		proxy_listener = new(source, nameof(.proc/PrivAddListener), nameof(.proc/PrivLocateListeners), range, proc_owner = src)
 		proxy_listener.register_turfs()
 
 /datum/sound_token/Destroy()

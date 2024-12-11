@@ -43,7 +43,7 @@ SUBSYSTEM_DEF(processing)
 		debug_original_process_proc = null
 	else
 		debug_original_process_proc	= process_proc
-		process_proc = /datum/proc/DebugSubsystemProcess
+		process_proc = nameof(.proc/DebugSubsystemProcess)
 
 	to_chat(usr, "[name] - Debug mode [debug_original_process_proc ? "en" : "dis"]abled")
 

@@ -6,7 +6,7 @@
 /obj/structure/deity/trap/New()
 	..()
 
-	register_signal(get_turf(src), SIGNAL_ENTERED, /obj/structure/deity/trap/proc/trigger)
+	register_signal(get_turf(src), SIGNAL_ENTERED, nameof(.proc/trigger))
 
 /obj/structure/deity/trap/Destroy()
 	unregister_signal(get_turf(src), SIGNAL_ENTERED)
@@ -18,7 +18,7 @@
 
 	. = ..()
 
-	register_signal(get_turf(src), SIGNAL_ENTERED, /obj/structure/deity/trap/proc/trigger)
+	register_signal(get_turf(src), SIGNAL_ENTERED, nameof(.proc/trigger))
 
 /obj/structure/deity/trap/attackby(obj/item/W as obj, mob/user as mob)
 	trigger(user)

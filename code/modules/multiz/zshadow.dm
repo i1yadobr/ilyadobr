@@ -23,8 +23,8 @@
 	owner = L
 	sync_icon(L)
 
-	register_signal(L, SIGNAL_DIR_SET, /mob/zshadow/proc/update_dir)
-	register_signal(L, SIGNAL_INVISIBILITY_SET, /mob/zshadow/proc/update_invisibility)
+	register_signal(L, SIGNAL_DIR_SET, nameof(.proc/update_dir))
+	register_signal(L, SIGNAL_INVISIBILITY_SET, nameof(.proc/update_invisibility))
 
 
 /mob/zshadow/Destroy()

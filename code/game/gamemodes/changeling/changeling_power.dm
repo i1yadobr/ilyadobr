@@ -256,7 +256,7 @@
 		return FALSE // One is inside, the other is outside something.
 	var/sting_range = changeling.boost_sting_range ? 2 : 1
 	// Maximum queued turfs set to 25; I don't *think* anything raises sting_range above 2, but if it does the 25 may need raising
-	if(!AStar(my_mob.loc, M.loc, /turf/proc/AdjacentTurfs, /turf/proc/Distance, max_nodes = 25, max_node_depth = sting_range)) // If we can't find a path, fail
+	if(!AStar(my_mob.loc, M.loc, nameof(/turf.proc/AdjacentTurfs), nameof(/turf.proc/Distance), max_nodes = 25, max_node_depth = sting_range)) // If we can't find a path, fail
 		to_chat(my_mob, SPAN("changeling", "We cannot find a path to sting \the [M] by!"))
 		return FALSE
 	return TRUE

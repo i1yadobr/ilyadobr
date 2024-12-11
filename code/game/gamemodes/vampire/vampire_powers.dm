@@ -351,7 +351,7 @@
 			break
 
 		var/turf/T = get_step(user, direction)
-		if (AStar(user.loc, T, /turf/proc/AdjacentTurfs, /turf/proc/Distance, 1))
+		if (AStar(user.loc, T, nameof(/turf.proc/AdjacentTurfs), nameof(/turf.proc/Distance), 1))
 			locs += T
 
 	var/list/spawned = list()
@@ -939,7 +939,7 @@
 	user.status_flags |= FAKELIVING
 	vampire.use_blood(power_use_cost)
 	log_and_message_admins("activated revitalise.")
-	addtimer(CALLBACK(vampire, /datum/vampire/proc/handle_revitalise), 20 SECONDS)
+	addtimer(CALLBACK(vampire, nameof(.proc/handle_revitalise)), 20 SECONDS)
 	return
 
 /datum/vampire/proc/handle_revitalise()
@@ -959,7 +959,7 @@
 			user.status_flags &= ~FAKELIVING
 			to_chat(user, SPAN_WARNING("You no longer pretend to be prey."))
 			return
-		addtimer(CALLBACK(vampire, /datum/vampire/proc/handle_revitalise), 20 SECONDS)
+		addtimer(CALLBACK(vampire, nameof(.proc/handle_revitalise)), 20 SECONDS)
 	return
 
 /datum/vampire/proc/vampire_touch_of_life()
