@@ -9,6 +9,7 @@
 #define DAYS    DAY
 
 #define WATT         *1
+#define WATTHOUR     *1
 #define METER        *1
 #define GRAM         *1
 #define AMPERE       *1
@@ -29,6 +30,7 @@
 #define GREY         *1
 
 #define WATTS      WATT
+#define WATTHOURS  WATTHOUR
 #define METERS     METER
 #define GRAMS      GRAM
 #define AMPERES    AMPERE
