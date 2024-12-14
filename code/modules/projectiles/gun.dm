@@ -86,8 +86,8 @@
 //Checks whether a given mob can use the gun
 //Any checks that shouldn't result in handle_click_empty() being called if they fail should go here.
 //Otherwise, if you want handle_click_empty() to be called, check in consume_next_projectile() and return null there.
+// TODO(rufus): refactor to a better name than a "special" check as it's undescriptive
 /obj/item/gun/proc/special_check(mob/user)
-
 	if(!istype(user, /mob/living))
 		return 0
 	if(!user.IsAdvancedToolUser())
@@ -195,6 +195,7 @@
 	next_fire_time = world.time + fire_delay
 
 //obtains the next projectile to fire
+// TODO(rufus):
 /obj/item/gun/proc/consume_next_projectile()
 	return null
 

@@ -8,35 +8,26 @@ GLOBAL_LIST_INIT(registered_weapons, list())
 	icon_state = "energy"
 	fire_sound_text = "laser blast"
 
-	var/obj/item/cell/power_supply //What type of power cell this uses
-	var/charge_cost = 20 //How much energy is needed to fire.
-	var/max_shots = 10 //Determines the capacity of the weapon's power cell. Specifying a cell_type overrides this value.
-	var/cell_type = null
+	var/obj/item/cell/power_supply // Currently installed power cell
+	var/charge_cost = 20 // How much energy is needed to fire
+	var/cell_type = null // What type of power cell this uses, a new cell of this type will be created on initialization
+	var/max_shots = 10 // Determines the capacity of a generic power cell that will be created if cell_type is not specificed
 	var/projectile_type = /obj/item/projectile/beam/practice
-	var/modifystate
-	var/charge_meter = 1	//if set, the icon state will be chosen based on the current charge
+	var/charge_meter = 1 // If set, the icon state will be chosen based on the current charge
+	var/modifystate // String prefix that will be combined with the charge percentage to produce the correct icon state
+	var/icon_rounder = 25 // Charge percentage will be rounded to this number to choose icon state for charge_meter
 
-	//self-recharging
-	var/self_recharge = 0	//if set, the weapon will recharge itself
-	var/use_external_power = 0 //if set, the weapon will look for an external power source to draw from, otherwise it recharges magically
-	var/recharge_time = 4
-	var/charge_tick = 0
-	var/icon_rounder = 25
+	// Self-recharging
+	var/self_recharge = 0	// If set, the weapon will recharge itself
+	var/use_external_power = 0 // If set, will try to recharge from cyborg, RIG etc, otherwise recharges magically
+	var/recharge_time = 4 // How many "ticks" it takes to do one recharge iteration, by default 1 tick is 1 second
+	var/charge_tick = 0 // Charge tick counter, see /obj/item/gun/energy/think()
+
 	combustion = 1
 	force = 8.5
 	mod_weight = 0.7
 	mod_reach = 0.5
 	mod_handy = 1.0
-
-/obj/item/gun/energy/switch_firemodes()
-	. = ..()
-	if(.)
-		update_icon()
-		playsound(src, 'sound/effects/weapons/energy/toggle_mode1.ogg', rand(50, 75), FALSE)
-
-/obj/item/gun/energy/emp_act(severity)
-	..()
-	update_icon()
 
 /obj/item/gun/energy/Initialize()
 	. = ..()
@@ -48,8 +39,28 @@ GLOBAL_LIST_INIT(registered_weapons, list())
 		set_next_think(world.time)
 	update_icon()
 
+/obj/item/gun/energy/_examine_text(mob/user)
+	. = ..()
+	if(!power_supply)
+		. += "Doesn't have a power supply installed."
+	else
+		. += "\nHas [round(power_supply.charge / charge_cost)] shot\s remaining."
+
+/obj/item/gun/energy/update_icon()
+	if(charge_meter)
+		var/charge_state = 0
+		if(power_supply && power_supply.charge >= charge_cost)
+			// display lowest non-zero state if there's at least one charge, as rounding to zero would be confusing
+			charge_state = max(round(power_supply.percent(), icon_rounder), icon_rounder)
+
+		if(modifystate)
+			icon_state = "[modifystate][charge_state]"
+		else
+			icon_state = "[initial(icon_state)][charge_state]"
+	..()
+
 /obj/item/gun/energy/think()
-	if(self_recharge) //Every [recharge_time] ticks, recharge a shot for the cyborg
+	if(self_recharge)
 		charge_tick++
 		if(charge_tick < recharge_time)
 			set_next_think(world.time + 1 SECOND)
@@ -58,15 +69,15 @@ GLOBAL_LIST_INIT(registered_weapons, list())
 
 		if(!power_supply || power_supply.charge >= power_supply.maxcharge)
 			set_next_think(world.time + 1 SECOND)
-			return // check if we actually need to recharge
+			return
 
 		if(use_external_power)
 			var/obj/item/cell/external = get_external_power_supply()
-			if(!external || !external.use(charge_cost)) //Take power from the borg...
+			if(!external || !external.use(charge_cost))
 				set_next_think(world.time + 1 SECOND)
 				return
 
-		power_supply.give(charge_cost) //... to recharge the shot
+		power_supply.give(charge_cost)
 		update_icon()
 
 	set_next_think(world.time + 1 SECOND)
@@ -99,26 +110,16 @@ GLOBAL_LIST_INIT(registered_weapons, list())
 					return suit.cell
 	return null
 
-/obj/item/gun/energy/_examine_text(mob/user)
+/obj/item/gun/energy/switch_firemodes()
 	. = ..()
-	. += "\nHas [power_supply ? round(power_supply.charge / charge_cost) : "0"] shot\s remaining."
+	if(.)
+		update_icon()
+		playsound(src, 'sound/effects/weapons/energy/toggle_mode1.ogg', rand(50, 75), FALSE)
 
-/obj/item/gun/energy/update_icon()
-	if(charge_meter)
-		var/ratio
-		if(power_supply)
-			if(power_supply.charge < charge_cost)
-				ratio = 0
-			else
-				ratio = max(round(power_supply.percent(), icon_rounder), icon_rounder)
-		else
-			ratio = 0
-
-		if(modifystate)
-			icon_state = "[modifystate][ratio]"
-		else
-			icon_state = "[initial(icon_state)][ratio]"
+/obj/item/gun/energy/emp_act(severity)
 	..()
+	update_icon()
+
 
 /obj/item/gun/energy/secure
 	desc = "A basic energy-based gun with a secure authorization chip."
@@ -136,23 +137,32 @@ GLOBAL_LIST_INIT(registered_weapons, list())
 
 	. = ..()
 
+/obj/item/gun/energy/secure/_examine_text(mob/user)
+	. = ..()
+
+	if(!registered_owner)
+		. += "\nA small screen on the side of the weapon displays a blinking icon of a red ID card, indicating that the weapon is not registered."
+	else
+		. += "\nA small screen on the side of the weapon displays the name \"[registered_owner]\", indicating it is registered."
+
 /obj/item/gun/energy/secure/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/card/id))
-		if(!emagged)
-			if(!registered_owner)
-				if(allowed(user))
-					var/obj/item/card/id/id = W
-					GLOB.registered_weapons += src
-					registered_owner = id.registered_name
-					user.visible_message("[user] swipes an ID through \the [src], registering it.", "You swipe an ID through \the [src], registering it.")
-				else
-					to_chat(user, "<span class='warning'>Access denied.</span>")
-			else
-				to_chat(user, "This weapon is already registered, you must reset it first.")
-		else
+		if(emagged)
 			to_chat(user, "You swipe your ID, but nothing happens.")
-	else
-		..()
+			return
+		if(registered_owner)
+			to_chat(user, "This weapon is already registered, you must reset it first.")
+			return
+		if(!allowed(user))
+			to_chat(user, "<span class='warning'>Access denied.</span>")
+			return
+
+		var/obj/item/card/id/id = W
+		GLOB.registered_weapons += src
+		registered_owner = id.registered_name
+		user.visible_message("[user] swipes an ID through \the [src], registering it.", "You swipe an ID through \the [src], registering it.")
+
+	..()
 
 /obj/item/gun/energy/secure/verb/reset()
 	set name = "Reset Registration"
@@ -166,38 +176,52 @@ GLOBAL_LIST_INIT(registered_weapons, list())
 		usr.visible_message("[usr] presses the reset button on \the [src], resetting its registration.", "You press the reset button on \the [src], resetting its registration.")
 		registered_owner = null
 		GLOB.registered_weapons -= src
+		return
+
+	audible_message("<span class='warning'>\The [src] buzzes, refusing unauthorized action.</span>", runechat_message = "*buzz*")
+	playsound(loc, 'sound/signals/error1.ogg', 50, 0)
 
 /obj/item/gun/energy/secure/Destroy()
 	GLOB.registered_weapons -= src
 
 	. = ..()
 
-/obj/item/gun/energy/secure/proc/authorize(mode, authorized, by)
-	if(emagged || mode < 1 || mode > authorized_modes.len || authorized_modes[mode] == authorized)
+/obj/item/gun/energy/secure/proc/authorize(mode, authorization, authorized_by)
+	if(emagged || mode < 1 || mode > authorized_modes.len || authorized_modes[mode] == authorization)
 		return 0
 
-	authorized_modes[mode] = authorized
+	authorized_modes[mode] = authorization
 
-	if(mode == sel_mode && !authorized)
+	if(mode == sel_mode && authorization == UNAUTHORIZED)
 		switch_firemodes()
 
 	var/mob/M = get_holder_of_type(src, /mob)
 	if(M)
-		to_chat(M, "<span class='notice'>Your [src.name] has been [authorized ? "granted" : "denied"] [firemodes[mode]] fire authorization by [by].</span>")
+		to_chat(M, "<span class='notice'>Your [src.name] has been [authorization ? "granted" : "denied"] [firemodes[mode]] fire authorization by [authorized_by].</span>")
 
 	return 1
 
+/obj/item/gun/energy/secure/proc/current_mode_authorized()
+	return authorized_modes[sel_mode] != UNAUTHORIZED
+
 /obj/item/gun/energy/secure/special_check()
-	if(!emagged && (!authorized_modes[sel_mode] || !registered_owner))
+	if(!emagged && (!current_mode_authorized() || !registered_owner))
 		audible_message("<span class='warning'>\The [src] buzzes, refusing to fire.</span>", runechat_message = "*buzz*")
 		playsound(loc, 'sound/signals/error1.ogg', 50, 0)
 		return 0
-
+	// TODO(rufus): refactor special check, as besides checking it also does shooting on clumsy mutation.
+	//   Special check is not following single responsibility principle which causes issues. Also the name is non-descriptive and it's impossible to tell
+	//   What "special" check does without reading through the code.
+	//   1. If parent call is done at the end, when a user has hulk mutation, their finger size shouldn't even allow them to try triggering the gun,
+	//      yet this override function will trigger first and give unauthorized mode feedback.
+	//   2. If parent call is done at the beginning, clown with no access will be able to shoot themselves in the foot, overriding the authorization.
+	//   One possible solution is to add a pre-trigger check function (e.g. "check_trigger"), which will catch hulk-like cases, and post-trigger one,
+	//   happening after the authorization check was passed and redirecting clown shots into their feet.
 	. = ..()
 
 /obj/item/gun/energy/secure/switch_firemodes()
 	var/next_mode = get_next_authorized_mode()
-	if(firemodes.len <= 1 || next_mode == null || sel_mode == next_mode)
+	if(next_mode == null || firemodes.len <= 1 || sel_mode == next_mode)
 		return null
 
 	sel_mode = next_mode
@@ -208,21 +232,16 @@ GLOBAL_LIST_INIT(registered_weapons, list())
 
 	return new_mode
 
-/obj/item/gun/energy/secure/_examine_text(mob/user)
-	. = ..()
-
-	if(registered_owner)
-		. += "\nA small screen on the side of the weapon indicates that it is registered to [registered_owner]."
-
 /obj/item/gun/energy/secure/proc/get_next_authorized_mode()
-	. = sel_mode
-	do
-		.++
-		if(. > authorized_modes.len)
-			. = 1
-		if(. == sel_mode) // just in case all modes are unauthorized
+	var/current_mode = sel_mode
+	while(TRUE)
+		current_mode++
+		if (current_mode > authorized_modes.len)
+			current_mode = 1
+		if (current_mode == sel_mode) // looped back to the start and found no authorized modes
 			return null
-	while(!authorized_modes[.] && !emagged)
+		if (emagged || authorized_modes[current_mode])
+			return current_mode
 
 /obj/item/gun/energy/secure/emag_act(charges, mob/user)
 	if(emagged || !charges)
@@ -231,5 +250,5 @@ GLOBAL_LIST_INIT(registered_weapons, list())
 		emagged = 1
 		registered_owner = null
 		GLOB.registered_weapons -= src
-		to_chat(user, "The authorization chip fries, giving you full use of \the [src].")
+		to_chat(user, "The authorization chip fries, giving you full access to \the [src].")
 		return 1

@@ -19,6 +19,8 @@
 	var/list/data = host.initial_data()
 
 	data["guns"] = list()
+	// TODO(rufus): add something to indicate there are no registered guns and maybe some instructions,
+	//   as right now empty window looks like a broken UI
 	for(var/obj/item/gun/energy/secure/G in GLOB.registered_weapons)
 		var/turf/T = get_turf(G)
 		if(!T || !(T.z in GLOB.using_map.get_levels_with_trait(ZTRAIT_STATION)))
