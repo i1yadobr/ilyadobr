@@ -1,3 +1,4 @@
+// TODO(rufus): refactor path from gun/energy/gun to a proper one without duplicate words
 /obj/item/gun/energy/gun
 	name = "tactical taser"
 	desc = "Crafted in underground factories of Redknight & Company Dominance Tech, the TEG02 Mjolnir is a versatile energy based sidearm, \
