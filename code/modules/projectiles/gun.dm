@@ -61,7 +61,11 @@
 /obj/item/gun/Initialize()
 	. = ..()
 	for(var/i in 1 to firemodes.len)
-		firemodes[i] = new /datum/firemode(src, firemodes[i])
+		// NOTE(rufus): list support is kept for backwards compatibility reasons, but may be safely removed
+		//   if all weapons are converted to a set of pre-defined firemodes with some modifiers/coefficients
+		//   applied where slight changes are necessary
+		if(islist(firemodes[i]))
+			firemodes[i] = new /datum/firemode(src, firemodes[i])
 
 	if(isnull(scoped_accuracy))
 		scoped_accuracy = accuracy
