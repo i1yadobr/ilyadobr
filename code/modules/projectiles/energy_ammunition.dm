@@ -10,7 +10,6 @@
 	maxcharge = 600 WATTHOURS
 	w_class = ITEM_SIZE_SMALL
 
-
 /obj/item/cell/magazine/update_icon()
 	var/charge_step = round(percent(), chargebar_step)
 	var/new_state = icon_state_key + "[charge_step]"
