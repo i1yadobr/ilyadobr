@@ -136,8 +136,12 @@ var/list/channel_to_radio_key = new
 		to_chat(src, SPAN("warning", "You cannot speak in IC (Muted)."))
 		return FALSE
 
-	message = sanitize(message)
+	// TODO(rufus): research why message sanitazing was moved to subtypes of living in commit
+	//   https://github.com/ZeroHubProjects/ZeroOnyx/commit/23bbbb7e4cf561e4188a9c5c9edab6c12ac57345.
+	//   Most of the subtypes call this parent implementation anyways, so it might be reasonable to handle
+	//   sanitization here in a centralized way instead of relying on every implementation calling sanitization on their own.
 
+	// TODO(rufus): turn messages into datums instead of relying on lists with magic constant strings
 	var/list/message_data = list(
 	  "message" = message,
 	  "language" = language,

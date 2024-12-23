@@ -1,3 +1,5 @@
+// TODO(rufus): split say into explanatory functions (smaller functions and their combinations that explain the code without any need for comments).
+//   Alternatively, use comments for segmenting and explanation.
 /mob/living/carbon/human/say(message, datum/language/language = null, whispering)
 	var/alt_name = ""
 	if(name != GetVoice())
