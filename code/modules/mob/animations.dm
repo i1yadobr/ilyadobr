@@ -176,7 +176,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 	for (var/mob/M in viewers(A))
 		if (M.client)
 			viewing |= M.client
-	flick_overlay(I, viewing, 5) // 5 ticks/half a second
+	flick_image_to_clients(I, viewing, 5) // 5 ticks/half a second
 
 	// Scale the icon.
 	I.SetTransform(scale = 0.75)

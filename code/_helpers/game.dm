@@ -383,7 +383,7 @@
 			for(var/client/C in group)
 				C.screen -= O
 
-/proc/flick_overlay(image/I, list/show_to, duration)
+/proc/flick_image_to_clients(image/I, list/show_to, duration)
 	for(var/client/C in show_to)
 		C.images += I
 	spawn(duration)
