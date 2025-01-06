@@ -390,7 +390,7 @@
 					B.deductcharge(B.hitcost)
 				user.visible_message( \
 					"<span class='danger'>[user] was stunned by \his wet [O]!</span>", \
-					"<span class='userdanger'>[user] was stunned by \his wet [O]!</span>")
+					"<span class='danger'>[user] was stunned by \his wet [O]!</span>")
 				return 1
 	else if(istype(O, /obj/item/mop))
 		playsound(loc, 'sound/effects/using/sink/filling1.ogg', 75)

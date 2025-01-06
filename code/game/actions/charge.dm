@@ -175,7 +175,7 @@
 	if(!isliving(target))
 		return
 	var/mob/living/living_target = target
-	living_target.visible_message("<span class='danger'>[usr] slams into [living_target]!</span>", "<span class='userdanger'>[usr] tramples you into the ground!</span>")
+	living_target.visible_message("<span class='danger'>[usr] slams into [living_target]!</span>", "<span class='danger'>[usr] tramples you into the ground!</span>")
 	usr.forceMove(get_turf(living_target))
 	living_target.apply_damage(damage_dealt, BRUTE)
 	playsound(get_turf(living_target), 'sound/effects/meteorimpact.ogg', 100, TRUE)
