@@ -343,6 +343,8 @@
 	return
 
 //Recursive function to find everything a mob is holding.
+// TODO(rufus): refactor this function, storage param doesn't make sense as storage implements its own content return,
+//   commented code is redundant, and gift storage handling is actually duplicated with return_inv().
 /mob/living/get_contents(obj/item/storage/Storage = null)
 	var/list/L = list()
 

@@ -1,3 +1,4 @@
+// TODO(rufus): move this file from objects/items/weapons as this is definitely not a weapon
 /* Gifts and wrapping paper
  * Contains:
  *		Gifts
@@ -104,7 +105,7 @@
 /*
  * Wrapping Paper and Gifts
  */
-
+// TODO(rufus): merge gift functionality with wrapped packages (smallDelivery)
 /obj/item/gift
 	name = "gift"
 	desc = "A wrapped item."

@@ -96,6 +96,9 @@
 /datum/storage_ui/default/on_hand_attack(mob/user)
 	if(user?.s_active == storage)
 		storage.close(user)
+	// TODO(rufus): increase range to two tiles. If mobs are standing one tile apart,
+	//   picking up happens first and results in two tile distance from the others,
+	//   which results in them still seeing the UI.
 	for(var/mob/M in range(1, storage.loc))
 		if(M.s_active == storage)
 			storage.close(M)

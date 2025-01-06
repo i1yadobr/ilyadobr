@@ -95,6 +95,10 @@
 /atom/proc/LateInitialize()
 	return
 
+// TODO(rufus): revert the commit for this proc: https://github.com/ZeroHubProjects/ZeroOnyx/commit/6a2aa8fb9af6cffd54e76f9fc57d99bc87227ed6
+//   The commit doesn't clearly explain what it does or fixes, nor does its PR: https://github.com/ChaoticOnyx/OnyxBay/pull/7920
+//   It introduces two uncommented procs drop_location() and allow_drop(), which are only used in two very specific places in the codebase.
+//   These places can actually use simple type checks to enforce their restrictions and there's no need to introduce anything new on /atom level.
 /atom/proc/drop_location()
 	var/atom/L = loc
 	if(!L)

@@ -272,9 +272,8 @@
 	// Unequipping from self
 	else if(loc == user && !user.drop(src))
 		return
-	// Doing some unintended shit that may cause catastrophical events, aborting
-	// If you'll ever want to implement something that intentionally allows direct clicking on an item while it's inside
-	// an atom's contents - just go and smack yourself with a brick, it shall not work like this.
+	// The only other allowed case for interaction is if item is on turf,
+	// interactions with items that are in contents of anything else are currently not intended.
 	else if(!isturf(loc))
 		return
 
