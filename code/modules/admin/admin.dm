@@ -5,27 +5,26 @@ var/global/floorIsLava = 0
 
 ////////////////////////////////
 /proc/message_admins(msg)
-	msg = "<span class=\"log_message\"><span class=\"prefix\">ADMIN LOG:</span> <span class=\"message\">[msg]</span></span>"
+	msg = SPAN("log_message", "[SPAN("prefix", "ADMIN LOG:")] [SPAN("message", msg)]")
 	log_adminwarn(msg)
 	for(var/client/C in GLOB.admins)
 		if(R_ADMIN & C.holder.rights)
 			to_chat(C, msg, MESSAGE_TYPE_ADMINLOG)
 /proc/message_staff(msg)
-	msg = "<span class=\"log_message\"><span class=\"prefix\">STAFF LOG:</span> <span class=\"message\">[msg]</span></span>"
+	msg = SPAN("log_message", "[SPAN("prefix", "STAFF LOG:")] [SPAN("message", msg)]")
 	log_adminwarn(msg)
 	for(var/client/C in GLOB.admins)
 		if(R_INVESTIGATE & C.holder.rights)
 			to_chat(C, msg, MESSAGE_TYPE_ADMINLOG)
-/proc/msg_admin_attack(text) //Toggleable Attack Messages
-	log_attack(text)
-	var/rendered = "<span class=\"log_message\"><span class=\"prefix\">ATTACK:</span> <span class=\"message\">[text]</span></span>"
+/proc/msg_admin_attack(msg) //Toggleable Attack Messages
+	log_attack(msg)
+	var/rendered = SPAN("log_message", "[SPAN("prefix", "ATTACK:")] [SPAN("message", msg)]")
 	for(var/client/C in GLOB.admins)
 		if(check_rights(R_INVESTIGATE, 0, C))
-			var/msg = rendered
-			to_chat(C, msg, MESSAGE_TYPE_ATTACKLOG)
+			to_chat(C, rendered, MESSAGE_TYPE_ATTACKLOG)
 
 /proc/href_exploit(suspect_ckey, href)
-	var/rendered = "<span class=\"log_message\"><span class=\"prefix\">HREF EXPLOIT POSSIBLE:</span> <span class=\"message\">Suspect: '[suspect_ckey]' || Href: '[href]'</span></span><br>"
+	var/rendered = SPAN("log_message", "[SPAN("prefix", "HREF EXPLOIT POSSIBLE:")] [SPAN("message", "Suspect: '[suspect_ckey]' || Href: '[href]'")]")
 	log_href(rendered)
 	for(var/client/C in GLOB.admins)
 		if(check_rights(R_INVESTIGATE, 0, C))
@@ -738,7 +737,7 @@ var/global/floorIsLava = 0
 	message = sanitize(message, 500, extra = 0)
 	if(message)
 		message = replacetext(message, "\n", "<br>") // required since we're putting it in a <p> tag
-		to_world("<span class=notice><b>[key_name(usr)] Announces:</b><p style='text-indent: 50px'>[message]</p></span>")
+		to_world("<span class='notice'><b>[key_name(usr)] Announces:</b><p style='text-indent: 50px'>[message]</p></span>")
 		log_admin("Announce: [key_name(usr)]: [message]")
 	feedback_add_details("admin_verb","A") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 

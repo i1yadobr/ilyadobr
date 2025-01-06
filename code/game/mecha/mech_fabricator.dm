@@ -187,7 +187,7 @@
 		return
 
 	if(!(material in materials))
-		to_chat(user, "<span class=warning>\The [src] does not accept [stack_plural]!</span>")
+		to_chat(user, "<span class='warning'>\The [src] does not accept [stack_plural]!</span>")
 		return
 
 	if(materials[material] + amnt <= res_max_amount)

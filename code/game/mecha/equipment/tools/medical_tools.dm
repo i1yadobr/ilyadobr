@@ -274,10 +274,10 @@
 	if(mode)
 		return analyze_reagents(target)
 	if(!syringes.len)
-		occupant_message("<span class=\"alert\">No syringes loaded.</span>")
+		occupant_message("<span class='alert'>No syringes loaded.</span>")
 		return
 	if(reagents.total_volume<=0)
-		occupant_message("<span class=\"alert\">No available reagents to load syringe with.</span>")
+		occupant_message("<span class='alert'>No available reagents to load syringe with.</span>")
 		return
 	set_ready_state(0)
 	chassis.use_power(energy_drain)
@@ -305,7 +305,7 @@
 					S.icon = initial(S.icon)
 					S.reagents.trans_to_mob(M, S.reagents.total_volume, CHEM_BLOOD)
 					M.take_organ_damage(2)
-					S.visible_message("<span class=\"attack\"> [M] was hit by the syringe!</span>")
+					S.visible_message("<span class='attack'> [M] was hit by the syringe!</span>")
 					break
 				else if(S.loc == trg)
 					S.icon_state = initial(S.icon_state)
@@ -447,7 +447,7 @@
 		occupant_message("The object is too far away.")
 		return 0
 	if(!A.reagents || istype(A,/mob))
-		occupant_message("<span class=\"alert\">No reagent info gained from [A].</span>")
+		occupant_message("<span class='alert'>No reagent info gained from [A].</span>")
 		return 0
 	occupant_message("Analyzing reagents...")
 	for(var/datum/reagent/R in A.reagents.reagent_list)
@@ -487,7 +487,7 @@
 		return stop()
 	var/energy_drain = S.energy_drain
 	if(!S.processed_reagents.len || S.reagents.total_volume >= S.reagents.maximum_volume || !S.chassis.has_charge(energy_drain))
-		S.occupant_message("<span class=\"alert\">Reagent processing stopped.</span>")
+		S.occupant_message("<span class='alert'>Reagent processing stopped.</span>")
 		S.log_message("Reagent processing stopped.")
 		return stop()
 	var/amount = S.synth_speed / S.processed_reagents.len

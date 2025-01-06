@@ -240,7 +240,7 @@
 					nverb = verb
 			formatted = language.format_message_radio(message, nverb)
 	else
-		formatted = "[verb], <span class=\"body\">\"[message]\"</span>"
+		formatted = "[verb], <span class='body'>\"[message]\"</span>"
 	if(sdisabilities & DEAF || ear_deaf)
 		var/mob/living/carbon/human/H = src
 		if(istype(H) && H.has_headset_in_ears() && prob(20))

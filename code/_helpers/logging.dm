@@ -61,8 +61,7 @@
 				message += " (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[T.x];Y=[T.y];Z=[T.z]'>JMP</a>)"
 		else
 			WRITE_FILE(GLOB.world_common_log, "\[[time_stamp()]] [game_id] [type]: [message][log_end]")
-
-		var/rendered = "<span class=\"log_message\"><span class=\"prefix\">[type] LOG:</span> <span class=\"message\">[message]</span></span>"
+		var/rendered = SPAN("log_message", "[SPAN("prefix", "[type] LOG:")] [SPAN("message", "[message]")]")
 		if(notify_admin && SScharacter_setup?.initialized) // Checking SScharacter_setup early so won't cycle through all the admins
 			if(type == "DEBUG")
 				message = SPAN("filter_debuglog", message)
