@@ -10,7 +10,7 @@ GLOBAL_LIST_EMPTY(common_report)
 			if(evacuation_controller.round_over() && evacuation_controller.emergency_evacuation)
 				if(!isAdminLevel(playerTurf.z))
 					parts += "<div class='panel stationborder'>"
-					parts += "<span class='marooned'>You managed to survive, but were marooned on [station_name()] as [Player.real_name]...</span>"
+					parts += "<span class='redtext'>You managed to survive, but were marooned on [station_name()] as [Player.real_name]...</span>"
 				else
 					parts += "<div class='panel greenborder'>"
 					parts += "<span class='greentext'>You managed to survive the events on [station_name()] as [Player.real_name].</span>"
@@ -173,7 +173,7 @@ GLOBAL_LIST_EMPTY(common_report)
 
 	var/list/parts = list()
 
-	parts += "<div class='panel stationborder'><span class='marooned'><b>Last words of the first victims:</b></span><br>"
+	parts += "<div class='panel stationborder'><span class='redtext'><b>Last words of the first victims:</b></span><br>"
 
 	for(var/index = 1 to min(length(GLOB.last_words), 4))
 		var/datum/last_words_data/data = GLOB.last_words[index]
