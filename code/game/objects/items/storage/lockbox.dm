@@ -7,7 +7,7 @@
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = DEFAULT_BACKPACK_STORAGE
 	req_access = list(access_armory)
-	var/locked = 1
+	locked = TRUE
 	var/broken = 0
 	var/icon_locked = "lockbox+l"
 	var/icon_closed = "lockbox"
@@ -82,13 +82,6 @@
 		return
 	. = ..()
 
-/obj/item/storage/lockbox/MouseDrop(over_object, src_location, over_location)
-	add_fingerprint(usr)
-	if (locked)
-		to_chat(usr, SPAN_WARNING("[src] is locked and cannot be opened!"))
-		return
-	. = ..()
-
 /obj/item/storage/lockbox/emag_act(remaining_charges, mob/user, emag_source, visual_feedback = "", audible_feedback = "")
 	if(!broken)
 		if(visual_feedback)
@@ -137,4 +130,3 @@
 	broken = !broken
 	update_icon()
 	return
-

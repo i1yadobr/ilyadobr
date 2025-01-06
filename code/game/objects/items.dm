@@ -267,7 +267,8 @@
 	// Removing from a storage
 	if(istype(loc, /obj/item/storage))
 		var/obj/item/storage/S = loc
-		S.remove_from_storage(src)
+		if(!S.remove_from_storage(src))
+			return
 	// Unequipping from self
 	else if(loc == user && !user.drop(src))
 		return

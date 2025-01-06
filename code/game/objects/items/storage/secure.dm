@@ -15,7 +15,7 @@
 	var/icon_locking = "secureb"
 	var/icon_sparking = "securespark"
 	var/icon_opened = "secure0"
-	var/locked = 1
+	locked = TRUE
 	// TODO(rufus): document these variables or refactor
 	var/code = ""
 	var/l_code = null
@@ -69,19 +69,6 @@
 		return
 
 	// -> storage/attackby() what with handle insertion, etc
-	..()
-
-
-/obj/item/storage/secure/MouseDrop(over_object, src_location, over_location)
-	if(locked)
-		add_fingerprint(usr)
-		return
-	..()
-
-/obj/item/storage/secure/AltClick(mob/usr)
-	if(locked)
-		add_fingerprint(usr)
-		return
 	..()
 
 /obj/item/storage/secure/proc/show_lock_menu(mob/user)
@@ -183,19 +170,6 @@
 	mod_handy = 1.0
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = DEFAULT_BACKPACK_STORAGE
-
-/obj/item/storage/secure/briefcase/attack_hand(mob/user)
-	if((src.loc == user) && (src.locked == 1))
-		to_chat(usr, "<span class='warning'>[src] is locked and cannot be opened!</span>")
-	else if((src.loc == user) && (!src.locked))
-		src.open(usr)
-	else
-		..()
-		for(var/mob/M in range(1))
-			if(M.s_active == src)
-				src.close(M)
-	src.add_fingerprint(user)
-	return
 
 // -----------------------------
 //        Secure Safe
