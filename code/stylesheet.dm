@@ -68,8 +68,6 @@ h1.alert, h2.alert		{color: #000080;}
 .emote					{font-style: italic;}
 
 /* Game Messages */
-
-.attack					{color: #ff0000;}
 .moderate				{color: #cc0000;}
 .disarm					{color: #990000;}
 .passive				{color: #660000;}
