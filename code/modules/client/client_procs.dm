@@ -160,13 +160,13 @@ If you have any  questions about this stuff feel free to ask. ~Carn
 		// TODO(rufus): figure out what's up with this "redirect" TopicData and if disconnect after the first hop is intended behavior. Remove if unsure.
 		if(config.multiaccount.panic_server_address && TopicData != "redirect")
 			log_access("Panic Bunker: ([key_name(key, include_name = FALSE)] | age [player_age]) - attempted to connect. Redirected to [config.multiaccount.panic_server_name ? config.multiaccount.panic_server_name : config.multiaccount.panic_server_address]")
-			message_admins(SPAN("adminnotice", "Panic Bunker: ([key] | age [player_age]) - attempted to connect. Redirected to [config.multiaccount.panic_server_name ? config.multiaccount.panic_server_name : config.multiaccount.panic_server_address]"))
+			message_admins(SPAN("danger", "Panic Bunker: ([key] | age [player_age]) - attempted to connect. Redirected to [config.multiaccount.panic_server_name ? config.multiaccount.panic_server_name : config.multiaccount.panic_server_address]"))
 			to_chat(src, SPAN("notice", "Server is already full. Sending you to [config.multiaccount.panic_server_name ? config.multiaccount.panic_server_name : config.multiaccount.panic_server_address]."))
 			winset(src, null, "command=.options")
 			send_link(src, "[config.multiaccount.panic_server_address]?redirect")
 		else
 			log_access("Panic Bunker: ([key_name(key, include_name = FALSE)] | age [player_age]) - attempted to connect. Redirecting is not configured.")
-			message_admins("<span class='adminnotice'>Panic Bunker: ([key] | age [player_age]) - Redirecting is not configured.</span>")
+			message_admins("<span class='danger'>Panic Bunker: ([key] | age [player_age]) - Redirecting is not configured.</span>")
 		qdel(src)
 		return
 

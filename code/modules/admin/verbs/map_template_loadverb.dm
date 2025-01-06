@@ -72,6 +72,6 @@
 	if(M.preload_size())
 		to_chat(usr, "Map template '[map]' ready to place ([M.width]x[M.height])")
 		SSmapping.map_templates[M.name] = M
-		message_admins("<span class='adminnotice'>[key_name_admin(usr)] has uploaded a map template ([map])</span>")
+		message_admins("<span class='danger'>[key_name_admin(usr)] has uploaded a map template ([map])</span>")
 	else
 		to_chat(usr, "Map template '[map]' failed to load properly")

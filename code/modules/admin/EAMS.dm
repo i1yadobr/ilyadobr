@@ -48,10 +48,10 @@ SUBSYSTEM_DEF(eams)
 
 /datum/controller/subsystem/eams/proc/Toggle(mob/user)
 	if (!initialized && user)
-		to_chat(user, SPAN("adminnotice", "Wait until EAMS initialized!"))
+		to_chat(user, SPAN("danger", "Wait until EAMS initialized!"))
 		return
 	if(!__active && !establish_db_connection())
-		to_chat(user, SPAN("adminnotice", "EAMS can't be enabled because there is no DB connection!"))
+		to_chat(user, SPAN("danger", "EAMS can't be enabled because there is no DB connection!"))
 		return
 
 	__active = !__active
@@ -281,7 +281,7 @@ SUBSYSTEM_DEF(eams)
 	set name = "Toggle EAMS"
 
 	if (!establish_db_connection())
-		to_chat(usr, SPAN("adminnotice", "The Database is not connected!"))
+		to_chat(usr, SPAN("danger", "The Database is not connected!"))
 		return
 
 	var/eams_status = SSeams.Toggle()

@@ -808,7 +808,7 @@
 		to_chat(possessor, "<span class='warning'>\The [src] already has a player.</span>")
 		return 0
 
-	message_admins("<span class='adminnotice'>[key_name_admin(possessor)] has taken control of \the [src].</span>")
+	message_admins("<span class='danger'>[key_name_admin(possessor)] has taken control of \the [src].</span>")
 	log_admin("[key_name(possessor)] took control of \the [src].")
 	src.ckey = possessor.ckey
 	qdel(possessor)
