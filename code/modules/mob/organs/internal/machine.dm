@@ -87,10 +87,10 @@
 	if (istype(W, /obj/item/cell))
 		if(open)
 			if(cell)
-				to_chat(user, "<span class ='warning'>There is a power cell already installed.</span>")
+				to_chat(user, "<span class='warning'>There is a power cell already installed.</span>")
 			else if(user.drop(W, src))
 				cell = W
-				to_chat(user, "<span class = 'notice'>You insert \the [cell].</span>")
+				to_chat(user, "<span class='notice'>You insert \the [cell].</span>")
 
 /obj/item/organ/internal/cell/replaced()
 	..()

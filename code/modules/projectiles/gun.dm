@@ -378,14 +378,14 @@
 		return
 	var/obj/item/projectile/in_chamber = consume_next_projectile()
 	if (istype(in_chamber) && process_projectile(in_chamber, user, user, BP_MOUTH))
-		user.visible_message("<span class = 'warning'>[user] pulls the trigger.</span>")
+		user.visible_message("<span class='warning'>[user] pulls the trigger.</span>")
 		var/shot_sound = in_chamber.fire_sound? in_chamber.fire_sound : fire_sound
 		if(silenced)
 			playsound(user, shot_sound, 10, 1)
 		else
 			playsound(user, shot_sound, 50, 1)
 		if(istype(in_chamber, /obj/item/projectile/beam/lasertag))
-			user.show_message("<span class = 'warning'>You feel rather silly, trying to commit suicide with a toy.</span>")
+			user.show_message("<span class='warning'>You feel rather silly, trying to commit suicide with a toy.</span>")
 			mouthshoot = 0
 			return
 		if(istype(in_chamber, /obj/item/projectile/energy/floramut))
@@ -399,7 +399,7 @@
 			user.apply_damage(in_chamber.damage*2.5, in_chamber.damage_type, BP_HEAD, 0, in_chamber.damage_flags(), used_weapon = "Point blank shot in the mouth with \a [in_chamber]")
 			user.death()
 		else
-			to_chat(user, "<span class = 'notice'>Ow...</span>")
+			to_chat(user, "<span class='notice'>Ow...</span>")
 			user.apply_effect(110,PAIN,0)
 		QDEL_NULL(in_chamber)
 		mouthshoot = 0

@@ -110,9 +110,9 @@
 				amount -= needs
 
 			if(existing.damtype == BRUTE)
-				visible_message("<span class = 'warning'>\The [existing.descriptor] on [src] gapes wider[existing.patched ? ", tearing the patch" : ""]!</span>")
+				visible_message("<span class='warning'>\The [existing.descriptor] on [src] gapes wider[existing.patched ? ", tearing the patch" : ""]!</span>")
 			else if(existing.damtype == BURN)
-				visible_message("<span class = 'warning'>\The [existing.descriptor] on [src] widens[existing.patched ? ", ruining the patch" : ""]!</span>")
+				visible_message("<span class='warning'>\The [existing.descriptor] on [src] widens[existing.patched ? ", ruining the patch" : ""]!</span>")
 
 			existing.patched = FALSE
 
@@ -128,9 +128,9 @@
 		B.holder = src
 
 		if(B.damtype == BRUTE)
-			visible_message("<span class = 'warning'>\A [B.descriptor] opens up on [src]!</span>")
+			visible_message("<span class='warning'>\A [B.descriptor] opens up on [src]!</span>")
 		else if(B.damtype == BURN)
-			visible_message("<span class = 'warning'>\A [B.descriptor] marks the surface of [src]!</span>")
+			visible_message("<span class='warning'>\A [B.descriptor] marks the surface of [src]!</span>")
 
 	calc_breach_damage()
 

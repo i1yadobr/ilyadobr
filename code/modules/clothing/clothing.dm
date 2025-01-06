@@ -532,7 +532,7 @@ BLIND     // can't see anything
 
 	if(!user.incapacitated(INCAPACITATION_DISABLED))
 		if(!pull_mask)
-			to_chat(usr, "<span class ='notice'>You cannot pull down your [src.name].</span>")
+			to_chat(usr, "<span class='notice'>You cannot pull down your [src.name].</span>")
 			return
 		else
 			src.hanging = !src.hanging

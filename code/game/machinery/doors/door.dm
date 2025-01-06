@@ -326,7 +326,7 @@
 /obj/machinery/door/set_broken(new_state)
 	. = ..()
 	if(. && new_state)
-		visible_message("<span class = 'warning'>\The [src.name] breaks!</span>")
+		visible_message("<span class='warning'>\The [src.name] breaks!</span>")
 
 /obj/machinery/door/ex_act(severity)
 	switch(severity)

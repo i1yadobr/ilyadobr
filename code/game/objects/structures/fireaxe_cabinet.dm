@@ -127,6 +127,6 @@
 
 		unlocked = !unlocked
 		playsound(user, 'sound/machines/lockreset.ogg', 50, 1)
-		to_chat(user, "<span class = 'notice'>You [unlocked ? "disable" : "enable"] the maglock.</span>")
+		to_chat(user, "<span class='notice'>You [unlocked ? "disable" : "enable"] the maglock.</span>")
 
 	update_icon()

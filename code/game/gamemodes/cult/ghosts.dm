@@ -72,7 +72,7 @@
 				choices += B
 
 		if(!choices.len)
-			to_chat(src, "<span class = 'warning'>There is no blood to use nearby.</span>")
+			to_chat(src, "<span class='warning'>There is no blood to use nearby.</span>")
 			return
 
 		choice = input(src, "What blood would you like to use?") as null|anything in choices
@@ -146,7 +146,7 @@
 	for(var/obj/item/I in range(1))
 		if(I.w_class <= 2)
 			choices += I
-	
+
 	choices -= ghost_multitool
 	if(!choices.len)
 		to_chat(src, "<span class='warning'>There are no suitable items nearby.</span>")

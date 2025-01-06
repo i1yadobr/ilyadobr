@@ -379,7 +379,7 @@
 
 	if(interfaced_with)
 		if(holder && holder.wearer)
-			to_chat(holder.wearer, "<span class = 'warning'>Your power sink retracts as the module deactivates.</span>")
+			to_chat(holder.wearer, "<span class='warning'>Your power sink retracts as the module deactivates.</span>")
 		drain_complete()
 	interfaced_with = null
 	total_power_drained = 0
@@ -413,10 +413,10 @@
 
 	// Is it a valid power source?
 	if(target.drain_power(1) <= 0)
-		to_chat(H, "<span class = 'danger'>There is no power in [target]!</span>")
+		to_chat(H, "<span class='danger'>There is no power in [target]!</span>")
 		return 0
 
-	to_chat(H, "<span class = 'danger'>You begin draining power from [target]!</span>")
+	to_chat(H, "<span class='danger'>You begin draining power from [target]!</span>")
 	interfaced_with = target
 	drain_loc = interfaced_with.loc
 
@@ -448,23 +448,23 @@
 	playsound(H.loc, GET_SFX(SFX_SPARK), 50, 1)
 
 	if(!holder.cell)
-		to_chat(H, "<span class = 'danger'>Your power sink flashes an error; there is no cell in your rig.</span>")
+		to_chat(H, "<span class='danger'>Your power sink flashes an error; there is no cell in your rig.</span>")
 		drain_complete(H)
 		return
 
 	if(!interfaced_with || !interfaced_with.Adjacent(H) || !(interfaced_with.loc == drain_loc))
-		to_chat(H, "<span class = 'warning'>Your power sink retracts into its casing.</span>")
+		to_chat(H, "<span class='warning'>Your power sink retracts into its casing.</span>")
 		drain_complete(H)
 		return
 
 	if(holder.cell.fully_charged())
-		to_chat(H, "<span class = 'warning'>Your power sink flashes an amber light; your rig cell is full.</span>")
+		to_chat(H, "<span class='warning'>Your power sink flashes an amber light; your rig cell is full.</span>")
 		drain_complete(H)
 		return
 
 	var/target_drained = interfaced_with.drain_power(0,0,max_draining_rate)
 	if(target_drained <= 0)
-		to_chat(H, "<span class = 'danger'>Your power sink flashes a red light; there is no power left in [interfaced_with].</span>")
+		to_chat(H, "<span class='danger'>Your power sink flashes a red light; there is no power left in [interfaced_with].</span>")
 		drain_complete(H)
 		return
 
