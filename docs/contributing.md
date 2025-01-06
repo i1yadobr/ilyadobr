@@ -379,9 +379,9 @@ O.specific_type_funс()
 
 Потому что не имеет смысла
 
-### Используйте макросы оформления текста SPAN_NOTICE, SPAN_WARNING, SPAN_DANGER и другие
+### Используйте макрос оформления текста SPAN()
 
-Вместо `to_chat(usr, "<span class="warning">[text]</span>")` используйте `to_chat(usr, SPAN_WARNING(text))`.
+Вместо `to_chat(usr, "<span class='warning'>[text]</span>")` используйте `to_chat(usr, SPAN("warning", text))`.
 
 ### Используйте ранний return
 
