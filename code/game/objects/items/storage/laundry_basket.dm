@@ -17,7 +17,6 @@
 	use_to_pickup = 1
 	allow_quick_empty = 1
 	allow_quick_gather = 1
-	collection_mode = 1
 	var/linked
 
 
@@ -85,4 +84,3 @@
 	..()
 	user.drop(linked, force = TRUE)
 	return
-

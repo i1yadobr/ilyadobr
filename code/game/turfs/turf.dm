@@ -119,7 +119,7 @@
 /turf/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/storage))
 		var/obj/item/storage/S = W
-		if(S.use_to_pickup && S.collection_mode)
+		if(S.use_to_pickup && S.quick_gather)
 			S.gather_all(src, user)
 	return ..()
 
@@ -291,13 +291,13 @@ var/const/enterloopsanity = 100
 
 /turf/_examine_text(mob/user, infix, suffix)
 	. = ..()
-	
+
 	if(hasHUD(user, HUD_SCIENCE))
 		. += "\nStopping Power:"
 
 		. += "\nα-particle: [fmt_siunit(CONV_JOULE_ELECTRONVOLT(rad_resist[RADIATION_ALPHA_PARTICLE]), "eV", 3)]"
 		. += "\nβ-particle: [fmt_siunit(CONV_JOULE_ELECTRONVOLT(rad_resist[RADIATION_BETA_PARTICLE]), "eV", 3)]"
-	
+
 	return .
 
 /turf/proc/get_footstep_sound()

@@ -555,13 +555,13 @@ var/list/mining_floors = list()
 
 	else if(istype(W,/obj/item/storage/ore))
 		var/obj/item/storage/ore/S = W
-		if(S.collection_mode)
+		if(S.quick_gather)
 			for(var/obj/item/ore/O in contents)
 				O.attackby(W,user)
 				return
 	else if(istype(W,/obj/item/storage/bag/fossils))
 		var/obj/item/storage/bag/fossils/S = W
-		if(S.collection_mode)
+		if(S.quick_gather)
 			for(var/obj/item/fossil/F in contents)
 				F.attackby(W,user)
 				return

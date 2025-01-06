@@ -11,7 +11,6 @@
 	use_to_pickup = 1
 	allow_quick_gather = 1
 	allow_quick_empty = 1
-	collection_mode = 1
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = 100
 
