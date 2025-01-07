@@ -177,7 +177,7 @@ GLOBAL_LIST_EMPTY(mob_spawners)
 	if(mob_possessor)
 		spawned_mob.ckey = mob_possessor.ckey
 	if(show_flavor)
-		var/output_message = "<span class='infoplain'>[SPAN("big bold", "[you_are_text]")]</span>"
+		var/output_message = SPAN("infoplain", "[SPAN("big bold", "[you_are_text]")]")
 		if(flavour_text != "")
 			output_message += "\n"
 			output_message += SPAN("infoplain", "<b>[flavour_text]</b>")

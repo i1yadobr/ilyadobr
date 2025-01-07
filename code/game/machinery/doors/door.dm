@@ -40,10 +40,10 @@
 
 /obj/machinery/door/attack_generic(mob/user, damage)
 	if(damage >= 10)
-		visible_message("<span class='danger'>\The [user] smashes into \the [src]!</span>")
+		visible_message(SPAN("danger", "\The [user] smashes into \the [src]!"))
 		take_damage(damage)
 	else
-		visible_message("<span class='notice'>\The [user] bonks \the [src] harmlessly.</span>")
+		visible_message(SPAN("notice", "\The [user] bonks \the [src] harmlessly."))
 	attack_animation(user)
 
 /obj/machinery/door/New()
@@ -162,7 +162,7 @@
 	if(damage > 90)
 		destroy_hits--
 		if(destroy_hits <= 0)
-			visible_message("<span class='danger'>\The [src.name] disintegrates!</span>")
+			visible_message(SPAN("danger", "\The [src.name] disintegrates!"))
 			switch (Proj.damage_type)
 				if(BRUTE)
 					new /obj/item/stack/material/steel(src.loc, 2)
@@ -202,13 +202,13 @@
 
 	if(istype(I, /obj/item/stack/material) && I.get_material_name() == src.get_material_name())
 		if(stat & BROKEN)
-			to_chat(user, "<span class='notice'>It looks like \the [src] is pretty busted. It's going to need more than just patching up now.</span>")
+			to_chat(user, SPAN("notice", "It looks like \the [src] is pretty busted. It's going to need more than just patching up now."))
 			return
 		if(health >= maxhealth)
-			to_chat(user, "<span class='notice'>Nothing to fix!</span>")
+			to_chat(user, SPAN("notice", "Nothing to fix!"))
 			return
 		if(!density)
-			to_chat(user, "<span class='warning'>\The [src] must be closed before you can repair it.</span>")
+			to_chat(user, SPAN("warning", "\The [src] must be closed before you can repair it."))
 			return
 
 		//figure out how much metal we need
@@ -220,7 +220,7 @@
 		if(repairing)
 			transfer = stack.transfer_to(repairing, amount_needed - repairing.amount)
 			if(!transfer)
-				to_chat(user, "<span class='warning'>You must weld or remove \the [repairing] from \the [src] before you can add anything else.</span>")
+				to_chat(user, SPAN("warning", "You must weld or remove \the [repairing] from \the [src] before you can add anything else."))
 		else
 			repairing = stack.split(amount_needed, force=TRUE)
 			if(repairing)
@@ -229,21 +229,21 @@
 				repairing.uses_charge = FALSE //for clean robot door repair - stacks hint immortal if true
 
 		if(transfer)
-			to_chat(user, "<span class='notice'>You fit [transfer] [stack.singular_name]\s to damaged and broken parts on \the [src].</span>")
+			to_chat(user, SPAN("notice", "You fit [transfer] [stack.singular_name]\s to damaged and broken parts on \the [src]."))
 
 		return
 
 	if(repairing && isWelder(I))
 		if(!density)
-			to_chat(user, "<span class='warning'>\The [src] must be closed before you can repair it.</span>")
+			to_chat(user, SPAN("warning", "\The [src] must be closed before you can repair it."))
 			return
 
 		var/obj/item/weldingtool/welder = I
 		if(welder.remove_fuel(0,user))
-			to_chat(user, "<span class='notice'>You start to fix dents and weld \the [repairing] into place.</span>")
+			to_chat(user, SPAN("notice", "You start to fix dents and weld \the [repairing] into place."))
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
 			if(do_after(user, 5 * repairing.amount, src) && welder && welder.isOn())
-				to_chat(user, "<span class='notice'>You finish repairing the damage to \the [src].</span>")
+				to_chat(user, SPAN("notice", "You finish repairing the damage to \the [src]."))
 				health = between(health, health + repairing.amount*DOOR_REPAIR_AMOUNT, maxhealth)
 				update_icon()
 				qdel(repairing)
@@ -251,7 +251,7 @@
 		return
 
 	if(repairing && isCrowbar(I))
-		to_chat(user, "<span class='notice'>You remove \the [repairing].</span>")
+		to_chat(user, SPAN("notice", "You remove \the [repairing]."))
 		playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 		repairing.loc = user.loc
 		repairing = null
@@ -266,10 +266,10 @@
 				user.visible_message(SPAN("notice", "\The [user] smacks \the [src] with \the [I] with no visible effect."))
 				playsound(loc, hitsound, 10, 1)
 			else if(I.force < min_force)
-				user.visible_message("<span class='danger'>\The [user] hits \the [src] with \the [I] with no visible effect.</span>")
+				user.visible_message(SPAN("danger", "\The [user] hits \the [src] with \the [I] with no visible effect."))
 				playsound(loc, hitsound, 25, 1)
 			else
-				user.visible_message("<span class='danger'>\The [user] forcefully strikes \the [src] with \the [I]!</span>")
+				user.visible_message(SPAN("danger", "\The [user] forcefully strikes \the [src] with \the [I]!"))
 				playsound(loc, hitsound, 100, 1)
 				take_damage(I.force)
 				shake_animation(3, 3)
@@ -326,7 +326,7 @@
 /obj/machinery/door/set_broken(new_state)
 	. = ..()
 	if(. && new_state)
-		visible_message("<span class='warning'>\The [src.name] breaks!</span>")
+		visible_message(SPAN("warning", "\The [src.name] breaks!"))
 
 /obj/machinery/door/ex_act(severity)
 	switch(severity)

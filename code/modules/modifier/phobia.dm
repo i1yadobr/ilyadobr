@@ -60,36 +60,36 @@
 	desc = "Seeing a bunch of blood isn't really pleasant for most people, but for you, it is very distressing."
 	fear_decay_rate = 4
 
-	on_created_text = "<span class='warning'>You are terrified of seeing blood.</span>"
-	on_expired_text = "<span class='notice'>You feel that blood doesn't bother you, at least, as much as it used to.</span>"
+	on_created_text = SPAN("warning", "You are terrified of seeing blood.")
+	on_expired_text = SPAN("notice", "You feel that blood doesn't bother you, at least, as much as it used to.")
 
 	zero_fear_up = list(
-		"<span class='warning'><font size='3'>You see some blood nearby...</font></span>",
-		"<span class='warning'><font size='3'>You try to avoid looking at the blood nearby.</font></span>"
+		SPAN("warning", "<font size='3'>You see some blood nearby...</font>"),
+		SPAN("warning", "<font size='3'>You try to avoid looking at the blood nearby.</font>")
 		)
 	zero_fear_down = list(
-		"<span class='notice'>You feel better now, with no blood in sight.</span>",
-		"<span class='notice'>At last, the blood is gone.</span>",
-		"<span class='notice'>Hopefully you won't see anymore blood today.</span>"
+		SPAN("notice", "You feel better now, with no blood in sight."),
+		SPAN("notice", "At last, the blood is gone."),
+		SPAN("notice", "Hopefully you won't see anymore blood today.")
 		)
 
 	half_fear_up = list(
-		"<span class='danger'><font size='3'>You're still near the blood!</font></span>",
-		"<span class='danger'><font size='3'>So much blood... You can't stand it.</font></span>"
+		SPAN("danger", "<font size='3'>You're still near the blood!</font>"),
+		SPAN("danger", "<font size='3'>So much blood... You can't stand it.</font>")
 		)
 	half_fear_down = list(
-		"<span class='warning'>The blood is gone now, but you're still worked up.</span>",
-		"<span class='warning'>You can't see the blood now, but you're still anxious.</span>"
+		SPAN("warning", "The blood is gone now, but you're still worked up."),
+		SPAN("warning", "You can't see the blood now, but you're still anxious.")
 		)
 
 	full_fear_up = list(
-		"<span class='danger'><font size='4'>The blood is too much!</font></span>",
-		"<span class='danger'><font size='4'>There is so much blood here, you need to leave!</font></span>",
-		"<span class='danger'><font size='4'>You gotta get away from the blood!</font></span>"
+		SPAN("danger", "<font size='4'>The blood is too much!</font>"),
+		SPAN("danger", "<font size='4'>There is so much blood here, you need to leave!</font>"),
+		SPAN("danger", "<font size='4'>You gotta get away from the blood!</font>")
 		)
 	full_fear_down = list(
-		"<span class='danger'>The blood is gone, but you're still very anxious.</span>",
-		"<span class='danger'>No more blood... Please.</span>"
+		SPAN("danger", "The blood is gone, but you're still very anxious."),
+		SPAN("danger", "No more blood... Please.")
 		)
 
 /datum/modifier/trait/phobia/haemophobia/check_if_valid()
@@ -156,38 +156,38 @@
 	desc = "More commonly known as the fear of darkness.  The shadows can hide many dangers, which makes the prospect of going into the depths of Maintenance rather worrisome."
 	fear_decay_rate = 5
 
-	on_created_text = "<span class='warning'>You are terrified of the dark.</span>"
-	on_expired_text = "<span class='notice'>You feel that darkness isn't quite as scary anymore.</span>"
+	on_created_text = SPAN("warning", "You are terrified of the dark.")
+	on_expired_text = SPAN("notice", "You feel that darkness isn't quite as scary anymore.")
 
 	var/fear_threshold = 0.5 // Average lighting needs to be below this to start increasing fear.
 
 	zero_fear_up = list(
-		"<span class='warning'><font size='3'>It's so dark here!</font></span>",
-		"<span class='warning'><font size='3'>It's too dark!</font></span>"
+		SPAN("warning", "<font size='3'>It's so dark here!</font>"),
+		SPAN("warning", "<font size='3'>It's too dark!</font>")
 		)
 	zero_fear_down = list(
-		"<span class='notice'>You feel calmer, now that you're in the light.</span>",
-		"<span class='notice'>At last, no more darkness.</span>",
-		"<span class='notice'>The light makes you feel calmer.</span>"
+		SPAN("notice", "You feel calmer, now that you're in the light."),
+		SPAN("notice", "At last, no more darkness."),
+		SPAN("notice", "The light makes you feel calmer.")
 		)
 
 	half_fear_up = list(
-		"<span class='danger'><font size='3'>You need to escape this darkness!</font></span>",
-		"<span class='danger'><font size='3'>Something might be lurking near you, but you can't see in this darkness.</font></span>",
-		"<span class='danger'><font size='3'>You need to find a light!</font></span>",
+		SPAN("danger", "<font size='3'>You need to escape this darkness!</font>"),
+		SPAN("danger", "<font size='3'>Something might be lurking near you, but you can't see in this darkness.</font>"),
+		SPAN("danger", "<font size='3'>You need to find a light!</font>"),
 		)
 	half_fear_down = list(
-		"<span class='warning'>The darkness is gone, for now...</span>",
-		"<span class='warning'>You're not in the dark anymore, but you're still anxious.</span>"
+		SPAN("warning", "The darkness is gone, for now..."),
+		SPAN("warning", "You're not in the dark anymore, but you're still anxious.")
 		)
 
 	full_fear_up = list(
-		"<span class='danger'><font size='4'>What was that?</font></span>",
-		"<span class='danger'><font size='4'>Something is nearby...</font></span>"
+		SPAN("danger", "<font size='4'>What was that?</font>"),
+		SPAN("danger", "<font size='4'>Something is nearby...</font>")
 		)
 	full_fear_down = list(
-		"<span class='danger'>Light, at last!</span>",
-		"<span class='danger'>The darkness is finally gone!</span>"
+		SPAN("danger", "Light, at last!"),
+		SPAN("danger", "The darkness is finally gone!")
 		)
 
 /datum/modifier/trait/phobia/nyctophobe/should_fear()
@@ -235,36 +235,36 @@
 
 	var/open_tiles_needed = 15 // Tends to be just right, as maint triggers this but hallways don't.
 
-	on_created_text = "<span class='warning'>You are terrified of tight spaces.  Why did you come to space?</span>"
-	on_expired_text = "<span class='notice'>Small rooms aren't so bad now.</span>"
+	on_created_text = SPAN("warning", "You are terrified of tight spaces.  Why did you come to space?")
+	on_expired_text = SPAN("notice", "Small rooms aren't so bad now.")
 
 	zero_fear_up = list(
-		"<span class='warning'><font size='3'>This room is too small...</font></span>",
-		"<span class='warning'><font size='3'>The walls are too close together...</font></span>"
+		SPAN("warning", "<font size='3'>This room is too small...</font>"),
+		SPAN("warning", "<font size='3'>The walls are too close together...</font>")
 		)
 	zero_fear_down = list(
-		"<span class='notice'>You feel calmer, now that you're in a larger room.</span>",
-		"<span class='notice'>At last, the walls are far apart.</span>",
-		"<span class='notice'>The relatively open area makes you feel calmer.</span>"
+		SPAN("notice", "You feel calmer, now that you're in a larger room."),
+		SPAN("notice", "At last, the walls are far apart."),
+		SPAN("notice", "The relatively open area makes you feel calmer.")
 		)
 
 	half_fear_up = list(
-		"<span class='danger'><font size='3'>Your surroundings look like they are closing in.</font></span>",
-		"<span class='danger'><font size='3'>Is the room getting smaller?</font></span>",
-		"<span class='danger'><font size='3'>You need to get out of here!</font></span>",
+		SPAN("danger", "<font size='3'>Your surroundings look like they are closing in.</font>"),
+		SPAN("danger", "<font size='3'>Is the room getting smaller?</font>"),
+		SPAN("danger", "<font size='3'>You need to get out of here!</font>"),
 		)
 	half_fear_down = list(
-		"<span class='warning'>Your surroundings seem to have stopped closing in.</span>",
-		"<span class='warning'>You're not in a tight space anymore, but you're still anxious.</span>"
+		SPAN("warning", "Your surroundings seem to have stopped closing in."),
+		SPAN("warning", "You're not in a tight space anymore, but you're still anxious.")
 		)
 
 	full_fear_up = list(
-		"<span class='danger'><font size='4'>You need to escape!</font></span>",
-		"<span class='danger'><font size='4'>There's barely any room to move around!</font></span>"
+		SPAN("danger", "<font size='4'>You need to escape!</font>"),
+		SPAN("danger", "<font size='4'>There's barely any room to move around!</font>")
 		)
 	full_fear_down = list(
-		"<span class='danger'>The surroundings stop shrinking.</span>",
-		"<span class='danger'>The walls seem to have stopped.</span>"
+		SPAN("danger", "The surroundings stop shrinking."),
+		SPAN("danger", "The walls seem to have stopped.")
 		)
 
 /datum/modifier/trait/phobia/claustrophobe/should_fear()

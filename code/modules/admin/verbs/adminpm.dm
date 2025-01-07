@@ -3,7 +3,7 @@
 	set category = null
 	set name = "Admin PM Mob"
 	if(!holder)
-		to_chat(src, "<span class='warning'>Error: Admin-PM-Context: Only administrators may use this command.</span>")
+		to_chat(src, SPAN("warning", "Error: Admin-PM-Context: Only administrators may use this command."))
 		return
 	if( !ismob(M) || !M.client )	return
 	cmd_admin_pm(M.client,null)
@@ -14,7 +14,7 @@
 	set category = "Admin"
 	set name = "Admin PM"
 	if(!holder)
-		to_chat(src, "<span class='warning'>Error: Admin-PM-Panel: Only administrators may use this command.</span>")
+		to_chat(src, SPAN("warning", "Error: Admin-PM-Panel: Only administrators may use this command."))
 		return
 	var/list/client/targets[0]
 	for(var/client/T)
@@ -38,15 +38,15 @@
 
 /client/proc/cmd_admin_pm(client/C, msg = null, datum/ticket/ticket = null)
 	if(!holder && !(C?.holder))
-		to_chat(src, "<span class='warning'>Error: Admin-PM: Non-admin to non-admin PM communication is forbidden.</span>")
+		to_chat(src, SPAN("warning", "Error: Admin-PM: Non-admin to non-admin PM communication is forbidden."))
 		return
 
 	if(prefs.muted & MUTE_ADMINHELP)
-		to_chat(src, "<span class='warning'>Error: Private-Message: You are unable to use PM-s (muted).</span>")
+		to_chat(src, SPAN("warning", "Error: Private-Message: You are unable to use PM-s (muted)."))
 		return
 
 	if(!istype(C,/client))
-		to_chat(src, "<span class='warning'>Error: Private-Message: Client not found. They may have lost connection!</span>")
+		to_chat(src, SPAN("warning", "Error: Private-Message: Client not found. They may have lost connection!"))
 		return
 
 	var/recieve_pm_type = holder?.rank || "Player"
@@ -60,8 +60,8 @@
 
 		if(!msg)	return
 		if(!C)
-			if(holder)	to_chat(src, "<span class='warning'>Error: Private-Message: Client not found.</span>")
-			else		to_chat(src, "<span class='warning'>Error: Private-Message: Client not found. They may have lost connection, so try using an adminhelp!</span>")
+			if(holder)	to_chat(src, SPAN("warning", "Error: Private-Message: Client not found."))
+			else		to_chat(src, SPAN("warning", "Error: Private-Message: Client not found. They may have lost connection, so try using an adminhelp!"))
 			return
 
 		msg = sanitize(msg)
@@ -85,10 +85,10 @@
 			ticket = new /datum/ticket(receiver_lite)
 			ticket.take(sender_lite)
 		else
-			to_chat(src, "<span class='notice'>You do not have an open ticket. Please use the adminhelp verb to open a ticket.</span>")
+			to_chat(src, SPAN("notice", "You do not have an open ticket. Please use the adminhelp verb to open a ticket."))
 			return
 	else if(ticket.status != TICKET_ASSIGNED && sender_lite.ckey == ticket.owner.ckey)
-		to_chat(src, "<span class='notice'>Your ticket is not open for conversation. Please wait for an administrator to receive your adminhelp.</span>")
+		to_chat(src, SPAN("notice", "Your ticket is not open for conversation. Please wait for an administrator to receive your adminhelp."))
 		return
 
 	// if the sender is an admin and they're not assigned to the ticket, ask them if they want to take/join it, unless the admin is responding to their own ticket
@@ -99,29 +99,27 @@
 	var/recieve_message
 
 	if(holder && !C.holder)
-		recieve_message = "<span class='pm'>[SPAN("howto", "<b>-- Click the [recieve_pm_type]'s name to reply --</b>")]</span>"
+		recieve_message = SPAN("pm", "[SPAN("howto", "<b>-- Click the [recieve_pm_type]'s name to reply --</b>")]")
 		recieve_message += "\n"
 		if(C.adminhelped)
 			to_chat(C, recieve_message)
 			C.adminhelped = 0
 
-	var/sender_message = "<span class='pm'><span class='out'>" + create_text_tag("pm_out_alt", "PM") + " to [SPAN("name", "[get_options_bar(C, holder ? 1 : 0, holder ? 1 : 0, 1)]")]"
+	var/sender_message = create_text_tag("pm_out_alt", "PM") + " to [SPAN("name", "[get_options_bar(C, holder ? 1 : 0, holder ? 1 : 0, 1)]")]"
 	if(holder)
 		sender_message += " (<a href='?_src_=holder;take_ticket=\ref[ticket]'>[(ticket.status == TICKET_OPEN) ? "TAKE" : "JOIN"]</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>)"
 		sender_message += ": [SPAN("message linkify", "[generate_ahelp_key_words(mob, msg)]")]"
 	else
 		sender_message += ": [SPAN("message linkify", "[msg]")]"
-	sender_message += "</span></span>"
-	to_chat(src, sender_message)
+	to_chat(src, SPAN("pm", SPAN("out", sender_message)))
 
-	var/receiver_message = "<span class='pm'><span class='in'>" + create_text_tag("pm_in", "") + " <b>\[[recieve_pm_type] PM\]</b> [SPAN("name", "[get_options_bar(src, C.holder ? 1 : 0, C.holder ? 1 : 0, 1)]")]"
+	var/receiver_message = create_text_tag("pm_in", "") + " <b>\[[recieve_pm_type] PM\]</b> [SPAN("name", "[get_options_bar(src, C.holder ? 1 : 0, C.holder ? 1 : 0, 1)]")]"
 	if(C.holder)
 		receiver_message += " (<a href='?_src_=holder;take_ticket=\ref[ticket]'>[(ticket.status == TICKET_OPEN) ? "TAKE" : "JOIN"]</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>)"
 		receiver_message += ": [SPAN("message linkify", "[generate_ahelp_key_words(C.mob, msg)]")]"
 	else
 		receiver_message += ": [SPAN("message linkify", "[msg]")]"
-	receiver_message += "</span></span>"
-	to_chat(C, receiver_message)
+	to_chat(C, SPAN("pm", SPAN("in", receiver_message)))
 	//play the recieving admin the adminhelp sound (if they have them enabled)
 	//non-admins shouldn't be able to disable this
 	if(C.get_preference_value(/datum/client_preference/staff/play_adminhelp_ping) == GLOB.PREF_HEAR)
@@ -139,4 +137,4 @@
 		if(X == C || X == src)
 			continue
 		if(X.key != key && X.key != C.key && (X.holder.rights & R_ADMIN|R_MOD|R_MENTOR))
-			to_chat(X, "<span class='pm'>[SPAN("other", "" + create_text_tag("pm_other", "PM") + " [SPAN("name", "[key_name(src, X, 0, ticket)]")] to [SPAN("name", "[key_name(C, X, 0, ticket)]")] (<a href='?_src_=holder;take_ticket=\ref[ticket]'>[(ticket.status == TICKET_OPEN) ? "TAKE" : "JOIN"]</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>): [SPAN("message linkify", "[msg]")]")]</span>")
+			to_chat(X, SPAN("pm", "[SPAN("other", "" + create_text_tag("pm_other", "PM") + " [SPAN("name", "[key_name(src, X, 0, ticket)]")] to [SPAN("name", "[key_name(C, X, 0, ticket)]")] (<a href='?_src_=holder;take_ticket=\ref[ticket]'>[(ticket.status == TICKET_OPEN) ? "TAKE" : "JOIN"]</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>): [SPAN("message linkify", "[msg]")]")]"))

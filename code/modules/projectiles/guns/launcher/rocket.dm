@@ -36,11 +36,11 @@
 			if(!user.drop(I, src))
 				return
 			rockets += I
-			to_chat(user, "<span class='notice'>You put the rocket in [src].</span>")
+			to_chat(user, SPAN("notice", "You put the rocket in [src]."))
 			playsound(usr.loc, 'sound/effects/weapons/gun/rpg_reload.ogg', 25, 1)
-			to_chat(user, "<span class='notice'>[rockets.len] / [max_rockets] rockets.</span>")
+			to_chat(user, SPAN("notice", "[rockets.len] / [max_rockets] rockets."))
 		else
-			to_chat(usr, "<span class='warning'>\The [src] cannot hold more rockets.</span>")
+			to_chat(usr, SPAN("warning", "\The [src] cannot hold more rockets."))
 
 /obj/item/gun/launcher/rocket/consume_next_projectile()
 	if(rockets.len)

@@ -34,7 +34,7 @@
 	if(istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
 		if(H.species && H.species.name != SPECIES_VOX)
-			to_chat(user, "<span class='warning'>\The [src] does not respond to you!</span>")
+			to_chat(user, SPAN("warning", "\The [src] does not respond to you!"))
 			return 0
 	return ..()
 

@@ -79,7 +79,7 @@
 	if(H.mind)
 		H.mind.transfer_to(brainmob)
 
-	to_chat(brainmob, "<span class='notice'>You feel slightly disoriented. That's normal when you're just \a [initial(src.name)].</span>")
+	to_chat(brainmob, SPAN("notice", "You feel slightly disoriented. That's normal when you're just \a [initial(src.name)]."))
 	callHook("debrain", list(brainmob))
 
 /obj/item/organ/internal/brain/_examine_text(mob/user) // -- TLE
@@ -224,10 +224,10 @@
 	if(damage > 0.1*max_damage && prob(1))
 		owner.custom_pain("Your head feels numb and painful.",10)
 	if(is_bruised() && prob(1) && owner.eye_blurry <= 0)
-		to_chat(owner, "<span class='warning'>It becomes hard to see for some reason.</span>")
+		to_chat(owner, SPAN("warning", "It becomes hard to see for some reason."))
 		owner.eye_blurry = 10
 	if(damage >= 0.5*max_damage && prob(1) && owner.get_active_hand())
-		to_chat(owner, "<span class='danger'>Your hand won't respond properly, and you drop what you are holding!</span>")
+		to_chat(owner, SPAN("danger", "Your hand won't respond properly, and you drop what you are holding!"))
 		if(prob(50))
 			owner.drop_active_hand()
 		else
@@ -236,5 +236,5 @@
 		owner.slurring = max(owner.slurring, 2)
 	if(is_broken())
 		if(!owner.lying)
-			to_chat(owner, "<span class='danger'>You black out!</span>")
+			to_chat(owner, SPAN("danger", "You black out!"))
 		owner.Paralyse(10)

@@ -38,7 +38,7 @@
 
 	if(!clown_check(user))	return
 	if(broken)
-		to_chat(user, "<span class='warning'>\The [src] is broken.</span>")
+		to_chat(user, SPAN("warning", "\The [src] is broken."))
 		return
 
 	flash_recharge()
@@ -50,12 +50,12 @@
 			last_used = world.time
 			if(prob(times_used))	//if you use it 5 times in a minute it has a 10% chance to break!
 				broken = 1
-				to_chat(user, "<span class='warning'>The bulb has burnt out!</span>")
+				to_chat(user, SPAN("warning", "The bulb has burnt out!"))
 				icon_state = "[initial(icon_state)]_burnt"
 				return
 			times_used++
 		else	//can only use it 5 times a minute
-			to_chat(user, "<span class='warning'>*click* *click*</span>")
+			to_chat(user, SPAN("warning", "*click* *click*"))
 			return
 
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
@@ -91,7 +91,7 @@
 		if (R.sensor_mode != FLASH_PROTECTION_VISION)
 			M.Weaken(rand(str_min,9))
 		else
-			to_chat(user, "<span class='warning'>\The [src] doesn't seem to work on [M].</span>")
+			to_chat(user, SPAN("warning", "\The [src] doesn't seem to work on [M]."))
 
 	else
 		flashfail = 1
@@ -113,11 +113,11 @@
 	if(!flashfail)
 		flick("[initial(icon_state)]_on", src)
 		if(!issilicon(M))
-			user.visible_message("<span class='disarm'>[user] blinds [M] with \the [src]!</span>")
+			user.visible_message(SPAN("disarm", "[user] blinds [M] with \the [src]!"))
 		else
-			user.visible_message("<span class='notice'>[user] overloads [M]'s sensors with \the [src]!</span>")
+			user.visible_message(SPAN("notice", "[user] overloads [M]'s sensors with \the [src]!"))
 	else
-		user.visible_message("<span class='notice'>[user] fails to blind [M] with \the [src]!</span>")
+		user.visible_message(SPAN("notice", "[user] fails to blind [M] with \the [src]!"))
 	return
 
 
@@ -127,7 +127,7 @@
 	if(!user || !clown_check(user)) 	return
 
 	if(broken)
-		user.show_message("<span class='warning'>The [src.name] is broken</span>", 2)
+		user.show_message(SPAN("warning", "The [src.name] is broken"), 2)
 		return
 
 	flash_recharge()
@@ -138,12 +138,12 @@
 		if(0 to 5)
 			if(prob(2*times_used))	//if you use it 5 times in a minute it has a 10% chance to break!
 				broken = 1
-				to_chat(user, "<span class='warning'>The bulb has burnt out!</span>")
+				to_chat(user, SPAN("warning", "The bulb has burnt out!"))
 				icon_state = "[initial(icon_state)]_burnt"
 				return
 			times_used++
 		else	//can only use it  5 times a minute
-			user.show_message("<span class='warning'>*click* *click*</span>", 2)
+			user.show_message(SPAN("warning", "*click* *click*"), 2)
 			return
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	playsound(src.loc, 'sound/weapons/flash.ogg', 100, 1)
@@ -190,7 +190,7 @@
 					M.Stun(5)
 					M.flash_eyes()
 					for(var/mob/O in viewers(M, null))
-						O.show_message("<span class='disarm'>[M] is blinded by the [name]!</span>")
+						O.show_message(SPAN("disarm", "[M] is blinded by the [name]!"))
 	..()
 
 /obj/item/device/flash/synthetic //not for regular use, weaker effects

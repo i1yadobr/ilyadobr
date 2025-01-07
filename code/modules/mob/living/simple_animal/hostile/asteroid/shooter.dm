@@ -141,7 +141,7 @@
 		user.set_sight(user.sight|SEE_MOBS|SEE_OBJS|SEE_TURFS)
 		user.set_see_in_dark(8)
 		user.set_see_invisible(SEE_INVISIBLE_LEVEL_TWO)
-		to_chat(user, "<span class='notice'>You look into the dead yet still hateful Eye of the Beholder and feel like it is looking into your own eyes. You look around and realize that walls suddenly disappear in the bright flash. When you look back at your hands there is no beholder eye. Where did it go?</span>")
+		to_chat(user, SPAN("notice", "You look into the dead yet still hateful Eye of the Beholder and feel like it is looking into your own eyes. You look around and realize that walls suddenly disappear in the bright flash. When you look back at your hands there is no beholder eye. Where did it go?"))
 		var/location = get_turf(src.loc)
 		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 		s.set_up(2, 1, location)
@@ -150,6 +150,6 @@
 			switch(get_dist(M, location))
 				if(0 to 5)
 					M.flash_eyes()
-		src.visible_message("<span class='warning'>\The [src] disappears in a bright flash!</span>")
+		src.visible_message(SPAN("warning", "\The [src] disappears in a bright flash!"))
 		qdel(src)
 		return

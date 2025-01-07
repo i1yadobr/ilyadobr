@@ -81,7 +81,7 @@
 		admin_attack_log(G.assailant, G.affecting, "tightens their grip on their victim to [upgrab.state_name]", "was grabbed more tightly to [upgrab.state_name]", "tightens grip to [upgrab.state_name] on")
 		return upgrab
 	else
-		to_chat(G.assailant, "<span class='warning'>[string_process(G, fail_up)]</span>")
+		to_chat(G.assailant, SPAN("warning", "[string_process(G, fail_up)]"))
 		return
 
 /datum/grab/proc/downgrade(obj/item/grab/G)
@@ -142,7 +142,7 @@
 					make_log(G, harm_action)
 
 	else
-		to_chat(G.assailant, "<span class='warning'>You must wait before you can do that.</span>")
+		to_chat(G.assailant, SPAN("warning", "You must wait before you can do that."))
 
 /datum/grab/proc/make_log(obj/item/grab/G, action)
 	if(!G.affecting && !G.assailant)
@@ -269,7 +269,7 @@
 		p_mult += 0.1
 
 	//if(break_strength < 1)
-	//	to_chat(G.assailant, "<span class='warning'>You try to break free but feel that unless something changes, you'll never escape!</span>")
+	//	to_chat(G.assailant, SPAN("warning", "You try to break free but feel that unless something changes, you'll never escape!"))
 	//	return
 
 	var/p_lost = (5.5 + affecting.poise/10 - assailant.poise/20) * p_mult

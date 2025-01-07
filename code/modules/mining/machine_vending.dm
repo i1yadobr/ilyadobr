@@ -130,7 +130,7 @@
 				if(usr.drop(I, src))
 					inserted_id = I
 			else
-				to_chat(usr, "<span class='danger'>No valid ID.</span>")
+				to_chat(usr, SPAN("danger", "No valid ID."))
 	if(href_list["purchase"])
 		if(istype(inserted_id))
 			var/datum/data/mining_equipment/equipment = locate(href_list["purchase"])

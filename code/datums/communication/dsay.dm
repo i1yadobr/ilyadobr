@@ -30,7 +30,7 @@
 		if(!speech_method.can_receive(communicator, M))
 			continue
 		var/sent_message = speech_method.get_message(communicator, M, message)
-		receive_communication(communicator, M, "<span class='deadsay'>" + create_text_tag("dead", "DEAD") + " [sent_message]</span>")
+		receive_communication(communicator, M, SPAN("deadsay", "" + create_text_tag("dead", "DEAD") + " [sent_message]"))
 
 /decl/communication_channel/dsay/get_message_type()
 	return MESSAGE_TYPE_DEADCHAT
@@ -39,7 +39,7 @@
 	if(!istype(communicator))
 		return FALSE
 	if(communicator.mob.stat != DEAD)
-		to_chat(communicator, "<span class='warning'>You're not sufficiently dead to use DSAY!</span>")
+		to_chat(communicator, SPAN("warning", "You're not sufficiently dead to use DSAY!"))
 		return FALSE
 	return DSAY_ASK_BASE
 
@@ -87,7 +87,7 @@
 			lname = "[keyname] ([name])"
 		else										// Everyone else (dead people who didn't ghost yet, etc.)
 			lname = name
-	return "<span class='name'>[lname]</span>"
+	return SPAN("name", "[lname]")
 
 /decl/dsay_communication/proc/get_message(client/C, mob/M, message)
 	var/say_verb = pick("complains","moans","whines","laments","blubbers")
@@ -111,7 +111,7 @@
 	if(!istype(communicator))
 		return FALSE
 	if(!communicator.holder)
-		to_chat(communicator, "<span class='warning'>You do not have sufficent permissions to use DSAY!</span>")
+		to_chat(communicator, SPAN("warning", "You do not have sufficent permissions to use DSAY!"))
 		return FALSE
 	return DSAY_ASK_BASE
 

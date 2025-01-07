@@ -96,12 +96,12 @@
 		if(M.faction != "xenomorph")
 			to_chat(M, "You touch \the [src].")
 		else
-			to_chat(M, "<span class='alium'>\The [src] is not ready to hatch yet.</alium>")
+			to_chat(M, SPAN("alium", "\The [src] is not ready to hatch yet."))
 		return
 	if(M.faction != "xenomorph")
 		to_chat(M, "You touch \the [src]... And it starts moving.")
 	else
-		to_chat(M, "<span class='alium'>You caress \the [src] as it hatches at your command.</alium>")
+		to_chat(M, SPAN("alium", "You caress \the [src] as it hatches at your command."))
 	hatch()
 
 /obj/structure/alien/egg/_examine_text(mob/user)
@@ -217,9 +217,9 @@
 
 /obj/effect/alien/weeds/attackby(obj/item/W, mob/user)
 	if(W.attack_verb.len)
-		visible_message("<span class='danger'>\The [src] have been [pick(W.attack_verb)] with \the [W][(user ? " by [user]." : ".")]</span>")
+		visible_message(SPAN("danger", "\The [src] have been [pick(W.attack_verb)] with \the [W][(user ? " by [user]." : ".")]"))
 	else
-		visible_message("<span class='danger'>\The [src] have been attacked with \the [W][(user ? " by [user]." : ".")]</span>")
+		visible_message(SPAN("danger", "\The [src] have been attacked with \the [W][(user ? " by [user]." : ".")]"))
 
 	if(istype(W, /obj/item/weldingtool))
 		var/obj/item/weldingtool/WT = W
@@ -232,7 +232,7 @@
 			qdel(src)
 
 /obj/effect/alien/weeds/attack_generic(mob/user, damage, attack_verb)
-	visible_message("<span class='danger'>[user] [attack_verb] the [src]!</span>")
+	visible_message(SPAN("danger", "[user] [attack_verb] the [src]!"))
 	user.do_attack_animation(src)
 	if(prob(50 + damage))
 		qdel(src)

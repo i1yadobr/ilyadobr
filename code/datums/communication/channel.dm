@@ -26,17 +26,17 @@
 		return FALSE
 
 	if(config_setting && !config.misc.vars[config_setting] && !check_rights(R_INVESTIGATE,0,communicator))
-		to_chat(communicator, "<span class='danger'>[name] is globally muted.</span>")
+		to_chat(communicator, SPAN("danger", "[name] is globally muted."))
 		return FALSE
 
 	var/client/C = communicator.get_client()
 
 	if(C && mute_setting && (C.prefs.muted & mute_setting))
-		to_chat(communicator, "<span class='danger'>You cannot use [name] (muted).</span>")
+		to_chat(communicator, SPAN("danger", "You cannot use [name] (muted)."))
 		return FALSE
 
 	if(C && (flags & COMMUNICATION_NO_GUESTS) && IsGuestKey(C.key) && !check_whitelist(C.ckey))
-		to_chat(communicator, "<span class='danger'>Guests may not use the [name] channel.</span>")
+		to_chat(communicator, SPAN("danger", "Guests may not use the [name] channel."))
 		return FALSE
 
 	return TRUE

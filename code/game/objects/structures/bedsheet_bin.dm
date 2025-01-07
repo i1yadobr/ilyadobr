@@ -21,9 +21,9 @@ LINEN BINS
 
 /obj/item/bedsheet/attackby(obj/item/I, mob/user)
 	if(is_sharp(I))
-		user.visible_message("<span class='notice'>\The [user] begins cutting up \the [src] with \a [I].</span>", "<span class='notice'>You begin cutting up \the [src] with \the [I].</span>")
+		user.visible_message(SPAN("notice", "\The [user] begins cutting up \the [src] with \a [I]."), SPAN("notice", "You begin cutting up \the [src] with \the [I]."))
 		if(do_after(user, 50, src))
-			to_chat(user, "<span class='notice'>You cut \the [src] into pieces!</span>")
+			to_chat(user, SPAN("notice", "You cut \the [src] into pieces!"))
 			for(var/i in 1 to rand(2,5))
 				new /obj/item/reagent_containers/rag(get_turf(src))
 			qdel(src)
@@ -194,10 +194,10 @@ LINEN BINS
 	if(istype(I, /obj/item/bedsheet) && user.drop(I, src))
 		sheets.Add(I)
 		amount++
-		to_chat(user, "<span class='notice'>You put [I] in [src].</span>")
+		to_chat(user, SPAN("notice", "You put [I] in [src]."))
 	else if(amount && !hidden && I.w_class < ITEM_SIZE_HUGE && user.drop(I, src)) // make sure there's sheets to hide it among, make sure nothing else is hidden in there.
 		hidden = I
-		to_chat(user, "<span class='notice'>You hide [I] among the sheets.</span>")
+		to_chat(user, SPAN("notice", "You hide [I] among the sheets."))
 
 /obj/structure/bedsheetbin/attack_hand(mob/user as mob)
 	if(amount >= 1)
@@ -212,11 +212,11 @@ LINEN BINS
 			B = new /obj/item/bedsheet(loc)
 
 		user.pick_or_drop(B, loc)
-		to_chat(user, "<span class='notice'>You take [B] out of [src].</span>")
+		to_chat(user, SPAN("notice", "You take [B] out of [src]."))
 
 		if(hidden)
 			hidden.loc = user.loc
-			to_chat(user, "<span class='notice'>[hidden] falls out of [B]!</span>")
+			to_chat(user, SPAN("notice", "[hidden] falls out of [B]!"))
 			hidden = null
 
 
@@ -235,7 +235,7 @@ LINEN BINS
 			B = new /obj/item/bedsheet(loc)
 
 		B.loc = loc
-		to_chat(user, "<span class='notice'>You telekinetically remove [B] from [src].</span>")
+		to_chat(user, SPAN("notice", "You telekinetically remove [B] from [src]."))
 		update_icon()
 
 		if(hidden)

@@ -78,8 +78,8 @@ var/datum/species/shapeshifter/promethean/prometheans
 
 /datum/species/shapeshifter/promethean/hug(mob/living/carbon/human/H,mob/living/target)
 	var/datum/gender/G = gender_datums[target.gender]
-	H.visible_message("<span class='notice'>\The [H] glomps [target] to make [G.him] feel better!</span>", \
-					"<span class='notice'>You glomps [target] to make [G.him] feel better!</span>")
+	H.visible_message(SPAN("notice", "\The [H] glomps [target] to make [G.him] feel better!"), \
+					SPAN("notice", "You glomps [target] to make [G.him] feel better!"))
 	H.apply_stored_shock_to(target)
 
 /datum/species/shapeshifter/promethean/handle_death(mob/living/carbon/human/H)
@@ -106,7 +106,7 @@ var/datum/species/shapeshifter/promethean/prometheans
 		if(I.damage > 0)
 			I.damage = max(I.damage - heal_rate, 0)
 			if (prob(5))
-				to_chat(H, "<span class='notice'>You feel a soothing sensation within your [I.name]...</span>")
+				to_chat(H, SPAN("notice", "You feel a soothing sensation within your [I.name]..."))
 			return 1
 
 	// Replace completely missing limbs.
@@ -121,7 +121,7 @@ var/datum/species/shapeshifter/promethean/prometheans
 			var/limb_path = organ_data["path"]
 			var/obj/item/organ/O = new limb_path(H)
 			organ_data["descriptor"] = O.name
-			to_chat(H, "<span class='notice'>You feel a slithering sensation as your [O.name] reforms.</span>")
+			to_chat(H, SPAN("notice", "You feel a slithering sensation as your [O.name] reforms."))
 			H.update_body()
 			return 1
 
@@ -151,9 +151,9 @@ var/datum/species/shapeshifter/promethean/prometheans
 		if(11 to 20)
 			return "[G.He] [G.is] glowing gently with moderate levels of electrical activity.\n"
 		if(21 to 35)
-			return "<span class='warning'>[G.He] [G.is] glowing brightly with high levels of electrical activity.</span>"
+			return SPAN("warning", "[G.He] [G.is] glowing brightly with high levels of electrical activity.")
 		if(35 to INFINITY)
-			return "<span class='danger'>[G.He] [G.is] radiating massive levels of electrical activity!</span>"
+			return SPAN("danger", "[G.He] [G.is] radiating massive levels of electrical activity!")
 
 /datum/species/shapeshifter/promethean/is_eligible_for_antag_spawn(antag_id)
 	if(antag_id == MODE_TRAITOR) // The only role that looks somewhat suitable

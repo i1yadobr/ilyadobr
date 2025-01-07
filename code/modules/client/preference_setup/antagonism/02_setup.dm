@@ -46,7 +46,7 @@
 		if(US.desc)
 			. += "[US.desc]<br>"
 	if(!pref.uplink_sources.len)
-		. += "<span class='warning'>You will not receive an uplink unless you add an uplink source!</span>"
+		. += SPAN("warning", "You will not receive an uplink unless you add an uplink source!")
 
 /datum/category_item/player_setup_item/antagonism/basic/OnTopic(href,list/href_list, mob/user)
 	if(href_list["add_source"])

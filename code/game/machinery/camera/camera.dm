@@ -199,7 +199,7 @@
 		set_status(0)
 		user.do_attack_animation(src)
 		user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
-		visible_message("<span class='warning'>\The [user] slashes at [src]!</span>")
+		visible_message(SPAN("warning", "\The [user] slashes at [src]!"))
 		playsound(src.loc, 'sound/weapons/slash.ogg', 100, 1)
 		add_hiddenprint(user)
 		destroy()
@@ -208,11 +208,11 @@
 	update_coverage()
 	// DECONSTRUCTION
 	if(isScrewdriver(W))
-//		to_chat(user, "<span class='notice'>You start to [panel_open ? "close" : "open"] the camera's panel.</span>")
+//		to_chat(user, SPAN("notice", "You start to [panel_open ? "close" : "open"] the camera's panel."))
 		//if(toggle_panel(user)) // No delay because no one likes screwdrivers trying to be hip and have a duration cooldown
 		panel_open = !panel_open
-		user.visible_message("<span class='warning'>[user] screws the camera's panel [panel_open ? "open" : "closed"]!</span>",
-		"<span class='notice'>You screw the camera's panel [panel_open ? "open" : "closed"].</span>")
+		user.visible_message(SPAN("warning", "[user] screws the camera's panel [panel_open ? "open" : "closed"]!"),
+		SPAN("notice", "You screw the camera's panel [panel_open ? "open" : "closed"]."))
 		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 
 	else if((isWirecutter(W) || isMultitool(W)) && panel_open)
@@ -230,11 +230,11 @@
 				assembly.dir = src.dir
 				if(stat & BROKEN)
 					assembly.state = 2
-					to_chat(user, "<span class='notice'>You repaired \the [src] frame.</span>")
+					to_chat(user, SPAN("notice", "You repaired \the [src] frame."))
 					cancelCameraAlarm()
 				else
 					assembly.state = 1
-					to_chat(user, "<span class='notice'>You cut \the [src] free from the wall.</span>")
+					to_chat(user, SPAN("notice", "You cut \the [src] free from the wall."))
 					new /obj/item/stack/cable_coil(src.loc, length=2)
 				assembly_ref = null //so qdel doesn't eat it.
 			qdel(src)
@@ -267,7 +267,7 @@
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		if (W.force >= src.toughness)
 			user.do_attack_animation(src)
-			visible_message("<span class='warning'><b>[src] has been [pick(W.attack_verb)] with [W] by [user]!</b></span>")
+			visible_message(SPAN("warning", "<b>[src] has been [pick(W.attack_verb)] with [W] by [user]!</b>"))
 			shake_animation(stime = 3)
 			obj_attack_sound(W)
 		take_damage(W.force)
@@ -286,17 +286,17 @@
 	set_status(!src.status)
 	if (!(src.status))
 		if(user)
-			visible_message("<span class='notice'> [user] has deactivated [src]!</span>")
+			visible_message(SPAN("notice", " [user] has deactivated [src]!"))
 		else
-			visible_message("<span class='notice'> [src] clicks and shuts down. </span>")
+			visible_message(SPAN("notice", " [src] clicks and shuts down. "))
 		playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
 		icon_state = "[initial(icon_state)]1"
 		add_hiddenprint(user)
 	else
 		if(user)
-			visible_message("<span class='notice'> [user] has reactivated [src]!</span>")
+			visible_message(SPAN("notice", " [user] has reactivated [src]!"))
 		else
-			visible_message("<span class='notice'> [src] clicks and reactivates itself. </span>")
+			visible_message(SPAN("notice", " [src] clicks and reactivates itself. "))
 		playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
 		icon_state = initial(icon_state)
 		add_hiddenprint(user)
@@ -411,7 +411,7 @@
 		return 0
 
 	// Do after stuff here
-	to_chat(user, "<span class='notice'>You start to weld the [src]..</span>")
+	to_chat(user, SPAN("notice", "You start to weld the [src].."))
 	playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
 	WT.eyecheck(user)
 	busy = 1
@@ -428,7 +428,7 @@
 		return
 
 	if(stat & BROKEN)
-		to_chat(user, "<span class='warning'>\The [src] is broken.</span>")
+		to_chat(user, SPAN("warning", "\The [src] is broken."))
 		return
 
 	user.set_machine(src)

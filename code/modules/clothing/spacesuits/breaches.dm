@@ -110,9 +110,9 @@
 				amount -= needs
 
 			if(existing.damtype == BRUTE)
-				visible_message("<span class='warning'>\The [existing.descriptor] on [src] gapes wider[existing.patched ? ", tearing the patch" : ""]!</span>")
+				visible_message(SPAN("warning", "\The [existing.descriptor] on [src] gapes wider[existing.patched ? ", tearing the patch" : ""]!"))
 			else if(existing.damtype == BURN)
-				visible_message("<span class='warning'>\The [existing.descriptor] on [src] widens[existing.patched ? ", ruining the patch" : ""]!</span>")
+				visible_message(SPAN("warning", "\The [existing.descriptor] on [src] widens[existing.patched ? ", ruining the patch" : ""]!"))
 
 			existing.patched = FALSE
 
@@ -128,9 +128,9 @@
 		B.holder = src
 
 		if(B.damtype == BRUTE)
-			visible_message("<span class='warning'>\A [B.descriptor] opens up on [src]!</span>")
+			visible_message(SPAN("warning", "\A [B.descriptor] opens up on [src]!"))
 		else if(B.damtype == BURN)
-			visible_message("<span class='warning'>\A [B.descriptor] marks the surface of [src]!</span>")
+			visible_message(SPAN("warning", "\A [B.descriptor] marks the surface of [src]!"))
 
 	calc_breach_damage()
 
@@ -189,7 +189,7 @@
 			return
 
 		if(istype(src.loc,/mob/living))
-			to_chat(user, "<span class='warning'>How do you intend to patch a powersuit while someone is wearing it?</span>")
+			to_chat(user, SPAN("warning", "How do you intend to patch a powersuit while someone is wearing it?"))
 			return
 
 		if(burn_damage <= 0)
@@ -205,7 +205,7 @@
 	else if(isWelder(W))
 
 		if(istype(src.loc,/mob/living))
-			to_chat(user, "<span class='warning'>How do you intend to patch a powersuit while someone is wearing it?</span>")
+			to_chat(user, SPAN("warning", "How do you intend to patch a powersuit while someone is wearing it?"))
 			return
 
 		if (brute_damage <= 0)
@@ -214,7 +214,7 @@
 
 		var/obj/item/weldingtool/WT = W
 		if(!WT.remove_fuel(5))
-			to_chat(user, "<span class='warning'>You need more welding fuel to repair this suit.</span>")
+			to_chat(user, SPAN("warning", "You need more welding fuel to repair this suit."))
 			return
 
 		repair_breaches(BRUTE, 3, user)

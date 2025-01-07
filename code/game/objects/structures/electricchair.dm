@@ -44,11 +44,11 @@
 	s.start()
 	if(buckled_mob)
 		buckled_mob.burn_skin(85)
-		to_chat(buckled_mob, "<span class='danger'>You feel a deep shock course through your body!</span>")
+		to_chat(buckled_mob, SPAN("danger", "You feel a deep shock course through your body!"))
 		sleep(1)
 		buckled_mob.burn_skin(85)
 		buckled_mob.Stun(600)
-	visible_message("<span class='danger'>The electric chair went off!</span>", "<span class='danger'>You hear a deep sharp shock!</span>")
+	visible_message(SPAN("danger", "The electric chair went off!"), SPAN("danger", "You hear a deep sharp shock!"))
 
 	A.power_light = light
 	A.update_icon()

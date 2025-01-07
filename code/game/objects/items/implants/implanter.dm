@@ -30,16 +30,16 @@
 
 	if(can_use(usr))
 		if(!imp)
-			to_chat(usr, "<span class='notice'>There is no implant to remove.</span>")
+			to_chat(usr, SPAN("notice", "There is no implant to remove."))
 			return
 		usr.pick_or_drop(imp, loc)
-		to_chat(usr, "<span class='notice'>You remove \the [imp] from \the [src].</span>")
+		to_chat(usr, SPAN("notice", "You remove \the [imp] from \the [src]."))
 		name = "implanter"
 		imp = null
 		update_icon()
 		return
 	else
-		to_chat(usr, "<span class='notice'>You cannot do this in your current condition.</span>")
+		to_chat(usr, SPAN("notice", "You cannot do this in your current condition."))
 
 /obj/item/implanter/proc/can_use()
 
@@ -58,7 +58,7 @@
 	if(!imp && istype(I, /obj/item/implant))
 		if(!user.drop(I, src))
 			return
-		to_chat(usr, "<span class='notice'>You slide \the [I] into \the [src].</span>")
+		to_chat(usr, SPAN("notice", "You slide \the [I] into \the [src]."))
 		imp = I
 		update_icon()
 	else
@@ -78,7 +78,7 @@
 			var/imp_name = imp.name
 
 			if(do_after(user, 50, M) && src.imp?.implant_in_mob(M, target_zone))
-				M.visible_message("<span class='warning'>[M] has been implanted by [user].</span>")
+				M.visible_message(SPAN("warning", "[M] has been implanted by [user]."))
 				admin_attack_log(user, M, "Implanted using \the [src] ([imp_name])", "Implanted with \the [src] ([imp_name])", "used an implanter, \the [src] ([imp_name]), on")
 
 				src.imp = null

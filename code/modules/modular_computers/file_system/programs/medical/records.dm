@@ -43,7 +43,7 @@
 		return FALSE
 
 	if (!F.can_edit(get_record_access(user), records_context))
-		to_chat(user, "<span class='notice'>\The [nano_host()] flashes an \"Access Denied\" warning.</span>")
+		to_chat(user, SPAN("notice", "\The [nano_host()] flashes an \"Access Denied\" warning."))
 		return FALSE
 
 	if (F.name == "Medical Recent Records")

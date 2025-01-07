@@ -40,7 +40,7 @@
 			if(bundle.loc == h_user)
 				h_user.drop(bundle)
 			h_user.pick_or_drop(bundle)
-		to_chat(user, "<span class='notice'>You add [src.worth] credits worth of money to the bundles.<br>It holds [bundle.worth] credits now.</span>")
+		to_chat(user, SPAN("notice", "You add [src.worth] credits worth of money to the bundles.<br>It holds [bundle.worth] credits now."))
 		qdel(src)
 
 	else if(istype(W, /obj/item/gun/launcher/money))
@@ -201,16 +201,16 @@
 /obj/item/spacecash/ewallet/lotto/attack_self(mob/user)
 
 	if(scratches_remaining <= 0)
-		to_chat(user, "<span class='warning'>The card flashes: \"No scratches remaining!\"</span>")
+		to_chat(user, SPAN("warning", "The card flashes: \"No scratches remaining!\""))
 		return
 
 	if(next_scratch > world.time)
-		to_chat(user, "<span class='warning'>The card flashes: \"Please wait!\"</span>")
+		to_chat(user, SPAN("warning", "The card flashes: \"Please wait!\""))
 		return
 
 	next_scratch = world.time + 6 SECONDS
 
-	to_chat(user, "<span class='notice'>You initiate the simulated scratch action process on the [src]...</span>")
+	to_chat(user, SPAN("notice", "You initiate the simulated scratch action process on the [src]..."))
 	if(do_after(user,4.5 SECONDS))
 		var/won = 0
 		var/result = rand(1,10000)
@@ -249,13 +249,13 @@
 		worth += won
 		sleep(1 SECONDS)
 		if(scratches_remaining > 0)
-			to_chat(user, "<span class='notice'>The card flashes: You have: [scratches_remaining] SCRATCHES remaining! Scratch again!</span>")
+			to_chat(user, SPAN("notice", "The card flashes: You have: [scratches_remaining] SCRATCHES remaining! Scratch again!"))
 		else
-			to_chat(user, "<span class='notice'>The card flashes: You have: [scratches_remaining] SCRATCHES remaining! You won a total of: [worth] CREDITS. Thanks for playing the space lottery!</span>")
+			to_chat(user, SPAN("notice", "The card flashes: You have: [scratches_remaining] SCRATCHES remaining! You won a total of: [worth] CREDITS. Thanks for playing the space lottery!"))
 
 		owner_name = user.name
 
 /obj/item/spacecash/ewallet/lotto/proc/speak(message = "Hello!")
 	for(var/mob/O in hearers(src.loc, null))
-		O.show_message("<span class='game say'>[SPAN("name", "\The [src]")] pings, \"[message]\"</span>",2)
+		O.show_message(SPAN("game say", "[SPAN("name", "\The [src]")] pings, \"[message]\""),2)
 	playsound(src.loc, 'sound/machines/ping.ogg', 50, 0, -4)

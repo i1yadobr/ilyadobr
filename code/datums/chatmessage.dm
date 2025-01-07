@@ -144,7 +144,7 @@
 
 	// Approximate text height
 	var/static/regex/html_metachars = new(@"&[A-Za-z]{1,7};", "g")
-	var/complete_text = "<span class='center maptext[size ? " [size]" : ""]' style='color: [tgt_color]'>[text]</span>"
+	var/complete_text = SPAN("center maptext[size ? " [size]" : ""]", "<font style='color: [tgt_color]'>[text]</font>")
 	var/mheight = WXH_TO_HEIGHT(owned_by.MeasureText(complete_text, null, CHAT_MESSAGE_WIDTH))
 	approx_lines = max(1, mheight / CHAT_MESSAGE_APPROX_LHEIGHT)
 

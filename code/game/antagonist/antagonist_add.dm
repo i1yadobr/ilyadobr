@@ -64,7 +64,7 @@
 	if(player.current && faction_verb)
 		player.current.verbs -= faction_verb
 	if(player in current_antagonists)
-		to_chat(player.current, "<span class='danger'><font size = 3>You are no longer a [role_text]!</font></span>")
+		to_chat(player.current, SPAN("danger", "<font size = 3>You are no longer a [role_text]!</font>"))
 		current_antagonists -= player
 		faction_members -= player
 		player.special_role = null

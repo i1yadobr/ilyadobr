@@ -390,7 +390,7 @@ var/global/list/additional_antag_types = list()
 //Reports player logouts//
 //////////////////////////
 /proc/display_roundstart_logout_report()
-	var/msg = "<span class='notice'><b>Roundstart logout report</b>\n\n"
+	var/msg = "<b>Roundstart logout report</b>\n\n"
 	for(var/mob/living/L in SSmobs.mob_list)
 
 		if(L.ckey)
@@ -429,11 +429,9 @@ var/global/list/additional_antag_types = list()
 						msg += "<b>[L.name]</b> ([ckey(D.mind.key)]), the [L.job] (<font color='red'><b>Ghosted</b></font>)\n"
 						continue //Ghosted while alive
 
-	msg += "</span>" // close the span from right at the top
-
 	for(var/mob/M in SSmobs.mob_list)
 		if(M.client && M.client.holder)
-			to_chat(M, msg)
+			to_chat(M, SPAN("notice", msg))
 /proc/get_nt_opposed()
 	var/list/dudes = list()
 	for(var/mob/living/carbon/human/man in GLOB.player_list)
@@ -453,7 +451,7 @@ var/global/list/additional_antag_types = list()
 		return
 
 	var/obj_count = 1
-	to_chat(player.current, "<span class='notice'>Your current objectives:</span>")
+	to_chat(player.current, SPAN("notice", "Your current objectives:"))
 	for(var/datum/objective/objective in player.objectives)
 		to_chat(player.current, "<B>Objective #[obj_count]</B>: [objective.explanation_text]")
 		obj_count++

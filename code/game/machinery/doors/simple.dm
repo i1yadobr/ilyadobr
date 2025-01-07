@@ -123,14 +123,14 @@
 	if(istype(I, /obj/item/key) && lock)
 		var/obj/item/key/K = I
 		if(!lock.toggle(I))
-			to_chat(user, "<span class='warning'>\The [K] does not fit in the lock!</span>")
+			to_chat(user, SPAN("warning", "\The [K] does not fit in the lock!"))
 		return
 	if(lock && lock.pick_lock(I,user))
 		return
 
 	if(istype(I,/obj/item/material/lock_construct))
 		if(lock)
-			to_chat(user, "<span class='warning'>\The [src] already has a lock.</span>")
+			to_chat(user, SPAN("warning", "\The [src] already has a lock."))
 		else
 			var/obj/item/material/lock_construct/L = I
 			lock = L.create_lock(src,user)
@@ -138,13 +138,13 @@
 
 	if(istype(I, /obj/item/stack/material) && I.get_material_name() == src.get_material_name())
 		if(stat & BROKEN)
-			to_chat(user, "<span class='notice'>It looks like \the [src] is pretty busted. It's going to need more than just patching up now.</span>")
+			to_chat(user, SPAN("notice", "It looks like \the [src] is pretty busted. It's going to need more than just patching up now."))
 			return
 		if(health >= maxhealth)
-			to_chat(user, "<span class='notice'>Nothing to fix!</span>")
+			to_chat(user, SPAN("notice", "Nothing to fix!"))
 			return
 		if(!density)
-			to_chat(user, "<span class='warning'>\The [src] must be closed before you can repair it.</span>")
+			to_chat(user, SPAN("warning", "\The [src] must be closed before you can repair it."))
 			return
 
 		//figure out how much metal we need
@@ -152,7 +152,7 @@
 		var/amount_needed = ceil((maxhealth - health)/DOOR_REPAIR_AMOUNT)
 		var/used = min(amount_needed,stack.amount)
 		if (used)
-			to_chat(user, "<span class='notice'>You fit [used] [stack.singular_name]\s to damaged and broken parts on \the [src].</span>")
+			to_chat(user, SPAN("notice", "You fit [used] [stack.singular_name]\s to damaged and broken parts on \the [src]."))
 			stack.use(used)
 			health = between(health, health + used*DOOR_REPAIR_AMOUNT, maxhealth)
 		return
@@ -166,10 +166,10 @@
 				user.visible_message(SPAN("notice", "\The [user] smacks \the [src] with \the [I] with no visible effect."))
 				playsound(loc, hitsound, 5, 1)
 			else if(I.force < min_force)
-				user.visible_message("<span class='danger'>\The [user] hits \the [src] with \the [I] with no visible effect.</span>")
+				user.visible_message(SPAN("danger", "\The [user] hits \the [src] with \the [I] with no visible effect."))
 				playsound(loc, hitsound, 10, 1)
 			else
-				user.visible_message("<span class='danger'>\The [user] forcefully strikes \the [src] with \the [I]!</span>")
+				user.visible_message(SPAN("danger", "\The [user] forcefully strikes \the [src] with \the [I]!"))
 				playsound(loc, hitsound, 100, 1)
 				take_damage(I.force)
 		return

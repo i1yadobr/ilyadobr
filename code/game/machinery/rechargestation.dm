@@ -271,6 +271,6 @@
 	if(!istype(target,/mob/living/silicon))
 		return
 	if(target.buckled)
-		to_chat(user, "<span class='warning'>Unbuckle the subject before attempting to move them.</span>")
+		to_chat(user, SPAN("warning", "Unbuckle the subject before attempting to move them."))
 		return
 	go_in(target, user)

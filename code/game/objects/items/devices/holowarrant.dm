@@ -29,7 +29,7 @@
 		if(!W.archived)
 			warrants += W.fields["namewarrant"]
 	if(warrants.len == 0)
-		to_chat(user,"<span class='notice'>There are no warrants available</span>")
+		to_chat(user,SPAN("notice", "There are no warrants available"))
 		return
 	var/temp
 	temp = input(user, "Which warrant would you like to load?") as null|anything in warrants
@@ -45,18 +45,18 @@
 			var/choice = alert(user, "Would you like to authorize this warrant?","Warrant authorization","Yes","No")
 			if(choice == "Yes")
 				active.fields["auth"] = "[I.registered_name] - [I.assignment ? I.assignment : "(Unknown)"]"
-			user.visible_message("<span class='notice'>You swipe \the [I] through the [src].</span>", \
-					"<span class='notice'>[user] swipes \the [I] through the [src].</span>")
+			user.visible_message(SPAN("notice", "You swipe \the [I] through the [src]."), \
+					SPAN("notice", "[user] swipes \the [I] through the [src]."))
 			broadcast_security_hud_message("\A [active.fields["arrestsearch"]] warrant for <b>[active.fields["namewarrant"]]</b> has been authorized by [I.assignment ? I.assignment+" " : ""][I.registered_name].", src)
 		else
-			to_chat(user, "<span class='notice'>A red \"Access Denied\" light blinks on \the [src]</span>")
+			to_chat(user, SPAN("notice", "A red \"Access Denied\" light blinks on \the [src]"))
 		return 1
 	..()
 
 //hit other people with it
 /obj/item/device/holowarrant/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
-	user.visible_message("<span class='notice'>[user] holds up a warrant projector and shows the contents to [M].</span>", \
-			"<span class='notice'>You show the warrant to [M].</span>")
+	user.visible_message(SPAN("notice", "[user] holds up a warrant projector and shows the contents to [M]."), \
+			SPAN("notice", "You show the warrant to [M]."))
 	M.examinate(src)
 
 /obj/item/device/holowarrant/update_icon()

@@ -18,7 +18,7 @@
 			if(!user.drop(O, src))
 				return
 			has_extinguisher = O
-			to_chat(user, "<span class='notice'>You place [O] in [src].</span>")
+			to_chat(user, SPAN("notice", "You place [O] in [src]."))
 			playsound(src.loc, 'sound/effects/extin.ogg', 50, 0)
 		else
 			opened = !opened
@@ -36,14 +36,14 @@
 		if(user.hand)
 			temp = H.organs_by_name[BP_L_HAND]
 		if(temp && !temp.is_usable())
-			to_chat(user, "<span class='notice'>You try to move your [temp.name], but cannot!</span>")
+			to_chat(user, SPAN("notice", "You try to move your [temp.name], but cannot!"))
 			return
 	if(has_extinguisher)
 		if(!user.IsAdvancedToolUser(1))
 			to_chat(user, FEEDBACK_YOU_LACK_DEXTERITY)
 			return
 		user.pick_or_drop(has_extinguisher)
-		to_chat(user, "<span class='notice'>You take [has_extinguisher] from [src].</span>")
+		to_chat(user, SPAN("notice", "You take [has_extinguisher] from [src]."))
 		playsound(src.loc, 'sound/effects/extout.ogg', 50, 0)
 		has_extinguisher = null
 		opened = 1
@@ -54,7 +54,7 @@
 /obj/structure/extinguisher_cabinet/attack_tk(mob/user)
 	if(has_extinguisher)
 		has_extinguisher.loc = loc
-		to_chat(user, "<span class='notice'>You telekinetically remove [has_extinguisher] from [src].</span>")
+		to_chat(user, SPAN("notice", "You telekinetically remove [has_extinguisher] from [src]."))
 		has_extinguisher = null
 		opened = 1
 	else
@@ -77,4 +77,3 @@
 	if(CanPhysicallyInteract(user))
 		opened = !opened
 		update_icon()
-

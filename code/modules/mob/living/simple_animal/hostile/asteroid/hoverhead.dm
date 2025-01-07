@@ -108,16 +108,16 @@
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(inert)
-			to_chat(user, "<span class='notice'>[src] has become inert, its healing properties are no more.</span>")
+			to_chat(user, SPAN("notice", "[src] has become inert, its healing properties are no more."))
 			return
 		else
 			if(H.stat == DEAD)
-				to_chat(user, "<span class='notice'>[src] are useless on the dead.</span>")
+				to_chat(user, SPAN("notice", "[src] are useless on the dead."))
 				return
 			if(H != user)
 				H.visible_message("[user] forces [H] to apply [src]... They quickly regenerate all the injuries!")
 			else
-				to_chat(user, "<span class='notice'>You start to smear [src] on yourself. You feel burst of energy coming through your whole body. At first it feels like torture, but then it feels good.</span>")
+				to_chat(user, SPAN("notice", "You start to smear [src] on yourself. You feel burst of energy coming through your whole body. At first it feels like torture, but then it feels good."))
 			H.revive()
 			make_inert(src)
 			qdel(src)

@@ -195,7 +195,7 @@
 		cloak = FALSE
 		return 1
 
-	to_chat(H, "<span class='notice'>Optical disruptor activated.</span>")
+	to_chat(H, SPAN("notice", "Optical disruptor activated."))
 	cloak = TRUE
 	animate(H,alpha = 255, alpha = 85, time = 10)
 
@@ -209,8 +209,8 @@
 		if(!istype(H.head, /obj/item/clothing/head/helmet/space/void/optical))
 			remain_cloaked = 0
 	H.invisibility = initial(H.invisibility)
-	H.visible_message("<span class='warning'>[H] suddenly fades in.</span>",
-	"<span class='notice'>Optical disruptor deactivated.</span>")
+	H.visible_message(SPAN("warning", "[H] suddenly fades in."),
+	SPAN("notice", "Optical disruptor deactivated."))
 	cloak = FALSE
 
 	animate(H,alpha = 85, alpha = 255, time = 10)

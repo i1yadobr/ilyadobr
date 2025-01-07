@@ -73,7 +73,7 @@
 		should_stop = should_stop || (prob(10) && owner.shock_stage >= 120) //traumatic shock
 		should_stop = should_stop || (prob(10) && pulse == PULSE_THREADY) //erratic heart patterns, usually caused by oxyloss
 		if(should_stop) // The heart has stopped due to going into traumatic or cardiovascular shock.
-			to_chat(owner, "<span class='danger'>Your heart has stopped!</span>")
+			to_chat(owner, SPAN("danger", "Your heart has stopped!"))
 			pulse = PULSE_NONE
 			return
 	if(pulse && oxy <= BLOOD_VOLUME_SURVIVE && !owner.chem_effects[CE_STABLE])	//I SAID MOAR OXYGEN
@@ -158,7 +158,7 @@
 			blood_max *= 0.8
 
 		if(world.time >= next_blood_squirt && istype(owner.loc, /turf) && do_spray.len)
-			owner.visible_message("<span class='danger'>Blood squirts from [pick(do_spray)]!</span>")
+			owner.visible_message(SPAN("danger", "Blood squirts from [pick(do_spray)]!"))
 			// It becomes very spammy otherwise. Arterial bleeding will still happen outside of this block, just not the squirt effect.
 			next_blood_squirt = world.time + 100
 			var/turf/sprayloc = get_turf(owner)

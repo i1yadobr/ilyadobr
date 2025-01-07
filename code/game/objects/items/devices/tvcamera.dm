@@ -54,20 +54,20 @@
 		if(nc)
 			channel = nc
 			camera.c_tag = channel
-			to_chat(usr, "<span class='notice'>New channel name: '[channel]' has been set.</span>")
+			to_chat(usr, SPAN("notice", "New channel name: '[channel]' has been set."))
 	if(href_list["video"])
 		camera.set_status(!camera.status)
 		if(camera.status)
-			to_chat(usr,"<span class='notice'>Video streaming: Activated. Broadcasting on channel: '[channel]'</span>")
+			to_chat(usr,SPAN("notice", "Video streaming: Activated. Broadcasting on channel: '[channel]'"))
 		else
-			to_chat(usr,"<span class='notice'>Video streaming: Deactivated.</span>")
+			to_chat(usr,SPAN("notice", "Video streaming: Deactivated."))
 		update_icon()
 	if(href_list["sound"])
 		radio.ToggleBroadcast()
 		if(radio.broadcasting)
-			to_chat(usr,"<span class='notice'>Audio streaming: Activated. Broadcasting on frequency: [format_frequency(radio.frequency)].</span>")
+			to_chat(usr,SPAN("notice", "Audio streaming: Activated. Broadcasting on frequency: [format_frequency(radio.frequency)]."))
 		else
-			to_chat(usr,"<span class='notice'>Audio streaming: Deactivated.</span>")
+			to_chat(usr,SPAN("notice", "Audio streaming: Deactivated."))
 	if(!href_list["close"])
 		attack_self(usr)
 
@@ -94,7 +94,7 @@
 	var/obj/item/TVAssembly/A = new(user)
 	qdel(S)
 	user.pick_or_drop(A)
-	to_chat(user, "<span class='notice'>You add the infrared sensor to the robot head.</span>")
+	to_chat(user, SPAN("notice", "You add the infrared sensor to the robot head."))
 	qdel(src)
 
 /* Using camcorder icon as I can't sprite.
@@ -112,31 +112,31 @@ Using robohead because of restricting to roboticist */
 	switch(buildstep)
 		if(0)
 			if(istype(W, /obj/item/robot_parts/robot_component/camera) && user.drop(W))
-				to_chat(user, "<span class='notice'>You add the camera module to [src]</span>")
+				to_chat(user, SPAN("notice", "You add the camera module to [src]"))
 				desc = "This TV camera assembly has a camera module."
 				buildstep++
 				qdel(W)
 		if(1)
 			if(istype(W, /obj/item/device/taperecorder) && user.drop(W))
 				buildstep++
-				to_chat(user, "<span class='notice'>You add the tape recorder to [src]</span>")
+				to_chat(user, SPAN("notice", "You add the tape recorder to [src]"))
 				desc = "This TV camera assembly has a camera and audio module."
 				return
 		if(2)
 			if(isCoil(W))
 				var/obj/item/stack/cable_coil/C = W
 				if(!C.use(3))
-					to_chat(user, "<span class='notice'>You need three cable coils to wire the devices.</span>")
+					to_chat(user, SPAN("notice", "You need three cable coils to wire the devices."))
 					..()
 					return
 				C.use(3)
 				buildstep++
-				to_chat(user, "<span class='notice'>You wire the assembly</span>")
+				to_chat(user, SPAN("notice", "You wire the assembly"))
 				desc = "This TV camera assembly has wires sticking out"
 				return
 		if(3)
 			if(isWirecutter(W))
-				to_chat(user, "<span class='notice'> You trim the wires.</span>")
+				to_chat(user, SPAN("notice", " You trim the wires."))
 				buildstep++
 				desc = "This TV camera assembly needs casing."
 				return
@@ -145,7 +145,7 @@ Using robohead because of restricting to roboticist */
 				var/obj/item/stack/material/steel/S = W
 				buildstep++
 				S.use(1)
-				to_chat(user, "<span class='notice'>You encase the assembly.</span>")
+				to_chat(user, SPAN("notice", "You encase the assembly."))
 				var/turf/T = get_turf(src)
 				var/obj/item/device/tvcamera/TVC = new /obj/item/device/tvcamera(T)
 				if(loc == user)

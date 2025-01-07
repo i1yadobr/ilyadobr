@@ -3,7 +3,7 @@
 
 /decl/teleport/proc/teleport(atom/target, atom/destination, precision = 0)
 	if(!can_teleport(target,destination))
-		target.visible_message("<span class='warning'>\The [target] bounces off the teleporter!</span>")
+		target.visible_message(SPAN("warning", "\The [target] bounces off the teleporter!"))
 		return
 
 	teleport_target(target, destination, precision)
@@ -46,7 +46,7 @@
 	if(istype(target, /obj/mecha))
 		if(destination.z in GLOB.using_map.get_levels_with_trait(ZTRAIT_CENTCOM))
 			var/obj/mecha/mech = target
-			to_chat(mech.occupant, "<span class='danger'>\The [target] would not survive the jump to a location so far away!</span>")
+			to_chat(mech.occupant, SPAN("danger", "\The [target] would not survive the jump to a location so far away!"))
 			return 0
 
 	if(is_type_in_list(target, teleport_blacklist))

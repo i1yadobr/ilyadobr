@@ -8,7 +8,7 @@
 
 	if(istype(H) && Adjacent(H) && (usr == H) && (H.a_intent == "grab") && hat && !(H.l_hand && H.r_hand))
 		H.pick_or_drop(hat, loc)
-		H.visible_message("<span class='danger'>\The [H] removes \the [src]'s [hat].</span>")
+		H.visible_message(SPAN("danger", "\The [H] removes \the [src]'s [hat]."))
 		hat = null
 		update_icons()
 		return
@@ -18,10 +18,10 @@
 /mob/living/carbon/alien/diona/attackby(obj/item/W, mob/user)
 	if(user.a_intent == I_HELP && istype(W, /obj/item/clothing/head))
 		if(hat)
-			to_chat(user, "<span class='warning'>\The [src] is already wearing \the [hat].</span>")
+			to_chat(user, SPAN("warning", "\The [src] is already wearing \the [hat]."))
 			return
 		user.drop(W)
 		wear_hat(W)
-		user.visible_message("<span class='notice'>\The [user] puts \the [W] on \the [src].</span>")
+		user.visible_message(SPAN("notice", "\The [user] puts \the [W] on \the [src]."))
 		return
 	return ..()

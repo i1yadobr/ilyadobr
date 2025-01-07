@@ -20,9 +20,9 @@
 		for(var/obj/item/hand in handlist)
 			if(prob(current_size*5) && hand.w_class >= ((11-current_size)/2) && drop(hand))
 				step_towards(hand, S)
-				to_chat(src, "<span class='warning'>\The [S] pulls \the [hand] from your grip!</span>")
+				to_chat(src, SPAN("warning", "\The [S] pulls \the [hand] from your grip!"))
 		if(!lying && (!shoes || !(shoes.item_flags & ITEM_FLAG_NOSLIP)) && (!species || !(species.species_flags & SPECIES_FLAG_NO_SLIP)) && prob(current_size*5))
-			to_chat(src, "<span class='danger'>A strong gravitational force slams you to the ground!</span>")
+			to_chat(src, SPAN("danger", "A strong gravitational force slams you to the ground!"))
 			Weaken(current_size)
 	..()
 

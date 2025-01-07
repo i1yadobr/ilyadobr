@@ -13,7 +13,7 @@
 	if(..(user))
 		return
 	if(!allowed(user))
-		to_chat(user, "<span class='warning'>Access Denied.</span>")
+		to_chat(user, SPAN("warning", "Access Denied."))
 		return 1
 
 	ui_interact(user)
@@ -54,7 +54,7 @@
 
 /obj/machinery/computer/elevator_control/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
 	if(!elevator_tag)
-		to_chat(user,"<span class='warning'>Unable to establish link with the elevator.</span>")
+		to_chat(user,SPAN("warning", "Unable to establish link with the elevator."))
 		return
 
 	var/list/data = get_ui_data()

@@ -38,14 +38,14 @@
 		if(!user.drop(I, src))
 			return
 		syringe = S
-		to_chat(user, "<span class='notice'>You carefully insert [syringe] into [src].</span>")
+		to_chat(user, SPAN("notice", "You carefully insert [syringe] into [src]."))
 		sharp = 1
 		name = "syringe dart"
 		update_icon()
 
 /obj/item/syringe_cartridge/attack_self(mob/user)
 	if(syringe)
-		to_chat(user, "<span class='notice'>You remove [syringe] from [src].</span>")
+		to_chat(user, SPAN("notice", "You remove [syringe] from [src]."))
 		user.pick_or_drop(syringe)
 		syringe = null
 		sharp = initial(sharp)
@@ -112,26 +112,26 @@
 
 /obj/item/gun/launcher/syringe/attack_self(mob/living/user as mob)
 	if(next)
-		user.visible_message("[user] unlatches and carefully relaxes the bolt on [src].", "<span class='warning'>You unlatch and carefully relax the bolt on [src], unloading the spring.</span>")
+		user.visible_message("[user] unlatches and carefully relaxes the bolt on [src].", SPAN("warning", "You unlatch and carefully relax the bolt on [src], unloading the spring."))
 		next = null
 	else if(darts.len)
 		playsound(src.loc, 'sound/weapons/flipblade.ogg', 50, 1)
-		user.visible_message("[user] draws back the bolt on [src], clicking it into place.", "<span class='warning'>You draw back the bolt on the [src], loading the spring!</span>")
+		user.visible_message("[user] draws back the bolt on [src], clicking it into place.", SPAN("warning", "You draw back the bolt on the [src], loading the spring!"))
 		next = darts[1]
 	add_fingerprint(user)
 
 /obj/item/gun/launcher/syringe/attack_hand(mob/living/user as mob)
 	if(user.get_inactive_hand() == src)
 		if(!darts.len)
-			to_chat(user, "<span class='warning'>[src] is empty.</span>")
+			to_chat(user, SPAN("warning", "[src] is empty."))
 			return
 		if(next)
-			to_chat(user, "<span class='warning'>[src]'s cover is locked shut.</span>")
+			to_chat(user, SPAN("warning", "[src]'s cover is locked shut."))
 			return
 		var/obj/item/syringe_cartridge/C = darts[1]
 		darts -= C
 		user.pick_or_drop(C)
-		user.visible_message("[user] removes \a [C] from [src].", "<span class='notice'>You remove \a [C] from [src].</span>")
+		user.visible_message("[user] removes \a [C] from [src].", SPAN("notice", "You remove \a [C] from [src]."))
 	else
 		..()
 
@@ -139,11 +139,11 @@
 	if(istype(A, /obj/item/syringe_cartridge))
 		var/obj/item/syringe_cartridge/C = A
 		if(darts.len >= max_darts)
-			to_chat(user, "<span class='warning'>[src] is full!</span>")
+			to_chat(user, SPAN("warning", "[src] is full!"))
 			return
 		user.drop(C, src)
 		darts += C //add to the end
-		user.visible_message("[user] inserts \a [C] into [src].", "<span class='notice'>You insert \a [C] into [src].</span>")
+		user.visible_message("[user] inserts \a [C] into [src].", SPAN("notice", "You insert \a [C] into [src]."))
 	else
 		..()
 

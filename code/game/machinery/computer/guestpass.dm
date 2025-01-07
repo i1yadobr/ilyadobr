@@ -28,14 +28,14 @@
 
 /obj/item/card/id/guest/read()
 	if (world.time > expiration_time)
-		to_chat(usr, "<span class='notice'>This pass expired at [worldtime2stationtime(expiration_time)].</span>")
+		to_chat(usr, SPAN("notice", "This pass expired at [worldtime2stationtime(expiration_time)]."))
 	else
-		to_chat(usr, "<span class='notice'>This pass expires at [worldtime2stationtime(expiration_time)].</span>")
+		to_chat(usr, SPAN("notice", "This pass expires at [worldtime2stationtime(expiration_time)]."))
 
-	to_chat(usr, "<span class='notice'>It grants access to following areas:</span>")
+	to_chat(usr, SPAN("notice", "It grants access to following areas:"))
 	for (var/A in temp_access)
-		to_chat(usr, "<span class='notice'>[get_access_desc(A)].</span>")
-	to_chat(usr, "<span class='notice'>Issuing reason: [reason].</span>")
+		to_chat(usr, SPAN("notice", "[get_access_desc(A)]."))
+	to_chat(usr, SPAN("notice", "Issuing reason: [reason]."))
 	return
 
 /////////////////////////////////////////////
@@ -68,7 +68,7 @@
 			giver = O
 			updateUsrDialog()
 		else if(giver)
-			to_chat(user, "<span class='warning'>There is already ID card inside.</span>")
+			to_chat(user, SPAN("warning", "There is already ID card inside."))
 		return
 	..()
 
@@ -129,7 +129,7 @@
 					if (dur > 0 && dur <= 30)
 						duration = dur
 					else
-						to_chat(user, "<span class='warning'>Invalid duration.</span>")
+						to_chat(user, SPAN("warning", "Invalid duration."))
 			if ("access")
 				var/A = text2num(href_list["access"])
 				if (A in accesses)
@@ -181,8 +181,8 @@
 					playsound(src.loc, 'sound/machines/ping.ogg', 25, 0)
 					. = TOPIC_REFRESH
 				else if(!giver)
-					to_chat(user, "<span class='warning'>Cannot issue pass without issuing ID.</span>")
+					to_chat(user, SPAN("warning", "Cannot issue pass without issuing ID."))
 				else if(!accesses.len)
-					to_chat(user, "<span class='warning'>Cannot issue pass without at least one granted access permission.</span>")
+					to_chat(user, SPAN("warning", "Cannot issue pass without at least one granted access permission."))
 	if(.)
 		attack_hand(user)

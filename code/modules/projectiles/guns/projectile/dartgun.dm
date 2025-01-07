@@ -115,21 +115,21 @@
 
 /obj/item/gun/projectile/dartgun/proc/add_beaker(obj/item/reagent_containers/vessel/B, mob/user)
 	if(!istype(B, container_type))
-		to_chat(user, "<span class='warning'>[B] doesn't seem to fit into [src].</span>")
+		to_chat(user, SPAN("warning", "[B] doesn't seem to fit into [src]."))
 		return
 	if(beakers.len >= max_beakers)
-		to_chat(user, "<span class='warning'>[src] already has [max_beakers] beakers in it - another one isn't going to fit!</span>")
+		to_chat(user, SPAN("warning", "[src] already has [max_beakers] beakers in it - another one isn't going to fit!"))
 		return
 	if(!user.drop(B, src))
 		return
 	beakers |= B
-	user.visible_message("\The [user] inserts \a [B] into [src].", "<span class='notice'>You slot [B] into [src].</span>")
+	user.visible_message("\The [user] inserts \a [B] into [src].", SPAN("notice", "You slot [B] into [src]."))
 
 /obj/item/gun/projectile/dartgun/proc/remove_beaker(obj/item/reagent_containers/vessel/B, mob/user)
 	mixing -= B
 	beakers -= B
 	user.pick_or_drop(B, loc)
-	user.visible_message("\The [user] removes \a [B] from [src].", "<span class='notice'>You remove [B] from [src].</span>")
+	user.visible_message("\The [user] removes \a [B] from [src].", SPAN("notice", "You remove [B] from [src]."))
 
 //fills the given dart with reagents
 /obj/item/gun/projectile/dartgun/proc/fill_dart(obj/item/projectile/bullet/chemdart/dart)

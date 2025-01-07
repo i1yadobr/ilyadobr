@@ -30,11 +30,11 @@
 
 		if(L.breath_fail_ratio > 0.9)
 			if(world.time < L.last_successful_breath + 2 MINUTES) //if we're in grace suffocation period, give it up for last words
-				to_chat(src, "<span class='warning'>You use your remaining air to say something!</span>")
+				to_chat(src, SPAN("warning", "You use your remaining air to say something!"))
 				L.last_successful_breath = world.time - 2 MINUTES
 				return ..(message, alt_name = alt_name, language = language)
 
-			to_chat(src, "<span class='warning'>You don't have enough air in [L] to make a sound!</span>")
+			to_chat(src, SPAN("warning", "You don't have enough air in [L] to make a sound!"))
 			return FALSE
 		else if(L.breath_fail_ratio > 0.7)
 			return whisper_say(length(message) > 5 ? stars(message) : message, language, alt_name)

@@ -192,14 +192,13 @@
 
 	if(locked)
 		if(!stop_messages)
-			// TODO(rufus): replace spans with SPAN("notice", "...") macros throughout this file
-			to_chat(user, "<span class='notice'>\The [src] is locked.</span>")
+			to_chat(user, SPAN("notice", "\The [src] is locked."))
 		// TODO(rufus): replace `return 0` with `return FALSE` throughout this file
 		return 0
 
 	if(storage_slots != null && contents.len >= storage_slots)
 		if(!stop_messages)
-			to_chat(user, "<span class='notice'>\The [src] is full, make some space.</span>")
+			to_chat(user, SPAN("notice", "\The [src] is full, make some space."))
 		return 0 //Storage item is full
 
 	// TODO(rufus): move anchored check before the storage check, as it doesn't make sense to report
@@ -210,12 +209,12 @@
 	if(length(can_hold))
 		if(!is_type_in_list(W, can_hold))
 			if(!stop_messages && ! istype(W, /obj/item/hand_labeler))
-				to_chat(user, "<span class='notice'>\The [src] cannot hold \the [W].</span>")
+				to_chat(user, SPAN("notice", "\The [src] cannot hold \the [W]."))
 			return 0
 		var/max_instances = can_hold[W.type]
 		if(max_instances && instances_of_type_in_list(W, contents) >= max_instances)
 			if(!stop_messages && !istype(W, /obj/item/hand_labeler))
-				to_chat(user, "<span class='notice'>\The [src] has no more space specifically for \the [W].</span>")
+				to_chat(user, SPAN("notice", "\The [src] has no more space specifically for \the [W]."))
 			return 0
 
 	//If attempting to lable the storage item, silently fail to allow it
@@ -233,24 +232,24 @@
 
 	if(length(cant_hold) && is_type_in_list(W, cant_hold))
 		if(!stop_messages)
-			to_chat(user, "<span class='notice'>\The [src] cannot hold \the [W].</span>")
+			to_chat(user, SPAN("notice", "\The [src] cannot hold \the [W]."))
 		return 0
 
 	if(max_w_class != null && W.w_class > max_w_class && !(override_w_class?.len && is_type_in_list(W, override_w_class)))
 		if(!stop_messages)
-			to_chat(user, "<span class='notice'>\The [W] is too big for this [src.name].</span>")
+			to_chat(user, SPAN("notice", "\The [W] is too big for this [src.name]."))
 		return 0
 
 	var/total_storage_space = W.get_storage_cost()
 	if(total_storage_space == ITEM_SIZE_NO_CONTAINER)
 		if(!stop_messages)
-			to_chat(user, "<span class='notice'>\The [W] cannot be placed in [src].</span>")
+			to_chat(user, SPAN("notice", "\The [W] cannot be placed in [src]."))
 		return 0
 
 	total_storage_space += storage_space_used() //Adds up the combined w_classes which will be in the storage item if the item is added to it.
 	if(total_storage_space > max_storage_space)
 		if(!stop_messages)
-			to_chat(user, "<span class='notice'>\The [src] is too full, make some space.</span>")
+			to_chat(user, SPAN("notice", "\The [src] is too full, make some space."))
 		return 0
 
 	return 1
@@ -273,11 +272,11 @@
 		if(!prevent_warning)
 			for(var/mob/M in viewers(usr, null))
 				if (M == usr)
-					to_chat(usr, "<span class='notice'>You put \the [W] into [src].</span>")
+					to_chat(usr, SPAN("notice", "You put \the [W] into [src]."))
 				else if (M in range(1)) //If someone is standing close enough, they can tell what it is... TODO replace with distance check
-					M.show_message("<span class='notice'>\The [usr] puts [W] into [src].</span>")
+					M.show_message(SPAN("notice", "\The [usr] puts [W] into [src]."))
 				else if (W && W.w_class >= ITEM_SIZE_NORMAL) //Otherwise they can only see large or normal items from a distance...
-					M.show_message("<span class='notice'>\The [usr] puts [W] into [src].</span>")
+					M.show_message(SPAN("notice", "\The [usr] puts [W] into [src]."))
 
 		if(!NoUpdate)
 			update_ui_after_item_insertion()
@@ -378,11 +377,11 @@
 		var/obj/item/tray/T = W
 		if(T.calc_carry() > 0)
 			if(prob(85))
-				to_chat(user, "<span class='warning'>The tray won't fit in [src].</span>")
+				to_chat(user, SPAN("warning", "The tray won't fit in [src]."))
 				return
 			else
 				if(user.drop(W))
-					to_chat(user, "<span class='warning'>God damnit!</span>")
+					to_chat(user, SPAN("warning", "God damnit!"))
 	W.add_fingerprint(user)
 	return handle_item_insertion(W)
 
@@ -424,24 +423,24 @@
 		// TODO(rufus): replace with named parameters
 		handle_item_insertion(I, 1, 1) // First 1 is no messages, second 1 is no ui updates
 	if(success && !failure)
-		to_chat(user, "<span class='notice'>You put everything into \the [src].</span>")
+		to_chat(user, SPAN("notice", "You put everything into \the [src]."))
 		if (src.use_sound)
 			playsound(src.loc, src.use_sound, 50, 1, -5)
 		update_ui_after_item_insertion()
 	else if(success)
-		to_chat(user, "<span class='notice'>You put some things into \the [src].</span>")
+		to_chat(user, SPAN("notice", "You put some things into \the [src]."))
 		if (src.use_sound)
 			playsound(src.loc, src.use_sound, 50, 1, -5)
 		update_ui_after_item_insertion()
 	else
-		to_chat(user, "<span class='notice'>You fail to pick anything up with \the [src].</span>")
+		to_chat(user, SPAN("notice", "You fail to pick anything up with \the [src]."))
 
 /obj/item/storage/verb/toggle_gathering_mode()
 	set name = "Switch Gathering Method"
 	set category = "Object"
 
 	quick_gather = !quick_gather
-	to_chat(usr, "<span class='notice'>\The [src] now picks up [quick_gather ? "all items in a tile at once." : "one item at a time"].</span>")
+	to_chat(usr, SPAN("notice", "\The [src] now picks up [quick_gather ? "all items in a tile at once." : "one item at a time"]."))
 
 /obj/item/storage/verb/quick_empty()
 	set name = "Empty Contents"

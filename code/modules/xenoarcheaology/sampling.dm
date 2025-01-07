@@ -99,14 +99,14 @@
 /obj/item/device/core_sampler/attackby(obj/item/I, mob/living/user)
 	if(istype(I, /obj/item/evidencebag))
 		if(I.contents.len)
-			to_chat(user, "<span class='warning'>\The [I] is full.</span>")
+			to_chat(user, SPAN("warning", "\The [I] is full."))
 			return
 		if(num_stored_bags < 10)
 			qdel(I)
 			num_stored_bags += 1
-			to_chat(user, "<span class='notice'>You insert \the [I] into \the [src].</span>")
+			to_chat(user, SPAN("notice", "You insert \the [I] into \the [src]."))
 		else
-			to_chat(user, "<span class='warning'>\The [src] can not fit any more bags.</span>")
+			to_chat(user, SPAN("warning", "\The [src] can not fit any more bags."))
 	else
 		return ..()
 
@@ -123,9 +123,9 @@
 
 	if(geo_data)
 		if(filled_bag)
-			to_chat(user, "<span class='warning'>The core sampler is full.</span>")
+			to_chat(user, SPAN("warning", "The core sampler is full."))
 		else if(num_stored_bags < 1)
-			to_chat(user, "<span class='warning'>The core sampler is out of sample bags.</span>")
+			to_chat(user, SPAN("warning", "The core sampler is out of sample bags."))
 		else
 			//create a new sample bag which we'll fill with rock samples
 			filled_bag = new /obj/item/evidencebag/research(src)
@@ -139,13 +139,13 @@
 			//update the sample bag
 			filled_bag.store_item(R)
 
-			to_chat(user, "<span class='notice'>You take a core sample of the [item_to_sample].</span>")
+			to_chat(user, SPAN("notice", "You take a core sample of the [item_to_sample]."))
 	else
-		to_chat(user, "<span class='warning'>You are unable to take a sample of [item_to_sample].</span>")
+		to_chat(user, SPAN("warning", "You are unable to take a sample of [item_to_sample]."))
 
 /obj/item/device/core_sampler/attack_self(mob/living/user)
 	if(filled_bag)
-		to_chat(user, "<span class='notice'>You eject the full sample bag.</span>")
+		to_chat(user, SPAN("notice", "You eject the full sample bag."))
 		var/success = 0
 		if(istype(src.loc, /mob))
 			var/mob/M = src.loc
@@ -155,4 +155,4 @@
 		filled_bag = null
 		icon_state = "sampler0"
 	else
-		to_chat(user, "<span class='warning'>The core sampler is empty.</span>")
+		to_chat(user, SPAN("warning", "The core sampler is empty."))

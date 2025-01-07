@@ -64,7 +64,7 @@
 				victim.vessel.remove_reagent(/datum/reagent/blood, blood_per_tick)
 				health = min(health + health_per_tick, maxHealth)
 				if(prob(15))
-					to_chat(gripping, "<span class='danger'>You feel your fluids being drained!</span>")
+					to_chat(gripping, SPAN("danger", "You feel your fluids being drained!"))
 			else
 				gripping = null
 
@@ -111,7 +111,7 @@
 			update_icon()
 			H.Weaken(3)
 			H.Stun(3)
-			H.visible_message("<span class='danger'>\the [src] latches onto \the [H], pulsating!</span>")
+			H.visible_message(SPAN("danger", "\the [src] latches onto \the [H], pulsating!"))
 			if(carried && length(H.virus2) == 0)
 				infect_virus2(H, carried, 1)
 			forceMove(H)

@@ -23,7 +23,7 @@
 	icon_state = "ed2090"
 
 /mob/living/bot/secbot/ed209/explode()
-	visible_message("<span class='warning'>[src] blows apart!</span>")
+	visible_message(SPAN("warning", "[src] blows apart!"))
 	var/turf/Tsec = get_turf(src)
 
 	new /obj/item/secbot_assembly/ed209_assembly(Tsec)
@@ -94,7 +94,7 @@
 					return
 				qdel(W)
 				build_step++
-				to_chat(user, "<span class='notice'>You add the robot leg to [src].</span>")
+				to_chat(user, SPAN("notice", "You add the robot leg to [src]."))
 				SetName("legs/frame assembly")
 				if(build_step == 1)
 					item_state = "ed209_leg"
@@ -113,7 +113,7 @@
 					return
 				qdel(W)
 				build_step++
-				to_chat(user, "<span class='notice'>You add [W] to [src].</span>")
+				to_chat(user, SPAN("notice", "You add [W] to [src]."))
 				SetName("vest/legs/frame assembly")
 				item_state = "ed209_shell"
 				icon_state = "ed209_shell"
@@ -124,14 +124,14 @@
 				if(WT.remove_fuel(0, user))
 					build_step++
 					SetName("shielded frame assembly")
-					to_chat(user, "<span class='notice'>You welded the vest to [src].</span>")
+					to_chat(user, SPAN("notice", "You welded the vest to [src]."))
 		if(4)
 			if(istype(W, /obj/item/clothing/head/helmet))
 				if(!user.drop(W))
 					return
 				qdel(W)
 				build_step++
-				to_chat(user, "<span class='notice'>You add the helmet to [src].</span>")
+				to_chat(user, SPAN("notice", "You add the helmet to [src]."))
 				SetName("covered and shielded frame assembly")
 				item_state = "ed209_hat"
 				icon_state = "ed209_hat"
@@ -142,7 +142,7 @@
 					return
 				qdel(W)
 				build_step++
-				to_chat(user, "<span class='notice'>You add the prox sensor to [src].</span>")
+				to_chat(user, SPAN("notice", "You add the prox sensor to [src]."))
 				SetName("covered, shielded and sensored frame assembly")
 				item_state = "ed209_prox"
 				icon_state = "ed209_prox"
@@ -151,13 +151,13 @@
 			if(isCoil(W))
 				var/obj/item/stack/cable_coil/C = W
 				if (C.get_amount() < 1)
-					to_chat(user, "<span class='warning'>You need one coil of wire to wire [src].</span>")
+					to_chat(user, SPAN("warning", "You need one coil of wire to wire [src]."))
 					return
-				to_chat(user, "<span class='notice'>You start to wire [src].</span>")
+				to_chat(user, SPAN("notice", "You start to wire [src]."))
 				if(do_after(user, 40, src) && build_step == 6)
 					if(C.use(1))
 						build_step++
-						to_chat(user, "<span class='notice'>You wire the ED-209 assembly.</span>")
+						to_chat(user, SPAN("notice", "You wire the ED-209 assembly."))
 						SetName("wired ED-209 assembly")
 				return
 
@@ -167,7 +167,7 @@
 					return
 				SetName("taser ED-209 assembly")
 				build_step++
-				to_chat(user, "<span class='notice'>You add [W] to [src].</span>")
+				to_chat(user, SPAN("notice", "You add [W] to [src]."))
 				item_state = "ed209_taser"
 				icon_state = "ed209_taser"
 				qdel(W)
@@ -176,19 +176,19 @@
 			if(isScrewdriver(W))
 				playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 				var/turf/T = get_turf(user)
-				to_chat(user, "<span class='notice'>Now attaching the gun to the frame...</span>")
+				to_chat(user, SPAN("notice", "Now attaching the gun to the frame..."))
 				sleep(40)
 				if(get_turf(user) == T && build_step == 8)
 					build_step++
 					SetName("armed [name]")
-					to_chat(user, "<span class='notice'>Taser gun attached.</span>")
+					to_chat(user, SPAN("notice", "Taser gun attached."))
 
 		if(9)
 			if(istype(W, /obj/item/cell))
 				if(!user.drop(W))
 					return
 				build_step++
-				to_chat(user, "<span class='notice'>You complete the ED-209.</span>")
+				to_chat(user, SPAN("notice", "You complete the ED-209."))
 				new /mob/living/bot/secbot/ed209(get_turf(src), created_name, lasercolor)
 				qdel(W)
 				qdel(src)

@@ -58,7 +58,7 @@
 		target.reset_view(src)
 		set_ready_state(0)
 		pr_mech_sleeper.start()
-		occupant_message("<span class='info'>[target] successfully loaded into [src]. Life support functions engaged.</span>")
+		occupant_message(SPAN("info", "[target] successfully loaded into [src]. Life support functions engaged."))
 		chassis.visible_message("[chassis] loads [target] into [src].")
 		log_message("[target] loaded. Life support functions engaged.")
 	return
@@ -274,10 +274,10 @@
 	if(mode)
 		return analyze_reagents(target)
 	if(!syringes.len)
-		occupant_message("<span class='alert'>No syringes loaded.</span>")
+		occupant_message(SPAN("alert", "No syringes loaded."))
 		return
 	if(reagents.total_volume<=0)
-		occupant_message("<span class='alert'>No available reagents to load syringe with.</span>")
+		occupant_message(SPAN("alert", "No available reagents to load syringe with."))
 		return
 	set_ready_state(0)
 	chassis.use_power(energy_drain)
@@ -305,7 +305,7 @@
 					S.icon = initial(S.icon)
 					S.reagents.trans_to_mob(M, S.reagents.total_volume, CHEM_BLOOD)
 					M.take_organ_damage(2)
-					S.visible_message("<span class='danger'> [M] was hit by the syringe!</span>")
+					S.visible_message(SPAN("danger", " [M] was hit by the syringe!"))
 					break
 				else if(S.loc == trg)
 					S.icon_state = initial(S.icon_state)
@@ -400,7 +400,7 @@
 						[r_list || "No known reagents"]
 						[inputs]
 						</form>
-						[r_list? "<span style=\"font-size:80%;\">Only the first [synth_speed] selected reagent\s will be added to production</span>" : null]
+						[r_list ? SPAN("", "<font style='font-size:80%;'>Only the first [synth_speed] selected reagent\s will be added to production</font>") : null]
 						"}
 	return output
 
@@ -447,7 +447,7 @@
 		occupant_message("The object is too far away.")
 		return 0
 	if(!A.reagents || istype(A,/mob))
-		occupant_message("<span class='alert'>No reagent info gained from [A].</span>")
+		occupant_message(SPAN("alert", "No reagent info gained from [A]."))
 		return 0
 	occupant_message("Analyzing reagents...")
 	for(var/datum/reagent/R in A.reagents.reagent_list)
@@ -487,7 +487,7 @@
 		return stop()
 	var/energy_drain = S.energy_drain
 	if(!S.processed_reagents.len || S.reagents.total_volume >= S.reagents.maximum_volume || !S.chassis.has_charge(energy_drain))
-		S.occupant_message("<span class='alert'>Reagent processing stopped.</span>")
+		S.occupant_message(SPAN("alert", "Reagent processing stopped."))
 		S.log_message("Reagent processing stopped.")
 		return stop()
 	var/amount = S.synth_speed / S.processed_reagents.len

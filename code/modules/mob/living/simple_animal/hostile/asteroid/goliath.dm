@@ -53,15 +53,15 @@
 	var/tturf = get_turf(target_mob)
 	if(get_dist(src, target_mob) <= 7)//Screen range check, so you can't get tentacle'd offscreen
 		if(istype(sturf, /turf/simulated/floor/asteroid))//Goliath turf check. No floor-breaking tentacles!
-			visible_message("<span class='warning'>The [src.name] tries to dig its huge tentacles under [target_mob.name]!</span>")
+			visible_message(SPAN("warning", "The [src.name] tries to dig its huge tentacles under [target_mob.name]!"))
 			if(istype(tturf, /turf/simulated/floor/asteroid))//Victim turf check. Again, no floor-breaking tentacles
-				visible_message("<span class='warning'>The [src.name] successfully digs its tentacles under [target_mob.name]!</span>")
+				visible_message(SPAN("warning", "The [src.name] successfully digs its tentacles under [target_mob.name]!"))
 				new /obj/effect/goliath_tentacle/original(tturf)
 				ranged_cooldown = ranged_cooldown_cap
 				icon_state = icon_aggro
 				pre_attack = 0
 			else
-				visible_message("<span class='warning'>The [src.name] cannot dig its tentacles under [target_mob.name] because of solid obstacles!</span>")
+				visible_message(SPAN("warning", "The [src.name] cannot dig its tentacles under [target_mob.name] because of solid obstacles!"))
 				ranged_cooldown = ranged_cooldown_cap
 				icon_state = icon_aggro
 				pre_attack = 0
@@ -108,7 +108,7 @@
 		for(var/mob/living/M in src.loc)
 			M.Weaken(3)
 			M.Stun(2)
-			visible_message("<span class='warning'>The [src.name] knocks [M.name] down!</span>")
+			visible_message(SPAN("warning", "The [src.name] knocks [M.name] down!"))
 		qdel(src)
 
 /obj/effect/goliath_tentacle/Crossed(AM as mob|obj)
@@ -143,10 +143,10 @@
 			if(current_armor["melee"] < 80)
 				current_armor["melee"] = min(current_armor["melee"] + 10, 80)
 				C.breach_threshold = min(C.breach_threshold + 2, 24)
-				to_chat(user, "<span class='info'>You strengthen [target], improving its resistance against melee attacks.</span>")
+				to_chat(user, SPAN("info", "You strengthen [target], improving its resistance against melee attacks."))
 				qdel(src)
 			else
-				to_chat(user, "<span class='warning'>You can't improve [C] any further!</span>")
+				to_chat(user, SPAN("warning", "You can't improve [C] any further!"))
 				return
 		if(istype(target, /obj/mecha/working/ripley))
 			var/obj/mecha/working/ripley/D = target
@@ -157,7 +157,7 @@
 				damage_absorption["bullet"] = damage_absorption["bullet"] - 0.05
 				damage_absorption["fire"] = damage_absorption["fire"] - 0.05
 				damage_absorption["laser"] = damage_absorption["laser"] - 0.025
-				to_chat(user, "<span class='info'>You strengthen [target], improving its resistance against melee attacks.</span>")
+				to_chat(user, SPAN("info", "You strengthen [target], improving its resistance against melee attacks."))
 				D.update_icon()
 				if(D.hides == 3)
 					D.desc = "Autonomous Power Loader Unit. It's wearing a fearsome carapace entirely composed of goliath hide plates - its pilot must be an experienced monster hunter."
@@ -165,7 +165,7 @@
 					D.desc = "Autonomous Power Loader Unit. Its armour is enhanced with some goliath hide plates."
 				qdel(src)
 			else
-				to_chat(user, "<span class='warning'>You can't improve [D] any further!</span>")
+				to_chat(user, SPAN("warning", "You can't improve [D] any further!"))
 				return
 
 /mob/living/simple_animal/hostile/asteroid/goliath/alpha

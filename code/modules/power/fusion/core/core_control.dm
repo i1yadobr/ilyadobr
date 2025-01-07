@@ -36,7 +36,7 @@
 		cur_viewed_device = null
 
 	if(!id_tag)
-		to_chat(user, "<span class='warning'>This console has not been assigned an ident tag. Please contact your system administrator or conduct a manual update with a standard multitool.</span>")
+		to_chat(user, SPAN("warning", "This console has not been assigned an ident tag. Please contact your system administrator or conduct a manual update with a standard multitool."))
 		return
 
 	if(cur_viewed_device && (cur_viewed_device.id_tag != id_tag || get_dist(src, cur_viewed_device) > scan_range))
@@ -47,7 +47,7 @@
 	if(cur_viewed_device)
 		dat += {"
 			<a href='?src=\ref[src];goto_scanlist=1'>Back to overview</a><hr>
-			Device ident '[cur_viewed_device.id_tag]' <span style='color: [cur_viewed_device.owned_field ? "green" : "red"]'>[cur_viewed_device.owned_field ? "active" : "inactive"].</span><br>
+			Device ident '[cur_viewed_device.id_tag]' [SPAN("", "<font style='color: [cur_viewed_device.owned_field ? "green" : "red"]'>[cur_viewed_device.owned_field ? "active" : "inactive"].</font>")]<br>
 			<b>Power status:</b> [cur_viewed_device.avail()]/[cur_viewed_device.active_power_usage] W<br>
 			<hr>
 			<a href='?src=\ref[src];toggle_active=1'>Bring field [cur_viewed_device.owned_field ? "offline" : "online"].</a><br>
@@ -101,12 +101,12 @@
 				var/status
 				var/can_access = 1
 				if(!check_core_status(C))
-					status = "<span style='color: red'>Unresponsive</span>"
+					status = SPAN("", "<font style='color: red'>Unresponsive</font>")
 					can_access = 0
 				else if(C.avail() < C.active_power_usage)
-					status = "<span style='color: orange'>Underpowered</span>"
+					status = SPAN("", "<font style='color: orange'>Underpowered</font>")
 				else
-					status = "<span style='color: green'>Good</span>"
+					status = SPAN("", "<font style='color: green'>Good</font>")
 
 				dat += {"
 					<tr>
@@ -116,7 +116,7 @@
 
 				if(!can_access)
 					dat += {"
-						<td><span style='color: red'>ERROR</span></td>
+						<td>[SPAN("", "<font style='color: red'>ERROR</font>")]</td>
 					"}
 				else
 					dat += {"
@@ -127,7 +127,7 @@
 				"}
 
 		else
-			dat += "<span style='color: red'>No electromagnetic field generators connected.</span>"
+			dat += SPAN("", "<font style='color: red'>No electromagnetic field generators connected.</font>")
 
 	var/datum/browser/popup = new(user, "fusion_control", name, 500, 400, src)
 	popup.set_content(dat)

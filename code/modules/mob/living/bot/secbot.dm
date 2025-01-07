@@ -189,7 +189,7 @@
 	. = ..()
 	if(!emagged)
 		if(user)
-			to_chat(user, "<span class='notice'>You short out [src]'s threat identificator.</span>")
+			to_chat(user, SPAN("notice", "You short out [src]'s threat identificator."))
 			ignore_list |= user
 		emagged = 2
 		return 1
@@ -296,7 +296,7 @@
 	flick(attack_state, src)
 
 /mob/living/bot/secbot/explode()
-	visible_message("<span class='warning'>[src] blows apart!</span>")
+	visible_message(SPAN("warning", "[src] blows apart!"))
 	var/turf/Tsec = get_turf(src)
 
 	var/obj/item/secbot_assembly/Sa = new /obj/item/secbot_assembly(Tsec)
@@ -417,13 +417,13 @@
 	set category = "IC"
 	set hidden = 1
 
-	to_chat(usr,"<span class='danger'>An arbitrary speech module is not installed in the [src]!</span>")
+	to_chat(usr,SPAN("danger", "An arbitrary speech module is not installed in the [src]!"))
 
 /mob/living/bot/secbot/say_verb_fake()
 	set name = "Say Verb"
 	set hidden = 1
 
-	to_chat(usr,"<span class='danger'>An arbitrary speech module is not installed in the [src]!</span>")
+	to_chat(usr,SPAN("danger", "An arbitrary speech module is not installed in the [src]!"))
 
 /mob/living/bot/secbot/proc/downonthefloor()
 	set category = "Communication"
@@ -439,9 +439,9 @@
 			say("Down on the floor, [target_name(custom_target)]! You have [SECBOT_WAIT_TIME] seconds to comply.")
 			if(declare_arrests)
 				broadcast_security_hud_message("[src] is arresting a level [check_threat(custom_target)] suspect <b>[target_name(custom_target)]</b> in <b>[get_area(src)]</b>.", src)
-				to_chat(usr,"<span class='notice'>Security service notified.</span>")
+				to_chat(usr,SPAN("notice", "Security service notified."))
 	else
-		to_chat(usr,"<span class='danger'>There are no suitable targets for arrest!</span>")
+		to_chat(usr,SPAN("danger", "There are no suitable targets for arrest!"))
 
 /mob/living/bot/secbot/proc/threatdetected()
 	set category = "Communication"
@@ -457,9 +457,9 @@
 			custom_emote(1, "points at [custom_target.name]!")
 			playsound(src.loc, pick(threat_found_sounds), 50)
 		else
-			to_chat(usr,"<span class='warning'>This target is safe.</span>")
+			to_chat(usr,SPAN("warning", "This target is safe."))
 	else
-		to_chat(usr,"<span class='danger'>There are no suitable targets for arrest!</span>")
+		to_chat(usr,SPAN("danger", "There are no suitable targets for arrest!"))
 
 /mob/living/bot/secbot/Life()
 	..()

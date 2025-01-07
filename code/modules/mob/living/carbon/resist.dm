@@ -6,14 +6,14 @@
 		Weaken(3)
 		spin(32,2)
 		visible_message(
-			"<span class='danger'>[src] rolls on the floor, trying to put themselves out!</span>",
-			"<span class='notice'>You stop, drop, and roll!</span>"
+			SPAN("danger", "[src] rolls on the floor, trying to put themselves out!"),
+			SPAN("notice", "You stop, drop, and roll!")
 			)
 		sleep(30)
 		if(fire_stacks <= 0)
 			visible_message(
-				"<span class='danger'>[src] has successfully extinguished themselves!</span>",
-				"<span class='notice'>You extinguish yourself.</span>"
+				SPAN("danger", "[src] has successfully extinguished themselves!"),
+				SPAN("notice", "You extinguish yourself.")
 				)
 			ExtinguishMob()
 		return TRUE
@@ -56,16 +56,16 @@
 		displaytime /= 2
 
 	visible_message(
-		"<span class='danger'>\The [src] attempts to remove \the [HC]!</span>",
-		"<span class='warning'>You attempt to remove \the [HC]. (This will take around [displaytime] minutes and you need to stand still)</span>"
+		SPAN("danger", "\The [src] attempts to remove \the [HC]!"),
+		SPAN("warning", "You attempt to remove \the [HC]. (This will take around [displaytime] minutes and you need to stand still)")
 		)
 
 	if(do_after(src, breakouttime, incapacitation_flags = INCAPACITATION_DEFAULT & ~INCAPACITATION_RESTRAINED))
 		if(!handcuffed || buckled)
 			return
 		visible_message(
-			"<span class='danger'>\The [src] manages to remove \the [handcuffed]!</span>",
-			"<span class='notice'>You successfully remove \the [handcuffed].</span>"
+			SPAN("danger", "\The [src] manages to remove \the [handcuffed]!"),
+			SPAN("notice", "You successfully remove \the [handcuffed].")
 			)
 		drop(handcuffed, force = TRUE)
 
@@ -75,8 +75,8 @@
 
 /mob/living/carbon/proc/break_handcuffs()
 	visible_message(
-		"<span class='danger'>[src] is trying to break \the [handcuffed]!</span>",
-		"<span class='warning'>You attempt to break your [handcuffed.name]. (This will take around 5 seconds and you need to stand still)</span>"
+		SPAN("danger", "[src] is trying to break \the [handcuffed]!"),
+		SPAN("warning", "You attempt to break your [handcuffed.name]. (This will take around 5 seconds and you need to stand still)")
 		)
 
 	if(do_after(src, 5 SECONDS, incapacitation_flags = INCAPACITATION_DEFAULT & ~INCAPACITATION_RESTRAINED))
@@ -84,8 +84,8 @@
 			return
 
 		visible_message(
-			"<span class='danger'>[src] manages to break \the [handcuffed]!</span>",
-			"<span class='warning'>You successfully break your [handcuffed.name].</span>"
+			SPAN("danger", "[src] manages to break \the [handcuffed]!"),
+			SPAN("warning", "You successfully break your [handcuffed.name].")
 			)
 
 		say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))

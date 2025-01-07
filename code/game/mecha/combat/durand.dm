@@ -44,10 +44,10 @@
 	defence = !defence
 	if(defence)
 		deflect_chance += def_boost
-		src.occupant_message("<span class='info'>You enable [src] defence mode.</span>")
+		src.occupant_message(SPAN("info", "You enable [src] defence mode."))
 	else
 		deflect_chance -= def_boost
-		src.occupant_message("<span class='info'>You disable [src] defence mode.</span>")
+		src.occupant_message(SPAN("info", "You disable [src] defence mode."))
 	src.log_message("Toggled defence mode.")
 	return
 

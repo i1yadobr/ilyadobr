@@ -10,10 +10,10 @@
 		return
 	if(usr == src) //client-called emote
 		if (client && (client.prefs.muted & MUTE_IC))
-			to_chat(src, "<span class='warning'>You cannot send IC messages (muted).</span>")
+			to_chat(src, SPAN("warning", "You cannot send IC messages (muted)."))
 			return
 		if(!can_emote(m_type))
-			to_chat(src, "<span class='warning'>You cannot currently [m_type == AUDIBLE_MESSAGE ? "audibly" : "visually"] emote!</span>")
+			to_chat(src, SPAN("warning", "You cannot currently [m_type == AUDIBLE_MESSAGE ? "audibly" : "visually"] emote!"))
 			return
 
 		if(act == "me")
@@ -44,11 +44,11 @@
 
 	var/decl/emote/use_emote = usable_emotes[act]
 	if(!use_emote)
-		to_chat(src, "<span class='warning'>Unknown emote '[act]'. Type <b>say *help</b> for a list of usable emotes.</span>")
+		to_chat(src, SPAN("warning", "Unknown emote '[act]'. Type <b>say *help</b> for a list of usable emotes."))
 		return
 
 	if(m_type != use_emote.message_type && use_emote.conscious && stat != CONSCIOUS)
-		to_chat(src, "<span class='warning'>You cannot currently [use_emote.message_type == AUDIBLE_MESSAGE ? "audibly" : "visually"] emote!</span>")
+		to_chat(src, SPAN("warning", "You cannot currently [use_emote.message_type == AUDIBLE_MESSAGE ? "audibly" : "visually"] emote!"))
 		return
 
 	if(use_emote.message_type == AUDIBLE_MESSAGE && is_muzzled())

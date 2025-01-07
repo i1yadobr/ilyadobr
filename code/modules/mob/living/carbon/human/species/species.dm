@@ -363,31 +363,31 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 
 	switch(zone)
 		if(BP_HEAD)
-			H.visible_message("<span class='notice'>[H] pats [target] on the head!</span>", \
-							"<span class='notice'>You pat [target] on the head!</span>")
+			H.visible_message(SPAN("notice", "[H] pats [target] on the head!"), \
+							SPAN("notice", "You pat [target] on the head!"))
 		if(BP_L_ARM, BP_R_ARM)
-			H.visible_message("<span class='notice'>[H] pats [target] on the shoulder!</span>", \
-							"<span class='notice'>You pat [target] on the shoulder!</span>")
+			H.visible_message(SPAN("notice", "[H] pats [target] on the shoulder!"), \
+							SPAN("notice", "You pat [target] on the shoulder!"))
 			if(prob(50))
-				to_chat(target, "<span class='notice'>You feel a bit more encouraged!</span>")
+				to_chat(target, SPAN("notice", "You feel a bit more encouraged!"))
 		if(BP_L_LEG, BP_R_LEG)
-			H.visible_message("<span class='notice'>[H] touches [target]'s hip!</span>", \
-							"<span class='notice'>You touch [target]'s hip!</span>")
+			H.visible_message(SPAN("notice", "[H] touches [target]'s hip!"), \
+							SPAN("notice", "You touch [target]'s hip!"))
 		if(BP_L_HAND, BP_R_HAND)
-			H.visible_message("<span class='notice'>[H] reaches out to shake [target]'s hand!</span>", \
-							"<span class='notice'>You reach out to shake [target]'s hand!</span>")
+			H.visible_message(SPAN("notice", "[H] reaches out to shake [target]'s hand!"), \
+							SPAN("notice", "You reach out to shake [target]'s hand!"))
 			H.next_move = world.time + 25 // Trying to shake one's hands during a fight is kinda risky, y'know.
 			if(!do_after(H,25,target))
 				return
 			if(target.a_intent == I_HELP)
-				H.visible_message("<span class='notice'>[H] and [target] shake hands!</span>", \
-								"<span class='notice'>You shake [target]'s hand!</span>")
+				H.visible_message(SPAN("notice", "[H] and [target] shake hands!"), \
+								SPAN("notice", "You shake [target]'s hand!"))
 				if(istype(H.gloves, /obj/item/clothing/gloves/stun))
 					var/obj/item/clothing/gloves/stun/SG = H.gloves
 					SG.stun_attack(H, target)
 			else
-				H.visible_message("<span class='warning'>[target] refuses to shake [H]'s hand!</span>", \
-								"<span class='warning'>[target] refuses to shake your hand!</span>")
+				H.visible_message(SPAN("warning", "[target] refuses to shake [H]'s hand!"), \
+								SPAN("warning", "[target] refuses to shake your hand!"))
 		if(BP_MOUTH)
 			var/obj/item/clothing/mask/actor_mask = H.wear_mask
 			var/obj/item/clothing/mask/target_mask
@@ -400,7 +400,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 					H.next_move = world.time + 15
 					if(!do_after(H,15,target) || target.a_intent != I_HELP)
 						return
-					H.visible_message(SPAN_NOTICE("\The [actor_mask] touches \the [target_mask].</span>")) // Harsh spessman flirt
+					H.visible_message(SPAN_NOTICE("\The [actor_mask] touches \the [target_mask].")) // Harsh spessman flirt
 					var/obj/item/clothing/mask/smokable/cigarette/actor_cig = actor_mask
 					var/obj/item/clothing/mask/smokable/cigarette/target_cig = target_mask
 					if(actor_cig.lit && !target_cig.lit)
@@ -416,21 +416,21 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 				to_chat(H, "[target] wears \a [target_mask]. It's in your way!")
 				return
 
-			H.visible_message("<span class='notice'>[H] reaches out for [target]'s face...</span>", \
-							"<span class='notice'>You reach out for [target]'s face...</span>")
+			H.visible_message(SPAN("notice", "[H] reaches out for [target]'s face..."), \
+							SPAN("notice", "You reach out for [target]'s face..."))
 			H.next_move = world.time + 15 // In a matter of a second we get subpoenaed for sexual harassment
 			if(!do_after(H,15,target) || target.a_intent != I_HELP)
 				return
-			H.visible_message("<span class='notice'>[H] kisses [target]!</span>", \
-							"<span class='notice'>You kiss [target]!</span>")
+			H.visible_message(SPAN("notice", "[H] kisses [target]!"), \
+							SPAN("notice", "You kiss [target]!"))
 
 		else // Well I can't figure out what exactly we should do w/ ppl's feet and eyes
-			H.visible_message("<span class='notice'>[H] hugs [target]!</span>", \
-							"<span class='notice'>You hug [target]!</span>")
+			H.visible_message(SPAN("notice", "[H] hugs [target]!"), \
+							SPAN("notice", "You hug [target]!"))
 
 	// Legacy for sum raisin
-	//H.visible_message("<span class='notice'>[H] hugs [target] to make [t_him] feel better!</span>",
-	//				"<span class='notice'>You hug [target] to make [t_him] feel better!</span>")
+	//H.visible_message(SPAN("notice", "[H] hugs [target] to make [t_him] feel better!"),
+	//				SPAN("notice", "You hug [target] to make [t_him] feel better!"))
 
 /datum/species/proc/remove_inherent_verbs(mob/living/carbon/human/H)
 	if(inherent_verbs)
@@ -627,7 +627,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 				turfs += T
 			if(turfs.len)
 				var/turf/shoot_to = pick(turfs)
-				target.visible_message("<span class='danger'>[target]'s [W] goes off during the struggle!</span>")
+				target.visible_message(SPAN("danger", "[target]'s [W] goes off during the struggle!"))
 				return W.afterattack(shoot_to,target)
 
 	var/effective_armor = target.getarmor(attacker.zone_sel.selecting, "melee")
@@ -643,10 +643,10 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 		var/armor_check = target.run_armor_check(affecting, "melee")
 		playsound(target.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 		if(prob(100-target.poise*6.5))
-			target.visible_message("<span class='danger'>[attacker] has pushed [target]!</span>")
+			target.visible_message(SPAN("danger", "[attacker] has pushed [target]!"))
 			target.apply_effect(4, WEAKEN, armor_check)
 		else
-			target.visible_message("<span class='warning'>[attacker] attempted to push [target]!</span>")
+			target.visible_message(SPAN("warning", "[attacker] attempted to push [target]!"))
 		return
 
 	if(!prob(target.poise*2)) //30 poise = 40% disarm, 20 poise = 60% disarm, 10 poise = 80% disarm, 0 poise = 100% disarm
@@ -658,12 +658,12 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 		//Actually disarm them
 		for(var/obj/item/I in holding)
 			if(target.drop(I))
-				target.visible_message("<span class='danger'>[attacker] has disarmed [target]!</span>")
+				target.visible_message(SPAN("danger", "[attacker] has disarmed [target]!"))
 				playsound(target.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 				return
 
 	playsound(target.loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
-	target.visible_message("<span class='warning'>[attacker] attempted to disarm \the [target]!</span>")
+	target.visible_message(SPAN("warning", "[attacker] attempted to disarm \the [target]!"))
 
 /datum/species/proc/disfigure_msg(mob/living/carbon/human/H) //Used for determining the message a disfigured face has on examine. To add a unique message, just add this onto a specific species and change the "return" message.
 	var/datum/gender/T = gender_datums[H.get_gender()]

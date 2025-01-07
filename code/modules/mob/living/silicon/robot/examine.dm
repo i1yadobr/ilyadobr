@@ -17,7 +17,7 @@
 			damage_description += "It looks slightly charred.\n"
 		else
 			damage_description += "<B>It looks severely burnt and heat-warped!</B>\n"
-	msg += "<span class='warning'>[damage_description]</span>"
+	msg += SPAN("warning", "[damage_description]")
 
 	if(opened)
 		msg += SPAN("warning", "Its cover is open and the power cell is [cell ? "installed" : "missing"].")
@@ -55,9 +55,9 @@
 			for(var/i in module.supported_upgrades)
 				var/atom/tmp = i
 				if(findtext("[tmp]","/obj/item/borg/upgrade/visor/"))
-					visors += "<span class='notice'>	[initial(tmp.name)]<br></span>"
+					visors += SPAN("notice", "	[initial(tmp.name)]<br>")
 				else
-					msg += "<span class='notice'>	[initial(tmp.name)]<br></span>"
+					msg += SPAN("notice", "	[initial(tmp.name)]<br>")
 			msg += "<b>[SPAN("notice", "Supported visors:")]</b>"
 			msg += "\n"
 			msg += visors

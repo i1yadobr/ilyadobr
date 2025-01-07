@@ -115,7 +115,7 @@
 			to_chat(loc, SPAN_WARNING("Combat injection is still recharging."))
 			return
 		var/mob/living/carbon/human/M = loc
-		to_chat(M, "<span class='notice'>You feel a sudden surge of energy!</span>")
+		to_chat(M, SPAN("notice", "You feel a sudden surge of energy!"))
 		M.SetStunned(0)
 		M.SetWeakened(0)
 		M.SetParalysis(0)
@@ -711,7 +711,7 @@ Congratulations! You are now trained for invasive xenobiology research!"}
 	if (C == user)
 		user.visible_message("[user] climbs on \the [src].","You climb on \the [src].")
 	else
-		visible_message("<span class='notice'>\The [C] has been laid on \the [src] by [user].</span>")
+		visible_message(SPAN("notice", "\The [C] has been laid on \the [src] by [user]."))
 	if (C.client)
 		C.client.perspective = EYE_PERSPECTIVE
 		C.client.eye = src
@@ -805,12 +805,12 @@ Congratulations! You are now trained for invasive xenobiology research!"}
 		if (istype(G.affecting, /mob/living/carbon/human))
 			var/obj/occupied = turf_is_crowded()
 			if(occupied)
-				to_chat(user, "<span class='danger'>There's \a [occupied] in the way.</span>")
+				to_chat(user, SPAN("danger", "There's \a [occupied] in the way."))
 				return
 
 			if(G.force_danger())
 				G.assailant.next_move = world.time + 13 //also should prevent user from triggering this repeatedly
-				visible_message("<span class='warning'>[G.assailant] starts putting [G.affecting] on \the [src].</span>")
+				visible_message(SPAN("warning", "[G.assailant] starts putting [G.affecting] on \the [src]."))
 				if(!do_after(G.assailant, 13))
 					return 0
 				if(!G) //check that we still have a grab
@@ -818,11 +818,11 @@ Congratulations! You are now trained for invasive xenobiology research!"}
 				G.affecting.forceMove(src.loc)
 				G.affecting.Weaken(rand(1,4))
 				G.affecting.Stun(1)
-				visible_message("<span class='warning'>[G.assailant] puts [G.affecting] on \the [src].</span>")
+				visible_message(SPAN("warning", "[G.assailant] puts [G.affecting] on \the [src]."))
 				G.affecting.break_all_grabs(G.assailant)
 				qdel(W)
 			else
-				to_chat(user, "<span class='danger'>You need a better grip to do that!</span>")
+				to_chat(user, SPAN("danger", "You need a better grip to do that!"))
 			return
 
 	// Handle dismantling or placing things on the table from here on.

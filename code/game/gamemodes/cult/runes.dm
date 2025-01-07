@@ -604,15 +604,15 @@
 
 		if(H.mind == cult.sacrifice_target)
 
-		to_chat(usr, "<span class='warning'>The Geometer of Blood accepts this sacrifice, your objective is now complete.</span>")
+		to_chat(usr, SPAN("warning", "The Geometer of Blood accepts this sacrifice, your objective is now complete."))
 
-		to_chat(usr, "<span class='warning'>The Geometer of Blood accepts this [worth ? "exotic " : ""]sacrifice.</span>")
+		to_chat(usr, SPAN("warning", "The Geometer of Blood accepts this [worth ? "exotic " : ""]sacrifice."))
 
-		to_chat(usr, "<span class='warning'>The Geometer of blood accepts this sacrifice.</span>")
-		to_chat(usr, "<span class='warning'>However, this soul was not enough to gain His favor.</span>")
+		to_chat(usr, SPAN("warning", "The Geometer of blood accepts this sacrifice."))
+		to_chat(usr, SPAN("warning", "However, this soul was not enough to gain His favor."))
 
-		to_chat(usr, "<span class='warning'>The Geometer of blood accepts this sacrifice.</span>")
-		to_chat(usr, "<span class='warning'>However, a mere dead body is not enough to satisfy Him.</span>")
+		to_chat(usr, SPAN("warning", "The Geometer of blood accepts this sacrifice."))
+		to_chat(usr, SPAN("warning", "However, a mere dead body is not enough to satisfy Him."))
 		*/
 		to_chat(victim, SPAN_OCCULT("The Geometer of Blood claims your body."))
 		victim.dust()
@@ -805,7 +805,7 @@
 			break
 
 	if(!target)
-		to_chat(user, "<span class='warning'>You need ten sheets of metal to fold them into a construct shell.</span>")
+		to_chat(user, SPAN("warning", "You need ten sheets of metal to fold them into a construct shell."))
 		return fizzle(user)
 
 	speak_incantation(user, "Da A[pick("'","`")]ig Osk!")

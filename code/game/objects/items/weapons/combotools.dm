@@ -21,7 +21,7 @@
 
 /obj/item/combotool/attack_self(mob/user)
 	switchtools()
-	to_chat(user, "<span class='notice'>[src] mode: [tool_c].</span>")
+	to_chat(user, SPAN("notice", "[src] mode: [tool_c]."))
 	update_icon()
 	return
 
@@ -103,7 +103,7 @@
 
 /obj/item/combotool/advtool/attack_self(mob/user)
 	if(!screwdriver && !wirecutters)
-		to_chat(user, "<span class='notice'>[src] lacks tools.</span>")
+		to_chat(user, SPAN("notice", "[src] lacks tools."))
 		return
 	..()
 
@@ -112,7 +112,7 @@
 		return ..()
 
 	if(!src.contents.len)
-		to_chat(user, "<span class='warning'>There's nothing in \the [src] to remove!</span>")
+		to_chat(user, SPAN("warning", "There's nothing in \the [src] to remove!"))
 		return
 
 	var/choice = input(user, "What would you like to remove from the [src]?") as null|anything in src.contents
@@ -120,18 +120,18 @@
 		return
 
 	if(choice == multitool)
-		to_chat(user, "<span class='warning'>You cannot remove the multitool itself.</span>")
+		to_chat(user, SPAN("warning", "You cannot remove the multitool itself."))
 		return
 
 	if(user.pick_or_drop(choice))
-		to_chat(user, "<span class='notice'>You remove \the [choice] from \the [src].</span>")
+		to_chat(user, SPAN("notice", "You remove \the [choice] from \the [src]."))
 		src.contents -= choice
 		if(choice == wirecutters)
 			wirecutters = null
 		else if(choice == screwdriver)
 			screwdriver = null
 	else
-		to_chat(user, "<span class='warning'>Something went wrong, please try again.</span>")
+		to_chat(user, SPAN("warning", "Something went wrong, please try again."))
 
 	tool_c = "multitool"
 	tool_u = multitool
@@ -145,20 +145,20 @@
 			contents += SD
 			user.drop(SD, src)
 			screwdriver = SD
-			to_chat(user, "<span class='notice'>You insert \the [SD] into \the [src].</span>")
+			to_chat(user, SPAN("notice", "You insert \the [SD] into \the [src]."))
 			update_icon()
 		else
-			to_chat(user, "<span class='warning'>There's already \the [screwdriver] in \the [src]!</span>")
+			to_chat(user, SPAN("warning", "There's already \the [screwdriver] in \the [src]!"))
 	else if(istype(I, /obj/item/wirecutters/advpart))
 		var/obj/item/screwdriver/advpart/WC = I
 		if(!wirecutters)
 			contents += WC
 			user.drop(WC, src)
 			wirecutters = WC
-			to_chat(user, "<span class='notice'>You insert \the [WC] into \the [src].</span>")
+			to_chat(user, SPAN("notice", "You insert \the [WC] into \the [src]."))
 			update_icon()
 		else
-			to_chat(user, "<span class='warning'>There are already \the [wirecutters] in \the [src]!</span>")
+			to_chat(user, SPAN("warning", "There are already \the [wirecutters] in \the [src]!"))
 	else
 		return ..()
 

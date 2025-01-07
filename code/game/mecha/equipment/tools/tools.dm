@@ -535,7 +535,7 @@
 /obj/item/mecha_parts/mecha_equipment/armor_booster/get_equip_info()
 	if(!chassis)
 		return
-	return "<span style=\"color:[equip_ready?"#0f0":"#f00"];\">*</span>&nbsp;[src.name]"
+	return "[SPAN("", "<font style='color:[equip_ready?"#0f0":"#f00"];'>*</font>")]&nbsp;[src.name]"
 
 /obj/item/mecha_parts/mecha_equipment/armor_booster/proc/activate_boost()
 	if(!src.chassis)
@@ -645,7 +645,7 @@
 
 /obj/item/mecha_parts/mecha_equipment/repair_droid/get_equip_info()
 	if(!chassis) return
-	return "<span style=\"color:[equip_ready?"#0f0":"#f00"];\">*</span>&nbsp;[src.name] - <a href='?src=\ref[src];toggle_repairs=1'>[pr_repair_droid.active()?"Dea":"A"]ctivate</a>"
+	return "[SPAN("", "<font style='color:[equip_ready?"#0f0":"#f00"];'>*</font>")]&nbsp;[src.name] - <a href='?src=\ref[src];toggle_repairs=1'>[pr_repair_droid.active()?"Dea":"A"]ctivate</a>"
 
 /obj/item/mecha_parts/mecha_equipment/repair_droid/Topic(href, href_list)
 	..()
@@ -750,7 +750,7 @@
 /obj/item/mecha_parts/mecha_equipment/tesla_energy_relay/get_equip_info()
 	if(!chassis)
 		return
-	return "<span style=\"color:[equip_ready?"#0f0":"#f00"];\">*</span>&nbsp;[src.name] - <a href='?src=\ref[src];toggle_relay=1'>[pr_energy_relay.active()?"Dea":"A"]ctivate</a>"
+	return "[SPAN("", "<font style='color:[equip_ready?"#0f0":"#f00"];'>*</font>")]&nbsp;[src.name] - <a href='?src=\ref[src];toggle_relay=1'>[pr_energy_relay.active()?"Dea":"A"]ctivate</a>"
 
 /datum/global_iterator/mecha_energy_relay/process(obj/item/mecha_parts/mecha_equipment/tesla_energy_relay/ER)
 	if(!ER.chassis || ER.chassis.hasInternalDamage(MECHA_INT_SHORT_CIRCUIT))
@@ -1359,7 +1359,7 @@
 /obj/item/mecha_parts/mecha_equipment/servo_accelerator/get_equip_info()
 	if(!chassis)
 		return
-	return "<span style=\"color:[equip_ready? "#0f0" : "#f00"];\">*</span>&nbsp;[src.name] - <a href='?src=\ref[src];toggle_accelerator=1'>[equip_ready?"Dea":"A"]ctivate</a> (<a href='?src=\ref[src];toggle_turbo=1'><span style=\"color:[turbo_mode? "#f00" : "#0f0"];\">TURBO</span></a>)"
+	return "[SPAN("", "<font style='color:[equip_ready?"#0f0":"#f00"];'>*</font>")]&nbsp;[src.name] - <a href='?src=\ref[src];toggle_accelerator=1'>[equip_ready?"Dea":"A"]ctivate</a> (<a href='?src=\ref[src];toggle_turbo=1'>[SPAN("", "<font style='color:[turbo_mode?"#f00":"#0f0"];'>TURBO</font>")]</a>)"
 
 /obj/item/mecha_parts/mecha_equipment/servo_accelerator/Topic(href, href_list)
 	..()

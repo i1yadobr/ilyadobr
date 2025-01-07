@@ -675,7 +675,7 @@
 		return
 
 	for(var/mob/O in hearers(src, null))
-		O.show_message("<span class='game say'>[SPAN("name", "\The [src]")] beeps, \"[message]\"</span>", 2)
+		O.show_message(SPAN("game say", "[SPAN("name", "\The [src]")] beeps, \"[message]\""), 2)
 	return
 
 /obj/machinery/vending/powered()

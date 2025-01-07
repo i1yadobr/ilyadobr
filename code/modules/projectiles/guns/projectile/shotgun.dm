@@ -112,7 +112,7 @@
 	if(isWelder(W) && buildstate == 0)
 		var/obj/item/weldingtool/WT = W
 		if(WT.remove_fuel(0, user))
-			user.visible_message("<span class='notice'>\The [user] secures \the [src]'s barrel.</span>")
+			user.visible_message(SPAN("notice", "\The [user] secures \the [src]'s barrel."))
 			add_fingerprint(user)
 			buildstate++
 			update_icon()
@@ -120,26 +120,26 @@
 	else if(istype(W,/obj/item/stack/rods) && buildstate == 1)
 		var/obj/item/stack/rods/R = W
 		R.use(1)
-		user.visible_message("<span class='notice'>\The [user] attaches a grip to \the [src].</span>")
+		user.visible_message(SPAN("notice", "\The [user] attaches a grip to \the [src]."))
 		add_fingerprint(user)
 		buildstate++
 		update_icon()
 		return
 	else if(istype(W,/obj/item/device/assembly/mousetrap) && buildstate == 2)
 		qdel(W)
-		user.visible_message("<span class='notice'>\The [user] takes apart \the [W] and uses the parts to construct a crude chamber loader inside \the [src].</span>")
+		user.visible_message(SPAN("notice", "\The [user] takes apart \the [W] and uses the parts to construct a crude chamber loader inside \the [src]."))
 		add_fingerprint(user)
 		buildstate++
 		update_icon()
 		return
 	else if(istype(W,/obj/item/tape_roll) && buildstate == 3)
-		user.visible_message("<span class='notice'>\The [user] madly wraps the assembly with \the [W].</span>")
+		user.visible_message(SPAN("notice", "\The [user] madly wraps the assembly with \the [W]."))
 		add_fingerprint(user)
 		buildstate++
 		update_icon()
 		return
 	else if(isScrewdriver(W) && buildstate == 4)
-		user.visible_message("<span class='notice'>\The [user] secures \the [src] with \the [W].</span>")
+		user.visible_message(SPAN("notice", "\The [user] secures \the [src] with \the [W]."))
 		playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
 		var/obj/item/gun/projectile/shotgun/pump/boomstick/herewego
 		herewego = new /obj/item/gun/projectile/shotgun/pump/boomstick { starts_loaded = 0 } (loc)
@@ -199,11 +199,11 @@
 //this is largely hacky and bad :(	-Pete
 /obj/item/gun/projectile/shotgun/doublebarrel/attackby(obj/item/A as obj, mob/user as mob)
 	if(w_class > 3 && (istype(A, /obj/item/circular_saw) || istype(A, /obj/item/melee/energy) || istype(A, /obj/item/gun/energy/plasmacutter)))
-		to_chat(user, "<span class='notice'>You begin to shorten the barrel of \the [src].</span>")
+		to_chat(user, SPAN("notice", "You begin to shorten the barrel of \the [src]."))
 		if(loaded.len)
 			for(var/i in 1 to max_shells)
 				Fire(user, user)	//will this work? //it will. we call it twice, for twice the FUN
-			user.visible_message("<span class='danger'>The shotgun goes off!</span>", "<span class='danger'>The shotgun goes off in your face!</span>")
+			user.visible_message(SPAN("danger", "The shotgun goes off!"), SPAN("danger", "The shotgun goes off in your face!"))
 			return
 		if(do_after(user, 30, src))	//SHIT IS STEALTHY EYYYYY
 			icon_state = "sawnshotgun"
@@ -220,7 +220,7 @@
 			SetName("sawn-off shotgun")
 			desc = "Omar's coming!"
 			fire_sound = 'sound/effects/weapons/gun/fire_shotgun3.ogg'
-			to_chat(user, "<span class='warning'>You shorten the barrel of \the [src]!</span>")
+			to_chat(user, SPAN("warning", "You shorten the barrel of \the [src]!"))
 	else
 		..()
 

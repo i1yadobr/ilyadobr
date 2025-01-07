@@ -70,7 +70,7 @@
 /obj/item/gun/energy/floragun/afterattack(obj/target, mob/user, adjacent_flag)
 	//allow shooting into adjacent hydrotrays regardless of intent
 	if(adjacent_flag && istype(target,/obj/machinery/portable_atmospherics/hydroponics))
-		user.visible_message("<span class='danger'>\The [user] fires \the [src] into \the [target]!</span>")
+		user.visible_message(SPAN("danger", "\The [user] fires \the [src] into \the [target]!"))
 		Fire(target,user)
 		return
 	..()
@@ -87,7 +87,7 @@
 
 	gene = SSplants.plant_gene_datums[genemask]
 
-	to_chat(usr, "<span class='info'>You set the [src]'s targeted genetic area to [genemask].</span>")
+	to_chat(usr, SPAN("info", "You set the [src]'s targeted genetic area to [genemask]."))
 
 	return
 
@@ -161,14 +161,14 @@
 
 /obj/item/gun/energy/staff/special_check(mob/user)
 	if((user.mind && !GLOB.wizards.is_antagonist(user.mind)))
-		to_chat(usr, "<span class='warning'>You focus your mind on \the [src], but nothing happens!</span>")
+		to_chat(usr, SPAN("warning", "You focus your mind on \the [src], but nothing happens!"))
 		return 0
 
 	return ..()
 
 /obj/item/gun/energy/staff/handle_click_empty(mob/user = null)
 	if (user)
-		user.visible_message("*fizzle*", "<span class='danger'>*fizzle*</span>")
+		user.visible_message("*fizzle*", SPAN("danger", "*fizzle*"))
 	else
 		src.visible_message("*fizzle*")
 	playsound(src.loc, GET_SFX(SFX_SPARK), 100, 1)
@@ -193,11 +193,11 @@
 	attack_self(mob/living/user as mob)
 		if(projectile_type == /obj/item/projectile/forcebolt)
 			charge_cost = 400
-			to_chat(user, "<span class='warning'>The [src.name] will now strike a small area.</span>")
+			to_chat(user, SPAN("warning", "The [src.name] will now strike a small area."))
 			projectile_type = /obj/item/projectile/forcebolt/strong
 		else
 			charge_cost = 200
-			to_chat(user, "<span class='warning'>The [src.name] will now strike only a single person.</span>")
+			to_chat(user, SPAN("warning", "The [src.name] will now strike only a single person."))
 			projectile_type = /obj/item/projectile/forcebolt"
 	*/
 

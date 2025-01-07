@@ -295,7 +295,7 @@
 	color = "#b31008"
 	var/agony_dose = 5
 	var/agony_amount = 2
-	var/discomfort_message = "<span class='danger'>Your insides feel uncomfortably hot!</span>"
+	var/discomfort_message = SPAN("danger", "Your insides feel uncomfortably hot!")
 	var/metroid_temp_adj = 10
 
 /datum/reagent/capsaicin/affect_blood(mob/living/carbon/M, alien, removed)
@@ -317,7 +317,7 @@
 		M.apply_effect(agony_amount, PAIN, 0)
 		if(prob(5))
 			M.custom_emote(2, "[pick("dry heaves!","coughs!","splutters!")]")
-			to_chat(M, "<span class='danger'>You feel like your insides are burning!</span>")
+			to_chat(M, SPAN("danger", "You feel like your insides are burning!"))
 	if(istype(M, /mob/living/carbon/metroid))
 		M.bodytemperature += rand(0, 15) + metroid_temp_adj
 	holder.remove_reagent(/datum/reagent/frostoil, 5)
@@ -332,7 +332,7 @@
 	color = "#b31008"
 	agony_dose = 0.5
 	agony_amount = 4
-	discomfort_message = "<span class='danger'>You feel like your insides are burning!</span>"
+	discomfort_message = SPAN("danger", "You feel like your insides are burning!")
 	metroid_temp_adj = 15
 
 /datum/reagent/capsaicin/condensed/affect_touch(mob/living/carbon/M, alien, removed)
@@ -368,9 +368,9 @@
 	var/message = null
 	if(eyes_covered)
 		if(!mouth_covered)
-			message = "<span class='warning'>Your [eye_protection] protects your eyes from the pepperspray!</span>"
+			message = SPAN("warning", "Your [eye_protection] protects your eyes from the pepperspray!")
 	else
-		message = "<span class='warning'>The pepperspray gets in your eyes!</span>"
+		message = SPAN("warning", "The pepperspray gets in your eyes!")
 		if(mouth_covered)
 			M.eye_blurry = max(M.eye_blurry, effective_strength * 3)
 			M.eye_blind = max(M.eye_blind, effective_strength)
@@ -380,9 +380,9 @@
 
 	if(mouth_covered)
 		if(!message)
-			message = "<span class='warning'>Your [face_protection] protects you from the pepperspray!</span>"
+			message = SPAN("warning", "Your [face_protection] protects you from the pepperspray!")
 	else if(!no_pain)
-		message = "<span class='danger'>Your face and throat burn!</span>"
+		message = SPAN("danger", "Your face and throat burn!")
 		if(prob(25))
 			M.custom_emote(2, "[pick("coughs!","coughs hysterically!","splutters!")]")
 		M.Weaken(5)
@@ -394,11 +394,11 @@
 		if(!H.can_feel_pain())
 			return
 	if(M.chem_doses[type] == metabolism)
-		to_chat(M, "<span class='danger'>You feel like your insides are burning!</span>")
+		to_chat(M, SPAN("danger", "You feel like your insides are burning!"))
 	else
 		M.apply_effect(4, PAIN, 0)
 		if(prob(5))
-			M.visible_message("<span class='warning'>[M] [pick("dry heaves!","coughs!","splutters!")]</span>", "<span class='danger'>You feel like your insides are burning!</span>")
+			M.visible_message(SPAN("warning", "[M] [pick("dry heaves!","coughs!","splutters!")]"), SPAN("danger", "You feel like your insides are burning!"))
 	if(istype(M, /mob/living/carbon/metroid))
 		M.bodytemperature += rand(15, 30)
 	holder.remove_reagent(/datum/reagent/frostoil, 5)

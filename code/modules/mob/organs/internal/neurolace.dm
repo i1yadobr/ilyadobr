@@ -1,6 +1,6 @@
 /mob/living/carbon/human/proc/create_neural_lace()
 	internal_organs_by_name[BP_NEURAL_LACE] = new /obj/item/organ/internal/neurolace(src,1)
-	to_chat(src, "<span class='notice'>You feel a faint sense of vertigo as your neural lace boots.</span>")
+	to_chat(src, SPAN("notice", "You feel a faint sense of vertigo as your neural lace boots."))
 
 /obj/item/organ/internal/neurolace
 	name = "neural lace"
@@ -69,7 +69,7 @@
 
 /obj/item/organ/internal/neurolace/vox/removed(mob/living/user, drop_organ = TRUE, detach = TRUE)
 	var/obj/item/organ/external/head = owner.get_organ(parent_organ)
-	owner.visible_message("<span class='danger'>\The [src] rips gaping holes in \the [owner]'s [head.name] as it is torn loose!</span>")
+	owner.visible_message(SPAN("danger", "\The [src] rips gaping holes in \the [owner]'s [head.name] as it is torn loose!"))
 	head.take_external_damage(rand(15,20))
 	for(var/obj/item/organ/internal/O in head.contents)
 		O.take_internal_damage(rand(30,70))
@@ -77,13 +77,13 @@
 
 /obj/item/organ/internal/neurolace/proc/overwrite()
 	if(owner.mind && owner.ckey) //Someone is already in this body!
-		owner.visible_message("<span class='danger'>\The [owner] spasms violently!</span>")
+		owner.visible_message(SPAN("danger", "\The [owner] spasms violently!"))
 		if(prob(66))
-			to_chat(owner, "<span class='danger'>You fight off the invading tendrils of another mind, holding onto your own body!</span>")
+			to_chat(owner, SPAN("danger", "You fight off the invading tendrils of another mind, holding onto your own body!"))
 			return
 		owner.ghostize() // Remove the previous owner to avoid their client getting reset.
 	backup.active = 1
 	backup.transfer_to(owner)
 	if(default_language) owner.default_language = default_language
 	owner.languages = languages.Copy()
-	to_chat(owner, "<span class='notice'>Consciousness slowly creeps over you as your new body awakens.</span>")
+	to_chat(owner, SPAN("notice", "Consciousness slowly creeps over you as your new body awakens."))

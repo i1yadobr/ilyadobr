@@ -69,10 +69,10 @@
 		return 0
 
 	if(accepted_item.charges >= 5)
-		to_chat(user, "<span class='danger'>Another grenade of that type will not fit into the module.</span>")
+		to_chat(user, SPAN("danger", "Another grenade of that type will not fit into the module."))
 		return 0
 
-	to_chat(user, "<span class='info'><b>You slot \the [input_device] into the suit module.</b></span>")
+	to_chat(user, SPAN("info", "<b>You slot \the [input_device] into the suit module.</b>"))
 	qdel(input_device)
 	accepted_item.charges++
 	return 1
@@ -245,7 +245,7 @@
 	var/mob/living/M = holder.wearer
 
 	if(M.l_hand && M.r_hand)
-		to_chat(M, "<span class='danger'>Your hands are full.</span>")
+		to_chat(M, SPAN("danger", "Your hands are full."))
 		deactivate()
 		return
 
@@ -293,15 +293,15 @@
 	if(target)
 		var/obj/item/firing = new fabrication_type()
 		firing.forceMove(get_turf(src))
-		H.visible_message("<span class='danger'>[H] launches \a [firing]!</span>")
+		H.visible_message(SPAN("danger", "[H] launches \a [firing]!"))
 		firing.throw_at(target, fire_distance, fire_force)
 	else
 		if(H.l_hand && H.r_hand)
-			to_chat(H, "<span class='danger'>Your hands are full.</span>")
+			to_chat(H, SPAN("danger", "Your hands are full."))
 		else
 			var/obj/item/new_weapon = new fabrication_type()
 			new_weapon.forceMove(H)
-			to_chat(H, "<span class='info'><b>You quickly fabricate \a [new_weapon].</b></span>")
+			to_chat(H, SPAN("info", "<b>You quickly fabricate \a [new_weapon].</b>"))
 			H.pick_or_drop(new_weapon)
 
 	return 1

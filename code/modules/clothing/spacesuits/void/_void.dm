@@ -179,17 +179,17 @@ else if(##equipment_var) {\
 	if(H.wear_suit != src) return
 
 	if(H.head == helmet)
-		to_chat(H, "<span class='notice'>You retract your suit helmet.</span>")
+		to_chat(H, SPAN("notice", "You retract your suit helmet."))
 		helmet.canremove = TRUE
 		H.drop(helmet, src)
 	else
 		if(H.head)
-			to_chat(H, "<span class='danger'>You cannot deploy your helmet while wearing \the [H.head].</span>")
+			to_chat(H, SPAN("danger", "You cannot deploy your helmet while wearing \the [H.head]."))
 			return
 		if(H.equip_to_slot_if_possible(helmet, slot_head))
 			helmet.pickup(H)
 			helmet.canremove = FALSE
-			to_chat(H, "<span class='info'>You deploy your suit helmet, sealing you off from the world.</span>")
+			to_chat(H, SPAN("info", "You deploy your suit helmet, sealing you off from the world."))
 	helmet.update_light(H)
 
 /obj/item/clothing/suit/space/void/verb/eject_tank()
@@ -210,7 +210,7 @@ else if(##equipment_var) {\
 	if(H.incapacitated()) return
 	if(H.wear_suit != src) return
 
-	to_chat(H, "<span class='info'>You press the emergency release, ejecting \the [tank] from your suit.</span>")
+	to_chat(H, SPAN("info", "You press the emergency release, ejecting \the [tank] from your suit."))
 	tank.canremove = TRUE
 	H.drop(tank)
 	src.tank = null
@@ -223,7 +223,7 @@ else if(##equipment_var) {\
 		return ..()
 
 	if(user.get_inventory_slot(src) == slot_wear_suit)
-		to_chat(user, "<span class='warning'>You cannot modify \the [src] while it is being worn.</span>")
+		to_chat(user, SPAN("warning", "You cannot modify \the [src] while it is being worn."))
 		return
 
 	if(istype(W,/obj/item/screwdriver))

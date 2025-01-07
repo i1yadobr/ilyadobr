@@ -26,7 +26,7 @@
 
 		if (stat == UNCONSCIOUS || ssd_check())
 			damage_description += "It is non-responsive and displaying the text: \"RUNTIME: Sensory Overload, stack 26/3\".\n"
-		msg += "<span class='warning'>[damage_description]</span>"
+		msg += SPAN("warning", "[damage_description]")
 	msg += "*---------*"
 	if(hardware && (hardware.owner == src))
 		msg += "<br>"

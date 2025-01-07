@@ -200,7 +200,7 @@ var/list/debug_verbs = list (
 	var/turf/simulated/location = get_turf(usr)
 
 	if(!istype(location, /turf/simulated))
-		to_chat(src, "<Span class='warning'>This debug tool can only be used while on a simulated turf.</span>")
+		to_chat(src, SPAN("warning", "This debug tool can only be used while on a simulated turf."))
 		return
 
 	if(!usedZAScolors)

@@ -87,7 +87,7 @@
 		M.visible_message(\
 			SPAN_WARNING("[user] tries to pull [M] free of \the [src]!"),\
 			SPAN_WARNING("[user] is trying to pull you off \the [src], opening up fresh wounds!"),\
-			SPAN("italics", "You hear a squishy wet noise.</span>"))
+			SPAN("italics", "You hear a squishy wet noise."))
 		unbuckling = TRUE
 		if(!do_after(user, delay = 150, target = src))
 			if(M && M == buckled_mob)
@@ -201,7 +201,7 @@
 	var/butchered_organ_name = "[organ.name]";
 	user.visible_message(SPAN_WARNING("[user] tries to butcher [H]'s [butchered_organ_name]!"),\
 		SPAN_NOTICE("You try to butcher [H]'s [butchered_organ_name]..."),\
-		SPAN("italics", "You hear a wet squishing noise.</span>"))
+		SPAN("italics", "You hear a wet squishing noise."))
 
 	if (do_after(user, delay = 20, target = H))
 		if (istype(C))
@@ -213,7 +213,7 @@
 			organ.droplimb(clean = FALSE, silent = TRUE, disintegrate = DROPLIMB_BLUNT) //blunt so it gets turned into gore
 		user.visible_message(SPAN_WARNING("[user]'ve successfully butchered [H]'s [butchered_organ_name]!"),\
 			SPAN_NOTICE("You've successfully butchered [H]'s [butchered_organ_name]..."),\
-			SPAN("italics", "You hear a squishy wet noise.</span>"))
+			SPAN("italics", "You hear a squishy wet noise."))
 		if (H.can_feel_pain())
 			H.emote("scream")
 		H.nutrition -= slab_nutrition

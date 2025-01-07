@@ -52,11 +52,11 @@
 		return
 
 	if(!usr.client.holder || !(usr.client.holder.rights & R_PERMISSIONS))
-		to_chat(usr, "<span class='warning'>You do not have permission to do this!</span>")
+		to_chat(usr, SPAN("warning", "You do not have permission to do this!"))
 		return
 
 	if(!establish_db_connection())
-		to_chat(usr, "<span class='warning'>Failed to establish database connection</span>")
+		to_chat(usr, SPAN("warning", "Failed to establish database connection"))
 		return
 
 	if(!adm_ckey || !new_rank)
@@ -82,13 +82,13 @@
 		var/log_msg = "Added new admin [adm_ckey] to rank [new_rank]"
 		sql_query("INSERT INTO admin VALUES (null, $adm_ckey, $new_rank, 0)", dbcon, list(adm_ckey = adm_ckey, new_rank = new_rank))
 		sql_query("INSERT INTO admin_log (id, datetime, adminckey, adminip, log ) VALUES (NULL , NOW() , $ckey, $address, $log);", dbcon, list(ckey = usr.ckey, address = usr.client.address || "127.0.0.1", adm_ckey = adm_ckey, new_rank = new_rank, log = log_msg))
-		to_chat(usr, "<span class='notice'>New admin added.</span>")
+		to_chat(usr, SPAN("notice", "New admin added."))
 	else
 		if(!isnull(admin_id) && isnum(admin_id))
 			var/log_msg = "Edited the rank of [adm_ckey] to [new_rank]"
 			sql_query("UPDATE admin SET `rank` = $new_rank WHERE id = $admin_id", dbcon, list(new_rank = new_rank, admin_id = admin_id))
 			sql_query("INSERT INTO admin_log (id, datetime, adminckey, adminip, log) VALUES (NULL , NOW( ) , $ckey, $address, $log);", dbcon, list(ckey = usr.ckey, address = usr.client.address || "127.0.0.1", adm_ckey = adm_ckey, new_rank = new_rank, log = log_msg))
-			to_chat(usr, "<span class='notice'>Admin rank changed.</span>")
+			to_chat(usr, SPAN("notice", "Admin rank changed."))
 
 /datum/admins/proc/log_admin_permission_modification(adm_ckey, new_permission)
 	if(config.admin.admin_legacy_system)	return
@@ -97,11 +97,11 @@
 		return
 
 	if(!usr.client.holder || !(usr.client.holder.rights & R_PERMISSIONS))
-		to_chat(usr, "<span class='warning'>You do not have permission to do this!</span>")
+		to_chat(usr, SPAN("warning", "You do not have permission to do this!"))
 		return
 
 	if(!establish_db_connection())
-		to_chat(usr, "<span class='warning'>Failed to establish database connection</span>")
+		to_chat(usr, SPAN("warning", "Failed to establish database connection"))
 		return
 
 	if(!adm_ckey || !new_permission)
@@ -135,9 +135,9 @@
 		var/log_msg = "Removed permission [new_permissiont] (flag = [new_permission]) to admin [adm_ckey]"
 		sql_query("UPDATE admin SET flags = $flags WHERE id = $admin_id", dbcon, list(flags = admin_rights & ~new_permission, admin_id = admin_id))
 		sql_query("INSERT INTO admin_log (id, datetime, adminckey, adminip, log) VALUES (NULL, NOW(), $ckey, $address, $log);", dbcon, list(ckey = usr.ckey, address = usr.client.address || "127.0.0.1", new_permissiont, new_permission = new_permission, adm_ckey = adm_ckey, log = log_msg))
-		to_chat(usr, "<span class='notice'>Permission removed.</span>")
+		to_chat(usr, SPAN("notice", "Permission removed."))
 	else //This admin doesn't have this permission, so we are adding it.
 		var/log_msg = "Added permission [new_permissiont] (flag = [new_permission]) to admin [adm_ckey]"
 		sql_query("UPDATE admin SET flags = $flags WHERE id = $admin_id", dbcon, list(flags = admin_rights | new_permission, admin_id = admin_id))
 		sql_query("INSERT INTO admin_log (id, datetime, adminckey, adminip, log) VALUES (NULL, NOW(), $ckey, $address, $log)", dbcon, list(ckey = usr.ckey, address = usr.client.address || "127.0.0.1", new_permissiont, new_permission = new_permission, adm_ckey = adm_ckey, log = log_msg))
-		to_chat(usr, "<span class='notice'>Permission added.</span>")
+		to_chat(usr, SPAN("notice", "Permission added."))

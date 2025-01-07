@@ -123,13 +123,13 @@ var/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown"
 					var/colour = href_list["cut"]
 					CutWireColour(colour)
 				else
-					to_chat(L, "<span class='error'>You need wirecutters!</span>")
+					to_chat(L, SPAN("error", "You need wirecutters!"))
 			else if(href_list["pulse"])
 				if(isMultitool(I))
 					var/colour = href_list["pulse"]
 					PulseColour(colour)
 				else
-					to_chat(L, "<span class='error'>You need a multitool!</span>")
+					to_chat(L, SPAN("error", "You need a multitool!"))
 			else if(href_list["attach"])
 				var/colour = href_list["attach"]
 				// Detach
@@ -143,7 +143,7 @@ var/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown"
 					if(istype(I, /obj/item/device/assembly/signaler) && L.drop(I))
 						Attach(colour, I)
 					else
-						to_chat(L, "<span class='error'>You need a remote signaller!</span>")
+						to_chat(L, SPAN("error", "You need a remote signaller!"))
 
 
 

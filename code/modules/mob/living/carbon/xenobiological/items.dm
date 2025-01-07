@@ -15,10 +15,10 @@
 	attackby(obj/item/O as obj, mob/user as mob)
 		if(istype(O, /obj/item/metroidsteroid2))
 			if(enhanced == 1)
-				to_chat(user, "<span class='warning'> This extract has already been enhanced!</span>")
+				to_chat(user, SPAN("warning", " This extract has already been enhanced!"))
 				return ..()
 			if(Uses == 0)
-				to_chat(user, "<span class='warning'> You can't enhance a used extract!</span>")
+				to_chat(user, SPAN("warning", " You can't enhance a used extract!"))
 				return ..()
 			to_chat(user, "You apply the enhancer. It now has triple the amount of uses.")
 			Uses = 3
@@ -128,16 +128,16 @@
 
 	attack(mob/living/carbon/metroid/M as mob, mob/user as mob)
 		if(!istype(M, /mob/living/carbon/metroid))//If target is not a metroid.
-			to_chat(user, "<span class='warning'> The potion only works on baby metroids!</span>")
+			to_chat(user, SPAN("warning", " The potion only works on baby metroids!"))
 			return ..()
 		if(M.is_adult) //Can't tame adults
-			to_chat(user, "<span class='warning'> Only baby metroids can be tamed!</span>")
+			to_chat(user, SPAN("warning", " Only baby metroids can be tamed!"))
 			return..()
 		if(M.stat)
-			to_chat(user, "<span class='warning'> The metroid is dead!</span>")
+			to_chat(user, SPAN("warning", " The metroid is dead!"))
 			return..()
 		if(M.mind)
-			to_chat(user, "<span class='warning'> The metroid resists!</span>")
+			to_chat(user, SPAN("warning", " The metroid resists!"))
 			return ..()
 		var/mob/living/simple_animal/metroid/pet = new /mob/living/simple_animal/metroid(M.loc)
 		pet.icon_state = "[M.colour] baby metroid"
@@ -162,13 +162,13 @@
 
 	attack(mob/living/carbon/metroid/M as mob, mob/user as mob)
 		if(!istype(M, /mob/living/carbon/metroid/))//If target is not a metroid.
-			to_chat(user, "<span class='warning'> The potion only works on metroids!</span>")
+			to_chat(user, SPAN("warning", " The potion only works on metroids!"))
 			return ..()
 		if(M.stat)
-			to_chat(user, "<span class='warning'> The metroid is dead!</span>")
+			to_chat(user, SPAN("warning", " The metroid is dead!"))
 			return..()
 		if(M.mind)
-			to_chat(user, "<span class='warning'> The metroid resists!</span>")
+			to_chat(user, SPAN("warning", " The metroid resists!"))
 			return ..()
 		var/mob/living/simple_animal/adultmetroid/pet = new /mob/living/simple_animal/adultmetroid(M.loc)
 		pet.icon_state = "[M.colour] adult metroid"
@@ -194,16 +194,16 @@
 
 /obj/item/metroidsteroid/attack(mob/living/carbon/metroid/M as mob, mob/user as mob)
 	if(!istype(M, /mob/living/carbon/metroid))//If target is not a metroid.
-		to_chat(user, "<span class='warning'> The steroid only works on baby metroids!</span>")
+		to_chat(user, SPAN("warning", " The steroid only works on baby metroids!"))
 		return ..()
 	if(M.is_adult) //Can't tame adults
-		to_chat(user, "<span class='warning'> Only baby metroids can use the steroid!</span>")
+		to_chat(user, SPAN("warning", " Only baby metroids can use the steroid!"))
 		return..()
 	if(M.stat)
-		to_chat(user, "<span class='warning'> The metroid is dead!</span>")
+		to_chat(user, SPAN("warning", " The metroid is dead!"))
 		return..()
 	if(M.cores == 3)
-		to_chat(user, "<span class='warning'> The metroid already has the maximum amount of extract!</span>")
+		to_chat(user, SPAN("warning", " The metroid already has the maximum amount of extract!"))
 		return..()
 
 	to_chat(user, "You feed the metroid the steroid. It now has triple the amount of extract.")
@@ -220,10 +220,10 @@
 	if(istype(target, /obj/item/metroid_extract))
 		var/obj/item/metroid_extract/extract = target
 		if(extract.enhanced == 1)
-			to_chat(user, "<span class='warning'> This extract has already been enhanced!</span>")
+			to_chat(user, SPAN("warning", " This extract has already been enhanced!"))
 			return ..()
 		if(extract.Uses == 0)
-			to_chat(user, "<span class='warning'> You can't enhance a used extract!</span>")
+			to_chat(user, SPAN("warning", " You can't enhance a used extract!"))
 			return ..()
 		to_chat(user, "You apply the enhancer. It now has triple the amount of uses.")
 		extract.Uses = 3
@@ -238,10 +238,10 @@
 
 /obj/item/metroid_stabilizer/attack(mob/living/carbon/metroid/M as mob, mob/user as mob)
 	if(!istype(M, /mob/living/carbon/metroid))//If target is not a metroid.
-		to_chat(user, "<span class='warning'> The stabilizer only works on metroids!</span>")
+		to_chat(user, SPAN("warning", " The stabilizer only works on metroids!"))
 		return ..()
 	if(M.stat)
-		to_chat(user, "<span class='warning'> The metroid is dead!</span>")
+		to_chat(user, SPAN("warning", " The metroid is dead!"))
 		return..()
 	to_chat(user, "You feed the metroid the stabilizer.")
 	M.mutation_chance -= 15
@@ -276,10 +276,10 @@
 
 /obj/item/metroid_mutation/attack(mob/living/carbon/metroid/M, mob/user)
 	if(!istype(M, /mob/living/carbon/metroid))//If target is not a metroid.
-		to_chat(user, "<span class='warning'> The mutation potion only works on metroids!</span>")
+		to_chat(user, SPAN("warning", " The mutation potion only works on metroids!"))
 		return ..()
 	if(M.stat)
-		to_chat(user, "<span class='warning'> The metroid is dead!</span>")
+		to_chat(user, SPAN("warning", " The metroid is dead!"))
 		return..()
 	to_chat(user, "You feed the metroid the mutation potion.")
 	M.mutation_chance += 15

@@ -25,7 +25,7 @@
 
 /obj/structure/rock/attackby(obj/item/I, mob/user)
 	if(isMonkey(user))
-		to_chat(user, "<span class='warning'>You don't have the dexterity to do this!</span>")
+		to_chat(user, SPAN("warning", "You don't have the dexterity to do this!"))
 		return
 	if(istype(I, /obj/item/pickaxe/drill))
 		if(!user.canClick())
@@ -35,9 +35,9 @@
 			return
 		var/obj/item/pickaxe/drill/D = I
 		playsound(user, D.drill_sound, 20, 1)
-		to_chat(user, "<span class='notice'>You start [D.drill_verb].</span>")
+		to_chat(user, SPAN("notice", "You start [D.drill_verb]."))
 		if(do_after(user, D.dig_delay, src))
-			to_chat(user, "<span class='notice'>You finish [D.drill_verb] \the [src].</span>")
+			to_chat(user, SPAN("notice", "You finish [D.drill_verb] \the [src]."))
 			qdel(src)
 		return
 	if(istype(I, /obj/item/pickaxe))

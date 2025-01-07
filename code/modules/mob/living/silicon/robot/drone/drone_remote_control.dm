@@ -10,11 +10,11 @@
 		return
 
 	if(stat != 2 || client || key)
-		to_chat(user, "<span class='warning'>You cannot take control of an autonomous, active drone.</span>")
+		to_chat(user, SPAN("warning", "You cannot take control of an autonomous, active drone."))
 		return
 
 	if(health < -35 || emagged)
-		to_chat(user, "<span class='notice'><b>WARNING:</b> connection timed out.</span>")
+		to_chat(user, SPAN("notice", "<b>WARNING:</b> connection timed out."))
 		return
 	
 	assume_control(user)
@@ -39,7 +39,7 @@
 	qdel(silicon_radio)
 	silicon_radio = new /obj/item/device/radio/headset/heads/ai_integrated(src)
 
-	to_chat(src, "<span class='notice'><b>You have shunted your primary control loop into \a [initial(name)].</b> Use the <b>Release Control</b> verb to return to your core.</span>")
+	to_chat(src, SPAN("notice", "<b>You have shunted your primary control loop into \a [initial(name)].</b> Use the <b>Release Control</b> verb to return to your core."))
 
 /obj/machinery/drone_fabricator/attack_ai(mob/living/silicon/ai/user)
 
@@ -47,19 +47,19 @@
 		return
 
 	if(stat & NOPOWER)
-		to_chat(user, "<span class='warning'>\The [src] is unpowered.</span>")
+		to_chat(user, SPAN("warning", "\The [src] is unpowered."))
 		return
 
 	if(!produce_drones)
-		to_chat(user, "<span class='warning'>\The [src] is disabled.</span>")
+		to_chat(user, SPAN("warning", "\The [src] is disabled."))
 		return
 
 	if(drone_progress < 100)
-		to_chat(user, "<span class='warning'>\The [src] is not ready to produce a new drone.</span>")
+		to_chat(user, SPAN("warning", "\The [src] is not ready to produce a new drone."))
 		return
 
 	if(count_drones() >= config.misc.max_maint_drones)
-		to_chat(user, "<span class='warning'>The drone control subsystems are tasked to capacity; they cannot support any more drones.</span>")
+		to_chat(user, SPAN("warning", "The drone control subsystems are tasked to capacity; they cannot support any more drones."))
 		return
 
 	var/mob/living/silicon/robot/drone/new_drone = create_drone()
@@ -95,7 +95,7 @@
 			mind.transfer_to(controlling_ai)
 		else
 			controlling_ai.key = key
-		to_chat(controlling_ai, "<span class='notice'>[message]</span>")
+		to_chat(controlling_ai, SPAN("notice", "[message]"))
 		controlling_ai.controlling_drone = null
 		controlling_ai = null
 

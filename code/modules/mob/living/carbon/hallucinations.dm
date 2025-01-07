@@ -169,7 +169,7 @@
 			log_misc("[holder.name] is hallucinating about [talker.name] SAYS : [message]")
 		else
 			to_chat(holder,"<B>[talker.name]</B> points at [holder.name]")
-			to_chat(holder,"<span class='game say'>[SPAN("name", "[talker.name]")] says something softly.</span>")
+			to_chat(holder,SPAN("game say", "[SPAN("name", "[talker.name]")] says something softly."))
 
 		var/image/speech_bubble = image('icons/mob/talk.dmi',talker,"h[holder.say_test(message)]")
 		speech_bubble.alpha = 0
@@ -183,7 +183,7 @@
 
 //Spiderling skitters
 /datum/hallucination/skitter/start()
-	to_chat(holder,"<span class='notice'>The spiderling skitters[pick(" away"," around","")].</span>")
+	to_chat(holder,SPAN("notice", "The spiderling skitters[pick(" away"," around","")]."))
 
 //Spiders in your body
 /datum/hallucination/spiderbabies
@@ -193,7 +193,7 @@
 	if(istype(holder,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = holder
 		var/obj/O = pick(H.organs)
-		to_chat(H,"<span class='warning'>You feel something [pick("moving","squirming","skittering")] inside of your [O.name]!</span>")
+		to_chat(H,SPAN("warning", "You feel something [pick("moving","squirming","skittering")] inside of your [O.name]!"))
 
 /datum/hallucination/virus
 	duration = 1 MINUTE // Just prevents duplicates for this duration
@@ -294,7 +294,7 @@
 	duration = 20 MINUTES
 
 /datum/hallucination/telepahy/start()
-	to_chat(holder,"<span class='notice'>You expand your mind outwards.</span>")
+	to_chat(holder,SPAN("notice", "You expand your mind outwards."))
 	holder.verbs += /mob/living/carbon/human/proc/fakeremotesay
 
 /datum/hallucination/telepahy/end()
@@ -310,11 +310,11 @@
 		return
 
 	if(stat)
-		to_chat(usr, "<span class='warning'>You're not in any state to use your powers right now!'</span>")
+		to_chat(usr, SPAN("warning", "You're not in any state to use your powers right now!'"))
 		return
 
 	if(chem_effects[CE_MIND] > 0)
-		to_chat(usr, "<span class='warning'>Chemicals in your blood prevent you from using your power!'</span>")
+		to_chat(usr, SPAN("warning", "Chemicals in your blood prevent you from using your power!'"))
 
 	var/list/creatures = list()
 	for(var/mob/living/carbon/C in SSmobs.mob_list)
@@ -325,7 +325,7 @@
 		return
 
 	var/msg = sanitize(input(usr, "What do you wish to transmit"))
-	show_message("<span class='notice'>You project your mind into [target.name]: \"[msg]\"</span>")
+	show_message(SPAN("notice", "You project your mind into [target.name]: \"[msg]\""))
 	if(!stat && prob(20))
 		say(msg)
 
@@ -341,7 +341,7 @@
 
 /datum/hallucination/fakeattack/start()
 	for(var/mob/living/M in oview(holder,1))
-		to_chat(holder, "<span class='danger'>[M] has punched [holder]!</span>")
+		to_chat(holder, SPAN("danger", "[M] has punched [holder]!"))
 		holder.playsound_local(get_turf(holder),SFX_FIGHTING_PUNCH,rand(80, 100))
 
 //Fake injection
@@ -349,7 +349,7 @@
 	min_power = 30
 
 /datum/hallucination/fakeattack/hypo/start()
-	to_chat(holder, "<span class='notice'>You feel a tiny prick!</span>")
+	to_chat(holder, SPAN("notice", "You feel a tiny prick!"))
 
 /datum/hallucination/fake_appearance
 	duration = 1 MINUTE

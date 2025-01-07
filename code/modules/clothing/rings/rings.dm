@@ -6,7 +6,7 @@
 	icon_state = "diamond"
 
 /obj/item/clothing/ring/engagement/attack_self(mob/user)
-	user.visible_message("<span class='warning'>\The [user] gets down on one knee, presenting \the [src].</span>","<span class='warning'>You get down on one knee, presenting \the [src].</span>")
+	user.visible_message(SPAN("warning", "\The [user] gets down on one knee, presenting \the [src]."),SPAN("warning", "You get down on one knee, presenting \the [src]."))
 
 /obj/item/clothing/ring/cti
 	name = "CTI ring"
@@ -52,7 +52,7 @@
 /obj/item/clothing/ring/reagent/equipped(mob/living/carbon/human/H)
 	..()
 	if(istype(H) && H.gloves==src)
-		to_chat(H, "<span class='info'><b>You feel a prick as you slip on the ring.</b></span>")
+		to_chat(H, SPAN("info", "<b>You feel a prick as you slip on the ring.</b>"))
 
 		if(reagents.total_volume)
 			if(H.reagents)
@@ -95,10 +95,10 @@
 
 /obj/item/clothing/ring/seal/signet/attack_self(mob/user)
 	if(nameset)
-		to_chat(user, "<span class='notice'>The [src] has already been claimed!</span>")
+		to_chat(user, SPAN("notice", "The [src] has already been claimed!"))
 		return
 
 	nameset = 1
-	to_chat(user, "<span class='notice'>You claim the [src] as your own!</span>")
+	to_chat(user, SPAN("notice", "You claim the [src] as your own!"))
 	name = "[user.real_name]'s signet ring"
 	desc = "A signet ring belonging to [user.real_name], for when you're too sophisticated to sign letters."

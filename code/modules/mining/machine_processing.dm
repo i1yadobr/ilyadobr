@@ -34,7 +34,7 @@
 		return
 
 	if(!allowed(user))
-		to_chat(user, "<span class='warning'>Access denied.</span>")
+		to_chat(user, SPAN("warning", "Access denied."))
 		return
 
 	user.set_machine(src)
@@ -64,7 +64,7 @@
 				if(1)
 					dat += "<font color='orange'>smelting</font>"
 				if(2)
-					dat += "<span class='info'>compressing</span>"
+					dat += SPAN("info", "compressing")
 				if(3)
 					dat += "<font color='gray'>alloying</font>"
 		else
@@ -103,7 +103,7 @@
 				if(usr.drop(I, src))
 					inserted_id = I
 			else
-				to_chat(usr, "<span class='warning'>No valid ID.</span>")
+				to_chat(usr, SPAN("warning", "No valid ID."))
 
 	if(href_list["toggle_smelting"])
 

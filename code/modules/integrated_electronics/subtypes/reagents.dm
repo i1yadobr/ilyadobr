@@ -136,8 +136,8 @@
 		return
 	var/atom/movable/acting_object = get_object()
 	log_admin("[key_name(L)] was successfully injected with " + reagents.get_reagents() + " by \the [acting_object]")
-	L.visible_message("<span class='warning'>\The [acting_object] injects [L] with its needle!</span>", \
-					"<span class='warning'>\The [acting_object] injects you with its needle!</span>")
+	L.visible_message(SPAN("warning", "\The [acting_object] injects [L] with its needle!"), \
+					SPAN("warning", "\The [acting_object] injects you with its needle!"))
 	reagents.trans_to_mob(L, transfer_amount, CHEM_BLOOD)
 	activate_pin(2)
 
@@ -149,8 +149,8 @@
 		return
 	var/atom/movable/acting_object = get_object()
 
-	C.visible_message("<span class='warning'>\The [acting_object] draws blood from \the [C]</span>",
-					"<span class='warning'>\The [acting_object] draws blood from you.</span>"
+	C.visible_message(SPAN("warning", "\The [acting_object] draws blood from \the [C]"),
+					SPAN("warning", "\The [acting_object] draws blood from you.")
 					)
 	C.take_blood(src, amount)
 	activate_pin(2)

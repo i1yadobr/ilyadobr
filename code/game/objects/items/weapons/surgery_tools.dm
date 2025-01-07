@@ -324,7 +324,7 @@
 	if(emagged)
 		return
 	emagged = 1
-	to_chat(user, "<span class='danger'>You overload \the [src]'s circuits.</span>")
+	to_chat(user, SPAN("danger", "You overload \the [src]'s circuits."))
 	return 1
 
 /obj/item/organfixer/proc/refill(amt = 1)

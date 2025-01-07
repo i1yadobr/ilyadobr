@@ -119,7 +119,7 @@
 				regen_organ.damage = max(regen_organ.damage - 5, 0)
 				H.nutrition -= 5
 				if(prob(5))
-					to_chat(H, "<span class='warning'>You feel a soothing sensation as your [regen_organ] mends...</span>")
+					to_chat(H, SPAN("warning", "You feel a soothing sensation as your [regen_organ] mends..."))
 
 	if(prob(2) && H.nutrition > 150)
 		for(var/limb_type in has_limbs)
@@ -139,8 +139,8 @@
 				var/limb_path = organ_data["path"]
 				var/obj/item/organ/external/O = new limb_path(H)
 				organ_data["descriptor"] = O.name
-				to_chat(H, "<span class='danger'>With a shower of fresh blood, a new [O.name] forms.</span>")
-				H.visible_message("<span class='danger'>With a shower of fresh blood, a length of biomass shoots from [H]'s [O.amputation_point], forming a new [O.name]!</span>")
+				to_chat(H, SPAN("danger", "With a shower of fresh blood, a new [O.name] forms."))
+				H.visible_message(SPAN("danger", "With a shower of fresh blood, a length of biomass shoots from [H]'s [O.amputation_point], forming a new [O.name]!"))
 				H.nutrition -= 50
 				var/datum/reagent/blood/B = locate(/datum/reagent/blood) in H.vessel.reagent_list
 				blood_splatter(H,B,1)

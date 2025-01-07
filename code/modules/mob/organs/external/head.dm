@@ -57,27 +57,27 @@
 		target = owner
 
 	if(forehead_graffiti)
-		to_chat(penman, "<span class='notice'>There is no room left to write on [head_name]!</span>")
+		to_chat(penman, SPAN("notice", "There is no room left to write on [head_name]!"))
 		return
 
 	var/graffiti = sanitizeSafe(input(penman, "Enter a message to write on [head_name]:") as text|null, MAX_NAME_LEN)
 	if(graffiti)
 		if(!target.Adjacent(penman))
-			to_chat(penman, "<span class='notice'>[head_name] is too far away.</span>")
+			to_chat(penman, SPAN("notice", "[head_name] is too far away."))
 			return
 
 		if(owner && owner.check_head_coverage())
-			to_chat(penman, "<span class='notice'>[head_name] is covered up.</span>")
+			to_chat(penman, SPAN("notice", "[head_name] is covered up."))
 			return
 
-		penman.visible_message("<span class='warning'>[penman] begins writing something on [head_name]!</span>", "You begin writing something on [head_name].")
+		penman.visible_message(SPAN("warning", "[penman] begins writing something on [head_name]!"), "You begin writing something on [head_name].")
 
 		if(do_after(penman, 3 SECONDS, target))
 			if(owner && owner.check_head_coverage())
-				to_chat(penman, "<span class='notice'>[head_name] is covered up.</span>")
+				to_chat(penman, SPAN("notice", "[head_name] is covered up."))
 				return
 
-			penman.visible_message("<span class='warning'>[penman] writes something on [head_name]!</span>", "You write something on [head_name].")
+			penman.visible_message(SPAN("warning", "[penman] writes something on [head_name]!"), "You write something on [head_name].")
 			forehead_graffiti = graffiti
 			graffiti_style = style
 			if(owner)
@@ -230,14 +230,14 @@
 
 /obj/item/skull/attackby(obj/item/W as obj, mob/user as mob)
 	if(W.sharp && !iscut)
-		user.visible_message("<span class='warning'><b>[user]</b> cuts [src] open with [W]!</span>")
+		user.visible_message(SPAN("warning", "<b>[user]</b> cuts [src] open with [W]!"))
 		icon_state = "skull_human_cut"
 		iscut = 1
 		name = "facial bones"
 		desc = "Used to be someone's face."
 		return
 	if((istype(W,/obj/item/handcuffs/cable)) && iscut)
-		user.visible_message("<span class='notice'>[user] attaches [W] to [src].</span>")
+		user.visible_message(SPAN("notice", "[user] attaches [W] to [src]."))
 		new /obj/item/clothing/mask/skullmask(user.loc)
 		qdel(src)
 		qdel(W)
@@ -247,13 +247,13 @@
 		if(M.get_material_name() == MATERIAL_STEEL)
 			if(do_after(usr, 10, src))
 				new /obj/item/reagent_containers/vessel/skullgoblet(user.loc)
-				user.visible_message("<span class='notice'>[user] makes a goblet out of [src].</span>")
+				user.visible_message(SPAN("notice", "[user] makes a goblet out of [src]."))
 				M.use(1)
 				qdel(src)
 		else if(M.get_material_name() == MATERIAL_GOLD)
 			if(do_after(usr, 10, src))
 				new /obj/item/reagent_containers/vessel/skullgoblet/gold(user.loc)
-				user.visible_message("<span class='notice'>[user] makes a <b>golden</b> goblet out of [src].</span>")
+				user.visible_message(SPAN("notice", "[user] makes a <b>golden</b> goblet out of [src]."))
 				M.use(1)
 				qdel(src)
 		return

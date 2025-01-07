@@ -519,10 +519,11 @@
 /obj/item/device/radio/_examine_text(mob/user)
 	. = ..()
 	if ((in_range(src, user) || loc == user))
+		. += "\n"
 		if (b_stat)
-			. += "\n[SPAN_NOTICE("\The [src] can be attached and modified!</span>")]"
+			. += SPAN("notice", "\The [src] can be attached and modified!")
 		else
-			. += "\n[SPAN_NOTICE("\The [src] can not be modified or attached!</span>")]"
+			. += SPAN("notice", "\The [src] can not be modified or attached!")
 	return
 
 /obj/item/device/radio/attackby(obj/item/W as obj, mob/user as mob)
@@ -533,9 +534,9 @@
 	b_stat = !( b_stat )
 	if(!istype(src, /obj/item/device/radio/beacon))
 		if (b_stat)
-			user.show_message("<span class='notice'>\The [src] can now be attached and modified!</span>")
+			user.show_message(SPAN("notice", "\The [src] can now be attached and modified!"))
 		else
-			user.show_message("<span class='notice'>\The [src] can no longer be modified or attached!</span>")
+			user.show_message(SPAN("notice", "\The [src] can no longer be modified or attached!"))
 		updateDialog()
 		return
 
@@ -672,9 +673,9 @@
 		if(enable_subspace_transmission != subspace_transmission)
 			subspace_transmission = !subspace_transmission
 			if(subspace_transmission)
-				to_chat(usr, "<span class='notice'>Subspace Transmission is enabled</span>")
+				to_chat(usr, SPAN("notice", "Subspace Transmission is enabled"))
 			else
-				to_chat(usr, "<span class='notice'>Subspace Transmission is disabled</span>")
+				to_chat(usr, SPAN("notice", "Subspace Transmission is disabled"))
 
 			if(subspace_transmission == 0)//Simple as fuck, clears the channel list to prevent talking/listening over them if subspace transmission is disabled
 				channels = list()
@@ -687,10 +688,10 @@
 			shut_up = !shut_up
 			if(shut_up)
 				canhear_range = 0
-				to_chat(usr, "<span class='notice'>Loadspeaker disabled.</span>")
+				to_chat(usr, SPAN("notice", "Loadspeaker disabled."))
 			else
 				canhear_range = 3
-				to_chat(usr, "<span class='notice'>Loadspeaker enabled.</span>")
+				to_chat(usr, SPAN("notice", "Loadspeaker enabled."))
 		. = 1
 
 	if(.)

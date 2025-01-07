@@ -25,8 +25,8 @@
 	if(!curloc || !targloc)
 		return
 	chassis.use_power(energy_drain)
-	chassis.visible_message("<span class='warning'>[chassis] fires [src]!</span>")
-	occupant_message("<span class='warning'>You fire [src]!</span>")
+	chassis.visible_message(SPAN("warning", "[chassis] fires [src]!"))
+	occupant_message(SPAN("warning", "You fire [src]!"))
 	log_message("Fired from [src], targeting [target].")
 	for(var/i = 1 to min(projectiles, projectiles_per_shot))
 		var/turf/aimloc = targloc
@@ -311,7 +311,7 @@
 	projectile = /obj/item/grenade/flashbang/clusterbang
 
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/flashbang/clusterbang/limited/get_equip_info()//Limited version of the clusterbang launcher that can't reload
-	return "<span style=\"color:[equip_ready?"#0f0":"#f00"];\">*</span>&nbsp;[chassis.selected==src?"<b>":"<a href='?src=\ref[chassis];select_equip=\ref[src]'>"][src.name][chassis.selected==src?"</b>":"</a>"]\[[src.projectiles]\]"
+	return "[SPAN("", "<font style='color:[equip_ready?"#0f0":"#f00"];'>*</font>")]&nbsp;[chassis.selected==src?"<b>":"<a href='?src=\ref[chassis];select_equip=\ref[src]'>"][src.name][chassis.selected==src?"</b>":"</a>"]\[[src.projectiles]\]"
 
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/flashbang/clusterbang/limited/rearm()
 	return//Extra bit of security

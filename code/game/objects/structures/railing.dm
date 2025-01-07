@@ -50,7 +50,7 @@
 /obj/structure/railing/proc/take_damage(amount)
 	health -= amount
 	if(health <= 0)
-		visible_message("<span class='warning'>\The [src] breaks down!</span>")
+		visible_message(SPAN("warning", "\The [src] breaks down!"))
 		playsound(loc, 'sound/effects/grillehit.ogg', 50, 1)
 		new /obj/item/stack/rods(get_turf(src))
 		qdel(src)
@@ -208,7 +208,7 @@
 	if(isWrench(W) && !anchored)
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		if(do_after(user, 20, src))
-			user.visible_message("<span class='notice'>\The [user] dismantles \the [src].</span>", "<span class='notice'>You dismantle \the [src].</span>")
+			user.visible_message(SPAN("notice", "\The [user] dismantles \the [src]."), SPAN("notice", "You dismantle \the [src]."))
 			new /obj/item/stack/material/steel(get_turf(usr), 2)
 			qdel(src)
 			return
@@ -219,16 +219,16 @@
 		if(F.welding)
 			playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
 			if(do_after(user, 20, src))
-				user.visible_message("<span class='notice'>\The [user] repairs some damage to \the [src].</span>", "<span class='notice'>You repair some damage to \the [src].</span>")
+				user.visible_message(SPAN("notice", "\The [user] repairs some damage to \the [src]."), SPAN("notice", "You repair some damage to \the [src]."))
 				health = min(health+(maxhealth/4), maxhealth) // 25% repair per application
 				return
 
 	// (Un)Anchor
 	if(istype(W, /obj/item/screwdriver))
-		user.visible_message(anchored ? "<span class='notice'>\The [user] begins unscrewing \the [src].</span>" : "<span class='notice'>\The [user] begins fasten \the [src].</span>" )
+		user.visible_message(anchored ? SPAN("notice", "\The [user] begins unscrewing \the [src].") : SPAN("notice", "\The [user] begins fasten \the [src].") )
 		playsound(loc, 'sound/items/Screwdriver.ogg', 75, 1)
 		if(do_after(user, 10, src))
-			to_chat(user, (anchored ? "<span class='notice'>You have unfastened \the [src] from the floor.</span>" : "<span class='notice'>You have fastened \the [src] to the floor.</span>"))
+			to_chat(user, (anchored ? SPAN("notice", "You have unfastened \the [src] from the floor.") : SPAN("notice", "You have fastened \the [src] to the floor.")))
 			anchored = !anchored
 			update_icon()
 			return
@@ -293,7 +293,7 @@
 	if (!can_climb(user))
 		return
 
-	user.visible_message("<span class='warning'>\The [user] starts climbing over \the [src]!</span>")
+	user.visible_message(SPAN("warning", "\The [user] starts climbing over \the [src]!"))
 	climbers |= user
 
 	if(!do_after(user,(issmall(user) ? 30 : 50), src))
@@ -312,12 +312,12 @@
 	// If the rail isn't anchored, it'll fall over the edge.
 	// Always fun to climb over a railing, fall to the floor below, and then have the railing fall on you.
 	if(!anchored)
-		user.visible_message("<span class='warning'>\The [user] tries to climb over \the [src], but it collapses!</span>")
+		user.visible_message(SPAN("warning", "\The [user] tries to climb over \the [src], but it collapses!"))
 		user.Weaken(30)
 		src.forceMove(get_turf(user))
 		take_damage(maxhealth/2)
 	else
-		user.visible_message("<span class='warning'>\The [user] climbs over \the [src]!</span>")
+		user.visible_message(SPAN("warning", "\The [user] climbs over \the [src]!"))
 
 	climbers -= user
 

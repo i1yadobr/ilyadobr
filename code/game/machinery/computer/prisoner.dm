@@ -98,7 +98,7 @@
 				var/obj/item/implant/I = locate(href_list["warn"])
 				if((I)&&(I.imp_in))
 					var/mob/living/carbon/R = I.imp_in
-					to_chat(R, "<span class='notice'>You hear a voice in your head saying: '[warning]'</span>")
+					to_chat(R, SPAN("notice", "You hear a voice in your head saying: '[warning]'"))
 
 		src.updateUsrDialog()
 		return

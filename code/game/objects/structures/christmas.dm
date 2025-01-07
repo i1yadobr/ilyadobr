@@ -22,7 +22,7 @@
 		my_hat = W
 		update_icon()
 	else
-		to_chat(user, "<span class='notice'>You cannot put [W] on [src]</span>")
+		to_chat(user, SPAN("notice", "You cannot put [W] on [src]"))
 		return ..()
 
 /obj/structure/christmas/snowman/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)

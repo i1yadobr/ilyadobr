@@ -21,7 +21,7 @@
 /obj/machinery/computer/gyrotron_control/interact(mob/user)
 
 	if(!id_tag)
-		to_chat(user, "<span class='warning'>This console has not been assigned an ident tag. Please contact your system administrator or conduct a manual update with a standard multitool.</span>")
+		to_chat(user, SPAN("warning", "This console has not been assigned an ident tag. Please contact your system administrator or conduct a manual update with a standard multitool."))
 		return
 
 	var/dat = "<td><b>Gyrotron controller #[id_tag]</b>"
@@ -38,9 +38,9 @@
 
 		dat += "<tr>"
 		if(G.state != 2 || (G.stat & (NOPOWER | BROKEN))) //Error data not found.
-			dat += "<td><span style='color: red'>ERROR</span></td>"
-			dat += "<td><span style='color: red'>ERROR</span></td>"
-			dat += "<td><span style='color: red'>ERROR</span></td>"
+			dat += "<td>[SPAN("", "<font style='color: red'>ERROR</font>")]</td>"
+			dat += "<td>[SPAN("", "<font style='color: red'>ERROR</font>")]</td>"
+			dat += "<td>[SPAN("", "<font style='color: red'>ERROR</font>")]</td>"
 		else
 			dat += "<td><a href='?src=\ref[src];machine=\ref[G];toggle=1'>[G.active  ? "Emitting" : "Standing By"]</a></td>"
 			dat += "<td><a href='?src=\ref[src];machine=\ref[G];modifyrate=1'>[G.rate]</a></td>"
@@ -65,7 +65,7 @@
 	if(href_list["modifypower"])
 		var/new_val = input("Enter new emission power level (1 - 50)", "Modifying power level", G.mega_energy) as num
 		if(!new_val)
-			to_chat(usr, "<span class='warning'>That's not a valid number.</span>")
+			to_chat(usr, SPAN("warning", "That's not a valid number."))
 			return 1
 		G.mega_energy = Clamp(new_val, 1, 50)
 		G.change_power_consumption(G.mega_energy * 1500, POWER_USE_ACTIVE)
@@ -75,7 +75,7 @@
 	if(href_list["modifyrate"])
 		var/new_val = input("Enter new emission delay between 1 and 10 seconds.", "Modifying emission rate", G.rate) as num
 		if(!new_val)
-			to_chat(usr, "<span class='warning'>That's not a valid number.</span>")
+			to_chat(usr, SPAN("warning", "That's not a valid number."))
 			return 1
 		G.rate = Clamp(new_val, 1, 10)
 		updateUsrDialog()

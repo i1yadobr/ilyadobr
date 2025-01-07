@@ -67,7 +67,7 @@
 				else
 					F.faction = usr.faction
 					usr.add_spell(new /datum/spell/contract/return_master(F), "const_spell_ready")
-					to_chat(F, "<span class='notice'>You are a familiar.</span>")
+					to_chat(F, SPAN("notice", "You are a familiar."))
 					to_chat(F, "<b>You have been summoned by the wizard [usr] to assist in all matters magical and not.</b>")
 					to_chat(F, "<b>Do their bidding and help them with their goals.</b>")
 					uses--

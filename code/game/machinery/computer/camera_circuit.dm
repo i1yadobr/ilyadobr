@@ -40,7 +40,7 @@
 		..()
 		if(isScrewdriver(I))
 			secured = !secured
-			user.visible_message("<span class='notice'>The [src] can [secured ? "no longer" : "now"] be modified.</span>")
+			user.visible_message(SPAN("notice", "The [src] can [secured ? "no longer" : "now"] be modified."))
 			updateBuildPath()
 		return
 
@@ -109,8 +109,8 @@
 	if(network)
 		playsound(src.loc, 'sound/effects/computer_emag.ogg', 25)
 		authorised = 1
-		to_chat(user, "<span class='notice'>You authorised the circuit network!</span>")
+		to_chat(user, SPAN("notice", "You authorised the circuit network!"))
 		updateDialog()
 		return 1
 	else
-		to_chat(user, "<span class='warning'>You must select a camera network circuit!</span>")
+		to_chat(user, SPAN("warning", "You must select a camera network circuit!"))

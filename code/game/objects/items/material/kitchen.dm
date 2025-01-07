@@ -48,17 +48,17 @@
 		if(M == user)
 			if(!M.can_eat(loaded))
 				return
-			M.visible_message("<span class='notice'>\The [user] eats some [loaded] from \the [src].</span>")
+			M.visible_message(SPAN("notice", "\The [user] eats some [loaded] from \the [src]."))
 		else
-			user.visible_message("<span class='warning'>\The [user] begins to feed \the [M]!</span>")
+			user.visible_message(SPAN("warning", "\The [user] begins to feed \the [M]!"))
 			if(!(M.can_force_feed(user, loaded) && do_mob(user, M, 5 SECONDS)))
 				return
-			M.visible_message("<span class='notice'>\The [user] feeds some [loaded] to \the [M] with \the [src].</span>")
+			M.visible_message(SPAN("notice", "\The [user] feeds some [loaded] to \the [M] with \the [src]."))
 		playsound(M.loc, 'sound/items/eatfood.ogg', rand(10, 40), 1)
 		overlays.Cut()
 		return
 	else
-		to_chat(user, "<span class='warning'>You don't have anything on \the [src].</span>")//if we have help intent and no food scooped up DON'T STAB OURSELVES WITH THE FORK
+		to_chat(user, SPAN("warning", "You don't have anything on \the [src]."))//if we have help intent and no food scooped up DON'T STAB OURSELVES WITH THE FORK
 		return
 
 /obj/item/material/kitchen/utensil/fork
@@ -157,7 +157,7 @@
 
 /obj/item/material/kitchen/rollingpin/attack(mob/living/M as mob, mob/living/user as mob)
 	if((MUTATION_CLUMSY in user.mutations) && prob(50))
-		to_chat(user, "<span class='warning'>\The [src] slips out of your hand and hits your head.</span>")
+		to_chat(user, SPAN("warning", "\The [src] slips out of your hand and hits your head."))
 		user.drop(src, force = TRUE)
 		user.take_organ_damage(10)
 		user.Paralyse(2)

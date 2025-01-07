@@ -6,13 +6,13 @@
 	flags = RESTRICTED|NONGLOBAL|INNATE|NO_TALK_MSG|NO_STUTTER
 
 /datum/language/noise/format_message(message, verb)
-	return "<span class='message'>[SPAN("[colour]", "[message]")]</span>"
+	return SPAN("message", "[SPAN("[colour]", "[message]")]")
 
 /datum/language/noise/format_message_plain(message, verb)
 	return message
 
 /datum/language/noise/format_message_radio(message, verb)
-	return "<span class='[colour]'>[message]</span>"
+	return SPAN("[colour]", "[message]")
 
 /datum/language/noise/get_talkinto_msg_range(message)
 	// if you make a loud noise (screams etc), you'll be heard from 4 tiles over instead of two

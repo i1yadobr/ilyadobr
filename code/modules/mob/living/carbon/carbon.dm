@@ -67,7 +67,7 @@
 		if(!cooldown)
 			return
 
-		src.visible_message("<span class='danger'>You hear something rumbling inside [src]'s stomach...</span>")
+		src.visible_message(SPAN("danger", "You hear something rumbling inside [src]'s stomach..."))
 		var/obj/item/I = user.get_active_hand()
 		var/dmg = (I && I.force) ? rand(round(I.force / 4), I.force) : rand(1, 6) //give a chance to creatures without hands
 		if(istype(src, /mob/living/carbon/human))
@@ -78,7 +78,7 @@
 			H.updatehealth()
 		else
 			take_organ_damage(dmg)
-		user.visible_message("<span class='danger'>[user] attacks [src]'s stomach wall!</span>")
+		user.visible_message(SPAN("danger", "[user] attacks [src]'s stomach wall!"))
 		playsound(user.loc, 'sound/effects/attackblob.ogg', 50, 1)
 
 		if(prob(getBruteLoss() - 50))
@@ -94,7 +94,7 @@
 		M.loc = src.loc
 		for(var/mob/N in viewers(src, null))
 			if(N.client)
-				N.show_message(text("<span class='danger'>[M] bursts out of [src]!</span>"), 2)
+				N.show_message(SPAN("danger", "[M] bursts out of [src]!"), AUDIBLE_MESSAGE)
 	..()
 
 /mob/living/carbon/attack_hand(mob/M as mob)
@@ -105,7 +105,7 @@
 		if (H.hand)
 			temp = H.organs_by_name[BP_L_HAND]
 		if(temp && !temp.is_usable())
-			to_chat(H, "<span class='warning'>You can't use your [temp.name]</span>")
+			to_chat(H, SPAN("warning", "You can't use your [temp.name]"))
 			return
 
 	return
@@ -124,15 +124,15 @@
 	playsound(loc, SFX_SPARK, 50, 1, -1)
 	if (shock_damage > 15)
 		src.visible_message(
-			"<span class='warning'>[src] was electrocuted[source ? " by the [source]" : ""]!</span>", \
-			"<span class='danger'>You feel a powerful shock course through your body!</span>", \
-			"<span class='warning'>You hear a heavy electrical crack.</span>" \
+			SPAN("warning", "[src] was electrocuted[source ? " by the [source]" : ""]!"), \
+			SPAN("danger", "You feel a powerful shock course through your body!"), \
+			SPAN("warning", "You hear a heavy electrical crack.") \
 		)
 	else
 		src.visible_message(
-			"<span class='warning'>[src] was shocked[source ? " by the [source]" : ""].</span>", \
-			"<span class='warning'>You feel a shock course through your body.</span>", \
-			"<span class='warning'>You hear a zapping sound.</span>" \
+			SPAN("warning", "[src] was shocked[source ? " by the [source]" : ""]."), \
+			SPAN("warning", "You feel a shock course through your body."), \
+			SPAN("warning", "You hear a zapping sound.") \
 		)
 
 	switch(shock_damage)

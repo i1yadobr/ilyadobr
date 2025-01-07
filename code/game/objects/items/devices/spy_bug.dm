@@ -230,7 +230,7 @@
 			if(!T || !is_on_same_plane_or_station(T.z, user.z) || !selected_camera.can_use())
 				user.unset_machine()
 				user.reset_view(null)
-				to_chat(user, "<span class='notice'>[selected_camera] unavailable.</span>")
+				to_chat(user, SPAN("notice", "[selected_camera] unavailable."))
 				sleep(90)
 			else
 				user.set_machine(selected_camera)
@@ -244,8 +244,8 @@
 		return
 
 	if(!cameras.len)
-		to_chat(user, "<span class='warning'>No paired cameras detected!</span>")
-		to_chat(user, "<span class='warning'>Bring a bug in contact with this device to pair the camera.</span>")
+		to_chat(user, SPAN("warning", "No paired cameras detected!"))
+		to_chat(user, SPAN("warning", "Bring a bug in contact with this device to pair the camera."))
 		return
 
 	return 1

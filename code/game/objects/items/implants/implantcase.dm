@@ -65,7 +65,7 @@
 	else if (istype(I, /obj/item/implant))
 		if(!user.drop(I, src))
 			return
-		to_chat(usr, "<span class='notice'>You slide \the [I] into \the [src].</span>")
+		to_chat(usr, SPAN("notice", "You slide \the [I] into \the [src]."))
 		imp = I
 		update_description()
 		update_icon()

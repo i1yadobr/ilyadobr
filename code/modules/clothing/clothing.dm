@@ -113,7 +113,7 @@ GLOBAL_LIST_EMPTY(clothing_blood_icons)
 
 			if(!wearable && !(slot in list(slot_l_store, slot_r_store, slot_s_store)))
 				if(!disable_warning)
-					to_chat(H, "<span class='danger'>Your species cannot wear [src].</span>")
+					to_chat(H, SPAN("danger", "Your species cannot wear [src]."))
 				return 0
 	return 1
 
@@ -454,9 +454,9 @@ BLIND     // can't see anything
 	if(!success)
 		return 0
 	else if(success == 2)
-		to_chat(user, "<span class='warning'>You are already wearing a hat.</span>")
+		to_chat(user, SPAN("warning", "You are already wearing a hat."))
 	else if(success == 1)
-		to_chat(user, "<span class='notice'>You crawl under \the [src].</span>")
+		to_chat(user, SPAN("notice", "You crawl under \the [src]."))
 	return 1
 
 /obj/item/clothing/head/update_icon(mob/user)
@@ -532,7 +532,7 @@ BLIND     // can't see anything
 
 	if(!user.incapacitated(INCAPACITATION_DISABLED))
 		if(!pull_mask)
-			to_chat(usr, "<span class='notice'>You cannot pull down your [src.name].</span>")
+			to_chat(usr, SPAN("notice", "You cannot pull down your [src.name]."))
 			return
 		else
 			src.hanging = !src.hanging
@@ -600,10 +600,10 @@ BLIND     // can't see anything
 	holding.forceMove(get_turf(usr))
 
 	if(usr.put_in_hands(holding))
-		usr.visible_message("<span class='warning'>\The [usr] pulls \the [holding] out of \the [src]!</span>", range = 1)
+		usr.visible_message(SPAN("warning", "\The [usr] pulls \the [holding] out of \the [src]!"), range = 1)
 		holding = null
 	else
-		to_chat(usr, "<span class='warning'>Your need an empty, unbroken hand to do that.</span>")
+		to_chat(usr, SPAN("warning", "Your need an empty, unbroken hand to do that."))
 		holding.forceMove(src)
 
 	if(!holding)
@@ -621,12 +621,12 @@ BLIND     // can't see anything
 /obj/item/clothing/shoes/attackby(obj/item/I, mob/user)
 	if(can_hold_knife && is_type_in_list(I, list(/obj/item/material/shard, /obj/item/material/butterfly, /obj/item/material/kitchen/utensil, /obj/item/material/hatchet/tacknife, /obj/item/material/knife/shiv)))
 		if(holding)
-			to_chat(user, "<span class='warning'>\The [src] is already holding \a [holding].</span>")
+			to_chat(user, SPAN("warning", "\The [src] is already holding \a [holding]."))
 			return
 		if(!user.drop(I, src))
 			return
 		holding = I
-		user.visible_message("<span class='notice'>\The [user] shoves \the [I] into \the [src].</span>", range = 1)
+		user.visible_message(SPAN("notice", "\The [user] shoves \the [I] into \the [src]."), range = 1)
 		verbs |= /obj/item/clothing/shoes/proc/draw_knife
 		update_icon()
 	else if(istype(I, /obj/item/flame/match))
@@ -838,7 +838,7 @@ BLIND     // can't see anything
 
 	else if(ismob(src.loc))
 		if(sensor_mode == 0)
-			user.visible_message("<span class='warning'>[user] disables [src.loc]'s remote sensing equipment.</span>", "You disable [src.loc]'s remote sensing equipment.")
+			user.visible_message(SPAN("warning", "[user] disables [src.loc]'s remote sensing equipment."), "You disable [src.loc]'s remote sensing equipment.")
 		else
 			user.visible_message("[user] adjusts the tracking sensor on [src.loc]'s [src.name].", "You adjust [src.loc]'s sensors.")
 	else
@@ -875,7 +875,7 @@ BLIND     // can't see anything
 
 	update_rolldown_status()
 	if(rolled_down == -1)
-		to_chat(usr, "<span class='notice'>You cannot roll down [src]!</span>")
+		to_chat(usr, SPAN("notice", "You cannot roll down [src]!"))
 	if((rolled_sleeves == 1) && !(rolled_down))
 		rolled_sleeves = 0
 
@@ -900,21 +900,21 @@ BLIND     // can't see anything
 
 	update_rollsleeves_status()
 	if(rolled_sleeves == -1)
-		to_chat(usr, "<span class='notice'>You cannot roll up your [src]'s sleeves!</span>")
+		to_chat(usr, SPAN("notice", "You cannot roll up your [src]'s sleeves!"))
 		return
 	if(rolled_down == 1)
-		to_chat(usr, "<span class='notice'>You must roll up your [src] first!</span>")
+		to_chat(usr, SPAN("notice", "You must roll up your [src] first!"))
 		return
 
 	rolled_sleeves = !rolled_sleeves
 	if(rolled_sleeves)
 		body_parts_covered &= ~(ARMS|HANDS)
 		item_state_slots[slot_w_uniform_str] = "[worn_state]_r"
-		to_chat(usr, "<span class='notice'>You roll up your [src]'s sleeves.</span>")
+		to_chat(usr, SPAN("notice", "You roll up your [src]'s sleeves."))
 	else
 		body_parts_covered = initial(body_parts_covered)
 		item_state_slots[slot_w_uniform_str] = "[worn_state]"
-		to_chat(usr, "<span class='notice'>You roll down your [src]'s sleeves.</span>")
+		to_chat(usr, SPAN("notice", "You roll down your [src]'s sleeves."))
 	update_clothing_icon()
 
 /obj/item/clothing/under/rank/New()

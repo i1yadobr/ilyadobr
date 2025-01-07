@@ -286,6 +286,6 @@ GLOBAL_LIST_EMPTY(world_awaygateways)
 			to_chat(user, "The gate is already calibrated, there is no work for you to do here.")
 			return
 		else
-			to_chat(user, SPAN("notice", "<b>Recalibration successful!</b></span>: This gate's systems have been fine tuned.  Travel to this gate will now be on target."))
+			to_chat(user, "[SPAN("notice", "<b>Recalibration successful!</b>")]: This gate's systems have been fine tuned.  Travel to this gate will now be on target.")
 			calibrated = TRUE
 			return

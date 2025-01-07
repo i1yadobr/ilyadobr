@@ -64,7 +64,7 @@
 								/obj/item/robot_parts/robot_component 					= TRADER_BLACKLIST
 								)
 
-	mob_transfer_message = "<span class='danger'>You are transported to the ORIGIN. When the transportation dizziness wears off, you find you are surrounded by cackling Vox...</span>"
+	mob_transfer_message = SPAN("danger", "You are transported to the ORIGIN. When the transportation dizziness wears off, you find you are surrounded by cackling Vox...")
 
 
 /datum/trader/ship/vox/hail(mob/user)

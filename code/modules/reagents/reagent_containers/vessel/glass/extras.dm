@@ -6,20 +6,20 @@
 		if(can_add_extra(GE))
 			extras += GE
 			user.drop(GE, src)
-			to_chat(user, "<span class='notice'>You add \the [GE] to \the [src].</span>")
+			to_chat(user, SPAN("notice", "You add \the [GE] to \the [src]."))
 			update_icon()
 		else
-			to_chat(user, "<span class='warning'>There's no space to put \the [GE] on \the [src]!</span>")
+			to_chat(user, SPAN("warning", "There's no space to put \the [GE] on \the [src]!"))
 	else if(istype(I, /obj/item/reagent_containers/food/fruit_slice))
 		if(!rim_pos)
-			to_chat(user, "<span class='warning'>There's no space to put \the [I] on \the [src]!</span>")
+			to_chat(user, SPAN("warning", "There's no space to put \the [I] on \the [src]!"))
 			return
 		var/obj/item/reagent_containers/food/fruit_slice/FS = I
 		extras += FS
 		user.drop(FS, src)
 		FS.pixel_x = 0 // Reset its pixel offsets so the icons work!
 		FS.pixel_y = 0
-		to_chat(user, "<span class='notice'>You add \the [FS] to \the [src].</span>")
+		to_chat(user, SPAN("notice", "You add \the [FS] to \the [src]."))
 		update_icon()
 	else
 		return ..()
@@ -29,7 +29,7 @@
 		return ..()
 
 	if(!extras.len)
-		to_chat(user, "<span class='warning'>There's nothing on the glass to remove!</span>")
+		to_chat(user, SPAN("warning", "There's nothing on the glass to remove!"))
 		return
 
 	var/choice = input(user, "What would you like to remove from the glass?") as null|anything in extras

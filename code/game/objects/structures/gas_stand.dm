@@ -53,7 +53,7 @@
 		qdel(tank)
 	if(breather)
 		breather.drop(contained)
-		visible_message("<span class='notice'>The mask rapidly retracts just before \the [src] is destroyed!</span>")
+		visible_message(SPAN("notice", "The mask rapidly retracts just before \the [src] is destroyed!"))
 	qdel(contained)
 	contained = null
 	breather = null
@@ -80,7 +80,7 @@
 
 /obj/structure/gas_stand/attack_hand(mob/user as mob)
 	if (tank && is_loosen)
-		user.visible_message("<span class='notice'>\The [user] removes \the [tank] from \the [src].</span>", "<span class='notice'>You remove \the [tank] from \the [src].</span>")
+		user.visible_message(SPAN("notice", "\The [user] removes \the [tank] from \the [src]."), SPAN("notice", "You remove \the [tank] from \the [src]."))
 		user.pick_or_drop(tank)
 		src.add_fingerprint(user)
 		tank.add_fingerprint(user)
@@ -88,11 +88,11 @@
 		update_icon()
 		return
 	if (!tank)
-		to_chat(user, "<span class='warning'>There is no tank in \the [src]!</span>")
+		to_chat(user, SPAN("warning", "There is no tank in \the [src]!"))
 		return
 	else
 		if (valve_opened)
-			src.visible_message("<span class='notice'>\The [user] closes valve on \the [src]!</span>")
+			src.visible_message(SPAN("notice", "\The [user] closes valve on \the [src]!"))
 			if(breather)
 				if(breather.internals)
 					breather.internals.icon_state = "internal0"
@@ -100,7 +100,7 @@
 			valve_opened = FALSE
 			update_icon()
 		else
-			src.visible_message("<span class='notice'>\The [user] opens valve on \the [src]!</span>")
+			src.visible_message(SPAN("notice", "\The [user] opens valve on \the [src]!"))
 			if(breather)
 				breather.internal = tank
 				if(breather.internals)
@@ -123,39 +123,39 @@
 		user = target
 	// Check target validity
 	if(!target.organs_by_name[BP_HEAD])
-		to_chat(user, "<span class='warning'>\The [target] doesn't have a head.</span>")
+		to_chat(user, SPAN("warning", "\The [target] doesn't have a head."))
 		return
 	if(!target.check_has_mouth())
-		to_chat(user, "<span class='warning'>\The [target] doesn't have a mouth.</span>")
+		to_chat(user, SPAN("warning", "\The [target] doesn't have a mouth."))
 		return
 	if(target.wear_mask && target != breather)
-		to_chat(user, "<span class='warning'>\The [target] is already wearing a mask.</span>")
+		to_chat(user, SPAN("warning", "\The [target] is already wearing a mask."))
 		return
 	if(target.head && (target.head.body_parts_covered & FACE))
-		to_chat(user, "<span class='warning'>Remove their [target.head] first.</span>")
+		to_chat(user, SPAN("warning", "Remove their [target.head] first."))
 		return
 	if(!tank)
-		to_chat(user, "<span class='warning'>There is no tank in \the [src].</span>")
+		to_chat(user, SPAN("warning", "There is no tank in \the [src]."))
 		return
 	if(is_loosen)
-		to_chat(user, "<span class='warning'>Tighten \the nut with a wrench first.</span>")
+		to_chat(user, SPAN("warning", "Tighten \the nut with a wrench first."))
 		return
 	if(!Adjacent(target))
 		return
 	//when there is a breather:
 	if(breather && target != breather)
-		to_chat(user, "<span class='warning'>\The [src] is already in use.</span>")
+		to_chat(user, SPAN("warning", "\The [src] is already in use."))
 		return
 	//Checking if breather is still valid
 	if(target == breather && target.wear_mask != contained)
-		to_chat(user, "<span class='warning'>\The [target] is not using the supplied mask.</span>")
+		to_chat(user, SPAN("warning", "\The [target] is not using the supplied mask."))
 		return
 	return 1
 
 /obj/structure/gas_stand/attackby(obj/item/W as obj, mob/user as mob)
 	if(isWrench(W))
 		if (valve_opened)
-			to_chat(user, "<span class='warning'>Close the valve first.</span>")
+			to_chat(user, SPAN("warning", "Close the valve first."))
 			return
 		if (tank)
 			if (!is_loosen)
@@ -164,20 +164,20 @@
 				is_loosen = FALSE
 				if (valve_opened)
 					set_next_think(world.time)
-			user.visible_message("<span class='notice'>\The [user] [is_loosen == TRUE ? "loosen" : "tighten"] \the nut holding [tank] in place.</span>", "<span class='notice'>You [is_loosen == TRUE ? "loosen" : "tighten"] \the nut holding [tank] in place.</span>")
+			user.visible_message(SPAN("notice", "\The [user] [is_loosen == TRUE ? "loosen" : "tighten"] \the nut holding [tank] in place."), SPAN("notice", "You [is_loosen == TRUE ? "loosen" : "tighten"] \the nut holding [tank] in place."))
 			return
 		else
-			to_chat(user, "<span class='warning'>There is no tank in \the [src].</span>")
+			to_chat(user, SPAN("warning", "There is no tank in \the [src]."))
 			return
 
 	if(istype(W, /obj/item/tank))
 		if(tank)
-			to_chat(user, "<span class='warning'>\The [src] already has a tank installed!</span>")
+			to_chat(user, SPAN("warning", "\The [src] already has a tank installed!"))
 		else if(!is_loosen)
-			to_chat(user, "<span class='warning'>Loosen the nut with a wrench first.</span>")
+			to_chat(user, SPAN("warning", "Loosen the nut with a wrench first."))
 		else if(user.drop(W, src))
 			tank = W
-			user.visible_message("<span class='notice'>\The [user] attaches \the [tank] to \the [src].</span>", "<span class='notice'>You attach \the [tank] to \the [src].</span>")
+			user.visible_message(SPAN("notice", "\The [user] attaches \the [tank] to \the [src]."), SPAN("notice", "You attach \the [tank] to \the [src]."))
 			add_fingerprint(user)
 			update_icon()
 
@@ -203,7 +203,7 @@
 			else
 				qdel(contained)
 				contained = new mask_type(src)
-			src.visible_message("<span class='notice'>\The [contained] slips to \the [src]!</span>")
+			src.visible_message(SPAN("notice", "\The [contained] slips to \the [src]!"))
 			breather = null
 			update_icon()
 			return

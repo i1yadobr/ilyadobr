@@ -39,9 +39,9 @@
 
 	if(istype(I, /obj/item/device/measuring_tape))
 		var/obj/item/device/measuring_tape/P = I
-		user.visible_message("<span class='notice'>\The [user] extends \the [P] towards \the [src].</span>", "<span class='notice'>You extend \the [P] towards \the [src].</span>")
+		user.visible_message(SPAN("notice", "\The [user] extends \the [P] towards \the [src]."), SPAN("notice", "You extend \the [P] towards \the [src]."))
 		if(do_after(user, 15))
-			to_chat(user, "<span class='notice'>\The [src] has been excavated to a depth of [src.excavation_level]cm.</span>")
+			to_chat(user, SPAN("notice", "\The [src] has been excavated to a depth of [src.excavation_level]cm."))
 		return
 
 	if(istype(I, /obj/item/pickaxe/drill))
@@ -49,10 +49,10 @@
 			return
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		var/obj/item/pickaxe/drill/D = I
-		to_chat(user, "<span class='warning'>You start [D.drill_verb] [src].</span>")
+		to_chat(user, SPAN("warning", "You start [D.drill_verb] [src]."))
 		if(!do_after(user, D.dig_delay))
 			return
-		to_chat(user, "<span class='notice'>You finish [D.drill_verb] [src].</span>")
+		to_chat(user, SPAN("notice", "You finish [D.drill_verb] [src]."))
 		qdel(src)
 		return
 
@@ -66,7 +66,7 @@
 
 		// if(excavation_level > 200)
 		// 	//failure
-		// 	user.visible_message("<span class='warning'>\The [src] suddenly crumbles away.</span>", "<span class='warning'>\The [src] has disintegrated under your onslaught, any secrets it was holding are long gone.</span>")
+		// 	user.visible_message(SPAN("warning", "\The [src] suddenly crumbles away."), SPAN("warning", "\The [src] has disintegrated under your onslaught, any secrets it was holding are long gone."))
 		// 	qdel(src)
 		// 	return
 
@@ -79,9 +79,9 @@
 		// 			var/obj/machinery/artifact/X = O
 		// 			if(X.main_effect)
 		// 				X.main_effect.artifact_id = artifact_find.artifact_id
-		// 		src.visible_message("<span class='warning'>\The [src] suddenly crumbles away.</span>")
+		// 		src.visible_message(SPAN("warning", "\The [src] suddenly crumbles away."))
 		// 	else
-		// 		user.visible_message("<span class='warning'>\The [src] suddenly crumbles away.</span>", "<span class='notice'>\The [src] has been whittled away under your careful excavation, but there was nothing of interest inside.</span>")
+		// 		user.visible_message(SPAN("warning", "\The [src] suddenly crumbles away."), SPAN("notice", "\The [src] has been whittled away under your careful excavation, but there was nothing of interest inside."))
 
 	if(istype(I, /obj/item/pickaxe))
 		// TODO(rufus): research and apply a proper way to apply cooldown for both drills and pickaxes

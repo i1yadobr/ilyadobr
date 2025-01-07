@@ -501,7 +501,7 @@ steam.start() -- spawns the effect
 
 	if (!living_holder || explosion_radius_light > 0)
 		for(var/mob/M in viewers())
-			to_chat(M, "<span class='warning'>The solution violently explodes.</span>")
+			to_chat(M, SPAN("warning", "The solution violently explodes."))
 
 	explosion(location, explosion_radius_devst, explosion_radius_heavy, explosion_radius_light, 0)
 

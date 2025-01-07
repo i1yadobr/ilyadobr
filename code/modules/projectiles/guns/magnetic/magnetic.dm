@@ -73,7 +73,7 @@
 
 /obj/item/gun/magnetic/proc/show_ammo()
 	if(loaded)
-		return "<span class='notice'>It has \a [loaded] loaded.</span>"
+		return SPAN("notice", "It has \a [loaded] loaded.")
 
 /obj/item/gun/magnetic/_examine_text(mob/user)
 	. = ..()
@@ -112,22 +112,22 @@
 	if(removable_components)
 		if(istype(thing, /obj/item/cell))
 			if(cell)
-				to_chat(user, "<span class='warning'>\The [src] already has \a [cell] installed.</span>")
+				to_chat(user, SPAN("warning", "\The [src] already has \a [cell] installed."))
 				return
 			if(!user.drop(cell, src))
 				return
 			cell = thing
 			playsound(loc, 'sound/machines/click.ogg', 10, 1)
-			user.visible_message("<span class='notice'>\The [user] slots \the [cell] into \the [src].</span>")
+			user.visible_message(SPAN("notice", "\The [user] slots \the [cell] into \the [src]."))
 			update_icon()
 			return
 
 		if(isScrewdriver(thing))
 			if(!capacitor)
-				to_chat(user, "<span class='warning'>\The [src] has no capacitor installed.</span>")
+				to_chat(user, SPAN("warning", "\The [src] has no capacitor installed."))
 				return
 			user.pick_or_drop(capacitor, loc)
-			user.visible_message("<span class='notice'>\The [user] unscrews \the [capacitor] from \the [src].</span>")
+			user.visible_message(SPAN("notice", "\The [user] unscrews \the [capacitor] from \the [src]."))
 			playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
 			capacitor = null
 			update_icon()
@@ -135,20 +135,20 @@
 
 		if(istype(thing, /obj/item/stock_parts/capacitor))
 			if(capacitor)
-				to_chat(user, "<span class='warning'>\The [src] already has \a [capacitor] installed.</span>")
+				to_chat(user, SPAN("warning", "\The [src] already has \a [capacitor] installed."))
 				return
 			capacitor = thing
 			user.drop(capacitor, src)
 			playsound(loc, 'sound/machines/click.ogg', 10, 1)
 			power_per_tick = (power_cost*0.15) * capacitor.rating
-			user.visible_message("<span class='notice'>\The [user] slots \the [capacitor] into \the [src].</span>")
+			user.visible_message(SPAN("notice", "\The [user] slots \the [capacitor] into \the [src]."))
 			update_icon()
 			return
 
 	if(istype(thing, load_type))
 
 		if(loaded)
-			to_chat(user, "<span class='warning'>\The [src] already has \a [loaded] loaded.</span>")
+			to_chat(user, SPAN("warning", "\The [src] already has \a [loaded] loaded."))
 			return
 
 		// This is not strictly necessary for the magnetic gun but something using
@@ -161,7 +161,7 @@
 			loaded = new load_type(src, 1)
 			ammo.use(1)
 
-		user.visible_message("<span class='notice'>\The [user] loads \the [src] with \the [loaded].</span>")
+		user.visible_message(SPAN("notice", "\The [user] loads \the [src] with \the [loaded]."))
 		playsound(loc, 'sound/weapons/flipblade.ogg', 50, 1)
 		update_icon()
 		return
@@ -180,7 +180,7 @@
 
 		if(removing)
 			user.pick_or_drop(removing)
-			user.visible_message("<span class='notice'>\The [user] removes \the [removing] from \the [src].</span>")
+			user.visible_message(SPAN("notice", "\The [user] removes \the [removing] from \the [src]."))
 			playsound(loc, 'sound/machines/click.ogg', 10, 1)
 			update_icon()
 			return
@@ -213,7 +213,7 @@
 		increase_heat_level()
 		if(heat_level > 10 && prob(5 + heat_level))
 			if(heat_level < 15 || prob(90 - heat_level))
-				to_chat(user, "<span class='warning'>\The [src] misfires!</span>")
+				to_chat(user, SPAN("warning", "\The [src] misfires!"))
 				capacitor.use(power_cost)
 				emit_sparks()
 				update_icon()
@@ -222,11 +222,11 @@
 				if(heat_level < 30 || prob(100 - heat_level))
 					if(electrocute_mob(user, cell, src))
 						emit_sparks()
-						to_chat(user, "<span class='danger'>You accidentally ground bare wiring of [src]!</span>")
+						to_chat(user, SPAN("danger", "You accidentally ground bare wiring of [src]!"))
 						return
 				else
 					spawn(3) // So that it will still fire - considered modifying Fire() to return a value but burst fire makes that annoying.
-						visible_message("<span class='danger'>\The [src] explodes with the force of the shot!</span>")
+						visible_message(SPAN("danger", "\The [src] explodes with the force of the shot!"))
 						explosion(get_turf(src), -1, 0, 2)
 						qdel(src)
 

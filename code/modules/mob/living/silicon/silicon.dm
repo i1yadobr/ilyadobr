@@ -95,8 +95,8 @@
 			src.take_organ_damage(0,10,emp=1)
 			confused = (min(confused + 2, 30))
 	flash_eyes(affect_silicon = 1)
-	to_chat(src, "<span class='danger'><B>*BZZZT*</B></span>")
-	to_chat(src, "<span class='danger'>Warning: Electromagnetic pulse detected.</span>")
+	to_chat(src, SPAN("danger", "<B>*BZZZT*</B>"))
+	to_chat(src, SPAN("danger", "Warning: Electromagnetic pulse detected."))
 	..()
 
 /mob/living/silicon/stun_effect_act(stun_amount, agony_amount, def_zone, used_weapon = null)
@@ -111,9 +111,9 @@
 
 		shock_damage *= 0.75	//take reduced damage
 		take_overall_damage(0, shock_damage)
-		visible_message("<span class='warning'>\The [src] was shocked by \the [source]!</span>", \
-			"<span class='danger'>Energy pulse detected, system damaged!</span>", \
-			"<span class='warning'>You hear an electrical crack</span>")
+		visible_message(SPAN("warning", "\The [src] was shocked by \the [source]!"), \
+			SPAN("danger", "Energy pulse detected, system damaged!"), \
+			SPAN("warning", "You hear an electrical crack"))
 		if(prob(20))
 			Stun(2)
 		return
@@ -187,7 +187,7 @@
 
 //can't inject synths
 /mob/living/silicon/can_inject(mob/user, target_zone)
-	to_chat(user, "<span class='warning'>The armoured plating is too tough.</span>")
+	to_chat(user, SPAN("warning", "The armoured plating is too tough."))
 	return 0
 
 
@@ -245,30 +245,30 @@
 		if ("Security")
 			sensor_mode = SEC_VISION
 			active_hud = HUD_SECURITY
-			to_chat(src, "<span class='notice'>Security records overlay enabled.</span>")
+			to_chat(src, SPAN("notice", "Security records overlay enabled."))
 		if ("Medical")
 			sensor_mode = MED_VISION
 			active_hud = HUD_MEDICAL
-			to_chat(src, "<span class='notice'>Life signs monitor overlay enabled.</span>")
+			to_chat(src, SPAN("notice", "Life signs monitor overlay enabled."))
 		if ("Meson")
 			sensor_mode = MESON_VISION
-			to_chat(src, "<span class='notice'>Meson vision overlay enabled.</span>")
+			to_chat(src, SPAN("notice", "Meson vision overlay enabled."))
 		if ("Science")
 			sensor_mode = SCIENCE_VISION
 			active_hud = HUD_SCIENCE
-			to_chat(src, "<span class='notice'>Science vision overlay enabled.</span>")
+			to_chat(src, SPAN("notice", "Science vision overlay enabled."))
 		if ("Night Vision")
 			sensor_mode = NVG_VISION
-			to_chat(src, "<span class='notice'>Night vision overlay enabled.</span>")
+			to_chat(src, SPAN("notice", "Night vision overlay enabled."))
 		if ("Material")
 			sensor_mode = MATERIAL_VISION
-			to_chat(src, "<span class='notice'>Material vision overlay enabled.</span>")
+			to_chat(src, SPAN("notice", "Material vision overlay enabled."))
 		if ("Thermal")
 			sensor_mode = THERMAL_VISION
-			to_chat(src, "<span class='notice'>Thermal vision overlay enabled.</span>")
+			to_chat(src, SPAN("notice", "Thermal vision overlay enabled."))
 		if ("X-Ray")
 			sensor_mode = XRAY_VISION
-			to_chat(src, "<span class='notice'>X-Ray vision overlay enabled.</span>")
+			to_chat(src, SPAN("notice", "X-Ray vision overlay enabled."))
 		if ("Flash Screen")
 			sensor_mode = FLASH_PROTECTION_VISION
 		if ("Disable")
@@ -442,10 +442,10 @@
 					if (istype(R.module,/obj/item/robot_module/security/general) && !R.emagged)
 						var/obj/item/gun/energy/laser/mounted/cyborg/LC = locate(/obj/item/gun/energy/laser/mounted/cyborg) in R.module.modules
 						LC.locked = 1
-						to_chat(src, "<span class='notice'>Security protocols has been changed: Safety locks in place.</span>")
+						to_chat(src, SPAN("notice", "Security protocols has been changed: Safety locks in place."))
 			if ("code red")
 				if (R.module)
 					if (istype(R.module,/obj/item/robot_module/security/general))
 						var/obj/item/gun/energy/laser/mounted/cyborg/LC = locate(/obj/item/gun/energy/laser/mounted/cyborg) in R.module.modules
 						LC.locked = 0
-						to_chat(src, "<span class='warning'>Security protocols has been changed: Safety locks is now lifted.</span>")
+						to_chat(src, SPAN("warning", "Security protocols has been changed: Safety locks is now lifted."))

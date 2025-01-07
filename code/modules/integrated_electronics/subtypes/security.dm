@@ -167,7 +167,7 @@
 		if(fibers.evidence)
 			output = "Molecular analysis on provided sample has determined the presence of unique fiber strings.<br><br>"
 			for(var/fiber in fibers.evidence)
-				output += "Most likely match for fibers: [fiber]</span><br><br>"
+				output += "Most likely match for fibers: [fiber]<br><br>"
 		else
 			output += "No fibers found."
 	else if(istype(sample, /obj/item/sample/print))

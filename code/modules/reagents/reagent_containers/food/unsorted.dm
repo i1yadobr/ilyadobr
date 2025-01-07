@@ -241,7 +241,7 @@
 		return // Could be happened hitby()
 	new /obj/effect/decal/cleanable/egg_smudge(src.loc)
 	src.reagents.splash(hit_atom, src.reagents.total_volume)
-	src.visible_message("<span class='warning'>\The [src] has been squashed!</span>","<span class='warning'>You hear a smack.</span>")
+	src.visible_message(SPAN("warning", "\The [src] has been squashed!"),SPAN("warning", "You hear a smack."))
 	qdel(src)
 
 /obj/item/reagent_containers/food/egg/attackby(obj/item/W, mob/user)
@@ -250,10 +250,10 @@
 		var/clr = C.colourName
 
 		if(!(clr in list("blue","green","mime","orange","purple","rainbow","red","yellow")))
-			to_chat(usr, "<span class='notice'>The egg refuses to take on this color!</span>")
+			to_chat(usr, SPAN("notice", "The egg refuses to take on this color!"))
 			return
 
-		to_chat(usr, "<span class='notice'>You color \the [src] [clr]</span>")
+		to_chat(usr, SPAN("notice", "You color \the [src] [clr]"))
 		icon_state = "egg-[clr]"
 	else
 		..()
@@ -473,10 +473,10 @@
 
 /obj/item/reagent_containers/food/donkpocket/sinpocket/attack_self(mob/user)
 	if(has_been_heated)
-		to_chat(user, "<span class='notice'>The heating chemicals have already been spent.</span>")
+		to_chat(user, SPAN("notice", "The heating chemicals have already been spent."))
 		return
 	has_been_heated = 1
-	user.visible_message("<span class='notice'>[user] crushes \the [src] package.</span>", "You crush \the [src] package and feel a comfortable heat build up.")
+	user.visible_message(SPAN("notice", "[user] crushes \the [src] package."), "You crush \the [src] package and feel a comfortable heat build up.")
 	addtimer(CALLBACK(src, nameof(.proc/heat), user), 200)
 
 /obj/item/reagent_containers/food/donkpocket/sinpocket/heat(user)
@@ -1205,7 +1205,7 @@
 /obj/item/reagent_containers/food/monkeycube/proc/Expand()
 	if(!growing)
 		growing = 1
-		src.visible_message("<span class='notice'>\The [src] expands!</span>")
+		src.visible_message(SPAN("notice", "\The [src] expands!"))
 		var/mob/monkey = new monkey_type
 		monkey.dropInto(src.loc)
 		qdel(src)
@@ -1221,7 +1221,7 @@
 /obj/item/reagent_containers/food/monkeycube/On_Consume(mob/M)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		H.visible_message("<span class='warning'>A screeching creature bursts out of [M]'s chest!</span>")
+		H.visible_message(SPAN("warning", "A screeching creature bursts out of [M]'s chest!"))
 		var/obj/item/organ/external/organ = H.get_organ(BP_CHEST)
 		organ.take_external_damage(50, 0, 0, "Animal escaping the ribcage")
 	Expand()

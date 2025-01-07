@@ -21,7 +21,7 @@
 	var/datum/map/M = GLOB.all_maps[result[1]]
 	
 	if (M)	
-		to_world("<span class='notice'>Map has been changed to: <b>[M.name]</b></span>")
+		to_world(SPAN("notice", "Map has been changed to: <b>[M.name]</b>"))
 		fdel("data/use_map")
 		text2file("[M.type]", "data/use_map")
 

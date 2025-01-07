@@ -71,10 +71,10 @@
 	if(istype(I, /obj/item/material/shard) || istype(I, /obj/item/material/knife/shiv))
 		var/obj/item/material/tmp_shard = I
 		finished = new /obj/item/material/twohanded/spear(get_turf(user), tmp_shard.material.name)
-		to_chat(user, "<span class='notice'>You fasten \the [I] to the top of the rod with the cable.</span>")
+		to_chat(user, SPAN("notice", "You fasten \the [I] to the top of the rod with the cable."))
 	else if(isWirecutter(I))
 		finished = new /obj/item/melee/baton/cattleprod(get_turf(user))
-		to_chat(user, "<span class='notice'>You fasten the wirecutters to the top of the rod with the cable, prongs outward.</span>")
+		to_chat(user, SPAN("notice", "You fasten the wirecutters to the top of the rod with the cable, prongs outward."))
 	if(finished)
 		qdel(I)
 		qdel(src)

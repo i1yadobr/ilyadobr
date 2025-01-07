@@ -145,7 +145,7 @@
 		nutrition = 0
 		adjustToxLoss(2)
 		if (client && prob(5))
-			to_chat(src, "<span class='danger'>You are starving!</span>")
+			to_chat(src, SPAN("danger", "You are starving!"))
 
 	else if (nutrition >= get_grow_nutrition() && amount_grown < 10)
 		nutrition -= 20

@@ -45,12 +45,12 @@
 
 	if(istype(W, /obj/item/cell) && anchored)
 		if(charging)
-			to_chat(user, "<span class='warning'>There is already a cell in the charger.</span>")
+			to_chat(user, SPAN("warning", "There is already a cell in the charger."))
 			return
 		else
 			var/area/a = get_area(loc)
 			if(a.power_equip == 0) // There's no APC in this area, don't try to cheat power!
-				to_chat(user, "<span class='warning'>The [name] blinks red as you try to insert the cell!</span>")
+				to_chat(user, SPAN("warning", "The [name] blinks red as you try to insert the cell!"))
 				return
 			if(!user.drop(W, src))
 				return
@@ -63,7 +63,7 @@
 
 	if(isScrewdriver(W) || isCrowbar(W) || isWrench(W))
 		if(charging)
-			to_chat(user, "<span class='warning'>Remove the cell first!</span>")
+			to_chat(user, SPAN("warning", "Remove the cell first!"))
 			return
 		if(default_deconstruction_screwdriver(user, W))
 			return

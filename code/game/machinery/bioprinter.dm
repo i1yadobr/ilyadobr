@@ -139,7 +139,7 @@
 
 /obj/machinery/organ_printer/proc/can_print(choice)
 	if(stored_matter < products[choice][3])
-		visible_message("<span class='notice'>\The [src] displays a warning: 'Not enough matter. [stored_matter] stored and [products[choice][3]] needed.'</span>")
+		visible_message(SPAN("notice", "\The [src] displays a warning: 'Not enough matter. [stored_matter] stored and [products[choice][3]] needed.'"))
 		return 0
 	return 1
 
@@ -185,22 +185,22 @@
 		O.robotize()
 		O.status |= ORGAN_CUT_AWAY // Default robotize() resets status to ORGAN_ROBOTIC only
 
-	visible_message("<span class='info'>\The [src] churns for a moment, then spits out \a [O].</span>")
+	visible_message(SPAN("info", "\The [src] churns for a moment, then spits out \a [O]."))
 	return O
 
 /obj/machinery/organ_printer/robot/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/stack/material) && W.get_material_name() == matter_type)
 		if((max_stored_matter-stored_matter) < matter_amount_per_sheet)
-			to_chat(user, "<span class='warning'>\The [src] is too full.</span>")
+			to_chat(user, SPAN("warning", "\The [src] is too full."))
 			return
 		var/obj/item/stack/S = W
 		var/space_left = max_stored_matter - stored_matter
 		var/sheets_to_take = min(S.amount, Floor(space_left/matter_amount_per_sheet))
 		if(sheets_to_take <= 0)
-			to_chat(user, "<span class='warning'>\The [src] is too full.</span>")
+			to_chat(user, SPAN("warning", "\The [src] is too full."))
 			return
 		stored_matter = min(max_stored_matter, stored_matter + (sheets_to_take*matter_amount_per_sheet))
-		to_chat(user, "<span class='info'>\The [src] processes \the [W]. Levels of stored matter now: [stored_matter]</span>")
+		to_chat(user, SPAN("info", "\The [src] processes \the [W]. Levels of stored matter now: [stored_matter]"))
 		S.use(sheets_to_take)
 		return
 	return ..()
@@ -220,7 +220,7 @@
 /obj/machinery/organ_printer/flesh/can_print(choice)
 	. = ..()
 	if(!loaded_dna || !loaded_dna["donor"])
-		visible_message("<span class='info'>\The [src] displays a warning: 'No DNA saved. Insert a blood sample.'</span>")
+		visible_message(SPAN("info", "\The [src] displays a warning: 'No DNA saved. Insert a blood sample.'"))
 		return 0
 
 /obj/machinery/organ_printer/flesh/mapped/Initialize()
@@ -256,7 +256,7 @@
 			// This is a very hacky way of doing of what organ/New() does if it has an owner
 			O.w_class = max(O.w_class + mob_size_difference(O.species.mob_size, MOB_MEDIUM), 1)
 
-	visible_message("<span class='info'>\The [src] churns for a moment, injects its stored DNA into the biomass, then spits out \a [O].</span>")
+	visible_message(SPAN("info", "\The [src] churns for a moment, injects its stored DNA into the biomass, then spits out \a [O]."))
 	return O
 
 /obj/machinery/organ_printer/flesh/attackby(obj/item/W, mob/user)
@@ -264,12 +264,12 @@
 	for(var/path in amount_list)
 		if(istype(W, path))
 			if(max_stored_matter == stored_matter)
-				to_chat(user, "<span class='warning'>\The [src] is too full.</span>")
+				to_chat(user, SPAN("warning", "\The [src] is too full."))
 				return
 			if(!user.drop(W))
 				return
 			stored_matter += min(amount_list[path], max_stored_matter - stored_matter)
-			to_chat(user, "<span class='info'>\The [src] processes \the [W]. Levels of stored biomass now: [stored_matter]</span>")
+			to_chat(user, SPAN("info", "\The [src] processes \the [W]. Levels of stored biomass now: [stored_matter]"))
 			qdel(W)
 			return
 
@@ -279,7 +279,7 @@
 		var/datum/reagent/blood/injected = locate() in S.reagents.reagent_list //Grab some blood
 		if(injected && injected.data)
 			loaded_dna = injected.data
-			to_chat(user, "<span class='info'>You inject the blood sample into the bioprinter.</span>")
+			to_chat(user, SPAN("info", "You inject the blood sample into the bioprinter."))
 		return
 	return ..()
 // END FLESH ORGAN PRINTER

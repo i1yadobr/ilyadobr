@@ -80,20 +80,20 @@
 		return
 	if(istype(O, /obj/item/reagent_containers/vessel))
 		if(beaker)
-			to_chat(user, "<span class='notice'>]The [src] is already loaded.</span>")
+			to_chat(user, SPAN("notice", "]The [src] is already loaded."))
 		else if(user.drop(O, src))
 			beaker = O
 			state = BG_READY
 			updateUsrDialog()
 	else if(processing)
-		to_chat(user, "<span class='notice'>\The [src] is currently processing.</span>")
+		to_chat(user, SPAN("notice", "\The [src] is currently processing."))
 	else if(istype(O, /obj/item/storage/plants))
 		var/obj/item/storage/plants/P = O
 		var/i = 0
 		for(var/obj/item/reagent_containers/food/grown/G in contents)
 			i++
 		if(i >= 10)
-			to_chat(user, "<span class='notice'>\The [src] is already full! Activate it.</span>")
+			to_chat(user, SPAN("notice", "\The [src] is already full! Activate it."))
 		else
 			var/hadPlants = 0
 			for(var/obj/item/reagent_containers/food/grown/G in P.contents)
@@ -101,24 +101,24 @@
 				P.remove_from_storage(G, src)
 				i++
 				if(i >= 10)
-					to_chat(user, "<span class='notice'>You fill \the [src] to its capacity.</span>")
+					to_chat(user, SPAN("notice", "You fill \the [src] to its capacity."))
 					break
 			if(!hadPlants)
-				to_chat(user, "<span class='notice'>\The [P] has no produce inside.</span>")
+				to_chat(user, SPAN("notice", "\The [P] has no produce inside."))
 			else if(i < 10)
-				to_chat(user, "<span class='notice'>You empty \the [P] into \the [src].</span>")
+				to_chat(user, SPAN("notice", "You empty \the [P] into \the [src]."))
 
 
 	else if(!istype(O, /obj/item/reagent_containers/food/grown))
-		to_chat(user, "<span class='notice'>You cannot put this in \the [src].</span>")
+		to_chat(user, SPAN("notice", "You cannot put this in \the [src]."))
 	else
 		var/i = 0
 		for(var/obj/item/reagent_containers/food/grown/G in contents)
 			i++
 		if(i >= 10)
-			to_chat(user, "<span class='notice'>\The [src] is full! Activate it.</span>")
+			to_chat(user, SPAN("notice", "\The [src] is full! Activate it."))
 		else if(user.drop(O, src))
-			to_chat(user, "<span class='notice'>You put \the [O] in \the [src]</span>")
+			to_chat(user, SPAN("notice", "You put \the [O] in \the [src]"))
 	update_icon()
 	return
 

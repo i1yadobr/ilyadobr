@@ -231,7 +231,7 @@
 
 	if(result == PROJECTILE_FORCE_MISS)
 		if(!silenced)
-			target_mob.visible_message("<span class='notice'>\The [src] misses [target_mob] narrowly!</span>")
+			target_mob.visible_message(SPAN("notice", "\The [src] misses [target_mob] narrowly!"))
 		return 0
 
 	//sometimes bullet_act() will want the projectile to continue flying
@@ -319,7 +319,7 @@
 			//if they have a neck grab on someone, that person gets hit instead
 			var/obj/item/grab/G = locate() in M
 			if(G && G.shield_assailant())
-				visible_message("<span class='danger'>\The [M] uses [G.affecting] as a shield!</span>")
+				visible_message(SPAN("danger", "\The [M] uses [G.affecting] as a shield!"))
 				if(Bump(G.affecting, forced=1))
 					return //If Bump() returns 0 (keep going) then we continue on to attack M.
 

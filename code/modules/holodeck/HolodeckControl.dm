@@ -56,13 +56,13 @@
 	dat += "<HR>Current Loaded Programs:<BR>"
 
 	if(!linkedholodeck)
-		dat += "<span class='danger'>Warning: Unable to locate holodeck.<br></span>"
+		dat += SPAN("danger", "Warning: Unable to locate holodeck.<br>")
 		show_browser(user, dat, "window=computer;size=400x500")
 		onclose(user, "computer")
 		return
 
 	if(!supported_programs.len)
-		dat += "<span class='danger'>Warning: No supported holo-programs loaded.<br></span>"
+		dat += SPAN("danger", "Warning: No supported holo-programs loaded.<br>")
 		show_browser(user, dat, "window=computer;size=400x500")
 		onclose(user, "computer")
 		return
@@ -149,7 +149,7 @@
 		emagged = 1
 		safety_disabled = 1
 		update_projections()
-		to_chat(user, "<span class='notice'>You vastly increase projector power and override the safety and security protocols.</span>")
+		to_chat(user, SPAN("notice", "You vastly increase projector power and override the safety and security protocols."))
 		to_chat(user, "Warning.  Automatic shutoff and derezing protocols have been corrupted.  Please call [GLOB.using_map.company_name] maintenance and do not use the simulator.")
 		log_game("[key_name(usr)] emagged the Holodeck Control Computer")
 		src.updateUsrDialog()
@@ -269,7 +269,7 @@
 			if(world.time < (last_change + 15))//To prevent super-spam clicking, reduced process size and annoyance -Sieve
 				return
 			for(var/mob/M in range(3,src))
-				M.show_message("<span class='warning'>ERROR. Recalibrating projection apparatus.</span>")
+				M.show_message(SPAN("warning", "ERROR. Recalibrating projection apparatus."))
 				last_change = world.time
 				return
 
@@ -326,7 +326,7 @@
 		if(world.time < (last_gravity_change + 15))//To prevent super-spam clicking
 			return
 		for(var/mob/M in range(3,src))
-			M.show_message("<span class='warning'>ERROR. Recalibrating gravity field.</span>")
+			M.show_message(SPAN("warning", "ERROR. Recalibrating gravity field."))
 			last_change = world.time
 			return
 
@@ -354,10 +354,10 @@
 /obj/machinery/computer/HolodeckControl/proc/togglelock(mob/user)
 	if(cantogglelock(user))
 		islocked = !islocked
-		audible_message("<span class='notice'>\The [src] emits a series of beeps to announce it has been [islocked ? null : "un"]locked.</span>", hearing_distance = 3, runechat_message = "*beep-beep-beep*")
+		audible_message(SPAN("notice", "\The [src] emits a series of beeps to announce it has been [islocked ? null : "un"]locked."), hearing_distance = 3, runechat_message = "*beep-beep-beep*")
 		return 0
 	else
-		to_chat(user, "<span class='warning'>Access denied.</span>")
+		to_chat(user, SPAN("warning", "Access denied."))
 		return 1
 
 /obj/machinery/computer/HolodeckControl/proc/cantogglelock(mob/user)

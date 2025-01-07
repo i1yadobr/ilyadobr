@@ -35,7 +35,7 @@
 /obj/item/engine/electric/attackby(obj/item/I, mob/user)
 	if(istype(I,/obj/item/cell))
 		if(cell)
-			to_chat(user, "<span class='warning'>There is already a cell in \the [src].</span>")
+			to_chat(user, SPAN("warning", "There is already a cell in \the [src]."))
 		else if(user.drop(I, src))
 			cell = I
 		return 1

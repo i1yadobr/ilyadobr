@@ -42,63 +42,63 @@
 /obj/machinery/beehive/attackby(obj/item/I, mob/user)
 	if(isCrowbar(I))
 		closed = !closed
-		user.visible_message("<span class='notice'>\The [user] [closed ? "closes" : "opens"] \the [src].</span>", "<span class='notice'>You [closed ? "close" : "open"] \the [src].</span>")
+		user.visible_message(SPAN("notice", "\The [user] [closed ? "closes" : "opens"] \the [src]."), SPAN("notice", "You [closed ? "close" : "open"] \the [src]."))
 		update_icon()
 		return
 	else if(isWrench(I))
 		anchored = !anchored
-		user.visible_message("<span class='notice'>\The [user] [anchored ? "wrenches" : "unwrenches"] \the [src].</span>", "<span class='notice'>You [anchored ? "wrench" : "unwrench"] \the [src].</span>")
+		user.visible_message(SPAN("notice", "\The [user] [anchored ? "wrenches" : "unwrenches"] \the [src]."), SPAN("notice", "You [anchored ? "wrench" : "unwrench"] \the [src]."))
 		return
 	else if(istype(I, /obj/item/bee_smoker))
 		if(closed)
-			to_chat(user, "<span class='notice'>You need to open \the [src] with a crowbar before smoking the bees.</span>")
+			to_chat(user, SPAN("notice", "You need to open \the [src] with a crowbar before smoking the bees."))
 			return
-		user.visible_message("<span class='notice'>\The [user] smokes the bees in \the [src].</span>", "<span class='notice'>You smoke the bees in \the [src].</span>")
+		user.visible_message(SPAN("notice", "\The [user] smokes the bees in \the [src]."), SPAN("notice", "You smoke the bees in \the [src]."))
 		smoked = 30
 		update_icon()
 		return
 	else if(istype(I, /obj/item/honey_frame))
 		if(closed)
-			to_chat(user, "<span class='notice'>You need to open \the [src] with a crowbar before inserting \the [I].</span>")
+			to_chat(user, SPAN("notice", "You need to open \the [src] with a crowbar before inserting \the [I]."))
 			return
 		if(frames >= maxFrames)
-			to_chat(user, "<span class='notice'>There is no place for an another frame.</span>")
+			to_chat(user, SPAN("notice", "There is no place for an another frame."))
 			return
 		var/obj/item/honey_frame/H = I
 		if(H.honey)
-			to_chat(user, "<span class='notice'>\The [I] is full with beeswax and honey, empty it in the extractor first.</span>")
+			to_chat(user, SPAN("notice", "\The [I] is full with beeswax and honey, empty it in the extractor first."))
 			return
 		++frames
-		user.visible_message("<span class='notice'>\The [user] loads \the [I] into \the [src].</span>", "<span class='notice'>You load \the [I] into \the [src].</span>")
+		user.visible_message(SPAN("notice", "\The [user] loads \the [I] into \the [src]."), SPAN("notice", "You load \the [I] into \the [src]."))
 		update_icon()
 		qdel(I)
 		return
 	else if(istype(I, /obj/item/bee_pack))
 		var/obj/item/bee_pack/B = I
 		if(B.full && bee_count)
-			to_chat(user, "<span class='notice'>\The [src] already has bees inside.</span>")
+			to_chat(user, SPAN("notice", "\The [src] already has bees inside."))
 			return
 		if(!B.full && bee_count < 90)
-			to_chat(user, "<span class='notice'>\The [src] is not ready to split.</span>")
+			to_chat(user, SPAN("notice", "\The [src] is not ready to split."))
 			return
 		if(!B.full && !smoked)
-			to_chat(user, "<span class='notice'>Smoke \the [src] first!</span>")
+			to_chat(user, SPAN("notice", "Smoke \the [src] first!"))
 			return
 		if(closed)
-			to_chat(user, "<span class='notice'>You need to open \the [src] with a crowbar before moving the bees.</span>")
+			to_chat(user, SPAN("notice", "You need to open \the [src] with a crowbar before moving the bees."))
 			return
 		if(B.full)
-			user.visible_message("<span class='notice'>\The [user] puts the queen and the bees from \the [I] into \the [src].</span>", "<span class='notice'>You put the queen and the bees from \the [I] into \the [src].</span>")
+			user.visible_message(SPAN("notice", "\The [user] puts the queen and the bees from \the [I] into \the [src]."), SPAN("notice", "You put the queen and the bees from \the [I] into \the [src]."))
 			bee_count = 20
 			B.empty()
 		else
-			user.visible_message("<span class='notice'>\The [user] puts bees and larvae from \the [src] into \the [I].</span>", "<span class='notice'>You put bees and larvae from \the [src] into \the [I].</span>")
+			user.visible_message(SPAN("notice", "\The [user] puts bees and larvae from \the [src] into \the [I]."), SPAN("notice", "You put bees and larvae from \the [src] into \the [I]."))
 			bee_count /= 2
 			B.fill()
 		update_icon()
 		return
 	else if(istype(I, /obj/item/device/analyzer/plant_analyzer))
-		to_chat(user, "<span class='notice'>Scan result of \the [src]...</span>")
+		to_chat(user, SPAN("notice", "Scan result of \the [src]..."))
 		to_chat(user, "Beehive is [bee_count ? "[round(bee_count)]% full" : "empty"].[bee_count > 90 ? " Colony is ready to split." : ""]")
 		if(frames)
 			to_chat(user, "[frames] frames installed, [round(honeycombs / 100)] filled.")
@@ -111,12 +111,12 @@
 		return 1
 	else if(isScrewdriver(I))
 		if(bee_count)
-			to_chat(user, "<span class='notice'>You can't dismantle \the [src] with these bees inside.</span>")
+			to_chat(user, SPAN("notice", "You can't dismantle \the [src] with these bees inside."))
 			return
-		to_chat(user, "<span class='notice'>You start dismantling \the [src]...</span>")
+		to_chat(user, SPAN("notice", "You start dismantling \the [src]..."))
 		playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
 		if(do_after(user, 30, src))
-			user.visible_message("<span class='notice'>\The [user] dismantles \the [src].</span>", "<span class='notice'>You dismantle \the [src].</span>")
+			user.visible_message(SPAN("notice", "\The [user] dismantles \the [src]."), SPAN("notice", "You dismantle \the [src]."))
 			new /obj/item/beehive_assembly(loc)
 			qdel(src)
 		return
@@ -124,20 +124,20 @@
 /obj/machinery/beehive/attack_hand(mob/user)
 	if(!closed)
 		if(honeycombs < 100)
-			to_chat(user, "<span class='notice'>There are no filled honeycombs.</span>")
+			to_chat(user, SPAN("notice", "There are no filled honeycombs."))
 			return
 		if(!smoked && bee_count)
 			angry_swarm(user)
-			to_chat(user, "<span class='notice'>The bees are angry, smoke them first.</span>")
+			to_chat(user, SPAN("notice", "The bees are angry, smoke them first."))
 			return
-		user.visible_message("<span class='notice'>\The [user] starts taking the honeycombs out of \the [src].</span>", "<span class='notice'>You start taking the honeycombs out of \the [src]...</span>")
+		user.visible_message(SPAN("notice", "\The [user] starts taking the honeycombs out of \the [src]."), SPAN("notice", "You start taking the honeycombs out of \the [src]..."))
 		while(honeycombs >= 100 && do_after(user, 30, src))
 			new /obj/item/honey_frame/filled(loc)
 			honeycombs -= 100
 			--frames
 			update_icon()
 		if(honeycombs < 100)
-			to_chat(user, "<span class='notice'>You take all filled honeycombs out.</span>")
+			to_chat(user, SPAN("notice", "You take all filled honeycombs out."))
 		return
 
 /obj/machinery/beehive/Process()
@@ -219,9 +219,9 @@
 	icon_state = "apiary"
 
 /obj/item/beehive_assembly/attack_self(mob/user)
-	to_chat(user, "<span class='notice'>You start assembling \the [src]...</span>")
+	to_chat(user, SPAN("notice", "You start assembling \the [src]..."))
 	if(do_after(user, 30, src))
-		user.visible_message("<span class='notice'>\The [user] constructs a beehive.</span>", "<span class='notice'>You construct a beehive.</span>")
+		user.visible_message(SPAN("notice", "\The [user] constructs a beehive."), SPAN("notice", "You construct a beehive."))
 		new /obj/machinery/beehive(get_turf(user))
 		qdel(src)
 	return

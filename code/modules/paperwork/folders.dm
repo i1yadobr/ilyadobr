@@ -34,7 +34,7 @@
 /obj/item/folder/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/paper) || istype(W, /obj/item/photo) || istype(W, /obj/item/paper_bundle))
 		if(user.drop(W, src))
-			to_chat(user, "<span class='notice'>You put the [W] into \the [src].</span>")
+			to_chat(user, SPAN("notice", "You put the [W] into \the [src]."))
 			update_icon()
 	else if(istype(W, /obj/item/pen))
 		var/n_name = sanitizeSafe(input(usr, "What would you like to label the folder?", "Folder Labelling", null)  as text, MAX_NAME_LEN)

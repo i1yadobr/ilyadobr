@@ -84,10 +84,10 @@ var/global/list/rad_collectors = list()
 /obj/machinery/power/rad_collector/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/tank/plasma))
 		if(!anchored)
-			to_chat(user, "<span class='warning'>The [src] needs to be secured to the floor first.</span>")
+			to_chat(user, SPAN("warning", "The [src] needs to be secured to the floor first."))
 			return 1
 		if(P)
-			to_chat(user, "<span class='warning'>There's already a plasma tank loaded.</span>")
+			to_chat(user, SPAN("warning", "There's already a plasma tank loaded."))
 			return 1
 		if(!user.drop(W, src))
 			return 1
@@ -100,11 +100,11 @@ var/global/list/rad_collectors = list()
 			return 1
 	else if(isWrench(W))
 		if(P)
-			to_chat(user, "<span class='notice'>Remove the plasma tank first.</span>")
+			to_chat(user, SPAN("notice", "Remove the plasma tank first."))
 			return 1
 		for(var/obj/machinery/power/rad_collector/R in get_turf(src))
 			if(R != src)
-				to_chat(user, "<span class='warning'>You cannot install more than one collector on the same spot.</span>")
+				to_chat(user, SPAN("warning", "You cannot install more than one collector on the same spot."))
 				return 1
 		playsound(loc, 'sound/items/Ratchet.ogg', 75, 1)
 		anchored = !anchored
@@ -123,9 +123,9 @@ var/global/list/rad_collectors = list()
 				to_chat(user, "The controls are now [locked ? "locked." : "unlocked."]")
 			else
 				locked = 0 //just in case it somehow gets locked
-				to_chat(user, "<span class='warning'>The controls can only be locked when the [src] is active</span>")
+				to_chat(user, SPAN("warning", "The controls can only be locked when the [src] is active"))
 		else
-			to_chat(user, "<span class='warning'>Access denied!</span>")
+			to_chat(user, SPAN("warning", "Access denied!"))
 		return 1
 	return ..()
 

@@ -118,7 +118,7 @@ GLOBAL_DATUM_INIT(abductor, /datum/antagonist/abductor, new)
 
 	player.objectives += player.abductor.team.objectives
 	var/obj_count = 1
-	to_chat(player, "<span class='notice'>Your current objectives:</span>")
+	to_chat(player, SPAN("notice", "Your current objectives:"))
 	for(var/datum/objective/objective in player.objectives)
 		to_chat(player, "<B>Objective #[obj_count]</B>: [objective.explanation_text]")
 		obj_count++

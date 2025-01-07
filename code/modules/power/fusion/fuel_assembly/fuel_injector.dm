@@ -48,14 +48,14 @@ var/list/fuel_injectors = list()
 	if(istype(W, /obj/item/fuel_assembly))
 
 		if(injecting)
-			to_chat(user, "<span class='warning'>Shut \the [src] off before playing with the fuel rod!</span>")
+			to_chat(user, SPAN("warning", "Shut \the [src] off before playing with the fuel rod!"))
 			return
 
 		if(cur_assembly)
 			cur_assembly.forceMove(get_turf(src))
-			visible_message("<span class='notice'>\The [user] swaps \the [src]'s [cur_assembly] for \a [W].</span>")
+			visible_message(SPAN("notice", "\The [user] swaps \the [src]'s [cur_assembly] for \a [W]."))
 		else
-			visible_message("<span class='notice'>\The [user] inserts \a [W] into \the [src].</span>")
+			visible_message(SPAN("notice", "\The [user] inserts \a [W] into \the [src]."))
 
 		user.drop(W, src)
 		if(cur_assembly)
@@ -65,7 +65,7 @@ var/list/fuel_injectors = list()
 
 	if(isWrench(W))
 		if(injecting)
-			to_chat(user, "<span class='warning'>Shut \the [src] off first!</span>")
+			to_chat(user, SPAN("warning", "Shut \the [src] off first!"))
 			return
 		anchored = !anchored
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
@@ -82,17 +82,17 @@ var/list/fuel_injectors = list()
 		return
 
 	if(injecting)
-		to_chat(user, "<span class='warning'>Shut \the [src] off before playing with the fuel rod!</span>")
+		to_chat(user, SPAN("warning", "Shut \the [src] off before playing with the fuel rod!"))
 		return
 
 	if(cur_assembly)
 		cur_assembly.forceMove(get_turf(src))
 		user.pick_or_drop(cur_assembly, loc)
-		visible_message("<span class='notice'>\The [user] removes \the [cur_assembly] from \the [src].</span>")
+		visible_message(SPAN("notice", "\The [user] removes \the [cur_assembly] from \the [src]."))
 		cur_assembly = null
 		return
 	else
-		to_chat(user, "<span class='warning'>There is no fuel rod in \the [src].</span>")
+		to_chat(user, SPAN("warning", "There is no fuel rod in \the [src]."))
 		return
 
 /obj/machinery/fusion_fuel_injector/proc/BeginInjecting()

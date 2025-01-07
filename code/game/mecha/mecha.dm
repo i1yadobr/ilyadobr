@@ -336,17 +336,17 @@
 
 /obj/mecha/proc/interface_action(obj/machinery/target)
 	if(istype(target, /obj/machinery/access_button) && target.Adjacent(src))
-		src.occupant_message("<span class='notice'>Interfacing with [target].</span>")
+		src.occupant_message(SPAN("notice", "Interfacing with [target]."))
 		src.log_message("Interfaced with [target].")
 		target.attack_hand(src.occupant)
 		return 1
 	if(istype(target, /obj/machinery/embedded_controller))
 		if(target in view(2,src))
-			src.occupant_message("<span class='notice'>Interfacing with [target]...</span>")
+			src.occupant_message(SPAN("notice", "Interfacing with [target]..."))
 			src.log_message("Interfaced with [target].")
 			target.ui_interact(src.occupant)
 		else
-			src.occupant_message("<span class='notice'>Unable to interface with [target], target out of range.</span>")
+			src.occupant_message(SPAN("notice", "Unable to interface with [target], target out of range."))
 		return 1
 	return 0
 
@@ -494,12 +494,12 @@
 	internal_damage &= ~int_dam_flag
 	switch(int_dam_flag)
 		if(MECHA_INT_TEMP_CONTROL)
-			occupant_message("<span class='info'><b>Life support system reactivated.</b></span>")
+			occupant_message(SPAN("info", "<b>Life support system reactivated.</b>"))
 			pr_int_temp_processor.start()
 		if(MECHA_INT_FIRE)
-			occupant_message("<span class='info'><b>Internal fire extinquished.</b></span>")
+			occupant_message(SPAN("info", "<b>Internal fire extinquished.</b>"))
 		if(MECHA_INT_TANK_BREACH)
-			occupant_message("<span class='info'><b>Damaged internal tank has been sealed.</b></span>")
+			occupant_message(SPAN("info", "<b>Damaged internal tank has been sealed.</b>"))
 	return
 
 
@@ -647,7 +647,7 @@
 
 	src.log_message("Hit by projectile. Type: [Proj.name]([Proj.check_armour]).",1)
 	if(deflect_hit(is_melee=0))
-		src.occupant_message("<span class='notice'>The armor deflects incoming projectile.</span>")
+		src.occupant_message(SPAN("notice", "The armor deflects incoming projectile."))
 		src.visible_message("The [src.name] armor deflects the projectile.")
 		src.log_append_to_last("Armor saved.")
 		return
@@ -709,18 +709,18 @@
 		src.take_damage(6)
 		src.check_for_internal_damage(list(MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST))
 		playsound(src.loc, 'sound/effects/blobattack.ogg', 50, 1, -1)
-		to_chat(user, "<span class='danger'>You smash at the armored suit!</span>")
+		to_chat(user, SPAN("danger", "You smash at the armored suit!"))
 		for (var/mob/V in viewers(src))
 			if(V.client && !(V.blinded))
-				V.show_message("<span class='danger'>\The [user] smashes against [src.name]'s armor!</span>", 1)
+				V.show_message(SPAN("danger", "\The [user] smashes against [src.name]'s armor!"), 1)
 	else
 		src.log_append_to_last("Armor saved.")
 		playsound(src.loc, 'sound/effects/blobattack.ogg', 50, 1, -1)
-		to_chat(user, "<span class='warning'>Your attack had no effect!</span>")
-		src.occupant_message("<span class='warning'>\The [user]'s attack is stopped by the armor.</span>")
+		to_chat(user, SPAN("warning", "Your attack had no effect!"))
+		src.occupant_message(SPAN("warning", "\The [user]'s attack is stopped by the armor."))
 		for (var/mob/V in viewers(src))
 			if(V.client && !(V.blinded))
-				V.show_message("<span class='warning'>\The [user] rebounds off the [src.name] armor!</span>", 1)
+				V.show_message(SPAN("warning", "\The [user] rebounds off the [src.name] armor!"), 1)
 	return
 */
 
@@ -780,9 +780,9 @@
 				output_maintenance_dialog(id_card, user)
 				return
 			else
-				to_chat(user, "<span class='warning'>Invalid ID: Access denied.</span>")
+				to_chat(user, SPAN("warning", "Invalid ID: Access denied."))
 		else
-			to_chat(user, "<span class='warning'>Maintenance protocols disabled by operator.</span>")
+			to_chat(user, SPAN("warning", "Maintenance protocols disabled by operator."))
 	else if(isWrench(W))
 		if(state==1)
 			state = 2
@@ -834,8 +834,8 @@
 				log_message("[occupant] was ejected using the maintenance controls.")
 				go_out()
 			else
-				to_chat(user, "<span class='warning'>Your attempt is rejected.</span>")
-				src.occupant_message("<span class='warning'>An attempt to eject you was made using the maintenance controls.</span>")
+				to_chat(user, SPAN("warning", "Your attempt is rejected."))
+				src.occupant_message(SPAN("warning", "An attempt to eject you was made using the maintenance controls."))
 				src.log_message("Eject attempt made using maintenance controls - rejected.")
 		return
 
@@ -856,12 +856,12 @@
 		if (WT.remove_fuel(0,user))
 			if (hasInternalDamage(MECHA_INT_TANK_BREACH))
 				clearInternalDamage(MECHA_INT_TANK_BREACH)
-				to_chat(user, "<span class='notice'>You repair the damaged gas tank.</span>")
+				to_chat(user, SPAN("notice", "You repair the damaged gas tank."))
 				user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		else
 			return
 		if(src.health<initial(src.health))
-			to_chat(user, "<span class='notice'>You repair some damage to [src.name].</span>")
+			to_chat(user, SPAN("notice", "You repair some damage to [src.name]."))
 			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 			src.health += min(10, initial(src.health)-src.health)
 		else
@@ -878,7 +878,7 @@
 
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		if(deflect_hit(is_melee=1))
-			to_chat(user, "<span class='danger'>\The [W] bounces off [src.name].</span>")
+			to_chat(user, SPAN("danger", "\The [W] bounces off [src.name]."))
 			src.log_append_to_last("Armor saved.")
 		else
 			src.occupant_message("<font color='red'><b>[user] hits [src] with [W].</b></font>")
@@ -995,12 +995,12 @@
 	var/obj/machinery/atmospherics/portables_connector/possible_port = locate(/obj/machinery/atmospherics/portables_connector/) in loc
 	if(possible_port)
 		if(connect(possible_port))
-			src.occupant_message("<span class='notice'>\The [name] connects to the port.</span>")
+			src.occupant_message(SPAN("notice", "\The [name] connects to the port."))
 			src.verbs += /obj/mecha/verb/disconnect_from_port
 			src.verbs -= /obj/mecha/verb/connect_to_port
 			return
 		else
-			src.occupant_message("<span class='danger'>\The [name] failed to connect to the port.</span>")
+			src.occupant_message(SPAN("danger", "\The [name] failed to connect to the port."))
 			return
 	else
 		src.occupant_message("Nothing happens")
@@ -1015,11 +1015,11 @@
 	if(usr!=src.occupant)
 		return
 	if(disconnect())
-		src.occupant_message("<span class='notice'>[name] disconnects from the port.</span>")
+		src.occupant_message(SPAN("notice", "[name] disconnects from the port."))
 		src.verbs -= /obj/mecha/verb/disconnect_from_port
 		src.verbs += /obj/mecha/verb/connect_to_port
 	else
-		src.occupant_message("<span class='danger'>[name] is not connected to the port at the moment.</span>")
+		src.occupant_message(SPAN("danger", "[name] is not connected to the port at the moment."))
 
 /obj/mecha/verb/toggle_lights()
 	set name = "Toggle Lights"
@@ -1082,7 +1082,7 @@
 	else if(operation_allowed(usr))
 		passed = TRUE
 	if(!passed)
-		to_chat(usr, "<span class='warning'>Access denied</span>")
+		to_chat(usr, SPAN("warning", "Access denied"))
 		log_append_to_last("Permission denied.")
 		return
 
@@ -1091,7 +1091,7 @@
 			to_chat(usr, "You're too busy getting your life sucked out of you.")
 			return
 
-	visible_message("<span class='notice'>\The [usr] starts to climb into [src.name]</span>")
+	visible_message(SPAN("notice", "\The [usr] starts to climb into [src.name]"))
 
 	if(enter_after(40, usr))
 		if(!occupant)
@@ -1420,7 +1420,7 @@
 						<b>Cabin pressure: </b>[cabin_pressure>WARNING_HIGH_PRESSURE ? "<font color='red'>[cabin_pressure]</font>": cabin_pressure]kPa<br>
 						<b>Cabin temperature: </b> [return_temperature()]K|[CONV_KELVIN_CELSIUS(return_temperature())]&deg;C<br>
 						<b>Lights: </b>[lights?"on":"off"]<br>
-						[src.dna?"<b>DNA-locked:</b><br> <span style='font-size:10px;letter-spacing:-1px;'>[src.dna]</span> \[<a href='?src=\ref[src];reset_dna=1'>Reset</a>\]<br>":null]
+						[src.dna?"<b>DNA-locked:</b><br> [SPAN("", "<font style='font-size:10px;letter-spacing:-1px;'>[src.dna]</font>")] \[<a href='?src=\ref[src];reset_dna=1'>Reset</a>\]<br>":null]
 					"}
 	return output
 
@@ -1689,7 +1689,7 @@
 				passengers["[P.occupant]"] = P
 
 		if (!passengers)
-			to_chat(user, "<span class='warning'>There are no passengers to remove.</span>")
+			to_chat(user, SPAN("warning", "There are no passengers to remove."))
 			return
 
 		var/pname = input(user, "Choose a passenger to forcibly remove.", "Forcibly Remove Passenger") as null|anything in passengers
@@ -1700,11 +1700,11 @@
 		var/obj/item/mecha_parts/mecha_equipment/tool/passenger/P = passengers[pname]
 		var/mob/occupant = P.occupant
 
-		user.visible_message("<span class='notice'>\The [user] begins opening the hatch on \the [P]...</span>", "<span class='notice'>You begin opening the hatch on \the [P]...</span>")
+		user.visible_message(SPAN("notice", "\The [user] begins opening the hatch on \the [P]..."), SPAN("notice", "You begin opening the hatch on \the [P]..."))
 		if (!do_after(user, 40, src, needhand = FALSE))
 			return
 
-		user.visible_message("<span class='notice'>\The [user] opens the hatch on \the [P] and removes [occupant]!</span>", "<span class='notice'>You open the hatch on \the [P] and remove [occupant]!</span>")
+		user.visible_message(SPAN("notice", "\The [user] opens the hatch on \the [P] and removes [occupant]!"), SPAN("notice", "You open the hatch on \the [P] and remove [occupant]!"))
 		P.go_out()
 		P.log_message("[occupant] was removed.")
 		return
@@ -1747,7 +1747,7 @@
 		if(do_after(usr, 100, src))
 			if(T == src.loc)
 				src.clearInternalDamage(MECHA_INT_CONTROL_LOST)
-				src.occupant_message("<span class='info'>Recalibration successful.</span>")
+				src.occupant_message(SPAN("info", "Recalibration successful."))
 				src.log_message("Recalibration of coordination system finished with 0 errors.")
 			else
 				src.occupant_message("<font color='red'>Recalibration failed.</font>")
@@ -1855,13 +1855,13 @@
 	if(!deflect_hit(is_melee=1))
 		src.hit_damage(damage, is_melee=1)
 		src.check_for_internal_damage(list(MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST))
-		visible_message("<span class='danger'>[user] [attack_message] [src]!</span>")
+		visible_message(SPAN("danger", "[user] [attack_message] [src]!"))
 		admin_attacker_log(user, "attacked \the [src]")
 	else
 		src.log_append_to_last("Armor saved.")
 		playsound(src.loc, 'sound/weapons/slash.ogg', 50, 1, -1)
-		src.occupant_message("<span class='notice'>\The [user]'s attack is stopped by the armor.</span>")
-		visible_message("<span class='notice'>\The [user] rebounds off [src.name]'s armor!</span>")
+		src.occupant_message(SPAN("notice", "\The [user]'s attack is stopped by the armor."))
+		visible_message(SPAN("notice", "\The [user] rebounds off [src.name]'s armor!"))
 		admin_attacker_log(user, "attacked \the [src] but rebounded")
 	return 1
 

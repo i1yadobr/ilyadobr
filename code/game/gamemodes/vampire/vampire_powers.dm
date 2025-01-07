@@ -779,7 +779,7 @@
 	var/command = input(user, "Command your victim.", "Your command.") as text|null
 
 	if (!command)
-		to_chat(user, "<span class='alert'>Cancelled.</span>")
+		to_chat(user, SPAN("alert", "Cancelled."))
 		return
 
 	command = sanitizeSafe(command, extra = 0)
@@ -788,7 +788,7 @@
 
 	show_browser(T, "<HTML><meta charset=\"utf-8\"><center>You feel a strong presence enter your mind. For a moment, you hear nothing but what it says, <b>and are compelled to follow its direction without question or hesitation:</b><br>[command]</center></BODY></HTML>", "window=vampiredominate")
 	to_chat(T, SPAN_NOTICE("You feel a strong presence enter your mind. For a moment, you hear nothing but what it says, and are compelled to follow its direction without question or hesitation:"))
-	to_chat(T, "<span style='color: green;'><i><em>[command]</em></i></span>")
+	to_chat(T, SPAN("", "<font style='color: green;'><i><em>[command]</em></i></font>"))
 	to_chat(user, SPAN_NOTICE("You command [T], and they will obey."))
 	user.emote("me", 1, "whispers.")
 
@@ -1056,10 +1056,10 @@
 
 	while (do_mob(user, T, 50))
 		if (!user.mind.vampire)
-			to_chat(user, "<span class='alert'>Your fangs have disappeared!</span>")
+			to_chat(user, SPAN("alert", "Your fangs have disappeared!"))
 			return
 		if (!T.vessel.get_reagent_amount(/datum/reagent/blood))
-			to_chat(user, "<span class='alert'>[T] is now drained of blood. You begin forcing your own blood into their body, spreading the corruption of the Veil to their body.</span>")
+			to_chat(user, SPAN("alert", "[T] is now drained of blood. You begin forcing your own blood into their body, spreading the corruption of the Veil to their body."))
 			break
 
 		T.vessel.remove_reagent(/datum/reagent/blood, 50)

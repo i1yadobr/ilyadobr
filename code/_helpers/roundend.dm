@@ -10,25 +10,25 @@ GLOBAL_LIST_EMPTY(common_report)
 			if(evacuation_controller.round_over() && evacuation_controller.emergency_evacuation)
 				if(!isAdminLevel(playerTurf.z))
 					parts += "<div class='panel stationborder'>"
-					parts += "<span class='redtext'>You managed to survive, but were marooned on [station_name()] as [Player.real_name]...</span>"
+					parts += SPAN("redtext", "You managed to survive, but were marooned on [station_name()] as [Player.real_name]...")
 				else
 					parts += "<div class='panel greenborder'>"
-					parts += "<span class='greentext'>You managed to survive the events on [station_name()] as [Player.real_name].</span>"
+					parts += SPAN("greentext", "You managed to survive the events on [station_name()] as [Player.real_name].")
 			else if(isAdminLevel(playerTurf.z))
 				parts += "<div class='panel greenborder'>"
-				parts += "<span class='greentext'>You successfully underwent crew transfer after events on [station_name()] as [Player.real_name].</span>"
+				parts += SPAN("greentext", "You successfully underwent crew transfer after events on [station_name()] as [Player.real_name].")
 			else if(issilicon(Player))
 				parts += "<div class='panel greenborder'>"
-				parts += "<span class='greentext'>You remain operational after the events on [station_name()] as [Player.real_name].</span>"
+				parts += SPAN("greentext", "You remain operational after the events on [station_name()] as [Player.real_name].")
 			else
 				parts += "<div class='panel greenborder'>"
-				parts += "<span class='greentext'>You got through just another workday on [station_name()] as [Player.real_name].</span>"
+				parts += SPAN("greentext", "You got through just another workday on [station_name()] as [Player.real_name].")
 
 		else
 			var/mob/observer/ghost/O = Player
 			if (!istype(Player) || !O.started_as_observer)
 				parts += "<div class='panel redborder'>"
-				parts += "<span class='redtext'>You did not survive the events on [station_name()]...</span>"
+				parts += SPAN("redtext", "You did not survive the events on [station_name()]...")
 	else
 		parts += "<div class='panel stationborder'>"
 	parts += "<br>"

@@ -37,7 +37,7 @@
 		return
 
 	if ((MUTATION_CLUMSY in user.mutations) && prob(50))
-		to_chat(user, "<span class='warning'>Uh ... how do those things work?!</span>")
+		to_chat(user, SPAN("warning", "Uh ... how do those things work?!"))
 		place_handcuffs(user, user)
 		return
 
@@ -52,9 +52,9 @@
 			if(can_place(C, user))
 				place_handcuffs(C, user)
 			else
-				to_chat(user, "<span class='danger'>You need to have a firm grip on [C] before you can put \the [src] on!</span>")
+				to_chat(user, SPAN("danger", "You need to have a firm grip on [C] before you can put \the [src] on!"))
 		else
-			to_chat(user, "<span class='warning'>\The [C] is already handcuffed!</span>")
+			to_chat(user, SPAN("warning", "\The [C] is already handcuffed!"))
 	else
 		..()
 
@@ -75,14 +75,14 @@
 		return 0
 
 	if (!H.has_organ_for_slot(slot_handcuffed))
-		to_chat(user, "<span class='danger'>\The [H] needs at least two wrists before you can cuff them together!</span>")
+		to_chat(user, SPAN("danger", "\The [H] needs at least two wrists before you can cuff them together!"))
 		return 0
 
 	if(istype(H.gloves,/obj/item/clothing/gloves/rig) && !elastic) // Can't cuff someone who's in a deployed powersuit.
-		to_chat(user, "<span class='danger'>\The [src] won't fit around \the [H.gloves]!</span>")
+		to_chat(user, SPAN("danger", "\The [src] won't fit around \the [H.gloves]!"))
 		return 0
 
-	user.visible_message("<span class='danger'>\The [user] is attempting to put [cuff_type] on \the [H]!</span>")
+	user.visible_message(SPAN("danger", "\The [user] is attempting to put [cuff_type] on \the [H]!"))
 
 	if(!do_after(user,30, target))
 		return 0
@@ -96,7 +96,7 @@
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	user.do_attack_animation(H)
 
-	user.visible_message("<span class='danger'>\The [user] has put [cuff_type] on \the [H]!</span>")
+	user.visible_message(SPAN("danger", "\The [user] has put [cuff_type] on \the [H]!"))
 
 	// Apply cuffs.
 	var/obj/item/handcuffs/cuffs = src
@@ -123,7 +123,7 @@ var/last_chew = 0
 	var/obj/item/organ/external/O = H.organs_by_name[(H.hand ? BP_L_HAND : BP_R_HAND)]
 	if (!O) return
 
-	H.visible_message("<span class='warning'>\The [H] chews on \his [O.name]!</span>", "<span class='warning'>You chew on your [O.name]!</span>")
+	H.visible_message(SPAN("warning", "\The [H] chews on \his [O.name]!"), SPAN("warning", "You chew on your [O.name]!"))
 	admin_attacker_log(H, "chewed on their [O.name]!")
 
 	O.take_external_damage(3,0, DAM_SHARP|DAM_EDGE ,"teeth marks")
@@ -170,7 +170,7 @@ var/last_chew = 0
 		if (R.use(1))
 			var/obj/item/material/wirerod/W = new(get_turf(user))
 			user.pick_or_drop(W)
-			to_chat(user, "<span class='notice'>You wrap the cable restraint around the top of the rod.</span>")
+			to_chat(user, SPAN("notice", "You wrap the cable restraint around the top of the rod."))
 			qdel(src)
 			update_icon(user)
 
@@ -202,9 +202,9 @@ var/last_chew = 0
 
 	switch(mode)
 		if(SYNDICUFFS_ON_APPLY)
-			to_chat(user, "<span class='notice'>You pull the rotating arm back until you hear two clicks. \The [src] will detonate a few seconds after being applied.</span>")
+			to_chat(user, SPAN("notice", "You pull the rotating arm back until you hear two clicks. \The [src] will detonate a few seconds after being applied."))
 		if(SYNDICUFFS_ON_REMOVE)
-			to_chat(user, "<span class='notice'>You pull the rotating arm back until you hear one click. \The [src] will detonate when removed.</span>")
+			to_chat(user, SPAN("notice", "You pull the rotating arm back until you hear one click. \The [src] will detonate when removed."))
 
 /obj/item/handcuffs/syndicate/on_restraint_apply(mob/user, slot)
 	if(mode == SYNDICUFFS_ON_APPLY && !charge_detonated)

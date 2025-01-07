@@ -129,11 +129,11 @@
 		switch(craft_tool)
 			if(1)
 				if(!user.get_active_hand() || ((!user:get_active_hand().sharp) && (!user:get_active_hand().edge)))
-					to_chat(user, "<span class='warning'>You need something sharp to construct \the [recipe.title]!</span>")
+					to_chat(user, SPAN("warning", "You need something sharp to construct \the [recipe.title]!"))
 					return
 			if(2)
 				if(!isWelder(user.get_active_hand()))
-					to_chat(user, "<span class='warning'>You need a welding tool to construct \the [recipe.title]!</span>")
+					to_chat(user, SPAN("warning", "You need a welding tool to construct \the [recipe.title]!"))
 					return
 
 	var/obj/item/weldingtool/WT
@@ -142,31 +142,31 @@
 
 	if (!can_use(required))
 		if (produced>1)
-			to_chat(user, "<span class='warning'>You haven't got enough [src] to build \the [produced] [recipe.title]\s!</span>")
+			to_chat(user, SPAN("warning", "You haven't got enough [src] to build \the [produced] [recipe.title]\s!"))
 		else
-			to_chat(user, "<span class='warning'>You haven't got enough [src] to build \the [recipe.title]!</span>")
+			to_chat(user, SPAN("warning", "You haven't got enough [src] to build \the [recipe.title]!"))
 		return
 
 	if (recipe.one_per_turf)
 		if (istype(src.loc,/turf) && locate(recipe.result_type) in src.loc)
-			to_chat(user, "<span class='warning'>There is another [recipe.title] here!</span>")
+			to_chat(user, SPAN("warning", "There is another [recipe.title] here!"))
 			return
 		else if (locate(recipe.result_type) in user.loc)
-			to_chat(user, "<span class='warning'>There is another [recipe.title] here!</span>")
+			to_chat(user, SPAN("warning", "There is another [recipe.title] here!"))
 			return
 
 	if (recipe.on_floor && !isfloor(user.loc))
 		if (istype(src.loc,/turf) && !isfloor(src.loc))
-			to_chat(user, "<span class='warning'>\The [recipe.title] must be constructed on the floor!</span>")
+			to_chat(user, SPAN("warning", "\The [recipe.title] must be constructed on the floor!"))
 			return
 		else if (!isfloor(user.loc))
-			to_chat(user, "<span class='warning'>\The [recipe.title] must be constructed on the floor!</span>")
+			to_chat(user, SPAN("warning", "\The [recipe.title] must be constructed on the floor!"))
 			return
 
 	if((WT && WT.remove_fuel(0, user)) || uses_charge || craft_tool == 1)
 
 		if (recipe.time)
-			to_chat(user, "<span class='notice'>Building [recipe.title] ...</span>")
+			to_chat(user, SPAN("notice", "Building [recipe.title] ..."))
 			if (!do_after(user, recipe.time))
 				return
 
@@ -356,7 +356,7 @@
 			continue
 		var/transfer = src.transfer_to(item)
 		if (transfer)
-			to_chat(user, "<span class='notice'>You add a new [item.singular_name] to the stack. It now contains [item.amount] [item.singular_name]\s.</span>")
+			to_chat(user, SPAN("notice", "You add a new [item.singular_name] to the stack. It now contains [item.amount] [item.singular_name]\s."))
 		if(!amount)
 			break
 

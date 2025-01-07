@@ -27,7 +27,7 @@
 		if(C)
 			swag -= get_key_by_value(swag, C)
 			user.pick_or_drop(C)
-			to_chat(user,"<span class='notice'>You take \the [C] off \the [src]</span>")
+			to_chat(user,SPAN("notice", "You take \the [C] off \the [src]"))
 			update_icon()
 	else
 		rattle_bones(user, null)
@@ -64,7 +64,7 @@
 			slot = slot_wear_mask_str
 		if(slot)
 			if(swag[slot])
-				to_chat(user,"<span class='notice'>There is already that kind of clothing on \the [src].</span>")
+				to_chat(user,SPAN("notice", "There is already that kind of clothing on \the [src]."))
 			else if(user.drop(W, src))
 				swag[slot] = W
 				update_icon()

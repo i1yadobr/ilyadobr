@@ -60,7 +60,7 @@
 	if(!mind)
 		return
 	if(!is_special_character(mind))
-		to_chat(src, "<span class='warning'>While you may perhaps have goals, this verb's meant to only be visible to antagonists.  Please make a bug report!</span>")
+		to_chat(src, SPAN("warning", "While you may perhaps have goals, this verb's meant to only be visible to antagonists.  Please make a bug report!"))
 		return
 	var/new_ambitions = input(src, "Write a short sentence of what your character hopes to accomplish \
 	today as an antagonist.  Remember that this is purely optional.  It will be shown at the end of the \
@@ -70,9 +70,9 @@
 	new_ambitions = sanitize(new_ambitions)
 	mind.ambitions = new_ambitions
 	if(new_ambitions)
-		to_chat(src, "<span class='notice'>You've set your goal to be '[new_ambitions]'.</span>")
+		to_chat(src, SPAN("notice", "You've set your goal to be '[new_ambitions]'."))
 	else
-		to_chat(src, "<span class='notice'>You leave your ambitions behind.</span>")
+		to_chat(src, SPAN("notice", "You leave your ambitions behind."))
 	log_and_message_admins("has set their ambitions to now be: [new_ambitions].")
 
 //some antagonist datums are not actually antagonists, so we might want to avoid

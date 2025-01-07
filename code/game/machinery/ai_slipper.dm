@@ -46,7 +46,7 @@
 				if(user.machine==src)
 					src.attack_hand(usr)
 		else
-			to_chat(user, "<span class='warning'>Access denied.</span>")
+			to_chat(user, SPAN("warning", "Access denied."))
 			return
 	return
 
@@ -85,7 +85,7 @@
 
 /obj/machinery/ai_slipper/CanUseTopic(user)
 	if(locked && !issilicon(user))
-		to_chat(user, "<span class='warning'>The control panel is locked!</span>")
+		to_chat(user, SPAN("warning", "The control panel is locked!"))
 		return min(..(), STATUS_UPDATE)
 	return ..()
 

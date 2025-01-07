@@ -56,13 +56,13 @@
 	if(stat & (BROKEN|NOPOWER))
 		if(damage >= 10)
 			if(density)
-				visible_message("<span class='danger'>\The [user] forces \the [src] open!</span>")
+				visible_message(SPAN("danger", "\The [user] forces \the [src] open!"))
 				open(1)
 			else
-				visible_message("<span class='danger'>\The [user] forces \the [src] closed!</span>")
+				visible_message(SPAN("danger", "\The [user] forces \the [src] closed!"))
 				close(1)
 		else
-			visible_message("<span class='notice'>\The [user] strains fruitlessly to force \the [src] [density ? "open" : "closed"].</span>")
+			visible_message(SPAN("notice", "\The [user] strains fruitlessly to force \the [src] [density ? "open" : "closed"]."))
 		return
 	..()
 
@@ -99,7 +99,7 @@ About the new airlock wires panel:
 		else if(prob(3) && operating == 0)
 			var/mob/living/carbon/C = user
 			if(istype(C) && C.hallucination_power > 25)
-				to_chat(user, "<span class='danger'>You feel a powerful shock course through your body!</span>")
+				to_chat(user, SPAN("danger", "You feel a powerful shock course through your body!"))
 				user.adjustHalLoss(10)
 				user.Stun(3)
 				return
@@ -436,16 +436,16 @@ About the new airlock wires panel:
 
 /obj/machinery/door/airlock/CanUseTopic(mob/user)
 	if(operating < 0) //emagged
-		to_chat(user, "<span class='warning'>Unable to interface: Internal error.</span>")
+		to_chat(user, SPAN("warning", "Unable to interface: Internal error."))
 		return STATUS_CLOSE
 	if(issilicon(user) && !src.canAIControl())
 		if(canAIHack(user))
 			hack(user)
 		else
 			if(isAllPowerLoss()) //don't really like how this gets checked a second time, but not sure how else to do it.
-				to_chat(user, "<span class='warning'>Unable to interface: Connection timed out.</span>")
+				to_chat(user, SPAN("warning", "Unable to interface: Connection timed out."))
 			else
-				to_chat(user, "<span class='warning'>Unable to interface: Connection refused.</span>")
+				to_chat(user, SPAN("warning", "Unable to interface: Connection refused."))
 		return STATUS_CLOSE
 
 	return ..()
@@ -528,7 +528,7 @@ About the new airlock wires panel:
 		if(!WT.isOn())
 			return 0
 		if(!WT.remove_fuel(0,user))
-			to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
+			to_chat(user, SPAN("notice", "You need more welding fuel to complete this task."))
 			return 0
 		cut_verb = "cutting"
 		cut_sound = 'sound/items/Welder.ogg'
@@ -556,8 +556,8 @@ About the new airlock wires panel:
 		if(!F.wielded)
 			return 0
 		user.visible_message(
-			"<span class='danger'>\The [user] smashes the bolt cover open!</span>",
-			"<span class='warning'>You smash the bolt cover open!</span>"
+			SPAN("danger", "\The [user] smashes the bolt cover open!"),
+			SPAN("warning", "You smash the bolt cover open!")
 			)
 		playsound(src, 'sound/effects/fighting/smash.ogg', 100, 1)
 		lock_cut_state = BOLTS_EXPOSED
@@ -569,29 +569,29 @@ About the new airlock wires panel:
 
 	if(src.lock_cut_state == BOLTS_FINE)
 		user.visible_message(
-			"<span class='notice'>\The [user] begins [cut_verb] through the bolt cover on [src].</span>",
-			"<span class='notice'>You begin [cut_verb] through the bolt cover.</span>"
+			SPAN("notice", "\The [user] begins [cut_verb] through the bolt cover on [src]."),
+			SPAN("notice", "You begin [cut_verb] through the bolt cover.")
 			)
 
 		playsound(src, cut_sound, 100, 1)
 		if(do_after(user, cut_delay, src))
 			user.visible_message(
-				"<span class='notice'>\The [user] removes the bolt cover from [src]</span>",
-				"<span class='notice'>You remove the cover and expose the door bolts.</span>"
+				SPAN("notice", "\The [user] removes the bolt cover from [src]"),
+				SPAN("notice", "You remove the cover and expose the door bolts.")
 				)
 			src.lock_cut_state = BOLTS_EXPOSED
 		return 1
 
 	if(lock_cut_state == BOLTS_EXPOSED)
 		user.visible_message(
-			"<span class='notice'>\The [user] begins [cut_verb] through [src]'s bolts.</span>",
-			"<span class='notice'>You begin [cut_verb] through the door bolts.</span>"
+			SPAN("notice", "\The [user] begins [cut_verb] through [src]'s bolts."),
+			SPAN("notice", "You begin [cut_verb] through the door bolts.")
 			)
 		playsound(src, cut_sound, 100, 1)
 		if(do_after(user, cut_delay, src))
 			user.visible_message(
-				"<span class='notice'>\The [user] severs the door bolts, unlocking [src].</span>",
-				"<span class='notice'>You sever the door bolts, unlocking the door.</span>"
+				SPAN("notice", "\The [user] severs the door bolts, unlocking [src]."),
+				SPAN("notice", "You sever the door bolts, unlocking the door.")
 				)
 			lock_cut_state = BOLTS_CUT
 			unlock(1) //force it
@@ -650,7 +650,7 @@ About the new airlock wires panel:
 	else if(isScrewdriver(C))
 		if(p_open)
 			if(stat & BROKEN)
-				to_chat(usr, "<span class='warning'>The panel is broken and cannot be closed.</span>")
+				to_chat(usr, SPAN("warning", "The panel is broken and cannot be closed."))
 			else
 				p_open = FALSE
 		else
@@ -694,7 +694,7 @@ About the new airlock wires panel:
 		var/obj/item/material/twohanded/fireaxe/F = C
 		if(F.wielded)
 			playsound(src, 'sound/effects/fighting/smash.ogg', 100, 1)
-			user.visible_message("<span class='danger'>[user] smashes \the [C] into the airlock's control panel! It explodes in a shower of sparks!</span>", "<span class='danger'>You smash \the [C] into the airlock's control panel! It explodes in a shower of sparks!</span>")
+			user.visible_message(SPAN("danger", "[user] smashes \the [C] into the airlock's control panel! It explodes in a shower of sparks!"), SPAN("danger", "You smash \the [C] into the airlock's control panel! It explodes in a shower of sparks!"))
 			health = 0
 			set_broken(TRUE)
 		else

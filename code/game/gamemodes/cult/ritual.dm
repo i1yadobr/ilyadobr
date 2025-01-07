@@ -37,7 +37,7 @@
 	if(!proximity || !iscultist(user))
 		return
 	if(A.reagents && A.reagents.has_reagent(/datum/reagent/water/holywater))
-		to_chat(user, "<span class='notice'>You unbless \the [A].</span>")
+		to_chat(user, SPAN("notice", "You unbless \the [A]."))
 		var/holy2water = A.reagents.get_reagent_amount(/datum/reagent/water/holywater)
 		A.reagents.del_reagent(/datum/reagent/water/holywater)
 		A.reagents.add_reagent(/datum/reagent/water, holy2water)
@@ -51,27 +51,27 @@
 		if(B.open)
 			has_tome = 1
 		else
-			to_chat(src, "<span class='warning'>You need to open the tome before drawing the rune.</span>")
+			to_chat(src, SPAN("warning", "You need to open the tome before drawing the rune."))
 	else if(istype(get_inactive_hand(), /obj/item/book/tome))
 		var/obj/item/book/tome/B = get_inactive_hand()
 		if(B.open)
 			has_tome = 1
 		else
-			to_chat(src, "<span class='warning'>You need to open the tome before drawing the rune.</span>")
+			to_chat(src, SPAN("warning", "You need to open the tome before drawing the rune."))
 	else if(tome_required && mob_needs_tome())
-		to_chat(src, "<span class='warning'>This rune is too complex to draw by memory, you need to have a tome in your hand to draw it.</span>")
+		to_chat(src, SPAN("warning", "This rune is too complex to draw by memory, you need to have a tome in your hand to draw it."))
 		return
 	if(istype(get_equipped_item(slot_head), /obj/item/clothing/head/culthood) && istype(get_equipped_item(slot_wear_suit), /obj/item/clothing/suit/cultrobes) && istype(get_equipped_item(slot_shoes), /obj/item/clothing/shoes/cult))
 		has_robes = 1
 	var/turf/T = get_turf(src)
 	if(T.holy)
-		to_chat(src, "<span class='warning'>This place is blessed, you may not draw runes on it - defile it first.</span>")
+		to_chat(src, SPAN("warning", "This place is blessed, you may not draw runes on it - defile it first."))
 		return
 	if(!istype(T, /turf/simulated))
-		to_chat(src, "<span class='warning'>You need more space to draw a rune here.</span>")
+		to_chat(src, SPAN("warning", "You need more space to draw a rune here."))
 		return
 	if(locate(/obj/effect/rune) in T)
-		to_chat(src, "<span class='warning'>There's already a rune here.</span>") // Don't cross the runes
+		to_chat(src, SPAN("warning", "There's already a rune here.")) // Don't cross the runes
 		return
 	if(T.icon_state == "cult" || T.icon_state == "cult-narsie")
 		cult_ground = 1
@@ -115,7 +115,7 @@
 			self += ", having to cut your finger two more times before you make it resemble the pattern in your memory. It still looks a little off."
 			timer = 80
 			damage = 2
-	visible_message("<span class='warning'>\The [src] slices open a finger and begins to chant and paint symbols on the floor.</span>", "<span class='notice'>[self]</span>", "You hear chanting.")
+	visible_message(SPAN("warning", "\The [src] slices open a finger and begins to chant and paint symbols on the floor."), SPAN("notice", "[self]"), "You hear chanting.")
 	if(do_after(src, timer))
 		pay_for_rune(cost * damage)
 		if(locate(/obj/effect/rune) in T)
@@ -130,7 +130,7 @@
 
 /mob/living/carbon/human/make_rune(rune, cost, tome_required)
 	if(should_have_organ(BP_HEART) && vessel && !vessel.has_reagent(/datum/reagent/blood, species.blood_volume * 0.7))
-		to_chat(src, "<span class='danger'>You are too weak to draw runes.</span>")
+		to_chat(src, SPAN("danger", "You are too weak to draw runes."))
 		return
 	..()
 
@@ -320,7 +320,7 @@ var/list/Tier4Runes = list(
 	set name = "Communicate"
 
 	if(incapacitated())
-		to_chat(src, "<span class='warning'>Not when you are incapacitated.</span>")
+		to_chat(src, SPAN("warning", "Not when you are incapacitated."))
 		return
 
 	message_cult_communicate()
@@ -336,11 +336,11 @@ var/list/Tier4Runes = list(
 	log_and_message_admins("used a communicate verb to say '[input]'")
 	for(var/datum/mind/H in GLOB.cult.current_antagonists)
 		if(H.current && !H.current.stat)
-			to_chat(H.current, "<span class='cult'>[input]</span>")
+			to_chat(H.current, SPAN("cult", "[input]"))
 
 /mob/living/carbon/cult_communicate()
 	if(incapacitated(INCAPACITATION_RESTRAINED))
-		to_chat(src, "<span class='warning'>You need at least your hands free to do this.</span>")
+		to_chat(src, SPAN("warning", "You need at least your hands free to do this."))
 		return
 	..()
 
@@ -348,4 +348,4 @@ var/list/Tier4Runes = list(
 	return
 
 /mob/living/carbon/human/message_cult_communicate()
-	visible_message("<span class='warning'>\The [src] cuts \his finger and starts drawing on the back of \his hand.</span>")
+	visible_message(SPAN("warning", "\The [src] cuts \his finger and starts drawing on the back of \his hand."))

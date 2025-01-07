@@ -531,11 +531,11 @@
 		return
 	if(volume <= 0.1 && M.chem_doses[type] >= 0.5 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
 		data = world.time
-		to_chat(M, "<span class='warning'>You lose focus...</span>")
+		to_chat(M, SPAN("warning", "You lose focus..."))
 	else
 		if(world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
 			data = world.time
-			to_chat(M, "<span class='notice'>Your mind feels focused and undivided.</span>")
+			to_chat(M, SPAN("notice", "Your mind feels focused and undivided."))
 
 /datum/reagent/citalopram
 	name = "Citalopram"
@@ -551,12 +551,12 @@
 		return
 	if(volume <= 0.1 && M.chem_doses[type] >= 0.5 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
 		data = world.time
-		to_chat(M, "<span class='warning'>Your mind feels a little less stable...</span>")
+		to_chat(M, SPAN("warning", "Your mind feels a little less stable..."))
 	else
 		M.add_chemical_effect(CE_MIND, 1)
 		if(world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
 			data = world.time
-			to_chat(M, "<span class='notice'>Your mind feels stable... a little stable.</span>")
+			to_chat(M, SPAN("notice", "Your mind feels stable... a little stable."))
 
 /datum/reagent/paroxetine
 	name = "Paroxetine"
@@ -571,15 +571,15 @@
 		return
 	if(volume <= 0.1 && M.chem_doses[type] >= 0.5 && world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
 		data = world.time
-		to_chat(M, "<span class='warning'>Your mind feels much less stable...</span>")
+		to_chat(M, SPAN("warning", "Your mind feels much less stable..."))
 	else
 		M.add_chemical_effect(CE_MIND, 2)
 		if(world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY)
 			data = world.time
 			if(prob(90))
-				to_chat(M, "<span class='notice'>Your mind feels much more stable.</span>")
+				to_chat(M, SPAN("notice", "Your mind feels much more stable."))
 			else
-				to_chat(M, "<span class='warning'>Your mind breaks apart...</span>")
+				to_chat(M, SPAN("warning", "Your mind breaks apart..."))
 				M.hallucination(200, 100)
 
 /datum/reagent/nicotine
@@ -661,7 +661,7 @@
 		return
 	if(world.time > data + ANTIDEPRESSANT_MESSAGE_DELAY * 0.35)
 		data = world.time
-		to_chat(M, "<span class='notice'>You feel faintly sore in the throat.</span>")
+		to_chat(M, SPAN("notice", "You feel faintly sore in the throat."))
 
 /datum/reagent/rezadone
 	name = "Rezadone"

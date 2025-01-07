@@ -9,13 +9,13 @@
 		return 0
 
 	if(!H.should_have_organ(BP_HEART) || H.vessel.total_volume == H.species.blood_volume)
-		to_chat(linked, "<span class='warning'>\The [H] doesn't require anymore blood.</span>")
+		to_chat(linked, SPAN("warning", "\The [H] doesn't require anymore blood."))
 		return 0
 	return 1
 
 /datum/phenomena/exhude_blood/activate(mob/living/carbon/human/H, mob/living/deity/user)
 	H.vessel.add_reagent(/datum/reagent/blood, 30)
-	to_chat(H,"<span class='notice'>You feel a rush as new blood enters your system.</span>")
+	to_chat(H,SPAN("notice", "You feel a rush as new blood enters your system."))
 
 
 /datum/phenomena/hellscape

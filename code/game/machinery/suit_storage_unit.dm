@@ -223,8 +223,7 @@
 	else
 		if(!isbroken)
 			dat+= "<HEAD><TITLE>Suit storage unit</TITLE></HEAD>"
-			dat+= "<span class='info'><font size = 4><B>U-Stor-It Suit Storage Unit, model DS1900</B></FONT><BR>"
-			dat+= "<B>Welcome to the Unit control panel.</B></span><HR>"
+			dat+= SPAN("info", "<font size = 4><B>U-Stor-It Suit Storage Unit, model DS1900</B></FONT><BR><B>Welcome to the Unit control panel.</B><HR>")
 			dat+= text("<font color='black'>Helmet storage compartment: <B>[]</B></font><BR>",(helmet  ? helmet.name : "</font><font color ='grey'>No helmet detected.") )
 			if(helmet  && isopen)
 				dat+=text("<A href='?src=\ref[];dispense_helmet=1'>Dispense helmet</A><BR>",src)
@@ -317,10 +316,10 @@
 		return
 	else  //welp, the guy is protected, we can continue
 		if(issuperUV)
-			to_chat(user, "<span class='notice'>You slide the dial back towards \"185nm\".</span>")
+			to_chat(user, SPAN("notice", "You slide the dial back towards \"185nm\"."))
 			issuperUV = 0
 		else
-			to_chat(user, "<span class='warning'>You crank the dial all the way up to \"15nm\".</span>")
+			to_chat(user, SPAN("warning", "You crank the dial all the way up to \"15nm\"."))
 			issuperUV = 1
 		return
 
@@ -330,7 +329,7 @@
 		return
 	else
 		safetieson = !safetieson
-		to_chat(user, "<span class='notice'>You push the button. The coloured LED next to it [safetieson ? "turns green" : "turns red"].</span>")
+		to_chat(user, SPAN("notice", "You push the button. The coloured LED next to it [safetieson ? "turns green" : "turns red"]."))
 
 #define dispense_clothing(item) if(item){item.dropInto(loc); item = null}
 
@@ -364,10 +363,10 @@
 
 /obj/machinery/suit_storage_unit/proc/toggle_open(mob/user as mob)
 	if(stat & NOPOWER)
-		to_chat(user, "<span class='warning'>The unit is offline.</span>")
+		to_chat(user, SPAN("warning", "The unit is offline."))
 		return
 	if(islocked || isUV)
-		to_chat(user, "<span class='warning'>Unable to open unit.</span>")
+		to_chat(user, SPAN("warning", "Unable to open unit."))
 		return
 	if(occupant)
 		eject_occupant(user)
@@ -379,13 +378,13 @@
 
 /obj/machinery/suit_storage_unit/proc/toggle_lock(mob/user as mob)
 	if(stat & NOPOWER)
-		to_chat(user, "<span class='warning'>The unit is offline.</span>")
+		to_chat(user, SPAN("warning", "The unit is offline."))
 		return
 	if(!allowed(user))
 		to_chat(user, FEEDBACK_ACCESS_DENIED)
 		return
 	if(occupant && safetieson)
-		to_chat(user, "<span class='warning'>The Unit's safety protocols disallow locking when a biological form is detected inside its compartments.</span>")
+		to_chat(user, SPAN("warning", "The Unit's safety protocols disallow locking when a biological form is detected inside its compartments."))
 		return
 	if(isopen)
 		return
@@ -398,13 +397,13 @@
 	if(isUV || isopen) //I'm bored of all these sanity checks
 		return
 	if(stat & NOPOWER)
-		to_chat(user, "<span class='warning'>The unit is offline.</span>")
+		to_chat(user, SPAN("warning", "The unit is offline."))
 		return
 	if(occupant && safetieson)
 		to_chat(user, "[SPAN("danger", "WARNING:")][SPAN("warning", " Biological entity detected in the confines of the Unit's storage. Cannot initiate cycle.")]")
 		return
 	if(!helmet  && !mask && !suit && !boots && !tank && !occupant ) //shit's empty yo
-		to_chat(user, "<span class='warning'>Unit storage bays empty. Nothing to disinfect -- Aborting.</span>")
+		to_chat(user, SPAN("warning", "Unit storage bays empty. Nothing to disinfect -- Aborting."))
 		return
 	to_chat(user, "You start the Unit's cauterisation cycle.")
 	cycletime_left = 20
@@ -452,7 +451,7 @@
 					tank = null
 				if(mask)
 					mask = null
-				visible_message("<span class='warning'>With a loud whining noise, the Suit Storage Unit's door grinds open. Puffs of ashen smoke come out of its chamber.</span>")
+				visible_message(SPAN("warning", "With a loud whining noise, the Suit Storage Unit's door grinds open. Puffs of ashen smoke come out of its chamber."))
 				isbroken = 1
 				isopen = 1
 				islocked = 0
@@ -477,9 +476,9 @@
 
 	if (occupant.client)
 		if(user != occupant)
-			to_chat(occupant, "<span class='notice'>The machine kicks you out!</span>")
+			to_chat(occupant, SPAN("notice", "The machine kicks you out!"))
 		if(user.loc != loc)
-			to_chat(occupant, "<span class='notice'>You leave the not-so-cozy confines of the SSU.</span>")
+			to_chat(occupant, SPAN("notice", "You leave the not-so-cozy confines of the SSU."))
 
 		occupant.client.eye = occupant.client.mob
 		occupant.client.perspective = MOB_PERSPECTIVE
@@ -513,13 +512,13 @@
 	if (usr.stat != 0)
 		return
 	if (!isopen)
-		to_chat(usr, "<span class='warning'>The unit's doors are shut.</span>")
+		to_chat(usr, SPAN("warning", "The unit's doors are shut."))
 		return
 	if ((stat & NOPOWER) || isbroken)
-		to_chat(usr, "<span class='warning'>The unit is not operational.</span>")
+		to_chat(usr, SPAN("warning", "The unit is not operational."))
 		return
 	if ( (occupant) || (helmet ) || (suit) )
-		to_chat(usr, "<span class='warning'>It's too cluttered inside for you to fit in!</span>")
+		to_chat(usr, SPAN("warning", "It's too cluttered inside for you to fit in!"))
 		return
 	visible_message("\The [usr] starts squeezing into the suit storage unit!")
 	if(do_after(usr, 10, src))
@@ -542,32 +541,32 @@
 	if(isScrewdriver(I))
 		panelopen = !panelopen
 		playsound(loc, 'sound/items/Screwdriver.ogg', 100, 1)
-		to_chat(user, text("<span class='notice'>You [panelopen ? "open" : "close"] the unit's maintenance panel.</span>"))
+		to_chat(user, SPAN("notice", "You [panelopen ? "open" : "close"] the unit's maintenance panel."))
 		updateUsrDialog()
 		update_icon()
 		return
 	if(isCrowbar(I))
 		if((stat & NOPOWER) && !islocked && !isopen)
-			to_chat(user, "<span class='warning'>You begin prying the unit open.</span>")
+			to_chat(user, SPAN("warning", "You begin prying the unit open."))
 			if(do_after(user, 50, src))
 				isopen = 1
-				to_chat(user, "<span class='warning'>You pry the unit open.</span>")
+				to_chat(user, SPAN("warning", "You pry the unit open."))
 				update_icon()
 		else if(islocked)
-			to_chat(user, "<span class='warning'>You can't pry the unit open, it's locked!</span>")
+			to_chat(user, SPAN("warning", "You can't pry the unit open, it's locked!"))
 		return
 	if(istype(I, /obj/item/grab) )
 		var/obj/item/grab/G = I
 		if( !(ismob(G.affecting)) )
 			return
 		if (!isopen)
-			to_chat(user, "<span class='warning'>The unit's doors are shut.</span>")
+			to_chat(user, SPAN("warning", "The unit's doors are shut."))
 			return
 		if ((stat & NOPOWER) || isbroken)
-			to_chat(user, "<span class='warning'>The unit is not operational.</span>")
+			to_chat(user, SPAN("warning", "The unit is not operational."))
 			return
 		if ( (occupant) || (helmet ) || (suit) || (boots) || (tank) || (mask)) //Unit needs to be absolutely empty
-			to_chat(user, "<span class='warning'>The unit's storage area is too cluttered.</span>")
+			to_chat(user, SPAN("warning", "The unit's storage area is too cluttered."))
 			return
 		visible_message("[user] starts putting [G.affecting.name] into the Suit Storage Unit.")
 		if(do_after(user, 20, src))
@@ -590,7 +589,7 @@
 			return
 		var/obj/item/clothing/suit/space/S = I
 		if(suit)
-			to_chat(user, "<span class='notice'>The unit already contains a suit.</span>")
+			to_chat(user, SPAN("notice", "The unit already contains a suit."))
 			return
 		if(!user.drop(I, src))
 			return
@@ -604,7 +603,7 @@
 			return
 		var/obj/item/clothing/head/helmet/H = I
 		if(helmet )
-			to_chat(user, "<span class='notice'>The unit already contains a helmet.</span>")
+			to_chat(user, SPAN("notice", "The unit already contains a helmet."))
 			return
 		if(!user.drop(I, src))
 			return
@@ -618,7 +617,7 @@
 			return
 		var/obj/item/clothing/shoes/magboots/B = I
 		if(boots)
-			to_chat(user, "<span class='notice'>The unit already contains a pair of magboots.</span>")
+			to_chat(user, SPAN("notice", "The unit already contains a pair of magboots."))
 			return
 		if(!user.drop(I, src))
 			return
@@ -632,7 +631,7 @@
 			return
 		var/obj/item/tank/T = I
 		if(tank)
-			to_chat(user, "<span class='notice'>The unit already contains an air tank.</span>")
+			to_chat(user, SPAN("notice", "The unit already contains an air tank."))
 			return
 		if(!user.drop(I, src))
 			return
@@ -646,7 +645,7 @@
 			return
 		var/obj/item/clothing/mask/M = I
 		if(mask)
-			to_chat(user, "<span class='notice'>The unit already contains a mask.</span>")
+			to_chat(user, SPAN("notice", "The unit already contains a mask."))
 			return
 		if(!user.drop(I, src))
 			return
@@ -789,14 +788,14 @@
 			return
 
 		if(locked)
-			to_chat(user, "<span class='danger'>The suit cycler is locked.</span>")
+			to_chat(user, SPAN("danger", "The suit cycler is locked."))
 			return
 
 		if(contents.len > 0)
-			to_chat(user, "<span class='danger'>There is no room inside the cycler for [G.affecting.name].</span>")
+			to_chat(user, SPAN("danger", "There is no room inside the cycler for [G.affecting.name]."))
 			return
 
-		visible_message("<span class='notice'>[user] starts putting [G.affecting.name] into the suit cycler.</span>")
+		visible_message(SPAN("notice", "[user] starts putting [G.affecting.name] into the suit cycler."))
 
 		if(do_after(user, 20, src))
 			if(!G || !G.affecting) return
@@ -823,11 +822,11 @@
 	else if(istype(I,/obj/item/clothing/head/helmet/space) && !istype(I, /obj/item/clothing/head/helmet/space/rig))
 
 		if(locked)
-			to_chat(user, "<span class='danger'>The suit cycler is locked.</span>")
+			to_chat(user, SPAN("danger", "The suit cycler is locked."))
 			return
 
 		if(helmet)
-			to_chat(user, "<span class='danger'>The cycler already contains a helmet.</span>")
+			to_chat(user, SPAN("danger", "The cycler already contains a helmet."))
 			return
 
 		if(CUSTOM_ITEM_MOB && I.icon_override == CUSTOM_ITEM_MOB)
@@ -846,11 +845,11 @@
 	else if(istype(I,/obj/item/clothing/suit/space/void))
 
 		if(locked)
-			to_chat(user, "<span class='danger'>The suit cycler is locked.</span>")
+			to_chat(user, SPAN("danger", "The suit cycler is locked."))
 			return
 
 		if(suit)
-			to_chat(user, "<span class='danger'>The cycler already contains a voidsuit.</span>")
+			to_chat(user, SPAN("danger", "The cycler already contains a voidsuit."))
 			return
 
 		if(CUSTOM_ITEM_MOB && I.icon_override == CUSTOM_ITEM_MOB)
@@ -870,12 +869,12 @@
 
 /obj/machinery/suit_cycler/emag_act(remaining_charges, mob/user)
 	if(emagged)
-		to_chat(user, "<span class='danger'>The cycler has already been subverted.</span>")
+		to_chat(user, SPAN("danger", "The cycler has already been subverted."))
 		return
 
 	//Clear the access reqs, disable the safeties, and open up all paintjobs.
 	playsound(src.loc, 'sound/effects/computer_emag.ogg', 25)
-	to_chat(user, "<span class='danger'>You run the sequencer across the interface, corrupting the operating protocols.</span>")
+	to_chat(user, SPAN("danger", "You run the sequencer across the interface, corrupting the operating protocols."))
 	departments = list("Engineering","Mining","Medical","Security","Atmos","^%###^%$")
 	emagged = 1
 	safeties = 0
@@ -982,7 +981,7 @@
 	else if(href_list["begin_decontamination"])
 
 		if(safeties && occupant)
-			to_chat(usr, "<span class='danger'>The cycler has detected an occupant. Please remove the occupant before commencing the decontamination cycle.</span>")
+			to_chat(usr, SPAN("danger", "The cycler has detected an occupant. Please remove the occupant before commencing the decontamination cycle."))
 			return
 
 		active = 1
@@ -1065,7 +1064,7 @@
 /obj/machinery/suit_cycler/proc/eject_occupant(mob/user as mob)
 
 	if(locked || active)
-		to_chat(user, "<span class='warning'>The cycler is locked.</span>")
+		to_chat(user, SPAN("warning", "The cycler is locked."))
 		return
 
 	if (!occupant)

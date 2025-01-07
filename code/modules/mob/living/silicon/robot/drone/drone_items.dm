@@ -282,7 +282,7 @@
 		wrapped = null
 		return
 
-	to_chat(src.loc, "<span class='warning'>You drop \the [wrapped].</span>")
+	to_chat(src.loc, SPAN("warning", "You drop \the [wrapped]."))
 	wrapped.loc = get_turf(src)
 	wrapped = null
 	//update_icon()
@@ -313,7 +313,7 @@
 			return
 		if(istype(target, /obj/structure/table)) //Putting item on the table if any
 			var/obj/structure/table/T = target
-			to_chat(src.loc, "<span class='notice'>You place \the [wrapped] on \the [target].</span>")
+			to_chat(src.loc, SPAN("notice", "You place \the [wrapped] on \the [target]."))
 			wrapped.loc = get_turf(target)
 			T.auto_align(wrapped,params)
 			wrapped = null
@@ -349,7 +349,7 @@
 					S.open(user)
 				if (MODE_EMPTY)
 					inuse = 1
-					visible_message("<span class='notice'>\The [user] starts removing item from \the [S].</span>")
+					visible_message(SPAN("notice", "\The [user] starts removing item from \the [S]."))
 					if (do_after(user,30))
 						inuse = 0
 						if (length(S.contents))
@@ -358,18 +358,18 @@
 								return
 							var/turf/T = get_turf(src)
 							S.remove_from_storage(I,T)
-							visible_message("<span class='notice'>\The [I] drops on \the [T].</span>")
+							visible_message(SPAN("notice", "\The [I] drops on \the [T]."))
 						else
 							inuse = 0
-							to_chat(user, "<span class='notice'>\The [target] is empty.</span>")
+							to_chat(user, SPAN("notice", "\The [target] is empty."))
 					else
 						inuse = 0
-						to_chat(user, "<span class='danger'>The process was interrupted!</span>")
+						to_chat(user, SPAN("danger", "The process was interrupted!"))
 			return
 
 	for(var/atypepath in cant_hold)
 		if(istype(target,atypepath))
-			to_chat(user, "<span class='danger'>Your gripper cannot hold \the [target].</span>")
+			to_chat(user, SPAN("danger", "Your gripper cannot hold \the [target]."))
 			return
 
 	if(istype(target,/obj/item)) //Check that we're not pocketing a mob.
@@ -389,12 +389,12 @@
 
 		//We can grab the item, finally.
 		if(grab)
-			to_chat(user, "<span class='notice'>You collect \the [I].</span>")
+			to_chat(user, SPAN("notice", "You collect \the [I]."))
 			I.loc = src
 			wrapped = I
 			return
 		else
-			to_chat(user, "<span class='danger'>Your gripper cannot hold \the [target].</span>")
+			to_chat(user, SPAN("danger", "Your gripper cannot hold \the [target]."))
 	else if(istype(target,/obj/machinery/power/apc))
 		var/obj/machinery/power/apc/A = target
 		if(A.opened)
@@ -410,7 +410,7 @@
 				A.charging = 0
 				A.update_icon()
 
-				user.visible_message("<span class='danger'>[user] removes the power cell from [A]!</span>", "You remove the power cell.")
+				user.visible_message(SPAN("danger", "[user] removes the power cell from [A]!"), "You remove the power cell.")
 
 	else if(istype(target,/mob/living/silicon/robot))
 		var/mob/living/silicon/robot/A = target
@@ -425,7 +425,7 @@
 				A.cell.loc = src
 				A.cell = null
 
-				user.visible_message("<span class='danger'>[user] removes the power cell from [A]!</span>", "You remove the power cell.")
+				user.visible_message(SPAN("danger", "[user] removes the power cell from [A]!"), "You remove the power cell.")
 
 	else if(istype(target, /obj/machinery/mining/drill))
 		var/obj/machinery/mining/drill/hdrill = target
@@ -453,7 +453,7 @@
 			user.visible_message(SPAN_DANGER("[user] removes the power cell from [charger]!"), "You remove the power cell.")
 
 	else
-		to_chat(user, "<span class='notice'>[src] can't interact with \the [target].</span>")
+		to_chat(user, SPAN("notice", "[src] can't interact with \the [target]."))
 
 /obj/item/gripper/proc/finish_using(atom/target, mob/living/user, params, force_holder, resolved)
 	if(!resolved && wrapped && target)
@@ -502,7 +502,7 @@
 
 	for(var/mob/M in T)
 		if(istype(M,/mob/living/simple_animal/lizard) || istype(M,/mob/living/simple_animal/mouse))
-			src.loc.visible_message("<span class='danger'>[src.loc] sucks [M] into its decompiler. There's a horrible crunching noise.</span>","<span class='danger'>It's a bit of a struggle, but you manage to suck [M] into your decompiler. It makes a series of visceral crunching noises.</span>")
+			src.loc.visible_message(SPAN("danger", "[src.loc] sucks [M] into its decompiler. There's a horrible crunching noise."),SPAN("danger", "It's a bit of a struggle, but you manage to suck [M] into your decompiler. It makes a series of visceral crunching noises."))
 			new /obj/effect/decal/cleanable/blood/splatter(get_turf(src))
 			qdel(M)
 			if(wood)
@@ -518,15 +518,15 @@
 			if(!istype(D))
 				return
 
-			to_chat(D, "<span class='danger'>You begin decompiling [M].</span>")
+			to_chat(D, SPAN("danger", "You begin decompiling [M]."))
 
 			if(!do_after(D,50,M))
-				to_chat(D, "<span class='danger'>You need to remain still while decompiling such a large object.</span>")
+				to_chat(D, SPAN("danger", "You need to remain still while decompiling such a large object."))
 				return
 
 			if(!M || !D) return
 
-			to_chat(D, "<span class='danger'>You carefully and thoroughly decompile [M], storing as much of its resources as you can within yourself.</span>")
+			to_chat(D, SPAN("danger", "You carefully and thoroughly decompile [M], storing as much of its resources as you can within yourself."))
 			qdel(M)
 			new /obj/effect/decal/cleanable/blood/oil(get_turf(src))
 
@@ -605,16 +605,16 @@
 		grabbed_something = 1
 
 	if(grabbed_something)
-		to_chat(user, "<span class='notice'>You deploy your decompiler and clear out the contents of \the [T].</span>")
+		to_chat(user, SPAN("notice", "You deploy your decompiler and clear out the contents of \the [T]."))
 	else
-		to_chat(user, "<span class='danger'>Nothing on \the [T] is useful to you.</span>")
+		to_chat(user, SPAN("danger", "Nothing on \the [T] is useful to you."))
 	return
 
 //PRETTIER TOOL LIST.
 /mob/living/silicon/robot/drone/installed_modules()
 
 	if(weapon_lock)
-		to_chat(src, "<span class='danger'>Weapon lock active, unable to use modules! Count:[weaponlock_time]</span>")
+		to_chat(src, SPAN("danger", "Weapon lock active, unable to use modules! Count:[weaponlock_time]"))
 		return
 
 	if(!module)

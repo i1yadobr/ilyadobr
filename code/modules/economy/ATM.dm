@@ -101,7 +101,7 @@
 			var/datum/transaction/T = new(authenticated_account.owner_name, "Credit deposit", dolla.worth, machine_id)
 			authenticated_account.do_transaction(T)
 
-			to_chat(user, "<span class='info'>You insert [I] into [src].</span>")
+			to_chat(user, SPAN("info", "You insert [I] into [src]."))
 			src.attack_hand(user)
 			dolla.worth = 0
 			qdel(I)

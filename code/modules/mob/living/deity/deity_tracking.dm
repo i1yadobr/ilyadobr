@@ -23,7 +23,7 @@
 	if(following)
 		stop_follow()
 	eyeobj.setLoc(get_turf(L))
-	to_chat(src, "<span class='notice'>You begin to follow \the [L].</span>")
+	to_chat(src, SPAN("notice", "You begin to follow \the [L]."))
 	following = L
 	register_signal(L, SIGNAL_MOVED, nameof(.proc/keep_following))
 	register_signal(L, SIGNAL_QDELETING, nameof(.proc/stop_follow))
@@ -33,7 +33,7 @@
 	unregister_signal(following, SIGNAL_MOVED)
 	unregister_signal(following, SIGNAL_QDELETING)
 	unregister_signal(following, SIGNAL_MOB_DEATH)
-	to_chat(src, "<span class='notice'>You stop following \the [following].</span>")
+	to_chat(src, SPAN("notice", "You stop following \the [following]."))
 	following = null
 
 /mob/living/deity/proc/keep_following(atom/movable/moving_instance, atom/old_loc, atom/new_loc)

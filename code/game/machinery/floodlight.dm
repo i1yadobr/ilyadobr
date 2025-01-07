@@ -136,10 +136,10 @@
 	item_state = "syringe_kit"
 
 /obj/item/floodlight_diy/attack_self(mob/user)
-	to_chat(usr, "<span class='notice'>You start piecing together the kit...</span>")
+	to_chat(usr, SPAN("notice", "You start piecing together the kit..."))
 	if(do_after(user, 80))
 		var/obj/machinery/floodlight/R = new /obj/machinery/floodlight(user.loc)
-		user.visible_message("<span class='notice'>[user] assembles \a [R].</span>",
-							 "<span class='notice'>You assemble \a [R].</span>")
+		user.visible_message(SPAN("notice", "[user] assembles \a [R]."),
+							 SPAN("notice", "You assemble \a [R]."))
 		R.add_fingerprint(user)
 		qdel(src)

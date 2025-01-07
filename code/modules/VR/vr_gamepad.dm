@@ -51,7 +51,7 @@
 		return
 
 /obj/machinery/gamepod/proc/scan_card(obj/item/card/id/C, mob/user)
-	visible_message("<span class='info'>[user] swipes a card through [src].</span>")
+	visible_message(SPAN("info", "[user] swipes a card through [src]."))
 	if(!station_account)
 		return
 	var/datum/money_account/D = get_account(C.associated_account_number)

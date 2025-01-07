@@ -150,11 +150,11 @@
 	if(href_list["launch_shuttle"])
 		var/datum/shuttle/autodock/ferry/supply/shuttle = SSsupply.shuttle
 		if(!shuttle)
-			to_chat(user, "<span class='warning'>Error connecting to the shuttle.</span>")
+			to_chat(user, SPAN("warning", "Error connecting to the shuttle."))
 			return
 		if(shuttle.at_station())
 			if (shuttle.forbidden_atoms_check())
-				to_chat(usr, "<span class='warning'>For safety reasons the automated supply shuttle cannot transport live organisms, classified nuclear weaponry or homing beacons.</span>")
+				to_chat(usr, SPAN("warning", "For safety reasons the automated supply shuttle cannot transport live organisms, classified nuclear weaponry or homing beacons."))
 			else
 				shuttle.launch(user)
 		else
@@ -176,7 +176,7 @@
 			if(SO.ordernum != id)
 				continue
 			if(SO.object.cost > SSsupply.points)
-				to_chat(usr, "<span class='warning'>Not enough points to purchase \the [SO.object.name]!</span>")
+				to_chat(usr, SPAN("warning", "Not enough points to purchase \the [SO.object.name]!"))
 				return 1
 			SSsupply.requestlist -= SO
 			SSsupply.shoppinglist += SO

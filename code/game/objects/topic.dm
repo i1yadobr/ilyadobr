@@ -18,7 +18,7 @@
 	var/id = src.get_id_card()
 	if(id && O.check_access(id))
 		return TRUE
-	to_chat(src, "<span class='danger'>\icon[src]Access Denied!</span>")
+	to_chat(src, SPAN("danger", "\icon[src]Access Denied!"))
 	return FALSE
 
 /mob/proc/CanUseObjTopic()

@@ -63,7 +63,7 @@
 				Victim.adjustBruteLoss(10 * hazmat)
 
 			else
-				to_chat(src, "<span class='warning'>[pick("This subject is incompatable", "This subject does not have a life energy", "This subject is empty", "I am not satisified", "I can not feed from this subject", "I do not feel nourished", "This subject is not food")]...</span>")
+				to_chat(src, SPAN("warning", "[pick("This subject is incompatable", "This subject does not have a life energy", "This subject is empty", "I am not satisified", "I can not feed from this subject", "I do not feel nourished", "This subject is not food")]..."))
 				Feedstop()
 				break
 
@@ -75,7 +75,7 @@
 				else if (istype(M, /mob/living/carbon))
 					var/mob/living/carbon/C = M
 					if (C.can_feel_pain())
-						to_chat(M, "<span class='danger'>[painMes]</span>")
+						to_chat(M, SPAN("danger", "[painMes]"))
 
 			gain_nutrition(20 * hazmat)
 			totalDrained += 20 * hazmat
@@ -111,7 +111,7 @@
 						++Friends[VLA]
 
 		else
-			to_chat(src, "<span class='notice'>This subject does not have a strong enough life energy anymore...</span>")
+			to_chat(src, SPAN("notice", "This subject does not have a strong enough life energy anymore..."))
 
 	Victim = null
 
@@ -128,7 +128,7 @@
 	set desc = "This will let you evolve from baby to adult metroid."
 
 	if(stat)
-		to_chat(src, "<span class='notice'>I must be conscious to do this...</span>")
+		to_chat(src, SPAN("notice", "I must be conscious to do this..."))
 		return
 
 	if(!is_adult)
@@ -137,24 +137,24 @@
 			maxHealth = 200
 			amount_grown = 0
 			regenerate_icons()
-			SetName(text("[colour] [is_adult ? "adult" : "baby"] metroid ([number])"))
+			SetName("[colour] [is_adult ? "adult" : "baby"] metroid ([number])")
 		else
-			to_chat(src, "<span class='notice'>I am not ready to evolve yet...</span>")
+			to_chat(src, SPAN("notice", "I am not ready to evolve yet..."))
 	else
-		to_chat(src, "<span class='notice'>I have already evolved...</span>")
+		to_chat(src, SPAN("notice", "I have already evolved..."))
 
 /mob/living/carbon/metroid/verb/Reproduce()
 	set category = "Metroid"
 	set desc = "This will make you split into four metroids."
 
 	if(stat)
-		to_chat(src, "<span class='notice'>I must be conscious to do this...</span>")
+		to_chat(src, SPAN("notice", "I must be conscious to do this..."))
 		return
 
 	if(is_adult)
 		if(amount_grown >= 10)
 			if(stat)
-				to_chat(src, "<span class='notice'>I must be conscious to do this...</span>")
+				to_chat(src, SPAN("notice", "I must be conscious to do this..."))
 				return
 
 			var/list/babies = list()
@@ -178,6 +178,6 @@
 				new_metroid.key = src.key
 			qdel(src)
 		else
-			to_chat(src, "<span class='notice'>I am not ready to reproduce yet...</span>")
+			to_chat(src, SPAN("notice", "I am not ready to reproduce yet..."))
 	else
-		to_chat(src, "<span class='notice'>I am not old enough to reproduce yet...</span>")
+		to_chat(src, SPAN("notice", "I am not old enough to reproduce yet..."))

@@ -80,12 +80,12 @@
 	playsound(src.loc, 'sound/signals/processing21.ogg', 50)
 
 	if(!grown_seed)
-		to_chat(user, "<span class='danger'>[src] can tell you nothing about \the [target].</span>")
+		to_chat(user, SPAN("danger", "[src] can tell you nothing about \the [target]."))
 		return
 
 	form_title = "[grown_seed.seed_name] (#[grown_seed.uid])"
 	var/dat = "<meta charset=\"utf-8\"><h3>Plant data for [form_title]</h3>"
-	user.visible_message("<span class='notice'>[user] runs the scanner over \the [target].</span>")
+	user.visible_message(SPAN("notice", "[user] runs the scanner over \the [target]."))
 
 	dat += "<h2>General Data</h2>"
 

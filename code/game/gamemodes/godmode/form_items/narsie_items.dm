@@ -21,13 +21,13 @@
 			if(H.should_have_organ(BP_HEART))
 				multiplier++
 		if(L.stat == DEAD)
-			to_chat(user, "<span class='warning'>\The [a] is already dead! There is nothing to take!</span>")
+			to_chat(user, SPAN("warning", "\The [a] is already dead! There is nothing to take!"))
 			return
 
-		user.visible_message("<span class='warning'>\The [user] hovers \the [src] over \the [a], whispering an incantation.</span>")
+		user.visible_message(SPAN("warning", "\The [user] hovers \the [src] over \the [a], whispering an incantation."))
 		if(!do_after(user,200, L))
 			return
-		user.visible_message("<span class='danger'>\The [user] plunges the knife down into \the [a]!</span>")
+		user.visible_message(SPAN("danger", "\The [user] plunges the knife down into \the [a]!"))
 		L.adjustBruteLoss(20)
 		if(altar.linked_god)
 			altar.linked_god.adjust_power(2 * multiplier,0,"from a delicious sacrifice!")
@@ -54,7 +54,7 @@
 		var/obj/structure/deity/altar/altar = a
 		if(stored_power && altar.linked_god)
 			altar.linked_god.adjust_power(stored_power, "from harvested souls.")
-			altar.visible_message("<span class='warning'>\The [altar] absorbs a black mist exuded from \the [src].</span>")
+			altar.visible_message(SPAN("warning", "\The [altar] absorbs a black mist exuded from \the [src]."))
 			return
 	if(ismob(a))
 		var/mob/M = a
@@ -66,7 +66,7 @@
 
 /obj/item/material/twohanded/fireaxe/cult/proc/gain_power()
 	stored_power += 50
-	src.visible_message("<span class='cult'>\The [src] screeches as the smell of death fills the air!</span>")
+	src.visible_message(SPAN("cult", "\The [src] screeches as the smell of death fills the air!"))
 
 /obj/item/reagent_containers/vessel/zombiedrink
 	name = "well-used urn"

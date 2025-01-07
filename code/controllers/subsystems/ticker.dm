@@ -34,7 +34,7 @@ SUBSYSTEM_DEF(ticker)
 	pregame_timeleft = config.game.pregame_timeleft
 	restart_timeout = config.game.restart_timeout
 
-	to_world("<span class='info'><B>Welcome to the pre-game lobby!</B></span>")
+	to_world(SPAN("info", "<B>Welcome to the pre-game lobby!</B>"))
 	to_world("Please, setup your character and select ready. Game will start in [round(pregame_timeleft/10)] seconds")
 	return ..()
 
@@ -101,7 +101,7 @@ SUBSYSTEM_DEF(ticker)
 
 	spawn(0)//Forking here so we dont have to wait for this to finish
 		mode.post_setup()
-		to_world("<span class='info'><B>Enjoy the game!</B></span>")
+		to_world(SPAN("info", "<B>Enjoy the game!</B>"))
 
 		for(var/mob/M in GLOB.player_list)
 			M.playsound_local(M.loc, GLOB.using_map.welcome_sound, 75)
@@ -144,12 +144,12 @@ SUBSYSTEM_DEF(ticker)
 				else
 					feedback_set_details("end_proper","universe destroyed")
 				if(!delay_end)
-					to_world("<span class='notice'><b>Rebooting due to destruction of [station_name()] in [restart_timeout/10] seconds</b></span>")
+					to_world(SPAN("notice", "<b>Rebooting due to destruction of [station_name()] in [restart_timeout/10] seconds</b>"))
 
 			else
 				feedback_set_details("end_proper","proper completion")
 				if(!delay_end)
-					to_world("<span class='notice'><b>Restarting in [restart_timeout/10] seconds</b></span>")
+					to_world(SPAN("notice", "<b>Restarting in [restart_timeout/10] seconds</b>"))
 
 			handle_tickets()
 			SSstoryteller.collect_statistics()
@@ -373,18 +373,18 @@ Helpers
 
 /datum/controller/subsystem/ticker/proc/notify_delay()
 	if(!delay_notified)
-		to_world("<span class='notice'><b>An admin has delayed the round end</b></span>")
+		to_world(SPAN("notice", "<b>An admin has delayed the round end</b>"))
 	delay_notified = 1
 
 /datum/controller/subsystem/ticker/proc/handle_tickets()
 	for(var/datum/ticket/ticket in tickets)
 		if(ticket.is_active())
 			if(!delay_notified)
-				message_staff("<span class='warning'><b>Automatically delaying restart due to active tickets.</b></span>")
+				message_staff(SPAN("warning", "<b>Automatically delaying restart due to active tickets.</b>"))
 			notify_delay()
 			end_game_state = END_GAME_AWAITING_TICKETS
 			return
-	message_staff("<span class='warning'><b>No active tickets remaining, restarting in [restart_timeout/10] seconds if an admin has not delayed the round end.</b></span>")
+	message_staff(SPAN("warning", "<b>No active tickets remaining, restarting in [restart_timeout/10] seconds if an admin has not delayed the round end.</b>"))
 	end_game_state = END_GAME_ENDING
 
 /datum/controller/subsystem/ticker/proc/declare_completion()
@@ -434,4 +434,4 @@ Helpers
 	var/datum/map/next_map = GLOB.all_maps[next_map_name]
 	fdel("data/use_map")
 	text2file("[next_map.type]", "data/use_map")
-	to_world("<span class='notice'>Map has been changed to: <b>[next_map.name]</b></span>")
+	to_world(SPAN("notice", "Map has been changed to: <b>[next_map.name]</b>"))

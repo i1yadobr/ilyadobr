@@ -150,15 +150,15 @@
 		return 0
 
 	if(assailant == affecting)
-		to_chat(assailant, "<span class='notice'>You can't grab yourself.</span>")
+		to_chat(assailant, SPAN("notice", "You can't grab yourself."))
 		return 0
 
 	if(assailant.get_active_hand())
-		to_chat(assailant, "<span class='notice'>You can't grab someone if your hand is full.</span>")
+		to_chat(assailant, SPAN("notice", "You can't grab someone if your hand is full."))
 		return 0
 
 	if(assailant.grabbed_by.len)
-		to_chat(assailant, "<span class='notice'>You can't grab someone if you're being grabbed.</span>")
+		to_chat(assailant, SPAN("notice", "You can't grab someone if you're being grabbed."))
 		return 0
 
 	var/obj/item/organ/external/O = get_targeted_organ()
@@ -196,7 +196,7 @@
 
 /obj/item/grab/proc/upgrade(bypass_cooldown = FALSE)
 	if(!check_upgrade_cooldown() && !bypass_cooldown)
-		to_chat(assailant, "<span class='danger'>It's too soon to upgrade.</span>")
+		to_chat(assailant, SPAN("danger", "It's too soon to upgrade."))
 		return
 
 	var/datum/grab/upgrab = current_grab.upgrade(src)

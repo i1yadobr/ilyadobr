@@ -19,7 +19,7 @@
 
 /obj/item/gun/portalgun/_examine_text(mob/user)
 	. = ..()
-	. += "\nIt's current setting is <span style='color: [setting ? COLOR_ORANGE : COLOR_BLUE];'>[setting ? "red" : "blue"]</span>."
+	. += "\nIt's current setting is [SPAN("", "<font style='color: [setting ? COLOR_ORANGE : COLOR_BLUE];'>[setting ? "red" : "blue"]</font>.")]"
 
 /obj/item/gun/portalgun/Initialize()
 	. = ..()
@@ -39,7 +39,7 @@
 /obj/item/gun/portalgun/attack_self(mob/user)
 	setting = !setting
 	fire_sound = setting ? 'sound/weapons/portalgun_red.ogg' : 'sound/weapons/portalgun_blue.ogg'
-	to_chat(user, "Now set to fire <span style='color: [setting ? COLOR_ORANGE : COLOR_BLUE];'>[setting ? "red" : "blue"] portals</span>.")
+	to_chat(user, "Now set to fire [SPAN("", "<font style='color: [setting ? COLOR_ORANGE : COLOR_BLUE];'>[setting ? "red" : "blue"] portals</font>.")]")
 	update_icon()
 
 /obj/item/gun/portalgun/update_icon()

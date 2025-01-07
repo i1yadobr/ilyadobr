@@ -242,12 +242,12 @@
 			return
 		var/mob/M = usr
 		if(!istype(M, /mob/living/carbon))
-			to_chat(usr, "<span class='notice'>You don't have any DNA, or your DNA is incompatible with this device.</span>")
+			to_chat(usr, SPAN("notice", "You don't have any DNA, or your DNA is incompatible with this device."))
 		else
 			var/datum/dna/dna = usr.dna
 			pai.master = M.real_name
 			pai.master_dna = dna.unique_enzymes
-			to_chat(pai, "<span class='warning'>You have been bound to a new master.</span>")
+			to_chat(pai, SPAN("warning", "You have been bound to a new master."))
 	if(href_list["request"])
 		src.looking_for_personality = 1
 		paiController.findPAI(src, usr)
@@ -316,7 +316,7 @@
 /obj/item/device/paicard/proc/alertUpdate()
 	var/turf/T = get_turf_or_move(src.loc)
 	for (var/mob/M in viewers(T))
-		M.show_message("<span class='notice'>\The [src] flashes a message across its screen, \"Additional personalities available for download.\"</span>", 3, "<span class='notice'>\The [src] bleeps electronically.</span>", 2)
+		M.show_message(SPAN("notice", "\The [src] flashes a message across its screen, \"Additional personalities available for download.\""), 3, SPAN("notice", "\The [src] bleeps electronically."), 2)
 
 /obj/item/device/paicard/emp_act(severity)
 	for(var/mob/M in src)
@@ -330,12 +330,12 @@
 
 /obj/item/device/paicard/see_emote(mob/living/M, text)
 	if(pai && pai.client && pai.stat == CONSCIOUS)
-		var/rendered = "<span class='message'>[text]</span>"
+		var/rendered = SPAN("message", "[text]")
 		pai.show_message(rendered, 2)
 	..()
 
 /obj/item/device/paicard/show_message(msg, type, alt, alt_type)
 	if(pai && pai.client)
-		var/rendered = "<span class='message'>[msg]</span>"
+		var/rendered = SPAN("message", "[msg]")
 		pai.show_message(rendered, type)
 	..()

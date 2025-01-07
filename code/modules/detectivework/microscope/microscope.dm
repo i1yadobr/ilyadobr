@@ -13,11 +13,11 @@
 /obj/machinery/microscope/attackby(obj/item/W as obj, mob/user as mob)
 
 	if(sample)
-		to_chat(user, "<span class='warning'>There is already a slide in the microscope.</span>")
+		to_chat(user, SPAN("warning", "There is already a slide in the microscope."))
 		return
 
 	if(istype(W, /obj/item/forensics/swab)|| istype(W, /obj/item/sample/fibers) || istype(W, /obj/item/sample/print))
-		to_chat(user, "<span class='notice'>You insert \the [W] into the microscope.</span>")
+		to_chat(user, SPAN("notice", "You insert \the [W] into the microscope."))
 		user.drop(W, src)
 		sample = W
 		update_icon()
@@ -26,16 +26,16 @@
 /obj/machinery/microscope/attack_hand(mob/user)
 
 	if(!sample)
-		to_chat(user, "<span class='warning'>The microscope has no sample to examine.</span>")
+		to_chat(user, SPAN("warning", "The microscope has no sample to examine."))
 		return
 
-	to_chat(user, "<span class='notice'>The microscope whirrs as you examine \the [sample].</span>")
+	to_chat(user, SPAN("notice", "The microscope whirrs as you examine \the [sample]."))
 
 	if(!do_after(user, 25, src) || !sample)
-		to_chat(user, "<span class='notice'>You stop examining \the [sample].</span>")
+		to_chat(user, SPAN("notice", "You stop examining \the [sample]."))
 		return
 
-	to_chat(user, "<span class='notice'>Printing findings now...</span>")
+	to_chat(user, SPAN("notice", "Printing findings now..."))
 	var/obj/item/paper/report = new(get_turf(src))
 	report.stamped = list(/obj/item/stamp)
 	report.overlays = list("paper_stamped")
@@ -69,7 +69,7 @@
 		if(card.evidence && card.evidence.len)
 			report.info += "Surface analysis has determined unique fingerprint strings:<br><br>"
 			for(var/prints in card.evidence)
-				report.info += "<span class='notice'>Fingerprint string: </span>"
+				report.info += SPAN("notice", "Fingerprint string: ")
 				if(!is_complete_print(prints))
 					report.info += "INCOMPLETE PRINT"
 				else
@@ -88,9 +88,9 @@
 	if(!istype(remover) || remover.incapacitated() || !Adjacent(remover))
 		return
 	if(!sample)
-		to_chat(remover, "<span class='warning'>\The [src] does not have a sample in it.</span>")
+		to_chat(remover, SPAN("warning", "\The [src] does not have a sample in it."))
 		return
-	to_chat(remover, "<span class='notice'>You remove \the [sample] from \the [src].</span>")
+	to_chat(remover, SPAN("notice", "You remove \the [sample] from \the [src]."))
 	remover.pick_or_drop(sample, loc)
 	sample = null
 	update_icon()

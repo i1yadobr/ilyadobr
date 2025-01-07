@@ -88,7 +88,7 @@
 	var/msg = "[SPAN("info", "*---------*")]\nThis is \icon[src] \a <EM>[src]</EM>!\n[desc]\n"
 
 	if(shackle)
-		msg += "<span class='warning'>It is clamped in a set of metal straps with a complex digital lock.</span>"
+		msg += SPAN("warning", "It is clamped in a set of metal straps with a complex digital lock.")
 		msg += "\n"
 
 	var/extra_info = ""
@@ -99,15 +99,15 @@
 				if(!src.brainmob.client)
 					extra_info += "It appears to be in stand-by mode." //afk
 			if(UNCONSCIOUS)
-				extra_info += "<span class='warning'>It doesn't seem to be responsive.</span>"
+				extra_info += SPAN("warning", "It doesn't seem to be responsive.")
 			if(DEAD)
-				extra_info += "<span class='deadsay'>It appears to be completely inactive.</span>"
+				extra_info += SPAN("deadsay", "It appears to be completely inactive.")
 	else
-		extra_info += "<span class='deadsay'>It appears to be completely inactive.</span>"
+		extra_info += SPAN("deadsay", "It appears to be completely inactive.")
 	extra_info += "\n"
 
-	msg += "<span class='warning'>[extra_info]</span>"
-	msg += "<span class='info'>*---------*</span>"
+	msg += SPAN("warning", "[extra_info]")
+	msg += SPAN("info", "*---------*")
 	. += "\n[msg]"
 	return
 

@@ -5,7 +5,7 @@ GLOBAL_DATUM_INIT(ninjas, /datum/antagonist/ninja, new)
 	role_text = "Ninja"
 	role_text_plural = "Ninja"
 	landmark_id = "Ninja"
-	welcome_text = "<span class='info'>You are an elite mercenary assassin of the Spider Clan. You have a variety of abilities at your disposal, thanks to your nano-enhanced cyber armor.</span>"
+	welcome_text = SPAN("info", "You are an elite mercenary assassin of the Spider Clan. You have a variety of abilities at your disposal, thanks to your nano-enhanced cyber armor.")
 	flags = ANTAG_OVERRIDE_JOB | ANTAG_CLEAR_EQUIPMENT | ANTAG_CHOOSE_NAME | ANTAG_RANDSPAWN | ANTAG_VOTABLE | ANTAG_SET_APPEARANCE | ANTAG_DISPLAY_IN_CHARSETUP
 	antaghud_indicator = "hudninja"
 
@@ -133,7 +133,7 @@ GLOBAL_DATUM_INIT(ninjas, /datum/antagonist/ninja, new)
 		if(player.internal)
 			player.internals.icon_state = "internal1"
 		else
-			to_chat(player, "<span class='danger'>You forgot to turn on your internals! Quickly, toggle the valve!</span>")
+			to_chat(player, SPAN("danger", "You forgot to turn on your internals! Quickly, toggle the valve!"))
 
 /datum/antagonist/ninja/proc/generate_ninja_directive(side)
 	var/directive = "[side=="face"?"[GLOB.using_map.company_name]":"A criminal syndicate"] is your employer. "//Let them know which side they're on.

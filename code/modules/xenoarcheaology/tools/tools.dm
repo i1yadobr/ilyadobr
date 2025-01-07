@@ -10,7 +10,7 @@
 
 /obj/item/device/gps/attack_self(mob/user as mob)
 	var/turf/T = get_turf(src)
-	to_chat(user, "<span class='notice'>\icon[src] \The [src] flashes <i>[T.x]:[T.y]:[T.z]</i>.</span>")
+	to_chat(user, SPAN("notice", "\icon[src] \The [src] flashes <i>[T.x]:[T.y]:[T.z]</i>."))
 
 /obj/item/device/gps/_examine_text(mob/user)
 	. = ..()
@@ -130,7 +130,7 @@
 	var/material = "unknown"
 
 /obj/item/device/depth_scanner/proc/scan_atom(mob/user, atom/A)
-	user.visible_message("<span class='notice'>\The [user] scans \the [A], the air around them humming gently.</span>")
+	user.visible_message(SPAN("notice", "\The [user] scans \the [A], the air around them humming gently."))
 
 	if(istype(A, /turf/simulated/mineral))
 		var/turf/simulated/mineral/M = A
@@ -152,7 +152,7 @@
 
 			positive_locations.Add(D)
 
-			to_chat(user, "<span class='notice'>\icon[src] [src] pings.</span>")
+			to_chat(user, SPAN("notice", "\icon[src] [src] pings."))
 
 	else if(istype(A, /obj/structure/boulder))
 		var/obj/structure/boulder/B = A
@@ -170,7 +170,7 @@
 
 			positive_locations.Add(D)
 
-			to_chat(user, "<span class='notice'>\icon[src] [src] pings [pick("madly","wildly","excitedly","crazily")]!</span>")
+			to_chat(user, SPAN("notice", "\icon[src] [src] pings [pick("madly","wildly","excitedly","crazily")]!"))
 
 /obj/item/device/depth_scanner/attack_self(mob/living/user)
 	interact(user)

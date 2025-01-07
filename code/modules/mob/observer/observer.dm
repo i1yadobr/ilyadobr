@@ -84,4 +84,4 @@ var/const/GHOST_IMAGE_ALL = ~GHOST_IMAGE_NONE
 		forceMove(T)
 		inertia_dir = 0
 		throwing = 0
-		to_chat(src, "<span class='notice'>You cannot move further in this direction.</span>")
+		to_chat(src, SPAN("notice", "You cannot move further in this direction."))

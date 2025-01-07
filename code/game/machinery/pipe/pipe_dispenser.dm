@@ -111,7 +111,7 @@
 	if (istype(W, /obj/item/pipe) || istype(W, /obj/item/pipe_meter))
 		if(!user.drop(W))
 			return
-		to_chat(usr, "<span class='notice'>You put \the [W] back into \the [src].</span>")
+		to_chat(usr, SPAN("notice", "You put \the [W] back into \the [src]."))
 		add_fingerprint(usr)
 		qdel(W)
 		return
@@ -119,11 +119,11 @@
 		add_fingerprint(usr)
 		if(unwrenched==0)
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-			to_chat(user, "<span class='notice'>You begin to unfasten \the [src] from the floor...</span>")
+			to_chat(user, SPAN("notice", "You begin to unfasten \the [src] from the floor..."))
 			if (do_after(user, 40, src))
 				user.visible_message( \
-					"<span class='notice'>\The [user] unfastens \the [src].</span>", \
-					"<span class='notice'>You have unfastened \the [src]. Now it can be pulled somewhere else.</span>", \
+					SPAN("notice", "\The [user] unfastens \the [src]."), \
+					SPAN("notice", "You have unfastened \the [src]. Now it can be pulled somewhere else."), \
 					"You hear ratchet.")
 				src.anchored = 0
 				src.stat |= MAINT
@@ -132,11 +132,11 @@
 					close_browser(usr, "window=pipedispenser")
 		else /*if (unwrenched==1)*/
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-			to_chat(user, "<span class='notice'>You begin to fasten \the [src] to the floor...</span>")
+			to_chat(user, SPAN("notice", "You begin to fasten \the [src] to the floor..."))
 			if (do_after(user, 20, src))
 				user.visible_message( \
-					"<span class='notice'>\The [user] fastens \the [src].</span>", \
-					"<span class='notice'>You have fastened \the [src]. Now it can dispense pipes.</span>", \
+					SPAN("notice", "\The [user] fastens \the [src]."), \
+					SPAN("notice", "You have fastened \the [src]. Now it can dispense pipes."), \
 					"You hear ratchet.")
 				src.anchored = 1
 				src.stat &= ~MAINT

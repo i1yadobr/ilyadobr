@@ -610,7 +610,7 @@
 
 		if(get_shock() >= species.total_health * 2)
 			if(!stat)
-				to_chat(src, "<span class='warning'>[species.halloss_message_self]</span>")
+				to_chat(src, SPAN("warning", "[species.halloss_message_self]"))
 				src.visible_message("<B>[src]</B> [species.halloss_message]")
 			Paralyse(10)
 
@@ -660,7 +660,7 @@
 				var/zzzchance = min(5, 5*drowsyness/30)
 				if((prob(zzzchance) || drowsyness >= 60))
 					if(stat == CONSCIOUS)
-						to_chat(src, "<span class='notice'>You are about to fall asleep...</span>")
+						to_chat(src, SPAN("notice", "You are about to fall asleep..."))
 					Sleeping(5)
 
 		confused = max(0, confused - 1)
@@ -700,7 +700,7 @@
 		if(stasis_value > 1 && drowsyness < stasis_value * 4)
 			drowsyness += min(stasis_value, 3)
 			if(!stat && prob(1))
-				to_chat(src, "<span class='notice'>You feel slow and sluggish...</span>")
+				to_chat(src, SPAN("notice", "You feel slow and sluggish..."))
 
 	return 1
 
@@ -932,7 +932,7 @@
 	if(client && world.time >= client.played + 600)
 		A.play_ambience(src)
 	if(stat == UNCONSCIOUS && world.time - l_move_time < 5 && prob(10))
-		to_chat(src,"<span class='notice'>You feel like you're [pick("moving","flying","floating","falling","hovering")].</span>")
+		to_chat(src,SPAN("notice", "You feel like you're [pick("moving","flying","floating","falling","hovering")]."))
 
 /mob/living/carbon/human/handle_stomach()
 	spawn(0)

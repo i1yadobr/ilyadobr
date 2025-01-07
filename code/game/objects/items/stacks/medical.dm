@@ -186,7 +186,7 @@
 			user.visible_message(SPAN("notice", "\The [user] starts salving wounds on [M]'s [affecting.name]."), \
 					                      SPAN("notice", "You start salving wounds on [M]'s [affecting.name]."))
 			if(!do_mob(user, M, 10))
-				to_chat(user, SPAN("warning", "You must stand still to salve wounds.</span>"))
+				to_chat(user, SPAN("warning", "You must stand still to salve wounds."))
 				return 1
 			user.visible_message(SPAN("notice", "[user] salved wounds on [M]'s [affecting.name]."), \
 			                        SPAN("notice", "You salved wounds on [M]'s [affecting.name]."))

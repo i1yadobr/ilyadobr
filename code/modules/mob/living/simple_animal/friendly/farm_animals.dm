@@ -148,12 +148,12 @@
 /mob/living/simple_animal/cow/attackby(obj/item/O, mob/user)
 	var/obj/item/reagent_containers/vessel/G = O
 	if(stat == CONSCIOUS && istype(G) && G.is_open_container())
-		user.visible_message("<span class='notice'>[user] milks [src] using \the [O].</span>")
+		user.visible_message(SPAN("notice", "[user] milks [src] using \the [O]."))
 		var/transfered = udder.trans_type_to(G, milktype, rand(5,10))
 		if(G.reagents.total_volume >= G.volume)
-			to_chat(user, "<span class='warning'>\The [O] is full.</span>")
+			to_chat(user, SPAN("warning", "\The [O] is full."))
 		if(!transfered)
-			to_chat(user, "<span class='warning'>The udder is dry. Wait a bit longer...</span>")
+			to_chat(user, SPAN("warning", "The udder is dry. Wait a bit longer..."))
 	else
 		..()
 
@@ -165,7 +165,7 @@
 
 /mob/living/simple_animal/cow/attack_hand(mob/living/carbon/M)
 	if(!stat && M.a_intent == I_DISARM && icon_state != icon_dead)
-		M.visible_message("<span class='warning'>[M] tips over [src].</span>","<span class='notice'>You tip over [src].</span>")
+		M.visible_message(SPAN("warning", "[M] tips over [src]."),SPAN("notice", "You tip over [src]."))
 		Weaken(30)
 		icon_state = icon_dead
 		spawn(rand(20,50))

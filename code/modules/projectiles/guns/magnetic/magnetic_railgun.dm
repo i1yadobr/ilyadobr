@@ -39,9 +39,9 @@
 /obj/item/gun/magnetic/railgun/show_ammo(mob/user)
 	var/obj/item/rcd_ammo/ammo = loaded
 	if (ammo)
-		return "<span class='notice'>There are [ammo.remaining] shot\s remaining in \the [loaded].</span>"
+		return SPAN("notice", "There are [ammo.remaining] shot\s remaining in \the [loaded].")
 	else
-		return "<span class='notice'>There is nothing loaded.</span>"
+		return SPAN("notice", "There is nothing loaded.")
 
 /obj/item/gun/magnetic/railgun/check_ammo()
 	var/obj/item/rcd_ammo/ammo = loaded
@@ -58,7 +58,7 @@
 /obj/item/gun/magnetic/railgun/proc/out_of_ammo()
 	qdel(loaded)
 	loaded = null
-	visible_message("<span class='warning'>\The [src] beeps and ejects its empty cartridge.</span>")
+	visible_message(SPAN("warning", "\The [src] beeps and ejects its empty cartridge."))
 
 /obj/item/gun/magnetic/railgun/automatic // Adminspawn only, this shit is absurd.
 	name = "\improper RHR accelerator"
@@ -108,4 +108,4 @@
 		)
 
 /obj/item/gun/magnetic/railgun/flechette/out_of_ammo()
-	visible_message("<span class='warning'>\The [src] beeps to indicate the magazine is empty.</span>")
+	visible_message(SPAN("warning", "\The [src] beeps to indicate the magazine is empty."))

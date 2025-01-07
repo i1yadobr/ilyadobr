@@ -38,10 +38,10 @@
 /obj/item/material/butterfly/attack_self(mob/user)
 	active = !active
 	if(active)
-		to_chat(user, "<span class='notice'>You flip out \the [src].</span>")
+		to_chat(user, SPAN("notice", "You flip out \the [src]."))
 		playsound(user, 'sound/weapons/flipblade.ogg', 15, 1)
 	else
-		to_chat(user, "<span class='notice'>\The [src] can now be concealed.</span>")
+		to_chat(user, SPAN("notice", "\The [src] can now be concealed."))
 	update_force()
 	add_fingerprint(user)
 
@@ -158,7 +158,7 @@
 			mod_weight += 0.10
 			mod_handy = W.mod_handy
 			unbreakable = 1
-			to_chat(user, "<span class='notice'>You insert [src] into [W].</span>")
+			to_chat(user, SPAN("notice", "You insert [src] into [W]."))
 			overlays += image("icon" = 'icons/obj/weapons.dmi', "icon_state" = "[W.icon_state]")
 			qdel(W)
 			return
@@ -170,7 +170,7 @@
 				desc = "A small blade. This one has a makeshift cable grip."
 				mod_weight += 0.05
 				mod_handy = 1.0
-				to_chat(user, "<span class='notice'>You wind up [src]'s grip with the cable.</span>")
+				to_chat(user, SPAN("notice", "You wind up [src]'s grip with the cable."))
 				overlays += image("icon" = 'icons/obj/weapons.dmi', "icon_state" = "shiv_wire")
 			return
 		if(istype(W,/obj/item/tape_roll))
@@ -179,7 +179,7 @@
 			desc = "A small blade. This one has a makeshift duct tape grip."
 			mod_weight += 0.1
 			mod_handy = 1.0
-			to_chat(user, "<span class='notice'>You wind up [src]'s grip with the cable.</span>")
+			to_chat(user, SPAN("notice", "You wind up [src]'s grip with the cable."))
 			overlays += image("icon" = 'icons/obj/weapons.dmi', "icon_state" = "shiv_tape")
 			return
 	..()

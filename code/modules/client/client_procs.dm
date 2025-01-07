@@ -166,7 +166,7 @@ If you have any  questions about this stuff feel free to ask. ~Carn
 			send_link(src, "[config.multiaccount.panic_server_address]?redirect")
 		else
 			log_access("Panic Bunker: ([key_name(key, include_name = FALSE)] | age [player_age]) - attempted to connect. Redirecting is not configured.")
-			message_admins("<span class='danger'>Panic Bunker: ([key] | age [player_age]) - Redirecting is not configured.</span>")
+			message_admins(SPAN("danger", "Panic Bunker: ([key] | age [player_age]) - Redirecting is not configured."))
 		qdel(src)
 		return
 
@@ -188,7 +188,7 @@ If you have any  questions about this stuff feel free to ask. ~Carn
 	if(custom_event_msg && custom_event_msg != "")
 		to_chat(src, "<h1 class='alert'>Custom Event</h1>")
 		to_chat(src, "<h2 class='alert'>A custom event is taking place. OOC Info:</h2>")
-		to_chat(src, "<span class='alert'>[custom_event_msg]</span>")
+		to_chat(src, SPAN("alert", "[custom_event_msg]"))
 		to_chat(src, "<br>")
 
 

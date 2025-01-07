@@ -383,7 +383,7 @@ var/list/admin_verbs_mentor = list(
 	verbs.Remove(/client/proc/hide_most_verbs, admin_verbs_hideable)
 	verbs += /client/proc/show_verbs
 
-	to_chat(src, "<span class='interface'>Most of your adminverbs have been hidden.</span>")
+	to_chat(src, SPAN("interface", "Most of your adminverbs have been hidden."))
 	feedback_add_details("admin_verb","HMV") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	return
 
@@ -394,7 +394,7 @@ var/list/admin_verbs_mentor = list(
 	remove_admin_verbs()
 	verbs += /client/proc/show_verbs
 
-	to_chat(src, "<span class='interface'>Almost all of your adminverbs have been hidden.</span>")
+	to_chat(src, SPAN("interface", "Almost all of your adminverbs have been hidden."))
 	feedback_add_details("admin_verb","TAVVH") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	return
 
@@ -405,7 +405,7 @@ var/list/admin_verbs_mentor = list(
 	verbs -= /client/proc/show_verbs
 	add_admin_verbs()
 
-	to_chat(src, "<span class='interface'>All of your adminverbs are now visible.</span>")
+	to_chat(src, SPAN("interface", "All of your adminverbs are now visible."))
 	feedback_add_details("admin_verb","TAVVS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 
@@ -686,7 +686,7 @@ var/list/admin_verbs_mentor = list(
 		deadmin_holder.reassociate()
 		log_admin("[src] re-admined themself.")
 		message_admins("[src] re-admined themself.", 1)
-		to_chat(src, "<span class='interface'>You now have the keys to control the planet, or atleast a small space station</span>")
+		to_chat(src, SPAN("interface", "You now have the keys to control the planet, or atleast a small space station"))
 		verbs -= /client/proc/readmin_self
 
 /client/proc/deadmin_self()
@@ -698,7 +698,7 @@ var/list/admin_verbs_mentor = list(
 			log_admin("[src] deadmined themself.")
 			message_admins("[src] deadmined themself.", 1)
 			deadmin()
-			to_chat(src, "<span class='interface'>You are now a normal player.</span>")
+			to_chat(src, SPAN("interface", "You are now a normal player."))
 			verbs |= /client/proc/readmin_self
 	feedback_add_details("admin_verb","DAS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
@@ -810,7 +810,7 @@ var/list/admin_verbs_mentor = list(
 	var/mob/living/carbon/human/M = input("Select mob.", "Edit Appearance") as null|anything in GLOB.human_mob_list
 
 	if(!istype(M, /mob/living/carbon/human))
-		to_chat(usr, "<span class='warning'>You can only do this to humans!</span>")
+		to_chat(usr, SPAN("warning", "You can only do this to humans!"))
 		return
 	switch(alert("Are you sure you wish to edit this mob's appearance? Skrell, Unathi, Vox and Tajaran can result in unintended consequences.",,"Yes","No"))
 		if("No")
@@ -927,8 +927,8 @@ var/list/admin_verbs_mentor = list(
 	set desc = "Tells mob to man up and deal with it."
 
 	var/mob/T = fh.followed_instance
-	to_chat(T, "<span class='notice'><b><font size=3>Man up and deal with it.</font></b></span>")
-	to_chat(T, "<span class='notice'>Move on.</span>")
+	to_chat(T, SPAN("notice", "<b><font size=3>Man up and deal with it.</font></b>"))
+	to_chat(T, SPAN("notice", "Move on."))
 
 	log_and_message_admins("told [key_name(T)] to man up and deal with it.")
 

@@ -37,7 +37,7 @@
 		for(var/client/target in GLOB.clients)
 			if(target?.is_key_ignored(sender_key))
 				continue
-			to_chat(target, "<span class='ooc dooc'>[SPAN("everyone", "[sent_message]")]</span>", type = MESSAGE_TYPE_DOOC)
+			to_chat(target, SPAN("ooc dooc", "[SPAN("everyone", "[sent_message]")]"), type = MESSAGE_TYPE_DOOC)
 		return json_encode(list("code"="success"))
 
 	else if("ahelp" in input)
@@ -57,7 +57,7 @@
 		if(!target_client)
 			return json_encode(list("code" = "no_client"))
 		var/player_message = "<font color='red'>Discord PM from <b>[sender_key]</b>: [message]</font>"
-		var/admin_message =  "<span class='info'>Discord PM from [sender_key] to <b>[key_name(target_client)]</b> : [message]</span>"
+		var/admin_message =  SPAN("info", "Discord PM from [sender_key] to <b>[key_name(target_client)]</b> : [message]")
 
 		sound_to(target_client, sound('sound/effects/adminhelp.ogg'))
 		to_chat(target_client, player_message, type=MESSAGE_TYPE_ADMINPM)

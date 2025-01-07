@@ -73,7 +73,7 @@
 /datum/spell/New()
 	..()
 
-	//still_recharging_msg = "<span class='notice'>[name] is still recharging.</span>"
+	//still_recharging_msg = SPAN("notice", "[name] is still recharging.")
 	charge_counter = charge_max
 
 /datum/spell/proc/process()

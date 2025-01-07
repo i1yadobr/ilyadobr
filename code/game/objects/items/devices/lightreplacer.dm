@@ -89,16 +89,16 @@
 	if(istype(W, /obj/item/stack/material) && W.get_material_name() == MATERIAL_GLASS)
 		var/obj/item/stack/G = W
 		if(uses >= max_uses)
-			to_chat(user, "<span class='warning'>[src.name] is full.</span>")
+			to_chat(user, SPAN("warning", "[src.name] is full."))
 			return
 		else if(G.use(5))
 			AddUses(2)
 			if (prob(50))
 				AddUses(1)
-			to_chat(user, "<span class='notice'>You insert a piece of glass into \the [src.name]. You have [uses] light\s remaining.</span>")
+			to_chat(user, SPAN("notice", "You insert a piece of glass into \the [src.name]. You have [uses] light\s remaining."))
 			return
 		else
-			to_chat(user, "<span class='warning'>You need 5 sheets of glass to replace lights.</span>")
+			to_chat(user, SPAN("warning", "You need 5 sheets of glass to replace lights."))
 
 	if(istype(W, /obj/item/light))
 		var/obj/item/light/L = W
@@ -221,7 +221,7 @@
 	else if(!CanUse(U))
 		to_chat(U, failmsg)
 	else if(Use(U))
-		to_chat(U, "<span class='notice'>You replace the [target.get_fitting_name()] with the [src].</span>")
+		to_chat(U, SPAN("notice", "You replace the [target.get_fitting_name()] with the [src]."))
 
 		if(target.lightbulb)
 			target.remove_bulb()

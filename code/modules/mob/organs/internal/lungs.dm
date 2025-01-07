@@ -82,7 +82,7 @@
 			if(active_breathing)
 				owner.visible_message(
 					"<B>\The [owner]</B> coughs up blood!",
-					"<span class='warning'>You cough up blood!</span>",
+					SPAN("warning", "You cough up blood!"),
 					"You hear someone coughing!",
 				)
 			else
@@ -96,11 +96,11 @@
 			if(active_breathing)
 				owner.visible_message(
 					"<B>\The [owner]</B> gasps for air!",
-					"<span class='danger'>You can't breathe!</span>",
+					SPAN("danger", "You can't breathe!"),
 					"You hear someone gasp for air!",
 				)
 			else
-				to_chat(owner, "<span class='danger'>You're having trouble getting enough [breath_type]!</span>")
+				to_chat(owner, SPAN("danger", "You're having trouble getting enough [breath_type]!"))
 
 			owner.losebreath += round(damage/2)
 
@@ -194,7 +194,7 @@
 			owner.co2_alert = 0
 
 		if(!owner.co2_alert && word && prob(warn_prob))
-			to_chat(owner, "<span class='warning'>You feel [word].</span>")
+			to_chat(owner, SPAN("warning", "You feel [word]."))
 			owner.adjustOxyLoss(oxyloss)
 			owner.co2_alert = alert
 
@@ -262,7 +262,7 @@
 		var/damage = 0
 		if(breath.temperature <= species.cold_level_1)
 			if(prob(20))
-				to_chat(owner, "<span class='danger'>You feel your face freezing and icicles forming in your lungs!</span>")
+				to_chat(owner, SPAN("danger", "You feel your face freezing and icicles forming in your lungs!"))
 			if (breath.temperature <= species.cold_level_3)
 				damage = COLD_GAS_DAMAGE_LEVEL_3
 			else if (breath.temperature <= species.cold_level_2)
@@ -278,7 +278,7 @@
 			owner.fire_alert = 1
 		else if(breath.temperature >= species.heat_level_1)
 			if(prob(20))
-				to_chat(owner, "<span class='danger'>You feel your face burning and a searing heat in your lungs!</span>")
+				to_chat(owner, SPAN("danger", "You feel your face burning and a searing heat in your lungs!"))
 
 			if (breath.temperature > species.heat_level_3)
 				damage = HEAT_GAS_DAMAGE_LEVEL_3

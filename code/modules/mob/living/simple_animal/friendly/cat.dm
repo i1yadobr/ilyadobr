@@ -205,7 +205,7 @@
 						   "rubs against [friend].",
 						   "purrs."))
 	else
-		to_chat(usr, "<span class='notice'>[src] ignores you.</span>")
+		to_chat(usr, SPAN("notice", "[src] ignores you."))
 	return
 
 //RUNTIME IS ALIVE! SQUEEEEEEEE~

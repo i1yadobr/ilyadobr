@@ -21,7 +21,7 @@
 
 	if(istype(M, /mob/living/carbon/human))
 		for(var/mob/O in viewers(world.view, src.loc))
-			to_chat(O, "<span class='warning'>\The [M] triggered the \icon[src] [src]</span>")
+			to_chat(O, SPAN("warning", "\The [M] triggered the \icon[src] [src]"))
 		triggered = 1
 		call(src,triggerproc)(M)
 

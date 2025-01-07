@@ -582,7 +582,7 @@
 /obj/structure/flora/junglevines/light/CanPass(atom/movable/mover, turf/target)
 	if(istype(mover, /mob/living))
 		if(prob(25))
-			to_chat(mover, "<span class='warning'>You get stuck in \the [src] for a moment.</span>")
+			to_chat(mover, SPAN("warning", "You get stuck in \the [src] for a moment."))
 			return FALSE
 	else if(istype(mover, /obj/item/projectile))
 		return prob(30)
@@ -604,7 +604,7 @@
 /obj/structure/flora/junglevines/heavy/CanPass(atom/movable/mover, turf/target)
 	if(istype(mover, /mob/living))
 		if(prob(65))
-			to_chat(mover, "<span class='warning'>You get stuck in \the [src] for a moment.</span>")
+			to_chat(mover, SPAN("warning", "You get stuck in \the [src] for a moment."))
 			return FALSE
 	else if(istype(mover, /obj/item/projectile))
 		return prob(30)

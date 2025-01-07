@@ -239,7 +239,7 @@
 
 		mob.Weaken(DETONATION_MOB_CONCUSSION)
 		mob.Stun(DETONATION_MOB_CONCUSSION/2)
-		to_chat(mob, "<span class='danger'>An invisible force slams you against the ground!</span>")
+		to_chat(mob, SPAN("danger", "An invisible force slams you against the ground!"))
 
 		if(iscarbon(mob))
 			var/mob/living/carbon/C = mob
@@ -473,9 +473,9 @@
 	ui_interact(user)
 
 /obj/machinery/power/supermatter/attack_hand(mob/user)
-	user.visible_message("<span class='warning'>\The [user] reaches out and touches \the [src], inducing a resonance... \his body starts to glow and bursts into flames before flashing into ash.</span>",
-		"<span class='danger'>You reach out and touch \the [src]. Everything starts burning and all you can hear is ringing. Your last thought is \"That was not a wise decision.\"</span>",
-		"<span class='warning'>You hear an uneartly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat.</span>")
+	user.visible_message(SPAN("warning", "\The [user] reaches out and touches \the [src], inducing a resonance... \his body starts to glow and bursts into flames before flashing into ash."),
+		SPAN("danger", "You reach out and touch \the [src]. Everything starts burning and all you can hear is ringing. Your last thought is \"That was not a wise decision.\""),
+		SPAN("warning", "You hear an uneartly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat."))
 
 	Consume(user)
 
@@ -512,9 +512,9 @@
 		to_chat(user, "You repair some of the damage to \the [src] with \the [W].")
 		damage = max(damage -10, 0)
 
-	user.visible_message("<span class='warning'>\The [user] touches \a [W] to \the [src] as a silence fills the room...</span>",
-		"<span class='danger'>You touch \the [W] to \the [src] when everything suddenly goes silent. \The [W] flashes into dust as you flinch away from \the [src].</span>",
-		"<span class='warning'>Everything suddenly goes silent.</span>")
+	user.visible_message(SPAN("warning", "\The [user] touches \a [W] to \the [src] as a silence fills the room..."),
+		SPAN("danger", "You touch \the [W] to \the [src] when everything suddenly goes silent. \The [W] flashes into dust as you flinch away from \the [src]."),
+		SPAN("warning", "Everything suddenly goes silent."))
 
 	user.drop(W, force = TRUE)
 	Consume(W)
@@ -525,12 +525,12 @@
 	if(istype(AM, /obj/effect))
 		return
 	if(isliving(AM))
-		AM.visible_message("<span class='warning'>\The [AM] slams into \the [src] inducing a resonance... \his body starts to glow and catch flame before flashing into ash.</span>",
-		"<span class='danger'>You slam into \the [src] as your ears are filled with unearthly ringing. Your last thought is \"Oh, fuck.\"</span>",
-		"<span class='warning'>You hear an uneartly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat.</span>")
+		AM.visible_message(SPAN("warning", "\The [AM] slams into \the [src] inducing a resonance... \his body starts to glow and catch flame before flashing into ash."),
+		SPAN("danger", "You slam into \the [src] as your ears are filled with unearthly ringing. Your last thought is \"Oh, fuck.\""),
+		SPAN("warning", "You hear an uneartly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat."))
 	else if(!grav_pulling) //To prevent spam, detonating supermatter does not indicate non-mobs being destroyed
-		AM.visible_message("<span class='warning'>\The [AM] smacks into \the [src] and rapidly flashes to ash.</span>",
-		"<span class='warning'>You hear a loud crack as you are washed with a wave of heat.</span>")
+		AM.visible_message(SPAN("warning", "\The [AM] smacks into \the [src] and rapidly flashes to ash."),
+		SPAN("warning", "You hear a loud crack as you are washed with a wave of heat."))
 
 	Consume(AM)
 
@@ -546,10 +546,10 @@
 	//Some poor sod got eaten, go ahead and irradiate people nearby.
 	for(var/mob/living/l in range(10))
 		if(l in view())
-			l.show_message("<span class='warning'>As \the [src] slowly stops resonating, you find your skin covered in new radiation burns.</span>", 1,
-				"<span class='warning'>The unearthly ringing subsides and you notice you have new radiation burns.</span>", 2)
+			l.show_message(SPAN("warning", "As \the [src] slowly stops resonating, you find your skin covered in new radiation burns."), 1,
+				SPAN("warning", "The unearthly ringing subsides and you notice you have new radiation burns."), 2)
 		else
-			l.show_message("<span class='warning'>You hear an uneartly ringing and notice your skin is covered in fresh radiation burns.</span>", 2)
+			l.show_message(SPAN("warning", "You hear an uneartly ringing and notice your skin is covered in fresh radiation burns."), 2)
 
 	var/datum/radiation_source/temp_src = SSradiation.radiate(src, new /datum/radiation/preset/supermatter(10))
 	temp_src.schedule_decay(20 SECONDS)

@@ -48,7 +48,7 @@
 		var/obj/screen/S = desc_screens[i]
 		var/datum/phenomena/P = D.intent_phenomenas[intent][i]
 		if(P)
-			S.maptext = "<span style='font-size:7pt;font-family:Impact'><font color='#3C3612'>[P.name]</font></span>"
+			S.maptext = SPAN("", "<font color='#3C3612' style='font-size:7pt;font-family:Impact'>[P.name]</font>")
 		else
 			S.maptext = null
 

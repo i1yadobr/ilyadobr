@@ -139,7 +139,7 @@
 	if(..())
 		return 1
 	if(panel_open)
-		to_chat(user, "<span class='notice'>Close the maintenance panel first.</span>")
+		to_chat(user, SPAN("notice", "Close the maintenance panel first."))
 		return
 
 	ui_interact(user)
@@ -188,7 +188,7 @@
 	if(panel_open)
 		return
 	if(user == occupant)
-		to_chat(usr, "<span class='warning'>You can't reach the controls from the inside.</span>")
+		to_chat(usr, SPAN("warning", "You can't reach the controls from the inside."))
 		return STATUS_CLOSE
 	return ..()
 
@@ -233,9 +233,9 @@
 				return
 			beaker = I
 			component_parts += I
-			user.visible_message("<span class='notice'>\The [user] adds \a [I] to \the [src].</span>", "<span class='notice'>You add \a [I] to \the [src].</span>")
+			user.visible_message(SPAN("notice", "\The [user] adds \a [I] to \the [src]."), SPAN("notice", "You add \a [I] to \the [src]."))
 		else
-			to_chat(user, "<span class='warning'>\The [src] has a beaker already.</span>")
+			to_chat(user, SPAN("warning", "\The [src] has a beaker already."))
 			return
 	if(occupant && panel_open && istype(I,/obj/item/crowbar))
 		occupant.loc = get_turf(src)
@@ -255,7 +255,7 @@
 			return
 		if(!check_compatibility(I:affecting, user))
 			return
-		user.visible_message("<span class='notice'>\The [user] starts placing \the [I:affecting] into \the [src].</span>", "<span class='notice'>You start placing \the [I:affecting] into \the [src].</span>")
+		user.visible_message(SPAN("notice", "\The [user] starts placing \the [I:affecting] into \the [src]."), SPAN("notice", "You start placing \the [I:affecting] into \the [src]."))
 
 		if(do_after(user, 20, src))
 			if(!check_compatibility(I:affecting, user))
@@ -280,13 +280,13 @@
 	if(!CanMouseDrop(target, user))
 		return FALSE
 	if(occupant)
-		to_chat(user, "<span class='warning'>The scanner is already occupied!</span>")
+		to_chat(user, SPAN("warning", "The scanner is already occupied!"))
 		return FALSE
 	if(target.abiotic())
-		to_chat(user, "<span class='warning'>The subject cannot have abiotic items on.</span>")
+		to_chat(user, SPAN("warning", "The subject cannot have abiotic items on."))
 		return FALSE
 	if(target.buckled)
-		to_chat(user, "<span class='warning'>Unbuckle the subject before attempting to move them.</span>")
+		to_chat(user, SPAN("warning", "Unbuckle the subject before attempting to move them."))
 		return FALSE
 	for(var/mob/living/carbon/metroid/M in range(1,target))
 		if(M.Victim == target)
@@ -300,7 +300,7 @@
 	if(!istype(target))
 		return
 	if(target.buckled)
-		to_chat(user, "<span class='warning'>Unbuckle the subject before attempting to move them.</span>")
+		to_chat(user, SPAN("warning", "Unbuckle the subject before attempting to move them."))
 		return
 	if(!check_compatibility(target, user))
 		return
@@ -333,14 +333,14 @@
 
 	if(!emagged)
 		playsound(src.loc, 'sound/effects/computer_emag.ogg', 25)
-		to_chat(user, "<span class='danger'>You short out safety system turning it off.</span>")
+		to_chat(user, SPAN("danger", "You short out safety system turning it off."))
 		emagged = 1
 		available_chemicals += list("Lexorin" = /datum/reagent/lexorin)
 		spark_system.start()
 		playsound(src.loc, SFX_SPARK, 50, 1)
 		return 1
 	if(locked)
-		to_chat(user, "<span class='danger'>You short out locking system.</span>")
+		to_chat(user, SPAN("danger", "You short out locking system."))
 		toggle_lock()
 		spark_system.start()
 		playsound(src.loc, SFX_SPARK, 50, 1)
@@ -350,21 +350,21 @@
 	if(!occupant || !beaker)
 		filtering = 0
 		return
-	to_chat(occupant, "<span class='warning'>You feel like your blood is being sucked away.</span>")
+	to_chat(occupant, SPAN("warning", "You feel like your blood is being sucked away."))
 	filtering = !filtering
 
 /obj/machinery/sleeper/proc/toggle_pump()
 	if(!occupant || !beaker)
 		pump = 0
 		return
-	to_chat(occupant, "<span class='warning'>You feel a tube jammed down your throat.</span>")
+	to_chat(occupant, SPAN("warning", "You feel a tube jammed down your throat."))
 	pump = !pump
 
 /obj/machinery/sleeper/proc/toggle_lock()
 	if(!occupant)
 		locked = 0
 		return
-	to_chat(occupant, "<span class='warning'>You hear a quiet click as the locking bolts [locked ? "go up" : "drop down"].</span>")
+	to_chat(occupant, SPAN("warning", "You hear a quiet click as the locking bolts [locked ? "go up" : "drop down"]."))
 	locked = !locked
 
 /obj/machinery/sleeper/proc/go_in(mob/M, mob/user)
@@ -373,10 +373,10 @@
 	if(stat & (BROKEN|NOPOWER))
 		return
 	if(occupant)
-		to_chat(user, "<span class='warning'>\The [src] is already occupied.</span>")
+		to_chat(user, SPAN("warning", "\The [src] is already occupied."))
 		return
 	if(panel_open)
-		to_chat(user, "<span class='notice'>Close the maintenance panel first.</span>")
+		to_chat(user, SPAN("notice", "Close the maintenance panel first."))
 		return
 	if(M == user)
 		visible_message("\The [user] starts climbing into \the [src].")
@@ -387,7 +387,7 @@
 		if(!check_compatibility(M, user))
 			return
 		if(occupant)
-			to_chat(user, "<span class='warning'>\The [src] is already occupied.</span>")
+			to_chat(user, SPAN("warning", "\The [src] is already occupied."))
 			return
 		M.stop_pulling()
 		if(M.client)

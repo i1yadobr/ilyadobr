@@ -86,22 +86,22 @@
 		if(istype(H))
 			for(var/obj/item/clothing/C in list(H.head,H.wear_mask,H.glasses))
 				if(istype(C) && (C.body_parts_covered & EYES))
-					to_chat(user, "<span class='warning'>You're going to need to remove [C] first.</span>")
+					to_chat(user, SPAN("warning", "You're going to need to remove [C] first."))
 					return
 
 			var/obj/item/organ/vision
 			if(!H.species.vision_organ || !H.should_have_organ(H.species.vision_organ))
-				to_chat(user, "<span class='warning'>You can't find anything on [H] to direct [src] into!</span>")
+				to_chat(user, SPAN("warning", "You can't find anything on [H] to direct [src] into!"))
 				return
 
 			vision = H.internal_organs_by_name[H.species.vision_organ]
 			if(!vision)
 				vision = H.species.has_organ[H.species.vision_organ]
-				to_chat(user, "<span class='warning'>\The [H] is missing \his [initial(vision.name)]!</span>")
+				to_chat(user, SPAN("warning", "\The [H] is missing \his [initial(vision.name)]!"))
 				return
 
-			user.visible_message("<span class='notice'>\The [user] directs [src] into [M]'s [vision.name].</span>", \
-								 "<span class='notice'>You direct [src] into [M]'s [vision.name].</span>")
+			user.visible_message(SPAN("notice", "\The [user] directs [src] into [M]'s [vision.name]."), \
+								 SPAN("notice", "You direct [src] into [M]'s [vision.name]."))
 
 			inspect_vision(vision, user)
 
@@ -331,14 +331,14 @@
 
 /obj/item/device/flashlight/flare/attack_self(mob/user)
 	if(turn_on(user))
-		user.visible_message("<span class='notice'>\The [user] activates \the [src].</span>", "<span class='notice'>You pull the cord on the flare, activating it!</span>")
+		user.visible_message(SPAN("notice", "\The [user] activates \the [src]."), SPAN("notice", "You pull the cord on the flare, activating it!"))
 
 /obj/item/device/flashlight/flare/proc/turn_on(mob/user)
 	if(on)
 		return FALSE
 	if(!fuel)
 		if(user)
-			to_chat(user, "<span class='notice'>It's out of fuel.</span>")
+			to_chat(user, SPAN("notice", "It's out of fuel."))
 		return FALSE
 	force = on_damage
 	damtype = "fire"
@@ -406,15 +406,15 @@
 /obj/item/device/flashlight/glowstick/attack_self(mob/user)
 
 	if(!fuel)
-		to_chat(user,"<span class='notice'>\The [src] is spent.</span>")
+		to_chat(user,SPAN("notice", "\The [src] is spent."))
 		return
 	if(on)
-		to_chat(user,"<span class='notice'>\The [src] is already lit.</span>")
+		to_chat(user,SPAN("notice", "\The [src] is already lit."))
 		return
 
 	. = ..()
 	if(.)
-		user.visible_message("<span class='notice'>[user] cracks and shakes the glowstick.</span>", "<span class='notice'>You crack and shake the glowstick, turning it on!</span>")
+		user.visible_message(SPAN("notice", "[user] cracks and shakes the glowstick."), SPAN("notice", "You crack and shake the glowstick, turning it on!"))
 		set_next_think(world.time)
 
 /obj/item/device/flashlight/glowstick/red

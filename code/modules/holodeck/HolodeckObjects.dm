@@ -130,11 +130,11 @@
 	if(!istype(W) || W.item_flags & ITEM_FLAG_NO_BLUDGEON) return
 
 	if(istype(W, /obj/item/screwdriver))
-		to_chat(user, ("<span class='notice'>It's a holowindow, you can't unfasten it!</span>"))
+		to_chat(user, (SPAN("notice", "It's a holowindow, you can't unfasten it!")))
 	else if(istype(W, /obj/item/crowbar) && reinf && state <= 1)
-		to_chat(user, ("<span class='notice'>It's a holowindow, you can't pry it!</span>"))
+		to_chat(user, (SPAN("notice", "It's a holowindow, you can't pry it!")))
 	else if(istype(W, /obj/item/wrench) && !anchored && (!state || !reinf))
-		to_chat(user, ("<span class='notice'>It's a holowindow, you can't dismantle it!</span>"))
+		to_chat(user, (SPAN("notice", "It's a holowindow, you can't dismantle it!")))
 	else
 		if(W.damtype == BRUTE || W.damtype == BURN)
 			hit(W.force)
@@ -168,7 +168,7 @@
 	if(density && user.a_intent == I_HURT && !(istype(I, /obj/item/card) || istype(I, /obj/item/device/pda)))
 		var/aforce = I.force
 		playsound(src.loc, GET_SFX(SFX_GLASS_HIT), 75, 1)
-		visible_message("<span class='danger'>\The [src] was hit by \the [I].</span>")
+		visible_message(SPAN("danger", "\The [src] was hit by \the [I]."))
 		if(I.damtype == BRUTE || I.damtype == BURN)
 			take_damage(aforce)
 		return
@@ -184,7 +184,7 @@
 			close()
 
 	else if (src.density)
-		flick(text("[]deny", src.base_state), src)
+		flick("[base_state]deny", src)
 
 	return
 
@@ -278,13 +278,13 @@
 		icon_state = "sword[item_color]"
 		w_class = ITEM_SIZE_HUGE
 		playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
-		to_chat(user, "<span class='notice'>[src] is now active.</span>")
+		to_chat(user, SPAN("notice", "[src] is now active."))
 	else
 		force = 3
 		icon_state = "sword0"
 		w_class = ITEM_SIZE_SMALL
 		playsound(user, 'sound/weapons/saberoff.ogg', 50, 1)
-		to_chat(user, "<span class='notice'>[src] can now be concealed.</span>")
+		to_chat(user, SPAN("notice", "[src] can now be concealed."))
 
 	update_held_icon()
 
@@ -317,9 +317,9 @@
 			return TRUE
 		if(prob(50))
 			I.forceMove(loc)
-			visible_message("<span class='notice'>Swish! \the [I] lands in \the [src].</span>")
+			visible_message(SPAN("notice", "Swish! \the [I] lands in \the [src]."))
 		else
-			visible_message("<span class='warning'>\The [I] bounces off of \the [src]'s rim!</span>")
+			visible_message(SPAN("warning", "\The [I] bounces off of \the [src]'s rim!"))
 		return FALSE
 	return ..()
 

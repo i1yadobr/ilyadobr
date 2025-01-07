@@ -99,30 +99,30 @@
 	if(O.get_id_card())
 		if(access_scanner.allowed(user) && !open)
 			locked = !locked
-			to_chat(user, "<span class='notice'>Controls are now [locked ? "locked." : "unlocked."]</span>")
+			to_chat(user, SPAN("notice", "Controls are now [locked ? "locked." : "unlocked."]"))
 			Interact(usr)
 		else if(open)
-			to_chat(user, "<span class='warning'>Please close the access panel before locking it.</span>")
+			to_chat(user, SPAN("warning", "Please close the access panel before locking it."))
 		else
-			to_chat(user, "<span class='warning'>Access denied.</span>")
+			to_chat(user, SPAN("warning", "Access denied."))
 		return
 	else if(isScrewdriver(O))
 		if(!locked)
 			open = !open
-			to_chat(user, "<span class='notice'>Maintenance panel is now [open ? "opened" : "closed"].</span>")
+			to_chat(user, SPAN("notice", "Maintenance panel is now [open ? "opened" : "closed"]."))
 			Interact(usr)
 		else
-			to_chat(user, "<span class='notice'>You need to unlock the controls first.</span>")
+			to_chat(user, SPAN("notice", "You need to unlock the controls first."))
 		return
 	else if(isWelder(O))
 		if(health < maxHealth)
 			if(open)
 				health = min(maxHealth, health + 10)
-				user.visible_message("<span class='notice'>\The [user] repairs \the [src].</span>","<span class='notice'>You repair \the [src].</span>")
+				user.visible_message(SPAN("notice", "\The [user] repairs \the [src]."),SPAN("notice", "You repair \the [src]."))
 			else
-				to_chat(user, "<span class='notice'>Unable to repair with the maintenance panel closed.</span>")
+				to_chat(user, SPAN("notice", "Unable to repair with the maintenance panel closed."))
 		else
-			to_chat(user, "<span class='notice'>\The [src] does not need a repair.</span>")
+			to_chat(user, SPAN("notice", "\The [src] does not need a repair."))
 		return
 	else
 		..()

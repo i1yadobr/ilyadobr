@@ -728,18 +728,18 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		if(I.force <15)
 			for (var/mob/O in hearers(5, src.loc))
-				O.show_message("<span class='warning'>[user.name] hits the [src.name] with the [I.name] with no visible effect.</span>" )
+				O.show_message(SPAN("warning", "[user.name] hits the [src.name] with the [I.name] with no visible effect.") )
 				playsound(src.loc, GET_SFX(SFX_GLASS_HIT), 75, 1)
 		else
 			src.hitstaken++
 			if(hitstaken==3)
 				for (var/mob/O in hearers(5, src.loc))
-					O.show_message("<span class='warning'>[user.name] smashes the [src.name]!</span>" )
+					O.show_message(SPAN("warning", "[user.name] smashes the [src.name]!") )
 				set_broken(TRUE)
 				playsound(src.loc, GET_SFX(SFX_BREAK_WINDOW), 75, 1)
 			else
 				for (var/mob/O in hearers(5, src.loc))
-					O.show_message("<span class='warning'>[user.name] forcefully slams the [src.name] with the [I.name]!</span>" )
+					O.show_message(SPAN("warning", "[user.name] forcefully slams the [src.name] with the [I.name]!") )
 				playsound(src.loc, GET_SFX(SFX_GLASS_HIT), 75, 1)
 		user.setClickCooldown(I.update_attack_cooldown())
 		user.do_attack_animation(src)
@@ -915,7 +915,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 /obj/item/newspaper/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/pen))
 		if(src.scribble_page == src.curr_page)
-			to_chat(user, "<span class='info'>There's already a scribble in this page... You wouldn't want to make things too cluttered, would you?</span>")
+			to_chat(user, SPAN("info", "There's already a scribble in this page... You wouldn't want to make things too cluttered, would you?"))
 		else
 			var/s = sanitize(input(user, "Write something", "Newspaper", ""))
 			s = sanitize(s)
@@ -964,7 +964,7 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 	var/turf/T = get_turf(src)                      //Who the fuck uses spawn(600) anyway, jesus christ
 	if(news_call)
 		for(var/mob/O in hearers(world.view-1, T))
-			O.show_message("<span class='newscaster'><EM>[src.name]</EM> beeps, \"[news_call]\"</span>",2)
+			O.show_message(SPAN("newscaster", "<EM>[src.name]</EM> beeps, \"[news_call]\""),2)
 		src.alert = 1
 		src.update_icon()
 		spawn(300)
@@ -973,6 +973,6 @@ var/list/obj/machinery/newscaster/allCasters = list() //Global list that will co
 		playsound(src.loc, 'sound/signals/ping6.ogg', 75, 0)
 	else
 		for(var/mob/O in hearers(world.view-1, T))
-			O.show_message("<span class='newscaster'><EM>[src.name]</EM> beeps, \"Attention! Wanted issue distributed!\"</span>",2)
+			O.show_message(SPAN("newscaster", "<EM>[src.name]</EM> beeps, \"Attention! Wanted issue distributed!\""),2)
 		playsound(src.loc, 'sound/signals/warning1.ogg', 75, 0)
 	return

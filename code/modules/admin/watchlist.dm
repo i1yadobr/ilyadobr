@@ -26,7 +26,7 @@
 		target_ckey = new_ckey
 
 	if (Check(target_ckey))
-		to_chat(usr, "<span class='redtext'>[target_ckey] is already on the watchlist.</span>")
+		to_chat(usr, SPAN("redtext", "[target_ckey] is already on the watchlist."))
 		return
 
 	var/reason = sanitize(input(usr, "Please State Reason", "Reason"))

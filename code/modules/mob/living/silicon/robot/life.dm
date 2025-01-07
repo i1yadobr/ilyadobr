@@ -60,7 +60,7 @@
 		has_power = TRUE
 	else
 		if(has_power)
-			to_chat(src, "<span class='warning'>You are now running on emergency backup power.</span>")
+			to_chat(src, SPAN("warning", "You are now running on emergency backup power."))
 		has_power = FALSE
 		if(lights_on) // Light is on but there is no power!
 			lights_on = FALSE

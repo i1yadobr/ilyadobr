@@ -102,7 +102,7 @@
 			return
 		t = sanitizeSafe(t, MAX_NAME_LEN)
 		if(t)
-			src.SetName(text("Morgue- '[]'", t))
+			src.SetName("Morgue - '[t]'")
 		else
 			src.SetName("Morgue")
 	src.add_fingerprint(user)
@@ -172,7 +172,7 @@
 	if(user != O)
 		for(var/mob/B in viewers(user, 3))
 			if(B.client && !B.blinded)
-				to_chat(B, "<span class='warning'>\The [user] stuffs [O] into [src]!</span>")
+				to_chat(B, SPAN("warning", "\The [user] stuffs [O] into [src]!"))
 	return
 
 
@@ -246,7 +246,7 @@
 
 /obj/structure/crematorium/attack_hand(mob/user)
 	if(cremating)
-		to_chat(usr, "<span class='warning'>It's locked.</span>")
+		to_chat(usr, SPAN("warning", "It's locked."))
 		return
 	if(src.connected && (src.locked == FALSE))
 		for(var/atom/movable/A as mob|obj in src.connected.loc)
@@ -280,7 +280,7 @@
 			return
 		t = sanitizeSafe(t, MAX_NAME_LEN)
 		if(t)
-			src.SetName(text("Crematorium- '[]'", t))
+			src.SetName("Crematorium - '[t]'")
 		else
 			src.SetName("Crematorium")
 	src.add_fingerprint(user)
@@ -308,14 +308,14 @@
 		return //don't let you cremate something twice or w/e
 
 	if(contents.len <= 0)
-		src.audible_message("<span class='warning'>You hear a hollow crackle.</span>", 1, runechat_message = "*crackle*")
+		src.audible_message(SPAN("warning", "You hear a hollow crackle."), 1, runechat_message = "*crackle*")
 		return
 
 	else
 		if(!isemptylist(src.search_contents_for(/obj/item/disk/nuclear)))
 			to_chat(loc, "The button's status indicator flashes yellow, indicating that something important is inside the crematorium, and must be removed.")
 			return
-		src.audible_message("<span class='warning'>You hear a roar as the [src] activates.</span>", 1, runechat_message = "*roaring*")
+		src.audible_message(SPAN("warning", "You hear a roar as the [src] activates."), 1, runechat_message = "*roaring*")
 
 		cremating = 1
 		locked = 1
@@ -425,8 +425,7 @@
 	if(user != O)
 		for(var/mob/B in viewers(user, 3))
 			if(B.client && !B.blinded)
-				to_chat(B, text("<span class='warning'>[] stuffs [] into []!</span>", user, O, src))
-			//Foreach goto(99)
+				to_chat(B, SPAN("warning", "[user] stuffs [O] into \the [src]!"))
 	return
 
 /obj/machinery/button/crematorium
@@ -448,4 +447,4 @@
 				if(!C.cremating)
 					C.cremate(user)
 	else
-		to_chat(usr, "<span class='warning'>Access denied.</span>")
+		to_chat(usr, SPAN("warning", "Access denied."))

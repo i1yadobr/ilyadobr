@@ -156,12 +156,12 @@
 /obj/item/melee/energy/axe/activate(mob/living/user)
 	..()
 	icon_state = "axe1"
-	to_chat(user, "<span class='notice'>\The [src] is now energised.</span>")
+	to_chat(user, SPAN("notice", "\The [src] is now energised."))
 
 /obj/item/melee/energy/axe/deactivate(mob/living/user)
 	..()
 	icon_state = initial(icon_state)
-	to_chat(user, "<span class='notice'>\The [src] is de-energised. It's just a regular axe now.</span>")
+	to_chat(user, SPAN("notice", "\The [src] is de-energised. It's just a regular axe now."))
 
 /*
  * Energy Sword

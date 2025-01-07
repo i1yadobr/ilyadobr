@@ -18,6 +18,6 @@
 		card.update_icon()
 
 	for (var/mob/living/silicon/robot/R in connected_robots)
-		to_chat(R, "<span class='notice'>You lost signal from your master [src.name].</span>")
+		to_chat(R, SPAN("notice", "You lost signal from your master [src.name]."))
 	. = ..(gibbed,"gives one shrill beep before falling lifeless.", "You have suffered a critical system failure, and are dead.")
 	set_density(1)

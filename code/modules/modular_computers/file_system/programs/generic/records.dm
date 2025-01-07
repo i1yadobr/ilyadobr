@@ -113,7 +113,7 @@
 		return FALSE
 
 	if(!F.can_edit(get_record_access(user), records_context))
-		to_chat(user, "<span class='notice'>\The [nano_host()] flashes an \"Access Denied\" warning.</span>")
+		to_chat(user, SPAN("notice", "\The [nano_host()] flashes an \"Access Denied\" warning."))
 		return FALSE
 
 	var/newValue
@@ -139,7 +139,7 @@
 	if(active_record != R)
 		return FALSE
 	if(!F.can_edit(get_record_access(user), records_context))
-		to_chat(user, "<span class='notice'>\The [nano_host()] flashes an \"Access Denied\" warning.</span>")
+		to_chat(user, SPAN("notice", "\The [nano_host()] flashes an \"Access Denied\" warning."))
 		return FALSE
 	if(newValue)
 		return F.set_value(newValue)

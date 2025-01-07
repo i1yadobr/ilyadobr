@@ -71,7 +71,7 @@
 	playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
 	if(do_after(user, 20, src))
 		if(!src || !WT.isOn()) return
-		to_chat(user, "<span class='notice'>You deconstruct the frame.</span>")
+		to_chat(user, SPAN("notice", "You deconstruct the frame."))
 		new /obj/item/stack/material/steel(src.loc, 5)
 		qdel(src)
 

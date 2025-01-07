@@ -169,7 +169,7 @@ var/global/photo_count = 0
 	var/new_size = input("Photo Size", "Pick a size of resulting photo.") as null|anything in list(1,3)
 	if(new_size)
 		size = new_size
-		to_chat(usr, "<span class='notice'>Camera will now take [size]x[size] photos.</span>")
+		to_chat(usr, SPAN("notice", "Camera will now take [size]x[size] photos."))
 
 /obj/item/device/camera/attack(mob/living/carbon/human/M as mob, mob/user as mob)
 	return
@@ -183,11 +183,11 @@ var/global/photo_count = 0
 /obj/item/device/camera/attackby(obj/item/I as obj, mob/user as mob)
 	if(istype(I, /obj/item/device/camera_film))
 		if(pictures_left)
-			to_chat(user, "<span class='notice'>[src] still has some film in it!</span>")
+			to_chat(user, SPAN("notice", "[src] still has some film in it!"))
 			return
 		if(!user.drop(I, src))
 			return
-		to_chat(user, "<span class='notice'>You insert [I] into [src].</span>")
+		to_chat(user, SPAN("notice", "You insert [I] into [src]."))
 		// TODO [V] That's kinda strange: pictures_left should be stored in film rather than in camera
 		pictures_left = pictures_max
 		return
@@ -217,7 +217,7 @@ var/global/photo_count = 0
 	if(!is_on || !pictures_left || ismob(target.loc))
 		return
 	if(world.time < next_shot_time)
-		to_chat(user, "<span class='notice'>Camera is still charging.</span>")
+		to_chat(user, SPAN("notice", "Camera is still charging."))
 		return
 
 	next_shot_time = world.time + 6 SECONDS
@@ -225,7 +225,7 @@ var/global/photo_count = 0
 
 	captureimage(target, user, flag)
 	playsound(loc, pick('sound/items/polaroid1.ogg', 'sound/items/polaroid2.ogg'), 75, 1, -3)
-	to_chat(user, "<span class='notice'>[pictures_left] photos left.</span>")
+	to_chat(user, SPAN("notice", "[pictures_left] photos left."))
 
 	update_icon()
 

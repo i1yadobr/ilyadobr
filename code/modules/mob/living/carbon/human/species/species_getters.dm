@@ -65,10 +65,10 @@
 	switch(msg_type)
 		if("cold")
 			if(!covered)
-				to_chat(H, "<span class='danger'>[pick(cold_discomfort_strings)]</span>")
+				to_chat(H, SPAN("danger", "[pick(cold_discomfort_strings)]"))
 		if("heat")
 			if(covered)
-				to_chat(H, "<span class='danger'>[pick(heat_discomfort_strings)]</span>")
+				to_chat(H, SPAN("danger", "[pick(heat_discomfort_strings)]"))
 
 /datum/species/proc/get_body_build(gender, prefered)
 	for(var/datum/body_build/BB in body_builds)

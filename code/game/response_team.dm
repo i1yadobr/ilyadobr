@@ -12,13 +12,13 @@ var/can_call_ert
 	set desc = "Send an emergency response team"
 
 	if(!holder)
-		to_chat(usr, "<span class='danger'>Only administrators may use this command.</span>")
+		to_chat(usr, SPAN("danger", "Only administrators may use this command."))
 		return
 	if(GAME_STATE < RUNLEVEL_GAME)
-		to_chat(usr, "<span class='danger'>The game hasn't started yet!</span>")
+		to_chat(usr, SPAN("danger", "The game hasn't started yet!"))
 		return
 	if(send_emergency_team)
-		to_chat(usr, "<span class='danger'>[GLOB.using_map.boss_name] has already dispatched an emergency response team!</span>")
+		to_chat(usr, SPAN("danger", "[GLOB.using_map.boss_name] has already dispatched an emergency response team!"))
 		return
 
 	var/call_reason = sanitize(input(usr, "Enter reason", "Call reason") as message, max_length=MAX_BOOK_MESSAGE_LEN, extra=FALSE)
@@ -32,7 +32,7 @@ var/can_call_ert
 			if("No")
 				return
 	if(send_emergency_team)
-		to_chat(usr, "<span class='danger'>Looks like somebody beat you to it!</span>")
+		to_chat(usr, SPAN("danger", "Looks like somebody beat you to it!"))
 		return
 
 	log_admin("[key_name(usr)] used Dispatch Response Team.", notify_admin = TRUE)
@@ -178,5 +178,5 @@ var/can_call_ert
 /datum/evacuation_predicate/ert/can_call(user)
 	if(world.time >= prevent_until)
 		return TRUE
-	to_chat(user, "<span class='warning'>An emergency response team has been dispatched. Evacuation requests will be denied until [duration2stationtime(prevent_until - world.time)].</span>")
+	to_chat(user, SPAN("warning", "An emergency response team has been dispatched. Evacuation requests will be denied until [duration2stationtime(prevent_until - world.time)]."))
 	return FALSE

@@ -242,7 +242,7 @@ be able to influence the host through various commands.
 	// Use the points at the end rather than the beginning, because the user might cancel
 	if(!use_points(50)) return
 
-	var/rendered = "<span class='game say'>[SPAN("name", "[speaker]")] [SPAN("message", "[say_quote(message)] [message]")]</span>"
+	var/rendered = SPAN("game say", "[SPAN("name", "[speaker]")] [SPAN("message", "[say_quote(message)] [message]")]")
 	target.show_message(rendered)
 
 	to_chat(usr, "<i>You make [target] hear:</i> [rendered]")

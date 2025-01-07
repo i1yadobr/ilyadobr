@@ -95,7 +95,7 @@
 		I.loc = src
 		loaded_item = I
 		for(var/mob/M in viewers())
-			M.show_message(text("<span class='notice'>[user] adds the [I] to the [src].</span>"), 1)
+			M.show_message(SPAN("notice", "[user] adds \the [I] to the [src]."), VISIBLE_MESSAGE)
 		desc = initial(desc) + "<br>It is holding \the [loaded_item]."
 		flick("portable_analyzer_load", src)
 		icon_state = "portable_analyzer_full"
@@ -298,9 +298,9 @@
 							sleep(rand(2,4))
 		if ( droppedSomething )
 			if ( foundtable )
-				user.visible_message("<span class='notice'>[user] unloads their service tray.</span>")
+				user.visible_message(SPAN("notice", "[user] unloads their service tray."))
 			else
-				user.visible_message("<span class='notice'>[user] drops all the items on their tray.</span>")
+				user.visible_message(SPAN("notice", "[user] drops all the items on their tray."))
 
 	return ..()
 
@@ -376,7 +376,7 @@
 	deploy_paper(get_turf(src))
 
 /obj/item/form_printer/proc/deploy_paper(turf/T)
-	T.visible_message("<span class='notice'>\The [src.loc] dispenses a sheet of crisp white paper.</span>")
+	T.visible_message(SPAN("notice", "\The [src.loc] dispenses a sheet of crisp white paper."))
 	new /obj/item/paper(T)
 
 
@@ -536,7 +536,7 @@
 			var/obj/item/R = held[length(held)]
 			held -= R
 			R.forceMove(get_turf(src))
-			R.visible_message("<span class='danger'>[R] drops on the [get_turf(src)]!</span>")
+			R.visible_message(SPAN("danger", "[R] drops on the [get_turf(src)]!"))
 			if(R && istype(R.loc,/turf))
 				R.throw_at(get_edge_target_turf(R.loc, pick(GLOB.alldirs)), rand(1, 3), 1)
 
@@ -558,7 +558,7 @@
 /obj/item/robot_rack/proc/deploy(loc, mob/user)
 	if (!inuse)
 		if(!length(held))
-			to_chat(user, "<span class='notice'>The rack is empty.</span>")
+			to_chat(user, SPAN("notice", "The rack is empty."))
 			return
 		if (deploy_sound)
 			playsound(src.loc, deploy_sound, 10, 1)
@@ -570,11 +570,11 @@
 			if (istype(R, /obj/item/bodybag))
 				R.attack_self(user) // deploy it
 			inuse = 0
-			user.visible_message("<span class='notice'>\The [user]'s \the [src] delpoys [R].</span>")
+			user.visible_message(SPAN("notice", "\The [user]'s \the [src] delpoys [R]."))
 			update_icon()
 		else
 			inuse = 0
-			to_chat(user, "<span class='notice'>You failed to deploy [R].</span>")
+			to_chat(user, SPAN("notice", "You failed to deploy [R]."))
 
 /obj/item/robot_rack/attack_self(mob/user)
 	deploy(get_turf(src),user)
@@ -589,20 +589,20 @@
 						if (I == O)
 							return
 					inuse = 1
-					user.visible_message("<span class='notice'>\The [user] started picking up [O].</span>")
+					user.visible_message(SPAN("notice", "\The [user] started picking up [O]."))
 					if (pickup_sound)
 						playsound(src.loc, pickup_sound, 20, 1)
 					if(do_after(user,pickup_time,src))
 						inuse = 0
-						to_chat(user, "<span class='notice'>You collect [O].</span>")
+						to_chat(user, SPAN("notice", "You collect [O]."))
 						O.forceMove(src)
 						held += O
 						update_icon()
 					else
 						inuse = 0
-						to_chat(user, "<span class='notice'>You failed to pick up [O].</span>")
+						to_chat(user, SPAN("notice", "You failed to pick up [O]."))
 					return
-				to_chat(user, "<span class='notice'>\The [src] is full and can't store any more items.</span>")
+				to_chat(user, SPAN("notice", "\The [src] is full and can't store any more items."))
 				return
 		if(interact_type && istype(O, interact_type))
 			O.attack_hand(user)
@@ -817,9 +817,9 @@
 		for (var/datum/dispense_type/T in item_types)
 			if (istype(A,T.item_type))
 				inuse = 1
-				user.visible_message("<span class='notice'>\The [user] starts recycling [A]...</span>")
+				user.visible_message(SPAN("notice", "\The [user] starts recycling [A]..."))
 				if(do_after(user,recycling_time,src))
-					to_chat(user, "<span class='notice'>\The [src] consumes [A] and you get some energy back.</span>")
+					to_chat(user, SPAN("notice", "\The [src] consumes [A] and you get some energy back."))
 					if(istype(A, /obj/structure/closet))
 						var/obj/structure/closet/C = A
 						C.dump_contents()
@@ -830,13 +830,13 @@
 							R.cell.add_charge(T.energy/3)
 					inuse = 0
 				else
-					to_chat(user, "<span class='danger'>You failed to recycle [A].</span>")
+					to_chat(user, SPAN("danger", "You failed to recycle [A]."))
 					inuse = 0
 				break
 		if(istype(user,/mob/living/silicon/robot))
 			var/mob/living/silicon/robot/R = user
 			if(R.stat || !R.cell || R.cell.charge <= selected.energy)
-				to_chat(user, "<span class='notice'>Not enough energy.</span>")
+				to_chat(user, SPAN("notice", "Not enough energy."))
 				return
 
 		if(!istype(A, /obj/structure/table) && !istype(A, /turf/simulated/floor))
@@ -844,7 +844,7 @@
 		if (!selected.item_type)
 			return
 		playsound(src.loc, activate_sound, 10, 1)
-		to_chat(user, "<span class='notice'>Dispensing [selected.name]...</span>")
+		to_chat(user, SPAN("notice", "Dispensing [selected.name]..."))
 		inuse = 1
 		if(do_after(user,selected.delay,src))
 			inuse = 0
@@ -874,7 +874,7 @@
 				else if (istype(product,/obj/item/reagent_containers/ivbag/blood/OMinus))
 					product.name = "synthesised blood pack"
 
-			user.visible_message("<span class='notice'>\The [user]'s \the [src] spits out \the [selected.name].</span>")
+			user.visible_message(SPAN("notice", "\The [user]'s \the [src] spits out \the [selected.name]."))
 			product.loc = get_turf(A)
 			if(isrobot(user))
 				var/mob/living/silicon/robot/R = user
@@ -882,7 +882,7 @@
 					R.cell.use(selected.energy)
 		else
 			inuse = 0
-			to_chat(user, "<span class='danger'>You failed to dispense the product</span>")
+			to_chat(user, SPAN("danger", "You failed to dispense the product"))
 
 /obj/item/robot_item_dispenser/canvas
 	name = "canvas assembler"

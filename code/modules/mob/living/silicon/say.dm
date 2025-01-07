@@ -9,7 +9,7 @@
 	..()
 	if(message_mode)
 		if(!is_component_functioning("radio"))
-			to_chat(src, "<span class='warning'>Your radio isn't functional at this time.</span>")
+			to_chat(src, SPAN("warning", "Your radio isn't functional at this time."))
 			return 0
 		if(message_mode == "general")
 			message_mode = null
@@ -21,7 +21,7 @@
 		return holopad_talk(message, verb, speaking)
 	else if(message_mode)
 		if (ai_radio.disabledAi || !has_power() || stat)
-			to_chat(src, "<span class='danger'>System Error - Transceiver Disabled.</span>")
+			to_chat(src, SPAN("danger", "System Error - Transceiver Disabled."))
 			return 0
 		if(message_mode == "general")
 			message_mode = null
@@ -136,7 +136,7 @@
 
 	var/obj/machinery/hologram/holopad/T = src.holo
 	if(T && T.masters[src])
-		var/rendered = "<span class='game say'>[SPAN("name", "[name]")] [SPAN("message", "[message]")]</span>"
+		var/rendered = SPAN("game say", "[SPAN("name", "[name]")] [SPAN("message", "[message]")]")
 		to_chat(src, "<i>[SPAN("game say", "Holopad action relayed, [SPAN("name", "[real_name]")] [SPAN("message", "[message]")]")]</i>")
 
 		for(var/mob/M in viewers(T.loc))

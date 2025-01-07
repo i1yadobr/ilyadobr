@@ -81,7 +81,7 @@
 
 /mob/living/bot/cleanbot/explode()
 	on = 0
-	visible_message("<span class='danger'>[src] blows apart!</span>")
+	visible_message(SPAN("danger", "[src] blows apart!"))
 	var/turf/Tsec = get_turf(src)
 
 	new /obj/item/reagent_containers/vessel/bucket(Tsec)
@@ -135,7 +135,7 @@
 	. = ..()
 	if(!screwloose || !oddbutton)
 		if(user)
-			to_chat(user, "<span class='notice'>The [src] buzzes and beeps.</span>")
+			to_chat(user, SPAN("notice", "The [src] buzzes and beeps."))
 		oddbutton = 1
 		screwloose = 1
 		return 1
@@ -173,7 +173,7 @@
 		var/turf/T = get_turf(loc)
 		var/mob/living/bot/cleanbot/A = new /mob/living/bot/cleanbot(T)
 		A.SetName(created_name)
-		to_chat(user, "<span class='notice'>You add the robot arm to the bucket and sensor assembly. Beep boop!</span>")
+		to_chat(user, SPAN("notice", "You add the robot arm to the bucket and sensor assembly. Beep boop!"))
 		qdel(src)
 
 	else if(istype(O, /obj/item/pen))

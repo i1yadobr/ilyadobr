@@ -38,7 +38,7 @@
 /obj/effect/force_portal/onDropInto(atom/movable/AM)
 	boom_time -= 1 SECOND
 	set_next_think(boom_time)
-	src.visible_message("<span class='warning'>\The [src] sucks in \the [AM]!</span>")
+	src.visible_message(SPAN("warning", "\The [src] sucks in \the [AM]!"))
 	if(!ismob(AM))
 		var/obj/O = AM
 		if(O.w_class <= ITEM_SIZE_SMALL)

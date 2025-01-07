@@ -19,18 +19,18 @@
 	var/turf/destination = (direction == UP) ? GetAbove(pulling) : GetBelow(pulling)
 
 	if(!start.CanZPass(pulling, direction))
-		to_chat(src, "<span class='warning'>\The [start] blocked your pulled object!</span>")
+		to_chat(src, SPAN("warning", "\The [start] blocked your pulled object!"))
 		stop_pulling()
 		return 0
 
 	if(!destination.CanZPass(pulling, direction))
-		to_chat(src, "<span class='warning'>The [pulling] you were pulling bumps up against \the [destination].</span>")
+		to_chat(src, SPAN("warning", "The [pulling] you were pulling bumps up against \the [destination]."))
 		stop_pulling()
 		return 0
 
 	for(var/atom/A in destination)
 		if(!A.CanMoveOnto(pulling, start, 1.5, direction))
-			to_chat(src, "<span class='warning'>\The [A] blocks the [pulling] you were pulling.</span>")
+			to_chat(src, SPAN("warning", "\The [A] blocks the [pulling] you were pulling."))
 			stop_pulling()
 			return 0
 

@@ -35,18 +35,18 @@
 			var/mob/living/M = buckled_mob
 			if(buckled_mob != user)
 				buckled_mob.visible_message(\
-					"<span class='notice'>[user.name] pulls [M.name] free from the sticky nest!</span>",\
-					"<span class='notice'>[user.name] pulls you free from the gelatinous resin.</span>",\
-					"<span class='notice'>You hear squelching...</span>")
+					SPAN("notice", "[user.name] pulls [M.name] free from the sticky nest!"),\
+					SPAN("notice", "[user.name] pulls you free from the gelatinous resin."),\
+					SPAN("notice", "You hear squelching..."))
 				unbuckle_mob()
 			else
 				THROTTLE_SHARED(cooldown, NEST_RESIST_TIME, M.last_special)
 				if(!cooldown)
 					return
 				M.visible_message(\
-					"<span class='warning'>[buckled_mob.name] struggles to break free of the gelatinous resin...</span>",\
-					"<span class='warning'>You struggle to break free from the gelatinous resin...</span>",\
-					"<span class='notice'>You hear squelching...</span>")
+					SPAN("warning", "[buckled_mob.name] struggles to break free of the gelatinous resin..."),\
+					SPAN("warning", "You struggle to break free from the gelatinous resin..."),\
+					SPAN("notice", "You hear squelching..."))
 				if(!do_after(M, NEST_RESIST_TIME))
 					to_chat(M, SPAN("warning", "You fail to untie yourself!"))
 					M.last_special = world.time - NEST_RESIST_TIME/2 // Don't make them wait forever till next try, but also don't allow them to try again immediately
@@ -79,9 +79,9 @@
 		return
 	else
 		M.visible_message(
-			"<span class='notice'>[user.name] secretes a thick vile goo, securing [M] into [src]!</span>",
-			"<span class='warning'>[user.name] drenches you in a foul-smelling resin, trapping you in the [src]!</span>",
-			"<span class='notice'>You hear squelching...</span>")
+			SPAN("notice", "[user.name] secretes a thick vile goo, securing [M] into [src]!"),
+			SPAN("warning", "[user.name] drenches you in a foul-smelling resin, trapping you in the [src]!"),
+			SPAN("notice", "You hear squelching..."))
 	buckle_mob(M)
 	src.add_fingerprint(user)
 	return

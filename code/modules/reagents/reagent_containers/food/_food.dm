@@ -193,7 +193,7 @@
 
 			user.visible_message( \
 				"\The [user] scoops up some [src] with \the [U]!", \
-				"<span class='notice'>You scoop up some [src] with \the [U]!</span>" \
+				SPAN("notice", "You scoop up some [src] with \the [U]!") \
 			)
 
 			bitecount++

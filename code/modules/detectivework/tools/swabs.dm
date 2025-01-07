@@ -17,37 +17,37 @@
 		return ..()
 
 	if(is_used())
-		to_chat(user, "<span class='warning'>This swab has already been used.</span>")
+		to_chat(user, SPAN("warning", "This swab has already been used."))
 		return
 
 	var/mob/living/carbon/human/H = M
 	var/sample_type
 	inuse = 1
-	to_chat(user, "<span class='notice'>You begin collecting evidence.</span>")
+	to_chat(user, SPAN("notice", "You begin collecting evidence."))
 	if(do_after(user,20,src))
 		if(H.wear_mask)
-			to_chat(user, "<span class='warning'>\The [H] is wearing a mask.</span>")
+			to_chat(user, SPAN("warning", "\The [H] is wearing a mask."))
 			inuse = 0
 			return
 
 		if(!H.dna || !H.dna.unique_enzymes)
-			to_chat(user, "<span class='warning'>They don't seem to have DNA!</span>")
+			to_chat(user, SPAN("warning", "They don't seem to have DNA!"))
 			inuse = 0
 			return
 
 		if(user != H && H.a_intent != I_HELP && !H.lying)
-			user.visible_message("<span class='danger'>\The [user] tries to take a swab sample from \the [H], but they move away.</span>")
+			user.visible_message(SPAN("danger", "\The [user] tries to take a swab sample from \the [H], but they move away."))
 			inuse = 0
 			return
 		var/target_dna
 		var/target_gsr
 		if(user.zone_sel.selecting == BP_MOUTH)
 			if(!H.organs_by_name[BP_HEAD])
-				to_chat(user, "<span class='warning'>They don't have a head.</span>")
+				to_chat(user, SPAN("warning", "They don't have a head."))
 				inuse = 0
 				return
 			if(!H.check_has_mouth())
-				to_chat(user, "<span class='warning'>They don't have a mouth.</span>")
+				to_chat(user, SPAN("warning", "They don't have a mouth."))
 				inuse = 0
 				return
 			user.visible_message("[user] swabs \the [H]'s mouth for a saliva sample.")
@@ -64,7 +64,7 @@
 				if(istype(O) && !O.is_stump())
 					has_hand = 1
 			if(!has_hand)
-				to_chat(user, "<span class='warning'>They don't have any hands.</span>")
+				to_chat(user, SPAN("warning", "They don't have any hands."))
 				inuse = 0
 				return
 			user.visible_message("[user] swabs [H]'s palm for a sample.")
@@ -98,12 +98,12 @@
 		return
 
 	if(is_used())
-		to_chat(user, "<span class='warning'>This swab has already been used.</span>")
+		to_chat(user, SPAN("warning", "This swab has already been used."))
 		return
 
 	add_fingerprint(user)
 	inuse = 1
-	to_chat(user, "<span class='notice'>You begin collecting evidence.</span>")
+	to_chat(user, SPAN("notice", "You begin collecting evidence."))
 	if(do_after(user,20,src))
 		var/list/choices = list()
 		if(A.blood_DNA)
@@ -113,7 +113,7 @@
 
 		var/choice
 		if(!choices.len)
-			to_chat(user, "<span class='warning'>There is no evidence on \the [A].</span>")
+			to_chat(user, SPAN("warning", "There is no evidence on \the [A]."))
 			inuse = 0
 			return
 		else if(choices.len == 1)
@@ -138,7 +138,7 @@
 		else if(choice == "Gunshot Residue")
 			var/obj/item/clothing/B = A
 			if(!istype(B) || !B.gunshot_residue)
-				to_chat(user, "<span class='warning'>There is no residue on \the [A].</span>")
+				to_chat(user, SPAN("warning", "There is no residue on \the [A]."))
 				inuse = 0
 				return
 			target_gsr = B.gunshot_residue

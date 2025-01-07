@@ -26,7 +26,7 @@
 /obj/item/clothing/under/gorka/mob_can_equip(mob/user)
 	.=..()
 	if(user.gender == FEMALE)
-		to_chat(user, "<span class='warning'> You aren't sure you'll fit in this men's cloth..</span>")
+		to_chat(user, SPAN("warning", " You aren't sure you'll fit in this men's cloth.."))
 		return 0
 
 /obj/item/clothing/under/rank/rosa
@@ -699,11 +699,11 @@
 	var/list/slot_must_be_empty = list(slot_back,slot_handcuffed,slot_legcuffed,slot_belt,slot_head,slot_wear_suit)
 	for(var/slot_id in slot_must_be_empty)
 		if(user.get_equipped_item(slot_id))
-			to_chat(user, "<span class='warning'>You can't fit inside while wearing that \the [user.get_equipped_item(slot_id)].</span>")
+			to_chat(user, SPAN("warning", "You can't fit inside while wearing that \the [user.get_equipped_item(slot_id)]."))
 			return 0
 
 	if(user.r_hand != null || user.l_hand != null)
-		to_chat(user, "<span class='warning'>You can't fit inside while holding items.</span>")
+		to_chat(user, SPAN("warning", "You can't fit inside while holding items."))
 		return 0
 
 	return 1

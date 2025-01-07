@@ -228,7 +228,7 @@
 //Will return 1 on failure
 /obj/machinery/power/smes/proc/make_terminal(const/mob/user)
 	if (user.loc == loc)
-		to_chat(user, "<span class='warning'>You must not be on the same tile as the [src].</span>")
+		to_chat(user, SPAN("warning", "You must not be on the same tile as the [src]."))
 		return 1
 
 	//Direction the terminal will face to
@@ -240,15 +240,15 @@
 			tempDir = WEST
 	var/turf/tempLoc = get_step(src, reverse_direction(tempDir))
 	if (istype(tempLoc, /turf/space))
-		to_chat(user, "<span class='warning'>You can't build a terminal on space.</span>")
+		to_chat(user, SPAN("warning", "You can't build a terminal on space."))
 		return 1
 	else if (istype(tempLoc))
 		if(!tempLoc.is_plating())
-			to_chat(user, "<span class='warning'>You must remove the floor plating first.</span>")
+			to_chat(user, SPAN("warning", "You must remove the floor plating first."))
 			return 1
 	if(check_terminal_exists(tempLoc, user, tempDir))
 		return 1
-	to_chat(user, "<span class='notice'>You start adding cable to the [src].</span>")
+	to_chat(user, SPAN("notice", "You start adding cable to the [src]."))
 	if(do_after(user, 50, src))
 		if(check_terminal_exists(tempLoc, user, tempDir))
 			return 1
@@ -264,7 +264,7 @@
 /obj/machinery/power/smes/proc/check_terminal_exists(turf/location, mob/user, direction)
 	for(var/obj/machinery/power/terminal/term in location)
 		if(term.dir == direction)
-			to_chat(user, "<span class='notice'>There is already a terminal here.</span>")
+			to_chat(user, SPAN("notice", "There is already a terminal here."))
 			return 1
 	return 0
 
@@ -294,14 +294,14 @@
 		return
 
 	if (!panel_open)
-		to_chat(user, "<span class='warning'>You need to open access hatch on [src] first!</span>")
+		to_chat(user, SPAN("warning", "You need to open access hatch on [src] first!"))
 		return 0
 
 	if(isCoil(W) && !building_terminal)
 		building_terminal = 1
 		var/obj/item/stack/cable_coil/CC = W
 		if (CC.get_amount() < 10)
-			to_chat(user, "<span class='warning'>You need more cables.</span>")
+			to_chat(user, SPAN("warning", "You need more cables."))
 			building_terminal = 0
 			return 0
 		if (make_terminal(user))
@@ -310,8 +310,8 @@
 		building_terminal = 0
 		CC.use(10)
 		user.visible_message(\
-				"<span class='notice'>[user.name] has added cables to the [src].</span>",\
-				"<span class='notice'>You added cables to the [src].</span>")
+				SPAN("notice", "[user.name] has added cables to the [src]."),\
+				SPAN("notice", "You added cables to the [src]."))
 		stat = 0
 		return 0
 
@@ -335,15 +335,15 @@
 				term = T
 				break
 		if(!term)
-			to_chat(user, "<span class='warning'>There is no terminal on this tile.</span>")
+			to_chat(user, SPAN("warning", "There is no terminal on this tile."))
 			building_terminal = 0
 			return 0
 		var/turf/tempTDir = get_turf(term)
 		if (istype(tempTDir))
 			if(!tempTDir.is_plating())
-				to_chat(user, "<span class='warning'>You must remove the floor plating first.</span>")
+				to_chat(user, SPAN("warning", "You must remove the floor plating first."))
 			else
-				to_chat(user, "<span class='notice'>You begin to cut the cables...</span>")
+				to_chat(user, SPAN("notice", "You begin to cut the cables..."))
 				playsound(src, 'sound/items/Deconstruct.ogg', 50, 1)
 				if(do_after(user, 50, src))
 					if (prob(50) && electrocute_mob(usr, term.powernet, term))
@@ -354,8 +354,8 @@
 							return 0
 					new /obj/item/stack/cable_coil(loc,10)
 					user.visible_message(\
-						"<span class='notice'>[user.name] cut the cables and dismantled the power terminal.</span>",\
-						"<span class='notice'>You cut the cables and dismantle the power terminal.</span>")
+						SPAN("notice", "[user.name] cut the cables and dismantled the power terminal."),\
+						SPAN("notice", "You cut the cables and dismantle the power terminal."))
 					terminals -= term
 					qdel(term)
 		building_terminal = 0
@@ -461,7 +461,7 @@
 	amount = max(0, round(amount))
 	damage += amount
 	if(damage > maxdamage)
-		visible_message("<span class='danger'>\The [src] explodes in large rain of sparks and smoke!</span>")
+		visible_message(SPAN("danger", "\The [src] explodes in large rain of sparks and smoke!"))
 		// Depending on stored charge percentage cause damage.
 		switch(Percentage())
 			if(75 to INFINITY)

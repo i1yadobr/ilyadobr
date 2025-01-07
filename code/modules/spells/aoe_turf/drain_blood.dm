@@ -26,7 +26,7 @@
 				H.vessel.remove_reagent(/datum/reagent/blood, 10)
 			else
 				L.adjustBruteLoss(10)
-			to_chat(L, "<span class='danger'>You feel your lifeforce being ripping out of your body!</span>")
+			to_chat(L, SPAN("danger", "You feel your lifeforce being ripping out of your body!"))
 
 			//Do effect
 			var/obj/item/projectile/beam/blood_effect/effect = new(get_turf(user))

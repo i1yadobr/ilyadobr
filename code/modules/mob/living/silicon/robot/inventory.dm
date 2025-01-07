@@ -208,7 +208,7 @@
 	if(!(locate(O) in src.module.modules) && O != src.module.emag)
 		return
 	if(activated(O))
-		to_chat(src, "<span class='notice'>Already activated</span>")
+		to_chat(src, SPAN("notice", "Already activated"))
 		return
 	if(!module_state_1)
 		module_state_1 = O
@@ -226,7 +226,7 @@
 		O.screen_loc = inv3.screen_loc
 		contents += O
 	else
-		to_chat(src, "<span class='notice'>You need to disable a module first!</span>")
+		to_chat(src, SPAN("notice", "You need to disable a module first!"))
 
 /mob/living/silicon/robot/put_in_hands(obj/item/W) // No hands.
 	W.forceMove(get_turf(src))

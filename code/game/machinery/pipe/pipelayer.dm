@@ -31,10 +31,10 @@
 
 /obj/machinery/pipelayer/attack_hand(mob/user as mob)
 	if(!metal&&!on)
-		to_chat(user, "<span class='warning'>\The [src] doesn't work without metal.</span>")
+		to_chat(user, SPAN("warning", "\The [src] doesn't work without metal."))
 		return
 	on=!on
-	user.visible_message("<span class='notice'>[user] has [!on?"de":""]activated \the [src].</span>", "<span class='notice'>You [!on?"de":""]activate \the [src].</span>")
+	user.visible_message(SPAN("notice", "[user] has [!on?"de":""]activated \the [src]."), SPAN("notice", "You [!on?"de":""]activate \the [src]."))
 	return
 
 /obj/machinery/pipelayer/attackby(obj/item/W as obj, mob/user as mob)
@@ -42,23 +42,23 @@
 	if(isWrench(W))
 		P_type_t = input("Choose pipe type", "Pipe type") as null|anything in Pipes
 		P_type = Pipes[P_type_t]
-		user.visible_message("<span class='notice'>[user] has set \the [src] to manufacture [P_type_t].</span>", "<span class='notice'>You set \the [src] to manufacture [P_type_t].</span>")
+		user.visible_message(SPAN("notice", "[user] has set \the [src] to manufacture [P_type_t]."), SPAN("notice", "You set \the [src] to manufacture [P_type_t]."))
 		return
 
 	if(isCrowbar(W))
 		a_dis=!a_dis
-		user.visible_message("<span class='notice'>[user] has [!a_dis?"de":""]activated auto-dismantling.</span>", "<span class='notice'>You [!a_dis?"de":""]activate auto-dismantling.</span>")
+		user.visible_message(SPAN("notice", "[user] has [!a_dis?"de":""]activated auto-dismantling."), SPAN("notice", "You [!a_dis?"de":""]activate auto-dismantling."))
 		return
 
 	if(istype(W, /obj/item/stack/material) && W.get_material_name() == MATERIAL_STEEL)
 
 		var/result = load_metal(W)
 		if(isnull(result))
-			to_chat(user, "<span class='warning'>Unable to load [W] - no metal found.</span>")
+			to_chat(user, SPAN("warning", "Unable to load [W] - no metal found."))
 		else if(!result)
-			to_chat(user, "<span class='notice'>\The [src] is full.</span>")
+			to_chat(user, SPAN("notice", "\The [src] is full."))
 		else
-			user.visible_message("<span class='notice'>[user] has loaded metal into \the [src].</span>", "<span class='notice'>You load metal into \the [src]</span>")
+			user.visible_message(SPAN("notice", "[user] has loaded metal into \the [src]."), SPAN("notice", "You load metal into \the [src]"))
 
 		return
 
@@ -72,7 +72,7 @@
 				use_metal(m)
 				var/obj/item/stack/material/steel/MM = new (get_turf(src))
 				MM.amount = m
-				user.visible_message("<span class='notice'>[user] removes [m] sheet\s of metal from the \the [src].</span>", "<span class='notice'>You remove [m] sheet\s of metal from \the [src]</span>")
+				user.visible_message(SPAN("notice", "[user] removes [m] sheet\s of metal from the \the [src]."), SPAN("notice", "You remove [m] sheet\s of metal from \the [src]"))
 		else
 			to_chat(user, "\The [src] is empty.")
 		return

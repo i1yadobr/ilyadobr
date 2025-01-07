@@ -21,7 +21,7 @@
 	log_say("[key_name(speaker)]: ([name]) [message]")
 
 	var/message_start = "[name], [SPAN("name", "[speaker.name]")]"
-	var/message_body = "<span class='message'>[speaker.say_quote(message)], \"[message]\"</span>"
+	var/message_body = SPAN("message", "[speaker.say_quote(message)], \"[message]\"")
 
 	for (var/mob/observer/ghost/O in GLOB.ghost_mob_list)
 		O.show_message("<i>[SPAN("game say", "[message_start] ([ghost_follow_link(speaker, O)]) [message_body]")]</i>", 2)

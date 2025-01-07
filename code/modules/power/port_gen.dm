@@ -50,7 +50,7 @@
 	if(..())
 		return
 	if(!anchored)
-		to_chat(usr, "<span class='warning'>The generator needs to be secured first.</span>")
+		to_chat(usr, SPAN("warning", "The generator needs to be secured first."))
 		return
 
 /obj/machinery/power/port_gen/_examine_text(mob/user)
@@ -270,9 +270,9 @@
 		var/obj/item/stack/addstack = O
 		var/amount = min((max_sheets - sheets), addstack.amount)
 		if(amount < 1)
-			to_chat(user, "<span class='notice'>The [src.name] is full!</span>")
+			to_chat(user, SPAN("notice", "The [src.name] is full!"))
 			return
-		to_chat(user, "<span class='notice'>You add [amount] sheet\s to the [src.name].</span>")
+		to_chat(user, SPAN("notice", "You add [amount] sheet\s to the [src.name]."))
 		sheets += amount
 		addstack.use(amount)
 		updateUsrDialog()
@@ -282,10 +282,10 @@
 
 			if(!anchored)
 				connect_to_network()
-				to_chat(user, "<span class='notice'>You secure the generator to the floor.</span>")
+				to_chat(user, SPAN("notice", "You secure the generator to the floor."))
 			else
 				disconnect_from_network()
-				to_chat(user, "<span class='notice'>You unsecure the generator from the floor.</span>")
+				to_chat(user, SPAN("notice", "You unsecure the generator from the floor."))
 
 			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 			anchored = !anchored
@@ -294,9 +294,9 @@
 			open = !open
 			playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 			if(open)
-				to_chat(user, "<span class='notice'>You open the access panel.</span>")
+				to_chat(user, SPAN("notice", "You open the access panel."))
 			else
-				to_chat(user, "<span class='notice'>You close the access panel.</span>")
+				to_chat(user, SPAN("notice", "You close the access panel."))
 		else if(isCrowbar(O) && open)
 			var/obj/machinery/constructable_frame/machine_frame/new_frame = new /obj/machinery/constructable_frame/machine_frame(src.loc)
 			for(var/obj/item/I in component_parts)
@@ -377,7 +377,7 @@
 	dat += text("Power current: [(powernet == null ? "Unconnected" : "[avail()]")]<br>")
 
 	var/tempstr = "Temperature: [temperature]&deg;C<br>"
-	dat += (overheating)? "<span class='danger'>[tempstr]</span>" : tempstr
+	dat += (overheating)? SPAN("danger", "[tempstr]") : tempstr
 	dat += "<br><A href='?src=\ref[src];action=close'>Close</A>"
 	show_browser(user, "[dat]", "window=port_gen")
 	onclose(user, "port_gen")
@@ -477,7 +477,7 @@
 		temperature_gain = 60
 		reagents.remove_any(1)
 		if(prob(2))
-			audible_message("<span class='notice'>[src] churns happily</span>", runechat_message = "*churn*")
+			audible_message(SPAN("notice", "[src] churns happily"), runechat_message = "*churn*")
 	else
 		rad_power = initial(rad_power)
 		temperature_gain = initial(temperature_gain)
@@ -494,10 +494,10 @@
 		var/obj/item/reagent_containers/R = O
 		if(R.standard_pour_into(src,user))
 			if(reagents.has_reagent("vodka"))
-				audible_message("<span class='notice'>[src] blips happily</span>", runechat_message = "*blip!*")
+				audible_message(SPAN("notice", "[src] blips happily"), runechat_message = "*blip!*")
 				playsound(src,'sound/machines/synth_yes.ogg', 50, 0)
 			else
-				audible_message("<span class='warning'>[src] blips in disappointment</span>", runechat_message = "*blip...*")
+				audible_message(SPAN("warning", "[src] blips in disappointment"), runechat_message = "*blip...*")
 				playsound(src, 'sound/machines/synth_no.ogg', 50, 0)
 		return
 	..()

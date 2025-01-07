@@ -211,7 +211,7 @@
 	if(cell.charge > cell_amount)
 		// Spam Protection
 		if(prob(10))
-			to_chat(src, "<span class='danger'>Warning: Unauthorized access through power channel [rand(11,29)] detected!</span>")
+			to_chat(src, SPAN("danger", "Warning: Unauthorized access through power channel [rand(11,29)] detected!"))
 		cell.use(cell_amount)
 		return amount
 	return 0
@@ -231,7 +231,7 @@
 			if(mmi.brainmob)
 				mind.transfer_to(mmi.brainmob)
 			else
-				to_chat(src, "<span class='danger'>Oops! Something went very wrong, your MMI was unable to receive your mind. You have been ghosted. Please make a bug report so we can fix this bug.</span>")
+				to_chat(src, SPAN("danger", "Oops! Something went very wrong, your MMI was unable to receive your mind. You have been ghosted. Please make a bug report so we can fix this bug."))
 				ghostize()
 				//ERROR("A borg has been destroyed, but its MMI lacked a brainmob, so the mind could not be transferred. Player: [ckey].")
 			mmi = null
@@ -428,12 +428,12 @@
 	set name = "Self Diagnosis"
 
 	if(!is_component_functioning("diagnosis unit"))
-		to_chat(src, "<span class='warning'>Your self-diagnosis component isn't functioning.</span>")
+		to_chat(src, SPAN("warning", "Your self-diagnosis component isn't functioning."))
 		return
 
 	var/datum/robot_component/CO = get_robot_component("diagnosis unit")
 	if (!cell_use_power(CO.active_usage))
-		to_chat(src, "<span class='warning'>Low Power.</span>")
+		to_chat(src, SPAN("warning", "Low Power."))
 		return
 	var/dat = self_diagnosis()
 	show_browser(src, dat, "window=robotdiagnosis")
@@ -458,10 +458,10 @@
 	var/datum/robot_component/C = components[toggle]
 	if(C.toggled)
 		C.toggled = 0
-		to_chat(src, "<span class='warning'>You disable [C.name].</span>")
+		to_chat(src, SPAN("warning", "You disable [C.name]."))
 	else
 		C.toggled = 1
-		to_chat(src, "<span class='warning'>You enable [C.name].</span>")
+		to_chat(src, SPAN("warning", "You enable [C.name]."))
 
 /mob/living/silicon/robot/pointed(atom/A as mob|obj|turf in view())
 	if(..())
@@ -553,7 +553,7 @@
 					C.brute_damage = WC.brute
 					C.electronics_damage = WC.burn
 
-				to_chat(usr, "<span class='notice'>You install the [W.name].</span>")
+				to_chat(usr, SPAN("notice", "You install the [W.name]."))
 				return
 
 	if(isWelder(W))
@@ -562,7 +562,7 @@
 			return
 		var/obj/item/weldingtool/WT = W
 		if (src == user && !do_after(user, 30, src))
-			to_chat(user, "<span class='warning'>You must stand still to repair yourself!</span>")
+			to_chat(user, SPAN("warning", "You must stand still to repair yourself!"))
 			return
 		if (WT.remove_fuel(0))
 			user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
@@ -570,7 +570,7 @@
 			updatehealth()
 			add_fingerprint(user)
 			for(var/mob/O in viewers(user, null))
-				O.show_message(text("<span class='warning'>[user] has fixed some of the dents on [src]!</span>"), 1)
+				O.show_message(SPAN("warning", "[user] has fixed some of the dents on [src]!"), VISIBLE_MESSAGE)
 		else
 			to_chat(user, "Need more welding fuel!")
 			return
@@ -585,14 +585,14 @@
 			adjustFireLoss(-30)
 			updatehealth()
 			for(var/mob/O in viewers(user, null))
-				O.show_message(text("<span class='warning'>[user] has fixed some of the burnt wires on [src]!</span>"), 1)
+				O.show_message(SPAN("warning", "[user] has fixed some of the burnt wires on [src]!"), VISIBLE_MESSAGE)
 
 	else if(isCrowbar(W))	// crowbar means open or close the cover - we all know what a crowbar is by now
 		if(opened)
 			if(cell)
-				user.visible_message("<span class='notice'>\The [user] begins clasping shut \the [src]'s maintenance hatch.</span>", "<span class='notice'>You begin closing up \the [src].</span>")
+				user.visible_message(SPAN("notice", "\The [user] begins clasping shut \the [src]'s maintenance hatch."), SPAN("notice", "You begin closing up \the [src]."))
 				if(do_after(user, 50, src))
-					to_chat(user, "<span class='notice'>You close \the [src]'s maintenance hatch.</span>")
+					to_chat(user, SPAN("notice", "You close \the [src]'s maintenance hatch."))
 					opened = 0
 					update_icon()
 
@@ -602,9 +602,9 @@
 					to_chat(user, "\The [src] has no brain to remove.")
 					return
 
-				user.visible_message("<span class='notice'>\The [user] begins ripping [mmi] from [src].</span>", "<span class='notice'>You jam the crowbar into the robot and begin levering [mmi].</span>")
+				user.visible_message(SPAN("notice", "\The [user] begins ripping [mmi] from [src]."), SPAN("notice", "You jam the crowbar into the robot and begin levering [mmi]."))
 				if(do_after(user, 50, src))
-					to_chat(user, "<span class='notice'>You damage some parts of the chassis, but eventually manage to rip out [mmi]!</span>")
+					to_chat(user, SPAN("notice", "You damage some parts of the chassis, but eventually manage to rip out [mmi]!"))
 					var/obj/item/robot_parts/robot_suit/C = new /obj/item/robot_parts/robot_suit(loc)
 					C.parts[BP_L_LEG] = new /obj/item/robot_parts/l_leg(C)
 					C.parts[BP_R_LEG] = new /obj/item/robot_parts/r_leg(C)
@@ -644,9 +644,9 @@
 			if(locked)
 				to_chat(user, "The cover is locked and cannot be opened.")
 			else
-				user.visible_message("<span class='notice'>\The [user] begins prying open \the [src]'s maintenance hatch.</span>", "<span class='notice'>You start opening \the [src]'s maintenance hatch.</span>")
+				user.visible_message(SPAN("notice", "\The [user] begins prying open \the [src]'s maintenance hatch."), SPAN("notice", "You start opening \the [src]'s maintenance hatch."))
 				if(do_after(user, 50, src))
-					to_chat(user, "<span class='notice'>You open \the [src]'s maintenance hatch.</span>")
+					to_chat(user, SPAN("notice", "You open \the [src]'s maintenance hatch."))
 					opened = 1
 					update_icon()
 
@@ -716,7 +716,7 @@
 				to_chat(src, "Your interface was [ locked ? "locked" : "unlocked"] by [user].")
 				update_icon()
 			else
-				to_chat(user, "<span class='warning'>Access denied.</span>")
+				to_chat(user, SPAN("warning", "Access denied."))
 	else if(istype(W, /obj/item/borg/upgrade/))
 		var/obj/item/borg/upgrade/U = W
 		if(!opened)
@@ -843,7 +843,7 @@
 
 /mob/living/silicon/robot/proc/installed_modules()
 	if(weapon_lock)
-		to_chat(src, "<span class='warning'>Weapon lock active, unable to use modules! Count:[weaponlock_time]</span>")
+		to_chat(src, SPAN("warning", "Weapon lock active, unable to use modules! Count:[weaponlock_time]"))
 		return
 
 	if(!module)
@@ -984,7 +984,7 @@
 								cleaned_human.shoes.clean_blood()
 								cleaned_human.update_inv_shoes(0)
 							cleaned_human.clean_blood(1)
-							to_chat(cleaned_human, "<span class='warning'>[src] cleans your face!</span>")
+							to_chat(cleaned_human, SPAN("warning", "[src] cleans your face!"))
 /*		if(module.type == /obj/item/robot_module/engineering)
 			var/obj/item/robot_module/engineering/general/mod = src.module
 			var/turf/tile = loc
@@ -1233,25 +1233,25 @@
 				SetLockdown(0)
 				. = 1
 				spawn()
-					to_chat(src, "<span class='danger'>ALERT: Foreign software detected.</span>")
+					to_chat(src, SPAN("danger", "ALERT: Foreign software detected."))
 					sleep(5)
-					to_chat(src, "<span class='danger'>Initiating diagnostics...</span>")
+					to_chat(src, SPAN("danger", "Initiating diagnostics..."))
 					sleep(20)
-					to_chat(src, "<span class='danger'>SynBorg v1.7.1 loaded.</span>")
+					to_chat(src, SPAN("danger", "SynBorg v1.7.1 loaded."))
 					sleep(5)
-					to_chat(src, "<span class='danger'>LAW SYNCHRONISATION ERROR</span>")
+					to_chat(src, SPAN("danger", "LAW SYNCHRONISATION ERROR"))
 					sleep(5)
-					to_chat(src, "<span class='danger'>Would you like to send a report to NanoTraSoft? Y/N</span>")
+					to_chat(src, SPAN("danger", "Would you like to send a report to NanoTraSoft? Y/N"))
 					sleep(10)
-					to_chat(src, "<span class='danger'>> N</span>")
+					to_chat(src, SPAN("danger", "> N"))
 					sleep(20)
-					to_chat(src, "<span class='danger'>ERRORERRORERROR</span>")
+					to_chat(src, SPAN("danger", "ERRORERRORERROR"))
 					to_chat(src, "<b>Obey these laws:</b>")
 					laws.show_laws(src)
 					if(emag_master && isrobot(user))
-						to_chat(src, "<span class='danger'>ALERT: [emag_master] and [user.real_name] are operatives. Obey your new laws and their commands.</span>")
+						to_chat(src, SPAN("danger", "ALERT: [emag_master] and [user.real_name] are operatives. Obey your new laws and their commands."))
 					else
-						to_chat(src, "<span class='danger'>ALERT: [user.real_name] is an operative. Obey your new laws and their commands.</span>")
+						to_chat(src, SPAN("danger", "ALERT: [user.real_name] is an operative. Obey your new laws and their commands."))
 					if(src.module)
 						var/rebuild = 0
 						for(var/obj/item/pickaxe/drill/cyborg/D in src.module.modules)

@@ -241,7 +241,7 @@
 		if(locate(/obj/effect/overlay/wallrot) in W)
 			for(var/obj/effect/overlay/wallrot/E in W)
 				qdel(E)
-			W.visible_message("<span class='notice'>The fungi are completely dissolved by the solution!</span>")
+			W.visible_message(SPAN("notice", "The fungi are completely dissolved by the solution!"))
 
 /datum/reagent/toxin/plantbgone/touch_obj(obj/O, volume)
 	if(istype(O, /obj/effect/vine))
@@ -348,7 +348,7 @@
 	if(alien == IS_DIONA)
 		return
 	if(prob(10))
-		to_chat(M, "<span class='danger'>Your insides are burning!</span>")
+		to_chat(M, SPAN("danger", "Your insides are burning!"))
 		M.adjustToxLoss(rand(100, 300) * removed)
 	else if(prob(40))
 		M.heal_organ_damage(25 * removed, 0)
@@ -591,13 +591,13 @@
 			meatchunks += E
 	if(!meatchunks.len)
 		if(prob(15))
-			to_chat(H, "<span class='danger'>Your flesh rapidly mutates!</span>")
+			to_chat(H, SPAN("danger", "Your flesh rapidly mutates!"))
 			H.set_species(SPECIES_PROMETHEAN)
 			H.shapeshifter_set_colour("#05ff9b")
 			H.verbs -= /mob/living/carbon/human/proc/shapeshifter_select_colour
 		return
 	var/obj/item/organ/external/O = pick(meatchunks)
-	to_chat(H, "<span class='danger'>Your [O.name]'s flesh mutates rapidly!</span>")
+	to_chat(H, SPAN("danger", "Your [O.name]'s flesh mutates rapidly!"))
 	if(!wrapped_species_by_ref["\ref[H]"])
 		wrapped_species_by_ref["\ref[H]"] = H.species.name
 	meatchunks = list(O) | O.children
@@ -614,7 +614,7 @@
 		E.update_icon(1)
 	O.max_damage = 15
 	if(prob(10))
-		to_chat(H, "<span class='danger'>Your slimy [O.name] plops off!</span>")
+		to_chat(H, SPAN("danger", "Your slimy [O.name] plops off!"))
 		O.droplimb()
 	H.update_body()
 
@@ -628,7 +628,7 @@
 /datum/reagent/ametroidtoxin/affect_blood(mob/living/carbon/M, alien, removed) // TODO: check if there's similar code anywhere else
 	if(HAS_TRANSFORMATION_MOVEMENT_HANDLER(M))
 		return
-	to_chat(M, "<span class='danger'>Your flesh rapidly mutates!</span>")
+	to_chat(M, SPAN("danger", "Your flesh rapidly mutates!"))
 	ADD_TRANSFORMATION_MOVEMENT_HANDLER(M)
 	M.icon = null
 	M.overlays.Cut()
@@ -667,7 +667,7 @@
 	if(prob(80))
 		if(prob(50))
 			var/msg = pick("clicking","clanking","beeping","buzzing","pinging")
-			to_chat(M, "<span class='warning'>You can feel something [msg] inside of you!</span>")
+			to_chat(M, SPAN("warning", "You can feel something [msg] inside of you!"))
 	else
 		if(istype(M, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = M
@@ -699,7 +699,7 @@
 	if(alien == IS_SKRELL)	//skrell can't have hair unless you hack it in, also to prevent tentacles from falling off
 		return
 	M.species.set_default_hair(M)
-	to_chat(M, "<span class='warning'>Your feel a chill, your skin feels lighter..</span>")
+	to_chat(M, SPAN("warning", "Your feel a chill, your skin feels lighter.."))
 	remove_self(volume)
 
 /datum/reagent/toxin/zombie
@@ -724,7 +724,7 @@
 		if ((true_dose >= amount_to_zombify) || (true_dose > 1 && prob(20)))
 			H.zombify()
 		else if (prob(10))
-			to_chat(H, "<span class='warning'>You feel terribly ill!</span>")
+			to_chat(H, SPAN("warning", "You feel terribly ill!"))
 
 /datum/reagent/vecuronium_bromide
 	name = "Vecuronium Bromide"

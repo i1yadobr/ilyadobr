@@ -12,11 +12,11 @@
 	deploy_path = /obj/machinery/power/supply_beacon/supermatter
 
 /obj/item/supply_beacon/attack_self(mob/user)
-	user.visible_message("<span class='notice'>\The [user] begins setting up \the [src].</span>")
+	user.visible_message(SPAN("notice", "\The [user] begins setting up \the [src]."))
 	if(!do_after(user, deploy_time, src))
 		return
 	var/obj/S = new deploy_path(get_turf(user))
-	user.visible_message("<span class='notice'>\The [user] deploys \the [S].</span>")
+	user.visible_message(SPAN("notice", "\The [user] deploys \the [S]."))
 	qdel(src)
 
 /obj/machinery/power/supply_beacon
@@ -45,10 +45,10 @@
 /obj/machinery/power/supply_beacon/attackby(obj/item/W, mob/user)
 	if(!use_power && isWrench(W))
 		if(!anchored && !connect_to_network())
-			to_chat(user, "<span class='warning'>This device must be placed over an exposed cable.</span>")
+			to_chat(user, SPAN("warning", "This device must be placed over an exposed cable."))
 			return
 		anchored = !anchored
-		user.visible_message("<span class='notice'>\The [user] [anchored ? "secures" : "unsecures"] \the [src].</span>")
+		user.visible_message(SPAN("notice", "\The [user] [anchored ? "secures" : "unsecures"] \the [src]."))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		return
 	return ..()
@@ -57,13 +57,13 @@
 
 	if(expended)
 		update_use_power(POWER_USE_OFF)
-		to_chat(user, "<span class='warning'>\The [src] has used up its charge.</span>")
+		to_chat(user, SPAN("warning", "\The [src] has used up its charge."))
 		return
 
 	if(anchored)
 		return use_power ? deactivate(user) : activate(user)
 	else
-		to_chat(user, "<span class='warning'>You need to secure the beacon with a wrench first!</span>")
+		to_chat(user, SPAN("warning", "You need to secure the beacon with a wrench first!"))
 		return
 
 /obj/machinery/power/supply_beacon/attack_ai(mob/user)
@@ -74,12 +74,12 @@
 	if(expended)
 		return
 	if(surplus() < 500)
-		if(user) to_chat(user, "<span class='notice'>The connected wire doesn't have enough current.</span>")
+		if(user) to_chat(user, SPAN("notice", "The connected wire doesn't have enough current."))
 		return
 	set_light(1, 0.5, 2, 2, "#00ccaa")
 	icon_state = "beacon_active"
 	update_use_power(POWER_USE_IDLE)
-	if(user) to_chat(user, "<span class='notice'>You activate the beacon. The supply drop will be dispatched soon.</span>")
+	if(user) to_chat(user, SPAN("notice", "You activate the beacon. The supply drop will be dispatched soon."))
 
 /obj/machinery/power/supply_beacon/proc/deactivate(mob/user, permanent)
 	if(permanent)
@@ -90,7 +90,7 @@
 	set_light(0)
 	update_use_power(POWER_USE_OFF)
 	target_drop_time = null
-	if(user) to_chat(user, "<span class='notice'>You deactivate the beacon.</span>")
+	if(user) to_chat(user, SPAN("notice", "You deactivate the beacon."))
 
 /obj/machinery/power/supply_beacon/Destroy()
 	if(use_power)

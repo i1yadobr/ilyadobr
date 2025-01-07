@@ -94,7 +94,7 @@
 /obj/item/clothing/mask/smokable/ecig/think()
 	if(idle >= idle_treshold) //idle too long -> automatic shut down
 		idle = 0
-		src.visible_message("<span class='notice'>\The [src] powered down automatically.</span>", null, 2)
+		src.visible_message(SPAN("notice", "\The [src] powered down automatically."), null, 2)
 		active=0//autodisable the cigarette
 		update_icon()
 		return
@@ -106,7 +106,7 @@
 
 		if (!active || !ec_cartridge || !ec_cartridge.reagents.total_volume)//no cartridge
 			if(!ec_cartridge.reagents.total_volume)
-				to_chat(C, "<span class='notice'>There is no liquid left in \the [src], so you shut it down.</span>")
+				to_chat(C, SPAN("notice", "There is no liquid left in \the [src], so you shut it down."))
 			active=0//autodisable the cigarette
 			update_icon()
 			return
@@ -117,7 +117,7 @@
 			if(!cigcell.checked_use(power_usage * CELLRATE)) //if this passes, there's not enough power in the battery
 				active = 0
 				update_icon()
-				to_chat(C,"<span class='notice'>Battery in \the [src] ran out and it powered down.</span>")
+				to_chat(C,SPAN("notice", "Battery in \the [src] ran out and it powered down."))
 				return
 			ec_cartridge.reagents.trans_to_mob(C, REM, CHEM_INGEST, 0.4) // Most of it is not inhaled... balance reasons.
 
@@ -146,61 +146,61 @@
 /obj/item/clothing/mask/smokable/ecig/attackby(obj/item/I, mob/user as mob)
 	if(istype(I, /obj/item/reagent_containers/ecig_cartridge))
 		if (ec_cartridge)//can't add second one
-			to_chat(user, "<span class='notice'>A cartridge has already been installed.</span>")
+			to_chat(user, SPAN("notice", "A cartridge has already been installed."))
 		else if(user.drop(I, src)) // fits in new one
 			ec_cartridge = I
 			update_icon()
-			to_chat(user, "<span class='notice'>You insert [I] into [src].</span>")
+			to_chat(user, SPAN("notice", "You insert [I] into [src]."))
 
 	if(istype(I, /obj/item/screwdriver))
 		if(cigcell) //if contains powercell
 			cigcell.update_icon()
 			cigcell.dropInto(loc)
 			cigcell = null
-			to_chat(user, "<span class='notice'>You remove the cell from \the [src].</span>")
+			to_chat(user, SPAN("notice", "You remove the cell from \the [src]."))
 		else //does not contains cell
-			to_chat(user, "<span class='notice'>There is no powercell in \the [src].</span>")
+			to_chat(user, SPAN("notice", "There is no powercell in \the [src]."))
 
 	if(istype(I, /obj/item/cell/device))
 		if(!cigcell && user.drop(I, src))
 			cigcell = I
-			to_chat(user, "<span class='notice'>You install a powercell into the [src].</span>")
+			to_chat(user, SPAN("notice", "You install a powercell into the [src]."))
 			update_icon()
 		else
-			to_chat(user, "<span class='notice'>[src] already has a powercell.</span>")
+			to_chat(user, SPAN("notice", "[src] already has a powercell."))
 
 
 /obj/item/clothing/mask/smokable/ecig/attack_self(mob/user as mob)
 	if (active)
 		active=0
 		set_next_think(0)
-		to_chat(user, "<span class='notice'>You turn off \the [src].</span>")
+		to_chat(user, SPAN("notice", "You turn off \the [src]."))
 		update_icon()
 	else
 		if(cigcell)
 			if (!ec_cartridge)
-				to_chat(user, "<span class='notice'>You can't use \the [src] with no cartridge installed!</span>")
+				to_chat(user, SPAN("notice", "You can't use \the [src] with no cartridge installed!"))
 				return
 			else if(!ec_cartridge.reagents.total_volume)
-				to_chat(user, "<span class='notice'>You can't use \the [src] with no liquid left!</span>")
+				to_chat(user, SPAN("notice", "You can't use \the [src] with no liquid left!"))
 				return
 			else if(!cigcell.check_charge(power_usage * CELLRATE))
-				to_chat(user, "<span class='notice'>Battery of \the [src] is too depleted to use.</span>")
+				to_chat(user, SPAN("notice", "Battery of \the [src] is too depleted to use."))
 				return
 			active=1
 			set_next_think(world.time)
-			to_chat(user, "<span class='notice'>You turn on \the [src]. </span>")
+			to_chat(user, SPAN("notice", "You turn on \the [src]. "))
 			update_icon()
 
 		else
-			to_chat(user, "<span class='warning'>\The [src] does not have a powercell installed.</span>")
+			to_chat(user, SPAN("warning", "\The [src] does not have a powercell installed."))
 
 /obj/item/clothing/mask/smokable/ecig/attack_hand(mob/user as mob)//eject cartridge
 	if(user.get_inactive_hand() == src)//if being hold
 		if (ec_cartridge)
 			active=0
 			user.pick_or_drop(ec_cartridge)
-			to_chat(user, "<span class='notice'>You eject \the [ec_cartridge] from \the [src].</span>")
+			to_chat(user, SPAN("notice", "You eject \the [ec_cartridge] from \the [src]."))
 			ec_cartridge = null
 			update_icon()
 	else

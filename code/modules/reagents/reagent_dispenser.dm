@@ -128,9 +128,9 @@
 
 /obj/structure/reagent_dispensers/fueltank/attack_hand()
 	if (rig)
-		usr.visible_message("<span class='notice'>\The [usr] begins to detach [rig] from \the [src].</span>", "<span class='notice'>You begin to detach [rig] from \the [src].</span>")
+		usr.visible_message(SPAN("notice", "\The [usr] begins to detach [rig] from \the [src]."), SPAN("notice", "You begin to detach [rig] from \the [src]."))
 		if(do_after(usr, 20, src))
-			usr.visible_message("<span class='notice'>\The [usr] detaches \the [rig] from \the [src].</span>", "<span class='notice'>You detach [rig] from \the [src]</span>")
+			usr.visible_message(SPAN("notice", "\The [usr] detaches \the [rig] from \the [src]."), SPAN("notice", "You detach [rig] from \the [src]"))
 			rig.loc = get_turf(usr)
 			rig = null
 			overlays = new /list()
@@ -147,13 +147,13 @@
 			leak_fuel(amount_per_transfer_from_this)
 	else if (istype(W,/obj/item/device/assembly_holder))
 		if (rig)
-			to_chat(user, "<span class='warning'>There is another device in the way.</span>")
+			to_chat(user, SPAN("warning", "There is another device in the way."))
 			return ..()
 		user.visible_message("\The [user] begins rigging [W] to \the [src].", "You begin rigging [W] to \the [src]")
 		if(do_after(user, 20, src))
 			if(!user.drop(W, src))
 				return
-			user.visible_message("<span class='notice'>The [user] rigs [W] to \the [src].</span>", "<span class='notice'>You rig [W] to \the [src].</span>")
+			user.visible_message(SPAN("notice", "The [user] rigs [W] to \the [src]."), SPAN("notice", "You rig [W] to \the [src]."))
 
 			var/obj/item/device/assembly_holder/H = W
 			if (istype(H.a_left,/obj/item/device/assembly/igniter) || istype(H.a_right,/obj/item/device/assembly/igniter))
@@ -165,7 +165,7 @@
 
 	else if(W.get_temperature_as_from_ignitor())
 		log_and_message_admins("triggered a fueltank explosion with [W].")
-		user.visible_message("<span class='danger'>[user] puts [W] to [src]!</span>", "<span class='danger'>You put \the [W] to \the [src] and with a moment of lucidity you realize, this might not have been the smartest thing you've ever done.</span>")
+		user.visible_message(SPAN("danger", "[user] puts [W] to [src]!"), SPAN("danger", "You put \the [W] to \the [src] and with a moment of lucidity you realize, this might not have been the smartest thing you've ever done."))
 		src.explode()
 
 		return
@@ -276,7 +276,7 @@
 
 		if(do_after(user, 20, src))
 			if(!src) return
-			to_chat(user, "<span class='notice'>You [anchored? "un" : ""]secured \the [src]!</span>")
+			to_chat(user, SPAN("notice", "You [anchored? "un" : ""]secured \the [src]!"))
 			anchored = !anchored
 		return
 	else

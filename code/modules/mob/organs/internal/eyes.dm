@@ -60,7 +60,7 @@
 	var/oldbroken = is_broken()
 	. = ..()
 	if(is_broken() && !oldbroken && owner && !owner.stat)
-		to_chat(owner, "<span class='danger'>You go blind!</span>")
+		to_chat(owner, SPAN("danger", "You go blind!"))
 
 /obj/item/organ/internal/eyes/think() //Eye damage replaces the old eye_stat var.
 	..()

@@ -71,7 +71,7 @@
 /obj/effect/accelerated_particle/proc/toxmob(mob/living/M)
 	M.rad_act(new /datum/radiation_source(new /datum/radiation(1000 KILO BECQUEREL * energy, RADIATION_BETA_PARTICLE), src))
 	M.updatehealth()
-//	to_chat(M, "<span class='warning'>You feel odd.</span>")
+//	to_chat(M, SPAN("warning", "You feel odd."))
 	return
 
 

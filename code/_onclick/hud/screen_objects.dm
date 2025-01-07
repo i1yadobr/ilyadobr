@@ -231,7 +231,7 @@
 				if(!C.stat && !C.stunned && !C.paralysis && !C.restrained())
 					if(C.internal)
 						C.internal = null
-						to_chat(C, "<span class='notice'>No longer running on internals.</span>")
+						to_chat(C, SPAN("notice", "No longer running on internals."))
 						if(C.internals)
 							C.internals.icon_state = "internal0"
 					else
@@ -243,7 +243,7 @@
 								no_mask = 1
 
 						if(no_mask)
-							to_chat(C, "<span class='notice'>You are not wearing a suitable mask or helmet.</span>")
+							to_chat(C, SPAN("notice", "You are not wearing a suitable mask or helmet."))
 							return 1
 						else
 							var/list/nicename = null
@@ -317,7 +317,7 @@
 							//We've determined the best container now we set it as our internals
 
 							if(best)
-								to_chat(C, "<span class='notice'>You are now running on internals from [tankcheck[best]] [from] your [nicename[best]].</span>")
+								to_chat(C, SPAN("notice", "You are now running on internals from [tankcheck[best]] [from] your [nicename[best]]."))
 								playsound(usr, 'sound/effects/internals.ogg', 50, 0)
 								C.internal = tankcheck[best]
 
@@ -326,7 +326,7 @@
 								if(C.internals)
 									C.internals.icon_state = "internal1"
 							else
-								to_chat(C, "<span class='notice'>You don't have a[breathes=="oxygen" ? "n oxygen" : addtext(" ",breathes)] tank.</span>")
+								to_chat(C, SPAN("notice", "You don't have a[breathes=="oxygen" ? "n oxygen" : addtext(" ",breathes)] tank."))
 
 		if("act_intent")
 			usr.a_intent_change("right")

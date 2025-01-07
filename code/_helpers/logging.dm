@@ -299,5 +299,5 @@
 	return d.get_log_info_line()
 
 /proc/report_progress(progress_message)
-	admin_notice("<span class='boldannounce'>[progress_message]</span>", R_DEBUG)
+	admin_notice(SPAN("boldannounce", "[progress_message]"), R_DEBUG)
 	log_to_dd(progress_message)

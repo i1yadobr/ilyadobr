@@ -77,11 +77,11 @@
 				return
 			oxytanks.Add(I)
 			oxygentanks++
-			to_chat(user, "<span class='notice'>You put [I] in [src].</span>")
+			to_chat(user, SPAN("notice", "You put [I] in [src]."))
 			if(oxygentanks < 5)
 				update_icon()
 		else
-			to_chat(user, "<span class='notice'>[src] is full.</span>")
+			to_chat(user, SPAN("notice", "[src] is full."))
 		return
 	if(istype(I, /obj/item/tank/plasma))
 		if(plasmatanks < 10)
@@ -89,18 +89,18 @@
 				return
 			platanks.Add(I)
 			plasmatanks++
-			to_chat(user, "<span class='notice'>You put [I] in [src].</span>")
+			to_chat(user, SPAN("notice", "You put [I] in [src]."))
 			if(oxygentanks < 6)
 				update_icon()
 		else
-			to_chat(user, "<span class='notice'>[src] is full.</span>")
+			to_chat(user, SPAN("notice", "[src] is full."))
 		return
 	if(isWrench(I))
 		if(anchored)
-			to_chat(user, "<span class='notice'>You lean down and unwrench [src].</span>")
+			to_chat(user, SPAN("notice", "You lean down and unwrench [src]."))
 			anchored = 0
 		else
-			to_chat(user, "<span class='notice'>You wrench [src] into place.</span>")
+			to_chat(user, SPAN("notice", "You wrench [src] into place."))
 			anchored = 1
 		return
 
@@ -113,7 +113,7 @@
 		else
 			O = new /obj/item/tank/oxygen(loc)
 		O.loc = loc
-		to_chat(user, "<span class='notice'>You take [O] out of [src].</span>")
+		to_chat(user, SPAN("notice", "You take [O] out of [src]."))
 		oxygentanks--
 		update_icon()
 
@@ -126,6 +126,6 @@
 		else
 			P = new /obj/item/tank/plasma(loc)
 		P.loc = loc
-		to_chat(user, "<span class='notice'>You take [P] out of [src].</span>")
+		to_chat(user, SPAN("notice", "You take [P] out of [src]."))
 		plasmatanks--
 		update_icon()

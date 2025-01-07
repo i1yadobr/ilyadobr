@@ -22,8 +22,8 @@
 	name = "flimsy"
 	desc = "You're more fragile than most, and have less of an ability to endure harm."
 
-	on_created_text = "<span class='warning'>You feel rather weak.</span>"
-	on_expired_text = "<span class='notice'>You feel your strength returning to you.</span>"
+	on_created_text = SPAN("warning", "You feel rather weak.")
+	on_expired_text = SPAN("notice", "You feel your strength returning to you.")
 
 	max_health_percent = 0.8
 
@@ -31,8 +31,8 @@
 	name = "frail"
 	desc = "Your body is very fragile, and has even less of an ability to endure harm."
 
-	on_created_text = "<span class='warning'>You feel really weak.</span>"
-	on_expired_text = "<span class='notice'>You feel your strength returning to you.</span>"
+	on_created_text = SPAN("warning", "You feel really weak.")
+	on_expired_text = SPAN("notice", "You feel your strength returning to you.")
 
 	max_health_percent = 0.6
 

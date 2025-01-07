@@ -59,7 +59,7 @@
 		SSticker.mode.check_win()
 
 	if(wearing_rig)
-		wearing_rig.notify_ai("<span class='danger'>Warning: user death event. Mobility control passed to integrated intelligence system.</span>")
+		wearing_rig.notify_ai(SPAN("danger", "Warning: user death event. Mobility control passed to integrated intelligence system."))
 
 	. = ..(gibbed, "no message", show_dead_message) // I don't know why second argument exists, it's not me.
 	if(!gibbed)

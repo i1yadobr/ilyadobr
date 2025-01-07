@@ -41,8 +41,8 @@
 	set category = "Object"
 
 	chamber_offset = 0
-	visible_message("<span class='warning'>\The [usr] spins the cylinder of \the [src]!</span>", \
-	"<span class='notice'>You hear something metallic spin and click.</span>")
+	visible_message(SPAN("warning", "\The [usr] spins the cylinder of \the [src]!"), \
+	SPAN("notice", "You hear something metallic spin and click."))
 	playsound(src.loc, 'sound/effects/weapons/gun/revolver_spin.ogg', 100, FALSE)
 	loaded = shuffle(loaded)
 	if(rand(1,max_shells) > loaded.len)
@@ -89,7 +89,7 @@
 	var/mob/M = usr
 	if(!M.mind)	return 0
 	if(!M.mind.assigned_role == "Detective")
-		to_chat(M, "<span class='notice'>You don't feel cool enough to name this gun, chump.</span>")
+		to_chat(M, SPAN("notice", "You don't feel cool enough to name this gun, chump."))
 		return 0
 
 	var/input = sanitizeSafe(input("What do you want to name the gun?", ,""), MAX_NAME_LEN)
@@ -142,7 +142,7 @@
 /obj/item/gun/projectile/revolver/capgun/attackby(obj/item/wirecutters/W, mob/user)
 	if(!istype(W) || icon_state == "revolver")
 		return ..()
-	to_chat(user, "<span class='notice'>You snip off the toy markings off the [src].</span>")
+	to_chat(user, SPAN("notice", "You snip off the toy markings off the [src]."))
 	name = "revolver"
 	icon_state = "revolver"
 	desc += " Someone snipped off the barrel's toy mark. How dastardly."
@@ -226,13 +226,13 @@
 
 /obj/item/gun/projectile/revolver/m2019/detective/attack_self(mob/living/user as mob)
 	if(chargemode == 0)
-		to_chat(user, "<span class='warning'>[src] has no battery installed!</span>")
+		to_chat(user, SPAN("warning", "[src] has no battery installed!"))
 		return
 	else if(chargemode == 2)
-		to_chat(user, "<span class='notice'>[src] fire mode: non-lethal.</span>")
+		to_chat(user, SPAN("notice", "[src] fire mode: non-lethal."))
 		chargemode = 1
 	else if(chargemode == 1)
-		to_chat(user, "<span class='warning'>[src] fire mode: lethal.</span>")
+		to_chat(user, SPAN("warning", "[src] fire mode: lethal."))
 		chargemode = 2
 	update_icon()
 
@@ -252,10 +252,10 @@
 
 /obj/item/gun/projectile/revolver/m2019/detective/proc/insert_cell(obj/item/cell/B, mob/user)
 	if(bcell)
-		to_chat(user, "<span class='notice'>[src] already has the [bcell] installed.</span>")
+		to_chat(user, SPAN("notice", "[src] already has the [bcell] installed."))
 		return
 	if(user.drop(B, src))
-		to_chat(user, "<span class='notice'>You install the [B] into your [src].</span>")
+		to_chat(user, SPAN("notice", "You install the [B] into your [src]."))
 		bcell = B
 		chargemode = 1
 		update_icon()
@@ -267,7 +267,7 @@
 
 	if(!bcell)
 		return
-	to_chat(usr, "<span class='notice'>You remove the [bcell.name] from your [src].</span>")
+	to_chat(usr, SPAN("notice", "You remove the [bcell.name] from your [src]."))
 	usr.pick_or_drop(bcell, loc)
 	bcell = null
 	chargemode = 0

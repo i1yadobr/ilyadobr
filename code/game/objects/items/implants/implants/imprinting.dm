@@ -61,16 +61,16 @@
 /obj/item/implant/imprinting/think()
 	var/instruction = pick(instructions)
 	if(brainwashing)
-		instruction = "<span class='warning'>You recall one of your beliefs: \"[instruction]\"</span>"
+		instruction = SPAN("warning", "You recall one of your beliefs: \"[instruction]\"")
 	else
-		instruction = "<span class='notice'>You remember suddenly: \"[instruction]\"</span>"
+		instruction = SPAN("notice", "You remember suddenly: \"[instruction]\"")
 	to_chat(imp_in, instruction)
 
 	set_next_think(world.time + 5 MINUTES)
 
 /obj/item/implant/imprinting/removed()
 	if(brainwashing)
-		to_chat(imp_in,"<span class='notice'>You are no longer so sure of those beliefs you've had...</span>")
+		to_chat(imp_in,SPAN("notice", "You are no longer so sure of those beliefs you've had..."))
 	..()
 	set_next_think(0)
 

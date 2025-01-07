@@ -57,7 +57,7 @@
 
 /obj/item/gun/projectile/consume_next_projectile()
 	if(!is_jammed && prob(jam_chance))
-		src.visible_message("<span class='danger'>\The [src] jams!</span>")
+		src.visible_message(SPAN("danger", "\The [src] jams!"))
 		is_jammed = 1
 	if(is_jammed)
 		return null
@@ -112,18 +112,18 @@
 		switch(AM.mag_type)
 			if(MAGAZINE)
 				if((ispath(allowed_magazines) && !istype(A, allowed_magazines)) || (islist(allowed_magazines) && !is_type_in_list(A, allowed_magazines)))
-					to_chat(user, "<span class='warning'>\The [A] won't fit into [src].</span>")
+					to_chat(user, SPAN("warning", "\The [A] won't fit into [src]."))
 					return
 				if(ammo_magazine)
-					to_chat(user, "<span class='warning'>[src] already has a magazine loaded.</span>")//already a magazine here
+					to_chat(user, SPAN("warning", "[src] already has a magazine loaded."))//already a magazine here
 					return
 				user.drop(AM, src)
 				ammo_magazine = AM
-				user.visible_message("[user] inserts [AM] into [src].", "<span class='notice'>You insert [AM] into [src].</span>")
+				user.visible_message("[user] inserts [AM] into [src].", SPAN("notice", "You insert [AM] into [src]."))
 				playsound(src.loc, mag_insert_sound, rand(45, 60), FALSE)
 			if(SPEEDLOADER)
 				if(loaded.len >= max_shells)
-					to_chat(user, "<span class='warning'>[src] is full!</span>")
+					to_chat(user, SPAN("warning", "[src] is full!"))
 					return
 				var/count = 0
 				for(var/obj/item/ammo_casing/C in AM.stored_ammo)
@@ -135,7 +135,7 @@
 						AM.stored_ammo -= C //should probably go inside an ammo_magazine proc, but I guess less proc calls this way...
 						count++
 				if(count)
-					user.visible_message("[user] reloads [src].", "<span class='notice'>You load [count] round\s into [src].</span>")
+					user.visible_message("[user] reloads [src].", SPAN("notice", "You load [count] round\s into [src]."))
 					playsound(src, mag_insert_sound, rand(50, 75), FALSE)
 		AM.update_icon()
 	else if(istype(A, /obj/item/ammo_casing))
@@ -143,12 +143,12 @@
 		if(!(load_method & SINGLE_CASING) || caliber != C.caliber)
 			return //incompatible
 		if(loaded.len >= max_shells)
-			to_chat(user, "<span class='warning'>[src] is full.</span>")
+			to_chat(user, SPAN("warning", "[src] is full."))
 			return
 
 		user.drop(C, src)
 		loaded.Insert(1, C) //add to the head of the list
-		user.visible_message("[user] inserts \a [C] into [src].", "<span class='notice'>You insert \a [C] into [src].</span>")
+		user.visible_message("[user] inserts \a [C] into [src].", SPAN("notice", "You insert \a [C] into [src]."))
 
 		if (istype(C, /obj/item/ammo_casing/shotgun))
 			playsound(user, SFX_SHELL_INSERT, rand(45, 60), FALSE)
@@ -224,7 +224,7 @@
 		ammo_magazine.loc = get_turf(src.loc)
 		user.visible_message(
 			"[ammo_magazine] falls out and clatters on the floor!",
-			"<span class='notice'>[ammo_magazine] falls out and clatters on the floor!</span>"
+			SPAN("notice", "[ammo_magazine] falls out and clatters on the floor!")
 			)
 		if(auto_eject_sound)
 			playsound(user, auto_eject_sound, 40, 1)

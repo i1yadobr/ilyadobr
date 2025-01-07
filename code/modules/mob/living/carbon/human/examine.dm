@@ -270,7 +270,7 @@
 	var/wound_flavors = ""
 	for(var/limb in wound_flavor_text)
 		wound_flavors += wound_flavor_text[limb]
-	msg += "<span class='warning'>[wound_flavors]</span>"
+	msg += SPAN("warning", "[wound_flavors]")
 
 	for(var/obj/implant in get_visible_implants(0))
 		if(implant in shown_objects)

@@ -13,19 +13,19 @@
 	if(!changeling)	return
 
 	if(src.has_brain_worms())
-		to_chat(src, "<span class='warning'>We cannot perform this ability at the present time!</span>")
+		to_chat(src, SPAN("warning", "We cannot perform this ability at the present time!"))
 		return
 
 	var/mob/living/carbon/human/H = src
 
 	if(!istype(H) || !H.species.primitive_form)
-		to_chat(src, "<span class='warning'>We cannot perform this ability in this form!</span>")
+		to_chat(src, SPAN("warning", "We cannot perform this ability in this form!"))
 		return
 
 	changeling.chem_charges--
-	H.visible_message("<span class='warning'>[H] transforms!</span>")
+	H.visible_message(SPAN("warning", "[H] transforms!"))
 	changeling.geneticdamage = 30
-	to_chat(H, "<span class='warning'>Our genes cry out!</span>")
+	to_chat(H, SPAN("warning", "Our genes cry out!"))
 	H = H.monkeyize()
 	if(istype(H))
 		H.setup_changeling_biostructure()
@@ -60,7 +60,7 @@
 
 	changeling.chem_charges--
 	C.remove_all_changeling_powers()
-	C.visible_message("<span class='warning'>[C] transforms!</span>")
+	C.visible_message(SPAN("warning", "[C] transforms!"))
 	C.dna = chosen_dna.Clone()
 
 	var/list/implants = list()

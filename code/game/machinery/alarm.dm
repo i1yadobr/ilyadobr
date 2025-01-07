@@ -396,7 +396,6 @@
 	signal.data["sigtype"] = "command"
 
 	radio_connection.post_signal(src, signal, RADIO_FROM_AIRALARM)
-//			log_debug(text("Signal [] Broadcasted to []", command, target))
 
 	return 1
 
@@ -614,7 +613,7 @@
 		return STATUS_CLOSE
 
 	if(aidisabled && isAI(user))
-		to_chat(user, "<span class='warning'>AI control for \the [src] interface has been disabled.</span>")
+		to_chat(user, SPAN("warning", "AI control for \the [src] interface has been disabled."))
 		return STATUS_CLOSE
 
 	. = shorted ? STATUS_DISABLED : STATUS_INTERACTIVE
@@ -774,7 +773,7 @@
 				return
 
 			if (wiresexposed && isWirecutter(W))
-				user.visible_message("<span class='warning'>[user] has cut the wires inside \the [src]!</span>", "You have cut the wires inside \the [src].")
+				user.visible_message(SPAN("warning", "[user] has cut the wires inside \the [src]!"), "You have cut the wires inside \the [src].")
 				playsound(src.loc, 'sound/items/Wirecutter.ogg', 50, 1)
 				new /obj/item/stack/cable_coil(get_turf(src), 5)
 				buildstage = 1
@@ -789,22 +788,22 @@
 					if(allowed(usr) && !wires.IsIndexCut(AALARM_WIRE_IDSCAN))
 						playsound(src.loc, 'sound/signals/warning10.ogg', 25)
 						locked = !locked
-						to_chat(user, "<span class='notice'>You [ locked ? "lock" : "unlock"] the Air Alarm interface.</span>")
+						to_chat(user, SPAN("notice", "You [ locked ? "lock" : "unlock"] the Air Alarm interface."))
 					else
 						playsound(src.loc, 'sound/signals/error21.ogg', 25)
-						to_chat(user, "<span class='warning'>Access denied.</span>")
+						to_chat(user, SPAN("warning", "Access denied."))
 			return
 
 		if(1)
 			if(isCoil(W))
 				var/obj/item/stack/cable_coil/C = W
 				if (C.use(5))
-					to_chat(user, "<span class='notice'>You wire \the [src].</span>")
+					to_chat(user, SPAN("notice", "You wire \the [src]."))
 					buildstage = 2
 					update_icon()
 					return
 				else
-					to_chat(user, "<span class='warning'>You need 5 pieces of cable to do wire \the [src].</span>")
+					to_chat(user, SPAN("warning", "You need 5 pieces of cable to do wire \the [src]."))
 					return
 
 			else if(isCrowbar(W))

@@ -137,10 +137,10 @@ var/list/global/tank_gauge_cache = list()
 	if(isWirecutter(W))
 		if(wired && proxyassembly.assembly)
 
-			to_chat(user, "<span class='notice'>You carefully begin clipping the wires that attach to the tank.</span>")
+			to_chat(user, SPAN("notice", "You carefully begin clipping the wires that attach to the tank."))
 			if(do_after(user, 100,src))
 				wired = 0
-				to_chat(user, "<span class='notice'>You cut the wire and remove the device.</span>")
+				to_chat(user, SPAN("notice", "You cut the wire and remove the device."))
 
 				var/obj/item/device/assembly_holder/assy = proxyassembly.assembly
 				if(assy.a_left && assy.a_right)
@@ -157,37 +157,37 @@ var/list/global/tank_gauge_cache = list()
 				update_icon(TRUE)
 
 			else
-				to_chat(user, "<span class='danger'>You slip and bump the igniter!</span>")
+				to_chat(user, SPAN("danger", "You slip and bump the igniter!"))
 				if(prob(85))
 					proxyassembly.receive_signal()
 
 		else if(wired)
 			if(do_after(user, 10, src))
-				to_chat(user, "<span class='notice'>You quickly clip the wire from the tank.</span>")
+				to_chat(user, SPAN("notice", "You quickly clip the wire from the tank."))
 				wired = 0
 				update_icon(TRUE)
 
 		else
-			to_chat(user, "<span class='notice'>There are no wires to cut!</span>")
+			to_chat(user, SPAN("notice", "There are no wires to cut!"))
 
 	if(istype(W, /obj/item/device/assembly_holder))
 		if(wired)
-			to_chat(user, "<span class='notice'>You begin attaching the assembly to \the [src].</span>")
+			to_chat(user, SPAN("notice", "You begin attaching the assembly to \the [src]."))
 			if(do_after(user, 50, src))
-				to_chat(user, "<span class='notice'>You finish attaching the assembly to \the [src].</span>")
+				to_chat(user, SPAN("notice", "You finish attaching the assembly to \the [src]."))
 				GLOB.bombers += "[key_name(user)] attached an assembly to a wired [src]. Temp: [CONV_KELVIN_CELSIUS(air_contents.temperature)]"
 				message_admins("[key_name_admin(user)] attached an assembly to a wired [src]. Temp: [CONV_KELVIN_CELSIUS(air_contents.temperature)]")
 				assemble_bomb(W,user)
 			else
-				to_chat(user, "<span class='notice'>You stop attaching the assembly.</span>")
+				to_chat(user, SPAN("notice", "You stop attaching the assembly."))
 		else
-			to_chat(user, "<span class='notice'>You need to wire the device up first.</span>")
+			to_chat(user, SPAN("notice", "You need to wire the device up first."))
 
 	if(isWelder(W))
 		var/obj/item/weldingtool/WT = W
 		if(WT.remove_fuel(1,user))
 			if(!valve_welded)
-				to_chat(user, "<span class='notice'>You begin welding the \the [src] emergency pressure relief valve.</span>")
+				to_chat(user, SPAN("notice", "You begin welding the \the [src] emergency pressure relief valve."))
 				if(do_after(user, 40,src))
 					to_chat(user, "[SPAN("notice", "You carefully weld \the [src] emergency pressure relief valve shut.")][SPAN("warning", " \The [src] may now rupture under pressure!")]")
 					valve_welded = 1
@@ -196,12 +196,12 @@ var/list/global/tank_gauge_cache = list()
 					GLOB.bombers += "[key_name(user)] attempted to weld a [src]. [CONV_KELVIN_CELSIUS(air_contents.temperature)]"
 					message_admins("[key_name_admin(user)] attempted to weld a [src]. [CONV_KELVIN_CELSIUS(air_contents.temperature)]")
 					if(WT.welding)
-						to_chat(user, "<span class='danger'>You accidentally rake \the [W] across \the [src]!</span>")
+						to_chat(user, SPAN("danger", "You accidentally rake \the [W] across \the [src]!"))
 						maxintegrity -= rand(2,6)
 						integrity = min(integrity,maxintegrity)
 				WT.eyecheck(user)
 			else
-				to_chat(user, "<span class='notice'>The emergency pressure relief valve has already been welded.</span>")
+				to_chat(user, SPAN("notice", "The emergency pressure relief valve has already been welded."))
 
 			if (src.air_contents)
 				var/const/welder_temperature = 1893.15
@@ -314,7 +314,7 @@ var/list/global/tank_gauge_cache = list()
 		if(location.internal == src)
 			location.internal = null
 			location.internals.icon_state = "internal0"
-			to_chat(user, "<span class='notice'>You close the tank release valve.</span>")
+			to_chat(user, SPAN("notice", "You close the tank release valve."))
 			if (location.internals)
 				location.internals.icon_state = "internal0"
 		else
@@ -328,11 +328,11 @@ var/list/global/tank_gauge_cache = list()
 
 			if(can_open_valve)
 				location.internal = src
-				to_chat(user, "<span class='notice'>You open \the [src] valve.</span>")
+				to_chat(user, SPAN("notice", "You open \the [src] valve."))
 				if (location.internals)
 					location.internals.icon_state = "internal1"
 			else
-				to_chat(user, "<span class='warning'>You need something to connect to \the [src].</span>")
+				to_chat(user, SPAN("warning", "You need something to connect to \the [src]."))
 
 	set_next_think(world.time)
 
@@ -474,7 +474,7 @@ var/list/global/tank_gauge_cache = list()
 			integrity -=7
 	else if(pressure > TANK_RUPTURE_PRESSURE)
 		#ifdef FIREDBG
-		log_debug("<span class='warning'>[x],[y] tank is rupturing: [pressure] kPa, integrity [integrity]</span>")
+		log_debug(SPAN("warning", "[x],[y] tank is rupturing: [pressure] kPa, integrity [integrity]"))
 		#endif
 
 		if(integrity <= 0)
@@ -483,7 +483,7 @@ var/list/global/tank_gauge_cache = list()
 				return FALSE
 			T.assume_air(air_contents)
 			playsound(src, 'sound/effects/weapons/gun/fire_shotgun.ogg', 20, 1)
-			visible_message("\icon[src] [SPAN("danger", "\The [src] flies apart!")]", "<span class='warning'>You hear a bang!</span>")
+			visible_message("\icon[src] [SPAN("danger", "\The [src] flies apart!")]", SPAN("warning", "You hear a bang!"))
 			T.hotspot_expose(air_contents.temperature, 70, 1)
 
 			var/strength = 1+((pressure-TANK_LEAK_PRESSURE)/TANK_FRAGMENT_SCALE)
@@ -520,7 +520,7 @@ var/list/global/tank_gauge_cache = list()
 				playsound(loc, 'sound/effects/spray.ogg', 10, 1, -3)
 				leaking = 1
 				#ifdef FIREDBG
-				log_debug("<span class='warning'>[x],[y] tank is leaking: [pressure] kPa, integrity [integrity]</span>")
+				log_debug(SPAN("warning", "[x],[y] tank is leaking: [pressure] kPa, integrity [integrity]"))
 				#endif
 		else
 			integrity-= 2

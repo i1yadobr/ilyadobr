@@ -8,7 +8,7 @@
 	invocation = "Dii Oda Baji."
 	invocation_type = SPI_WHISPER
 
-	message = "<span class='danger'>You suddenly feel completely overwhelmed!</span>"
+	message = SPAN("danger", "You suddenly feel completely overwhelmed!")
 
 	max_targets = 1
 

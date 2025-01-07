@@ -215,14 +215,14 @@
 		return
 
 	if(stat & NOPOWER)
-		to_chat(user, "<span class='notice'>\The [src] is unpowered and useless.</span>")
+		to_chat(user, SPAN("notice", "\The [src] is unpowered and useless."))
 		return
 
 	if(accept_check(O))
 		if(!user.drop(O))
 			return
 		stock_item(O)
-		user.visible_message("<span class='notice'>\The [user] has added \the [O] to \the [src].</span>", "<span class='notice'>You add \the [O] to \the [src].</span>")
+		user.visible_message(SPAN("notice", "\The [user] has added \the [O] to \the [src]."), SPAN("notice", "You add \the [O] to \the [src]."))
 
 	else if(istype(O, /obj/item/storage))
 		var/obj/item/storage/bag/P = O
@@ -233,12 +233,12 @@
 				stock_item(G)
 
 		if(plants_loaded)
-			user.visible_message("<span class='notice'>\The [user] loads \the [src] with the contents of \the [P].</span>", "<span class='notice'>You load \the [src] with the contents of \the [P].</span>")
+			user.visible_message(SPAN("notice", "\The [user] loads \the [src] with the contents of \the [P]."), SPAN("notice", "You load \the [src] with the contents of \the [P]."))
 			if(P.contents.len > 0)
-				to_chat(user, "<span class='notice'>Some items were refused.</span>")
+				to_chat(user, SPAN("notice", "Some items were refused."))
 
 	else
-		to_chat(user, "<span class='notice'>\The [src] smartly refuses [O].</span>")
+		to_chat(user, SPAN("notice", "\The [src] smartly refuses [O]."))
 	return 1
 
 /obj/machinery/smartfridge/secure/emag_act(remaining_charges, mob/user)
@@ -355,6 +355,6 @@
 	if(stat & (NOPOWER|BROKEN)) return 0
 	if(usr.contents.Find(src) || (in_range(src, usr) && istype(loc, /turf)))
 		if(!allowed(usr) && !emagged && scan_id && href_list["vend"])
-			to_chat(usr, "<span class='warning'>Access denied.</span>")
+			to_chat(usr, SPAN("warning", "Access denied."))
 			return 0
 	return ..()

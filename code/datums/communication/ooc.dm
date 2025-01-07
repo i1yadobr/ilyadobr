@@ -13,14 +13,14 @@
 
 	if(!C.holder)
 		if(!config.misc.dead_ooc_allowed && (C.mob.stat == DEAD))
-			to_chat(C, "<span class='danger'>[name] for dead mobs has been turned off.</span>")
+			to_chat(C, SPAN("danger", "[name] for dead mobs has been turned off."))
 			return FALSE
 		if(findtext(message, "byond://"))
 			to_chat(C, "<B>Advertising other servers is not allowed.</B>")
 			log_and_message_admins("has attempted to advertise in [name]: [message]")
 			return FALSE
 		if (config.multiaccount.eams_blocks_ooc && !SSeams.CheckForAccess(C))
-			to_chat(C, "<span class='danger'>Sorry! EAMS protection doesn't allow you to write in OOC. Use Adminhelp to contact administrators (F1 by default).</span>")
+			to_chat(C, SPAN("danger", "Sorry! EAMS protection doesn't allow you to write in OOC. Use Adminhelp to contact administrators (F1 by default)."))
 			return FALSE
 
 /decl/communication_channel/ooc/do_communicate(client/C, message)
@@ -47,9 +47,9 @@
 			continue
 		var/sent_message = "[create_text_tag("ooc", "OOC")] <EM>[C.key]:</EM> [SPAN("message linkify", "[message]")]"
 		if(can_badmin)
-			receive_communication(C, target, "<span class='ooc'><font color='[ooc_color]'>[sent_message]</font></span>")
+			receive_communication(C, target, SPAN("ooc", "<font color='[ooc_color]'>[sent_message]</font>"))
 		else
-			receive_communication(C, target, "<span class='ooc'>[SPAN("[ooc_style]", "[sent_message]")]</span>")
+			receive_communication(C, target, SPAN("ooc", "[SPAN("[ooc_style]", "[sent_message]")]"))
 
 /decl/communication_channel/ooc/get_message_type()
 	return MESSAGE_TYPE_OOC

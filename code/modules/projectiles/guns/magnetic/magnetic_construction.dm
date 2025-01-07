@@ -14,21 +14,21 @@
 		var/material/reinforcing_with = reinforcing.get_material()
 		if(reinforcing_with.name == MATERIAL_STEEL) // Steel
 			if(reinforcing.get_amount() < 5)
-				to_chat(user, "<span class='warning'>You need at least 5 [reinforcing.singular_name]\s for this task.</span>")
+				to_chat(user, SPAN("warning", "You need at least 5 [reinforcing.singular_name]\s for this task."))
 				return
 			reinforcing.use(5)
-			user.visible_message("<span class='notice'>\The [user] shapes some steel sheets around \the [src] to form a body.</span>")
+			user.visible_message(SPAN("notice", "\The [user] shapes some steel sheets around \the [src] to form a body."))
 			increment_construction_stage()
 			return
 
 	if(istype(thing, /obj/item/tape_roll) && construction_stage == 2)
-		user.visible_message("<span class='notice'>\The [user] secures \the [src] together with \the [thing].</span>")
+		user.visible_message(SPAN("notice", "\The [user] secures \the [src] together with \the [thing]."))
 		increment_construction_stage()
 		return
 
 	if(istype(thing, /obj/item/pipe) && construction_stage == 3)
 		qdel(thing)
-		user.visible_message("<span class='notice'>\The [user] jams \the [thing] into \the [src].</span>")
+		user.visible_message(SPAN("notice", "\The [user] jams \the [thing] into \the [src]."))
 		increment_construction_stage()
 		return
 
@@ -36,14 +36,14 @@
 		var/obj/item/weldingtool/welder = thing
 
 		if(!welder.isOn())
-			to_chat(user, "<span class='warning'>Turn it on first!</span>")
+			to_chat(user, SPAN("warning", "Turn it on first!"))
 			return
 
 		if(!welder.remove_fuel(0,user))
-			to_chat(user, "<span class='warning'>You need more fuel!</span>")
+			to_chat(user, SPAN("warning", "You need more fuel!"))
 			return
 
-		user.visible_message("<span class='notice'>\The [user] welds the barrel of \the [src] into place.</span>")
+		user.visible_message(SPAN("notice", "\The [user] welds the barrel of \the [src] into place."))
 		playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
 		increment_construction_stage()
 		return
@@ -51,21 +51,21 @@
 	if(isCoil(thing) && construction_stage == 5)
 		var/obj/item/stack/cable_coil/cable = thing
 		if(cable.get_amount() < 5)
-			to_chat(user, "<span class='warning'>You need at least 5 lengths of cable for this task.</span>")
+			to_chat(user, SPAN("warning", "You need at least 5 lengths of cable for this task."))
 			return
 		cable.use(5)
-		user.visible_message("<span class='notice'>\The [user] wires \the [src].</span>")
+		user.visible_message(SPAN("notice", "\The [user] wires \the [src]."))
 		increment_construction_stage()
 		return
 
 	if(istype(thing, /obj/item/smes_coil) && construction_stage >= 6 && construction_stage <= 8)
-		user.visible_message("<span class='notice'>\The [user] installs \a [thing] into \the [src].</span>")
+		user.visible_message(SPAN("notice", "\The [user] installs \a [thing] into \the [src]."))
 		qdel(thing)
 		increment_construction_stage()
 		return
 
 	if(isScrewdriver(thing) && construction_stage >= 9)
-		user.visible_message("<span class='notice'>\The [user] secures \the [src] and finishes it off.</span>")
+		user.visible_message(SPAN("notice", "\The [user] secures \the [src] and finishes it off."))
 		playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
 		var/obj/item/gun/magnetic/coilgun = new(loc)
 		var/put_in_hands

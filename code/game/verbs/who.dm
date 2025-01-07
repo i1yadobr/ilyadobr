@@ -94,7 +94,7 @@
 		msg += "[line]\n"
 
 	if(rights && preference)
-		msg += "<b>[SPAN("notice", "Total Living: [living]")] | Total Dead: [dead] | <span style='color:gray'>Observing: [observers]</span> | <font color = '#006400'>In Lobby: [lobby]</font> | <font color = 'purple'>Living Antags: [living_antags]</font> | <font color = 'red'>Dead Antags: [dead_antags]</font></b>\n"
+		msg += "<b>[SPAN("notice", "Total Living: [living]")] | Total Dead: [dead] | [SPAN("", "<font style='color:gray'>Observing: [observers]</font>")] | <font color = '#006400'>In Lobby: [lobby]</font> | <font color = 'purple'>Living Antags: [living_antags]</font> | <font color = 'red'>Dead Antags: [dead_antags]</font></b>\n"
 		msg += "<b>Total Players: [length(lines)]</b>\n"
 	else
 		msg += "<b>Total Players: [length(lines)]</b>"

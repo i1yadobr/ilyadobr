@@ -4,15 +4,15 @@
 	icon_state = "buildmode1"
 
 /datum/build_mode/basic/Help()
-	to_chat(user, "<span class='notice'>***********************************************************</span>")
-	to_chat(user, "<span class='notice'>Left Click        = Construct / Upgrade</span>")
-	to_chat(user, "<span class='notice'>Right Click       = Deconstruct / Delete / Downgrade</span>")
-	to_chat(user, "<span class='notice'>Left Click + Ctrl = R-Window</span>")
-	to_chat(user, "<span class='notice'>Left Click + Alt  = Airlock</span>")
+	to_chat(user, SPAN("notice", "***********************************************************"))
+	to_chat(user, SPAN("notice", "Left Click        = Construct / Upgrade"))
+	to_chat(user, SPAN("notice", "Right Click       = Deconstruct / Delete / Downgrade"))
+	to_chat(user, SPAN("notice", "Left Click + Ctrl = R-Window"))
+	to_chat(user, SPAN("notice", "Left Click + Alt  = Airlock"))
 	to_chat(user, "")
-	to_chat(user, "<span class='notice'>Use the directional button in the upper left corner to</span>")
-	to_chat(user, "<span class='notice'>change the direction of built objects.</span>")
-	to_chat(user, "<span class='notice'>***********************************************************</span>")
+	to_chat(user, SPAN("notice", "Use the directional button in the upper left corner to"))
+	to_chat(user, SPAN("notice", "change the direction of built objects."))
+	to_chat(user, SPAN("notice", "***********************************************************"))
 
 /datum/build_mode/basic/OnClick(atom/object, list/pa)
 	if(istype(object,/turf) && pa["left"] && !pa["alt"] && !pa["ctrl"] )

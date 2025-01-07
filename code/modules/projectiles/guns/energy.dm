@@ -154,7 +154,7 @@ GLOBAL_LIST_INIT(registered_weapons, list())
 			to_chat(user, "This weapon is already registered, you must reset it first.")
 			return
 		if(!allowed(user))
-			to_chat(user, "<span class='warning'>Access denied.</span>")
+			to_chat(user, SPAN("warning", "Access denied."))
 			return
 
 		var/obj/item/card/id/id = W
@@ -178,7 +178,7 @@ GLOBAL_LIST_INIT(registered_weapons, list())
 		GLOB.registered_weapons -= src
 		return
 
-	audible_message("<span class='warning'>\The [src] buzzes, refusing unauthorized action.</span>", runechat_message = "*buzz*")
+	audible_message(SPAN("warning", "\The [src] buzzes, refusing unauthorized action."), runechat_message = "*buzz*")
 	playsound(loc, 'sound/signals/error1.ogg', 50, 0)
 
 /obj/item/gun/energy/secure/Destroy()
@@ -197,7 +197,7 @@ GLOBAL_LIST_INIT(registered_weapons, list())
 
 	var/mob/M = get_holder_of_type(src, /mob)
 	if(M)
-		to_chat(M, "<span class='notice'>Your [src.name] has been [authorization ? "granted" : "denied"] [firemodes[mode]] fire authorization by [authorized_by].</span>")
+		to_chat(M, SPAN("notice", "Your [src.name] has been [authorization ? "granted" : "denied"] [firemodes[mode]] fire authorization by [authorized_by]."))
 
 	return 1
 
@@ -206,7 +206,7 @@ GLOBAL_LIST_INIT(registered_weapons, list())
 
 /obj/item/gun/energy/secure/special_check()
 	if(!emagged && (!current_mode_authorized() || !registered_owner))
-		audible_message("<span class='warning'>\The [src] buzzes, refusing to fire.</span>", runechat_message = "*buzz*")
+		audible_message(SPAN("warning", "\The [src] buzzes, refusing to fire."), runechat_message = "*buzz*")
 		playsound(loc, 'sound/signals/error1.ogg', 50, 0)
 		return 0
 	// TODO(rufus): refactor special check, as besides checking it also does shooting on clumsy mutation.

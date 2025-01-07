@@ -6,7 +6,7 @@
 		msg += "\n"
 	else
 		if (src.getBruteLoss())
-			msg += "<span class='warning'>It has [src.getBruteLoss() < 40 ? "some punctures" : "severe punctures and tears"] in its flesh!</span>"
+			msg += SPAN("warning", "It has [src.getBruteLoss() < 40 ? "some punctures" : "severe punctures and tears"] in its flesh!")
 			msg += "\n"
 
 		switch(powerlevel)

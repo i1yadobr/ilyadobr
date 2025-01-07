@@ -103,7 +103,7 @@
 		return 1
 	else
 		if(M)
-			to_chat(M, "<span class='notice'>You need more welding fuel to complete this task.</span>")
+			to_chat(M, SPAN("notice", "You need more welding fuel to complete this task."))
 		return 0
 
 /obj/item/weldingtool/linked/burn_fuel(amount)

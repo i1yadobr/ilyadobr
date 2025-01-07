@@ -26,7 +26,7 @@
 
 /obj/item/borg/upgrade/proc/action(mob/living/silicon/robot/R)
 	if(R.stat == DEAD)
-		to_chat(usr, "<span class='warning'>The [src] will not function on a deceased robot.</span>")
+		to_chat(usr, SPAN("warning", "The [src] will not function on a deceased robot."))
 		return 1
 	return 0
 
@@ -714,7 +714,7 @@
 		activate("emp")	//let's shout that this borg is dead
 	if(severity == 1)
 		if(prob(60) && !broken)	//small chance of obvious meltdown
-			to_chat(host, "<span class='warning'>Your's \the [src] stopped recive signals!</span>")
+			to_chat(host, SPAN("warning", "Your's \the [src] stopped recive signals!"))
 			broken = 1
 			name = "melted circuit"
 			desc = "Charred circuit. Wonder what that used to be..."

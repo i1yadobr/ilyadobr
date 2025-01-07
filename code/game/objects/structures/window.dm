@@ -202,14 +202,14 @@
 	take_damage(tforce, FALSE)
 
 /obj/structure/window/attack_tk(mob/user as mob)
-	user.visible_message("<span class='notice'>Something knocks on [src].</span>")
+	user.visible_message(SPAN("notice", "Something knocks on [src]."))
 	playsound(loc, GET_SFX(SFX_GLASS_KNOCK), 50, 1)
 
 /obj/structure/window/attack_hand(mob/user as mob)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	if(MUTATION_HULK in user.mutations)
 		user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!"))
-		user.visible_message("<span class='danger'>[user] smashes through [src]!</span>")
+		user.visible_message(SPAN("danger", "[user] smashes through [src]!"))
 		user.do_attack_animation(src)
 		shatter()
 
@@ -223,8 +223,8 @@
 
 		playsound(src.loc, GET_SFX(SFX_GLASS_HIT), 80, 1)
 		user.do_attack_animation(src)
-		user.visible_message("<span class='danger'>\The [user] bangs against \the [src]!</span>",
-							"<span class='danger'>You bang against \the [src]!</span>",
+		user.visible_message(SPAN("danger", "\The [user] bangs against \the [src]!"),
+							SPAN("danger", "You bang against \the [src]!"),
 							"You hear a banging sound.")
 	else
 		playsound(src.loc, GET_SFX(SFX_GLASS_KNOCK), 80, 1)
@@ -240,10 +240,10 @@
 	if(!damage)
 		return
 	if(damage >= 10)
-		visible_message("<span class='danger'>[user] smashes into [src]!</span>")
+		visible_message(SPAN("danger", "[user] smashes into [src]!"))
 		take_damage(damage)
 	else
-		visible_message("<span class='notice'>\The [user] bonks \the [src] harmlessly.</span>")
+		visible_message(SPAN("notice", "\The [user] bonks \the [src] harmlessly."))
 	return 1
 
 /obj/structure/window/attackby(obj/item/W as obj, mob/user as mob)
@@ -256,25 +256,25 @@
 			state = 3 - state
 			update_nearby_icons()
 			playsound(loc, 'sound/items/Screwdriver.ogg', 75, 1)
-			to_chat(user, (state == 1 ? "<span class='notice'>You have unfastened the window from the frame.</span>" : "<span class='notice'>You have fastened the window to the frame.</span>"))
+			to_chat(user, (state == 1 ? SPAN("notice", "You have unfastened the window from the frame.") : SPAN("notice", "You have fastened the window to the frame.")))
 		else if(reinf && state == 0)
 			set_anchored(!anchored)
 			playsound(loc, 'sound/items/Screwdriver.ogg', 75, 1)
-			to_chat(user, (anchored ? "<span class='notice'>You have fastened the frame to the floor.</span>" : "<span class='notice'>You have unfastened the frame from the floor.</span>"))
+			to_chat(user, (anchored ? SPAN("notice", "You have fastened the frame to the floor.") : SPAN("notice", "You have unfastened the frame from the floor.")))
 		else if(!reinf)
 			set_anchored(!anchored)
 			playsound(loc, 'sound/items/Screwdriver.ogg', 75, 1)
-			to_chat(user, (anchored ? "<span class='notice'>You have fastened the window to the floor.</span>" : "<span class='notice'>You have unfastened the window.</span>"))
+			to_chat(user, (anchored ? SPAN("notice", "You have fastened the window to the floor.") : SPAN("notice", "You have unfastened the window.")))
 	else if(isCrowbar(W) && reinf && state <= 1)
 		state = 1 - state
 		playsound(loc, 'sound/items/Crowbar.ogg', 75, 1)
-		to_chat(user, (state ? "<span class='notice'>You have pried the window into the frame.</span>" : "<span class='notice'>You have pried the window out of the frame.</span>"))
+		to_chat(user, (state ? SPAN("notice", "You have pried the window into the frame.") : SPAN("notice", "You have pried the window out of the frame.")))
 	else if(isWrench(W) && !anchored && (!state || !reinf))
 		if(!glasstype)
-			to_chat(user, "<span class='notice'>You're not sure how to dismantle \the [src] properly.</span>")
+			to_chat(user, SPAN("notice", "You're not sure how to dismantle \the [src] properly."))
 		else
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
-			visible_message("<span class='notice'>[user] dismantles \the [src].</span>")
+			visible_message(SPAN("notice", "[user] dismantles \the [src]."))
 			if(dir == SOUTHWEST)
 				var/obj/item/stack/material/mats = new glasstype(loc)
 				mats.amount = is_fulltile() ? 4 : 2
@@ -600,7 +600,7 @@
 		t = sanitizeSafe(t, MAX_NAME_LEN)
 		if (t)
 			src.id = t
-			to_chat(user, "<span class='notice'>The new ID of the window is [id]</span>")
+			to_chat(user, SPAN("notice", "The new ID of the window is [id]"))
 		return
 	..()
 
@@ -645,7 +645,7 @@
 
 /obj/machinery/button/windowtint/attackby(obj/item/device/W as obj, mob/user as mob)
 	if(isMultitool(W))
-		to_chat(user, "<span class='notice'>The ID of the button: [id]</span>")
+		to_chat(user, SPAN("notice", "The ID of the button: [id]"))
 		return
 
 /obj/machinery/button/windowtint/proc/toggle_tint()

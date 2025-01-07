@@ -39,7 +39,7 @@
 	set src in usr
 
 	if (t)
-		src.SetName(text("data disk- '[]'", t))
+		src.SetName("data disk - '[t]'")
 	else
 		src.SetName("data disk")
 	src.add_fingerprint(usr)
@@ -112,7 +112,7 @@ var/const/NO_EMAG_ACT = -50
 		log_and_message_admins("emagged \an [A].")
 
 	if(uses<1)
-		user.visible_message("<span class='warning'>\The [src] fizzles and sparks - it seems it's been used once too often, and is now spent.</span>")
+		user.visible_message(SPAN("warning", "\The [src] fizzles and sparks - it seems it's been used once too often, and is now spent."))
 	return 1
 
 /obj/item/card/emag/robot/_examine_text(mob/user)

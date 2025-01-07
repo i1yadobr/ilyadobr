@@ -95,8 +95,8 @@
 	return FALSE
 
 /datum/species/xenos/hug(mob/living/carbon/human/H,mob/living/target)
-	H.visible_message("<span class='notice'>[H] caresses [target] with its scythe-like arm.</span>", \
-					"<span class='notice'>I caress [target] with my scythe-like arm.</span>")
+	H.visible_message(SPAN("notice", "[H] caresses [target] with its scythe-like arm."), \
+					SPAN("notice", "I caress [target] with my scythe-like arm."))
 
 /datum/species/xenos/handle_post_spawn(mob/living/carbon/human/H)
 	alien_number++ //Keep track of how many aliens we've had so far.
@@ -140,7 +140,7 @@
 		H.adjustOxyLoss(-heal_rate)
 		H.adjustToxLoss(-heal_rate)
 		if(prob(5))
-			to_chat(H, "<span class='alium'>I feel a soothing sensation come over me...</span>")
+			to_chat(H, SPAN("alium", "I feel a soothing sensation come over me..."))
 		H.UpdateDamageIcon()
 		return TRUE
 
@@ -149,9 +149,9 @@
 		if(I.damage > 0)
 			I.damage = max(I.damage - heal_rate, 0)
 			if(mend_prob / 2)
-				to_chat(H, "<span class='alium'>I feel a soothing sensation within my [I.parent_organ]...</span>")
+				to_chat(H, SPAN("alium", "I feel a soothing sensation within my [I.parent_organ]..."))
 			if(!I.damage && (I.status & ORGAN_DEAD))
-				to_chat(H, "<span class='alium'>I feel invigorated as my [I] appears to be functioning again!</span>")
+				to_chat(H, SPAN("alium", "I feel invigorated as my [I] appears to be functioning again!"))
 				I.status &= ~ORGAN_DEAD
 			return TRUE
 

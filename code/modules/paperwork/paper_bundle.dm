@@ -75,13 +75,13 @@
 		if(istype(P, /obj/item/flame/lighter/zippo))
 			class = "rose>"
 
-		user.visible_message("<span class='[class]'>[user] holds \the [P] up to \the [src], it looks like \he's trying to burn it!</span>", \
-		"<span class='[class]'>You hold \the [P] up to \the [src], burning it slowly.</span>")
+		user.visible_message(SPAN("[class]", "[user] holds \the [P] up to \the [src], it looks like \he's trying to burn it!"), \
+		SPAN("[class]", "You hold \the [P] up to \the [src], burning it slowly."))
 
 		spawn(20)
 			if(get_dist(src, user) < 2 && user.get_active_hand() == P && P.lit)
-				user.visible_message("<span class='[class]'>[user] burns right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.</span>", \
-				"<span class='[class]'>You burn right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.</span>")
+				user.visible_message(SPAN("[class]", "[user] burns right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap."), \
+				SPAN("[class]", "You burn right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap."))
 
 				if(user.get_inactive_hand() == src)
 					user.drop(src)

@@ -279,7 +279,7 @@ Class Procs:
 		return TRUE
 	if ( ! (istype(usr, /mob/living/carbon/human) || \
 			istype(usr, /mob/living/silicon)))
-		to_chat(usr, "<span class='warning'>You don't have the dexterity to do this!</span>")
+		to_chat(usr, SPAN("warning", "You don't have the dexterity to do this!"))
 		return TRUE
 /*
 	//distance checks are made by atom/proc/DblClick
@@ -349,7 +349,7 @@ Class Procs:
 		return 0
 	playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
 	panel_open = !panel_open
-	to_chat(user, "<span class='notice'>You [panel_open ? "open" : "close"] the maintenance hatch of \the [src].</span>")
+	to_chat(user, SPAN("notice", "You [panel_open ? "open" : "close"] the maintenance hatch of \the [src]."))
 	update_icon()
 	return 1
 
@@ -374,7 +374,7 @@ Class Procs:
 						component_parts -= A
 						component_parts += B
 						B.loc = null
-						to_chat(user, "<span class='notice'>[A.name] replaced with [B.name].</span>")
+						to_chat(user, SPAN("notice", "[A.name] replaced with [B.name]."))
 						break
 			update_icon()
 			RefreshParts()
@@ -420,7 +420,7 @@ Class Procs:
 		playsound(src, clicksound, clickvol)
 
 /obj/machinery/proc/get_parts_infotext()
-	. = "<span class='notice'>Following parts detected in the machine: </span>"
+	. = SPAN("notice", "Following parts detected in the machine: ")
 	for(var/obj/item/C in component_parts)
 		. += "\n"
 		. += SPAN("notice", "[C.name]")

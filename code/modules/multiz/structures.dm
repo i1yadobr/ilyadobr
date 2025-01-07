@@ -76,7 +76,7 @@
 	if(!target_ladder)
 		return
 	if(!user.Move(get_turf(src)))
-		to_chat(user, "<span class='notice'>You fail to reach \the [src].</span>")
+		to_chat(user, SPAN("notice", "You fail to reach \the [src]."))
 		return
 
 	var/dragging = FALSE
@@ -87,11 +87,11 @@
 
 	var/direction = target_ladder == target_up ? "up" : "down"
 
-	user.visible_message("<span class='notice'>\The [user] begins climbing [direction] \the [src]!</span>",
+	user.visible_message(SPAN("notice", "\The [user] begins climbing [direction] \the [src]!"),
 	"You begin climbing [direction] \the [src]!",
 	"You hear the grunting and clanging of a metal ladder being used.")
 
-	target_ladder.audible_message("<span class='notice'>You hear something coming [direction] \the [src]</span>", runechat_message = "*crank crank*")
+	target_ladder.audible_message(SPAN("notice", "You hear something coming [direction] \the [src]"), runechat_message = "*crank crank*")
 
 	var/time = dragging ? drag_time : climb_time
 
@@ -102,7 +102,7 @@
 
 /obj/structure/ladder/proc/getTargetLadder(mob/user)
 	if((!target_up && !target_down) || (target_up && !istype(target_up.loc, /turf) || (target_down && !istype(target_down.loc, /turf))))
-		to_chat(user, "<span class='notice'>\The [src] is incomplete and can't be climbed.</span>")
+		to_chat(user, SPAN("notice", "\The [src] is incomplete and can't be climbed."))
 		return
 	if(target_down && target_up)
 		var/direction = show_radial_menu(user, src,  radial_options, require_near = !(isEye(user) || isobserver(user)))
@@ -123,21 +123,21 @@
 
 /mob/proc/may_climb_ladders(ladder)
 	if(!Adjacent(ladder))
-		to_chat(src, "<span class='warning'>You need to be next to \the [ladder] to start climbing.</span>")
+		to_chat(src, SPAN("warning", "You need to be next to \the [ladder] to start climbing."))
 		return FALSE
 	if(incapacitated())
-		to_chat(src, "<span class='warning'>You are physically unable to climb \the [ladder].</span>")
+		to_chat(src, SPAN("warning", "You are physically unable to climb \the [ladder]."))
 		return FALSE
 
 	var/carry_count = 0
 	for(var/obj/item/grab/G in src)
 		if(!G.ladder_carry())
-			to_chat(src, "<span class='warning'>You can't carry [G.affecting] up \the [ladder].</span>")
+			to_chat(src, SPAN("warning", "You can't carry [G.affecting] up \the [ladder]."))
 			return FALSE
 		else
 			carry_count++
 	if(carry_count > 1)
-		to_chat(src, "<span class='warning'>You can't carry more than one person up \the [ladder].</span>")
+		to_chat(src, SPAN("warning", "You can't carry more than one person up \the [ladder]."))
 		return FALSE
 
 	return TRUE
@@ -149,7 +149,7 @@
 	var/turf/T = get_turf(target_ladder)
 	for(var/atom/A in T)
 		if(!A.CanPass(user, user.loc, 1.5, 0))
-			to_chat(user, "<span class='notice'>\The [A] is blocking \the [src].</span>")
+			to_chat(user, SPAN("notice", "\The [A] is blocking \the [src]."))
 			return FALSE
 	playsound(src, pick(climbsounds), 50)
 	playsound(target_ladder, pick(climbsounds), 50)

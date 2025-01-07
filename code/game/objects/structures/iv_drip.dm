@@ -15,7 +15,7 @@
 	set category = "Object"
 	set src in range(1)
 	if(!istype(usr, /mob/living))
-		to_chat(usr, "<span class='warning'>You can't do that.</span>")
+		to_chat(usr, SPAN("warning", "You can't do that."))
 		return
 	var/N = input("Amount per transfer from this:","[src]") as null|anything in transfer_amounts
 	if(N)
@@ -146,7 +146,7 @@
 	set src in view(1)
 
 	if(!istype(usr, /mob/living))
-		to_chat(usr, "<span class='warning'>You can't do that.</span>")
+		to_chat(usr, SPAN("warning", "You can't do that."))
 		return
 
 	if(usr.incapacitated())

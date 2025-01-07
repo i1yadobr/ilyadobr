@@ -28,7 +28,7 @@
 
 /obj/machinery/computer/robotics/CanUseTopic(user)
 	if(!allowed(user))
-		to_chat(user, "<span class='warning'>Access Denied</span>")
+		to_chat(user, SPAN("warning", "Access Denied"))
 		return STATUS_CLOSE
 	return ..()
 
@@ -40,11 +40,11 @@
 			return TOPIC_HANDLED
 
 		if(isAI(user) && (target.connected_ai != user))
-			to_chat(user, "<span class='warning'>Access Denied. This robot is not linked to you.</span>")
+			to_chat(user, SPAN("warning", "Access Denied. This robot is not linked to you."))
 			return TOPIC_HANDLED
 
 		if(isrobot(user))
-			to_chat(user, "<span class='warning'>Access Denied.</span>")
+			to_chat(user, SPAN("warning", "Access Denied."))
 			return TOPIC_HANDLED
 
 		var/choice = input("Really [target.lockcharge ? "unlock" : "lockdown"] [target.name] ?") in list ("Yes", "No")
@@ -55,14 +55,14 @@
 			return TOPIC_HANDLED
 
 		if(target.SetLockdown(!target.lockcharge))
-			message_admins("<span class='notice'>[key_name_admin(usr)] [target.lockcharge ? "locked down" : "released"] [target.name]!</span>")
+			message_admins(SPAN("notice", "[key_name_admin(usr)] [target.lockcharge ? "locked down" : "released"] [target.name]!"))
 			log_game("[key_name(usr)] [target.lockcharge ? "locked down" : "released"] [target.name]!")
 			if(target.lockcharge)
-				to_chat(target, "<span class='danger'>You have been locked down!</span>")
+				to_chat(target, SPAN("danger", "You have been locked down!"))
 			else
-				to_chat(target, "<span class='notice'>Your lockdown has been lifted!</span>")
+				to_chat(target, SPAN("notice", "Your lockdown has been lifted!"))
 		else
-			to_chat(user, "<span class='warning'>ERROR: Lockdown attempt failed.</span>")
+			to_chat(user, SPAN("warning", "ERROR: Lockdown attempt failed."))
 		. = TOPIC_REFRESH
 
 	// Remotely hacks the cyborg. Only antag AIs can do this and only to linked cyborgs.
@@ -74,7 +74,7 @@
 		// Antag AI checks
 		var/mob/living/original_mob = user.mind?.original_mob?.resolve()
 		if(!istype(user, /mob/living/silicon/ai) || !(istype(original_mob) && user.mind.special_role && original_mob == user))
-			to_chat(user, "<span class='warning'>Access Denied</span>")
+			to_chat(user, SPAN("warning", "Access Denied"))
 			return TOPIC_HANDLED
 
 		if(target.emagged)
@@ -88,10 +88,10 @@
 		if(!target || !istype(target))
 			return TOPIC_HANDLED
 
-		message_admins("<span class='notice'>[key_name_admin(usr)] emagged [target.name] using robotic console!</span>")
+		message_admins(SPAN("notice", "[key_name_admin(usr)] emagged [target.name] using robotic console!"))
 		log_game("[key_name(usr)] emagged [target.name] using robotic console!")
 		target.emagged = 1
-		to_chat(target, "<span class='notice'>Failsafe protocols overriden. New tools available.</span>")
+		to_chat(target, SPAN("notice", "Failsafe protocols overriden. New tools available."))
 		. = TOPIC_REFRESH
 
 	else if (href_list["message"])
@@ -104,7 +104,7 @@
 			return
 
 		log_and_message_admins("sent message '[message]' to [target.name] using robotics control console!")
-		to_chat(target, "<span class='notice'>New remote message received using R-SSH protocol:</span>")
+		to_chat(target, SPAN("notice", "New remote message received using R-SSH protocol:"))
 		to_chat(target, message)
 		. = TOPIC_REFRESH
 

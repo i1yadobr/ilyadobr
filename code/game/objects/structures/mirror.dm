@@ -15,7 +15,7 @@
 
 	if(ishuman(user))
 		if(jobban_isbanned(user, "APPEARANCE"))
-			to_chat(src, "<span class='danger'>This is useless for you.</span>")
+			to_chat(src, SPAN("danger", "This is useless for you."))
 			return
 
 		var/datum/nano_module/appearance_changer/AC = ui_users[user]
@@ -48,10 +48,10 @@
 		return
 
 	if(prob(I.force * 2))
-		visible_message("<span class='warning'>[user] smashes [src] with [I]!</span>")
+		visible_message(SPAN("warning", "[user] smashes [src] with [I]!"))
 		shatter()
 	else
-		visible_message("<span class='warning'>[user] hits [src] with [I]!</span>")
+		visible_message(SPAN("warning", "[user] hits [src] with [I]!"))
 		playsound(src.loc, GET_SFX(SFX_GLASS_HIT), 70, 1)
 	user.setClickCooldown(I.update_attack_cooldown())
 	user.do_attack_animation(src)
@@ -63,10 +63,10 @@
 		return 0
 
 	if(damage)
-		user.visible_message("<span class='danger'>[user] smashes [src]!</span>")
+		user.visible_message(SPAN("danger", "[user] smashes [src]!"))
 		shatter()
 	else
-		user.visible_message("<span class='danger'>[user] hits [src] and bounces off!</span>")
+		user.visible_message(SPAN("danger", "[user] hits [src] and bounces off!"))
 	return 1
 
 /obj/structure/mirror/Destroy()
@@ -115,7 +115,7 @@
 /obj/item/mirror/attack_self(mob/user as mob)
 	if(ishuman(user))
 		if(jobban_isbanned(user, "APPEARANCE"))
-			to_chat(src, "<span class='danger'>This is useless for you.</span>")
+			to_chat(src, SPAN("danger", "This is useless for you."))
 			return
 
 		var/datum/nano_module/appearance_changer/AC = ui_users[user]

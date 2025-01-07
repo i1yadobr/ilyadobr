@@ -3,7 +3,7 @@
 	set category = "OOC"
 
 	if(src.mob && jobban_isbanned(src.mob, "OOC"))
-		to_chat(src, "<span class='danger'>You have been banned from OOC.</span>")
+		to_chat(src, SPAN("danger", "You have been banned from OOC."))
 		return
 
 	var/sanitizedMessage = sanitize(message)
@@ -16,7 +16,7 @@
 	set category = "OOC"
 
 	if(jobban_isbanned(src.mob, "LOOC"))
-		to_chat(src, "<span class='danger'>You have been banned from LOOC.</span>")
+		to_chat(src, SPAN("danger", "You have been banned from LOOC."))
 		return
 
 	sanitize_and_communicate(/decl/communication_channel/ooc/looc, src, message)

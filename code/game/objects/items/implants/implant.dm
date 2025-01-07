@@ -32,7 +32,7 @@
 /obj/item/implant/proc/can_implant(mob/M, mob/user, target_zone)
 	var/mob/living/carbon/human/H = M
 	if(istype(H) && !H.get_organ(target_zone))
-		to_chat(user, "<span class='warning'>\The [M] is missing that body part.</span>")
+		to_chat(user, SPAN("warning", "\The [M] is missing that body part."))
 		return FALSE
 	return TRUE
 
@@ -80,7 +80,7 @@
 	return FALSE
 
 /obj/item/implant/proc/meltdown()	//breaks it down, making implant unrecongizible
-	to_chat(imp_in, "<span class='warning'>You feel something melting inside [part ? "your [part.name]" : "you"]!</span>")
+	to_chat(imp_in, SPAN("warning", "You feel something melting inside [part ? "your [part.name]" : "you"]!"))
 	if (part)
 		part.take_external_damage(burn = 15, used_weapon = "Electronics meltdown")
 	else

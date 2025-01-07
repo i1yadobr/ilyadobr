@@ -233,7 +233,7 @@
 		\n<BR>
 		\n"}
 	else
-		dat += "<span class='danger'>No compatible attached compressor found.</span>"
+		dat += SPAN("danger", "No compatible attached compressor found.")
 
 	show_browser(user, dat, "window=computer;size=400x500")
 	onclose(user, "computer")

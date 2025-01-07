@@ -6,7 +6,7 @@
 	if( config.link.wiki )
 		send_link(src, config.link.wiki)
 	else
-		to_chat(src, "<span class='warning'>The wiki URL is not set in the server configuration.</span>")
+		to_chat(src, SPAN("warning", "The wiki URL is not set in the server configuration."))
 	return
 
 /client/verb/rules()
@@ -16,7 +16,7 @@
 	if( config.link.rules )
 		send_link(src, config.link.rules)
 	else
-		to_chat(src, "<span class='warning'>The rules URL is not set in the server configuration.</span>")
+		to_chat(src, SPAN("warning", "The rules URL is not set in the server configuration."))
 	return
 
 /client/verb/backstory()
@@ -26,7 +26,7 @@
 	if( config.link.backstory )
 		send_link(src, config.link.backstory)
 	else
-		to_chat(src, "<span class='warning'>The backstory URL is not set in the server configuration.</span>")
+		to_chat(src, SPAN("warning", "The backstory URL is not set in the server configuration."))
 	return
 
 /client/verb/forum()
@@ -36,7 +36,7 @@
 	if( config.link.forum )
 		send_link(src, config.link.forum)
 	else
-		to_chat(src, "<span class='warning'>The forum URL is not set in the server configuration.</span>")
+		to_chat(src, SPAN("warning", "The forum URL is not set in the server configuration."))
 	return
 
 /client/verb/discord()
@@ -46,7 +46,7 @@
 	if( config.link.discord )
 		send_link(src, config.link.discord)
 	else
-		to_chat(src, "<span class='warning'>The Discord URL is not set in the server configuration.</span>")
+		to_chat(src, SPAN("warning", "The Discord URL is not set in the server configuration."))
 	return
 
 /client/verb/bugreport()
@@ -56,7 +56,7 @@
 	if( config.link.github )
 		send_link(src, "[config.link.github]/issues")
 	else
-		to_chat(src, "<span class='warning'>The Github URL is not set in the server configuration.</span>")
+		to_chat(src, SPAN("warning", "The Github URL is not set in the server configuration."))
 	return
 
 /client/verb/hotkeys_help()

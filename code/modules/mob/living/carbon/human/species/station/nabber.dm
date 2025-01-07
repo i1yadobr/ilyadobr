@@ -211,7 +211,7 @@
 
 	var/armor = affecting.run_armor_check(BP_CHEST, "melee")
 	affecting.apply_damage(15, BRUTE, BP_CHEST, armor, DAM_SHARP, "organic punctures")
-	affecting.visible_message("<span class='danger'>[assailant]'s spikes dig in painfully!</span>")
+	affecting.visible_message(SPAN("danger", "[assailant]'s spikes dig in painfully!"))
 	affecting.Stun(10)
 
 /datum/species/nabber/update_skin(mob/living/carbon/human/H)
@@ -257,14 +257,14 @@
 	if(attacker.pulling_punches || target.lying || attacker == target)
 		return ..(attacker, target)
 	if(world.time < attacker.last_attack + 20)
-		to_chat(attacker, "<span class='notice'>You can't attack again so soon.</span>")
+		to_chat(attacker, SPAN("notice", "You can't attack again so soon."))
 		return 0
 	attacker.last_attack = world.time
 	var/turf/T = get_step(get_turf(target), get_dir(get_turf(attacker), get_turf(target)))
 	playsound(target.loc, 'sound/weapons/pushhiss.ogg', 50, 1, -1)
 	if(!T.density)
 		step(target, get_dir(get_turf(attacker), get_turf(target)))
-		target.visible_message("<span class='danger'>[pick("[target] was sent flying backward!", "[target] staggers back from the impact!")]</span>")
+		target.visible_message(SPAN("danger", "[pick("[target] was sent flying backward!", "[target] staggers back from the impact!")]"))
 	else
 		target.turf_collision(T, target.throw_speed / 2)
 	if(prob(50))

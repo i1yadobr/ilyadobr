@@ -32,7 +32,7 @@
 
 	//snap pop
 	playsound(src, 'sound/effects/snap.ogg', 50, 1)
-	src.visible_message("<span class='warning'>\The [src] explodes in a bright flash!</span>")
+	src.visible_message(SPAN("warning", "\The [src] explodes in a bright flash!"))
 
 	var/datum/effect/effect/system/spark_spread/sparks = new /datum/effect/effect/system/spark_spread()
 	sparks.set_up(2, 1, T)
@@ -216,7 +216,7 @@
 
 /obj/item/projectile/energy/plasmastun/proc/bang(mob/living/carbon/M)
 
-	to_chat(M, "<span class='danger'>You hear a loud roar.</span>")
+	to_chat(M, SPAN("danger", "You hear a loud roar."))
 	var/ear_safety = 0
 	if(iscarbon(M))
 		if(ishuman(M))
@@ -230,13 +230,13 @@
 		M.ear_damage += rand(1, 10)
 		M.ear_deaf = max(M.ear_deaf,15)
 	if (M.ear_damage >= 15)
-		to_chat(M, "<span class='danger'>Your ears start to ring badly!</span>")
+		to_chat(M, SPAN("danger", "Your ears start to ring badly!"))
 		if (prob(M.ear_damage - 5))
-			to_chat(M, "<span class='danger'>You can't hear anything!</span>")
+			to_chat(M, SPAN("danger", "You can't hear anything!"))
 			M.sdisabilities |= DEAF
 	else
 		if (M.ear_damage >= 5)
-			to_chat(M, "<span class='danger'>Your ears start to ring!</span>")
+			to_chat(M, SPAN("danger", "Your ears start to ring!"))
 	M.update_icons()
 
 /obj/item/projectile/energy/plasmastun/on_hit(atom/target)

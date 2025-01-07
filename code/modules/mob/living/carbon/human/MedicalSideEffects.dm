@@ -24,7 +24,7 @@
 	for(var/R in cures)
 		if(H.reagents.has_reagent(R))
 			if (cure_message)
-				to_chat(H, "<span class='notice'>[cure_message]</span>")
+				to_chat(H, SPAN("notice", "[cure_message]"))
 			return 1
 	return 0
 

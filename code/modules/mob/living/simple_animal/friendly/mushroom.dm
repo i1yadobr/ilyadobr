@@ -37,15 +37,15 @@
 	set src = usr
 
 	if(stat == 2)
-		to_chat(usr, "<span class='danger'>You are dead; it is too late for that.</span>")
+		to_chat(usr, SPAN("danger", "You are dead; it is too late for that."))
 		return
 
 	if(!seed)
-		to_chat(usr, "<span class='danger'>You are sterile!</span>")
+		to_chat(usr, SPAN("danger", "You are sterile!"))
 		return
 
 	if(world.time < harvest_time + min_explode_time)
-		to_chat(usr, "<span class='danger'>You are not mature enough for that.</span>")
+		to_chat(usr, SPAN("danger", "You are not mature enough for that."))
 		return
 
 	spore_explode()

@@ -102,7 +102,7 @@
 			else
 				close()
 		else if(density)
-			flick(text("[]deny", base_state), src)
+			flick("[base_state]deny", src)
 
 /obj/machinery/door/window/CanPass(atom/movable/mover, turf/target)
 	if(istype(mover) && mover.pass_flags & PASS_FLAG_GLASS)
@@ -155,7 +155,7 @@
 		deltimer(timer)
 		timer = 0
 
-	flick(text("[]closing", base_state), src)
+	flick("[base_state]closing", src)
 	set_density(1)
 	update_icon()
 	playsound(loc, 'sound/machines/windowdoor.ogg', 100, 1)
@@ -178,7 +178,7 @@
 		var/mob/living/carbon/human/H = user
 		if(H.species?.can_shred(H))
 			playsound(loc, GET_SFX(SFX_GLASS_HIT), 75, 1)
-			visible_message("<span class='danger'>[user] smashes against the [name].</span>")
+			visible_message(SPAN("danger", "[user] smashes against the [name]."))
 			user.do_attack_animation(src)
 			user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 			take_damage(25)
@@ -207,7 +207,7 @@
 			spark_system.start()
 			playsound(loc, SFX_SPARK, 50, 1)
 			playsound(loc, 'sound/weapons/blade1.ogg', 50, 1)
-			visible_message("<span class='warning'>The glass door was sliced open by [user]!</span>")
+			visible_message(SPAN("warning", "The glass door was sliced open by [user]!"))
 		return 1
 
 	//If it's emagged, crowbar can pry electronics out.
@@ -215,7 +215,7 @@
 		playsound(loc, 'sound/items/Crowbar.ogg', 100, 1)
 		user.visible_message("[user] removes the electronics from the windoor.", "You start to remove electronics from the windoor.")
 		if(do_after(user,40,src))
-			to_chat(user, "<span class='notice'>You removed the windoor electronics!</span>")
+			to_chat(user, SPAN("notice", "You removed the windoor electronics!"))
 
 			var/obj/structure/windoor_assembly/wa = new /obj/structure/windoor_assembly(loc)
 			if(istype(src, /obj/machinery/door/window/brigdoor))
@@ -253,7 +253,7 @@
 	if(density && user.a_intent == I_HURT && !(istype(I, /obj/item/card) || istype(I, /obj/item/device/pda)))
 		var/aforce = I.force
 		playsound(loc, GET_SFX(SFX_GLASS_HIT), 75, 1)
-		visible_message("<span class='danger'>[src] was hit by [I].</span>")
+		visible_message(SPAN("danger", "[src] was hit by [I]."))
 		user.setClickCooldown(I.update_attack_cooldown())
 		user.do_attack_animation(src)
 		if(I.damtype == BRUTE || I.damtype == BURN)
@@ -270,7 +270,7 @@
 			close()
 
 	else if(density)
-		flick(text("[]deny", base_state), src)
+		flick("[base_state]deny", src)
 
 	return
 

@@ -393,10 +393,10 @@
 				playsound(src, 'sound/effects/refill.ogg', 50, 1)
 				return
 			else
-				to_chat(user, "<span class='info'>[src] is only effective on the dead.</span>")
+				to_chat(user, SPAN("info", "[src] is only effective on the dead."))
 				return
 		else
-			to_chat(user, "<span class='info'>[src] is only effective on lesser beings.</span>")
+			to_chat(user, SPAN("info", "[src] is only effective on lesser beings."))
 			return
 
 /obj/item/lazarus_injector/attackby(obj/item/I, mob/living/user)
@@ -438,10 +438,10 @@
 		if(points)
 			var/obj/item/card/id/C = I
 			C.mining_points += points
-			to_chat(user, "<span class='info'>You transfer [points] points to [C].</span>")
+			to_chat(user, SPAN("info", "You transfer [points] points to [C]."))
 			points = 0
 		else
-			to_chat(user, "<span class='info'>There's no points left on [src].</span>")
+			to_chat(user, SPAN("info", "There's no points left on [src]."))
 	..()
 
 /obj/item/card/mining_point_card/_examine_text(mob/user)
@@ -492,10 +492,10 @@
 /obj/item/resonator/attack_self(mob/user)
 	if(burst_time == 50)
 		burst_time = 30
-		to_chat(user, "<span class='info'>You set the resonator's fields to detonate after 3 seconds.</span>")
+		to_chat(user, SPAN("info", "You set the resonator's fields to detonate after 3 seconds."))
 	else
 		burst_time = 50
-		to_chat(user, "<span class='info'>You set the resonator's fields to detonate after 5 seconds.</span>")
+		to_chat(user, SPAN("info", "You set the resonator's fields to detonate after 5 seconds."))
 
 /obj/item/resonator/afterattack(atom/target, mob/user, proximity_flag)
 	..()
@@ -541,7 +541,7 @@
 		var/turf/simulated/mineral/M = T
 		M.GetDrilled(1)
 	for(var/mob/living/L in T)
-		to_chat(L, "<span class='danger'>The [src.name] ruptured with you in it!</span>")
+		to_chat(L, SPAN("danger", "The [src.name] ruptured with you in it!"))
 		L.apply_damage(resonance_damage, BRUTE)
 	qdel(src)
 
@@ -599,7 +599,7 @@
 	origin_tech = list(TECH_BLUESPACE = 4, TECH_ENGINEERING = 3)
 
 /obj/item/oreportal/attack_self(mob/user)
-	to_chat(user, "<span class='info'>You pulse the ore summoner.</span>")
+	to_chat(user, SPAN("info", "You pulse the ore summoner."))
 	var/limit = 10
 	for(var/obj/item/ore/O in orange(7,user))
 		if(limit <= 0)
@@ -646,7 +646,7 @@
 
 	if (isWrench(C))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
-		to_chat(user, "<span class='notice'>You [anchored ? "un" : ""]anchor the [name].</span>")
+		to_chat(user, SPAN("notice", "You [anchored ? "un" : ""]anchor the [name]."))
 		anchored = !anchored
 
 	if (istype(C, /obj/item/autochisel))
@@ -659,19 +659,19 @@
 				for(var/mob/living/M in view(7,user))
 					choices += M
 				T = input(user,"Who do you wish to sculpt?") as null|anything in choices
-				user.visible_message("<span class='notice'>[user] begins sculpting.</span>",
-					"<span class='notice'>You begin sculpting.</span>")
+				user.visible_message(SPAN("notice", "[user] begins sculpting."),
+					SPAN("notice", "You begin sculpting."))
 
 			var/sculpting_coefficient = get_dist(user,T)
 			if(sculpting_coefficient <= 0)
 				sculpting_coefficient = 1
 
 			if(sculpting_coefficient >= 7)
-				to_chat(user, "<span class='warning'>You hardly remember what [T] really looks like! Bah!</span>")
+				to_chat(user, SPAN("warning", "You hardly remember what [T] really looks like! Bah!"))
 				T = null
 
-			user.visible_message("<span class='notice'>[user] carves away at the sculpting block!</span>",
-				"<span class='notice'>You continue sculpting.</span>")
+			user.visible_message(SPAN("notice", "[user] carves away at the sculpting block!"),
+				SPAN("notice", "You continue sculpting."))
 
 			playsound(user, GET_SFX(SFX_USE_CHISEL), 30, 1)
 			spawn(3)
@@ -685,12 +685,12 @@
 				if(times_carved <= 9)
 					times_carved += 1
 					if(times_carved < 1)
-						to_chat(user, "<span class='notice'>You review your work and see there is more to do.</span>")
+						to_chat(user, SPAN("notice", "You review your work and see there is more to do."))
 					return
 				else
 					sculpted = 1
-					user.visible_message("<span class='notice'>[user] finishes sculpting their magnum opus!</span>",
-						"<span class='notice'>You finish sculpting a masterpiece.</span>")
+					user.visible_message(SPAN("notice", "[user] finishes sculpting their magnum opus!"),
+						SPAN("notice", "You finish sculpting a masterpiece."))
 					src.appearance = T
 					appearance_flags = DEFAULT_APPEARANCE_FLAGS | KEEP_TOGETHER
 					src.color = list(

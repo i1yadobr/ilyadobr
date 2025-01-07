@@ -54,7 +54,7 @@
 		update_icon()
 	else
 		if(busy)
-			visible_message("<span class='notice'>\icon [src] flashes: insufficient materials: [getLackingMaterials(D)].</span>")
+			visible_message(SPAN("notice", "\icon [src] flashes: insufficient materials: [getLackingMaterials(D)]."))
 			busy = 0
 			update_icon()
 
@@ -83,7 +83,7 @@
 
 /obj/machinery/r_n_d/protolathe/attackby(obj/item/O as obj, mob/user as mob)
 	if(busy)
-		to_chat(user, "<span class='notice'>\The [src] is busy. Please wait for completion of previous operation.</span>")
+		to_chat(user, SPAN("notice", "\The [src] is busy. Please wait for completion of previous operation."))
 		return 1
 	if(default_deconstruction_screwdriver(user, O))
 		if(linked_console)
@@ -97,21 +97,21 @@
 	if(O.is_open_container())
 		return 1
 	if(panel_open)
-		to_chat(user, "<span class='notice'>You can't load \the [src] while it's opened.</span>")
+		to_chat(user, SPAN("notice", "You can't load \the [src] while it's opened."))
 		return 1
 	if(!linked_console)
-		to_chat(user, "<span class='notice'>\The [src] must be linked to an R&D console first!</span>")
+		to_chat(user, SPAN("notice", "\The [src] must be linked to an R&D console first!"))
 		return 1
 	if(is_robot_module(O))
 		return 0
 	if(!istype(O, /obj/item/stack/material))
-		to_chat(user, "<span class='notice'>You cannot insert this item into \the [src]!</span>")
+		to_chat(user, SPAN("notice", "You cannot insert this item into \the [src]!"))
 		return 0
 	if(stat)
 		return 1
 
 	if(TotalMaterials() + SHEET_MATERIAL_AMOUNT > max_material_storage)
-		to_chat(user, "<span class='notice'>\The [src]'s material bin is full. Please remove material before adding more.</span>")
+		to_chat(user, SPAN("notice", "\The [src]'s material bin is full. Please remove material before adding more."))
 		return 1
 
 	var/obj/item/stack/material/stack = O
@@ -127,7 +127,7 @@
 	if(t)
 		if(do_after(user, 16,src))
 			if(stack.use(amount))
-				to_chat(user, "<span class='notice'>You add [amount] sheet\s to \the [src].</span>")
+				to_chat(user, SPAN("notice", "You add [amount] sheet\s to \the [src]."))
 				materials[t] += amount * SHEET_MATERIAL_AMOUNT
 	busy = 0
 	updateUsrDialog()

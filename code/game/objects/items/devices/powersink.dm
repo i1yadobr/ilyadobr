@@ -61,21 +61,21 @@
 			if(isturf(T) && !!T.is_plating())
 				attached = locate() in T
 				if(!attached)
-					to_chat(user, "<span class='warning'>This device must be placed over an exposed, powered cable node!</span>")
+					to_chat(user, SPAN("warning", "This device must be placed over an exposed, powered cable node!"))
 				else
 					set_mode(CLAMPED_OFF)
 					user.visible_message( \
 						"[user] attaches \the [src] to the cable.", \
-						"<span class='notice'>You attach \the [src] to the cable.</span>",
-						"<span class='italics'>You hear some wires being connected to something.</span>")
+						SPAN("notice", "You attach \the [src] to the cable."),
+						SPAN("italics", "You hear some wires being connected to something."))
 			else
-				to_chat(user, "<span class='warning'>This device must be placed over an exposed, powered cable node!</span>")
+				to_chat(user, SPAN("warning", "This device must be placed over an exposed, powered cable node!"))
 		else
 			set_mode(DISCONNECTED)
 			user.visible_message( \
 				"[user] detaches \the [src] from the cable.", \
-				"<span class='notice'>You detach \the [src] from the cable.</span>",
-				"<span class='italics'>You hear some wires being disconnected from something.</span>")
+				SPAN("notice", "You detach \the [src] from the cable."),
+				SPAN("italics", "You hear some wires being disconnected from something."))
 	else
 		return ..()
 
@@ -93,15 +93,15 @@
 		if(CLAMPED_OFF)
 			user.visible_message( \
 				"[user] activates \the [src]!", \
-				"<span class='notice'>You activate \the [src].</span>",
-				"<span class='italics'>You hear a click.</span>")
+				SPAN("notice", "You activate \the [src]."),
+				SPAN("italics", "You hear a click."))
 			set_mode(OPERATING)
 
 		if(OPERATING)
 			user.visible_message( \
 				"[user] deactivates \the [src]!", \
-				"<span class='notice'>You deactivate \the [src].</span>",
-				"<span class='italics'>You hear a click.</span>")
+				SPAN("notice", "You deactivate \the [src]."),
+				SPAN("italics", "You hear a click."))
 			set_mode(CLAMPED_OFF)
 
 /obj/item/device/powersink/think()

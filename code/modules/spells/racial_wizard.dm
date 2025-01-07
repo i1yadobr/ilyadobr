@@ -188,14 +188,14 @@
 
 /obj/item/contract/apprentice/skrell/attack_self(mob/user as mob)
 	if(!linked)
-		to_chat(user, "<span class='warning'>This contract requires a link to a spellbook.</span>")
+		to_chat(user, SPAN("warning", "This contract requires a link to a spellbook."))
 		return
 	..()
 
 /obj/item/contract/apprentice/skrell/afterattack(atom/A, mob/user as mob, proximity)
 	if(!linked && istype(A,/obj/item/spellbook))
 		linked = A
-		to_chat(user, "<span class='notice'>You've linked \the [A] to \the [src]</span>")
+		to_chat(user, SPAN("notice", "You've linked \the [A] to \the [src]"))
 		return
 	..()
 

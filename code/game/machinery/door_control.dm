@@ -40,7 +40,7 @@
 		return
 
 	if(!allowed(user) && (wires & 1))
-		to_chat(user, "<span class='warning'>Access Denied</span>")
+		to_chat(user, SPAN("warning", "Access Denied"))
 		flick("[initial(icon_state)]-denied",src)
 		return
 

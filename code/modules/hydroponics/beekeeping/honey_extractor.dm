@@ -19,17 +19,17 @@
 
 /obj/machinery/honey_extractor/attackby(obj/item/I, mob/user)
 	if(processing)
-		to_chat(user, "<span class='notice'>\The [src] is currently spinning, wait until it's finished.</span>")
+		to_chat(user, SPAN("notice", "\The [src] is currently spinning, wait until it's finished."))
 		return
 	else if(istype(I, /obj/item/honey_frame))
 		if(open)
-			to_chat(user, "<span class='notice'>\The [src] is currently open.</span>")
+			to_chat(user, SPAN("notice", "\The [src] is currently open."))
 			return
 		var/obj/item/honey_frame/H = I
 		if(!H.honey)
-			to_chat(user, "<span class='notice'>\The [H] is empty, put it into a beehive.</span>")
+			to_chat(user, SPAN("notice", "\The [H] is empty, put it into a beehive."))
 			return
-		user.visible_message("<span class='notice'>\The [user] loads \the [H] into \the [src] and turns it on.</span>", "<span class='notice'>You load \the [H] into \the [src] and turn it on.</span>")
+		user.visible_message(SPAN("notice", "\The [user] loads \the [H] into \the [src] and turns it on."), SPAN("notice", "You load \the [H] into \the [src] and turn it on."))
 		processing = H.honey
 		icon_state = "centrifuge_moving"
 		qdel(H)
@@ -41,16 +41,16 @@
 			icon_state = "centrifuge"
 	else if(istype(I, /obj/item/reagent_containers/vessel))
 		if(open)
-			to_chat(user, "<span class='notice'>\The [src] is currently open.</span>")
+			to_chat(user, SPAN("notice", "\The [src] is currently open."))
 			return
 		if(!honey)
-			to_chat(user, "<span class='notice'>There is no honey in \the [src].</span>")
+			to_chat(user, SPAN("notice", "There is no honey in \the [src]."))
 			return
 		var/obj/item/reagent_containers/vessel/G = I
 		var/transferred = min(G.reagents.maximum_volume - G.reagents.total_volume, honey)
 		G.reagents.add_reagent(/datum/reagent/nutriment/honey, transferred)
 		honey -= transferred
-		user.visible_message("<span class='notice'>\The [user] collects honey from \the [src] into \the [G].</span>", "<span class='notice'>You collect [transferred] units of honey from \the [src] into \the [G].</span>")
+		user.visible_message(SPAN("notice", "\The [user] collects honey from \the [src] into \the [G]."), SPAN("notice", "You collect [transferred] units of honey from \the [src] into \the [G]."))
 		return 1
 	else if((isScrewdriver(I) || isCrowbar(I) || isWrench(I)))
 		if(default_deconstruction_screwdriver(user, I))

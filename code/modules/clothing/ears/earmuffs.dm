@@ -31,12 +31,12 @@
 		item_state = "headphones_off"
 		headphones_on = 0
 		ear_protection = 0.5 // Worn on both ears, effectively providing 1 ear protection
-		to_chat(usr, "<span class='notice'>You turn the music off.</span>")
+		to_chat(usr, SPAN("notice", "You turn the music off."))
 	else
 		icon_state = "headphones_on"
 		item_state = "headphones_on"
 		headphones_on = 1
 		ear_protection = 0
-		to_chat(usr, "<span class='notice'>You turn the music on.</span>")
+		to_chat(usr, SPAN("notice", "You turn the music on."))
 
 	update_clothing_icon()

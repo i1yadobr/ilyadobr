@@ -32,7 +32,7 @@
 		report("Antibodies detected: [antigens2string(C.antibodies)]", user)
 
 /obj/item/device/antibody_scanner/proc/report(text, mob/user as mob)
-	to_chat(user, "<span class='notice'>\icon[src] \The [src] beeps, \"[text]\"</span>")
+	to_chat(user, SPAN("notice", "\icon[src] \The [src] beeps, \"[text]\""))
 
 ///////////////VIRUS DISH///////////////
 
@@ -61,7 +61,7 @@
 		return
 	..()
 	if(prob(50))
-		to_chat(user, "<span class='danger'>\The [src] shatters!</span>")
+		to_chat(user, SPAN("danger", "\The [src] shatters!"))
 		if(virus2.infectionchance > 0)
 			for(var/mob/living/carbon/target in view(1, get_turf(src)))
 				if(airborne_can_reach(get_turf(src), get_turf(target)))

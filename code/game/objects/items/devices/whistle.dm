@@ -34,16 +34,16 @@
 	if(isnull(insults))
 		playsound(src, 'sound/voice/halt.ogg', 100, 1, vary = 0)
 		// TODO(rufus): refactor to hailer's own audible message, /atom/proc/audible_message(), and add runechat message override
-		user.audible_message("<span class='warning'>[user]'s [name] rasps, \"[use_message]\"</span>", null, "<span class='warning'>\The [user] holds up \the [name].</span>")
+		user.audible_message(SPAN("warning", "[user]'s [name] rasps, \"[use_message]\""), null, SPAN("warning", "\The [user] holds up \the [name]."))
 	else
 		if(insults > 0)
 			playsound(src, 'sound/voice/binsult.ogg', 100, 1, vary = 0)
 			// Yes, it used to show the transcription of the sound clip. That was a) inaccurate b) immature as shit.
 			// TODO(rufus): refactor to hailer's own audible message, /atom/proc/audible_message(), and add runechat message override
-			user.audible_message("<span class='warning'>[user]'s [name] gurgles something indecipherable and deeply offensive.</span>", null, "<span class='warning'>\The [user] holds up \the [name].</span>")
+			user.audible_message(SPAN("warning", "[user]'s [name] gurgles something indecipherable and deeply offensive."), null, SPAN("warning", "\The [user] holds up \the [name]."))
 			insults--
 		else
-			to_chat(user, "<span class='danger'>*BZZZZZZZZT*</span>")
+			to_chat(user, SPAN("danger", "*BZZZZZZZZT*"))
 
 	spamcheck = 1
 	spawn(20)
@@ -51,7 +51,7 @@
 
 /obj/item/device/hailer/emag_act(remaining_charges, mob/user)
 	if(isnull(insults))
-		to_chat(user, "<span class='danger'>You overload \the [src]'s voice synthesizer.</span>")
+		to_chat(user, SPAN("danger", "You overload \the [src]'s voice synthesizer."))
 		insults = rand(1, 3)//to prevent dickflooding
 		return 1
 	else

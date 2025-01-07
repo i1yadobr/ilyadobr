@@ -60,7 +60,7 @@
 				drop = 1
 	if(drop)
 		if(standing)
-			to_chat(owner, "<span class='warning'>You don't have enough energy to stand!</span>")
+			to_chat(owner, SPAN("warning", "You don't have enough energy to stand!"))
 		owner.Weaken(2)
 
 /obj/item/organ/internal/cell/emp_act(severity)
@@ -72,25 +72,25 @@
 	if(isScrewdriver(W))
 		if(open)
 			open = 0
-			to_chat(user, "<span class='notice'>You screw the battery panel in place.</span>")
+			to_chat(user, SPAN("notice", "You screw the battery panel in place."))
 		else
 			open = 1
-			to_chat(user, "<span class='notice'>You unscrew the battery panel.</span>")
+			to_chat(user, SPAN("notice", "You unscrew the battery panel."))
 
 	if(isCrowbar(W))
 		if(open)
 			if(cell)
 				user.pick_or_drop(cell)
-				to_chat(user, "<span class='notice'>You remove \the [cell] from \the [src].</span>")
+				to_chat(user, SPAN("notice", "You remove \the [cell] from \the [src]."))
 				cell = null
 
 	if (istype(W, /obj/item/cell))
 		if(open)
 			if(cell)
-				to_chat(user, "<span class='warning'>There is a power cell already installed.</span>")
+				to_chat(user, SPAN("warning", "There is a power cell already installed."))
 			else if(user.drop(W, src))
 				cell = W
-				to_chat(user, "<span class='notice'>You insert \the [cell].</span>")
+				to_chat(user, SPAN("notice", "You insert \the [cell]."))
 
 /obj/item/organ/internal/cell/replaced()
 	..()
@@ -152,7 +152,7 @@
 	if(owner && owner.stat == DEAD)
 		owner.set_stat(CONSCIOUS)
 		owner.switch_from_dead_to_living_mob_list()
-		owner.visible_message("<span class='danger'>\The [owner] twitches visibly!</span>")
+		owner.visible_message(SPAN("danger", "\The [owner] twitches visibly!"))
 
 /obj/item/organ/internal/mmi_holder/cut_away(mob/living/user)
 	var/obj/item/organ/external/parent = owner.get_organ(parent_organ)

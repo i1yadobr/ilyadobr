@@ -165,7 +165,7 @@
 	if(istype(W,/obj/item/pipe))
 		if(buildstate == 0)
 			qdel(W)
-			to_chat(user, "<span class='notice'>You secure the piping inside the frame.</span>")
+			to_chat(user, SPAN("notice", "You secure the piping inside the frame."))
 			buildstate++
 			update_icon()
 			return
@@ -173,16 +173,16 @@
 		if(buildstate == 2)
 			var/obj/item/stack/material/M = W
 			if(M.use(5))
-				to_chat(user, "<span class='notice'>You assemble a chassis around the cannon frame.</span>")
+				to_chat(user, SPAN("notice", "You assemble a chassis around the cannon frame."))
 				buildstate++
 				update_icon()
 			else
-				to_chat(user, "<span class='notice'>You need at least five metal sheets to complete this task.</span>")
+				to_chat(user, SPAN("notice", "You need at least five metal sheets to complete this task."))
 			return
 	else if(istype(W,/obj/item/device/transfer_valve))
 		if(buildstate == 4)
 			qdel(W)
-			to_chat(user, "<span class='notice'>You install the transfer valve and connect it to the piping.</span>")
+			to_chat(user, SPAN("notice", "You install the transfer valve and connect it to the piping."))
 			buildstate++
 			update_icon()
 			return
@@ -192,7 +192,7 @@
 			if(T.remove_fuel(0,user))
 				if(!src || !T.isOn()) return
 				playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
-				to_chat(user, "<span class='notice'>You weld the pipe into place.</span>")
+				to_chat(user, SPAN("notice", "You weld the pipe into place."))
 				buildstate++
 				update_icon()
 		if(buildstate == 3)
@@ -200,7 +200,7 @@
 			if(T.remove_fuel(0,user))
 				if(!src || !T.isOn()) return
 				playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
-				to_chat(user, "<span class='notice'>You weld the metal chassis together.</span>")
+				to_chat(user, SPAN("notice", "You weld the metal chassis together."))
 				buildstate++
 				update_icon()
 		if(buildstate == 5)
@@ -208,7 +208,7 @@
 			if(T.remove_fuel(0,user))
 				if(!src || !T.isOn()) return
 				playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
-				to_chat(user, "<span class='notice'>You weld the valve into place.</span>")
+				to_chat(user, SPAN("notice", "You weld the valve into place."))
 				new /obj/item/gun/launcher/pneumatic(get_turf(src))
 				qdel(src)
 		return

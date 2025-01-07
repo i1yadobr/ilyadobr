@@ -24,7 +24,7 @@
 
 /obj/item/reagent_containers/hypospray/attack(mob/living/M as mob, mob/user as mob)
 	if(!reagents.total_volume)
-		to_chat(user, "<span class='warning'>[src] is empty.</span>")
+		to_chat(user, SPAN("warning", "[src] is empty."))
 		return
 	if (!istype(M))
 		return
@@ -33,23 +33,23 @@
 	if(istype(H))
 		var/obj/item/organ/external/affected = H.get_organ(user.zone_sel.selecting)
 		if(!affected)
-			to_chat(user, "<span class='danger'>\The [H] is missing that limb!</span>")
+			to_chat(user, SPAN("danger", "\The [H] is missing that limb!"))
 			return
 		else if(BP_IS_ROBOTIC(affected))
-			to_chat(user, "<span class='danger'>You cannot inject a robotic limb.</span>")
+			to_chat(user, SPAN("danger", "You cannot inject a robotic limb."))
 			return
 
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 	user.do_attack_animation(M)
-	to_chat(user, "<span class='notice'>You inject [M] with [src].</span>")
-	to_chat(M, "<span class='notice'>You feel a tiny prick!</span>")
-	user.visible_message("<span class='warning'>[user] injects [M] with [src].</span>")
+	to_chat(user, SPAN("notice", "You inject [M] with [src]."))
+	to_chat(M, SPAN("notice", "You feel a tiny prick!"))
+	user.visible_message(SPAN("warning", "[user] injects [M] with [src]."))
 
 	if(M.reagents)
 		var/contained = reagentlist()
 		var/trans = reagents.trans_to_mob(M, amount_per_transfer_from_this, CHEM_BLOOD)
 		admin_inject_log(user, M, src, contained, trans)
-		to_chat(user, "<span class='notice'>[trans] units injected. [reagents.total_volume] units remaining in \the [src].</span>")
+		to_chat(user, SPAN("notice", "[trans] units injected. [reagents.total_volume] units remaining in \the [src]."))
 
 	return
 
@@ -95,11 +95,11 @@
 			loaded_vial = W
 			reagents.maximum_volume = loaded_vial.reagents.maximum_volume
 			loaded_vial.reagents.trans_to_holder(reagents,volume)
-			user.visible_message("<span class='notice'>[user] has loaded [W] into \the [src].</span>","<span class='notice'>You load \the [W] into \the [src].</span>")
+			user.visible_message(SPAN("notice", "[user] has loaded [W] into \the [src]."),SPAN("notice", "You load \the [W] into \the [src]."))
 			update_icon()
 			playsound(src.loc, 'sound/weapons/empty.ogg', 50, 1)
 		else
-			to_chat(user,"<span class='notice'>\The [src] already has a vial.</span>")
+			to_chat(user,SPAN("notice", "\The [src] already has a vial."))
 	else
 		..()
 

@@ -170,7 +170,7 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 			screen = RCS_SENTPASS
 			message_log += "<B>Message sent to [recipient]</B><BR>[message]"
 		else
-			audible_message(text("\icon[src] *The Requests Console beeps: 'NOTICE: No server detected!'"),,4, runechat_message = "NOTICE: No server detected!")
+			audible_message("\icon[src] *\The [src] beeps: 'NOTICE: No server detected!'","\The [src] screen blinks red!",4, runechat_message = "NOTICE: No server detected!")
 
 	//Handle screen switching
 	if(href_list["setScreen"])
@@ -230,13 +230,13 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 				announcement.announcer = ID.assignment ? "[ID.assignment] [ID.registered_name]" : ID.registered_name
 			else
 				reset_message()
-				to_chat(user, "<span class='warning'>You are not authorized to send announcements.</span>")
+				to_chat(user, SPAN("warning", "You are not authorized to send announcements."))
 			updateUsrDialog()
 	if (istype(O, /obj/item/stamp))
 		if(inoperable(MAINT)) return
 		if(screen == RCS_MESSAUTH)
 			var/obj/item/stamp/T = O
-			msgStamped = text("<span class='info'><b>Stamped with the [T.name]</b></span>")
+			msgStamped = SPAN("info", "<b>Stamped with the [T.name]</b>")
 			updateUsrDialog()
 	return
 

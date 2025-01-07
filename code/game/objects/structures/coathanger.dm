@@ -22,7 +22,7 @@
 		coat = W
 		update_icon()
 	else
-		to_chat(user, "<span class='notice'>You cannot hang [W] on [src]</span>")
+		to_chat(user, SPAN("notice", "You cannot hang [W] on [src]"))
 		return ..()
 
 /obj/structure/coatrack/CanPass(atom/movable/mover, turf/target)

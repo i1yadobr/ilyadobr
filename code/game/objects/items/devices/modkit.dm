@@ -36,20 +36,20 @@
 			parts_left = parts[i]
 			j = i
 	if(!to_type)
-		to_chat(user, "<span class='warning'>You cannot modify \the [O] with this kit.</span>")
+		to_chat(user, SPAN("warning", "You cannot modify \the [O] with this kit."))
 		return
 	if(parts_left <= 0)
-		to_chat(user, "<span class='warning'>This kit has no parts for this modification left.</span>")
+		to_chat(user, SPAN("warning", "This kit has no parts for this modification left."))
 		return
 	if(istype(O,to_type))
-		to_chat(user, "<span class='notice'>\The [O] is already modified.</span>")
+		to_chat(user, SPAN("notice", "\The [O] is already modified."))
 		return
 	if(!isturf(O.loc))
-		to_chat(user, "<span class='warning'>\The [O] must be safely placed on the ground for modification.</span>")
+		to_chat(user, SPAN("warning", "\The [O] must be safely placed on the ground for modification."))
 		return
 	playsound(user.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 	var/N = new to_type(O.loc)
-	user.visible_message("<span class='warning'>[user] opens \the [src] and modifies \the [O] into \the [N].</span>","<span class='warning'>You open \the [src] and modify \the [O] into \the [N].</span>")
+	user.visible_message(SPAN("warning", "[user] opens \the [src] and modifies \the [O] into \the [N]."),SPAN("warning", "You open \the [src] and modify \the [O] into \the [N]."))
 	qdel(O)
 
 

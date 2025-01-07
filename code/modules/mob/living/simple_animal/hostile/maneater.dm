@@ -44,7 +44,7 @@
 		if(!stat)
 			for(var/mob/M in viewers(user, null))
 				if ((M.client && !( M.blinded )))
-					M.show_message("<span class='notice'>[user] feeds the [name] with some [O].</span>")
+					M.show_message(SPAN("notice", "[user] feeds the [name] with some [O]."))
 			qdel(O)
 			angry = 1
 			friends += weakref(user)
@@ -65,7 +65,7 @@
 	if(istype(L))
 		if(prob(25))
 			L.Weaken(3)
-			L.visible_message("<span class='danger'>\The [src] knocks down \the [L]!</span>")
+			L.visible_message(SPAN("danger", "\The [src] knocks down \the [L]!"))
 
 /decl/simple_animal_bodyparts/maneater
 	hit_zones = list("flesh", "tendrils", "tentacles", "giant maw", "horrifying mouth", "mouth", "maw")

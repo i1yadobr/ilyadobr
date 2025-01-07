@@ -26,7 +26,7 @@
 /datum/spell/targeted/disintegrate/cast(list/targets, mob/user)
 	for(var/mob/T in targets)
 		if(!in_range(T, user))
-			to_chat(user, "<span class='warning'>That was not so bright of you.</span>")
+			to_chat(user, SPAN("warning", "That was not so bright of you."))
 			return
 		if(prob(5)) // Well why not?
 			playsound(user.loc, 'sound/misc/bangindonk.ogg', 50, 1)

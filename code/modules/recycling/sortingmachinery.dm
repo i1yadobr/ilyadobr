@@ -40,7 +40,7 @@
 			else
 				to_chat(user, SPAN("warning", "The package is already labeled for [O.currTag]"))
 		else
-			to_chat(user, SPAN("warning", "You need to set a destination first!</span>"))
+			to_chat(user, SPAN("warning", "You need to set a destination first!"))
 
 	else if(istype(W, /obj/item/pen) || istype(W, /obj/item/hand_labeler))
 		switch(alert("What would you like to alter?",,"Title","Description", "Cancel"))
@@ -182,7 +182,7 @@
 			else
 				to_chat(user, SPAN("warning", "The package is already labeled for [O.currTag]"))
 		else
-			to_chat(user, SPAN("warning", "You need to set a destination first!</span>"))
+			to_chat(user, SPAN("warning", "You need to set a destination first!"))
 
 	else if(istype(W, /obj/item/pen) || istype(W, /obj/item/hand_labeler))
 		switch(alert("What would you like to alter?",,"Title","Description", "Cancel"))

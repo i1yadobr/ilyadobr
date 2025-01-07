@@ -23,17 +23,17 @@
 			sandwich_limit += 4
 
 	if(contents.len > sandwich_limit)
-		to_chat(user, "<span class='wwarning'>If you put anything else on \the [src] it's going to collapse.</span>")
+		to_chat(user, SPAN("wwarning", "If you put anything else on \the [src] it's going to collapse."))
 		return
 	else if(istype(W, /obj/item/material/shard))
 		if(user.drop(W, src))
-			to_chat(user, "<span class='warning'>You hide [W] in \the [src].</span>")
+			to_chat(user, SPAN("warning", "You hide [W] in \the [src]."))
 			update()
 		return
 	else if(istype(W, /obj/item/reagent_containers/food))
 		if(!user.drop(W, src))
 			return
-		to_chat(user, "<span class='warning'>You layer [W] over \the [src].</span>")
+		to_chat(user, SPAN("warning", "You layer [W] over \the [src]."))
 		var/obj/item/reagent_containers/F = W
 		F.reagents.trans_to_obj(src, F.reagents.total_volume)
 		ingredients += W
@@ -97,6 +97,6 @@
 		H = M
 
 	if(H && shard && M == user) //This needs a check for feeding the food to other people, but that could be abusable.
-		to_chat(H, "<span class='warning'>You lacerate your mouth on a [shard.name] in the sandwich!</span>")
+		to_chat(H, SPAN("warning", "You lacerate your mouth on a [shard.name] in the sandwich!"))
 		H.adjustBruteLoss(5) //TODO: Target head if human.
 	..()
