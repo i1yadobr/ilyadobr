@@ -152,7 +152,7 @@
 				to_chat(src, "<span class='danger'>Could not locate an observer spawn point. Use the Teleport verb to jump to the map.</span>")
 			observer.timeofdeath = world.time // Set the time of death so that the respawn timer works correctly.
 			if (GAME_STATE < RUNLEVEL_LOBBY)
-				to_chat(usr, "<span class='boldannounce'>The world is still initializing, please be patient and expect visual glitches...")
+				to_chat(usr, "<span class='boldannounce'>The world is still initializing, please be patient and expect visual glitches...</span>")
 
 			if(QDELETED(client.holder))
 				announce_ghost_joinleave(src)

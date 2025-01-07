@@ -4,28 +4,28 @@
 	if (stat == DEAD)
 		msg += "<span class='deadsay'>It appears to be powered-down.</span>\n"
 	else
-		msg += "<span class='warning'>"
+		var/damage_description = ""
 		if (getBruteLoss())
 			if (getBruteLoss() < 30)
-				msg += "It looks slightly dented.\n"
+				damage_description += "It looks slightly dented.\n"
 			else
-				msg += "<B>It looks severely dented!</B>\n"
+				damage_description += "<B>It looks severely dented!</B>\n"
 		if (getFireLoss())
 			if (getFireLoss() < 30)
-				msg += "It looks slightly charred.\n"
+				damage_description += "It looks slightly charred.\n"
 			else
-				msg += "<B>Its casing is melted and heat-warped!</B>\n"
+				damage_description += "<B>Its casing is melted and heat-warped!</B>\n"
 		if (!has_power())
 			if (getOxyLoss() > 175)
-				msg += "<B>It seems to be running on backup power. Its display is blinking a \"BACKUP POWER CRITICAL\" warning.</B>\n"
+				damage_description += "<B>It seems to be running on backup power. Its display is blinking a \"BACKUP POWER CRITICAL\" warning.</B>\n"
 			else if(getOxyLoss() > 100)
-				msg += "<B>It seems to be running on backup power. Its display is blinking a \"BACKUP POWER LOW\" warning.</B>\n"
+				damage_description += "<B>It seems to be running on backup power. Its display is blinking a \"BACKUP POWER LOW\" warning.</B>\n"
 			else
-				msg += "It seems to be running on backup power.\n"
+				damage_description += "It seems to be running on backup power.\n"
 
 		if (stat == UNCONSCIOUS || ssd_check())
-			msg += "It is non-responsive and displaying the text: \"RUNTIME: Sensory Overload, stack 26/3\".\n"
-		msg += "</span>"
+			damage_description += "It is non-responsive and displaying the text: \"RUNTIME: Sensory Overload, stack 26/3\".\n"
+		msg += "<span class='warning'>[damage_description]</span>"
 	msg += "*---------*"
 	if(hardware && (hardware.owner == src))
 		msg += "<br>"

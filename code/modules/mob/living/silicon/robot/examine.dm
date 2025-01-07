@@ -5,19 +5,19 @@
 	var/msg = ""
 	msg += "\n"
 	msg += examine_all_modules()
-	
-	msg += "<span class='warning'>"
+
+	var/damage_description = ""
 	if (getBruteLoss())
 		if (getBruteLoss() < 75)
-			msg += "It looks slightly dented.\n"
+			damage_description += "It looks slightly dented.\n"
 		else
-			msg += "<B>It looks severely dented!</B>\n"
+			damage_description += "<B>It looks severely dented!</B>\n"
 	if (src.getFireLoss())
 		if (getFireLoss() < 75)
-			msg += "It looks slightly charred.\n"
+			damage_description += "It looks slightly charred.\n"
 		else
-			msg += "<B>It looks severely burnt and heat-warped!</B>\n"
-	msg += "</span>"
+			damage_description += "<B>It looks severely burnt and heat-warped!</B>\n"
+	msg += "<span class='warning'>[damage_description]</span>"
 
 	if(opened)
 		msg += "<span class='warning'>Its cover is open and the power cell is [cell ? "installed" : "missing"].</span>\n"

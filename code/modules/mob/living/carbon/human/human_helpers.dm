@@ -196,7 +196,7 @@
 		image_to(src, ping_image)
 		spawn(8)
 			qdel(ping_image)
-		var/feedback = list("<span class='notice'>There are noises of movement ")
+		var/feedback = "There are noises of movement "
 		var/direction = get_dir(src, L)
 		if(direction)
 			feedback += "towards the [dir2text(direction)], "
@@ -213,8 +213,7 @@
 					feedback += "far away."
 		else // No need to check distance if they're standing right on-top of us
 			feedback += "right on top of you."
-		feedback += "</span>"
-		to_chat(src, jointext(feedback,null))
+		to_chat(src, "<span class='notice'>[feedback]</span>")
 	if(!heard_something)
 		to_chat(src, "<span class='notice'>You hear no movement but your own.</span>")
 

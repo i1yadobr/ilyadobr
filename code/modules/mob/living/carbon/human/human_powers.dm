@@ -402,9 +402,10 @@
 	set name = "Switch Stance"
 	set desc = "Toggle between your hunting and manipulation stance"
 
-	if(stat) return
-
-	to_chat(src, "<span class='notice'>You begin to adjust the fluids in your arms, dropping everything and getting ready to swap which set you're using.</span>")
+	if(stat)
+		return
+	var/switch_msg = "You begin to adjust the fluids in your arms, dropping everything and getting ready to swap which set you're using."
+	to_chat(src, "<span class='notice'>[switch_msg]</span>")
 	var/hidden = is_cloaked()
 	if(!hidden)
 		visible_message("[src] shifts \his arms.")
@@ -421,17 +422,22 @@
 
 		if(pulling_punches)
 			current_grab_type = all_grabobjects[GRAB_NORMAL]
-			to_chat(src, "<span class='notice'>You relax your hunting arms, lowering the pressure and folding them tight to your thorax.\
-			You reach out with your manipulation arms, ready to use complex items.</span>")
+			var/self_msg = "You relax your hunting arms, lowering the pressure and folding them tight to your thorax.\
+						    You reach out with your manipulation arms, ready to use complex items."
+			to_chat(src, "<span class='notice'>[self_msg]</span>")
 			if(!hidden)
-				visible_message("<span class='notice'>[src] seems to relax as \he folds \his massive curved arms to \his thorax and reaches out \
-				with \his small handlike limbs.</span>")
+				var/msg = "[src] seems to relax as \he folds \his massive curved arms to \his thorax and reaches out \
+						   with \his small handlike limbs."
+				visible_message("<span class='notice'>[msg]</span>")
 		else
 			current_grab_type = all_grabobjects[GRAB_NAB]
-			to_chat(src, "<span class='notice'>You pull in your manipulation arms, dropping any items and unfolding your massive hunting arms in preparation of grabbing prey.</span>")
+			var/self_msg = "You pull in your manipulation arms, dropping any items and unfolding \
+						    your massive hunting arms in preparation of grabbing prey."
+			to_chat(src, "<span class='notice'>[self_msg]</span>")
 			if(!hidden)
-				visible_message("<span class='warning'>[src] tenses as \he brings \his smaller arms in close to \his body. \His two massive spiked arms reach \
-				out. \He looks ready to attack.</span>")
+				var/msg = "[src] tenses as \he brings \his smaller arms in close to \his body. \
+						   \His two massive spiked arms reach out. \He looks ready to attack."
+				visible_message("<span class='warning'>[msg]</span>")
 	else
 		to_chat(src, "<span class='notice'>You stop adjusting your arms and don't switch between them.</span>")
 
@@ -460,8 +466,10 @@
 			var/message = alert("Would you like to show a scary message?",,"Cancel","Yes", "No")
 			switch(message)
 				if("Yes")
-					visible_message("<span class='warning'>[src]'s skin shifts to a deep red colour with dark chevrons running down in an almost hypnotic \
-						pattern. Standing tall, \he strikes, sharp spikes aimed at those threatening \him, claws whooshing through the air past them.</span>")
+					var/scary_message = "[src]'s skin shifts to a deep red colour with dark chevrons running down in an \
+										 almost hypnotic pattern. Standing tall, \he strikes, sharp spikes aimed at those \
+										 threatening \him, claws whooshing through the air past them."
+					visible_message("<span class='warning'>[scary_message]</span>")
 				if("Cancel")
 					return
 			playsound(src, 'sound/effects/angrybug.ogg', 60, 0)

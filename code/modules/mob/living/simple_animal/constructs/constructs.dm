@@ -67,17 +67,13 @@
 
 /mob/living/simple_animal/construct/_examine_text(mob/user)
 	. = ..()
-	var/msg = "<span class='info'>*---------*\nThis is \icon[src] \a <EM>[src]</EM>!\n"
+	var/description = "*---------*\nThis is \icon[src] \a <EM>[src]</EM>!\n"
 	if (src.health < src.maxHealth)
-		msg += "<span class='warning'>"
-		if (src.health >= src.maxHealth/2)
-			msg += "It looks slightly dented.\n"
-		else
-			msg += "<B>It looks severely dented!</B>\n"
-		msg += "</span>"
-	msg += "*---------*</span>"
+		description += "<span class='warning'>[health >= (maxHealth/2) ? "It looks slightly dented." : "<B>It looks severely dented!</B>"]</span>"
+		description += "\n"
+	description += "*---------*\n"
 
-	. += "\n[msg]"
+	. += "<span class='info'>[description]</span>"
 
 /obj/item/ectoplasm
 	name = "ectoplasm"
