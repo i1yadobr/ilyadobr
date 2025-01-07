@@ -1,3 +1,8 @@
+> [!NOTE]  
+> Данный гайд унаследован от проекта [OnyxBay команды ChaoticOnyx](https://github.com/ChaoticOnyx/OnyxBay/) и ещё не был пересмотрен под условия ZeroOnyx.  
+> Используйте данное руководство в ознакомительных целях, но уточняйте спорные или неизвестные для вас моменты у разработчиков или мейнтейнеров репозитория.  
+> Указанная в данном руководстве информация может быть устаревшей или неактуальной.
+
 # Contributing
 
 - [Основное](#основное)
@@ -446,24 +451,24 @@ BYOND также позволяет подставлять выражения в
 Вместо:
 
 ```DM
-var/X
-var/list/Y
-var/datum/genitalia/Z
+var/A
+var/list/B
+var/datum/channel/C
 var/A = 42
-var/list/B = list(burn = "witch")
-var/datum/genitalia/C = MakeAPenis()
+var/list/B = list("donut" = "tasty")
+var/datum/channel/C = NewRobustFestChannel()
 var/hub_password
 ```
 
 Используйте:
 
 ```DM
-GLOBAL_VAR(X)
-GLOBAL_LIST(Y)
-GLOBAL_DATUM(Z, /datum/genitalia)
+GLOBAL_VAR(A)
+GLOBAL_LIST(B)
+GLOBAL_DATUM(C, /datum/channel)
 GLOBAL_VAR_INIT(A, 42)
-GLOBAL_LIST_INIT(B, list(burn = "witch"))
-GLOBAL_DATUM_INIT(C, /datum/genitalia, MakeAPenis())
+GLOBAL_LIST_INIT(B, list("donut" = "tasty"))
+GLOBAL_DATUM_INIT(C, /datum/channel, NewRobustFestChannel())
 GLOBAL_PROTECT(hub_password)
 ```
 
