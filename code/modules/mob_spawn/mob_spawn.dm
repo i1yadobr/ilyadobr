@@ -177,11 +177,13 @@ GLOBAL_LIST_EMPTY(mob_spawners)
 	if(mob_possessor)
 		spawned_mob.ckey = mob_possessor.ckey
 	if(show_flavor)
-		var/output_message = "<span class='infoplain'><span class='big bold'>[you_are_text]</span></span>"
+		var/output_message = "<span class='infoplain'>[SPAN("big bold", "[you_are_text]")]</span>"
 		if(flavour_text != "")
-			output_message += "\n<span class='infoplain'><b>[flavour_text]</b></span>"
+			output_message += "\n"
+			output_message += SPAN("infoplain", "<b>[flavour_text]</b>")
 		if(important_text != "")
-			output_message += "\n[SPAN_WARNING("[important_text]")]"
+			output_message += "\n"
+			output_message += SPAN_WARNING("[important_text]")
 		to_chat(spawned_mob, output_message)
 	var/datum/mind/spawned_mind = spawned_mob.mind
 	if(spawned_mind)

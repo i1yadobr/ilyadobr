@@ -29,7 +29,7 @@
 										"An extreme pressure comes over you, as if an unknown force has marked you.")
 
 /datum/phenomena/hellscape/activate(mob/living/L)
-	to_chat(L, "<font size='3'><span class='cult'>[pick(creepy_notes)]</span></font>")
+	to_chat(L, "<font size='3'>[SPAN("cult", "[pick(creepy_notes)]")]</font>")
 	L.damageoverlaytemp = 100
 	sound_to(L, sound('sound/hallucinations/far_noise.ogg'))
 	L.Weaken(2)

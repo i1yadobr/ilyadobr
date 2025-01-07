@@ -20,21 +20,23 @@
 	msg += "<span class='warning'>[damage_description]</span>"
 
 	if(opened)
-		msg += "<span class='warning'>Its cover is open and the power cell is [cell ? "installed" : "missing"].</span>\n"
+		msg += SPAN("warning", "Its cover is open and the power cell is [cell ? "installed" : "missing"].")
 	else
-		msg += "Its cover is closed.\n"
+		msg += "Its cover is closed."
+	msg += "\n"
 
 	if(!has_power)
-		msg += "<span class='warning'>It appears to be running on backup power.</span>\n"
-
+		msg += SPAN("warning", "It appears to be running on backup power.")
+		msg += "\n"
 	switch(stat)
 		if(CONSCIOUS)
 			if (ssd_check())
-				msg += "It appears to be in stand-by mode.\n" //afk
+				msg += "It appears to be in stand-by mode." //afk
 		if(UNCONSCIOUS)
-			msg += "<span class='warning'>It doesn't seem to be responding.</span>\n"
+			msg += SPAN("warning", "It doesn't seem to be responding.")
 		if(DEAD)
-			msg += "<span class='deadsay'>It's broken, but looks repairable.</span>\n"
+			msg += SPAN("deadsay", "It's broken, but looks repairable.")
+	msg += "\n"
 	msg += "*---------*"
 
 	if(print_flavor_text()) msg += "\n[print_flavor_text()]\n"
@@ -48,14 +50,16 @@
 		if (module)
 			msg += "<hr>"
 			var/visors = ""
-			msg += "<b><span class='notice'>Supported upgrades:</b></span>\n"
+			msg += "<b>[SPAN("notice", "Supported upgrades:")]</b>"
+			msg += "\n"
 			for(var/i in module.supported_upgrades)
 				var/atom/tmp = i
 				if(findtext("[tmp]","/obj/item/borg/upgrade/visor/"))
 					visors += "<span class='notice'>	[initial(tmp.name)]<br></span>"
 				else
 					msg += "<span class='notice'>	[initial(tmp.name)]<br></span>"
-			msg += "<b><span class='notice'>Supported visors:</b></span>\n"
+			msg += "<b>[SPAN("notice", "Supported visors:")]</b>"
+			msg += "\n"
 			msg += visors
 
 	. += "\n[msg]"

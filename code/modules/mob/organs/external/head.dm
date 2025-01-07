@@ -46,7 +46,8 @@
 	. = ..()
 
 	if(forehead_graffiti && graffiti_style)
-		. += "\n<span class='notice'>It has \"[forehead_graffiti]\" written on it in [graffiti_style]!</span>"
+		. += "\n"
+		. += SPAN("notice", "It has \"[forehead_graffiti]\" written on it in [graffiti_style]!")
 
 /obj/item/organ/external/head/proc/write_on(mob/penman, style)
 	var/head_name = name

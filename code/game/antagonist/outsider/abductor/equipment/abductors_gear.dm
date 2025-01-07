@@ -343,7 +343,7 @@
 		if(QDELETED(L) || L.stat == DEAD)
 			return
 
-		to_chat(L, SPAN_NOTICE("You hear a voice in your head saying: <span class='abductor'>[message]</span>"))
+		to_chat(L, SPAN_NOTICE("You hear a voice in your head saying: [SPAN("abductor", "[message]")]"))
 		to_chat(user, SPAN_NOTICE("You send the message to your target."))
 
 /obj/item/abductor/mind_device/afterattack(atom/target, mob/living/user, flag, params)

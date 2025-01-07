@@ -34,12 +34,15 @@
 	. = ..()
 	if(get_dist(src, user) > 2)
 		return
-	. += "\n<span class='notice'>It contains:</span>"
+	. += "\n"
+	. += SPAN("notice", "It contains:")
 	if(reagents && reagents.reagent_list.len)
 		for(var/datum/reagent/R in reagents.reagent_list)
-			. += "\n<span class='notice'>[R.volume] units of [R.name]</span>"
+			. += "\n"
+			. += SPAN("notice", "[R.volume] units of [R.name]")
 	else
-		. += "\n<span class='notice'>Nothing.</span>"
+		. += "\n"
+		. += SPAN("notice", "Nothing.")
 
 /obj/structure/reagent_dispensers/verb/set_APTFT() //set amount_per_transfer_from_this
 	set name = "Set transfer amount"
@@ -117,9 +120,11 @@
 	if(get_dist(src, user) > 2)
 		return
 	if(modded)
-		. += "\n<span class='warning'>Fuel faucet is wrenched open, leaking the fuel!</span>"
+		. += "\n"
+		. += SPAN("warning", "Fuel faucet is wrenched open, leaking the fuel!")
 	if(rig)
-		. += "\n<span class='notice'>There is some kind of device rigged to the tank.</span>"
+		. += "\n"
+		. += SPAN("notice", "There is some kind of device rigged to the tank.")
 
 /obj/structure/reagent_dispensers/fueltank/attack_hand()
 	if (rig)

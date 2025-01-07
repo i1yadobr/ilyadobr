@@ -46,7 +46,8 @@
 	. = ..()
 	if(!. || !stored_power)
 		return
-	. += "\n<span class='notice'>It exudes a death-like smell.</span>"
+	. += "\n"
+	. += SPAN("notice", "It exudes a death-like smell.")
 
 /obj/item/material/twohanded/fireaxe/cult/resolve_attackby(atom/a, mob/user, click_params)
 	if(istype(a, /obj/structure/deity/altar))

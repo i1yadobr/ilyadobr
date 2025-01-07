@@ -73,12 +73,14 @@
 
 /obj/item/computer_hardware/_examine_text(mob/user)
 	. = ..()
-	if(damage > damage_failure)
-		. += "\n<span class='danger'>It seems to be severely damaged!</span>"
-	else if(damage > damage_malfunction)
-		. += "\n<span class='notice'>It seems to be damaged!</span>"
-	else if(damage)
-		. += "\nIt seems to be slightly damaged."
+	if(damage)
+		. += "\n"
+		if(damage > damage_failure)
+			. += SPAN("danger", "It seems to be severely damaged!")
+		else if(damage > damage_malfunction)
+			. += SPAN("notice", "It seems to be damaged!")
+		else
+			. += "It seems to be slightly damaged."
 
 // Damages the component. Contains necessary checks. Negative damage "heals" the component.
 /obj/item/computer_hardware/proc/take_damage(amount)

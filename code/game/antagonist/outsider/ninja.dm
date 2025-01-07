@@ -82,7 +82,7 @@ GLOBAL_DATUM_INIT(ninjas, /datum/antagonist/ninja, new)
 	if(!..())
 		return 0
 	var/directive = generate_ninja_directive("heel")
-	player.store_memory("<B>Directive:</B> <span class='danger'>[directive]</span><br>")
+	player.store_memory("<B>Directive:</B> [SPAN("danger", "[directive]")]<br>")
 	to_chat(player, "<b>Remember your directive:</b> [directive].")
 
 /datum/antagonist/ninja/update_antag_mob(datum/mind/player)

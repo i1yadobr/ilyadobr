@@ -12,10 +12,10 @@
 	var/busy=0
 
 /obj/structure/casino/roulette/attack_hand(mob/user as mob)
-	if (busy)
-		to_chat(user,"<span class='notice'>You cannot spin now! \The [src] is already spinning.</span> ")
+	if(busy)
+		to_chat(user,"<span class='notice'>You cannot spin now! \The [src] is already spinning.</span>")
 		return
-	visible_message("<span class='notice'>\ [user]  spins the roulette and throws inside little ball.</span>")
+	visible_message("<span class='notice'>\ [user] spins the roulette and throws inside little ball.</span>")
 	busy = 1
 	var/n = rand(0,36)
 	var/color = "green"

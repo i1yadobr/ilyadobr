@@ -191,7 +191,8 @@
 /obj/machinery/door/unpowered/simple/_examine_text(mob/user)
 	. = ..()
 	if(get_dist(src, user) <= 1 && lock)
-		. += "\n<span class='notice'>It appears to have a lock.</span>"
+		. += "\n"
+		. += SPAN("notice", "It appears to have a lock.")
 
 /obj/machinery/door/unpowered/simple/can_open()
 	if(!..() || (lock && lock.isLocked()))

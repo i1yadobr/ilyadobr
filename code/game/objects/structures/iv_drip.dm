@@ -164,12 +164,14 @@
 	. += "\nThe IV drip is [mode ? "injecting" : "taking blood"]."
 	. += "\nIt is set to transfer [transfer_amount]u of chemicals per cycle."
 
+	. += "\n"
 	if(beaker)
 		if(beaker.reagents && beaker.reagents.total_volume)
-			. += "\n<span class='notice'>Attached is \a [beaker] with [beaker.reagents.total_volume] units of liquid.</span>"
+			. += SPAN("notice", "Attached is \a [beaker] with [beaker.reagents.total_volume] units of liquid.")
 		else
-			. += "\n<span class='notice'>Attached is an empty [beaker].</span>"
+			. += SPAN("notice", "Attached is an empty [beaker].")
 	else
-		. += "\n<span class='notice'>No chemicals are attached.</span>"
+		. += SPAN("notice", "No chemicals are attached.")
 
-	. += "\n<span class='notice'>[attached ? attached : "No one"] is hooked up to it.</span>"
+	. += "\n"
+	. += SPAN("notice", "[attached ? attached : "No one"] is hooked up to it.")

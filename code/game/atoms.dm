@@ -301,7 +301,7 @@ its easier to just keep the beam vertical.
 		else
 			f_name = "a "
 		if(blood_color != SYNTH_BLOOD_COLOUR)
-			f_name += "<span class='danger'>blood-stained</span> [SPAN("info", "<em>[name][infix]</em>")]!"
+			f_name += "[SPAN("danger", "blood-stained")] [SPAN("info", "<em>[name][infix]</em>")]!"
 		else
 			f_name += "oil-stained [name][infix]."
 

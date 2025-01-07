@@ -513,12 +513,13 @@
 	if(!damage)
 		return
 	var/damage_percentage = round((damage / maxdamage) * 100)
+	. += "\n"
 	switch(damage_percentage)
 		if(75 to INFINITY)
-			. += "\n<span class='danger'>It's casing is severely damaged, and sparking circuitry may be seen through the holes!</span>"
+			. += SPAN("danger", "It's casing is severely damaged, and sparking circuitry may be seen through the holes!")
 		if(50 to 74)
-			. += "\n<span class='notice'>It's casing is considerably damaged, and some of the internal circuits appear to be exposed!</span>"
+			. += SPAN("notice", "It's casing is considerably damaged, and some of the internal circuits appear to be exposed!")
 		if(25 to 49)
-			. += "\n<span class='notice'>It's casing is quite seriously damaged.</span>"
+			. += SPAN("notice", "It's casing is quite seriously damaged.")
 		if(0 to 24)
-			. += "\nIt's casing has some minor damage."
+			. += "It's casing has some minor damage."

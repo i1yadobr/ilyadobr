@@ -264,7 +264,7 @@
 
 /obj/item/storage/pill_bottle/paroxetine
 	name = "pill bottle (paroxetine)"
-	desc = "High-strength antidepressant. Only for use in severe depression. 10u dose per pill. <span class='warning'>WARNING: side-effects may include hallucinations.</span>"
+	desc = "High-strength antidepressant. Only for use in severe depression. 10u dose per pill. <font color='red'>WARNING: side-effects may include hallucinations.</font>"
 	label_color = "#ff80bf"
 	starting_label = "paroxetine"
 

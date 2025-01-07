@@ -645,7 +645,7 @@
 		var/signature = get_signature(P, usr, signfield_name)
 		if(istype(P, /obj/item/pen/crayon))
 			signature = "<b>[signature]</b>"
-		info = replacetext(info, "<I><span class='sign_field_[signfield]'>sign here</span></I>", "<font face=\"[signfont]\" color=[P.colour]><i>[signature]</i></font>")
+		info = replacetext(info, "<I>[SPAN("sign_field_[signfield]", "sign here")]</I>", "<font face=\"[signfont]\" color=[P.colour]><i>[signature]</i></font>")
 		info_links = replacetext(info_links, "<I><A href='?src=\ref[src];signfield=[signfield]'>sign here</A></I>", "<font face=\"[signfont]\" color=[P.colour]><i>[signature]</i></font>")
 		update_space()
 		var/content = {"

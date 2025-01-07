@@ -99,26 +99,27 @@
 	var/recieve_message
 
 	if(holder && !C.holder)
-		recieve_message = "<span class='pm'><span class='howto'><b>-- Click the [recieve_pm_type]'s name to reply --</b></span></span>\n"
+		recieve_message = "<span class='pm'>[SPAN("howto", "<b>-- Click the [recieve_pm_type]'s name to reply --</b>")]</span>"
+		recieve_message += "\n"
 		if(C.adminhelped)
 			to_chat(C, recieve_message)
 			C.adminhelped = 0
 
-	var/sender_message = "<span class='pm'><span class='out'>" + create_text_tag("pm_out_alt", "PM") + " to <span class='name'>[get_options_bar(C, holder ? 1 : 0, holder ? 1 : 0, 1)]</span>"
+	var/sender_message = "<span class='pm'><span class='out'>" + create_text_tag("pm_out_alt", "PM") + " to [SPAN("name", "[get_options_bar(C, holder ? 1 : 0, holder ? 1 : 0, 1)]")]"
 	if(holder)
 		sender_message += " (<a href='?_src_=holder;take_ticket=\ref[ticket]'>[(ticket.status == TICKET_OPEN) ? "TAKE" : "JOIN"]</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>)"
-		sender_message += ": <span class='message linkify'>[generate_ahelp_key_words(mob, msg)]</span>"
+		sender_message += ": [SPAN("message linkify", "[generate_ahelp_key_words(mob, msg)]")]"
 	else
-		sender_message += ": <span class='message linkify'>[msg]</span>"
+		sender_message += ": [SPAN("message linkify", "[msg]")]"
 	sender_message += "</span></span>"
 	to_chat(src, sender_message)
 
-	var/receiver_message = "<span class='pm'><span class='in'>" + create_text_tag("pm_in", "") + " <b>\[[recieve_pm_type] PM\]</b> <span class='name'>[get_options_bar(src, C.holder ? 1 : 0, C.holder ? 1 : 0, 1)]</span>"
+	var/receiver_message = "<span class='pm'><span class='in'>" + create_text_tag("pm_in", "") + " <b>\[[recieve_pm_type] PM\]</b> [SPAN("name", "[get_options_bar(src, C.holder ? 1 : 0, C.holder ? 1 : 0, 1)]")]"
 	if(C.holder)
 		receiver_message += " (<a href='?_src_=holder;take_ticket=\ref[ticket]'>[(ticket.status == TICKET_OPEN) ? "TAKE" : "JOIN"]</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>)"
-		receiver_message += ": <span class='message linkify'>[generate_ahelp_key_words(C.mob, msg)]</span>"
+		receiver_message += ": [SPAN("message linkify", "[generate_ahelp_key_words(C.mob, msg)]")]"
 	else
-		receiver_message += ": <span class='message linkify'>[msg]</span>"
+		receiver_message += ": [SPAN("message linkify", "[msg]")]"
 	receiver_message += "</span></span>"
 	to_chat(C, receiver_message)
 	//play the recieving admin the adminhelp sound (if they have them enabled)
@@ -138,4 +139,4 @@
 		if(X == C || X == src)
 			continue
 		if(X.key != key && X.key != C.key && (X.holder.rights & R_ADMIN|R_MOD|R_MENTOR))
-			to_chat(X, "<span class='pm'><span class='other'>" + create_text_tag("pm_other", "PM") + " <span class='name'>[key_name(src, X, 0, ticket)]</span> to <span class='name'>[key_name(C, X, 0, ticket)]</span> (<a href='?_src_=holder;take_ticket=\ref[ticket]'>[(ticket.status == TICKET_OPEN) ? "TAKE" : "JOIN"]</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>): <span class='message linkify'>[msg]</span></span></span>")
+			to_chat(X, "<span class='pm'>[SPAN("other", "" + create_text_tag("pm_other", "PM") + " [SPAN("name", "[key_name(src, X, 0, ticket)]")] to [SPAN("name", "[key_name(C, X, 0, ticket)]")] (<a href='?_src_=holder;take_ticket=\ref[ticket]'>[(ticket.status == TICKET_OPEN) ? "TAKE" : "JOIN"]</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>): [SPAN("message linkify", "[msg]")]")]</span>")

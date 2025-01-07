@@ -1643,9 +1643,9 @@
 			if(!org.is_usable() || org.is_dislocated())
 				status += "dangling uselessly"
 			if(status.len)
-				src.show_message("My [org.name] is <span class='warning'>[english_list(status)].</span>",1)
+				src.show_message("My [org.name] is [SPAN("warning", "[english_list(status)].")]",1)
 			else
-				src.show_message("My [org.name] is <span class='notice'>OK.</span>",1)
+				src.show_message("My [org.name] is [SPAN("notice", "OK.")]",1)
 
 		if((MUTATION_SKELETON in mutations) && (!w_uniform) && (!wear_suit))
 			play_xylophone()

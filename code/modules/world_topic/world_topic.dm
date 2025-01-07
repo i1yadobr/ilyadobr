@@ -33,11 +33,11 @@
 		// TODO(rufus): make a better function to look up jobbans, or replace this with a call to one if it already exists
 		if(jobban_keylist.Find("[ckey(sender_key)] - OOC"))
 			return json_encode(list("code"="banned"))
-		var/sent_message = "[create_text_tag("dooc", "Discord")] <EM>[sender_key]:</EM> <span class='message linkify'>[message]</span>"
+		var/sent_message = "[create_text_tag("dooc", "Discord")] <EM>[sender_key]:</EM> [SPAN("message linkify", "[message]")]"
 		for(var/client/target in GLOB.clients)
 			if(target?.is_key_ignored(sender_key))
 				continue
-			to_chat(target, "<span class='ooc dooc'><span class='everyone'>[sent_message]</span></span>", type = MESSAGE_TYPE_DOOC)
+			to_chat(target, "<span class='ooc dooc'>[SPAN("everyone", "[sent_message]")]</span>", type = MESSAGE_TYPE_DOOC)
 		return json_encode(list("code"="success"))
 
 	else if("ahelp" in input)

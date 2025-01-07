@@ -418,9 +418,11 @@
 /obj/item/lazarus_injector/_examine_text(mob/user)
 	. = ..()
 	if(!loaded)
-		. += "\n<span class='info'>[src] is empty.</span>"
+		. += "\n"
+		. += SPAN("info", "[src] is empty.")
 	if(malfunctioning || emagged)
-		. += "\n<span class='info'>The display on [src] seems to be flickering.</span>"
+		. += "\n"
+		. += SPAN("info", "The display on [src] seems to be flickering.")
 
 // TODO(rufus): with the removal of access check on points redemption this is obsolete.
 //   Review if there is any use for it and delete if it's really time for these to go.

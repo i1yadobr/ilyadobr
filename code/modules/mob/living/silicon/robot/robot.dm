@@ -1152,20 +1152,20 @@
 		return
 	switch(notifytype)
 		if(ROBOT_NOTIFICATION_SIGNAL_LOST)
-			to_chat(connected_ai, "<br><br><span class='notice'>NOTICE - Signal lost: [braintype] [name].</span><br>")
+			to_chat(connected_ai, "<br><br>[SPAN("notice", "NOTICE - Signal lost: [braintype] [name].")]<br>")
 			return
 		if(ROBOT_NOTIFICATION_NEW_UNIT) //New Robot
-			to_chat(connected_ai, "<br><br><span class='notice'>NOTICE - New [lowertext(braintype)] connection detected: <a href='byond://?src=\ref[connected_ai];track2=\ref[connected_ai];track=\ref[src]'>[name]</a></span><br>")
+			to_chat(connected_ai, "<br><br>[SPAN("notice", "NOTICE - New [lowertext(braintype)] connection detected: <a href='byond://?src=\ref[connected_ai];track2=\ref[connected_ai];track=\ref[src]'>[name]</a>")]<br>")
 			return
 		if(ROBOT_NOTIFICATION_NEW_MODULE) //New Module
-			to_chat(connected_ai, "<br><br><span class='notice'>NOTICE - [braintype] module change detected: [name] has loaded the [first_arg].</span><br>")
+			to_chat(connected_ai, "<br><br>[SPAN("notice", "NOTICE - [braintype] module change detected: [name] has loaded the [first_arg].")]<br>")
 			return
 		if(ROBOT_NOTIFICATION_MODULE_RESET)
-			to_chat(connected_ai, "<br><br><span class='notice'>NOTICE - [braintype] module reset detected: [name] has unloaded the [first_arg].</span><br>")
+			to_chat(connected_ai, "<br><br>[SPAN("notice", "NOTICE - [braintype] module reset detected: [name] has unloaded the [first_arg].")]<br>")
 			return
 		if(ROBOT_NOTIFICATION_NEW_NAME) //New Name
 			if(first_arg != second_arg)
-				to_chat(connected_ai, "<br><br><span class='notice'>NOTICE - [braintype] reclassification detected: [first_arg] is now designated as [second_arg].</span><br>")
+				to_chat(connected_ai, "<br><br>[SPAN("notice", "NOTICE - [braintype] reclassification detected: [first_arg] is now designated as [second_arg].")]<br>")
 				return
 /mob/living/silicon/robot/proc/disconnect_from_ai()
 	if(connected_ai)

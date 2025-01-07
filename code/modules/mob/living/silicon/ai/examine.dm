@@ -2,7 +2,8 @@
 	. = ..()
 	var/msg = ""
 	if (stat == DEAD)
-		msg += "<span class='deadsay'>It appears to be powered-down.</span>\n"
+		msg += SPAN("deadsay", "It appears to be powered-down.")
+		msg += "\n"
 	else
 		var/damage_description = ""
 		if (getBruteLoss())

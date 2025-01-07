@@ -115,7 +115,7 @@ GLOBAL_LIST_EMPTY(common_report)
 			continue
 
 		if (!robo.connected_ai)
-			parts += "[borg_spacer?"<br>":""]<b>[robo.name]</b> (Played by: <b>[robo.mind.key]</b>) [(robo.stat != DEAD)? "<span class='greentext'>survived</span> as an AI-less borg!" : "was <span class='redtext'>unable to survive</span> the rigors of being a cyborg without an AI."] Its laws were:"
+			parts += "[borg_spacer?"<br>":""]<b>[robo.name]</b> (Played by: <b>[robo.mind.key]</b>) [(robo.stat != DEAD)? "[SPAN("greentext", "survived")] as an AI-less borg!" : "was [SPAN("redtext", "unable to survive")] the rigors of being a cyborg without an AI."] Its laws were:"
 
 			if(robo) //How the hell do we lose robo between here and the world messages directly above this?
 				parts += robo.laws?.print_laws()
@@ -173,7 +173,7 @@ GLOBAL_LIST_EMPTY(common_report)
 
 	var/list/parts = list()
 
-	parts += "<div class='panel stationborder'><span class='redtext'><b>Last words of the first victims:</b></span><br>"
+	parts += "<div class='panel stationborder'>[SPAN("redtext", "<b>Last words of the first victims:</b>")]<br>"
 
 	for(var/index = 1 to min(length(GLOB.last_words), 4))
 		var/datum/last_words_data/data = GLOB.last_words[index]

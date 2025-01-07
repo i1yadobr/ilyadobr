@@ -103,4 +103,4 @@
 
 /datum/species/vox/disfigure_msg(mob/living/carbon/human/H)
 	var/datum/gender/T = gender_datums[H.get_gender()]
-	return "<span class='danger'>[T.His] beak is chipped! [T.He] [T.is] not even recognizable.</span>\n" //Pretty birds.
+	return "[SPAN("danger", "[T.His] beak is chipped! [T.He] [T.is] not even recognizable.")]\n" //Pretty birds.

@@ -15,7 +15,8 @@
 
 /obj/item/device/dociler/_examine_text(mob/user)
 	. = ..()
-	. += "\n<span class='notice'>It is currently set to [mode] docile mode.</span>"
+	. += "\n"
+	. += SPAN("notice", "It is currently set to [mode] docile mode.")
 
 /obj/item/device/dociler/attack_self(mob/user)
 	if(mode == "somewhat")
@@ -45,7 +46,8 @@
 		H.LoseTarget()
 		H.attack_same = 0
 		H.friends += weakref(user)
-	L.desc += "<br><span class='notice'>It looks especially docile.</span>"
+	L.desc += "<br>"
+	L.desc += SPAN("notice", "It looks especially docile.")
 	var/name = input(user, "Would you like to rename \the [L]?", "Dociler", L.name) as text
 	if(length(name))
 		L.real_name = name

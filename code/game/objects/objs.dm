@@ -131,12 +131,6 @@
 /obj/proc/hear_talk(mob/M as mob, text, verb, datum/language/speaking)
 	if(talking_atom)
 		talking_atom.catchMessage(text, M)
-/*
-	var/mob/mo = locate(/mob) in src
-	if(mo)
-		var/rendered = "<span class='game say'><span class='name'>[M.name]: </span> <span class='message'>[text]</span></span>"
-		mo.show_message(rendered, 2)
-		*/
 	return
 
 /obj/proc/see_emote(mob/M as mob, text, emote_type)
@@ -164,13 +158,13 @@
 
 /obj/_examine_text(mob/user, infix, suffix)
 	. = ..()
-	
+
 	if(hasHUD(user, HUD_SCIENCE))
 		. += "\nStopping Power:"
 
 		. += "\nα-particle: [fmt_siunit(CONV_JOULE_ELECTRONVOLT(rad_resist[RADIATION_ALPHA_PARTICLE]), "eV", 3)]"
 		. += "\nβ-particle: [fmt_siunit(CONV_JOULE_ELECTRONVOLT(rad_resist[RADIATION_BETA_PARTICLE]), "eV", 3)]"
-	
+
 	return .
 
 /obj/proc/wrench_floor_bolts(mob/user, delay=20)

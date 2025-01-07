@@ -230,7 +230,7 @@
 	transfer.loc = get_turf(src)
 	transfer.create_eyeobj()
 	transfer.cancel_camera()
-	to_chat(user, "<span class='notice'>Transfer successful:</span> [transfer.name] ([rand(1000,9999)].exe) downloaded to host terminal. Local copy wiped.")
+	to_chat(user, "[SPAN("notice", "Transfer successful:")] [transfer.name] ([rand(1000,9999)].exe) downloaded to host terminal. Local copy wiped.")
 	to_chat(transfer, "You have been uploaded to a stationary terminal. Remote device connection restored.")
 
 	if(card)
@@ -252,7 +252,7 @@
 		if(transfer)
 			load_ai(transfer,card,user)
 		else
-			to_chat(user, "<span class='danger'>ERROR:</span> Unable to locate artificial intelligence.")
+			to_chat(user, "[SPAN("danger", "ERROR:")] Unable to locate artificial intelligence.")
 		return
 	else if(istype(W, /obj/item/wrench))
 		if(anchored)

@@ -31,7 +31,8 @@
 /obj/item/tank/jetpack/_examine_text(mob/living/user)
 	. = ..()
 	if(air_contents.total_moles < 5)
-		. += "\n<span class='danger'>The meter on \the [src] indicates you are almost out of gas!</span>"
+		. += "\n"
+		. += SPAN("danger", "The meter on \the [src] indicates you are almost out of gas!")
 
 /obj/item/tank/jetpack/verb/toggle_rockets()
 	set name = "Toggle Jetpack Stabilization"

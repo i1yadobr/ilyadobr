@@ -79,10 +79,12 @@
 	. = ..()
 
 	if(get_dist(user, src) > 3 && !(istype(user, /mob/living/silicon/ai) || isghost(user)))
-		. += "\n<span class='warning'>You are too far away to read it.</span>"
+		. += "\n"
+		. += SPAN("warning", "You are too far away to read it.")
 
 	else if(stat & (NOPOWER|BROKEN))
-		. += "\n<span class='warning'>The display is off.</span>"
+		. += "\n"
+		. += SPAN("warning", "The display is off.")
 
 	else if(src.target)
 		var/datum/gas_mixture/environment = target.return_air()

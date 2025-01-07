@@ -211,7 +211,8 @@
 
 // Addition made by Techhead0, thanks for fullfilling the todo!
 /obj/item/melee/baton/robot/examine_cell(mob/user, prefix)
-	. += "\n<span class='notice'>The baton is running off an external power supply.</span>"
+	. += "\n"
+	. += SPAN("notice", "The baton is running off an external power supply.")
 
 // Override proc for the stun baton module, found in PC Security synthetics
 // Refactored to fix #14470 - old proc defination increased the hitcost beyond

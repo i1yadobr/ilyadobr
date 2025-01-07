@@ -21,7 +21,8 @@
 /mob/living/bot/remotebot/_examine_text(mob/user)
 	. = ..()
 	if(holding)
-		. += "\n<span class='notice'>It is holding \the \icon[holding] [holding].</span>"
+		. += "\n"
+		. += SPAN("notice", "It is holding \the \icon[holding] [holding].")
 
 /mob/living/bot/remotebot/explode()
 	on = 0

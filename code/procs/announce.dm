@@ -71,18 +71,18 @@
 
 /datum/announcement/proc/FormMessage(message, message_title)
 	. = "<h2 class='alert'>[message_title]</h2>"
-	. += "<br><span class='alert'>[message]</span>"
+	. += "<br>[SPAN("alert", "[message]")]"
 	if (announcer)
-		. += "<br><span class='alert'> -[html_encode(announcer)]</span>"
+		. += "<br>[SPAN("alert", " -[html_encode(announcer)]")]"
 
 /datum/announcement/minor/FormMessage(message, message_title)
 	. = "<b>[message]</b>"
 
 /datum/announcement/priority/FormMessage(message, message_title)
 	. = "<h1 class='alert'>[message_title]</h1>"
-	. += "<br><span class='alert'>[message]</span>"
+	. += "<br>[SPAN("alert", "[message]")]"
 	if(announcer)
-		. += "<br><span class='alert'> -[html_encode(announcer)]</span>"
+		. += "<br>[SPAN("alert", " -[html_encode(announcer)]")]"
 	. += "<br>"
 
 /datum/announcement/priority/command/FormMessage(message, message_title)
@@ -90,7 +90,7 @@
 	if (message_title)
 		. += "<br><h2 class='alert'>[message_title]</h2>"
 
-	. += "<br><span class='alert'>[message]</span><br>"
+	. += "<br>[SPAN("alert", "[message]")]<br>"
 	. += "<br>"
 
 /datum/announcement/priority/security/FormMessage(message, message_title)

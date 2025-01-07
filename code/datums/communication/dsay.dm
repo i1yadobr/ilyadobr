@@ -91,10 +91,10 @@
 
 /decl/dsay_communication/proc/get_message(client/C, mob/M, message)
 	var/say_verb = pick("complains","moans","whines","laments","blubbers")
-	return "[get_name(C, M)] [say_verb], <span class='message linkify'>\"[message]\"</span>"
+	return "[get_name(C, M)] [say_verb], [SPAN("message linkify", "\"[message]\"")]"
 
 /decl/dsay_communication/emote/get_message(client/C, mob/M, message)
-	return "[get_name(C, M)] <span class='message linkify'>[message]</span>"
+	return "[get_name(C, M)] [SPAN("message linkify", "[message]")]"
 
 /decl/dsay_communication/proc/adjust_channel(decl/communication_channel/dsay)
 	dsay.flags |= COMMUNICATION_ADMIN_FOLLOW|COMMUNICATION_GHOST_FOLLOW // Add admin and ghost follow
@@ -117,7 +117,7 @@
 
 /decl/dsay_communication/admin/get_message(client/communicator, mob/M, message)
 	var/stafftype = uppertext(communicator.holder.rank)
-	return "<span class='name'>[stafftype]([communicator.key])</span> says, <span class='message'>\"[message]\"</span>"
+	return "[SPAN("name", "[stafftype]([communicator.key])")] says, [SPAN("message", "\"[message]\"")]"
 
 /decl/dsay_communication/admin/adjust_channel(decl/communication_channel/dsay)
 	dsay.log_proc = /proc/log_say

@@ -46,9 +46,9 @@
 		brainwashing = 1
 	var/msg
 	if(brainwashing)
-		msg += "<span class='danger'>The fog in your head clears, and you remember some important things. You hold following things as deep convictions, almost like synthetics' laws:</span><br>"
+		msg += "[SPAN("danger", "The fog in your head clears, and you remember some important things. You hold following things as deep convictions, almost like synthetics' laws:")]<br>"
 	else
-		msg += "<span class='notice'>You hear an annoying voice in the back of your head. The things it keeps reminding you of:</span><br>"
+		msg += "[SPAN("notice", "You hear an annoying voice in the back of your head. The things it keeps reminding you of:")]<br>"
 	for(var/thing in instructions)
 		msg += "- [thing]<br>"
 	to_chat(M, msg)

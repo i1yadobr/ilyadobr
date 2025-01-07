@@ -36,7 +36,7 @@
 		return
 
 	for(var/mob/O in hearers(src, null))
-		O.show_message("<span class='game say'><span class='name'>\The [src]</span> says, \"[message]\"</span>",2)
+		O.show_message("<span class='game say'>[SPAN("name", "\The [src]")] says, \"[message]\"</span>",2)
 	return
 
 /*

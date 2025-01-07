@@ -491,9 +491,11 @@
 	if(!(in_range(user, src)))
 		return
 	if(!active)
-		. += "\n<span class='notice'>There's a little switch on the bottom. It's flipped down.</span>"
+		. += "\n"
+		. += SPAN("notice", "There's a little switch on the bottom. It's flipped down.")
 	else
-		. += "\n<span class='notice'>There's a little switch on the bottom. It's flipped up.</span>"
+		. += "\n"
+		. += SPAN("notice", "There's a little switch on the bottom. It's flipped up.")
 /obj/item/orion_ship/attack_self(mob/user)
 	if(active)
 		return

@@ -44,7 +44,7 @@
 		reagent_volumes[T] = volume
 		var/datum/reagent/R = T
 		reagent_names += initial(R.name)
-	
+
 	set_next_think(world.time)
 
 /obj/item/reagent_containers/borghypo/think() //Every [recharge_time] seconds, recharge some reagents for the cyborg+
@@ -119,7 +119,8 @@
 
 	var/datum/reagent/R = reagent_ids[mode]
 
-	. += "\n<span class='notice'>It is currently producing [initial(R.name)] and has [reagent_volumes[reagent_ids[mode]]] out of [volume] units left.</span>"
+	. += "\n"
+	. += SPAN("notice", "It is currently producing [initial(R.name)] and has [reagent_volumes[reagent_ids[mode]]] out of [volume] units left.")
 
 /obj/item/reagent_containers/borghypo/service
 	name = "cyborg drink synthesizer"

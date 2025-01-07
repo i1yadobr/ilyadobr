@@ -116,9 +116,11 @@
 	. = ..()
 	if(get_dist(src, user) <= 4)
 		if(sortTag)
-			. += "\n<span class='notice'>It is labeled \"[sortTag]\"</span>"
+			. += "\n"
+			. += SPAN("notice", "It is labeled \"[sortTag]\"")
 		if(examtext)
-			. += "\n<span class='notice'>It has a note attached which reads, \"[examtext]\"</span>"
+			. += "\n"
+			. += SPAN("notice", "It has a note attached which reads, \"[examtext]\"")
 	return
 
 /obj/structure/bigDelivery/Destroy()
@@ -255,9 +257,11 @@
 	. = ..()
 	if(get_dist(src, user) <= 4)
 		if(sortTag)
-			. += "\n<span class='notice'>It is labeled \"[sortTag]\"</span>"
+			. += "\n"
+			. += SPAN("notice", "It is labeled \"[sortTag]\"")
 		if(examtext)
-			. += "\n<span class='notice'>It has a note attached which reads, \"[examtext]\"</span>"
+			. += "\n"
+			. += SPAN("notice", "It has a note attached which reads, \"[examtext]\"")
 	return
 
 /obj/item/packageWrap
@@ -363,7 +367,8 @@
 /obj/item/packageWrap/_examine_text(mob/user)
 	. = ..()
 	if(get_dist(src, user) <= 0)
-		. += "\n<span class='notice'>There are [amount] units of package wrap left!</span>"
+		. += "\n"
+		. += SPAN("notice", "There are [amount] units of package wrap left!")
 	return
 
 /obj/item/device/destTagger

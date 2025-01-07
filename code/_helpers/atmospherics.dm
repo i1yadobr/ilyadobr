@@ -46,7 +46,8 @@
 						traits += "contaminates clothing with toxic residue"
 					if(gas_data.flags[mix] & XGM_GAS_FUSION_FUEL)
 						traits += "can be used to fuel fusion reaction"
-					. += "\t<span class='notice'>Specific heat: [gas_data.specific_heat[mix]] J/(mol*K), Molar mass: [gas_data.molar_mass[mix]] kg/mol.[traits.len ? "\n\tThis gas [english_list(traits)]" : ""]</span>"
+					. += "\t"
+					. += SPAN("notice", "Specific heat: [gas_data.specific_heat[mix]] J/(mol*K), Molar mass: [gas_data.molar_mass[mix]] kg/mol.[traits.len ? "\n\tThis gas [english_list(traits)]" : ""]")
 			. += "<span class='notice'>Temperature: [round(CONV_KELVIN_CELSIUS(mixture.temperature))]&deg;C / [round(mixture.temperature)]K</span>"
 			return
 	. += "<span class='warning'>\The [target] has no gases!</span>"

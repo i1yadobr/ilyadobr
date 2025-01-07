@@ -53,7 +53,7 @@ var/list/trait_categories = list() // The categories available for the trait men
 			. += " |"
 
 		if(category == current_tab)
-			. += " <span class='linkOn'>[category]</span> "
+			. += " [SPAN("linkOn", "[category]")] "
 		else
 			. += " <a href='?src=\ref[src];select_category=[category]'>[category]</a> "
 	. += "</center></td></tr>"

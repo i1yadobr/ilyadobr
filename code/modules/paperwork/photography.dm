@@ -65,11 +65,12 @@ var/global/photo_count = 0
 	..()
 
 /obj/item/photo/_examine_text(mob/user)
+	. += "\n"
 	if(in_range(user, src))
 		show(user)
-		. += "\n[desc]"
+		. += "[desc]"
 	else
-		. += "\n<span class='notice'>It is too far away.</span>"
+		. += SPAN("notice", "It is too far away.")
 
 /obj/item/photo/proc/show(mob/user as mob)
 	send_rsc(user, img, "tmp_photo_[id].png")

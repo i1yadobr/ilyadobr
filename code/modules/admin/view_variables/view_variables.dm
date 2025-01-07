@@ -143,7 +143,7 @@
 	else
 		vtext = "[value]"
 
-	return "<span class='value'>[vtext]</span>[jointext(extra, null)]"
+	return "[SPAN("value", "[vtext]")][jointext(extra, null)]"
 
 /proc/make_view_variables_var_entry(datum/D, varname, value, level=0)
 	var/ecm = null

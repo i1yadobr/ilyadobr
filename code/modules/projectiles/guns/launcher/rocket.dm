@@ -27,7 +27,8 @@
 	. = ..()
 	if(get_dist(src, user) > 2)
 		return
-	. += "\n<span class='notice'>[rockets.len] / [max_rockets] rockets.</span>"
+	. += "\n"
+	. += SPAN("notice", "[rockets.len] / [max_rockets] rockets.")
 
 /obj/item/gun/launcher/rocket/attackby(obj/item/I as obj, mob/user as mob)
 	if(istype(I, /obj/item/ammo_casing/rocket))

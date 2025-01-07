@@ -41,7 +41,8 @@
 		. += "\n<b>[get_remaining_mod_capacity()]%</b> mod capacity remaining."
 		for(var/A in get_modkits())
 			var/obj/item/borg/upgrade/modkit/M = A
-			. += "\n<span class='notice'>There is a [M.name] mod installed, using <b>[M.cost]%</b> capacity.</span>"
+			. += "\n"
+			. += SPAN("notice", "There is a [M.name] mod installed, using <b>[M.cost]%</b> capacity.")
 
 /obj/item/gun/energy/kinetic_accelerator/attackby(obj/item/A, mob/user)
 	if(isCrowbar(A))
@@ -137,7 +138,8 @@
 
 /obj/item/borg/upgrade/modkit/_examine_text(mob/user)
 	. = ..()
-	. += "\n<span class='notice'>Occupies <b>[cost]%</b> of mod capacity.</span>"
+	. += "\n"
+	. += SPAN("notice", "Occupies <b>[cost]%</b> of mod capacity.")
 
 /obj/item/borg/upgrade/modkit/attackby(obj/item/A, mob/user)
 	if(istype(A, /obj/item/gun/energy/kinetic_accelerator) && !issilicon(user))

@@ -42,15 +42,15 @@
 		. += "<tr><td>[antag.role_text]: </td><td>"
 		var/bannedReason = jobban_isbanned(preference_mob(), antag.id)
 		if(bannedReason == "Whitelisted Job")
-			. += "<span class='danger'>\[WHITELIST\]</span><br>"
+			. += "[SPAN("danger", "\[WHITELIST\]")]<br>"
 		else if(bannedReason || (antag.id == MODE_MALFUNCTION && jobban_isbanned(preference_mob(), "AI")))
-			. += "<span class='danger'>\[BANNED\]</span><br>"
+			. += "[SPAN("danger", "\[BANNED\]")]<br>"
 		else if(antag.id in pref.be_special_role)
-			. += "<span class='linkOn'>High</span> <a href='?src=\ref[src];add_maybe=[antag.id]'>Low</a> <a href='?src=\ref[src];del_special=[antag.id]'>Never</a></br>"
+			. += "[SPAN("linkOn", "High")] <a href='?src=\ref[src];add_maybe=[antag.id]'>Low</a> <a href='?src=\ref[src];del_special=[antag.id]'>Never</a></br>"
 		else if(antag.id in pref.may_be_special_role)
-			. += "<a href='?src=\ref[src];add_special=[antag.id]'>High</a> <span class='linkOn'>Low</span> <a href='?src=\ref[src];del_special=[antag.id]'>Never</a></br>"
+			. += "<a href='?src=\ref[src];add_special=[antag.id]'>High</a> [SPAN("linkOn", "Low")] <a href='?src=\ref[src];del_special=[antag.id]'>Never</a></br>"
 		else
-			. += "<a href='?src=\ref[src];add_special=[antag.id]'>High</a> <a href='?src=\ref[src];add_maybe=[antag.id]'>Low</a> <span class='linkOn'>Never</span></br>"
+			. += "<a href='?src=\ref[src];add_special=[antag.id]'>High</a> <a href='?src=\ref[src];add_maybe=[antag.id]'>Low</a> [SPAN("linkOn", "Never")]</br>"
 		. += "</td></tr>"
 	. += "<tr><td>Select All: </td><td><a href='?src=\ref[src];select_all=2'>High</a> <a href='?src=\ref[src];select_all=1'>Low</a> <a href='?src=\ref[src];select_all=0'>Never</a></td></tr>"
 	. += "</table><br>"
@@ -66,13 +66,13 @@
 		. += "<tr><td>[(ghost_trap.ghost_trap_role)]: </td><td>"
 		var/bannedReason = banned_from_ghost_role(preference_mob(), ghost_trap)
 		if(bannedReason == "Whitelisted Job")
-			. += "<span class='danger'>\[WHITELIST\]</span><br>"
+			. += "[SPAN("danger", "\[WHITELIST\]")]<br>"
 		else if(bannedReason)
-			. += "<span class='danger'>\[BANNED\]</span><br>"
+			. += "[SPAN("danger", "\[BANNED\]")]<br>"
 		else if((ghost_trap.pref_check in pref.be_special_role) || (ghost_trap.pref_check in pref.may_be_special_role))
-			. += "<span class='linkOn'>Always</span> <a href='?src=\ref[src];del_special=[ghost_trap.pref_check]'>Never</a></br>"
+			. += "[SPAN("linkOn", "Always")] <a href='?src=\ref[src];del_special=[ghost_trap.pref_check]'>Never</a></br>"
 		else
-			. += "<a href='?src=\ref[src];add_special=[ghost_trap.pref_check]'>Always</a> <span class='linkOn'>Never</span></br>"
+			. += "<a href='?src=\ref[src];add_special=[ghost_trap.pref_check]'>Always</a> [SPAN("linkOn", "Never")]</br>"
 		. += "</td></tr>"
 	. += "</table>"
 	. = jointext(.,null)

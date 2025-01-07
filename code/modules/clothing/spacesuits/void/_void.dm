@@ -96,7 +96,8 @@ else if(##equipment_var) {\
 		part_list += "\a [I]"
 	. += "\n\The [src] has [english_list(part_list)] installed."
 	if(tank && in_range(src,user))
-		. += "\n<span class='notice'>The wrist-mounted pressure gauge reads [max(round(tank.air_contents.return_pressure()),0)] kPa remaining in \the [tank].</span>"
+		. += "\n"
+		. += SPAN("notice", "The wrist-mounted pressure gauge reads [max(round(tank.air_contents.return_pressure()),0)] kPa remaining in \the [tank].")
 
 /obj/item/clothing/suit/space/void/refit_for_species(target_species)
 	..()

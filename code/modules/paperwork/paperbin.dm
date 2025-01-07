@@ -108,10 +108,11 @@
 /obj/item/paper_bin/_examine_text(mob/user)
 	. = ..()
 	if(get_dist(src, user) <= 1)
+		. += "\n"
 		if(amount)
-			. += "\n<span class='notice'>There " + (amount > 1 ? "are [amount] papers" : "is one paper") + " in the bin.</span>"
+			. += SPAN("notice", "There " + (amount > 1 ? "are [amount] papers" : "is one paper") + " in the bin.")
 		else
-			. += "\n<span class='notice'>There are no papers in the bin.</span>"
+			. += SPAN("notice", "There are no papers in the bin.")
 	return
 
 

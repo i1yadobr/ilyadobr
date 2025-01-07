@@ -188,7 +188,8 @@
 /obj/item/spacecash/ewallet/_examine_text(mob/user)
 	. = ..()
 	if (!(user in view(2)) && user!=src.loc) return
-	. += "\n<span class='notice'>Charge card's owner: [src.owner_name]. Credits remaining: [src.worth].</span>"
+	. += "\n"
+	. += SPAN("notice", "Charge card's owner: [src.owner_name]. Credits remaining: [src.worth].")
 
 /obj/item/spacecash/ewallet/lotto
 	name = "space lottery card"
@@ -256,5 +257,5 @@
 
 /obj/item/spacecash/ewallet/lotto/proc/speak(message = "Hello!")
 	for(var/mob/O in hearers(src.loc, null))
-		O.show_message("<span class='game say'><span class='name'>\The [src]</span> pings, \"[message]\"</span>",2)
+		O.show_message("<span class='game say'>[SPAN("name", "\The [src]")] pings, \"[message]\"</span>",2)
 	playsound(src.loc, 'sound/machines/ping.ogg', 50, 0, -4)

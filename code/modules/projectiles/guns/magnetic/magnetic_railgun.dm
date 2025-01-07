@@ -83,7 +83,8 @@
 /obj/item/gun/magnetic/railgun/automatic/_examine_text(mob/user)
 	. = ..()
 	if(get_dist(src, user) <= 1)
-		. += "\n<span class='notice'>Someone has scratched <i>Ultima Ratio Regum</i> onto the side of the barrel.</span>"
+		. += "\n"
+		. += SPAN("notice", "Someone has scratched <i>Ultima Ratio Regum</i> onto the side of the barrel.")
 
 /obj/item/gun/magnetic/railgun/flechette
 	name = "flechette gun"

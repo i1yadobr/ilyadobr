@@ -20,9 +20,11 @@
 /obj/item/card/id/guest/_examine_text(mob/user)
 	. = ..()
 	if (world.time < expiration_time)
-		. += "\n<span class='notice'>This pass expires at [worldtime2stationtime(expiration_time)].</span>"
+		. += "\n"
+		. += SPAN("notice", "This pass expires at [worldtime2stationtime(expiration_time)].")
 	else
-		. += "\n<span class='warning'>It expired at [worldtime2stationtime(expiration_time)].</span>"
+		. += "\n"
+		. += SPAN("warning", "It expired at [worldtime2stationtime(expiration_time)].")
 
 /obj/item/card/id/guest/read()
 	if (world.time > expiration_time)

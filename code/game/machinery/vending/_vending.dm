@@ -295,7 +295,7 @@
 	if(currently_vending.price > cashmoney.worth)
 		// This is not a status display message, since it's something the character
 		// themselves is meant to see BEFORE putting the money in
-		to_chat(usr, "\icon[cashmoney] <span class='warning'>That is not enough money.</span>")
+		to_chat(usr, "\icon[cashmoney] [SPAN("warning", "That is not enough money.")]")
 		return 0
 
 	visible_message(SPAN("info", "\The [usr] inserts some cash into \the [src]."))
@@ -675,7 +675,7 @@
 		return
 
 	for(var/mob/O in hearers(src, null))
-		O.show_message("<span class='game say'><span class='name'>\The [src]</span> beeps, \"[message]\"</span>", 2)
+		O.show_message("<span class='game say'>[SPAN("name", "\The [src]")] beeps, \"[message]\"</span>", 2)
 	return
 
 /obj/machinery/vending/powered()

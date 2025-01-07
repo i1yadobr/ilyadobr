@@ -275,7 +275,7 @@
 	if(H.pulling_punches)
 		return "\n[T.His] manipulation arms are out and [T.he] looks ready to use complex items."
 	else
-		return "\n<span class='warning'>[T.His] deadly upper arms are raised and [T.he] looks ready to attack!</span>"
+		return "\n[SPAN("warning", "[T.His] deadly upper arms are raised and [T.he] looks ready to attack!")]"
 
 /datum/species/nabber/handle_post_spawn(mob/living/carbon/human/H)
 	..()

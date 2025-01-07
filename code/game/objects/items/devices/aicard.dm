@@ -90,15 +90,15 @@
 
 /obj/item/aicard/proc/grab_ai(mob/living/silicon/ai/ai, mob/living/user)
 	if(!ai.client)
-		to_chat(user, "<span class='danger'>ERROR:</span> AI [ai.name] is offline. Unable to download.")
+		to_chat(user, "[SPAN("danger", "ERROR:")] AI [ai.name] is offline. Unable to download.")
 		return 0
 
 	if(carded_ai)
-		to_chat(user, "<span class='danger'>Transfer failed:</span> Existing AI found on remote terminal. Remove existing AI to install a new one.")
+		to_chat(user, "[SPAN("danger", "Transfer failed:")] Existing AI found on remote terminal. Remove existing AI to install a new one.")
 		return 0
 
 	if(ai.malfunctioning && ai.uncardable)
-		to_chat(user, "<span class='danger'>ERROR:</span> Remote transfer interface disabled.")
+		to_chat(user, "[SPAN("danger", "ERROR:")] Remote transfer interface disabled.")
 		return 0
 
 	if(istype(ai.loc, /turf/))
@@ -119,7 +119,7 @@
 	if(ai.client)
 		to_chat(ai, "You have been downloaded to a mobile storage device. Remote access lost.")
 	if(user.client)
-		to_chat(user, "<span class='notice'><b>Transfer successful:</b></span> [ai.name] ([rand(1000,9999)].exe) removed from host terminal and stored within local memory.")
+		to_chat(user, "[SPAN("notice", "<b>Transfer successful:</b>")] [ai.name] ([rand(1000,9999)].exe) removed from host terminal and stored within local memory.")
 
 	update_icon()
 	return 1

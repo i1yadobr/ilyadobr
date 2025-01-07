@@ -235,10 +235,13 @@
 /obj/item/gun/projectile/_examine_text(mob/user)
 	. = ..()
 	if(is_jammed)
-		. += "\n<span class='warning'>It looks jammed.</span>"
+		. += "\n"
+		. += SPAN("warning", "It looks jammed.")
 	if(ammo_magazine)
-		. += "\nIt has \a [ammo_magazine] loaded."
-	. += "\nHas [getAmmo()] round\s remaining."
+		. += "\n"
+		. += "It has \a [ammo_magazine] loaded."
+	. += "\n"
+	. += "Has [getAmmo()] round\s remaining."
 	return
 
 /obj/item/gun/projectile/proc/getAmmo()

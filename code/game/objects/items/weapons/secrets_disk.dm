@@ -32,7 +32,7 @@
 	. = ..()
 	if(!locked)
 		. += "\nWith the disk's classified contents unlocked, \
-		you peer into its preview screen and see <span class='notice'>[subject]</span>."
+		you peer into its preview screen and see [SPAN("notice", "[subject]")]."
 	else
 		. += "\nThe disk is locked, you cannot see its contents."
 

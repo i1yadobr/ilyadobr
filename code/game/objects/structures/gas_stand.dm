@@ -190,7 +190,8 @@
 		if (tank.distribute_pressure == 0)
 			. += "\nUse wrench to replace tank."
 	else
-		. += "\n<span class='warning'>It is missing a tank!</span>"
+		. += "\n"
+		. += SPAN("warning", "It is missing a tank!")
 
 /obj/structure/gas_stand/think()
 	if(breather)

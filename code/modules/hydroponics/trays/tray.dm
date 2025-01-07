@@ -417,7 +417,7 @@
 	weedlevel = 0
 
 	update_icon()
-	visible_message("<span class='danger'>The </span><span class='notice'>[previous_plant]</span><span class='danger'> has suddenly mutated into </span><span class='notice'>[seed.display_name]!</span>")
+	visible_message("[SPAN("danger", "The ")][SPAN("notice", "[previous_plant]")][SPAN("danger", " has suddenly mutated into ")][SPAN("notice", "[seed.display_name]!")]")
 
 	return
 
@@ -572,7 +572,7 @@
 		. += "\n[src] is empty."
 		return
 
-	. += "\n<span class='notice'>[seed.display_name] are growing here.</span>"
+	. += "\n[SPAN("notice", "[seed.display_name] are growing here.")]"
 
 	if(!Adjacent(usr))
 		return
@@ -581,14 +581,14 @@
 	. += "\nNutrient: [round(nutrilevel,0.1)]/10"
 
 	if(weedlevel >= 5)
-		. += "\n\The [src] is <span class='danger'>infested with weeds</span>!"
+		. += "\n\The [src] is [SPAN("danger", "infested with weeds")]!"
 	if(pestlevel >= 5)
-		. += "\n\The [src] is <span class='danger'>infested with tiny worms</span>!"
+		. += "\n\The [src] is [SPAN("danger", "infested with tiny worms")]!"
 
 	if(dead)
-		. += "\n<span class='danger'>The plant is dead.</span>"
+		. += "\n[SPAN("danger", "The plant is dead.")]"
 	else if(health <= (seed.get_trait(TRAIT_ENDURANCE)/ 2))
-		. += "\nThe plant looks <span class='danger'>unhealthy</span>."
+		. += "\nThe plant looks [SPAN("danger", "unhealthy")]."
 
 	if(mechanical)
 		var/turf/T = loc

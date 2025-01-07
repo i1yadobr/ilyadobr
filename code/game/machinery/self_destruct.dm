@@ -107,7 +107,8 @@
 /obj/machinery/self_destruct/_examine_text(mob/user)
 	. = ..()
 	if(damaged)
-		. += "\n<span class='warning'>[src] is damaged, it needs repairs.</span>"
+		. += "\n"
+		. += SPAN("warning", "[src] is damaged, it needs repairs.")
 		return
 	if(armed)
 		. += "\n[src] is armed and ready."

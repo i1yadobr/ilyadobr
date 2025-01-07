@@ -443,9 +443,9 @@ var/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 		if(C.mob.lastarea)
 			diedat = " at [C.mob.lastarea]"
 		if(joined_ghosts)
-			message = "The ghost of <span class='name'>[name]</span> now [pick("skulks","lurks","prowls","creeps","stalks")] among the dead[diedat]. [message]"
+			message = "The ghost of [SPAN("name", "[name]")] now [pick("skulks","lurks","prowls","creeps","stalks")] among the dead[diedat]. [message]"
 		else
-			message = "<span class='name'>[name]</span> no longer [pick("skulks","lurks","prowls","creeps","stalks")] in the realm of the dead. [message]"
+			message = "[SPAN("name", "[name]")] no longer [pick("skulks","lurks","prowls","creeps","stalks")] in the realm of the dead. [message]"
 		communicate(/decl/communication_channel/dsay, C || O, message, /decl/dsay_communication/direct)
 
 /mob/proc/switch_to_camera(obj/machinery/camera/C)

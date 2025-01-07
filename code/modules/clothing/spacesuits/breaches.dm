@@ -243,4 +243,5 @@
 	. = ..()
 	if(can_breach && breaches && breaches.len)
 		for(var/datum/breach/B in breaches)
-			. += "\n<span class='danger'>It has \a [B.descriptor].</span>"
+			. += "\n"
+			. += SPAN("danger", "It has \a [B.descriptor].")

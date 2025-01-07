@@ -89,7 +89,7 @@
 		message = rebootmsg
 	var/dat = "<meta charset=\"utf-8\"><head><title>Message Monitor Console</title></head><body>"
 	dat += "<center><h2>Message Monitor Console</h2></center><hr>"
-	dat += "<center><h4><span class='info'>[message]</span></h4></center>"
+	dat += "<center><h4>[SPAN("info", "[message]")]</h4></center>"
 
 	if(auth)
 		dat += "<h4><dd><A href='?src=\ref[src];auth=1'>&#09;<font color='green'>\[Authenticated\]</font></a>&#09;/"
@@ -123,7 +123,7 @@
 					dat += "<dd><A href='?src=\ref[src];spam=1'>&#09;[++i]. Modify Spam Filter</a><br></dd>"
 			else
 				for(var/n = ++i; n <= optioncount; n++)
-					dat += "<dd><span class='info'>&#09;[n]. ---------------</span><br></dd>"
+					dat += "<dd>[SPAN("info", "&#09;[n]. ---------------")]<br></dd>"
 			var/mob/living/original_mob = user.mind?.original_mob?.resolve()
 			if((istype(user, /mob/living/silicon/ai) || istype(user, /mob/living/silicon/robot)) && (istype(original_mob) && user.mind.special_role && original_mob == user))
 				//Malf/Traitor AIs can bruteforce into the system to gain the Key.
@@ -133,9 +133,9 @@
 
 			//Bottom message
 			if(!auth)
-				dat += "<br><hr><dd><span class='notice'>Please authenticate with the server in order to show additional options.</span>"
+				dat += "<br><hr><dd>[SPAN("notice", "Please authenticate with the server in order to show additional options.")]"
 			else
-				dat += "<br><hr><dd><span class='warning'>Reg, #514 forbids sending messages to a Head of Staff containing Erotic Rendering Properties.</span>"
+				dat += "<br><hr><dd>[SPAN("warning", "Reg, #514 forbids sending messages to a Head of Staff containing Erotic Rendering Properties.")]"
 
 		//Message Logs
 		if(1)

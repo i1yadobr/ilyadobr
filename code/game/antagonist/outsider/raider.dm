@@ -184,7 +184,7 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 			win_msg += "<B>The Raiders were repelled!</B>"
 
 	feedback_set_details("round_end_result","heist - [win_type] [win_group]")
-	return "<span class='danger'><font size = 3>[win_type] [win_group] victory!</font></span><br>[win_msg]"
+	return "[SPAN("danger", "<font size = 3>[win_type] [win_group] victory!</font>")]<br>[win_msg]"
 
 /datum/antagonist/raider/proc/is_raider_crew_safe()
 

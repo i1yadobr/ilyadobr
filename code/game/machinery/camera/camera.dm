@@ -40,7 +40,8 @@
 /obj/machinery/camera/_examine_text(mob/user)
 	. = ..()
 	if(stat & BROKEN)
-		. += "\n<span class='warning'>It is completely demolished.</span>"
+		. += "\n"
+		. += SPAN("warning", "It is completely demolished.")
 
 /obj/machinery/camera/malf_upgrade(mob/living/silicon/ai/user)
 	..()

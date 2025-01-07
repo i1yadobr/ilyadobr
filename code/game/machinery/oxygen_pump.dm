@@ -154,7 +154,8 @@
 	if(tank)
 		. += "\nThe meter shows [round(tank.air_contents.return_pressure())]"
 	else
-		. += "\n<span class='warning'>It is missing a tank!</span>"
+		. += "\n"
+		. += SPAN("warning", "It is missing a tank!")
 
 /obj/machinery/oxygen_pump/Process()
 	if(breather)

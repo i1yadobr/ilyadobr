@@ -40,11 +40,13 @@
 
 /obj/machinery/power/breakerbox/_examine_text(mob/user)
 	. = ..()
-	. += "\nLarge machine with heavy duty switching circuits used for advanced grid control"
+	. += "\n"
+	. += "Large machine with heavy duty switching circuits used for advanced grid control."
+	. += "\n"
 	if(on)
-		. += "\n<span class='good'>It seems to be online.</span>"
+		. += SPAN("good", "It seems to be online.")
 	else
-		. += "\n<span class='warning'>It seems to be offline.</span>"
+		. += SPAN("warning", "It seems to be offline.")
 
 /obj/machinery/power/breakerbox/attack_ai(mob/user)
 	if(update_locked)

@@ -15,7 +15,8 @@
 /obj/item/device/gps/_examine_text(mob/user)
 	. = ..()
 	var/turf/T = get_turf(src)
-	. += "\n<span class='notice'>\The [src]'s screen shows: <i>[T.x]:[T.y]:[T.z]</i>.</span>"
+	. += "\n"
+	. += SPAN("notice", "\The [src]'s screen shows: <i>[T.x]:[T.y]:[T.z]</i>.")
 
 /obj/item/device/measuring_tape
 	name = "measuring tape"

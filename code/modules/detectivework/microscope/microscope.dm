@@ -59,7 +59,7 @@
 		if(fibers.evidence)
 			report.info = "Molecular analysis on provided sample has determined the presence of unique fiber strings.<br><br>"
 			for(var/fiber in fibers.evidence)
-				report.info += "<span class='notice'>Most likely match for fibers: [fiber]</span><br><br>"
+				report.info += "[SPAN("notice", "Most likely match for fibers: [fiber]")]<br><br>"
 		else
 			report.info += "No fibers found."
 	else if(istype(sample, /obj/item/sample/print))

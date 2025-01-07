@@ -212,4 +212,5 @@
 /obj/item/reagent_containers/_examine_text(mob/user)
 	. = ..()
 	if(hasHUD(user, HUD_SCIENCE))
-		. += "\n<span class='notice'>The [src] contains: [reagents.get_reagents()].</span>"
+		. += "\n"
+		. += SPAN("notice", "The [src] contains: [reagents.get_reagents()].")

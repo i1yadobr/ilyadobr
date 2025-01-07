@@ -154,7 +154,7 @@ var/list/ghost_traps
 	list_as_special_role = FALSE
 
 /datum/ghosttrap/borer/welcome_candidate(mob/target)
-	to_chat(target, "<span class='notice'>You are a cortical borer!</span> You are a brain slug that worms its way \
+	to_chat(target, "[SPAN("notice", "You are a cortical borer!")] You are a brain slug that worms its way \
 	into the head of its victim. Use stealth, persuasion and your powers of mind control to keep you, \
 	your host and your eventual spawn safe and warm.")
 	to_chat(target, "You can speak to your victim with <b>say</b>, to other borers with <b>say [target.get_language_prefix()]x</b>, and use your Abilities tab to access powers.")

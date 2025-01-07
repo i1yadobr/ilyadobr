@@ -85,22 +85,26 @@
 /obj/item/organ/internal/posibrain/_examine_text(mob/user)
 	. = ..()
 
-	var/msg = "<span class='info'>*---------*</span>\nThis is \icon[src] \a <EM>[src]</EM>!\n[desc]\n"
+	var/msg = "[SPAN("info", "*---------*")]\nThis is \icon[src] \a <EM>[src]</EM>!\n[desc]\n"
 
-	if(shackle)	msg += "<span class='warning'>It is clamped in a set of metal straps with a complex digital lock.</span>\n"
+	if(shackle)
+		msg += "<span class='warning'>It is clamped in a set of metal straps with a complex digital lock.</span>"
+		msg += "\n"
 
 	var/extra_info = ""
 
 	if(src.brainmob && src.brainmob.key)
 		switch(src.brainmob.stat)
-			if(CONSCIOUS && !src.brainmob.client)
-				extra_info += "It appears to be in stand-by mode.\n" //afk
+			if(CONSCIOUS)
+				if(!src.brainmob.client)
+					extra_info += "It appears to be in stand-by mode." //afk
 			if(UNCONSCIOUS)
-				extra_info += "<span class='warning'>It doesn't seem to be responsive.</span>\n"
+				extra_info += "<span class='warning'>It doesn't seem to be responsive.</span>"
 			if(DEAD)
-				extra_info += "<span class='deadsay'>It appears to be completely inactive.</span>\n"
+				extra_info += "<span class='deadsay'>It appears to be completely inactive.</span>"
 	else
-		extra_info += "<span class='deadsay'>It appears to be completely inactive.</span>\n"
+		extra_info += "<span class='deadsay'>It appears to be completely inactive.</span>"
+	extra_info += "\n"
 
 	msg += "<span class='warning'>[extra_info]</span>"
 	msg += "<span class='info'>*---------*</span>"

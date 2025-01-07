@@ -98,13 +98,14 @@
 /obj/structure/table/_examine_text(mob/user)
 	. = ..()
 	if(health < maxhealth)
+		. += "\n"
 		switch(health / maxhealth)
 			if(0.0 to 0.5)
-				. += "\n<span class='warning'>It looks severely damaged!</span>"
+				. += SPAN("warning", "It looks severely damaged!")
 			if(0.25 to 0.5)
-				. += "\n<span class='warning'>It looks damaged!</span>"
+				. += SPAN("warning", "It looks damaged!")
 			if(0.5 to 1.0)
-				. += "\n<span class='notice'>It has a few scrapes and dents.</span>"
+				. += SPAN("notice", "It has a few scrapes and dents.")
 
 /obj/structure/table/attackby(obj/item/W, mob/user)
 

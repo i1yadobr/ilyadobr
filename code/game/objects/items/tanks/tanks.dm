@@ -103,12 +103,15 @@ var/list/global/tank_gauge_cache = list()
 					descriptive = "cold"
 				else
 					descriptive = "bitterly cold"
-		. += "\n<span class='notice'>\The [src] feels [descriptive].</span>"
+		. += "\n"
+		. += SPAN("notice", "\The [src] feels [descriptive].")
 
 	if(proxyassembly.assembly || wired)
-		. += "\n<span class='warning'>It seems to have [wired? "some wires ": ""][wired && proxyassembly.assembly? "and ":""][proxyassembly.assembly ? "some sort of assembly ":""]attached to it.</span>"
+		. += "\n"
+		. += SPAN("warning", "It seems to have [wired? "some wires ": ""][wired && proxyassembly.assembly? "and ":""][proxyassembly.assembly ? "some sort of assembly ":""]attached to it.")
 	if(valve_welded)
-		. += "\n<span class='warning'>\The [src] emergency relief valve has been welded shut!</span>"
+		. += "\n"
+		. += SPAN("warning", "\The [src] emergency relief valve has been welded shut!")
 
 
 /obj/item/tank/attackby(obj/item/W as obj, mob/user as mob)
@@ -186,7 +189,7 @@ var/list/global/tank_gauge_cache = list()
 			if(!valve_welded)
 				to_chat(user, "<span class='notice'>You begin welding the \the [src] emergency pressure relief valve.</span>")
 				if(do_after(user, 40,src))
-					to_chat(user, "<span class='notice'>You carefully weld \the [src] emergency pressure relief valve shut.</span><span class='warning'> \The [src] may now rupture under pressure!</span>")
+					to_chat(user, "[SPAN("notice", "You carefully weld \the [src] emergency pressure relief valve shut.")][SPAN("warning", " \The [src] may now rupture under pressure!")]")
 					valve_welded = 1
 					leaking = 0
 				else
@@ -480,7 +483,7 @@ var/list/global/tank_gauge_cache = list()
 				return FALSE
 			T.assume_air(air_contents)
 			playsound(src, 'sound/effects/weapons/gun/fire_shotgun.ogg', 20, 1)
-			visible_message("\icon[src] <span class='danger'>\The [src] flies apart!</span>", "<span class='warning'>You hear a bang!</span>")
+			visible_message("\icon[src] [SPAN("danger", "\The [src] flies apart!")]", "<span class='warning'>You hear a bang!</span>")
 			T.hotspot_expose(air_contents.temperature, 70, 1)
 
 			var/strength = 1+((pressure-TANK_LEAK_PRESSURE)/TANK_FRAGMENT_SCALE)
@@ -513,7 +516,7 @@ var/list/global/tank_gauge_cache = list()
 
 			T.assume_air(leaked_gas)
 			if(!leaking)
-				visible_message("\icon[src] <span class='warning'>\The [src] relief valve flips open with a hiss!</span>", "You hear hissing.")
+				visible_message("\icon[src] [SPAN("warning", "\The [src] relief valve flips open with a hiss!")]", "You hear hissing.")
 				playsound(loc, 'sound/effects/spray.ogg', 10, 1, -3)
 				leaking = 1
 				#ifdef FIREDBG

@@ -74,13 +74,11 @@
 				msg += "β-particle<br>"
 			if(RADIATION_HAWKING)
 				msg += "Hawking ray<br>"
-		
+
 		printed_rays += ray
 
-	if(radiation_dose > 0)
-		. += "\n<span class='warning'>[msg]</span>"
-	else
-		. += "\n<span class='notice'>[msg]</span>"
+	. += "\n"
+	. += SPAN(radiation_dose > 0 ? "warning": "notice", "[msg]")
 
 /obj/item/device/geiger/attack_self(mob/user)
 	scanning = !scanning

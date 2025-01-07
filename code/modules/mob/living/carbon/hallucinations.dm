@@ -169,7 +169,7 @@
 			log_misc("[holder.name] is hallucinating about [talker.name] SAYS : [message]")
 		else
 			to_chat(holder,"<B>[talker.name]</B> points at [holder.name]")
-			to_chat(holder,"<span class='game say'><span class='name'>[talker.name]</span> says something softly.</span>")
+			to_chat(holder,"<span class='game say'>[SPAN("name", "[talker.name]")] says something softly.</span>")
 
 		var/image/speech_bubble = image('icons/mob/talk.dmi',talker,"h[holder.say_test(message)]")
 		speech_bubble.alpha = 0

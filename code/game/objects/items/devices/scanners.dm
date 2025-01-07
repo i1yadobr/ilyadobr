@@ -118,7 +118,7 @@ REAGENT SCANNER
 					brain_result = SPAN("danger", "ERROR - Hardware fault")
 	else
 		brain_result = SPAN("danger", "ERROR - Nonstandard biology")
-	brain_data += "<span class='notice'>Brain activity:</span> [brain_result]."
+	brain_data += "[SPAN("notice", "Brain activity:")] [brain_result]."
 
 	if(brain && (H.stat == DEAD || (H.status_flags & FAKEDEATH)))
 		brain_data += SPAN("notice", "<b>Time of Death:</b> [worldtime2stationtime(H.timeofdeath)]")
@@ -204,31 +204,31 @@ REAGENT SCANNER
 				continue
 			if(E.brute_dam > 0)
 				limb_damaged = TRUE
-				limb_result = "[limb_result] \[<span class='scanner_red'><b>[get_wound_severity(E.brute_ratio, (E.limb_flags & ORGAN_FLAG_HEALS_OVERKILL))] physical trauma</b></span>\]"
+				limb_result = "[limb_result] \[[SPAN("scanner_red", "<b>[get_wound_severity(E.brute_ratio, (E.limb_flags & ORGAN_FLAG_HEALS_OVERKILL))] physical trauma</b>")]\]"
 			if(E.burn_dam > 0)
 				limb_damaged = TRUE
-				limb_result = "[limb_result] \[<span class='scanner_yellow'><b>[get_wound_severity(E.burn_ratio, (E.limb_flags & ORGAN_FLAG_HEALS_OVERKILL))] burns</b></span>\]"
+				limb_result = "[limb_result] \[[SPAN("scanner_yellow", "<b>[get_wound_severity(E.burn_ratio, (E.limb_flags & ORGAN_FLAG_HEALS_OVERKILL))] burns</b>")]\]"
 			if(E.status & ORGAN_BLEEDING)
 				limb_damaged = TRUE
-				limb_result = "[limb_result] \[<span class='scanner_red'>bleeding</span>\]"
+				limb_result = "[limb_result] \[[SPAN("scanner_red", "bleeding")]\]"
 			if(E.status & ORGAN_BROKEN)
 				limb_damaged = TRUE
 				if(((E.organ_tag == BP_L_ARM) || (E.organ_tag == BP_R_ARM) || (E.organ_tag == BP_L_LEG) || (E.organ_tag == BP_R_LEG)) && (!E.splinted))
-					limb_result = "[limb_result] \[<span class='danger'>fracture</span>\]"
+					limb_result = "[limb_result] \[[SPAN("danger", "fracture")]\]"
 					found_fracture = TRUE
 				else
 					found_closed_fracture = TRUE
 			for(var/datum/wound/W in E.wounds)
 				if (W.damage_type == CUT && W.current_stage <= W.max_bleeding_stage && !W.bandaged)
-					limb_result = "[limb_result] \[<span class='danger'>open wound</span>\]"
+					limb_result = "[limb_result] \[[SPAN("danger", "open wound")]\]"
 					break
 			if(E.has_infected_wound())
 				limb_damaged = TRUE
 				if(E.germ_level >= INFECTION_LEVEL_THREE)
-					limb_result = "[limb_result] \[<span class='danger'>extreme infection</span>\]"
+					limb_result = "[limb_result] \[[SPAN("danger", "extreme infection")]\]"
 					found_extreme_infection = TRUE
 				else
-					limb_result = "[limb_result] \[<span class='danger'>infection</span>\]"
+					limb_result = "[limb_result] \[[SPAN("danger", "infection")]\]"
 			if(!found_bleed && (E.status & ORGAN_ARTERY_CUT))
 				found_bleed = TRUE
 			if(!found_tendon && (E.status & ORGAN_TENDON_CUT))
@@ -606,7 +606,8 @@ REAGENT SCANNER
 		if(O.reagents.reagent_list.len > 0)
 			var/one_percent = O.reagents.total_volume / 100
 			for (var/datum/reagent/R in O.reagents.reagent_list)
-				dat += "\n \t <span class='notice'>[R][details ? ": [R.volume / one_percent]%" : ""]</span>"
+				dat += "\n \t "
+				dat += SPAN("notice", "[R][details ? ": [R.volume / one_percent]%" : ""]")
 		if(dat)
 			to_chat(user, "<span class='notice'>Chemicals found: [dat]</span>")
 		else

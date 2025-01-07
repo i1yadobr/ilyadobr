@@ -374,21 +374,21 @@ var/list/solars_list = list()
 
 /obj/machinery/power/solar_control/interact(mob/user)
 
-	var/t = "<B><span class='highlight'>Generated power</span></B> : [round(lastgen)] W<BR>"
-	t += "<B><span class='highlight'>Star Orientation</span></B>: [GLOB.sun.angle]&deg ([angle2text(GLOB.sun.angle)])<BR>"
-	t += "<B><span class='highlight'>Array Orientation</span></B>: [rate_control(src,"cdir","[cdir]&deg",1,15)] ([angle2text(cdir)])<BR>"
-	t += "<B><span class='highlight'>Tracking:</span></B><div class='statusDisplay'>"
+	var/t = "<B>[SPAN("highlight", "Generated power")]</B> : [round(lastgen)] W<BR>"
+	t += "<B>[SPAN("highlight", "Star Orientation")]</B>: [GLOB.sun.angle]&deg ([angle2text(GLOB.sun.angle)])<BR>"
+	t += "<B>[SPAN("highlight", "Array Orientation")]</B>: [rate_control(src,"cdir","[cdir]&deg",1,15)] ([angle2text(cdir)])<BR>"
+	t += "<B>[SPAN("highlight", "Tracking:")]</B><div class='statusDisplay'>"
 	switch(track)
 		if(0)
-			t += "<span class='linkOn'>Off</span> <A href='?src=\ref[src];track=1'>Timed</A> <A href='?src=\ref[src];track=2'>Auto</A><BR>"
+			t += "[SPAN("linkOn", "Off")] <A href='?src=\ref[src];track=1'>Timed</A> <A href='?src=\ref[src];track=2'>Auto</A><BR>"
 		if(1)
-			t += "<A href='?src=\ref[src];track=0'>Off</A> <span class='linkOn'>Timed</span> <A href='?src=\ref[src];track=2'>Auto</A><BR>"
+			t += "<A href='?src=\ref[src];track=0'>Off</A> [SPAN("linkOn", "Timed")] <A href='?src=\ref[src];track=2'>Auto</A><BR>"
 		if(2)
-			t += "<A href='?src=\ref[src];track=0'>Off</A> <A href='?src=\ref[src];track=1'>Timed</A> <span class='linkOn'>Auto</span><BR>"
+			t += "<A href='?src=\ref[src];track=0'>Off</A> <A href='?src=\ref[src];track=1'>Timed</A> [SPAN("linkOn", "Auto")]<BR>"
 
 	t += "Tracking Rate: [rate_control(src,"tdir","[trackrate] deg/h ([trackrate<0 ? "CCW" : "CW"])",1,30,180)]</div><BR>"
 
-	t += "<B><span class='highlight'>Connected devices:</span></B><div class='statusDisplay'>"
+	t += "<B>[SPAN("highlight", "Connected devices:")]</B><div class='statusDisplay'>"
 
 	t += "<A href='?src=\ref[src];search_connected=1'>Search for devices</A><BR>"
 	t += "Solar panels : [connected_panels.len] connected<BR>"

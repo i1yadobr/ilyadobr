@@ -204,7 +204,7 @@
 
 	C.watchlist_warn = watchlist.Check(C.ckey)
 	if (C.watchlist_warn)
-		message_admins("<font color='red'><B>WATCHLIST: </B></font><span class='info'>[key_name_admin(C)] has just connected - Reason: [C.watchlist_warn]</span>")
+		message_admins("<font color='red'><B>WATCHLIST: </B></font>[SPAN("info", "[key_name_admin(C)] has just connected - Reason: [C.watchlist_warn]")]")
 
 	if (check_rights((R_ADMIN|R_MOD), 0, C))
 		for(var/client/player in GLOB.clients)

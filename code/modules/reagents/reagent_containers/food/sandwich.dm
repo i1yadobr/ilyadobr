@@ -81,7 +81,8 @@
 /obj/item/reagent_containers/food/csandwich/_examine_text(mob/user)
 	. = ..()
 	var/obj/item/O = pick(contents)
-	. += "\n<span class='warning'>You think you can see [O.name] in there.</span>"
+	. += "\n"
+	. += SPAN("warning", "You think you can see [O.name] in there.")
 
 /obj/item/reagent_containers/food/csandwich/attack(mob/M as mob, mob/user as mob, def_zone)
 

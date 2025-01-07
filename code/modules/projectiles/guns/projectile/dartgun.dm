@@ -99,11 +99,13 @@
 /obj/item/gun/projectile/dartgun/_examine_text(mob/user)
 	. = ..()
 	if (beakers.len)
-		. += "\n<span class='notice'>\The [src] contains:</span>"
+		. += "\n"
+		. += SPAN("notice", "\The [src] contains:")
 		for(var/obj/item/reagent_containers/vessel/beaker/B in beakers)
 			if(B.reagents && B.reagents.reagent_list.len)
 				for(var/datum/reagent/R in B.reagents.reagent_list)
-					. += "\n<span class='notice'>[R.volume] units of [R.name]</span>"
+					. += "\n"
+					. += SPAN("notice", "[R.volume] units of [R.name]")
 
 /obj/item/gun/projectile/dartgun/attackby(obj/item/I as obj, mob/user as mob)
 	if(istype(I, /obj/item/reagent_containers/vessel))

@@ -37,7 +37,8 @@
 	. = ..()
 	if(locked)
 		var/turf/T = get_turf(locked)
-		. += "\n<span class='notice'>The console is locked on to \[[T.loc.name]\].</span>"
+		. += "\n"
+		. += SPAN("notice", "The console is locked on to \[[T.loc.name]\].")
 
 
 /obj/machinery/computer/teleporter/attackby(I as obj, mob/living/user as mob)

@@ -177,7 +177,7 @@ var/list/hash_to_gear = list()
 				category_cost += G.cost
 
 		if(category == current_tab)
-			. += " <span class='linkOn'>[category] - [category_cost]</span> "
+			. += " [SPAN("linkOn", "[category] - [category_cost]")] "
 		else
 			if(category_cost)
 				. += " <a class='white' href='?src=\ref[src];select_category=[category]'>[category] - [category_cost]</a> "

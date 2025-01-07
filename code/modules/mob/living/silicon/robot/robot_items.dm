@@ -102,13 +102,16 @@
 
 /obj/item/portable_destructive_analyzer/_examine_text(mob/user)
 	. = ..()
-	. += "\n<span class='notice'><b>Current science levels:</b></span>"
+	. += "\n"
+	. += SPAN("notice", "<b>Current science levels:</b>")
 	for(var/i = 1, i <= files.known_tech.len, i++)
 		if(files.known_tech[i].name == "ILLEGAL" || files.known_tech[i].name == "Arcane")
 			if(files.known_tech[i].level > 0)
-				. += "\n<span class='notice'>[files.known_tech[i].name] - [files.known_tech[i].level]</span>"
+				. += "\n"
+				. += SPAN("notice", "[files.known_tech[i].name] - [files.known_tech[i].level]")
 		else
-			. += "\n<span class='notice'>[files.known_tech[i].name] - [files.known_tech[i].level]</span>"
+			. += "\n"
+			. += SPAN("notice", "[files.known_tech[i].name] - [files.known_tech[i].level]")
 
 	//This is used to unlock other borg covers.
 /obj/item/card/robot //This is not a child of id cards, as to avoid dumb typechecks on computers.

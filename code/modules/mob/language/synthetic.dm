@@ -20,25 +20,25 @@
 
 	log_say("[key_name(speaker)]: ([name]) [message]")
 
-	var/message_start = "<i><span class='game say'>[name], <span class='name'>[speaker.name]</span>"
-	var/message_body = "<span class='message'>[speaker.say_quote(message)], \"[message]\"</span></span></i>"
+	var/message_start = "[name], [SPAN("name", "[speaker.name]")]"
+	var/message_body = "<span class='message'>[speaker.say_quote(message)], \"[message]\"</span>"
 
 	for (var/mob/observer/ghost/O in GLOB.ghost_mob_list)
-		O.show_message("[message_start] ([ghost_follow_link(speaker, O)]) [message_body]", 2)
+		O.show_message("<i>[SPAN("game say", "[message_start] ([ghost_follow_link(speaker, O)]) [message_body]")]</i>", 2)
 
 	for (var/mob/M in GLOB.dead_mob_list_)
 		if(!istype(M,/mob/new_player) && !istype(M,/mob/living/carbon/brain)) //No meta-evesdropping
-			M.show_message("[message_start] ([ghost_follow_link(speaker, M)]) [message_body]", 2)
+			M.show_message("<i>[SPAN("game say", "[message_start] ([ghost_follow_link(speaker, M)]) [message_body]")]</i>", 2)
 
 	for (var/mob/living/S in GLOB.living_mob_list_)
 		if(drone_only && !istype(S,/mob/living/silicon/robot/drone))
 			continue
 		else if(istype(S , /mob/living/silicon/ai))
-			message_start = "<i><span class='game say'>[name], <a href='byond://?src=\ref[S];track2=\ref[S];track=\ref[speaker];trackname=[html_encode(speaker.name)]'><span class='name'>[speaker.name]</span></a></span></i>"
+			message_start = "<i>[SPAN("game say", "[name], <a href='byond://?src=\ref[S];track2=\ref[S];track=\ref[speaker];trackname=[html_encode(speaker.name)]'>[SPAN("name", "[speaker.name]")]</a>")]</i>"
 		else if (!S.binarycheck())
 			continue
 
-		S.show_message("[message_start] [message_body]", 2)
+		S.show_message("<i>[SPAN("game say", "[message_start] [message_body]")]</i>", 2)
 
 	var/list/listening = hearers(1, src)
 	listening -= src
@@ -46,7 +46,7 @@
 	for (var/mob/living/M in listening)
 		if(istype(M, /mob/living/silicon) || M.binarycheck())
 			continue
-		M.show_message("<i><span class='game say'><span class='name'>synthesised voice</span> <span class='message'>beeps, \"beep beep beep\"</span></span></i>",2)
+		M.show_message("<i>[SPAN("game say", "[SPAN("name", "synthesised voice")] [SPAN("message", "beeps, \"beep beep beep\"")]")]</i>",2)
 
 	//robot binary xmitter component power usage
 	if (isrobot(speaker))

@@ -10,7 +10,7 @@
 
 	icobase = 'icons/mob/human_races/r_machine.dmi'
 	deform = 'icons/mob/human_races/r_machine.dmi'
-	
+
 	has_eyes_icon = FALSE
 
 	language = LANGUAGE_EAL
@@ -103,4 +103,4 @@
 
 /datum/species/machine/disfigure_msg(mob/living/carbon/human/H)
 	var/datum/gender/T = gender_datums[H.get_gender()]
-	return "<span class='danger'>[T.His] monitor is completely busted!</span>\n"
+	return "[SPAN("danger", "[T.His] monitor is completely busted!")]\n"

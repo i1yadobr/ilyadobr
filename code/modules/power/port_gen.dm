@@ -57,10 +57,11 @@
 	. = ..()
 	if(get_dist(src, user) > 1)
 		return
+	. += "\n"
 	if(active)
-		. += "\n<span class='notice'>The generator is on.</span>"
+		. += SPAN("notice", "The generator is on.")
 	else
-		. += "\n<span class='notice'>The generator is off.</span>"
+		. += SPAN("notice", "The generator is off.")
 
 /obj/machinery/power/port_gen/emp_act(severity)
 	if(!active)
@@ -153,9 +154,9 @@
 	. += "\n\The [src] appears to be producing [power_gen*power_output] W."
 	. += "\nThere [sheets == 1 ? "is" : "are"] [sheets] sheet\s left in the hopper."
 	if(IsBroken())
-		. += "\n<span class='warning'>\The [src] seems to have broken down.</span>"
+		. += SPAN("warning", "\The [src] seems to have broken down.")
 	if(overheating)
-		. += "\n<span class='danger'>\The [src] is overheating!</span>"
+		. += SPAN("danger", "\The [src] is overheating!")
 
 /obj/machinery/power/port_gen/pacman/HasFuel()
 	var/needed_sheets = power_output / time_per_sheet

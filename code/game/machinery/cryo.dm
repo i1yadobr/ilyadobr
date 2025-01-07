@@ -170,7 +170,8 @@
 		scan = replacetext(scan,"'warning'","'average'")
 		scan = replacetext(scan,"'danger'","'bad'")
 		if (occupant.bodytemperature >= 170)
-			scan += "<br><span class='average'>Warning: Patient's body temperature is not suitable.</span>"
+			scan += "<br>"
+			scan += SPAN("average", "Warning: Patient's body temperature is not suitable.")
 		scan += "<br>Cryostasis factor: [occupant.stasis_value]x"
 		data["occupant"] = scan
 

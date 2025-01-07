@@ -80,7 +80,8 @@
 		return
 
 	if(pdiff >= FIREDOOR_MAX_PRESSURE_DIFF)
-		. += "\n<span class='warning'>WARNING: Current pressure differential is [pdiff]kPa! Opening door may result in injury!</span>"
+		. += "\n"
+		. += SPAN("warning", "WARNING: Current pressure differential is [pdiff]kPa! Opening door may result in injury!")
 	. += "\n<b>Sensor readings:</b>"
 	for(var/index = 1; index <= tile_info.len; index++)
 		var/o = "&nbsp;&nbsp;"

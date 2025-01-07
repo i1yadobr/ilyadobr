@@ -1023,7 +1023,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			if(M.stat == DEAD && M.get_preference_value(/datum/client_preference/ghost_ears) == GLOB.PREF_ALL_SPEECH) // src.client is so that ghosts don't have to listen to mice
 				if(istype(M, /mob/new_player))
 					continue
-				M.show_message("<span class='game say'>PDA Message - <span class='name'>[owner]</span> -> <span class='name'>[P.owner]</span>: <span class='message'>[message]</span></span>")
+				M.show_message("<span class='game say'>PDA Message - [SPAN("name", "[owner]")] -> [SPAN("name", "[P.owner]")]: [SPAN("message", "[message]")]</span>")
 
 		if(!conversations.Find("\ref[P]"))
 			conversations.Add("\ref[P]")

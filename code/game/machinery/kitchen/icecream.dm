@@ -103,7 +103,7 @@
 		var/obj/item/reagent_containers/food/icecream/I = O
 		if(!I.ice_creamed)
 			if(product_types[dispense_flavour] > 0)
-				src.visible_message("\icon[src] <span class='info'>[user] scoops delicious [flavour_name] icecream into [I].</span>")
+				src.visible_message("\icon[src] [SPAN("info", "[user] scoops delicious [flavour_name] icecream into [I].")]")
 				product_types[dispense_flavour] -= 1
 				I.add_ice_cream(flavour_name)
 			//	if(beaker)

@@ -298,19 +298,21 @@
 /turf/simulated/wall/_examine_text(mob/user)
 	. = ..()
 
+	. += "\n"
 	if(!damage)
-		. += "\n<span class='notice'>It looks fully intact.</span>"
+		. += SPAN("notice", "It looks fully intact.")
 	else
 		var/dam = damage / material.integrity
 		if(dam <= 0.3)
-			. += "\n<span class='warning'>It looks slightly damaged.</span>"
+			. += SPAN("warning", "It looks slightly damaged.")
 		else if(dam <= 0.6)
-			. += "\n<span class='warning'>It looks moderately damaged.</span>"
+			. += SPAN("warning", "It looks moderately damaged.")
 		else
-			. += "\n<span class='danger'>It looks heavily damaged.</span>"
+			. += SPAN("danger", "It looks heavily damaged.")
 
 	if(locate(/obj/effect/overlay/wallrot) in src)
-		. += "\n<span class='warning'>There is fungus growing on [src].</span>"
+		. += "\n"
+		. += SPAN("warning", "There is fungus growing on [src].")
 
 //Damage
 

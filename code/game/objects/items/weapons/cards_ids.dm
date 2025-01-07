@@ -117,7 +117,8 @@ var/const/NO_EMAG_ACT = -50
 
 /obj/item/card/emag/robot/_examine_text(mob/user)
 	. = ..()
-	. += "\n<span class='notice'>It has [uses] uses left.</span>"
+	. += "\n"
+	. += SPAN("notice", "It has [uses] uses left.")
 
 /obj/item/card/id
 	name = "identification card"

@@ -39,9 +39,11 @@
 /obj/item/clothing/mask/smokable/ecig/simple/_examine_text(mob/user)
 	. = ..()
 	if(src.ec_cartridge)
-		. += "\n<span class='notice'>There is roughly [round(ec_cartridge.reagents.total_volume / ec_cartridge.volume, 25)]% of liquid remaining.</span>"
+		. += "\n"
+		. += SPAN("notice", "There is roughly [round(ec_cartridge.reagents.total_volume / ec_cartridge.volume, 25)]% of liquid remaining.")
 	else
-		. += "\n<span class='notice'>There is no cartridge connected.</span>"
+		. += "\n"
+		. += SPAN("notice", "There is no cartridge connected.")
 
 /obj/item/clothing/mask/smokable/ecig/util
 	name = "electronic cigarette"
@@ -60,10 +62,13 @@
 /obj/item/clothing/mask/smokable/ecig/util/_examine_text(mob/user)
 	. = ..()
 	if(src.ec_cartridge)
-		. += "\n<span class='notice'>There are [round(ec_cartridge.reagents.total_volume, 1)] units of liquid remaining.</span>"
+		. += "\n"
+		. += SPAN("notice", "There are [round(ec_cartridge.reagents.total_volume, 1)] units of liquid remaining.")
 	else
-		. += "\n<span class='notice'>There is no cartridge connected.</span>"
-	. += "\n<span class='notice'>Gauge shows about [round(cigcell.percent(), 25)]% energy remaining</span>"
+		. += "\n"
+		. += SPAN("notice", "There is no cartridge connected.")
+	. += "\n"
+	. += SPAN("notice", "Gauge shows about [round(cigcell.percent(), 25)]% energy remaining")
 
 /obj/item/clothing/mask/smokable/ecig/deluxe
 	name = "deluxe electronic cigarette"
@@ -78,10 +83,13 @@
 /obj/item/clothing/mask/smokable/ecig/deluxe/_examine_text(mob/user)
 	. = ..()
 	if(src.ec_cartridge)
-		. += "\n<span class='notice'>There are [round(ec_cartridge.reagents.total_volume, 1)] units of liquid remaining.</span>"
+		. += "\n"
+		. += SPAN("notice", "There are [round(ec_cartridge.reagents.total_volume, 1)] units of liquid remaining.")
 	else
-		. += "\n<span class='notice'>There is no cartridge connected.</span>"
-	. += "\n<span class='notice'>Gauge shows [round(cigcell.percent(), 1)]% energy remaining</span>"
+		. += "\n"
+		. += SPAN("notice", "There is no cartridge connected.")
+	. += "\n"
+	. += SPAN("notice", "Gauge shows [round(cigcell.percent(), 1)]% energy remaining")
 
 /obj/item/clothing/mask/smokable/ecig/think()
 	if(idle >= idle_treshold) //idle too long -> automatic shut down
@@ -138,11 +146,11 @@
 /obj/item/clothing/mask/smokable/ecig/attackby(obj/item/I, mob/user as mob)
 	if(istype(I, /obj/item/reagent_containers/ecig_cartridge))
 		if (ec_cartridge)//can't add second one
-			to_chat(user, "<span class='notice'>A cartridge has already been installed.</span> ")
+			to_chat(user, "<span class='notice'>A cartridge has already been installed.</span>")
 		else if(user.drop(I, src)) // fits in new one
 			ec_cartridge = I
 			update_icon()
-			to_chat(user, "<span class='notice'>You insert [I] into [src].</span> ")
+			to_chat(user, "<span class='notice'>You insert [I] into [src].</span>")
 
 	if(istype(I, /obj/item/screwdriver))
 		if(cigcell) //if contains powercell
@@ -166,22 +174,22 @@
 	if (active)
 		active=0
 		set_next_think(0)
-		to_chat(user, "<span class='notice'>You turn off \the [src]. </span> ")
+		to_chat(user, "<span class='notice'>You turn off \the [src].</span>")
 		update_icon()
 	else
 		if(cigcell)
 			if (!ec_cartridge)
-				to_chat(user, "<span class='notice'>You can't use \the [src] with no cartridge installed!</span> ")
+				to_chat(user, "<span class='notice'>You can't use \the [src] with no cartridge installed!</span>")
 				return
 			else if(!ec_cartridge.reagents.total_volume)
-				to_chat(user, "<span class='notice'>You can't use \the [src] with no liquid left!</span> ")
+				to_chat(user, "<span class='notice'>You can't use \the [src] with no liquid left!</span>")
 				return
 			else if(!cigcell.check_charge(power_usage * CELLRATE))
-				to_chat(user, "<span class='notice'>Battery of \the [src] is too depleted to use.</span> ")
+				to_chat(user, "<span class='notice'>Battery of \the [src] is too depleted to use.</span>")
 				return
 			active=1
 			set_next_think(world.time)
-			to_chat(user, "<span class='notice'>You turn on \the [src]. </span> ")
+			to_chat(user, "<span class='notice'>You turn on \the [src]. </span>")
 			update_icon()
 
 		else
@@ -192,7 +200,7 @@
 		if (ec_cartridge)
 			active=0
 			user.pick_or_drop(ec_cartridge)
-			to_chat(user, "<span class='notice'>You eject \the [ec_cartridge] from \the [src].</span> ")
+			to_chat(user, "<span class='notice'>You eject \the [ec_cartridge] from \the [src].</span>")
 			ec_cartridge = null
 			update_icon()
 	else

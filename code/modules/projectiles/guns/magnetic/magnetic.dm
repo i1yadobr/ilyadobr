@@ -83,23 +83,27 @@
 			. += "\n[ret]"
 
 		if(cell)
-			. += "\n<span class='notice'>The installed [cell.name] has a charge level of [round((cell.charge/cell.maxcharge)*100)]%.</span>"
+			. += "\n"
+			. += SPAN("notice", "The installed [cell.name] has a charge level of [round((cell.charge/cell.maxcharge)*100)]%.")
 		if(capacitor)
-			. += "\n<span class='notice'>The installed [capacitor.name] has a charge level of [round((capacitor.charge/capacitor.max_charge)*100)]%.</span>"
+			. += "\n"
+			. += SPAN("notice", "The installed [capacitor.name] has a charge level of [round((capacitor.charge/capacitor.max_charge)*100)]%.")
 
+		. += "\n"
 		if(!cell || !capacitor)
-			. += "\n<span class='notice'>The capacitor charge indicator is blinking <font color ='[COLOR_RED]'>red</font>. Maybe you should check the cell or capacitor.</span>"
+			. += SPAN("notice", "The capacitor charge indicator is blinking <font color ='[COLOR_RED]'>red</font>. Maybe you should check the cell or capacitor.")
 		else
 			if(capacitor.charge < power_cost)
-				. += "\n<span class='notice'>The capacitor charge indicator is <font color ='[COLOR_ORANGE]'>amber</font>.</span>"
+				. += SPAN("notice", "The capacitor charge indicator is <font color ='[COLOR_ORANGE]'>amber</font>.")
 			else
-				. += "\n<span class='notice'>The capacitor charge indicator is <font color ='[COLOR_GREEN]'>green</font>.</span>"
+				. += SPAN("notice", "The capacitor charge indicator is <font color ='[COLOR_GREEN]'>green</font>.")
 
 		if(able_to_overheat && heat_level > 15)
+			. += "\n"
 			if(heat_level < 25)
-				. += "\n<span class='warning'>\The [src]'s wiring glows faintly.</span>"
+				. += SPAN("warning", "\The [src]'s wiring glows faintly.")
 			else
-				. += "\n<span class='danger'>\The [src]'s wiring is glowing brightly!</span>"
+				. += SPAN("danger", "\The [src]'s wiring is glowing brightly!")
 
 		return
 

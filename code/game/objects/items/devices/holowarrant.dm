@@ -18,7 +18,8 @@
 	if(in_range(user, src) || isghost(user))
 		show_content(user)
 	else
-		. += "\n<span class='notice'>You have to be closer if you want to read it.</span>"
+		. += "\n"
+		. += SPAN("notice", "You have to be closer if you want to read it.")
 
 //hit yourself with it
 /obj/item/device/holowarrant/attack_self(mob/living/user as mob)

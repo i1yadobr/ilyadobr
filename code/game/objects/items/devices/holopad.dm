@@ -92,7 +92,7 @@
 			icon_state = "holopad_in_call"
 			addtimer(CALLBACK(src, nameof(.proc/update_holo)), 1)
 
-			audible_message("<span class='name'>[voice]</span> transmits, \"Connection established\"", hearing_distance = 1, runechat_message = "Connection established")
+			audible_message("[SPAN("name", "[voice]")] transmits, \"Connection established\"", hearing_distance = 1, runechat_message = "Connection established")
 		else
 			call_state = CALL_NONE
 			icon_state = initial(icon_state)
@@ -104,7 +104,7 @@
 		icon_state = "holopad_in_call"
 		addtimer(CALLBACK(src, nameof(.proc/update_holo)), 1)
 
-		audible_message("<span class='name'>[voice]</span> transmits, \"Connection established\"", hearing_distance = 1, runechat_message = "Connection established")
+		audible_message("[SPAN("name", "[voice]")] transmits, \"Connection established\"", hearing_distance = 1, runechat_message = "Connection established")
 
 /obj/item/device/holopad/proc/hangUp(remote = 0)
 	if(!remote && abonent)
@@ -185,7 +185,7 @@
 	if(!user)
 		voice = "Holopad Background Voice"
 	for(var/mob/M in listening)
-		to_chat(M, "<span class='name'>[voice]</span> transmits, \"[speaking]\" ")
+		to_chat(M, "[SPAN("name", "[voice]")] transmits, \"[speaking]\" ")
 
 #undef CALL_NONE
 #undef CALL_CALLING

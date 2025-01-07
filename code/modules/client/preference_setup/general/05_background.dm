@@ -83,7 +83,7 @@
 
 	. += "<br/><b>Records</b>:<br/>"
 	if(jobban_isbanned(user, "Records"))
-		. += "<span class='danger'>You are banned from using character records.</span><br>"
+		. += "[SPAN("danger", "You are banned from using character records.")]<br>"
 	else
 		. += "Medical Records:<br>"
 		. += "<a href='?src=\ref[src];set_medical_records=1'>[TextPreview(pref.med_record,40)]</a><br><br>"

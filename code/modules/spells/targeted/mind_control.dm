@@ -84,9 +84,9 @@
 	to_chat(H, message)
 	var/msg = ""
 	if (!H.reagents.has_reagent(/datum/reagent/water/holywater))
-		msg += "<span class='danger'>The fog in your head clears, and you remember some important things. You hold following things as deep convictions, almost like synthetics' laws:</span><br>"
+		msg += "[SPAN("danger", "The fog in your head clears, and you remember some important things. You hold following things as deep convictions, almost like synthetics' laws:")]<br>"
 	else
-		msg = "<span class='notice'>Something tried to crawl into you mind, but you protected yourself!</span><br>"
+		msg = "[SPAN("notice", "Something tried to crawl into you mind, but you protected yourself!")]<br>"
 		to_chat(H, msg)
 		Destroy()
 		return FALSE
