@@ -21,7 +21,7 @@
 /// Removes and returns the first element in the queue
 /datum/priority_queue/proc/Dequeue()
 	if(!L.len)
-		return 0
+		return null
 	. = L[1]
 
 	Remove(.)
@@ -41,7 +41,7 @@
 /// Return the element at the i_th position
 /datum/priority_queue/proc/Get(i)
 	if(i > L.len || i < 1)
-		return 0
+		return null
 	return L[i]
 
 /// Return the length of the queue
