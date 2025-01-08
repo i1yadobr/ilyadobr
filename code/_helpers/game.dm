@@ -15,10 +15,10 @@
 
 /proc/is_on_same_plane_or_station(z1, z2)
 	if(z1 == z2)
-		return 1
+		return TRUE
 	if((z1 in GLOB.using_map.get_levels_with_trait(ZTRAIT_STATION)) &&	(z2 in GLOB.using_map.get_levels_with_trait(ZTRAIT_STATION)))
-		return 1
-	return 0
+		return TRUE
+	return FALSE
 
 /proc/living_observers_present(list/zlevels)
 	if(LAZYLEN(zlevels))
@@ -43,7 +43,7 @@
 	for(var/area/A in world)
 		if(A.name == N)
 			return A
-	return 0
+	return null
 
 /proc/get_area_master(const/O)
 	var/area/A = get_area(O)
@@ -52,8 +52,8 @@
 
 /proc/in_range(source, user)
 	if(get_dist(source, user) <= 1)
-		return 1
-	return 0 // not in range and not telekinetic
+		return TRUE
+	return FALSE
 
 // Like view but bypasses luminosity check
 /proc/hear(range, atom/source)
@@ -148,7 +148,7 @@
 // Will recursively loop through an atom's contents and check for mobs, then it will loop through every atom in that atom's contents.
 // It will keep doing this until it checks every content possible. This will fix any problems with mobs, that are inside objects,
 // being unable to hear people due to being in a box within a bag.
-/proc/recursive_content_check(atom/O,  list/L = list(), recursion_limit = 3, client_check = 1, sight_check = 1, include_mobs = 1, include_objects = 1)
+/proc/recursive_content_check(atom/O,  list/L = list(), recursion_limit = 3, client_check = TRUE, sight_check = TRUE, include_mobs = TRUE, include_objects = TRUE)
 	if(!recursion_limit)
 		return L
 
@@ -173,7 +173,7 @@
 	return L
 
 // Returns a list of mobs and/or objects in range of R from source. Used in radio and say code.
-/proc/get_mobs_or_objects_in_view(R, atom/source, include_mobs = 1, include_objects = 1)
+/proc/get_mobs_or_objects_in_view(R, atom/source, include_mobs = TRUE, include_objects = TRUE)
 	var/turf/T = get_turf(source)
 	var/list/hear = list()
 
@@ -184,13 +184,13 @@
 
 	for(var/I in range)
 		if(ismob(I))
-			hear |= recursive_content_check(I, hear, 3, 1, 0, include_mobs, include_objects)
+			hear |= recursive_content_check(I, hear, 3, TRUE, FALSE, include_mobs, include_objects)
 			if(include_mobs)
 				var/mob/M = I
 				if(M.client)
 					hear += M
 		else if(istype(I,/obj/))
-			hear |= recursive_content_check(I, hear, 3, 1, 0, include_mobs, include_objects)
+			hear |= recursive_content_check(I, hear, 3, TRUE, FALSE, include_mobs, include_objects)
 			if(include_objects)
 				hear += I
 
@@ -198,7 +198,7 @@
 
 
 /proc/get_mobs_in_radio_ranges(list/obj/item/device/radio/radios)
-	set background = 1
+	set background = TRUE
 
 	. = list()
 	// Returns a list of mobs who can hear any of the radios given in @radios
@@ -273,14 +273,14 @@
 	var/turf/T
 	if(X1 == X2)
 		if(Y1 == Y2)
-			return 1 // Light cannot be blocked on same tile
+			return TRUE // Light cannot be blocked on same tile
 		else
 			var/s = MATH_SIGN(Y2 - Y1)
 			Y1 += s
 			while(Y1 != Y2)
 				T = locate(X1, Y1, Z)
 				if(T.opacity)
-					return 0
+					return FALSE
 				Y1 += s
 	else
 		var/m = (32 * (Y2 - Y1) + (PY2 - PY1)) / (32 * (X2 - X1) + (PX2 - PX1))
@@ -296,21 +296,21 @@
 				X1 += signX // Line exits tile horizontally
 			T = locate(X1, Y1, Z)
 			if(T.opacity)
-				return 0
-	return 1
+				return FALSE
+	return TRUE
 
 /proc/isInSight(atom/A, atom/B)
 	var/turf/Aturf = get_turf(A)
 	var/turf/Bturf = get_turf(B)
 
 	if(!Aturf || !Bturf)
-		return 0
+		return FALSE
 
 	if(inLineOfSight(Aturf.x, Aturf.y, Bturf.x, Bturf.y, Aturf.z))
-		return 1
+		return TRUE
 
 	else
-		return 0
+		return FALSE
 
 // Returns the position of a step from start away from finish, in one of the cardinal directions
 // Returns only NORTH, SOUTH, EAST, or WEST
@@ -575,10 +575,6 @@
 		mixedcolor += weight[i]*color[i]
 	mixedcolor = round(mixedcolor)
 
-	// until someone writes a formal proof for this algorithm, let's keep this in
-	// 	if(mixedcolor<0x00 || mixedcolor>0xFF)
-	//		return 0
-	// that's not the kind of operation we are running here, nerd
 	mixedcolor = min(max(mixedcolor, 0), 255)
 
 	return mixedcolor

@@ -83,23 +83,23 @@
 
 //Checks if the list is empty
 /proc/isemptylist(list/list)
-	if(!list.len)
-		return 1
-	return 0
+	if(!length(list))
+		return TRUE
+	return FALSE
 
 //Checks for specific types in a list
 /proc/is_type_in_list(atom/A, list/L)
 	for(var/type in L)
 		if(istype(A, type))
-			return 1
-	return 0
+			return TRUE
+	return FALSE
 
 //Checks for specific paths in a list
 /proc/is_path_in_list(path, list/L)
 	for(var/type in L)
 		if(ispath(path, type))
-			return 1
-	return 0
+			return TRUE
+	return FALSE
 
 /proc/instances_of_type_in_list(atom/A, list/L)
 	var/instances = 0
@@ -108,7 +108,7 @@
 			instances++
 	return instances
 
-//Empties the list by .Cut(). Setting lenght = 0 has been confirmed to leak references.
+//Empties the list by .Cut(). Setting length = 0 has been confirmed to leak references.
 /proc/clearlist(list/L)
 	if(islist(L))
 		L.Cut()
@@ -122,10 +122,10 @@
 
 /*
  * Returns list containing all the entries from first list that are not present in second.
- * If skiprep = 1, repeated elements are treated as one.
+ * If skiprep = TRUE, repeated elements are treated as one.
  * If either of arguments is not a list, returns null
  */
-/proc/difflist(list/first, list/second, skiprep=0)
+/proc/difflist(list/first, list/second, skiprep=FALSE)
 	if(!islist(first) || !islist(second))
 		return
 	var/list/result = new
@@ -139,10 +139,10 @@
 
 /*
  * Returns list containing entries that are in either list but not both.
- * If skipref = 1, repeated elements are treated as one.
+ * If skipref = TRUE, repeated elements are treated as one.
  * If either of arguments is not a list, returns null
  */
-/proc/uniquemergelist(list/first, list/second, skiprep=0)
+/proc/uniquemergelist(list/first, list/second, skiprep=FALSE)
 	if(!islist(first) || !islist(second))
 		return
 	var/list/result = new
@@ -411,10 +411,10 @@
 	var/list/out = list(pop(L))
 	for(var/entry in L)
 		if(isnum(entry))
-			var/success = 0
+			var/success = FALSE
 			for(var/i=1, i<=out.len, i++)
 				if(entry <= out[i])
-					success = 1
+					success = TRUE
 					out.Insert(i, entry)
 					break
 			if(!success)
@@ -565,7 +565,7 @@ proc/dd_sortedObjectList(list/incoming)
 	return sorted_list
 */
 
-/proc/dd_sortedtextlist(list/incoming, case_sensitive = 0)
+/proc/dd_sortedtextlist(list/incoming, case_sensitive = FALSE)
 	// Returns a new list with the text values sorted.
 	// Use binary search to order by sortValue.
 	// This works by going to the half-point of the list, seeing if the node in question is higher or lower cost,
@@ -625,7 +625,7 @@ proc/dd_sortedObjectList(list/incoming)
 
 
 /proc/dd_sortedTextList(list/incoming)
-	var/case_sensitive = 1
+	var/case_sensitive = TRUE
 	return dd_sortedtextlist(incoming, case_sensitive)
 
 

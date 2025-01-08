@@ -12,11 +12,12 @@
 /proc/isfloor(turf/T)
 	return (istype(T, /turf/simulated/floor) || istype(T, /turf/unsimulated/floor))
 
+// TODO(rufus): remove, unused proc
 /proc/turf_clear(turf/T)
 	for(var/atom/A in T)
 		if(A.simulated)
-			return 0
-	return 1
+			return FALSE
+	return TRUE
 
 // Picks a turf without a mob from the given list of turfs, if one exists.
 // If no such turf exists, picks any random turf from the given list of turfs.
@@ -89,7 +90,7 @@
 	var/datum/gas_mixture/air = T.return_air()
 	if(!air)
 		return "Spawn location lacks atmosphere."
-	return get_atmosphere_issues(air, 1)
+	return get_atmosphere_issues(air, TRUE)
 
 /proc/IsTurfAtmosSafe(turf/T)
 	return !IsTurfAtmosUnsafe(T)
@@ -139,12 +140,12 @@
 		var/base = base_turf || get_base_turf_by_area(source)
 		if(istype(source, base))
 			continue
-		source.ChangeTurf(base, 1, 1)
+		source.ChangeTurf(base, TRUE, TRUE)
 
 //Transports a turf from a source turf to a target turf, moving all of the turf's contents and making the target a copy of the source.
 /proc/transport_turf_contents(turf/source, turf/target, base)
 	if(!istype(source, base))
-		target = target.ChangeTurf(source.type, 1, 1)
+		target = target.ChangeTurf(source.type, TRUE, TRUE)
 		target.transport_properties_from(source)
 
 	for(var/obj/O in source)

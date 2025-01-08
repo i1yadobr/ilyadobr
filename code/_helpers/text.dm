@@ -13,7 +13,7 @@
 
 // Used for preprocessing entered text
 // Added in an additional check to alert players if input is too long
-/proc/sanitize(input, max_length = MAX_MESSAGE_LEN, encode = 1, trim = 1, extra = 1)
+/proc/sanitize(input, max_length = MAX_MESSAGE_LEN, encode = TRUE, trim = TRUE, extra = TRUE)
 	if(!input)
 		return
 
@@ -55,7 +55,7 @@
 // Best used for sanitize object names, window titles.
 // If you have a problem with sanitize() in chat, when quotes and >, < are displayed as html entites -
 // this is a problem of double-encode(when & becomes &amp;), use sanitize() with encode=0, but not the sanitizeSafe()!
-/proc/sanitizeSafe(input, max_length = MAX_MESSAGE_LEN, encode = 1, trim = 1, extra = 1)
+/proc/sanitizeSafe(input, max_length = MAX_MESSAGE_LEN, encode = TRUE, trim = TRUE, extra = TRUE)
 	return sanitize(replace_characters(input, list(">"=" ","<"=" ", "\""="'")), max_length, encode, trim, extra)
 
 #define NO_CHARS_DETECTED 0
@@ -152,14 +152,14 @@
 // Returns null if there is any bad text in the string
 /proc/reject_bad_text(text, max_length=512)
 	if(length_char(text) > max_length)	return			//message too long
-	var/non_whitespace = 0
+	var/non_whitespace = FALSE
 	for(var/i=1, i<=length_char(text), i++)
 		switch(text2ascii_char(text,i))
 			if(62,60,92,47)	return			//rejects the text if it contains these bad characters: <, >, \ or /
 			if(127 to 255)	return			//rejects weird letters like �
 			if(0 to 31)		return			//more weird stuff
 			if(32)			continue		//whitespace
-			else			non_whitespace = 1
+			else			non_whitespace = TRUE
 	if(non_whitespace)		return text		//only accepts the text if it has some non-spaces
 
 
@@ -288,7 +288,7 @@
 /proc/stringmerge(text,compare,replace = "*")
 	var/newtext = text
 	if(length(text) != length(compare))
-		return 0
+		CRASH("failed stringmerge: can't compare texts of length [length(text)] ([text]) and [length(compare)] ([compare])")
 	for(var/i = 1, i < length(text), i++)
 		var/a = copytext(text,i,i+1)
 		var/b = copytext(compare,i,i+1)
@@ -300,14 +300,14 @@
 			else if(b == replace) //if B is the replacement char
 				newtext = copytext(newtext,1,i) + a + copytext(newtext, i+1)
 			else //The lists disagree, Uh-oh!
-				return 0
+				CRASH("failed stringmerge: char conflict at index [i]: merging [text] [compare]")
 	return newtext
 
 // This proc returns the number of chars of the string that is the character
 // This is used for detective work to determine fingerprint completion.
 /proc/stringpercent(text,character = "*")
 	if(!text || !character)
-		return 0
+		CRASH("failed stringpercent, expected both parameters, got text: '[text]', character: '[character]'")
 	var/count = 0
 	for(var/i = 1, i <= length(text), i++)
 		var/a = copytext(text,i,i+1)
@@ -345,15 +345,15 @@
 		switch(ascii_char)
 			// A  .. Z
 			if(65 to 90)			// Uppercase Letters
-				return 1
+				return TRUE
 			// a  .. z
 			if(97 to 122)			// Lowercase Letters
-				return 1
+				return TRUE
 
 			// 0  .. 9
 			if(48 to 57)			// Numbers
-				return 1
-	return 0
+				return TRUE
+	return FALSE
 
 /proc/generateRandomString(length)
 	. = list()
@@ -365,7 +365,7 @@
 #define gender2text(gender) capitalize(gender)
 
 /**
- * Strip out the special beyond characters for \proper and \improper
+ * Strip out the special BYOND characters for \proper and \improper
  * from text that will be sent to the browser.
  */
 #define strip_improper(input_text) replacetext(replacetext(input_text, "\proper", ""), "\improper", "")

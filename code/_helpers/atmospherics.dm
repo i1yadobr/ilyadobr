@@ -1,3 +1,5 @@
+// Return value indicates if there were any gases.
+// FALSE means there were no gases associated with object A, or A's turf if A doesn't implement gas storage
 /obj/proc/analyze_gases(obj/A, mob/user, advanced)
 	playsound(src.loc, 'sound/signals/processing21.ogg', 50)
 	user.visible_message(SPAN("notice", "\The [user] has used \an [src] on \the [A]."))
@@ -6,11 +8,11 @@
 	var/air_contents = A.return_air()
 	if(!air_contents)
 		to_chat(user, SPAN("warning", "Your [src] flashes a red light as it fails to analyze \the [A]."))
-		return 0
+		return FALSE
 
 	var/list/result = atmosanalyzer_scan(A, air_contents, advanced)
 	print_atmos_analysis(user, result)
-	return 1
+	return TRUE
 
 /proc/print_atmos_analysis(user, list/result)
 	for(var/line in result)
