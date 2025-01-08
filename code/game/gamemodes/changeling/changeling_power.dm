@@ -57,6 +57,8 @@
 		_allow_stasis = allow_stasis
 	return changeling.is_incapacitated(_max_stat, _allow_stasis)
 
+// TODO(rufus): invert `no_message` param to `show_message` to avoid double negation,
+//   e.g. no_message=FALSE reading as not no message
 /datum/changeling_power/proc/is_usable(no_message = FALSE)
 	. = FALSE
 
@@ -158,6 +160,8 @@
 		set_next_think(world.time)
 	update_screen_button()
 
+// TODO(rufus): invert `no_message` param to `show_message` to avoid double negation,
+//   e.g. no_message=FALSE reading as not no message
 /datum/changeling_power/toggled/deactivate(no_message = TRUE)
 	. = ..()
 	if(!.)
@@ -239,13 +243,14 @@
 	active = TRUE
 	update_screen_button()
 
-/datum/changeling_power/toggled/sting/deactivate(no_message = TRUE)
+// Note: this is currently used both for actual deactivation and "just in case" deactivation by deactivate_stings()
+/datum/changeling_power/toggled/sting/deactivate()
+	if(active)
+		to_chat(my_mob, SPAN("changeling", text_deactivate))
 	active = FALSE
 	var/datum/click_handler/changeling/sting/C = my_mob.GetClickHandler()
 	if(istype(C) && C.sting == src)
 		my_mob.PopClickHandler()
-	if(!no_message)
-		to_chat(my_mob, SPAN("changeling", text_deactivate))
 	update_screen_button()
 
 /datum/changeling_power/toggled/sting/proc/can_reach(mob/M)

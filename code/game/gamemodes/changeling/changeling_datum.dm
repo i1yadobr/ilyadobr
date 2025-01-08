@@ -298,4 +298,4 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 // Deactivates all current stings to make sure my_mob doesn't have queued sting click handlers.
 /datum/changeling/proc/deactivate_stings()
 	for(var/datum/changeling_power/toggled/sting/S in available_powers)
-		S.deactivate()
+		S.deactivate(FALSE)
