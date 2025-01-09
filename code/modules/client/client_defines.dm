@@ -9,9 +9,22 @@
 	var/adminhelped = 0
 	var/watchlist_warn = null
 
-	// * Other things *
-	var/static/obj/screen/click_catcher/void
-	var/datum/click_handler/click_handler
+	// void is a list of /obj/screen/click_catcher's used to capture user clicks on areas outside their mob's view.
+	// It is initialized by create_click_catcher() proc and reused for every client (global).
+	// This list contains 225 (15*15, based on view radius of 7) special invisible screen objects residing on the lowest
+	// view plane that silently handle mouse actions or redirect the Click() call to turfs.
+	//
+	// This is needed because current click code relies on something actually being clicked, either an atom in the world
+	// or a screen (HUD) object. Some actions in the game are triggered on mouse click regardless of where the click
+	// happened, for example switching active hand or activating a RIG ability on middle mouse button click.
+	// The darkness system simulates darkness by removing everything present on a tile from
+	// the mob's view, including the turf. The darkness system does not remove screen objects, however.
+	// Invisible click_catchers use this to make dark areas still clickable, which allows players to utilize middle
+	// mouse button anywhere on the viewport.
+	//
+	// See code/_onclick/hud/click_catcher.dm for more information about how this is set up.
+	// See code/_onclick/click.dm for an overview on click handling in general.
+	var/global/list/void
 
 	var/datum/preferences/prefs = null
 	var/species_ingame_whitelisted = FALSE
