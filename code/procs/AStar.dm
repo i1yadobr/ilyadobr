@@ -73,6 +73,8 @@ proc/AStar(start, end, adjacent, dist, max_nodes, max_node_depth = 30, min_targe
 
 	while(!open.IsEmpty() && !path)
 		var/PathNode/current = open.Dequeue()
+		if(!current)
+			CRASH("null node returned from AStar queue")
 		closed.Add(current.position)
 
 		if(current.position == end || call(current.position, dist)(end) <= min_target_dist)
