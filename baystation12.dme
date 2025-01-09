@@ -575,6 +575,7 @@
 #include "code\game\gamemodes\changeling\changeling_datum.dm"
 #include "code\game\gamemodes\changeling\changeling_power.dm"
 #include "code\game\gamemodes\changeling\evolution_menu.dm"
+#include "code\game\gamemodes\changeling\helpcode\click_handlers.dm"
 #include "code\game\gamemodes\changeling\helpcode\items.dm"
 #include "code\game\gamemodes\changeling\helpcode\misc.dm"
 #include "code\game\gamemodes\changeling\helpcode\mobs.dm"
