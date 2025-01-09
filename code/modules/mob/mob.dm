@@ -367,6 +367,7 @@
 			update_inv_r_hand()
 	return
 
+// TODO(rufus): remove unused commented code
 /*
 /mob/verb/dump_source()
 

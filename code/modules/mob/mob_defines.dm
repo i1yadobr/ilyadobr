@@ -40,6 +40,17 @@
 
 	var/stat = 0 //Whether a mob is alive or dead. TODO: Move this to living - Nodrak
 
+	// Click handlers is a list of /datum/click_handler's that receive execution flow from /atom/Click()s
+	// and forward it to an appropriate function.
+	// Default click handler just forwards the call to /mob/ClickOn(atom), while special click handlers
+	// trigger abilities, spells, or define their own behavior (in case of admin's build mode).
+	// Click handlers are stored as a stack (/datum/stack), which allows other game modules to push
+	// their click handlers onto the stack to intercept user clicks or pop from the stack when they're done.
+	// See code/modules/mob/click_handlers.dm for utility functions that manipulate this list.
+	// See code/_onclick/click_handler.dm for more information on the default click handler.
+	// See code/_onclick/click.dm for an overview on click handling in general.
+	var/datum/stack/click_handlers
+
 	var/obj/screen/hands = null
 	var/obj/screen/pullin = null
 	var/obj/screen/purged = null
