@@ -426,24 +426,3 @@
 	L.paralyse_sting(target)
 	user.PopClickHandler()
 	return
-
-/////////////////
-//  WIZARD CH  //
-/////////////////
-
-/datum/click_handler/wizard/mob_check(mob/living/carbon/human/user)
-	return 1
-/datum/click_handler/wizard/OnClick(atom/target)
-
-/datum/click_handler/wizard/fireball
-	handler_name = "Fireball"
-/datum/click_handler/wizard/fireball/mob_check(mob/living/carbon/human/user)
-	return 1
-/datum/click_handler/wizard/fireball/OnClick(atom/target)
-	if (!isliving(target) && !isturf(target))
-		return 0
-	for(var/datum/spell/spell_storage in user.mind.learned_spells)
-		if (src.handler_name == spell_storage.name)
-			return spell_storage.perform(user,0,target)
-	to_chat(user, "We cannot find it's power... call admins")
-	return 0
