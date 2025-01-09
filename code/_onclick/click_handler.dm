@@ -48,9 +48,6 @@ var/const/CLICK_HANDLER_ALL                  = (~0)
 /datum/click_handler/proc/OnDblClick(atom/A, params)
 	return
 
-/datum/click_handler/proc/mob_check(mob/living/carbon/human/user) //Check can mob use a ability
-	return
-
 // Default click handlers simply forward the call to mob's ClickOn() proc.
 //
 // Since click handlers store a reference to their mob, the call is forwarded to the correct
