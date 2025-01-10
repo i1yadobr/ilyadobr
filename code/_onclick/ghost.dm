@@ -16,6 +16,9 @@
 			reenter_corpse()						// (cloning scanner, body bag, closet, mech, etc)
 			return
 
+	if(!A.loc)
+		return
+
 	// Things you might plausibly want to follow
 	if(istype(A,/atom/movable))
 		ManualFollow(A)
