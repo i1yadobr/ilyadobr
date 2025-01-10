@@ -1,4 +1,5 @@
 // UnarmedAttack of humans applies gloves effects and passes the execution to A's attack_hand() proc with a reference to self.
+// It also applies click cooldown if A is a mob, regardless of the intent.
 // This proc is a no-op if human is currently viewing cameras or is otherwise affected by `machine_visual`.
 //
 // This proc is called directly by the click code from code/_onclick/click.dm when human user doesn't have anything in
@@ -10,8 +11,12 @@
 /mob/living/carbon/human/UnarmedAttack(atom/A, proximity)
 	if(!..())
 		return
+
 	if(machine_visual) // if user is viewing cameras or has some other machinery affect its view, don't allow attacks
 		return
+
+	if(istype(A, /mob))
+		setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 
 	var/obj/item/clothing/gloves/G = gloves
 	if(istype(G) && G.Touch(A, TRUE))

@@ -6,13 +6,15 @@
 	if(!..())
 		return
 
+	setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+
 	// TODO(rufus): refactor to a semantic Feeding() proc that would return a bool
 	if(Victim)
 		if(Victim == A)
 			Feedstop()
 		return
 
-	setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+
 
 	if(!istype(A, /mob/living))
 		A.attack_generic(src, (is_adult ? rand(20,40) : rand(5,25)), "glomped")

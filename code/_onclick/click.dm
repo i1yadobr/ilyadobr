@@ -116,8 +116,6 @@
 			if(!resolved && A && I)
 				I.afterattack(A, src, 1, params) // 1 indicates adjacency
 		else
-			if(ismob(A)) // No instant mob attacking
-				setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 			UnarmedAttack(A, 1)
 
 		trigger_aiming(TARGET_CAN_CLICK)
@@ -142,8 +140,6 @@
 				if(!resolved && A && I)
 					I.afterattack(A, src, 1, params) // 1: clicking something Adjacent
 			else
-				if(ismob(A)) // No instant mob attacking
-					setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 				UnarmedAttack(A, 1)
 
 			trigger_aiming(TARGET_CAN_CLICK)
@@ -182,7 +178,6 @@
 	if((MUTATION_LASER in mutations) && a_intent == I_HURT)
 		LaserEyes(A)
 	else if(MUTATION_TK in mutations)
-		setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		A.attack_tk(src)
 /*
 	Restrained ClickOn

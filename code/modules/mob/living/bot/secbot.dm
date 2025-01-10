@@ -282,6 +282,8 @@
 	if(!istype(M))
 		return
 
+	setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+
 	var/mob/living/carbon/human/H = M
 	if(istype(H) && H.lying)
 		cuff_target(H)
