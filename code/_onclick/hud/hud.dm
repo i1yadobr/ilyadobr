@@ -265,6 +265,8 @@
 		if(src.hud_used.hotkeybuttons)
 			src.client.screen -= src.hud_used.hotkeybuttons
 		src.client.screen -= src.internals
+		src.client.screen += src.hud_used.l_hand_hud_object
+		src.client.screen += src.hud_used.r_hand_hud_object
 		src.client.screen += src.hud_used.action_intent		//we want the intent swticher visible
 	else
 		hud_used.hud_shown = 1
