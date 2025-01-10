@@ -170,30 +170,6 @@
 	return
 
 /*
-	Translates into attack_hand, etc.
-
-	Note: proximity_flag here is used to distinguish between normal usage (flag=1),
-	and usage when clicking on things telekinetically (flag=0).  This proc will
-	not be called at ranged except with telekinesis.
-
-	proximity_flag is not currently passed to attack_hand, and is instead used
-	in human click code to allow glove touches only at melee range.
-*/
-/mob/proc/UnarmedAttack(atom/A, proximity_flag)
-	return
-
-/mob/living/UnarmedAttack(atom/A, proximity_flag)
-
-	if(GAME_STATE < RUNLEVEL_GAME)
-		to_chat(src, "You cannot interact with the world before the game has started.")
-		return 0
-
-	if(stat)
-		return 0
-
-	return 1
-
-/*
 	Ranged unarmed attack:
 
 	This currently is just a default for all mobs, involving

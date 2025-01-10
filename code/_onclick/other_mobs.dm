@@ -1,28 +1,6 @@
 /atom/proc/attack_generic(mob/user as mob)
 // Generic damage proc (metroids and monkeys).
-	return 0
-
-/*
-	Humans:
-	Adds an exception for gloves, to allow special glove types like the ninja ones.
-
-	Otherwise pretty standard.
-*/
-/mob/living/carbon/human/UnarmedAttack(atom/A, proximity)
-	if (machine_visual)
-		return
-
-	if(!..())
-		return
-
-	// Special glove functions:
-	// If the gloves do anything, have them return TRUE to stop
-	// normal attack_hand() here.
-	var/obj/item/clothing/gloves/G = gloves // not typecast specifically enough in defines
-	if(istype(G) && G.Touch(A,1))
-		return
-
-	A.attack_hand(src)
+	return FALSE
 
 /atom/proc/attack_hand(mob/user as mob)
 	return
@@ -31,7 +9,9 @@
 	return
 
 /mob/living/carbon/human/RangedAttack(atom/A)
-	//Climbing up open spaces
+	// Standing below an open space and clicking an adjacent turf above allows you to climb.
+	// Intended to be used with the "Look Up" verb.
+	// Must be able to overcome gravity or have something climbable below you, see can_overcome_gravity().
 	if((istype(A, /turf/simulated/floor) || istype(A, /turf/unsimulated/floor) || istype(A, /obj/structure/lattice) || istype(A, /obj/structure/catwalk)) && isturf(loc) && shadow && !is_physically_disabled()) //Climbing through openspace
 		var/turf/T = get_turf(A)
 		var/turf/above = shadow.loc
@@ -69,80 +49,15 @@
 /*
 	Aliens
 */
-
 /mob/living/carbon/alien/RestrainedClickOn(atom/A)
 	return
-
-/mob/living/carbon/alien/UnarmedAttack(atom/A, proximity)
-
-	if(!..())
-		return 0
-
-	setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	A.attack_generic(src,rand(5,6),"bitten")
 
 /*
 	Metroids
 	Nothing happening here
 */
-
 /mob/living/carbon/metroid/RestrainedClickOn(atom/A)
 	return
-
-/mob/living/carbon/metroid/UnarmedAttack(atom/A, proximity)
-
-	if(!..())
-		return
-
-	// Eating
-	if(Victim)
-		if (Victim == A)
-			Feedstop()
-		return
-
-	//should have already been set if we are attacking a mob, but it doesn't hurt and will cover attacking non-mobs too
-	setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	var/mob/living/M = A
-	if(!istype(M))
-		A.attack_generic(src, (is_adult ? rand(20,40) : rand(5,25)), "glomped") // Basic attack.
-	else
-		var/power = max(0, min(10, (powerlevel + rand(0, 3))))
-
-		switch(src.a_intent)
-			if (I_HELP) // We just poke the other
-				M.visible_message(SPAN("notice", "[src] gently pokes [M]!"), SPAN("notice", "[src] gently pokes you!"))
-			if (I_DISARM) // We stun the target, with the intention to feed
-				var/stunprob = 1
-
-				if (powerlevel > 0 && !istype(A, /mob/living/carbon/metroid))
-					switch(power * 10)
-						if(0) stunprob *= 10
-						if(1 to 2) stunprob *= 20
-						if(3 to 4) stunprob *= 30
-						if(5 to 6) stunprob *= 40
-						if(7 to 8) stunprob *= 60
-						if(9) 	   stunprob *= 70
-						if(10) 	   stunprob *= 95
-
-				if(prob(stunprob))
-					var/shock_damage = max(0, powerlevel-3) * rand(6,10)
-					M.electrocute_act(shock_damage, src, 1.0, ran_zone())
-				else if(prob(40))
-					M.visible_message(SPAN("danger", "[src] has pounced at [M]!"), SPAN("danger", "[src] has pounced at you!"))
-					M.Weaken(power)
-					M.Stun(power/2)
-				else
-					M.visible_message(SPAN("danger", "[src] has tried to pounce at [M]!"), SPAN("danger", "[src] has tried to pounce at you!"))
-				M.updatehealth()
-			if (I_GRAB) // We feed
-				Wrap(M)
-			if (I_HURT) // Attacking
-				if(iscarbon(M) && prob(15))
-					M.visible_message(SPAN("danger", "[src] has pounced at [M]!"), SPAN("danger", "[src] has pounced at you!"))
-					M.Weaken(power)
-					M.Stun(power/2)
-				else
-					A.attack_generic(src, (is_adult ? rand(20,40) : rand(5,25)), "glomped")
 
 /*
 	New Players:
@@ -150,21 +65,3 @@
 */
 /mob/new_player/ClickOn()
 	return
-
-/*
-	Animals
-*/
-/mob/living/simple_animal/UnarmedAttack(atom/A, proximity)
-
-	if(!..())
-		return
-	if(istype(A,/mob/living))
-		if(melee_damage_upper == 0)
-			custom_emote(1,"[friendly] [A]!")
-			return
-		if(ckey)
-			admin_attack_log(src, A, "Has [attacktext] its victim.", "Has been [attacktext] by its attacker.", attacktext)
-	setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	var/damage = rand(melee_damage_lower, melee_damage_upper)
-	if(A.attack_generic(src, damage, attacktext, environment_smash, damtype, defense) && loc && attack_sound)
-		playsound(loc, attack_sound, 50, 1, 1)
