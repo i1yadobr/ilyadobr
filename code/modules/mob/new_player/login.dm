@@ -21,6 +21,7 @@
 	icon = GLOB.current_lobbyscreen
 
 /obj/screen/splash/proc/Fade(out, qdel_after = TRUE)
+	mouse_opacity = 0 // make the game clickable even while splash is fading out to improve perceived responsiveness
 	if(QDELETED(src))
 		return
 	if(out)
