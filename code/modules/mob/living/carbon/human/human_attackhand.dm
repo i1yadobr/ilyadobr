@@ -1,12 +1,23 @@
-/mob/living/carbon/human/proc/get_unarmed_attack(mob/living/carbon/human/target, hit_zone)
-	for(var/datum/unarmed_attack/u_attack in species.unarmed_attacks)
-		if(u_attack.is_usable(src, target, hit_zone))
-			if(pulling_punches)
-				var/datum/unarmed_attack/soft_variant = u_attack.get_sparring_variant()
-				if(soft_variant)
-					return soft_variant
-			return u_attack
-	return null
+// UnarmedAttack of humans applies gloves effects and passes the execution to A's attack_hand() proc with a reference to self.
+// This proc is a no-op if human is currently viewing cameras or is otherwise affected by `machine_visual`.
+//
+// This proc is called directly by the click code from code/_onclick/click.dm when human user doesn't have anything in
+// their hands and is adjacent to A (with the exception of telekinesis, but it's currently not available in the game).
+// See code/_onclick/click.dm for a general overview of click handling.
+//
+// The actual logic of the unarmed attack between humans is resolved in /mob/living/carbon/human/attack_hand() proc,
+// which will be called by UnarmedAttack if A is human.
+/mob/living/carbon/human/UnarmedAttack(atom/A, proximity)
+	if(!..())
+		return
+	if(machine_visual) // if user is viewing cameras or has some other machinery affect its view, don't allow attacks
+		return
+
+	var/obj/item/clothing/gloves/G = gloves
+	if(istype(G) && G.Touch(A, TRUE))
+		return
+
+	A.attack_hand(src)
 
 #define FINALIZE_UNARMED(damage, maximize) (damage * (maximize ? 140 : rand(60, 140)) / 100)
 /mob/living/carbon/human/attack_hand(mob/living/M)
@@ -374,3 +385,16 @@
 			user.visible_message("\The [user] stops applying pressure to [src]'s [organ.name]!", "You stop applying pressure to [src]'s [organ.name]!")
 
 	return 1
+
+// get_unarmed_attack is a utility human proc that returns an appropraite /datum/unarmed_attack based on types
+// available to the `species` of the user and selected hit_zone.
+// It also handles light attacks and returns an appropriate variant if user is `pulling_punches`.
+/mob/living/carbon/human/proc/get_unarmed_attack(mob/living/carbon/human/target, hit_zone)
+	for(var/datum/unarmed_attack/u_attack in species.unarmed_attacks)
+		if(u_attack.is_usable(src, target, hit_zone))
+			if(pulling_punches)
+				var/datum/unarmed_attack/soft_variant = u_attack.get_sparring_variant()
+				if(soft_variant)
+					return soft_variant
+			return u_attack
+	return null
