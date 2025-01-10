@@ -55,7 +55,7 @@
 	if(!gloves && !mutations.len) return
 	var/obj/item/clothing/gloves/G = gloves
 	if((MUTATION_LASER in mutations) && a_intent == I_HURT)
-		LaserEyes(A) // moved into a proc below
+		LaserEyes(A)
 
 	else if(istype(G) && G.Touch(A,0)) // for magic gloves
 		return
