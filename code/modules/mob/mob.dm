@@ -745,6 +745,25 @@
 	else
 		reset_plane_and_layer()
 
+// face_atom changes mob's dir to face atom A based on the distance.
+// It's a no-op if mob is on the same coordiantes as A or coordinates are not defined for mob or A.
+/mob/proc/face_atom(atom/A)
+	if(!A || !x || !y || !A.x || !A.y)
+		return
+	var/dx = A.x - x
+	var/dy = A.y - y
+	if(!dx && !dy) return
+
+	var/direction
+	if(abs(dx) < abs(dy))
+		if(dy > 0)	direction = NORTH
+		else		direction = SOUTH
+	else
+		if(dx > 0)	direction = EAST
+		else		direction = WEST
+	if(direction != dir)
+		facedir(direction)
+
 /mob/proc/facedir(ndir)
 	if(!canface() || moving)
 		return 0
