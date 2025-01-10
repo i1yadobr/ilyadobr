@@ -23,7 +23,7 @@
 	// mouse button anywhere on the viewport.
 	//
 	// See code/_onclick/hud/click_catcher.dm for more information about how this is set up.
-	// See code/_onclick/click.dm for an overview on click handling in general.
+	// See code/_onclick/click.dm for an overview of click handling in general.
 	var/global/list/void
 
 	var/datum/preferences/prefs = null

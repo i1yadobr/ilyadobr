@@ -17,7 +17,7 @@
 
 // infest click_handler calls infest logic of the little_changeling user and pops itself from the
 // click_handler stack.
-// It is intended to only used by little_changelings in their out-of-host form, but does not perform
+// It is intended to only be used by little_changelings in their out-of-host form, but does not perform
 // any checks in this regard.
 /datum/click_handler/changeling/infest
 	handler_name = "Infest"
@@ -30,7 +30,7 @@
 
 // paralyse click_handler calls paralysis sting logic of the little_changeling user and pops itself from the
 // click_handler stack.
-// It is intended to only used by little_changelings in their out-of-host form, but does not perform
+// It is intended to only be used by little_changelings in their out-of-host form, but does not perform
 // any checks in this regard.
 /datum/click_handler/changeling/paralyse
 	handler_name = "Paralyse"

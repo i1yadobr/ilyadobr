@@ -13,7 +13,7 @@ var/const/CLICK_HANDLER_ALL                  = (~0)
 // Currently these are abilities, spells, and admin's build mode.
 //
 // See code/modules/mob/mob_defines.dm for the definition of mob's click handlers storage.
-// See code/_onclick/click.dm for an overview on click handling in general.
+// See code/_onclick/click.dm for an overview of click handling in general.
 /datum/click_handler
 	var/mob/user
 	var/flags = 0

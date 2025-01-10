@@ -48,7 +48,7 @@
 	// their click handlers onto the stack to intercept user clicks or pop from the stack when they're done.
 	// See code/modules/mob/click_handlers.dm for utility functions that manipulate this list.
 	// See code/_onclick/click_handler.dm for more information on the default click handler.
-	// See code/_onclick/click.dm for an overview on click handling in general.
+	// See code/_onclick/click.dm for an overview of click handling in general.
 	var/datum/stack/click_handlers
 
 	var/obj/screen/hands = null
