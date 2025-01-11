@@ -88,9 +88,9 @@
 		M.click_action(A, src)
 		return
 
-	if(restrained())
-		setClickCooldown(10)
-		RestrainedClickOn(A)
+	if(restrained() && istype(A, /mob/living/carbon/human) && A == src)
+		var/mob/living/carbon/human/H = A
+		H.RestrainedSelfClick()
 		return
 
 	if(in_throw_mode)

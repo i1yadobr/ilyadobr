@@ -108,27 +108,22 @@
 	on_restraint_apply(src)
 	return 1
 
-var/last_chew = 0
-/mob/living/carbon/human/RestrainedClickOn(atom/A)
-	if(A != src) return ..()
-	if(last_chew + 26 > world.time) return
+/mob/living/carbon/human/proc/RestrainedSelfClick()
+	setClickCooldown(26)
 
-	var/mob/living/carbon/human/H = A
-	if(!H.handcuffed) return
-	if(H.a_intent != I_HURT) return
-	if(H.zone_sel.selecting != BP_MOUTH) return
-	if(H.wear_mask) return
-	if(istype(H.wear_suit, /obj/item/clothing/suit/straight_jacket)) return
+	if(istype(wear_suit, /obj/item/clothing/suit/straight_jacket))
+		return
+	if(!handcuffed || a_intent != I_HURT || zone_sel.selecting != BP_MOUTH || wear_mask)
+		return
 
-	var/obj/item/organ/external/O = H.organs_by_name[(H.hand ? BP_L_HAND : BP_R_HAND)]
-	if (!O) return
+	var/obj/item/organ/external/O = organs_by_name[(hand ? BP_L_HAND : BP_R_HAND)]
+	if(!O)
+		return
 
-	H.visible_message(SPAN("warning", "\The [H] chews on \his [O.name]!"), SPAN("warning", "You chew on your [O.name]!"))
-	admin_attacker_log(H, "chewed on their [O.name]!")
+	visible_message(SPAN("warning", "\The [src] chews on \his [O.name]!"), SPAN("warning", "You chew on your [O.name]!"))
+	admin_attacker_log(src, "chewed on their [O.name]!")
 
-	O.take_external_damage(3,0, DAM_SHARP|DAM_EDGE ,"teeth marks")
-
-	last_chew = world.time
+	O.take_external_damage(3, 0, DAM_SHARP|DAM_EDGE, "teeth marks")
 
 /obj/item/handcuffs/cable
 	name = "cable restraints"
