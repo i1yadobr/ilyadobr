@@ -5,9 +5,6 @@
 /atom/proc/attack_hand(mob/user as mob)
 	return
 
-/mob/living/carbon/human/RestrainedClickOn(atom/A)
-	return
-
 /mob/living/carbon/human/RangedAttack(atom/A)
 	// Standing below an open space and clicking an adjacent turf above allows you to climb.
 	// Intended to be used with the "Look Up" verb.
@@ -42,22 +39,6 @@
 
 	else if(MUTATION_TK in mutations)
 		A.attack_tk(src)
-
-/mob/living/RestrainedClickOn(atom/A)
-	return
-
-/*
-	Aliens
-*/
-/mob/living/carbon/alien/RestrainedClickOn(atom/A)
-	return
-
-/*
-	Metroids
-	Nothing happening here
-*/
-/mob/living/carbon/metroid/RestrainedClickOn(atom/A)
-	return
 
 /*
 	New Players:

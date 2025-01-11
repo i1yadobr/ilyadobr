@@ -195,14 +195,6 @@
 		LaserEyes(A)
 	else if(MUTATION_TK in mutations)
 		A.attack_tk(src)
-/*
-	Restrained ClickOn
-
-	Used when you are handcuffed and click things.
-	Not currently used by anything but could easily be.
-*/
-/mob/proc/RestrainedClickOn(atom/A)
-	return
 
 /*
 	Middle click
