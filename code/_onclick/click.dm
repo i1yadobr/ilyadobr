@@ -177,17 +177,11 @@
 		return TRUE
 	return FALSE
 
-// Default behavior: ignore double clicks, the second click that makes the doubleclick call already calls for a normal click
 /mob/proc/DblClickOn(atom/A, params)
 	return
 
 /*
-	Ranged unarmed attack:
-
-	This currently is just a default for all mobs, involving
-	laser eyes and telekinesis.  You could easily add exceptions
-	for things like ranged glove touches, spitting alien acid/neurotoxin,
-	animals lunging, etc.
+	Ranged unarmed attack
 */
 /mob/proc/RangedAttack(atom/A, params)
 	if(!mutations.len) return
@@ -198,7 +192,6 @@
 
 /*
 	Middle click
-	Only used for swapping hands
 */
 /mob/proc/MiddleClickOn(atom/A)
 	if(get_preference_value(/datum/client_preference/pointing) == GLOB.PREF_MIDDLE_CLICK)
@@ -212,17 +205,8 @@
 		if(pointed(A))
 			return
 
-
-// In case of use break glass
-/*
-/atom/proc/MiddleClick(mob/M as mob)
-	return
-*/
-
 /*
 	Shift click
-	For most mobs, examine.
-	This is overridden in ai.dm
 */
 /mob/proc/ShiftClickOn(atom/A)
 	A.ShiftClick(src)
@@ -235,11 +219,11 @@
 
 /*
 	Ctrl click
-	For most objects, pull
 */
 /mob/proc/CtrlClickOn(atom/A)
 	A.CtrlClick(src)
 	return
+
 /atom/proc/CtrlClick(mob/user)
 	return
 
@@ -249,7 +233,6 @@
 
 /*
 	Alt click
-	Unused except for AI
 */
 /mob/proc/AltClickOn(atom/A)
 	A.AltClick(src)
@@ -274,7 +257,6 @@
 
 /*
 	Control+Shift click
-	Unused except for AI
 */
 /mob/proc/CtrlShiftClickOn(atom/A)
 	A.CtrlShiftClick(src)
