@@ -1,4 +1,3 @@
-/client/var/inquisitive_ghost = 1
 /mob/observer/ghost/verb/toggle_inquisition() // warning: unexpected inquisition
 	set name = "Toggle Inquisitiveness"
 	set desc = "Sets whether your ghost examines everything on click by default"
@@ -74,16 +73,3 @@
 		user.forceMove(stationgate.loc)
 	else
 		to_chat(user, "[src] has no destination.")
-
-// -------------------------------------------
-// This was supposed to be used by adminghosts
-// I think it is a *terrible* idea
-// but I'm leaving it here anyway
-// commented out, of course.
-/*
-/atom/proc/attack_admin(mob/user as mob)
-	if(!user || !user.client || !user.client.holder)
-		return
-	attack_hand(user)
-
-*/

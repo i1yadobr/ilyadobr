@@ -494,6 +494,8 @@ meteor_act
 	return 1
 
 //User uses I to attack src.
+// `atype` param stands for alternative attack and is used for disarm intent "bashes", which are
+// effectively weaker attacks that cause more pain than harm, but still deal some brute.
 /mob/living/carbon/human/hit_with_weapon(obj/item/I, mob/living/user, effective_force, hit_zone, atype = 0)
 	var/obj/item/organ/external/affecting = get_organ(hit_zone)
 	if(!affecting)

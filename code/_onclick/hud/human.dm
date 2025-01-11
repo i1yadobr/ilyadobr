@@ -40,7 +40,7 @@
 
 		if(slot_data["toggle"])
 			src.other += inv_box
-			has_hidden_gear = 1
+			has_hidden_gear = TRUE
 		else
 			src.adding += inv_box
 
@@ -111,7 +111,7 @@
 		inv_box.SetName("r_hand")
 		inv_box.icon = ui_style
 		inv_box.icon_state = "r_hand_inactive"
-		if(mymob && !mymob.hand)	//This being 0 or null means the right hand is in use
+		if(mymob && !mymob.hand)	//This being FALSE or null means the right hand is in use
 			inv_box.icon_state = "r_hand_active"
 		inv_box.screen_loc = ui_rhand
 		inv_box.slot_id = slot_r_hand
@@ -125,7 +125,7 @@
 		inv_box.SetName("l_hand")
 		inv_box.icon = ui_style
 		inv_box.icon_state = "l_hand_inactive"
-		if(mymob && mymob.hand)	//This being 1 means the left hand is in use
+		if(mymob && mymob.hand)	//This being TRUE means the left hand is in use
 			inv_box.icon_state = "l_hand_active"
 		inv_box.screen_loc = ui_lhand
 		inv_box.slot_id = slot_l_hand
@@ -327,7 +327,7 @@
 
 	mymob.client.screen += hud_elements
 	mymob.client.screen += src.adding + src.hotkeybuttons
-	inventory_shown = 0
+	inventory_shown = FALSE
 
 /mob/living/carbon/human/verb/toggle_hotkey_verbs()
 	set category = "OOC"
@@ -336,10 +336,10 @@
 
 	if(hud_used.hotkey_ui_hidden)
 		client.screen += hud_used.hotkeybuttons
-		hud_used.hotkey_ui_hidden = 0
+		hud_used.hotkey_ui_hidden = FALSE
 	else
 		client.screen -= hud_used.hotkeybuttons
-		hud_used.hotkey_ui_hidden = 1
+		hud_used.hotkey_ui_hidden = TRUE
 
 /mob/living/carbon/human/rejuvenate()
 	. = ..()

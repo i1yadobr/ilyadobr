@@ -20,9 +20,8 @@
 	var/action_type = AB_ITEM
 	var/procname = null
 	var/atom/movable/target = null
-	var/check_flags = 0
-	var/processing = 0
-	var/active = 0
+	var/check_flags = 0 // which checks to perform before activating, bitfield for AB_CHECK_* constants
+	var/active = FALSE
 	var/obj/screen/movable/action_button/button = null
 	var/button_icon = 'icons/mob/actions.dmi'
 	var/button_icon_state = "default"
@@ -68,10 +67,6 @@
 			if(target)
 				var/obj/item/item = target
 				item.ui_action_click()
-		//if(AB_SPELL)
-		//	if(target)
-		//		var/obj/effect/proc_holder/spell = target
-		//		spell.Click()
 		if(AB_INNATE)
 			if(!active)
 				Activate()
@@ -94,34 +89,37 @@
 /datum/action/proc/ProcessAction()
 	return
 
-/datum/action/proc/CheckRemoval(mob/living/user) // 1 if action is no longer valid for this mob and should be removed
-	return 0
+// Return value of TRUE means the action is no longer valid for this mob and should be removed
+/datum/action/proc/CheckRemoval(mob/living/user)
+	return FALSE
 
 /datum/action/proc/IsAvailable()
 	return Checks()
 
-/datum/action/proc/Checks()// returns 1 if all checks pass
+// TODO(rufus): rename to a more descriptive name, like CheckAvailable().
+//   Also consume duplicate proc IsAvailable() that just calls Checks().
+/datum/action/proc/Checks()// returns TRUE if all checks pass
 	if(!owner)
-		return 0
+		return FALSE
 	if(check_flags & AB_CHECK_RESTRAINED)
 		if(owner.restrained())
-			return 0
+			return FALSE
 	if(check_flags & AB_CHECK_STUNNED)
 		if(owner.stunned)
-			return 0
+			return FALSE
 	if(check_flags & AB_CHECK_LYING)
 		if(owner.lying)
-			return 0
+			return FALSE
 	if(check_flags & AB_CHECK_ALIVE)
 		if(owner.stat)
-			return 0
+			return FALSE
 	if(check_flags & AB_CHECK_INSIDE)
 		if(!(target in owner))
-			return 0
+			return FALSE
 	if(check_flags & AB_CHECK_CONSCIOUS)
 		if(owner.stat != CONSCIOUS)
-			return 0
-	return 1
+			return FALSE
+	return TRUE
 
 /datum/action/proc/UpdateName()
 	return name
@@ -133,12 +131,12 @@
 /obj/screen/movable/action_button/Click(location,control,params)
 	var/list/modifiers = params2list(params)
 	if(modifiers["shift"])
-		moved = 0
-		return 1
+		moved = FALSE
+		return
 	if(usr.next_move >= world.time) // Is this needed ?
 		return
 	owner.Trigger()
-	return 1
+	return
 
 /obj/screen/movable/action_button/proc/UpdateIcon()
 	if(!owner)
@@ -170,7 +168,7 @@
 	name = "Hide Buttons"
 	icon = 'icons/mob/actions.dmi'
 	icon_state = "bg_default"
-	var/hidden = 0
+	var/hidden = FALSE
 
 /obj/screen/movable/action_button/hide_toggle/Click()
 	usr.hud_used.action_buttons_hidden = !usr.hud_used.action_buttons_hidden
@@ -227,16 +225,13 @@
 /datum/action/item_action
 	check_flags = AB_CHECK_RESTRAINED|AB_CHECK_STUNNED|AB_CHECK_LYING|AB_CHECK_ALIVE|AB_CHECK_INSIDE
 
-/datum/action/item_action/CheckRemoval(mob/living/user)
-	return !(target in user)
-
 /datum/action/item_action/hands_free
 	check_flags = AB_CHECK_ALIVE|AB_CHECK_INSIDE
 
 //Presets for innate actions
 /datum/action/innate
 	check_flags = 0
-	active = 0
+	active = FALSE
 	action_type = AB_INNATE
 
 #undef AB_WEST_OFFSET

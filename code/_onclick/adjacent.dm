@@ -1,3 +1,5 @@
+// TODO(rufus): move this file out of the _onclick folder as it defines functions widely
+//   used outside of _onclick code.
 /*
 	Adjacency proc for determining touch range
 
@@ -11,9 +13,9 @@
 	to check that the mob is not inside of something
 */
 /atom/proc/Adjacent(atom/neighbor, atom/target) // basic inheritance, unused
-	return 0
+	return FALSE
 
-// Not a sane use of the function and (for now) indicative of an error elsewhere
+// Not a sane use of the function and indicative of an error elsewhere
 /area/Adjacent(atom/neighbor, atom/target)
 	CRASH("Call to /area/Adjacent(), unimplemented proc")
 
@@ -62,29 +64,28 @@
 
 /*
 Quick adjacency (to turf):
-* If you are in the same turf, always true
-* If you are not adjacent, then false
+* If you are in the same turf, always TRUE
+* If you are not adjacent, then FALSE
 */
 /turf/proc/AdjacentQuick(atom/neighbor, atom/target = null)
 	var/turf/T0 = get_turf(neighbor)
 	if(T0 == src)
-		return 1
+		return TRUE
 
 	if(get_dist(src,T0) > 1)
-		return 0
+		return FALSE
 
-	return 1
+	return TRUE
 
 /*
 	Adjacency (to anything else):
 	* Must be on a turf
 	* In the case of a multiple-tile object, all valid locations are checked for adjacency.
 
-	Note: Multiple-tile objects are created when the bound_width and bound_height are creater than the tile size.
-	This is not used in stock /tg/station currently.
+	Note: Multiple-tile objects are created when the bound_width and bound_height are greater than the tile size.
 */
 /atom/movable/Adjacent(atom/neighbor, atom/target)
-	if(neighbor == loc|| neighbor.loc == loc)
+	if(neighbor == loc || neighbor.loc == loc)
 		return TRUE
 	if(!isturf(loc))
 		return FALSE

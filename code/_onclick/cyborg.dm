@@ -72,7 +72,7 @@
 
 		var/resolved = I.resolve_attackby(A, src, params)
 		if(!resolved && A && I)
-			I.afterattack(A, src, 1, params) // 1 indicates adjacency
+			I.afterattack(A, src, TRUE, params)
 		return
 
 	if(!isturf(loc))
@@ -84,10 +84,10 @@
 
 			var/resolved = I.resolve_attackby(A, src, params)
 			if(!resolved && A && I)
-				I.afterattack(A, src, 1, params) // 1 indicates adjacency
+				I.afterattack(A, src, TRUE, params)
 			return
 		else
-			I.afterattack(A, src, 0, params)
+			I.afterattack(A, src, FALSE, params)
 			return
 	return
 

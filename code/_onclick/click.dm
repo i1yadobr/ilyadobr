@@ -24,6 +24,9 @@
 	var/datum/click_handler/click_handler = usr.GetClickHandler()
 	click_handler.OnDblClick(src, params)
 
+// TODO(rufus): update this documentation, attackby() is no longer called directly, resolve_attackby() is called instead.
+//   It'd also be nice to mention how attackby() relates to afterattack(), specifically that attackby() may resolve an attack,
+//   in which case afterattack() won't be called at all.
 /*
 	Standard mob ClickOn()
 	Handles exceptions: middle click, modified clicks, mech actions
@@ -50,50 +53,51 @@
 		return
 	if(modifiers["shift"] && modifiers["ctrl"])
 		CtrlShiftClickOn(A)
-		return 1
+		return
 	if(modifiers["ctrl"] && modifiers["alt"])
 		CtrlAltClickOn(A)
-		return 1
+		return
 	if(modifiers["middle"])
 		if(modifiers["shift"])
 			ShiftMiddleClickOn(A)
 		else
 			MiddleClickOn(A)
-		return 1
+		return
 	if(modifiers["shift"])
 		ShiftClickOn(A)
-		return 0
+		return
 	if(modifiers["alt"]) // alt and alt-gr (rightalt)
 		AltClickOn(A)
-		return 1
+		return
 	if(modifiers["ctrl"])
 		CtrlClickOn(A)
-		return 1
+		return
 
 	if(stat || paralysis || stunned || weakened)
 		return
 
 	face_atom(A) // change direction to face what you clicked on
 
-	if(!canClick()) // in the year 2000...
+	if(!canClick())
 		return
 
 	if(istype(loc, /obj/mecha))
 		if(!locate(/turf) in list(A, A.loc)) // Prevents inventory from being drilled
 			return
 		var/obj/mecha/M = loc
-		return M.click_action(A, src)
+		M.click_action(A, src)
+		return
 
 	if(restrained())
 		setClickCooldown(10)
 		RestrainedClickOn(A)
-		return 1
+		return
 
 	if(in_throw_mode)
 		if(isturf(A) || isturf(A.loc))
 			throw_item(A)
 			trigger_aiming(TARGET_CAN_CLICK)
-			return 1
+			return
 		throw_mode_off()
 
 	var/obj/item/I = get_active_hand()
@@ -105,7 +109,7 @@
 			update_inv_l_hand(0)
 		else
 			update_inv_r_hand(0)
-		return 1
+		return
 
 	//Atoms on your person
 	// A is your location but is not a turf; or is on you (backpack); or is on something on you (box in backpack); sdepth is needed here because contents depth does not equate inventory storage depth.
@@ -114,12 +118,12 @@
 		if(I)
 			var/resolved = I.resolve_attackby(A, src, params)
 			if(!resolved && A && I)
-				I.afterattack(A, src, 1, params) // 1 indicates adjacency
+				I.afterattack(A, src, TRUE, params)
 		else
-			UnarmedAttack(A, 1)
+			UnarmedAttack(A, TRUE)
 
 		trigger_aiming(TARGET_CAN_CLICK)
-		return 1
+		return
 
 	if(!isturf(loc)) // This is going to stop you from telekinesing from inside a closet, but I don't shed many tears for that
 		return
@@ -129,37 +133,49 @@
 	sdepth = A.storage_depth_turf()
 	if(isturf(A) || isturf(A.loc) || (sdepth != -1 && sdepth <= 1))
 		if(Adjacent(A)) // see adjacent.dm
-			for(var/atom/movable/AM in get_turf(A)) // Checks if A is obscured by something
+			for(var/atom/movable/AM in get_turf(A)) // Checks if A is obscured by a fulltile object
 				if(AM.layer > A.layer && AM.atom_flags & ATOM_FLAG_FULLTILE_OBJECT)
+					// TODO(rufus): move out of the loop as this is not affected by AM changing in any way
+					// If A itself is fulltile or has an exception flag, it can't be obstructed by another fulltile
 					if((A.atom_flags & ATOM_FLAG_ADJACENT_EXCEPTION) || (A.atom_flags & ATOM_FLAG_FULLTILE_OBJECT))
 						continue
-					return FALSE
+					return
 			if(I)
-				// Return 1 in attackby() to prevent afterattack() effects (when safely moving items for example)
+				// Return TRUE in attackby() to prevent afterattack() effects (when safely moving items for example)
 				var/resolved = I.resolve_attackby(A,src, params)
 				if(!resolved && A && I)
-					I.afterattack(A, src, 1, params) // 1: clicking something Adjacent
+					I.afterattack(A, src, TRUE, params)
 			else
-				UnarmedAttack(A, 1)
+				UnarmedAttack(A, TRUE)
 
 			trigger_aiming(TARGET_CAN_CLICK)
 			return
 		else // non-adjacent click
 			if(I)
-				I.afterattack(A, src, 0, params) // 0: not Adjacent
+				I.afterattack(A, src, FALSE, params)
 			else
 				RangedAttack(A, params)
 
 			trigger_aiming(TARGET_CAN_CLICK)
-	return 1
+	return
 
+// setClickCooldown sets a secondary cooldown on the user actions and may be used to limit user clicks for a certain time
+// after an action.
+//
+// This is not called automatically in any way and is intended to be used by atoms/objects code
+// to apply custom delay.
+//
+// The delay is shared with all other objects, so setting click cooldown on one object will block
+// the mob from clicking anything else until the cooldown is over.
 /mob/proc/setClickCooldown(timeout)
 	next_move = max(world.time + timeout, next_move)
 
 /mob/proc/canClick()
+	// NOTE: this checks for next_move, which is different from next_click used by
+	//   mob/proc/OnClick() to enforce a 1 decisecond limit
 	if(config.misc.no_click_cooldown || next_move <= world.time)
-		return 1
-	return 0
+		return TRUE
+	return FALSE
 
 // Default behavior: ignore double clicks, the second click that makes the doubleclick call already calls for a normal click
 /mob/proc/DblClickOn(atom/A, params)
@@ -254,7 +270,7 @@
 		else
 			user.listed_turf = T
 			user.client.statpanel = "Turf"
-	return 1
+	return TRUE
 
 /mob/proc/TurfAdjacent(turf/T)
 	return T.AdjacentQuick(src)

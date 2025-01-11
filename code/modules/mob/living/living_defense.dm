@@ -140,6 +140,8 @@
 	return target_zone
 
 //Called when the mob is hit with an item in combat. Returns the blocked result
+// `atype` param stands for alternative attack and is used for disarm intent "bashes", which are
+// effectively weaker attacks that cause more pain than harm, but still deal some brute.
 /mob/living/proc/hit_with_weapon(obj/item/I, mob/living/user, effective_force, hit_zone, atype = 0)
 	visible_message(SPAN("danger", "[src] has been [I.attack_verb.len? pick(I.attack_verb) : "attacked"] with [I.name] by [user]!"))
 
@@ -363,10 +365,11 @@
 /mob/living/proc/reagent_permeability()
 	return 1
 
+// TODO(rufus): move action buttons related code to appropriate files instead of living_defense.dm
 /mob/living/proc/handle_actions()
 	//Pretty bad, i'd use picked/dropped instead but the parent calls in these are nonexistent
 	for(var/datum/action/A in actions)
-		if(A.CheckRemoval(src))
+		if(!(A.target in src))
 			A.Remove(src)
 	for(var/obj/item/I in src)
 		if(I.action_button_name)

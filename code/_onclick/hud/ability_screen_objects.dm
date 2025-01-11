@@ -5,7 +5,7 @@
 	var/list/obj/screen/ability/ability_objects = list()
 	var/list/obj/screen/ability/spell_objects = list()
 	var/list/obj/screen/ability/changeling_power_objects = list()
-	var/showing = 0 // If we're 'open' or not.
+	var/showing = FALSE // If we're 'open' or not.
 
 	var/open_state = "master_open"		// What the button looks like when it's 'open', showing the other buttons.
 	var/closed_state = "master_closed"	// Button when it's 'closed', hiding everything else.
@@ -59,14 +59,13 @@
 		for(var/obj/screen/ability/O in ability_objects)
 			if(my_mob && my_mob.client)
 				my_mob.client.screen -= O
-//			O.handle_icon_updates = 0
-		showing = 0
+		showing = FALSE
 		overlays.len = 0
 		overlays.Add(closed_state)
 	else if(forced_state != 1) // We're opening it, show the icons.
 		open_ability_master()
 		update_abilities(1)
-		showing = 1
+		showing = TRUE
 		overlays.len = 0
 		overlays.Add(open_state)
 	update_icon()
@@ -91,9 +90,8 @@
 		A.screen_loc = "[encode_screen_X(xpos, my_mob)]:[x_pix],[encode_screen_Y(ypos, my_mob)]:[y_pix]"
 		if(my_mob && my_mob.client)
 			my_mob.client.screen += A
-//			A.handle_icon_updates = 1
 
-/obj/screen/movable/ability_master/proc/update_abilities(forced = 0, mob/user)
+/obj/screen/movable/ability_master/proc/update_abilities(forced = FALSE, mob/user)
 	update_icon()
 	if(user && user.client)
 		if(!(src in user.client.screen))
@@ -225,11 +223,10 @@
 
 // This checks if the ability can be used.
 /obj/screen/ability/proc/can_activate()
-	return 1
+	return TRUE
 
 /client/verb/activate_ability(slot as num)
 	set name = ".activate_ability"
-//	set hidden = 1
 	if(!mob)
 		return // Paranoid.
 	if(isnull(slot) || !isnum(slot))
@@ -331,11 +328,11 @@
 	if(ability_master)
 		ability_master.update_spells(0)
 
-/obj/screen/movable/ability_master/proc/update_spells(forced = 0)
+/obj/screen/movable/ability_master/proc/update_spells(forced = FALSE)
 	for(var/obj/screen/ability/spell/spell in spell_objects)
 		spell.update_charge(forced)
 
-/obj/screen/ability/spell/proc/update_charge(forced_update = 0)
+/obj/screen/ability/spell/proc/update_charge(forced_update = FALSE)
 	if(!spell)
 		qdel(src)
 		return
@@ -373,7 +370,7 @@
 	if(spell.silenced)
 		overlays += "silence"
 
-/obj/screen/ability/spell/update_icon(forced = 0)
+/obj/screen/ability/spell/update_icon(forced = FALSE)
 	update_charge(forced)
 	return
 

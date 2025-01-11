@@ -74,3 +74,7 @@
 
 	// connected external accounts e.g. discord
 	var/list/connected_accounts
+
+	// TODO(rufus): move from client to player preferences
+	// If player is an observer ghost, inquisitiveness controls if they will examine clicked things or not
+	var/inquisitive_ghost = TRUE

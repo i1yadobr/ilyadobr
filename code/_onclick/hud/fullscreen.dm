@@ -22,7 +22,7 @@
 	screen.severity = severity
 
 	screens[category] = screen
-	if(client && (stat != DEAD || screen.allstate))
+	if(client && (stat != DEAD || screen.display_for_dead))
 		client.screen += screen
 	return screen
 
@@ -66,7 +66,7 @@
 	plane = FULLSCREEN_PLANE
 	mouse_opacity = 0
 	var/severity = 0
-	var/allstate = 0 //shows if it should show up for dead people too
+	var/display_for_dead = FALSE
 
 /obj/screen/fullscreen/Destroy()
 	severity = 0
@@ -137,7 +137,7 @@
 	screen_loc = ui_entire_screen
 	layer = FULLSCREEN_LAYER
 	alpha = 0
-	allstate = 1
+	display_for_dead = TRUE
 
 /obj/screen/fullscreen/fadeout/Initialize()
 	. = ..()
@@ -154,13 +154,13 @@
 /obj/screen/fullscreen/cam_corners
 	icon = 'icons/mob/screen_full.dmi'
 	icon_state = "cam_corners"
-	allstate = 1
+	display_for_dead = TRUE
 	layer = FULLSCREEN_LAYER
 	blend_mode = BLEND_OVERLAY
 
 /obj/screen/fullscreen/fishbed
 	icon_state = "fishbed"
-	allstate = 1
+	display_for_dead = TRUE
 
 /obj/screen/fullscreen/pain
 	icon_state = "brutedamageoverlay6"

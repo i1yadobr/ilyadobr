@@ -12,7 +12,7 @@
 	plane = HUD_PLANE
 	layer = HUD_BASE_LAYER
 	appearance_flags = DEFAULT_APPEARANCE_FLAGS |NO_CLIENT_COLOR
-	unacidable = 1
+	unacidable = TRUE
 	var/obj/master = null    //A reference to the object in the slot. Grabs or items, generally.
 	var/globalscreen = FALSE //Global screens are not qdeled when the holding mob is destroyed.
 
@@ -41,7 +41,7 @@
 		if(istype(master, /obj/item/storage))
 			var/obj/item/storage/S = master
 			S.close(usr)
-	return 1
+	return
 
 
 /obj/screen/item_action
@@ -53,34 +53,34 @@
 
 /obj/screen/item_action/Click()
 	if(!usr || !owner)
-		return 1
+		return
 	if(!usr.canClick())
 		return
 
 	if(usr.stat || usr.restrained() || usr.stunned || usr.lying)
-		return 1
+		return
 
 	if(!(owner in usr))
-		return 1
+		return
 
 	owner.ui_action_click()
-	return 1
+	return
 
 /obj/screen/storage
 	name = "storage"
 
 /obj/screen/storage/Click()
 	if(!usr.canClick())
-		return 1
+		return
 	if(usr.stat || usr.paralysis || usr.stunned || usr.weakened)
-		return 1
+		return
 	if (istype(usr.loc,/obj/mecha)) // stops inventory actions in a mech
-		return 1
+		return
 	if(master)
 		var/obj/item/I = usr.get_active_hand()
 		if(I)
 			usr.ClickOn(master)
-	return 1
+	return
 
 /obj/screen/zone_sel
 	name = "damage zone"
@@ -102,7 +102,7 @@
 				if(17 to 22)
 					selecting = BP_L_FOOT
 				else
-					return 1
+					return
 		if(4 to 9) //Legs
 			switch(icon_x)
 				if(10 to 15)
@@ -110,7 +110,7 @@
 				if(17 to 22)
 					selecting = BP_L_LEG
 				else
-					return 1
+					return
 		if(10 to 13) //Hands and groin
 			switch(icon_x)
 				if(8 to 11)
@@ -120,7 +120,7 @@
 				if(21 to 24)
 					selecting = BP_L_HAND
 				else
-					return 1
+					return
 		if(14 to 22) //Chest and arms to shoulders
 			switch(icon_x)
 				if(8 to 11)
@@ -130,7 +130,7 @@
 				if(21 to 24)
 					selecting = BP_L_ARM
 				else
-					return 1
+					return
 		if(23 to 30) //Head, but we need to check for eye or mouth
 			if(icon_x in 12 to 20)
 				selecting = BP_HEAD
@@ -147,7 +147,7 @@
 
 	if(old_selecting != selecting)
 		update_icon()
-	return 1
+	return
 
 /obj/screen/zone_sel/proc/set_selected_zone(bodypart)
 	var/old_selecting = selecting
@@ -189,17 +189,17 @@
 	switch(name)
 		if("toggle")
 			if(usr.hud_used.inventory_shown)
-				usr.hud_used.inventory_shown = 0
+				usr.hud_used.inventory_shown = FALSE
 				usr.client.screen -= usr.hud_used.other
 			else
-				usr.hud_used.inventory_shown = 1
+				usr.hud_used.inventory_shown = TRUE
 				usr.client.screen += usr.hud_used.other
 
 			usr.hud_used.hidden_inventory_update()
 
 		if("equip")
 			if (istype(usr.loc,/obj/mecha)) // stops inventory actions in a mech
-				return 1
+				return
 			if(ishuman(usr))
 				var/mob/living/carbon/human/H = usr
 				H.quick_equip()
@@ -240,11 +240,11 @@
 						if(!(C.wear_mask && C.wear_mask.item_flags & ITEM_FLAG_AIRTIGHT))
 							var/mob/living/carbon/human/H = C
 							if(!(H.head && H.head.item_flags & ITEM_FLAG_AIRTIGHT))
-								no_mask = 1
+								no_mask = TRUE
 
 						if(no_mask)
 							to_chat(C, SPAN("notice", "You are not wearing a suitable mask or helmet."))
-							return 1
+							return
 						else
 							var/list/nicename = null
 							var/list/tankcheck = null
@@ -318,7 +318,7 @@
 
 							if(best)
 								to_chat(C, SPAN("notice", "You are now running on internals from [tankcheck[best]] [from] your [nicename[best]]."))
-								playsound(usr, 'sound/effects/internals.ogg', 50, 0)
+								playsound(usr, 'sound/effects/internals.ogg', 50)
 								C.internal = tankcheck[best]
 
 
@@ -356,9 +356,6 @@
 		if("module")
 			if(isrobot(usr))
 				var/mob/living/silicon/robot/R = usr
-//				if(R.module)
-//					R.hud_used.toggle_show_robot_modules()
-//					return 1
 				R.choose_module()
 
 		if("inventory")
@@ -366,7 +363,7 @@
 				var/mob/living/silicon/robot/R = usr
 				if(R.module)
 					R.hud_used.toggle_show_robot_modules()
-					return 1
+					return
 				else
 					to_chat(R, "You haven't selected a module yet.")
 
@@ -541,18 +538,18 @@
 			var/mob/living/silicon/ai/AI = usr
 			AI.multitool_mode()
 		else
-			return 0
-	return 1
+			return
+	return
 
 /obj/screen/inventory/Click()
 	// At this point in client Click() code we have passed the 1/10 sec check and little else
 	// We don't even know if it's a middle click
 	if(!usr.canClick())
-		return 1
+		return
 	if(usr.stat || usr.paralysis || usr.stunned || usr.weakened)
-		return 1
+		return
 	if (istype(usr.loc,/obj/mecha)) // stops inventory actions in a mech
-		return 1
+		return
 	switch(name)
 		if("r_hand")
 			if(iscarbon(usr))
@@ -570,7 +567,7 @@
 			if(usr.attack_ui(slot_id))
 				usr.update_inv_l_hand(0)
 				usr.update_inv_r_hand(0)
-	return 1
+	return
 
 /obj/screen/rec
 	icon = 'icons/effects/effects.dmi'

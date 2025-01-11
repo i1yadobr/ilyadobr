@@ -1,23 +1,5 @@
-/*
-	AI ClickOn()
-
-	Note currently ai restrained() returns 0 in all cases,
-	therefore restrained code has been removed
-
-	The AI can double click to move the camera (this was already true but is cleaner),
-	or double click a mob to track them.
-
-	Note that AI have no need for the adjacency proc, and so this proc is a lot cleaner.
-*/
-/mob/living/silicon/ai/DblClickOn(atom/A, params)
-	if(control_disabled || stat) return
-
-	if(ismob(A))
-		ai_actual_track(A)
-	else
-		A.move_camera_by_click()
-
-
+// AI click handling overrides default /mob/ClicnOn() handling with a much cleaner implementation since
+// AI doesn't have a `restrained()` state, doesn't use items, and has no need for `Adjacent()` checks.
 /mob/living/silicon/ai/ClickOn(atom/A, params)
 	if(world.time <= next_click)
 		return
@@ -66,15 +48,16 @@
 		silicon_camera.captureimage(A, usr)
 		return
 
-	/*
-		AI restrained() currently does nothing
-	if(restrained())
-		RestrainedClickOn(A)
-	else
-	*/
 	A.add_hiddenprint(src)
 	A.attack_ai(src)
 
+/mob/living/silicon/ai/DblClickOn(atom/A, params)
+	if(control_disabled || stat) return
+
+	if(ismob(A))
+		ai_actual_track(A)
+	else
+		A.move_camera_by_click()
 /*
 	AI has no need for the UnarmedAttack() and RangedAttack() procs,
 	because the AI code is not generic;	attack_ai() is used instead.
@@ -128,83 +111,85 @@
 */
 
 /atom/proc/AICtrlAltClick()
+	return FALSE
 
 /obj/machinery/door/airlock/AICtrlAltClick() // Electrifies doors.
 	if(usr.incapacitated())
-		return
+		return FALSE
 	if(!electrified_until)
 		// permanent shock
 		Topic(src, list("command"="electrify_permanently", "activate" = "1"))
 	else
 		// disable/6 is not in Topic; disable/5 disables both temporary and permanent shock
 		Topic(src, list("command"="electrify_permanently", "activate" = "0"))
-	return 1
+	return TRUE
 
 /atom/proc/AICtrlShiftClick()
-	return
+	return FALSE
 
 /atom/proc/AIShiftClick()
-	return
+	return FALSE
 
 /obj/machinery/door/airlock/AIShiftClick()  // Opens and closes doors!
 	if(usr.incapacitated())
-		return
+		return FALSE
 	if(density)
 		Topic(src, list("command"="open", "activate" = "1"))
 	else
 		Topic(src, list("command"="open", "activate" = "0"))
-	return 1
+	return TRUE
 
 /atom/proc/AICtrlClick()
-	return
+	return FALSE
 
 /obj/machinery/door/airlock/AICtrlClick() // Bolts doors
 	if(usr.incapacitated())
-		return
+		return FALSE
 	if(locked)
 		Topic(src, list("command"="bolts", "activate" = "0"))
 	else
 		Topic(src, list("command"="bolts", "activate" = "1"))
-	return 1
+	return TRUE
 
 /obj/machinery/power/apc/AICtrlClick() // turns off/on APCs.
 	if(usr.incapacitated())
-		return
+		return FALSE
 	Topic(src, list("breaker"="1"))
-	return 1
+	return TRUE
 
 /obj/machinery/turretid/AICtrlClick() //turns off/on Turrets
 	if(usr.incapacitated())
-		return
+		return FALSE
 	Topic(src, list("command"="enable", "value"="[!enabled]"))
-	return 1
+	return TRUE
 
 /atom/proc/AIAltClick(atom/A)
-	return AltClick(A)
+	AltClick(A)
+	return TRUE
 
 /obj/machinery/turretid/AIAltClick() //toggles lethal on turrets
 	if(usr.incapacitated())
-		return
+		return FALSE
 	Topic(src, list("command"="lethal", "value"="[!lethal]"))
-	return 1
+	return TRUE
 
 /obj/machinery/atmospherics/binary/pump/AIAltClick()
 	return AltClick()
 
 /atom/proc/AIMiddleClick(mob/living/silicon/user)
-	return 0
+	return FALSE
 
 /obj/machinery/door/airlock/AIMiddleClick() // Toggles door bolt lights.
 	if(usr.incapacitated())
-		return
+		return FALSE
 	if(..())
-		return
+		return FALSE
 
 	if(!src.lights)
 		Topic(src, list("command"="lights", "activate" = "1"))
 	else
 		Topic(src, list("command"="lights", "activate" = "0"))
-	return 1
+	return TRUE
 
 //
 // Override AdjacentQuick for AltClicking

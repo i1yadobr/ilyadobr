@@ -50,10 +50,10 @@
 /datum/hud
 	var/mob/mymob
 
-	var/hud_shown = 1			//Used for the HUD toggle (F12)
-	var/inventory_shown = 1		//the inventory
-	var/show_intent_icons = 0
-	var/hotkey_ui_hidden = 0	//This is to hide the buttons that can be used via hotkeys. (hotkeybuttons list of buttons)
+	var/hud_shown = TRUE
+	var/inventory_shown = TRUE
+	var/show_intent_icons = FALSE
+	var/hotkey_ui_hidden = FALSE
 
 	var/obj/screen/lingchemdisplay
 	var/obj/screen/r_hand_hud_object
@@ -66,7 +66,7 @@
 	var/list/obj/screen/hotkeybuttons
 
 	var/obj/screen/movable/action_button/hide_toggle/hide_actions_toggle
-	var/action_buttons_hidden = 0
+	var/action_buttons_hidden = FALSE
 
 /datum/hud/New(mob/owner)
 	mymob = owner
@@ -171,8 +171,8 @@
 
 
 /datum/hud/proc/instantiate()
-	if(!ismob(mymob)) return 0
-	if(!mymob.client) return 0
+	if(!ismob(mymob) || !mymob.client)
+		return
 	var/ui_style = ui_style2icon(mymob.client.prefs.UI_style)
 	var/ui_color = mymob.client.prefs.UI_style_color
 	var/ui_alpha = mymob.client.prefs.UI_style_alpha
@@ -182,10 +182,11 @@
 /datum/hud/proc/FinalizeInstantiation(ui_style, ui_color, ui_alpha)
 	return
 
+// TODO(rufus): refactor to a keybind-agnostic proc with appropriate name
 //Triggered when F12 is pressed (Unless someone changed something in the DMF)
-/mob/verb/button_pressed_F12(full = 0 as null)
+/mob/verb/button_pressed_F12(full = FALSE as null)
 	set name = "F12"
-	set hidden = 1
+	set hidden = TRUE
 
 	if(!hud_used)
 		to_chat(usr, SPAN("warning", "This mob type does not use a HUD."))
@@ -199,7 +200,7 @@
 	if(client.view != world.view)
 		return
 	if(hud_used.hud_shown)
-		hud_used.hud_shown = 0
+		hud_used.hud_shown = FALSE
 		if(src.hud_used.adding)
 			src.client.screen -= src.hud_used.adding
 		if(src.hud_used.other)
@@ -223,7 +224,7 @@
 		src.client.screen -= src.zone_sel	//zone_sel is a mob variable for some reason.
 
 	else
-		hud_used.hud_shown = 1
+		hud_used.hud_shown = TRUE
 		if(src.hud_used.adding)
 			src.client.screen += src.hud_used.adding
 		if(src.hud_used.other && src.hud_used.inventory_shown)
@@ -257,7 +258,7 @@
 		return
 
 	if(hud_used.hud_shown)
-		hud_used.hud_shown = 0
+		hud_used.hud_shown = FALSE
 		if(src.hud_used.adding)
 			src.client.screen -= src.hud_used.adding
 		if(src.hud_used.other)
@@ -269,7 +270,7 @@
 		src.client.screen += src.hud_used.r_hand_hud_object
 		src.client.screen += src.hud_used.action_intent		//we want the intent swticher visible
 	else
-		hud_used.hud_shown = 1
+		hud_used.hud_shown = TRUE
 		if(src.hud_used.adding)
 			src.client.screen += src.hud_used.adding
 		if(src.hud_used.other && src.hud_used.inventory_shown)
@@ -294,7 +295,7 @@
 	if(!hud_shown)
 		for(var/i in 1 to alerts.len)
 			screenmob.client.screen -= alerts[alerts[i]]
-		return 1
+		return
 	for(var/i in 1 to alerts.len)
 		var/obj/screen/movable/alert/alert = alerts[alerts[i]]
 		if(alert.icon_state == "template")
@@ -314,8 +315,10 @@
 				. = ""
 		alert.screen_loc = .
 		screenmob.client.screen |= alert
-	return 1
+	return
 
+// TODO(rufus): move alert-related code to code/_onclick/hud/alert.dm where the rest of alert logic is defined
+// Return value is used by subtypes to determine if Click should be handled further
 /obj/screen/movable/alert/Click(location, control, params)
 	if(!usr || !usr.client)
 		return FALSE
