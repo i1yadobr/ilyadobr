@@ -99,7 +99,23 @@
 	var/last_pull_sound = 0
 	var/atom/movable/pulling = null
 	var/other_mobs = null
+	// TODO(rufus): refactor next_move to an appropriate name that better represents what it's used for.
+	//   Current name misleadingly uses "move" without any other context, which makes an impression that it's related to movement.
+	// next_move is used to track the next time when the user is allowed to click.
+	// It is primarily updated by the /mob/setClickCooldown() proc and is used by various systems and objects
+	// to apply a default delay to user clicks once the previous click was handled.
+	//
+	// next_move is not updated by any processing subsystem automatically and is not intended to be set
+	// manually, setClickCooldown() should be used instead.
+	// It is also not applied automatically to every click, next_click is used for that instead by the click handling code.
 	var/next_move = null
+	// TODO(rufus): refactor next_click to an appropriate name that better represents what it's used for.
+	//   Current name doesn't provide sufficient context about this variable being used to enforce a cooldown on user clicks.
+	// next_click is used to track 1 decisecond cooldown for all user clicks.
+	// It takes priority over mob/next_move and is the first thing checked on every click.
+	// It is intended to only be used by the click handling code, which can be found in the code/_onclick folder.
+	// See code/_onclick/click.dm for more information on click handling.
+	var/next_click = 0
 	var/hand = null
 	var/real_name = null
 
