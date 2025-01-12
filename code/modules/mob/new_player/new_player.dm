@@ -607,3 +607,7 @@
 
 /mob/new_player/is_eligible_for_antag_spawn(antag_id)
 	return TRUE
+
+// ClickOn for new players is a no-op as new_players should not be able to interact with atoms at all
+/mob/new_player/ClickOn()
+	return

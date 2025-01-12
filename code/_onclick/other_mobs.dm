@@ -39,10 +39,3 @@
 
 	else if(MUTATION_TK in mutations)
 		A.attack_tk(src)
-
-/*
-	New Players:
-	Have no reason to click on anything at all.
-*/
-/mob/new_player/ClickOn()
-	return
