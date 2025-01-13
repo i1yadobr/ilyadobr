@@ -199,25 +199,3 @@
 /mob/living/silicon/ai/face_atom(atom/A)
 	if(eyeobj)
 		eyeobj.face_atom(A)
-
-
-/turf/AICtrlClick(mob/user)
-	var/obj/machinery/door/airlock/AL = locate(/obj/machinery/door/airlock) in contents
-	if(AL)
-		AL.AICtrlClick(user)
-		return
-	return ..()
-
-/turf/AIAltClick(mob/user)
-	var/obj/machinery/door/airlock/AL = locate(/obj/machinery/door/airlock) in contents
-	if(AL)
-		AL.AIAltClick(user)
-		return
-	return ..()
-
-/turf/AIShiftClick(mob/user)
-	var/obj/machinery/door/airlock/AL = locate(/obj/machinery/door/airlock) in contents
-	if(AL)
-		AL.AIShiftClick(user)
-		return
-	return ..()
