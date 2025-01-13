@@ -15,10 +15,64 @@
 /atom/proc/Adjacent(atom/neighbor, atom/target) // basic inheritance, unused
 	return FALSE
 
+
 // Not a sane use of the function and indicative of an error elsewhere
 /area/Adjacent(atom/neighbor, atom/target)
 	CRASH("Call to /area/Adjacent(), unimplemented proc")
 
+
+/*
+	Adjacency (to anything else):
+	* Must be on a turf
+	* In the case of a multiple-tile object, all valid locations are checked for adjacency.
+
+	Note: Multiple-tile objects are created when the bound_width and bound_height are greater than the tile size.
+*/
+/atom/movable/Adjacent(atom/neighbor, atom/target)
+	if(neighbor == loc || neighbor.loc == loc)
+		return TRUE
+	if(!isturf(loc))
+		return FALSE
+	for(var/turf/T in locs)
+		if(isnull(T))
+			continue
+		if(T.Adjacent(neighbor, target = neighbor))
+			return TRUE
+	return FALSE
+
+
+// This is necessary for storage items not on your person.
+/obj/item/Adjacent(atom/neighbor, atom/target, recurse = 1)
+	if(neighbor == loc)
+		return TRUE
+	if(istype(loc, /obj/item))
+		if(recurse > 0)
+			return loc.Adjacent(neighbor, target, recurse - 1)
+		return FALSE
+	return ..()
+
+
+// TurfAdjacent of base mob type checks if mob is 1 or less tiles away from turf T and returns a boolean.
+/mob/proc/TurfAdjacent(turf/T)
+	return T.AdjacentQuick(src)
+
+// TurfAdjacent of observer ghosts checks if turf T is withing the view range of the ghost client and returns a boolean.
+/mob/observer/ghost/TurfAdjacent(turf/T)
+	if(!isturf(loc) || !client)
+		return FALSE
+	return z == T.z && (get_dist(loc, T) <= client.view)
+
+// TurfAdjacent of AI checks if turf is visible on any cameras and returns a boolean.
+/mob/living/silicon/ai/TurfAdjacent(turf/T)
+	return (cameranet && cameranet.is_turf_visible(T))
+
+
+// AdjacentQuick of turfs checks if atom A is 1 or less tiles away from the turf and returns a boolean.
+/turf/proc/AdjacentQuick(atom/A)
+	var/turf/T = get_turf(A)
+	if(T == src || (get_dist(src, T) <= 1))
+		return TRUE
+	return FALSE
 
 /*
 	Adjacency (to turf):
@@ -61,64 +115,6 @@
 
 		return TRUE // we don't care about our own density
 	return FALSE
-
-/*
-Quick adjacency (to turf):
-* If you are in the same turf, always TRUE
-* If you are not adjacent, then FALSE
-*/
-/turf/proc/AdjacentQuick(atom/neighbor, atom/target = null)
-	var/turf/T0 = get_turf(neighbor)
-	if(T0 == src)
-		return TRUE
-
-	if(get_dist(src,T0) > 1)
-		return FALSE
-
-	return TRUE
-
-/*
-	Adjacency (to anything else):
-	* Must be on a turf
-	* In the case of a multiple-tile object, all valid locations are checked for adjacency.
-
-	Note: Multiple-tile objects are created when the bound_width and bound_height are greater than the tile size.
-*/
-/atom/movable/Adjacent(atom/neighbor, atom/target)
-	if(neighbor == loc || neighbor.loc == loc)
-		return TRUE
-	if(!isturf(loc))
-		return FALSE
-	for(var/turf/T in locs)
-		if(isnull(T))
-			continue
-		if(T.Adjacent(neighbor, target = neighbor))
-			return TRUE
-	return FALSE
-
-// This is necessary for storage items not on your person.
-/obj/item/Adjacent(atom/neighbor, atom/target, recurse = 1)
-	if(neighbor == loc)
-		return TRUE
-	if(istype(loc, /obj/item))
-		if(recurse > 0)
-			return loc.Adjacent(neighbor, target, recurse - 1)
-		return FALSE
-	return ..()
-
-// TurfAdjacent of base mob type checks if mob is 1 or less tiles away from turf T and returns a boolean.
-/mob/proc/TurfAdjacent(turf/T)
-	return T.AdjacentQuick(src)
-
-// TurfAdjacent of observer ghosts checks if turf T is withing the view range of the ghost client and returns a boolean.
-/mob/observer/ghost/TurfAdjacent(turf/T)
-	if(!isturf(loc) || !client)
-		return FALSE
-	return z == T.z && (get_dist(loc, T) <= client.view)
-
-// TurfAdjacent of AI checks if turf is visible on any cameras and returns a boolean.
-/mob/living/silicon/ai/TurfAdjacent(turf/T)
-	return (cameranet && cameranet.is_turf_visible(T))
 
 /*
 	This checks if you there is uninterrupted airspace between that turf and this one.
