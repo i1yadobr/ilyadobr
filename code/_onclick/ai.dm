@@ -124,9 +124,6 @@
 	AltClick(A)
 	return TRUE
 
-/obj/machinery/atmospherics/binary/pump/AIAltClick()
-	return AltClick()
-
 /atom/proc/AIMiddleClick(mob/living/silicon/user)
 	return FALSE
 

@@ -42,6 +42,11 @@ Thus, the two variables affect pump operation are set in New():
 	air1.volume = ATMOS_DEFAULT_VOLUME_PUMP
 	air2.volume = ATMOS_DEFAULT_VOLUME_PUMP
 
+// AIAltClick of gas pump toggles it.
+/obj/machinery/atmospherics/binary/pump/AIAltClick()
+	Topic(src, list("power" = "1"))
+	return TRUE
+
 /obj/machinery/atmospherics/binary/pump/AltClick()
 	Topic(src, list("power" = "1"))
 
