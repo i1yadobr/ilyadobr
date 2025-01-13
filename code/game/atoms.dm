@@ -503,15 +503,16 @@ its easier to just keep the beam vertical.
 /atom/proc/InsertedContents()
 	return contents
 
-//all things climbable
+/atom/proc/attack_generic(mob/user as mob)
+	return FALSE
 
-/atom/attack_hand(mob/user)
-	..()
+/atom/proc/attack_hand(mob/user)
 	if(climbers.len && !(user in climbers))
 		user.visible_message(SPAN("warning", "[user.name] shakes \the [src]."), \
 					SPAN("notice", "You shake \the [src]."))
 		object_shaken()
 
+//all things climbable
 /atom/proc/climb_on()
 
 	set name = "Climb"

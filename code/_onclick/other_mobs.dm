@@ -1,10 +1,3 @@
-/atom/proc/attack_generic(mob/user as mob)
-// Generic damage proc (metroids and monkeys).
-	return FALSE
-
-/atom/proc/attack_hand(mob/user as mob)
-	return
-
 /mob/living/carbon/human/RangedAttack(atom/A)
 	// Standing below an open space and clicking an adjacent turf above allows you to climb.
 	// Intended to be used with the "Look Up" verb.
