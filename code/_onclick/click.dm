@@ -236,55 +236,37 @@
 			trigger_aiming(TARGET_CAN_CLICK)
 	return
 
+
 /mob/proc/DblClickOn(atom/A, params)
 	return
 
-/*
-	Middle click
-*/
+/mob/proc/CtrlClickOn(atom/A)
+	A.CtrlClick(src)
+
+/mob/proc/CtrlShiftClickOn(atom/A)
+	A.CtrlShiftClick(src)
+
+/mob/proc/CtrlAltClickOn(atom/A)
+	A.CtrlAltClick(src)
+
+/mob/proc/ShiftClickOn(atom/A)
+	A.ShiftClick(src)
+
+/mob/proc/AltClickOn(atom/A)
+	A.AltClick(src)
+
+// MiddleClickOn of the base mob type makes mob point towards atom A if
+// pointing preference is set to Middle-Click.
+// Otherwise it makes mob change their active hand.
 /mob/proc/MiddleClickOn(atom/A)
 	if(get_preference_value(/datum/client_preference/pointing) == GLOB.PREF_MIDDLE_CLICK)
 		if(pointed(A))
 			return
 	swap_hand()
-	return
 
+// ShiftMiddleClickOn of the base mob type makes mob point towards atom A if
+// pointing preference is set to Shift-Middle-Click.
 /mob/proc/ShiftMiddleClickOn(atom/A)
 	if(get_preference_value(/datum/client_preference/pointing) == GLOB.PREF_SHIFT_MIDDLE_CLICK)
 		if(pointed(A))
 			return
-
-/*
-	Shift click
-*/
-/mob/proc/ShiftClickOn(atom/A)
-	A.ShiftClick(src)
-	return
-
-
-/*
-	Ctrl click
-*/
-/mob/proc/CtrlClickOn(atom/A)
-	A.CtrlClick(src)
-	return
-
-/*
-	Alt click
-*/
-/mob/proc/AltClickOn(atom/A)
-	A.AltClick(src)
-
-/*
-	Control+Shift click
-*/
-/mob/proc/CtrlShiftClickOn(atom/A)
-	A.CtrlShiftClick(src)
-	return
-
-/*
-	Control+Alt click
-*/
-/mob/proc/CtrlAltClickOn(atom/A)
-	A.CtrlAltClick(src)
-	return
