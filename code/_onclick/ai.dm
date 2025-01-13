@@ -1,5 +1,7 @@
-// AI click handling overrides default /mob/ClicnOn() handling with a much cleaner implementation since
+// AI click handling overrides default /mob/ClickOn() handling with a much cleaner implementation since
 // AI doesn't have a `restrained()` state, doesn't use items, and has no need for `Adjacent()` checks.
+//
+// See code/_onclick/click.dm for base click handling implementations and an overview of click handling in general.
 /mob/living/silicon/ai/ClickOn(atom/A, params)
 	if(world.time <= next_click)
 		return
@@ -31,7 +33,7 @@
 		CtrlClickOn(A)
 		return
 
-	face_atom(A) // change direction to face what you clicked on
+	face_atom(A)
 
 	if(control_disabled || !canClick())
 		return
@@ -43,6 +45,7 @@
 			MT.interact(aiMulti, src)
 			return
 
+	// TODO(rufus): convert to a click_handler (code/_onclick/click_handler.dm)
 	if(silicon_camera.in_camera_mode)
 		silicon_camera.camera_mode_off()
 		silicon_camera.captureimage(A, usr)
@@ -52,31 +55,32 @@
 	A.attack_ai(src)
 
 /mob/living/silicon/ai/DblClickOn(atom/A, params)
-	if(control_disabled || stat) return
+	if(control_disabled || stat)
+		return
 
 	if(ismob(A))
 		ai_actual_track(A)
 	else
 		A.move_camera_by_click()
-/*
-	AI has no need for the UnarmedAttack() and RangedAttack() procs,
-	because the AI code is not generic;	attack_ai() is used instead.
-	The below is only really for safety, or you can alter the way
-	it functions and re-insert it above.
-*/
-/mob/living/silicon/ai/UnarmedAttack(atom/A)
-	A.attack_ai(src)
-/mob/living/silicon/ai/RangedAttack(atom/A)
-	A.attack_ai(src)
-/mob/living/silicon/ai/MouseDrop() //AI cant user crawl
+
+/mob/living/silicon/ai/MouseDrop() // AI is prohibited from drag-n-drop interactions
 	return
 
 
-/*
-	Since the AI handles shift, ctrl, and alt-click differently
-	than anything else in the game, atoms have separate procs
-	for AI shift, ctrl, and alt clicking.
-*/
+// Clicks with modifier buttons are handled in a unique way for AI interactions and atoms implement
+// unique procs for these interactions, e.g. /atom/AICtrlClick(), /atom/AIShiftClick() etc.
+// These procs are expected to return a boolean value indicating if interaction was handled.
+//
+// Interactions that weren't handled by the AI proc fall through to the base /mob/living or /mob
+// click handling functions which handle clicks as if AI was a regular mob, with actual adjacency
+// taken into account.
+//
+// See code/_onclick/click.dm for base click handling implementations and an overview of click handling in general.
+
+/mob/living/silicon/ai/CtrlClickOn(atom/A)
+	if(!control_disabled && A.AICtrlClick(src))
+		return
+	..()
 
 /mob/living/silicon/ai/CtrlAltClickOn(atom/A)
 	if(!control_disabled && A.AICtrlAltClick(src))
@@ -85,11 +89,6 @@
 
 /mob/living/silicon/ai/ShiftClickOn(atom/A)
 	if(!control_disabled && A.AIShiftClick(src))
-		return
-	..()
-
-/mob/living/silicon/ai/CtrlClickOn(atom/A)
-	if(!control_disabled && A.AICtrlClick(src))
 		return
 	..()
 
