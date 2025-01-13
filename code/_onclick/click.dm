@@ -260,20 +260,13 @@
 /mob/proc/ShiftClickOn(atom/A)
 	A.ShiftClick(src)
 	return
-/atom/proc/ShiftClick(mob/user)
-	if(user.client && (src in view(user.client.eye)))
-		user.examinate(src)
 
-	return
 
 /*
 	Ctrl click
 */
 /mob/proc/CtrlClickOn(atom/A)
 	A.CtrlClick(src)
-	return
-
-/atom/proc/CtrlClick(mob/user)
 	return
 
 /atom/movable/CtrlClick(mob/user)
@@ -286,16 +279,6 @@
 /mob/proc/AltClickOn(atom/A)
 	A.AltClick(src)
 
-/atom/proc/AltClick(mob/user)
-	var/turf/T = get_turf(src)
-	if(T && user.TurfAdjacent(T))
-		if(user.listed_turf == T)
-			user.listed_turf = null
-		else
-			user.listed_turf = T
-			user.client.statpanel = "Turf"
-	return TRUE
-
 /*
 	Control+Shift click
 */
@@ -303,15 +286,9 @@
 	A.CtrlShiftClick(src)
 	return
 
-/atom/proc/CtrlShiftClick(mob/user)
-	return
-
 /*
 	Control+Alt click
 */
 /mob/proc/CtrlAltClickOn(atom/A)
 	A.CtrlAltClick(src)
-	return
-
-/atom/proc/CtrlAltClick(mob/user)
 	return
