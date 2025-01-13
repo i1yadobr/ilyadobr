@@ -115,6 +115,18 @@
 
 	ui_interact(user)
 
+// AICtrlClick of turrets toggles the connected turrets.
+/obj/machinery/turretid/AICtrlClick()
+	Topic(src, list("command"="enable", "value"="[!enabled]"))
+	return TRUE
+
+// AIAltClick of turret control panels toggles lethal mode of the connected turrets.
+/obj/machinery/turretid/AIAltClick()
+	if(usr.incapacitated())
+		return FALSE
+	Topic(src, list("command"="lethal", "value"="[!lethal]"))
+	return TRUE
+
 /obj/machinery/turretid/attack_hand(mob/user as mob)
 	if(isLocked(user))
 		return

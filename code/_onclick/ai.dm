@@ -126,20 +126,8 @@
 	Topic(src, list("breaker"="1"))
 	return TRUE
 
-/obj/machinery/turretid/AICtrlClick() //turns off/on Turrets
-	if(usr.incapacitated())
-		return FALSE
-	Topic(src, list("command"="enable", "value"="[!enabled]"))
-	return TRUE
-
 /atom/proc/AIAltClick(atom/A)
 	AltClick(A)
-	return TRUE
-
-/obj/machinery/turretid/AIAltClick() //toggles lethal on turrets
-	if(usr.incapacitated())
-		return FALSE
-	Topic(src, list("command"="lethal", "value"="[!lethal]"))
 	return TRUE
 
 /obj/machinery/atmospherics/binary/pump/AIAltClick()
