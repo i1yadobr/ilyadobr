@@ -1,5 +1,5 @@
-// TODO(rufus): move this file out of the _onclick folder as it defines functions widely
-//   used outside of _onclick code.
+// TODO(rufus): update the adjacency proc description below, improve readability, and split it
+//   into proper descriptions for each subtype implementation.
 /*
 	Adjacency proc for determining touch range
 
