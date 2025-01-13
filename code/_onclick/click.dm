@@ -306,14 +306,6 @@
 			user.client.statpanel = "Turf"
 	return TRUE
 
-/mob/proc/TurfAdjacent(turf/T)
-	return T.AdjacentQuick(src)
-
-/mob/observer/ghost/TurfAdjacent(turf/T)
-	if(!isturf(loc) || !client)
-		return FALSE
-	return z == T.z && (get_dist(loc, T) <= client.view)
-
 /*
 	Control+Shift click
 */

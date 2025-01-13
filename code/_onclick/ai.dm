@@ -126,10 +126,3 @@
 
 /atom/proc/AIMiddleClick(mob/living/silicon/user)
 	return FALSE
-
-//
-// Override AdjacentQuick for AltClicking
-//
-
-/mob/living/silicon/ai/TurfAdjacent(turf/T)
-	return (cameranet && cameranet.is_turf_visible(T))
