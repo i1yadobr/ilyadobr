@@ -120,12 +120,6 @@
 /atom/proc/AICtrlClick()
 	return FALSE
 
-/obj/machinery/power/apc/AICtrlClick() // turns off/on APCs.
-	if(usr.incapacitated())
-		return FALSE
-	Topic(src, list("breaker"="1"))
-	return TRUE
-
 /atom/proc/AIAltClick(atom/A)
 	AltClick(A)
 	return TRUE

@@ -765,6 +765,11 @@
 	// do APC interaction
 	src.interact(user)
 
+// AICtrlClick of APC toggles it.
+/obj/machinery/power/apc/AICtrlClick()
+	Topic(src, list("breaker"="1"))
+	return TRUE
+
 /obj/machinery/power/apc/interact(mob/user)
 	if(!user)
 		return
