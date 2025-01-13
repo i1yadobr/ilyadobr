@@ -71,8 +71,6 @@
 /mob/living/silicon/ai/MouseDrop() //AI cant user crawl
 	return
 
-/atom/proc/attack_ai(mob/user as mob)
-	return
 
 /*
 	Since the AI handles shift, ctrl, and alt-click differently
