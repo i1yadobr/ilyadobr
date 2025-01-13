@@ -354,6 +354,13 @@
 	if(T != loc)
 		forceMove(T)
 
-/// Called on `/mob/proc/start_pulling`.
+// CtrlClick of movable atoms makes user start pulling the atom if user is adjacent.
+/atom/movable/CtrlClick(mob/user)
+	if(Adjacent(user))
+		user.start_pulling(src)
+
+// on_pulling_try is a no-op and is intended to be overridden by the subtypes to implement custom actions before
+// pulling starts.
+// It is currently only used by mimics which trigger their trap action on attempt to be pulled.
 /atom/movable/proc/on_pulling_try(mob/user)
 	return

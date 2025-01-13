@@ -269,10 +269,6 @@
 	A.CtrlClick(src)
 	return
 
-/atom/movable/CtrlClick(mob/user)
-	if(Adjacent(user))
-		user.start_pulling(src)
-
 /*
 	Alt click
 */
