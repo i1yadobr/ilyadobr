@@ -24,6 +24,44 @@
 
 	A.attack_hand(src)
 
+// RangedAttack of humans handles climbing openspace turfs, triggers laser eyes and telekinesis mutation abilities,
+// and handles special ranged glove touch interactions.
+//
+// This proc is called directly by the click code from code/_onclick/click.dm when human user doesn't have anything in
+// their hands and is not adjacent to A.
+// See code/_onclick/click.dm for a general overview of click handling.
+/mob/living/carbon/human/RangedAttack(atom/A)
+	if((istype(A, /turf/simulated/floor) || istype(A, /turf/unsimulated/floor) || istype(A, /obj/structure/lattice) || istype(A, /obj/structure/catwalk)) && isturf(loc) && shadow && !is_physically_disabled()) //Climbing through openspace
+		var/turf/T = get_turf(A)
+		var/turf/above = shadow.loc
+		if(T.Adjacent(shadow) && above.CanZPass(src, UP)) //Certain structures will block passage from below, others not
+
+			var/area/location = get_area(loc)
+			if(location.has_gravity && !can_overcome_gravity())
+				return
+
+			visible_message(SPAN("notice", "[src] starts climbing onto \the [A]!"), SPAN("notice", "You start climbing onto \the [A]!"))
+			shadow.visible_message(SPAN("notice", "[shadow] starts climbing onto \the [A]!"))
+			if(do_after(src, 50, A))
+				visible_message(SPAN("notice", "[src] climbs onto \the [A]!"), SPAN("notice", "You climb onto \the [A]!"))
+				shadow.visible_message(SPAN("notice", "[shadow] climbs onto \the [A]!"))
+				src.Move(T)
+			else
+				visible_message(SPAN("warning", "[src] gives up on trying to climb onto \the [A]!"), SPAN("warning", "You give up on trying to climb onto \the [A]!"))
+				shadow.visible_message(SPAN("warning", "[shadow] gives up on trying to climb onto \the [A]!"))
+			return
+
+	if(!gloves && !mutations.len) return
+	var/obj/item/clothing/gloves/G = gloves
+	if((MUTATION_LASER in mutations) && a_intent == I_HURT)
+		LaserEyes(A)
+
+	else if(istype(G) && G.Touch(A,0)) // for magic gloves
+		return
+
+	else if(MUTATION_TK in mutations)
+		A.attack_tk(src)
+
 #define FINALIZE_UNARMED(damage, maximize) (damage * (maximize ? 140 : rand(60, 140)) / 100)
 /mob/living/carbon/human/attack_hand(mob/living/M)
 
