@@ -6,3 +6,7 @@
 		/datum/movement_handler/mob/eye,
 		/datum/movement_handler/move_relay
 	)
+
+/mob/living/silicon/ai/face_atom(atom/A)
+	if(eyeobj)
+		eyeobj.face_atom(A)

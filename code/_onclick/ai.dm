@@ -195,7 +195,3 @@
 
 /mob/living/silicon/ai/TurfAdjacent(turf/T)
 	return (cameranet && cameranet.is_turf_visible(T))
-
-/mob/living/silicon/ai/face_atom(atom/A)
-	if(eyeobj)
-		eyeobj.face_atom(A)
