@@ -240,16 +240,6 @@
 	return
 
 /*
-	Ranged unarmed attack
-*/
-/mob/proc/RangedAttack(atom/A, params)
-	if(!mutations.len) return
-	if((MUTATION_LASER in mutations) && a_intent == I_HURT)
-		LaserEyes(A)
-	else if(MUTATION_TK in mutations)
-		A.attack_tk(src)
-
-/*
 	Middle click
 */
 /mob/proc/MiddleClickOn(atom/A)

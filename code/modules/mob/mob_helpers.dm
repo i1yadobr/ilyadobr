@@ -4,6 +4,15 @@
 /mob/proc/UnarmedAttack(atom/A, proximity)
 	return
 
+// RangedAttack of the base mob type triggers Laser Eyes or Telekinesis abilities if mob has respective mutations.
+/mob/proc/RangedAttack(atom/A, params)
+	if(!mutations.len)
+		return
+	if((MUTATION_LASER in mutations) && a_intent == I_HURT)
+		LaserEyes(A)
+	else if(MUTATION_TK in mutations)
+		A.attack_tk(src)
+
 // fun if you want to typecast humans/monkeys/etc without writing long path-filled lines.
 /proc/isxenomorph(A)
 	if(istype(A, /mob/living/carbon/human))
