@@ -503,14 +503,26 @@ its easier to just keep the beam vertical.
 /atom/proc/InsertedContents()
 	return contents
 
+// attack_generic for base atom type is a no-op.
+//
+// This proc is intended for handling actual damaging attack in contrast to other "attack" procs that deal
+// with all sorts of click handling.
 /atom/proc/attack_generic(mob/user as mob)
 	return FALSE
 
+// TODO(rufus): check if climbable behavior should be on base atom type or could be moved to a subtype
+// attack_hand for base atom type calls object_shaken() proc if anyone is climbing on this atom,
+// and displays a visible message that user shook the atom.
+//
+// This proc is intended to be extended by subtypes to handle "unarmed" interactions, which are clicks on
+// the atom while not holding any item in hand.
+//
+// This proc is usually called by the UnarmedAttack() proc, which in turn is called by the click handling system.
+// See code/_onclick/click.dm for an overview of click handling in general.
 /atom/proc/attack_hand(mob/user)
 	if(climbers.len && !(user in climbers))
-		user.visible_message(SPAN("warning", "[user.name] shakes \the [src]."), \
-					SPAN("notice", "You shake \the [src]."))
 		object_shaken()
+		user.visible_message(SPAN("warning", "[user.name] shakes \the [src]."), SPAN("notice", "You shake \the [src]."))
 
 //all things climbable
 /atom/proc/climb_on()
