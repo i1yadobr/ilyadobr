@@ -1,3 +1,9 @@
+// UnarmedAttack of the base mob type is a no-op.
+// This proc is part of the click handling system.
+// See code/_onclick/click.dm for a general overview of click handling.
+/mob/proc/UnarmedAttack(atom/A, proximity)
+	return
+
 // fun if you want to typecast humans/monkeys/etc without writing long path-filled lines.
 /proc/isxenomorph(A)
 	if(istype(A, /mob/living/carbon/human))
