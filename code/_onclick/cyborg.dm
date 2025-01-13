@@ -1,11 +1,8 @@
-/*
-	Cyborg ClickOn()
-
-	Cyborgs have no range restriction on attack_robot(), because it is basically an AI click.
-	However, they do have a range restriction on item use, so they cannot do without the
-	adjacency code.
-*/
-
+// Cyborg click handling overrides default /mob/ClickOn() with their own click handling system which
+// only checks for adjacency on item interactions, but otherwise allows cyborgs to interact regardless
+// of the distance to objects.
+//
+// See code/_onclick/click.dm for base click handling implementations and an overview of click handling in general.
 /mob/living/silicon/robot/ClickOn(atom/A, params)
 	if(world.time <= next_click)
 		return
@@ -37,7 +34,7 @@
 	if(!canClick())
 		return
 
-	face_atom(A) // change direction to face what you clicked on
+	face_atom(A)
 
 	if(silicon_camera.in_camera_mode)
 		silicon_camera.camera_mode_off()
@@ -49,7 +46,7 @@
 
 	var/obj/item/I = get_active_hand()
 
-	// Cyborgs have no range-checking unless there is item use
+	// Cyborgs interact with the world remotely when not using an item
 	if(!I)
 		A.add_hiddenprint(src)
 		A.attack_robot(src)
@@ -59,10 +56,9 @@
 		I.attack_self(src)
 		return
 
-	// cyborgs are prohibited from using storage items so we can I think safely remove (A.loc in contents)
+	// Regardless of turfs, if A is our location, or A shares the same location with us, or A is in our contents,
+	// we allow item interaction with A.
 	if(A == loc || (A in loc) || (A in contents))
-		// No adjacency checks
-
 		var/resolved = I.resolve_attackby(A, src, params)
 		if(!resolved && A && I)
 			I.afterattack(A, src, TRUE, params)
@@ -71,10 +67,9 @@
 	if(!isturf(loc))
 		return
 
-	// cyborgs are prohibited from using storage items so we can I think safely remove (A.loc && isturf(A.loc.loc))
+	// Item interactions in the world where A is turf or is on a turf require cyborg to be adjacent
 	if(isturf(A) || isturf(A.loc))
-		if(A.Adjacent(src)) // see adjacent.dm
-
+		if(A.Adjacent(src))
 			var/resolved = I.resolve_attackby(A, src, params)
 			if(!resolved && A && I)
 				I.afterattack(A, src, TRUE, params)
@@ -84,86 +79,46 @@
 			return
 	return
 
-//Middle click cycles through selected modules.
+
+// CtrlClickOn for cyborgs forwards the click to the regular CtrlClick interaction of the atom A.
+// If A is an airlock, an APC, or a turred control panel, or a turf, it calls the AI variant of
+// the CtrlClick interaction instead.
+/mob/living/silicon/robot/CtrlClickOn(atom/A)
+	if(istype(A, /obj/machinery/door/airlock) \
+	|| istype(A, /obj/machinery/power/apc) \
+	|| istype(A, /obj/machinery/turretid) \
+	|| istype(A, /turf))
+		A.AICtrlClick()
+		return
+	A.CtrlClick(src)
+
+// CtrlShiftClickOn for cyborgs forwards the click to the regular CtrlShiftClick interaction of the atom A.
+/mob/living/silicon/robot/CtrlShiftClickOn(atom/A)
+	A.CtrlShiftClick(src)
+
+// ShiftClickOn for cyborgs forwards the click to the regular ShiftClick interaction of the atom A.
+// If A is an airlock or a turf, it calls the AI variant of the ShiftClick interaction instead.
+/mob/living/silicon/robot/ShiftClickOn(atom/A)
+	if(istype(A, /obj/machinery/door/airlock) || istype(A, /turf))
+		A.AIShiftClick()
+		return
+	A.ShiftClick(src)
+
+// AltClickOn for cyborgs forwards the click to the regular AltClick interaction of the atom A.
+// If A is a turret control panel or a turf, it calls the AI variant of the AltClick interaction instead.
+//
+// NOTE: below is a unqiue exception which maps a differnt keybind.
+// If A is an airlock, it calls the AI variant of the **CtrlAltClick** interaction instead.
+/mob/living/silicon/robot/AltClickOn(atom/A)
+	if(istype(A, /obj/machinery/turretid) || istype(A, /turf))
+		A.AIAltClick()
+		return
+	if(istype(A, /obj/machinery/door/airlock))
+		A.AICtrlAltClick()
+		return
+	A.AltClick(src)
+
+//MiddleClickOn for cyborgs cycles through selected modules.
 /mob/living/silicon/robot/MiddleClickOn(atom/A)
 	cycle_modules()
 	return
-
-//Give cyborgs hotkey clicks without breaking existing uses of hotkey clicks
-// for non-doors/apcs
-/mob/living/silicon/robot/CtrlShiftClickOn(atom/A)
-	A.BorgCtrlShiftClick(src)
-
-/mob/living/silicon/robot/ShiftClickOn(atom/A)
-	A.BorgShiftClick(src)
-
-/mob/living/silicon/robot/CtrlClickOn(atom/A)
-	A.BorgCtrlClick(src)
-
-/mob/living/silicon/robot/AltClickOn(atom/A)
-	A.BorgAltClick(src)
-
-/atom/proc/BorgCtrlShiftClick(mob/living/silicon/robot/user) //forward to human click if not overriden
-	CtrlShiftClick(user)
-
-/obj/machinery/door/airlock/BorgCtrlShiftClick()
-	AICtrlShiftClick()
-
-/atom/proc/BorgShiftClick(mob/living/silicon/robot/user) //forward to human click if not overriden
-	ShiftClick(user)
-
-/obj/machinery/door/airlock/BorgShiftClick()  // Opens and closes doors! Forwards to AI code.
-	AIShiftClick()
-
-/atom/proc/BorgCtrlClick(mob/living/silicon/robot/user) //forward to human click if not overriden
-	CtrlClick(user)
-
-/obj/machinery/door/airlock/BorgCtrlClick() // Bolts doors. Forwards to AI code.
-	AICtrlClick()
-
-/obj/machinery/power/apc/BorgCtrlClick() // turns off/on APCs. Forwards to AI code.
-	AICtrlClick()
-
-/obj/machinery/turretid/BorgCtrlClick() //turret control on/off. Forwards to AI code.
-	AICtrlClick()
-
-/atom/proc/BorgAltClick(mob/living/silicon/robot/user)
-	AltClick(user)
-	return
-
-/obj/machinery/door/airlock/BorgAltClick() // Eletrifies doors. Forwards to AI code.
-	AICtrlAltClick()
-
-/obj/machinery/turretid/BorgAltClick() //turret lethal on/off. Forwards to AI code.
-	AIAltClick()
-
-/obj/machinery/atmospherics/binary/pump/BorgAltClick()
-	return AltClick()
-
-/*
-	As with AI, these are not used in click code,
-	because the code for robots is specific, not generic.
-
-	If you would like to add advanced features to robot
-	clicks, you can do so here, but you will have to
-	change attack_robot() above to the proper function
-*/
-/mob/living/silicon/robot/UnarmedAttack(atom/A)
-	A.attack_robot(src)
-/mob/living/silicon/robot/RangedAttack(atom/A)
-	A.attack_robot(src)
-
-/atom/proc/attack_robot(mob/user as mob)
-	attack_ai(user)
-	return
-
-// QOL feature, clicking on turf can toogle doors
-/turf/BorgCtrlClick(mob/living/silicon/robot/user)
-	AICtrlClick(user)
-
-/turf/BorgAltClick(mob/living/silicon/robot/user)
-	AIAltClick(user)
-
-/turf/BorgShiftClick(mob/living/silicon/robot/user)
-	AIShiftClick(user)
-	..()

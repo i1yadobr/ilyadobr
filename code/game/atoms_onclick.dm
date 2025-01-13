@@ -74,3 +74,12 @@
 // See code/_onclick/click.dm for an overview of click handling in general.
 /atom/proc/attack_ai(mob/user as mob)
 	return
+
+// attack_robot for base atom type forwards the click to the attack_ai() proc.
+//
+// This proc is intended to be overridden by subtypes for unique interactions that are different from AI variants.
+//
+// This proc is only called by the Cyborg's ClickOn() proc, which in part of the click system.
+// See code/_onclick/click.dm for an overview of click handling in general.
+/atom/proc/attack_robot(mob/user as mob)
+	attack_ai(user)
