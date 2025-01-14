@@ -442,6 +442,9 @@
 	color = rgb(rand(50, 255), rand(50, 255), rand(50, 255))
 	..()
 
+
+// Metroid flashlight is a flashlight variant with a weak yellow light that is always on.
+// It is usually obtained by extracting and activating the core of yellow metroids.
 /obj/item/device/flashlight/metroid
 	gender = PLURAL
 	name = "glowing metroid extract"
@@ -450,6 +453,7 @@
 	icon_state = "slime-on"
 	item_state = "slime"
 	w_class = ITEM_SIZE_TINY
+	action_button_name = null
 
 	flashlight_max_bright = 1
 	flashlight_inner_range = 0.1
@@ -465,5 +469,8 @@
 /obj/item/device/flashlight/metroid/update_icon()
 	return
 
-/obj/item/device/flashlight/metroid/attack_self(mob/user)
-	return //Bio-luminescence does not toggle.
+/obj/item/device/flashlight/metroid/switch_light(mob/user)
+	return
+
+/obj/item/device/flashlight/metroid/toggle(mob/user)
+	return
