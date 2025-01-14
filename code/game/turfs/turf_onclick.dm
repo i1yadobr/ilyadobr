@@ -6,11 +6,11 @@
 	var/obj/machinery/door/airlock/AL = locate(/obj/machinery/door/airlock) in contents
 	if(AL)
 		AL.attack_ai(user)
-		return TRUE
+		return
 	var/obj/machinery/door/firedoor/FD = locate(/obj/machinery/door/firedoor) in contents
 	if(FD)
 		FD.attack_ai(user)
-		return TRUE
+		return
 
 // AICtrlClick for turfs allows AI to Ctrl-click an airlock present on the turf.
 // This is a QoL feature intended to help AI players easily interact with open airlocks, as open state sprite
@@ -18,8 +18,7 @@
 /turf/AICtrlClick(mob/user)
 	var/obj/machinery/door/airlock/AL = locate(/obj/machinery/door/airlock) in contents
 	if(AL)
-		AL.AICtrlClick(user)
-		return
+		return AL.AICtrlClick(user)
 	return ..()
 
 // AIShiftClick for turfs allows AI to Shift-click an airlock present on the turf.
@@ -28,8 +27,7 @@
 /turf/AIShiftClick(mob/user)
 	var/obj/machinery/door/airlock/AL = locate(/obj/machinery/door/airlock) in contents
 	if(AL)
-		AL.AIShiftClick(user)
-		return
+		return AL.AIShiftClick(user)
 	return ..()
 
 // AIAltClick for turfs allows AI to Alt-click an airlock present on the turf.
@@ -38,6 +36,5 @@
 /turf/AIAltClick(mob/user)
 	var/obj/machinery/door/airlock/AL = locate(/obj/machinery/door/airlock) in contents
 	if(AL)
-		AL.AIAltClick(user)
-		return
+		return AL.AIAltClick(user)
 	return ..()
