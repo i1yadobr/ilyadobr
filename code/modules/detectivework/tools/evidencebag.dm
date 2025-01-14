@@ -103,7 +103,6 @@
 	else
 		to_chat(user, "[src] is empty.")
 		icon_state = "[base_icon_state]obj"
-	return
 
 /obj/item/evidencebag/_examine_text(mob/user)
 	. = ..()

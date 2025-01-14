@@ -138,7 +138,7 @@
 			turn_on(user)
 
 /obj/item/modular_computer/attack_ai(mob/user)
-	return attack_self(user)
+	attack_self(user)
 
 /obj/item/modular_computer/attack_hand(mob/user)
 	if(anchored)

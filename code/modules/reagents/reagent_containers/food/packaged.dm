@@ -16,7 +16,6 @@
 		update_icon()
 		playsound(loc, 'sound/items/shpshpsh.ogg', 50, 1)
 		return
-	return ..()
 
 /obj/item/reagent_containers/food/packaged/update_icon()
 	if(is_open_container())

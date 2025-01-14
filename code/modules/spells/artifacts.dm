@@ -21,8 +21,6 @@
 
 	user.teleop = user.ghostize(1)
 	announce_ghost_joinleave(user.teleop, 1, "You feel that they used a powerful artifact to [pick("invade","disturb","disrupt","infest","taint","spoil","blight")] this place with their presence.")
-	return
-
 
 
 /////////////////////////Cursed Dice///////////////////////////

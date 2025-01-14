@@ -99,7 +99,7 @@
 	var/amount = input(usr, "How many Credits do you want to take? (0 to [src.worth])", "Take Money", 20) as num
 	amount = round(Clamp(amount, 0, src.worth))
 	if(amount==0 || src.worth == amount || !src.loc)
-		return 0
+		return
 
 	src.worth -= amount
 	src.update_icon()
@@ -199,7 +199,6 @@
 	var/next_scratch = 0
 
 /obj/item/spacecash/ewallet/lotto/attack_self(mob/user)
-
 	if(scratches_remaining <= 0)
 		to_chat(user, SPAN("warning", "The card flashes: \"No scratches remaining!\""))
 		return

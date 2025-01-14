@@ -245,20 +245,16 @@
 			qdel(src)
 
 /obj/item/reagent_containers/food/grown/attack_self(mob/user as mob)
-
 	if(!seed)
 		return
-
 	if(istype(user.loc,/turf/space))
 		return
-
 	if(user.a_intent == I_HURT)
 		user.visible_message(SPAN("danger", "\The [user] squashes \the [src]!"))
 		seed.thrown_at(src,user)
 		sleep(-1)
 		if(src) qdel(src)
 		return
-
 	if(seed.kitchen_tag == "grass")
 		user.show_message(SPAN("notice", "You make a grass tile out of \the [src]!"), 1)
 		var/flesh_colour = seed.get_trait(TRAIT_FLESH_COLOUR)
@@ -275,7 +271,6 @@
 			to_chat(user, "You add the newly-formed grass to the stack. It now contains [G.amount] tiles.")
 		qdel(src)
 		return
-
 	if(seed.get_trait(TRAIT_SPREAD) > 0)
 		to_chat(user, SPAN("notice", "You plant the [src.name]."))
 		new /obj/machinery/portable_atmospherics/hydroponics/soil/invisible(get_turf(user),src.seed)

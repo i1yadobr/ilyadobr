@@ -55,7 +55,6 @@
 		SetName(initial(name))
 
 /obj/item/reagent_containers/chem_disp_cartridge/attack_self()
-	..()
 	if (is_open_container())
 		to_chat(usr, SPAN("notice", "You put the cap on \the [src]."))
 		atom_flags ^= ATOM_FLAG_OPEN_CONTAINER

@@ -238,5 +238,4 @@ var/list/artefact_feedback = list(
 	if(!GLOB.wizards.is_antagonist(user.mind))
 		to_chat(user, "You can't make heads or tails of this book.")
 		return
-
 	tgui_interact(user, null)

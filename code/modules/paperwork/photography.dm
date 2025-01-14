@@ -179,7 +179,6 @@ var/global/photo_count = 0
 	is_on = !is_on
 	update_icon()
 	to_chat(user, "You switch the camera [is_on ? "on" : "off"].")
-	return
 
 /obj/item/device/camera/attackby(obj/item/I as obj, mob/user as mob)
 	if(istype(I, /obj/item/device/camera_film))

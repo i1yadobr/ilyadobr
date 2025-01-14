@@ -98,7 +98,6 @@
 	set hidden = 1
 	if(mob)
 		mob.mode()
-	return
 
 
 /client/verb/toggle_throw_mode()

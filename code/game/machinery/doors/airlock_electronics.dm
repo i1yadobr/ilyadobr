@@ -20,7 +20,8 @@
 
 /obj/item/airlock_electronics/attack_self(mob/user as mob)
 	if (!ishuman(user) && !istype(user,/mob/living/silicon/robot))
-		return ..(user)
+		..(user)
+		return
 
 	tgui_interact(user)
 

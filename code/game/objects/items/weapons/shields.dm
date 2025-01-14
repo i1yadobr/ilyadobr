@@ -163,7 +163,6 @@
 		H.update_inv_r_hand()
 
 	add_fingerprint(user)
-	return
 
 /obj/item/shield/energy/update_icon()
 	icon_state = "eshield[active]"
@@ -307,4 +306,3 @@
 		user.take_organ_damage(5)
 	toggle(user)
 	add_fingerprint(user)
-	return

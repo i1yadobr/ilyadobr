@@ -96,7 +96,6 @@
 /obj/item/clothing/ring/seal/signet/attack_self(mob/user)
 	if(nameset)
 		to_chat(user, SPAN("notice", "The [src] has already been claimed!"))
-		return
 
 	nameset = 1
 	to_chat(user, SPAN("notice", "You claim the [src] as your own!"))

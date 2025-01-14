@@ -35,4 +35,3 @@
 	attack_self(mob/user)
 		activate()
 		add_fingerprint(user)
-		return

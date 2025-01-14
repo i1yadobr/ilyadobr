@@ -57,10 +57,8 @@
 		qdel(src)
 	return
 
-
 /obj/item/reagent_containers/food/attack_self(mob/user)
 	return
-
 
 /obj/item/reagent_containers/food/attack(mob/M, mob/user, def_zone)
 	if(!reagents.total_volume)
@@ -137,7 +135,6 @@
 
 	return FALSE
 
-
 /obj/item/reagent_containers/food/proc/get_bitecount()
 	switch(bitecount)
 		if(-INFINITY to 0)
@@ -149,13 +146,11 @@
 		else
 			return SPAN("notice", "\n\The [src] was bitten multiple times!")
 
-
 /obj/item/reagent_containers/food/_examine_text(mob/user)
 	. = ..()
 	if(get_dist(src, user) > 1)
 		return
 	. += get_bitecount()
-
 
 /obj/item/reagent_containers/food/throw_impact(atom/hit_atom, speed, thrown_with, target_zone)
 	var/mob/living/carbon/human/H = hit_atom
@@ -175,11 +170,9 @@
 	if(H.stat == CONSCIOUS)
 		to_chat(H, SPAN("notice", "You take a bite of [src]."))
 
-
 /obj/item/reagent_containers/food/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/storage))
 		return ..() // -> item/attackby()
-
 	// Eating with forks
 	if(istype(W, /obj/item/material/kitchen/utensil))
 		var/obj/item/material/kitchen/utensil/U = W
@@ -191,9 +184,9 @@
 				to_chat(user, SPAN("warning", "You already have something on your [U]."))
 				return
 
-			user.visible_message( \
-				"\The [user] scoops up some [src] with \the [U]!", \
-				SPAN("notice", "You scoop up some [src] with \the [U]!") \
+			user.visible_message(
+				"\The [user] scoops up some [src] with \the [U]!",
+				SPAN("notice", "You scoop up some [src] with \the [U]!")
 			)
 
 			bitecount++
@@ -211,12 +204,10 @@
 			reagents.trans_to_obj(U, min(reagents.total_volume, 5))
 			On_Consume(user)
 			return
-
 	if(is_sliceable())
 		//these are used to allow hiding edge items in food that is not on a table/tray
 		var/can_slice_here = isturf(loc) && ((locate(/obj/structure/table) in loc) || (locate(/obj/machinery/optable) in loc) || (locate(/obj/item/tray) in loc))
 		var/hide_item = !has_edge(W) || !can_slice_here
-
 		if(hide_item)
 			if(W.w_class >= w_class || is_robot_module(W))
 				return
@@ -230,7 +221,6 @@
 			add_fingerprint(user)
 			contents += W
 			return
-
 		if(has_edge(W))
 			if(!can_slice_here)
 				to_chat(user, SPAN("warning", "You cannot slice \the [src] here! You need a table or at least a tray to do it."))
@@ -249,8 +239,6 @@
 				reagents.trans_to_obj(slice, reagents_per_slice)
 			qdel(src)
 			return
-	return ..()
-
 
 /obj/item/reagent_containers/food/attack_generic(mob/living/user)
 	if(!isanimal(user) && !isalien(user))
@@ -265,13 +253,11 @@
 			qdel(src)
 	On_Consume(user)
 
-
 /obj/item/reagent_containers/food/Destroy()
 	if(contents)
 		for(var/atom/movable/thing in contents)
 			thing.dropInto(loc)
 	. = ..()
-
 
 /obj/item/reagent_containers/food/proc/is_sliceable()
 	return (slices_num && slice_path)

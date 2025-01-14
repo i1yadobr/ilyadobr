@@ -285,11 +285,8 @@
 		w_class = ITEM_SIZE_SMALL
 		playsound(user, 'sound/weapons/saberoff.ogg', 50, 1)
 		to_chat(user, SPAN("notice", "[src] can now be concealed."))
-
 	update_held_icon()
-
 	add_fingerprint(user)
-	return
 
 //BASKETBALL OBJECTS
 

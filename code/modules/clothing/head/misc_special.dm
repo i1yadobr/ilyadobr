@@ -180,7 +180,6 @@
 		src.damtype = "brute"
 		src.icon_state = "cake0"
 		src.item_state = "cake0"
-	return
 
 /obj/item/clothing/head/cakehat/get_temperature_as_from_ignitor()
 	if(onfire)

@@ -162,7 +162,6 @@
 
 /obj/item/complaint_folder/attack_self(mob/living/user)
 	user.examinate(main_form)
-	return ..()
 
 /obj/item/complaint_folder/attack_hand(mob/user)
 	if (user.get_inactive_hand() != src)

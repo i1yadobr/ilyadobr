@@ -64,7 +64,6 @@
 /obj/item/stack/attack_self(mob/user as mob)
 	if(uses_charge)
 		list_recipes(user)
-	return
 
 /obj/item/stack/proc/list_recipes(mob/user as mob, recipes_sublist)
 	if(!recipes)

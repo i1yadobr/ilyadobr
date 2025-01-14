@@ -45,7 +45,7 @@
 		return ..()
 
 /obj/item/anodevice/attack_self(mob/user)
-	return interact(user)
+	interact(user)
 
 /obj/item/anodevice/interact(mob/user)
 	var/dat = "<meta charset=\"utf-8\"><b>Anomalous Materials Energy Utiliser</b><br>"

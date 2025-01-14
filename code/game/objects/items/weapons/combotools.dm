@@ -23,7 +23,6 @@
 	switchtools()
 	to_chat(user, SPAN("notice", "[src] mode: [tool_c]."))
 	update_icon()
-	return
 
 /obj/item/combotool/resolve_attackby(atom/a, mob/user, click_params)
 	if(istype(a, /obj/item/storage) && user.a_intent != I_DISARM)

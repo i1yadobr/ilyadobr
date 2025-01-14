@@ -54,7 +54,6 @@
 	show_browser(user, dat, "window=folder")
 	onclose(user, "folder")
 	add_fingerprint(usr)
-	return
 
 /obj/item/folder/Topic(href, href_list)
 	..()
@@ -135,8 +134,7 @@
 	if(sealed)
 		sealcheck(user)
 		return
-	else
-		..()
+	..()
 
 /obj/item/folder/envelope/attackby(obj/item/W as obj, mob/user as mob)
 	if(sealed)

@@ -100,8 +100,6 @@
 	t = "Available reagents: [t]."
 	to_chat(user, t)
 
-	return
-
 /obj/item/reagent_containers/borghypo/OnTopic(href, list/href_list)
 	if(href_list["reagent_index"])
 		var/index = text2num(href_list["reagent_index"])

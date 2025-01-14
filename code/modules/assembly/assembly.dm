@@ -130,10 +130,10 @@
 
 
 /obj/item/device/assembly/attack_self(mob/user as mob)
-	if(!user)	return 0
+	if(!user)
+		return
 	user.set_machine(src)
 	interact(user)
-	return 1
 
 /obj/item/device/assembly/interact(mob/user as mob)
 	return //HTML MENU FOR WIRES GOES HERE

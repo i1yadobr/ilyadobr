@@ -354,7 +354,7 @@
 		icon_state = "[icon_state]_full"
 
 /obj/item/reagent_containers/dna_sampler/attack_self(mob/user as mob)
-	if (!reagents.get_free_space())
+	if(!reagents.get_free_space())
 		src.reagents.del_reagent(/datum/reagent/blood)
 		update_icon()
 		to_chat(user, SPAN("notice", "You reset \the [src]."))

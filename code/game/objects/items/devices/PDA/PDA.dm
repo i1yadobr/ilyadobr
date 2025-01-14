@@ -314,12 +314,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	if ((honkamt > 0) && (prob(60)))//For clown virus.
 		honkamt--
 		playsound(loc, 'sound/items/bikehorn.ogg', 30, 1)
-	return
-
 
 /obj/item/device/pda/ai/pai
 	ttone = "assist"
-
 
 /*
  *	The Actual PDA
@@ -567,12 +564,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 //NOTE: graphic resources are loaded on client login
 /obj/item/device/pda/attack_self(mob/user as mob)
 	user.set_machine(src)
-
 	if(active_uplink_check(user))
 		return
-
 	ui_interact(user) //NanoUI requires this proc
-	return
 
 /obj/item/device/pda/Topic(href, href_list)
 	if(href_list["cartmenu"] && !QDELETED(cartridge))

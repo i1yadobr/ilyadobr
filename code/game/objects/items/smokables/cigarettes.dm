@@ -209,7 +209,7 @@
 				user.drop(src) // un-equip it so the overlays can update
 		else
 			die(nomessage = TRUE, nodestroy = FALSE)
-	return ..()
+	..()
 
 /obj/item/clothing/mask/smokable/cigarette/attack_hand(mob/user)
 	if(ishuman(user) && dynamic_icon)

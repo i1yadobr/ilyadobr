@@ -36,7 +36,6 @@
 	part1.attack_self(user, status)
 	part2.attack_self(user, status)
 	add_fingerprint(user)
-	return
 
 /obj/item/assembly/shock_kit/receive_signal()
 	if(istype(loc, /obj/structure/bed/chair/e_chair))

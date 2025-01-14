@@ -77,7 +77,6 @@ Basically: I can use it to target things where I click. I can then pass these ta
 	var/datum/spell/hand/mind_control/mind_spell
 
 /obj/item/magic_hand/control_hand/attack_self(mob/user)
-	. = ..()
 	mind_spell.interact(user)
 
 /obj/item/magic_hand/control_hand/New(datum/spell/hand/S)

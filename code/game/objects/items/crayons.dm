@@ -76,7 +76,6 @@
 		colour = "#000000"
 		shadeColour = "#ffffff"
 		to_chat(user, "You will now draw in black and white with this crayon.")
-	return
 
 /obj/item/pen/crayon/rainbow
 	icon_state = "crayonrainbow"
@@ -90,7 +89,6 @@
 	colour = input(user, "Please select the main colour.", "Crayon colour") as color
 	shadeColour = input(user, "Please select the shade colour.", "Crayon colour") as color
 	update_popup(user)
-	return
 
 /obj/item/pen/crayon
 	var/datum/browser/popup

@@ -14,7 +14,6 @@
 	if((user.mind && !GLOB.wizards.is_antagonist(user.mind)))
 		to_chat(usr, SPAN("warning", "You stare at the scroll but cannot make sense of the markings!"))
 		return
-
 	user.set_machine(src)
 	var/dat = "<meta charset=\"utf-8\"><B>Teleportation Scroll:</B><BR>"
 	dat += "Number of uses: [src.uses]<BR>"
@@ -24,7 +23,6 @@
 	dat += "Kind regards,<br>Wizards Federation<br><br>P.S. Don't forget to bring your gear, you'll need it to cast most spells.<HR>"
 	show_browser(user, dat, "window=scroll")
 	onclose(user, "scroll")
-	return
 
 /obj/item/teleportation_scroll/Topic(href, href_list)
 	if(..())

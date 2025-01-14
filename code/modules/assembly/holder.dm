@@ -184,8 +184,6 @@
 				a_right.proximity_monitor.SetHost(a_right, a_right)
 		spawn(0)
 			qdel(src)
-	return
-
 
 /obj/item/device/assembly_holder/process_activation(obj/D, normal = 1, special = 1)
 	if(!D)	return 0

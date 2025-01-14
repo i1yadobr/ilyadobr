@@ -470,7 +470,7 @@
 		// TODO(rufus): replace with allow_quick_empty check
 		if(src.verbs.Find(/obj/item/storage/verb/quick_empty))
 			quick_empty()
-			return TRUE
+			return
 
 /obj/item/storage/proc/make_exact_fit()
 	storage_slots = contents.len

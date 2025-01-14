@@ -316,14 +316,11 @@
 	var/mode = 1
 
 /obj/item/pen/robopen/attack_self(mob/user as mob)
-
 	var/choice = input("Would you like to change colour or mode?") as null|anything in list("Colour","Mode")
-	if(!choice) return
-
+	if(!choice)
+		return
 	playsound(src.loc, 'sound/effects/pop.ogg', 50, 0)
-
 	switch(choice)
-
 		if("Colour")
 			var/newcolour = input("Which colour would you like to use?") as null|anything in list("black","blue","red","green","yellow")
 			if(newcolour) colour = newcolour
@@ -334,8 +331,6 @@
 			else
 				mode = 1
 			to_chat(user, "Changed printing mode to '[mode == 2 ? "Rename Paper" : "Write Paper"]'")
-
-	return
 
 // Copied over from paper's rename verb
 // see code/modules/paperwork/paper.dm line 62

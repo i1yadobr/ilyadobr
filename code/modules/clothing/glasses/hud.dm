@@ -313,7 +313,6 @@
 /obj/item/clothing/glasses/hud/attack_self(mob/user)
 	if(!user.incapacitated())
 		toggle_matrix(user)
-	return
 
 /obj/item/clothing/glasses/hud/proc/activate_matrix()
 	if(!matrix)

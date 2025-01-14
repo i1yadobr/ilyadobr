@@ -184,7 +184,7 @@
 	. = ..()
 
 /obj/item/gun/flamer/attack_self(mob/user)
-	return toggle_flame(user)
+	toggle_flame(user)
 
 /obj/item/gun/flamer/proc/toggle_flame(mob/user)
 
@@ -201,6 +201,7 @@
 	if(lit)
 		playsound(user, pick(ignite_sound), 100, 1)
 		set_next_think(world.time)
+	// TODO(rufus): remove redundant return value
 	return TRUE
 
 /obj/item/gun/flamer/Fire(atom/target, mob/living/user, params, pointblank=0, reflex=0)

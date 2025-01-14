@@ -221,9 +221,7 @@ var/const/NO_EMAG_ACT = -50
 /obj/item/card/id/attack_self(mob/user as mob)
 	user.visible_message("\The [user] shows you: \icon[src] [src.name]. The assignment on the card: [src.assignment]",\
 		"You flash your ID card: \icon[src] [src.name]. The assignment on the card: [src.assignment]")
-
 	src.add_fingerprint(user)
-	return
 
 /obj/item/card/id/GetAccess()
 	return access

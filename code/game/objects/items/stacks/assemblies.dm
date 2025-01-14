@@ -77,11 +77,9 @@
 
 /obj/item/stack/gassembly/attack_self(mob/user as mob)
 	src.add_fingerprint(user)
-
-	if (istype(user.loc,/turf) && !isfloor(user.loc))
+	if(istype(user.loc,/turf) && !isfloor(user.loc))
 		to_chat(user, SPAN_WARNING("\The [name] must be constructed on the floor!"))
 		return
-
 	if(!in_use)
 		user.visible_message(SPAN_NOTICE("\The [user] begins assembling \a [singular_name]."), \
 				SPAN_NOTICE("You begin assembling \the [singular_name]."))
@@ -98,4 +96,3 @@
 		in_use = 0
 		new_girder.add_fingerprint(user)
 		use(1)
-	return

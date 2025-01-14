@@ -39,8 +39,8 @@
 				ui_interact(user)
 			if("Show")
 				..()
-	else
-		..()
+		return
+	..()
 
 /obj/item/card/id/syndicate/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1)
 	var/data[0]

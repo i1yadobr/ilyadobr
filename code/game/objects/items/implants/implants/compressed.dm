@@ -96,8 +96,7 @@
 
 /obj/item/implanter/compressed/attack_self(mob/user)
 	if(!imp || safe == 2)
-		return ..()
-
+		return
 	safe = !safe
 	to_chat(user, SPAN("notice", "You [safe ? "enable" : "disable"] the matter compressor safety."))
 	src.desc = "The matter compressor safety is [safe ? "on" : "off"]."

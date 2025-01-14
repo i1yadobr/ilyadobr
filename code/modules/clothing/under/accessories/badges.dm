@@ -18,7 +18,6 @@
 	name = "[initial(name)] ([stored_name])"
 
 /obj/item/clothing/accessory/badge/attack_self(mob/user)
-
 	if(!stored_name)
 		to_chat(user, "You inspect your [src.name]. Everything seems to be in order and you give it a quick cleaning with your hand.")
 		set_name(user.real_name)
@@ -71,7 +70,7 @@
 	if(!stored_name)
 		to_chat(user, "Waving around a holobadge before swiping an ID would be pretty pointless.")
 		return
-	return ..()
+	..()
 
 /obj/item/clothing/accessory/badge/holo/emag_act(remaining_charges, mob/user)
 	if (emagged)

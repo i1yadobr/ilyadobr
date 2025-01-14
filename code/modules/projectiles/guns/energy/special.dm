@@ -189,6 +189,7 @@
 	w_class = ITEM_SIZE_LARGE
 	projectile_type = /obj/item/projectile/forcebolt
 	combustion = FALSE
+	// TODO(rufus): remove or reuse commented code
 	/*
 	attack_self(mob/living/user as mob)
 		if(projectile_type == /obj/item/projectile/forcebolt)

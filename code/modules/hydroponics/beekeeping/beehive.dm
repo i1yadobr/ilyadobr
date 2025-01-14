@@ -224,7 +224,6 @@
 		user.visible_message(SPAN("notice", "\The [user] constructs a beehive."), SPAN("notice", "You construct a beehive."))
 		new /obj/machinery/beehive(get_turf(user))
 		qdel(src)
-	return
 
 /obj/item/stack/wax
 	name = "wax"

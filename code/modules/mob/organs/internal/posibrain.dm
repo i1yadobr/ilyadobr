@@ -58,7 +58,8 @@
 		src.searching = 1
 		var/datum/ghosttrap/G = get_ghost_trap("positronic brain")
 		G.request_player(brainmob, "Someone is requesting a personality for a positronic brain.", 60 SECONDS)
-		spawn(600) reset_search()
+		spawn(600)
+			reset_search()
 
 /obj/item/organ/internal/posibrain/proc/reset_search() //We give the players sixty seconds to decide, then reset the timer.
 	if(src.brainmob && src.brainmob.key) return

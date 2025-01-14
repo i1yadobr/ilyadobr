@@ -28,7 +28,6 @@
 		src.add_fingerprint(user)
 		spawn(20)
 			spam_flag = 0
-	return
 
 //Oh no
 /obj/item/bikehorn/vuvuzela
@@ -49,4 +48,3 @@
 		src.add_fingerprint(user)
 		spawn(20)
 			spam_flag = 0
-	return

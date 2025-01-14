@@ -147,7 +147,6 @@
 	..()
 
 /obj/item/deck/attack_self(mob/user as mob)
-
 	cards = shuffle(cards)
 	user.visible_message("\The [user] shuffles [src].")
 

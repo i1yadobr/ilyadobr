@@ -226,8 +226,10 @@
 
 /obj/item/storage/secure/guncase/security/attack_self(mob/user)
 	if(locked && !gunspawned)
-		return ..()
-	return attack_hand(user)
+		show_lock_menu(user)
+		if(lock_menu?.user == user)
+			lock_menu.open()
+	attack_hand(user)
 
 /obj/item/storage/secure/guncase/security/spawn_set(set_name)
 	if(gunspawned)

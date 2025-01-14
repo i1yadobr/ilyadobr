@@ -60,7 +60,6 @@
 	src.icon_state = "[sprite_name][!safety]"
 	src.desc = "The safety is [safety ? "on" : "off"]."
 	to_chat(user, "The safety is [safety ? "on" : "off"].")
-	return
 
 /obj/item/extinguisher/attack(mob/living/M, mob/user)
 	if((user.a_intent == I_HELP) && !external_source)

@@ -103,7 +103,7 @@
 // Blade Runner pistol.
 // NOTE(rufus): this and M2019 are references to the same fictional gun.
 //   The plan is to keep both, but make Deckard into an antique gun from bygone era by lore means, similar to cap's ancient gun.
-//   Deckard is intended to only be available via merchants right now. 
+//   Deckard is intended to only be available via merchants right now.
 /obj/item/gun/projectile/revolver/deckard
 	name = "Deckard .44"
 	// TODO(rufus): lore is cool and stuff, but this has to go under an "extended description/item info" feature, extremely long

@@ -146,7 +146,6 @@
 	src.show_content(user)
 	add_fingerprint(usr)
 	update_icon()
-	return
 
 /obj/item/paper_bundle/Topic(href, href_list)
 	if(..())

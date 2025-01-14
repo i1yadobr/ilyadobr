@@ -299,7 +299,6 @@
 	if(!held)
 		to_chat(user, SPAN("notice", "The rack is empty."))
 		return
-
 	to_chat(user, SPAN("notice", "You deploy the roller bed."))
 	var/obj/structure/bed/roller/R = new held.bedtype(user.loc)
 	R.add_fingerprint(user)

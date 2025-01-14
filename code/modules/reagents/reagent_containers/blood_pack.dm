@@ -65,6 +65,7 @@
 		. += SPAN_WARNING("There are teeth marks on it.")
 
 /obj/item/reagent_containers/attackby(obj/item/W as obj, mob/user as mob)
+	return
 
 /obj/item/reagent_containers/ivbag/update_icon()
 	overlays.Cut()

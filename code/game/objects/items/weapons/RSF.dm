@@ -38,42 +38,31 @@ RSF
 
 /obj/item/rsf/attack_self(mob/user as mob)
 	playsound(src.loc, 'sound/effects/pop.ogg', 50, 0)
-
 	switch(mode)
 		if(1)
 			mode = 2
 			to_chat(user, "Changed dispensing mode to 'Drinking Glass'")
-
 		if(2)
 			mode = 3
 			to_chat(user, "Changed dispensing mode to 'Paper'")
-
 		if(3)
-
 			mode = 4
 			to_chat(user, "Changed dispensing mode to 'Pen'")
-
 		if(4)
 			mode = 5
 			to_chat(user, "Changed dispensing mode to 'Dice Pack'")
-
 		if(5)
-
 			mode = 6
 			to_chat(user, "Changed dispensing mode to 'Shot glass'")
-
 		if(6)
 			mode = 7
 			to_chat(user, "Changed dispensing mode to 'Rocks glass'")
-
 		if(7)
 			mode = 8
 			to_chat(user, "Changed dispensing mode to 'Beer Mug'")
-
 		if(8)
 			mode = 1
 			to_chat(user, "Changed dispensing mode to 'Cigarette'")
-
 
 /obj/item/rsf/afterattack(atom/A, mob/user as mob, proximity)
 

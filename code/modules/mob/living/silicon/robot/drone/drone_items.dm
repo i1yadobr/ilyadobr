@@ -254,17 +254,17 @@
 
 /obj/item/gripper/attack_self(mob/user as mob)
 	if(wrapped)
-		return wrapped.attack_self(user)
+		wrapped.attack_self(user)
+		return
 	else
-		if (length(storage_type))
+		if(length(storage_type))
 			playsound(src.loc, 'sound/effects/pop.ogg', 50, 0)
 			if (mode == MODE_EMPTY)
 				mode = MODE_OPEN
 			else
 				mode = MODE_EMPTY
 			to_chat(user, "You changed \the [src]'s mode to [mode == MODE_EMPTY ? "empty" : "open"] containers.")
-
-	return ..()
+	..()
 
 /obj/item/gripper/verb/drop_item()
 

@@ -84,8 +84,6 @@
 /obj/structure/filingcabinet/attack_tk(mob/user)
 	if(anchored)
 		attack_self_tk(user)
-	else
-		..()
 
 /obj/structure/filingcabinet/attack_self_tk(mob/user)
 	if(contents.len)

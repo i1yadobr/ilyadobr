@@ -487,14 +487,11 @@ REAGENT SCANNER
 		to_chat(user, "You toggle advanced gas analysis [advanced_mode ? "on" : "off"].")
 
 /obj/item/device/analyzer/attack_self(mob/user)
-
 	if (user.incapacitated())
 		return
 	if (!user.IsAdvancedToolUser())
 		return
-
 	analyze_gases(user.loc, user,advanced_mode)
-	return 1
 
 /obj/item/device/analyzer/afterattack(obj/O, mob/user, proximity)
 	if(!proximity)
@@ -567,7 +564,6 @@ REAGENT SCANNER
 				dat += "[initial(R.name)] ([blood_doses[T]] units) "
 		to_chat(user, "[dat]")
 		reagents.clear_reagents()
-	return
 
 /obj/item/device/mass_spectrometer/adv
 	name = "advanced mass spectrometer"

@@ -223,12 +223,11 @@ var/list/global/tank_gauge_cache = list()
 
 /obj/item/tank/attack_self(mob/user as mob)
 	add_fingerprint(user)
-	if (!air_contents)
+	if(!air_contents)
 		return
 	ui_interact(user)
-
-// There's GOT to be a better way to do this
-	if (proxyassembly.assembly)
+	// There's GOT to be a better way to do this
+	if(proxyassembly.assembly)
 		proxyassembly.assembly.attack_self(user)
 
 

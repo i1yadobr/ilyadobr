@@ -79,7 +79,6 @@
 	show_browser(user, dat, "window=clipboard")
 	onclose(user, "clipboard")
 	add_fingerprint(usr)
-	return
 
 /obj/item/clipboard/Topic(href, href_list)
 	..()

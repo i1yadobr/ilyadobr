@@ -30,7 +30,6 @@
 /obj/item/device/chameleonholo/attack_self_tk(mob/user)
 	if(active)
 		deactivate()
-		return
 
 /obj/item/device/chameleonholo/_examine_text(mob/user)
 	if(!active)

@@ -45,7 +45,6 @@
 
 /obj/item/device/analyzer/plant_analyzer/attack_self(mob/user as mob)
 	print_report(user)
-	return 0
 
 /obj/item/device/analyzer/plant_analyzer/afterattack(obj/target, mob/user, flag)
 	if(!flag) return

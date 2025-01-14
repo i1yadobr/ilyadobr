@@ -161,6 +161,7 @@
 	var/signature = ""
 
 /obj/item/pen/chameleon/attack_self(mob/user as mob)
+	// TODO(rufus): remove or reuse commented code
 	/*
 	// Limit signatures to official crew members
 	var/personnel_list[] = list()

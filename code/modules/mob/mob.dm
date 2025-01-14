@@ -348,6 +348,8 @@
 					G.affecting.ret_grab(L)
 	return L
 
+// TODO(rufus): rename mode() proc to an appropriate "activate held object" name.
+//   It is currently named "mode" as historically it was used only for switching modes of the held item.
 /mob/verb/mode()
 	set name = "Activate Held Object"
 	set category = "Object"

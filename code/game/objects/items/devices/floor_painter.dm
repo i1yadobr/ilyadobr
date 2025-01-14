@@ -179,7 +179,7 @@
 	new painting_decal(F, painting_dir, painting_colour)
 
 /obj/item/device/floor_painter/attack_self(mob/user)
-	. = ..()
+	..()
 	tgui_interact(user)
 
 /obj/item/device/floor_painter/_examine_text(mob/user)

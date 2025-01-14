@@ -193,10 +193,8 @@
 		. += "\n[lid.get_examine_hint()]"
 
 /obj/item/reagent_containers/vessel/attack_self(mob/user)
-	..()
 	if(lid?.toggle(user))
 		update_icon()
-		return
 
 /obj/item/reagent_containers/vessel/attack(mob/M, mob/user, def_zone)
 	if(force && !(item_flags & ITEM_FLAG_NO_BLUDGEON) && user.a_intent == I_HURT)

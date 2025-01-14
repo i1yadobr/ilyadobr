@@ -559,7 +559,7 @@
 	var/on = 0
 
 /obj/item/oremagnet/attack_self(mob/user)
-	if (!ishuman(user))
+	if(!ishuman(user))
 		return
 	toggle_on(user)
 

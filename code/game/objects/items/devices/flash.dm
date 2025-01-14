@@ -124,7 +124,8 @@
 
 
 /obj/item/device/flash/attack_self(mob/living/carbon/user as mob, flag = 0, emp = 0)
-	if(!user || !clown_check(user)) 	return
+	if(!user || !clown_check(user))
+		return
 
 	if(broken)
 		user.show_message(SPAN("warning", "The [src.name] is broken"), 2)
@@ -168,8 +169,6 @@
 			if(!M.blinded)
 				M.flash_eyes()
 				M.eye_blurry += 2
-
-	return
 
 /obj/item/device/flash/emp_act(severity)
 	if(broken)

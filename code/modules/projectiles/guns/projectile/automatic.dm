@@ -305,8 +305,8 @@
 /obj/item/gun/projectile/automatic/l6_saw/attack_self(mob/user)
 	if(cover_open)
 		toggle_cover(user) //close the cover
-	else
-		return ..() //once closed, behave like normal
+		return
+	..() //once closed, behave like normal
 
 /obj/item/gun/projectile/automatic/l6_saw/attack_hand(mob/user)
 	if(!cover_open && user.get_inactive_hand() == src)

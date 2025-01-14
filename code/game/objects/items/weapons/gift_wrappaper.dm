@@ -100,7 +100,6 @@
 	var/obj/item/I = new gift_type(M)
 	I.add_fingerprint(M)
 	M.replace_item(src, I, TRUE, TRUE)
-	return
 
 /*
  * Wrapping Paper and Gifts
@@ -140,7 +139,6 @@
 	else
 		to_chat(user, SPAN("warning", "The gift was empty!"))
 	qdel(src)
-	return
 
 /obj/item/wrapping_paper
 	name = "wrapping paper"

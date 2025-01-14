@@ -32,7 +32,7 @@
 			// 10kJ per pulse, but gap in the shield lasts for longer than regular diffusers.
 			if(istype(S) && cell.checked_use(10 KILO WATTS * CELLRATE))
 				qdel(S)
-	
+
 	set_next_think(world.time + 1 SECOND)
 
 /obj/item/shield_diffuser/attack_self()

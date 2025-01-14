@@ -1,4 +1,3 @@
-
 /obj/item/reagent_containers/vessel/can
 	name = "tin can"
 	desc = "It opens, but never closes."
@@ -16,9 +15,7 @@
 	var/trash = null
 
 /obj/item/reagent_containers/vessel/can/attack_self(mob/user)
-	if((!reagents || !reagents.total_volume) && trash && user.a_intent != I_HELP)
-		if(!ispath(trash, /obj/item/trash/cans))
-			return ..()
+	if((!reagents || !reagents.total_volume) && trash && ispath(trash, /obj/item/trash/cans) && user.a_intent != I_HELP)
 		to_chat(user, SPAN("notice", "You crush \the [src]."))
 		playsound(user.loc, pick('sound/items/cancrush1.ogg', 'sound/items/cancrush2.ogg'), 50, 1)
 		var/obj/item/trash/cans/TrashItem = new trash(get_turf(user))
@@ -27,5 +24,4 @@
 		else
 			TrashItem.icon_state = TrashItem.base_state
 		user.replace_item(src, TrashItem, TRUE, TRUE)
-	else
-		return ..()
+	..()

@@ -41,7 +41,6 @@ Frequency:
 <A href='?src=\ref[src];refresh=1'>Refresh</A>"}
 	show_browser(user, dat, "window=radio")
 	onclose(user, "radio")
-	return
 
 /obj/item/locator/Topic(href, href_list)
 	var/mob/user

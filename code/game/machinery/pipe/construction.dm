@@ -437,7 +437,7 @@ Buildable meters
 			return 0
 
 /obj/item/pipe/attack_self(mob/user as mob)
-	return rotate()
+	rotate()
 
 /obj/item/pipe/attackby(obj/item/W as obj, mob/user as mob)
 	..()

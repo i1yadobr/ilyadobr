@@ -152,4 +152,3 @@
 					M.flash_eyes()
 		src.visible_message(SPAN("warning", "\The [src] disappears in a bright flash!"))
 		qdel(src)
-		return

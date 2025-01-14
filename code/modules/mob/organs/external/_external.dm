@@ -196,7 +196,8 @@
 
 /obj/item/organ/external/attack_self(mob/user)
 	if(!contents.len)
-		return ..()
+		..()
+		return
 	var/list/removable_objects = list()
 	for(var/obj/item/organ/external/E in (contents + src))
 		if(!istype(E))
@@ -215,7 +216,6 @@
 				user.pick_or_drop(I)
 		user.visible_message(SPAN("danger", "\The [user] rips \the [I] out of \the [src]!"))
 		return //no eating the limb until everything's been removed
-	return ..()
 
 /obj/item/organ/external/_examine_text(mob/user)
 	. = ..()

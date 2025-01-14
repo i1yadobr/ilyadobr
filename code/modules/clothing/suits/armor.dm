@@ -238,7 +238,7 @@
 	return 0
 
 /obj/item/clothing/suit/armor/reactive/attack_self(mob/user as mob)
-	src.active = !( src.active )
+	src.active = !(src.active)
 	if(src.active)
 		to_chat(user, SPAN("notice", "The reactive armor is now active."))
 		src.icon_state = "reactive"
@@ -248,7 +248,6 @@
 		src.icon_state = "reactiveoff"
 		src.item_state = "reactiveoff"
 		src.add_fingerprint(user)
-	return
 
 /obj/item/clothing/suit/armor/reactive/emp_act(severity)
 	active = 0

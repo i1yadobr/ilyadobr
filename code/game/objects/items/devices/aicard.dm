@@ -18,7 +18,6 @@
 		to_chat(user, "<b>ERROR ERROR ERROR</b>")
 
 /obj/item/aicard/attack_self(mob/user)
-
 	ui_interact(user)
 
 /obj/item/aicard/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, datum/topic_state/state = GLOB.inventory_state)
