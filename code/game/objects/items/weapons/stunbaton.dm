@@ -205,6 +205,8 @@
 // Stunbaton module for Security synthetics
 /obj/item/melee/baton/robot
 	name = "mounted baton"
+	// TODO(rufus): remove direct reference to the robot's cell, determine the cell to use at the moment of usage and
+	//   call cell procs to use charge.
 	bcell = null
 	hitcost = 20
 	icon_state = "mounted baton"
@@ -214,19 +216,14 @@
 	. += "\n"
 	. += SPAN("notice", "The baton is running off an external power supply.")
 
-// Override proc for the stun baton module, found in PC Security synthetics
-// Refactored to fix #14470 - old proc defination increased the hitcost beyond
-// usability without proper checks.
-// Also hard-coded to be unuseable outside their righteous synthetic owners.
 /obj/item/melee/baton/robot/attack_self(mob/user)
-	var/mob/living/silicon/robot/R = isrobot(user) ? user : null // null if the user is NOT a robot
-	update_cell(R) // takes both robots and null
-	if (R)
-		return ..()
-	else	// Stop pretending and get out of your cardborg suit, human.
-		to_chat(user, SPAN("warning", "You don't seem to be able interacting with this by yourself.."))
+	var/mob/living/silicon/robot/R = user
+	if(!istype(R))
+		to_chat(user, SPAN("warning", "You don't seem to be able to do anything with \the [src] on your own..."))
 		add_fingerprint(user)
-	return 0
+		return
+	update_cell(R)
+	..()
 
 /obj/item/melee/baton/robot/attackby(obj/item/W, mob/user)
 	return
@@ -242,6 +239,8 @@
 		bcell = null
 		set_status(0)
 	else if (!bcell || bcell != user.cell)
+		// TODO(rufus): remove direct reference to the robot's cell, determine the cell to use at the moment of usage and
+		//   call cell procs to use charge.
 		bcell = user.cell // if it is null, nullify it anyway
 
 // Traitor variant for Engineering synthetics.
