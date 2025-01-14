@@ -202,7 +202,7 @@ var/list/holder_mob_icon_cache = list()
 		if(scoop_check(over_object))
 			get_scooped(over_object, (usr == src))
 			return
-	return ..()
+	..()
 
 /mob/living/proc/scoop_check(mob/living/scooper)
 	return 1

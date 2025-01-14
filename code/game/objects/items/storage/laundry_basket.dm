@@ -60,8 +60,7 @@
 /obj/item/storage/laundry_basket/MouseDrop(obj/over_object as obj)
 	if(over_object == usr)
 		return
-	else
-		return ..()
+	..()
 
 /obj/item/storage/laundry_basket/dropped(mob/user as mob)
 	qdel(linked)

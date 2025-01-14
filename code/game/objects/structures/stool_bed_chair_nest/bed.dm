@@ -323,7 +323,7 @@
 		if(!ishuman(usr))
 			return
 		if(buckled_mob)
-			return 0
+			return
 		visible_message("[usr] collapses \the [src.name].")
 		new rollertype(get_turf(src))
 		rollertype = null

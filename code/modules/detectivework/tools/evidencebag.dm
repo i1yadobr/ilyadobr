@@ -18,14 +18,14 @@
 
 /obj/item/evidencebag/MouseDrop_T(obj/item/I, mob/living/carbon/human/user)
 	if(!istype(user))
-		return FALSE
+		return
 
 	if(!istype(I) || I.anchored)
-		return FALSE
+		return
 
 	if (isturf(I.loc))
 		if (!user.Adjacent(I))
-			return FALSE
+			return
 	else
 		//If it isn't on the floor. Do some checks to see if it's in our hands or a box. Otherwise give up.
 		if(istype(I.loc,/obj/item/storage))	//in a container.
@@ -39,9 +39,9 @@
 			I.forceMove(get_turf(U))
 		else if(user.l_hand == I || user.r_hand == I)					//in a hand
 			attackby(I, user)
-			return FALSE
+			return
 		else
-			return FALSE
+			return
 
 	put_item(I, user)
 

@@ -19,7 +19,8 @@
 	if(ishuman(usr))
 		var/mob/M = usr
 		if(!(istype(over_object, /obj/screen) ))
-			return ..()
+			..()
+			return
 
 		if(!M.restrained() && !M.stat)
 			switch(over_object.name)

@@ -279,7 +279,7 @@
 /obj/machinery/vending/MouseDrop_T(obj/item/I, mob/user)
 	if(!CanMouseDrop(I, user) || (I.loc != user))
 		return
-	return attempt_to_stock(I, user)
+	attempt_to_stock(I, user)
 
 /obj/machinery/vending/proc/attempt_to_stock(obj/item/I, mob/user)
 	if(!cartridge)

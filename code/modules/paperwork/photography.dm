@@ -112,7 +112,8 @@ var/global/photo_count = 0
 	if((ishuman(usr)))
 		var/mob/M = usr
 		if(!istype(over_object, /obj/screen))
-			return ..()
+			..()
+			return
 		playsound(loc, SFX_SEARCH_CLOTHES, 50, 1, -5)
 		if((!M.restrained() && !M.stat && M.back == src))
 			switch(over_object.name)

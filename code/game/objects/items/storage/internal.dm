@@ -21,6 +21,8 @@
 /obj/item/storage/internal/mob_can_equip()
 	return 0	//make sure this is never picked up
 
+// TODO(rufus): review and refactor internal storage and handle_mousedrop code, and check if it's actually used in the game
+
 //Helper procs to cleanly implement internal storages - storage items that provide inventory slots for other items.
 //These procs are completely optional, it is up to the master item to decide when it's storage get's opened by calling open()
 //However they are helpful for allowing the master item to pretend it is a storage item itself.

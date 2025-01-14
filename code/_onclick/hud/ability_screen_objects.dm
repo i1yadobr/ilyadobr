@@ -45,8 +45,7 @@
 /obj/screen/movable/ability_master/MouseDrop()
 	if(showing)
 		return
-
-	return ..()
+	..()
 
 /obj/screen/movable/ability_master/Click()
 	if(!ability_objects.len) // If we're empty for some reason.

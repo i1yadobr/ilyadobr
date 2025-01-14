@@ -101,8 +101,8 @@
 /obj/machinery/microscope/MouseDrop(atom/other)
 	if(usr == other)
 		remove_sample(usr)
-	else
-		return ..()
+		return
+	..()
 
 /obj/machinery/microscope/update_icon()
 	icon_state = "microscope"

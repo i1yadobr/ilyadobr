@@ -64,7 +64,8 @@
 
 /obj/structure/table/MouseDrop_T(obj/O, mob/user)
 	if(!istype(O, /obj/item) || user.get_active_hand() != O)
-		return ..()
+		..()
+		return
 	if(isrobot(user))
 		return
 	if(!user.drop(O))

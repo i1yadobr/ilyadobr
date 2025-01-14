@@ -31,4 +31,4 @@
 		update_icon()
 		return
 
-	return ..()
+	..()

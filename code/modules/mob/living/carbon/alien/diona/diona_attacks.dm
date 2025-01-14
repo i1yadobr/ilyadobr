@@ -13,7 +13,7 @@
 		update_icons()
 		return
 
-	return ..()
+	..()
 
 /mob/living/carbon/alien/diona/attackby(obj/item/W, mob/user)
 	if(user.a_intent == I_HELP && istype(W, /obj/item/clothing/head))

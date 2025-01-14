@@ -455,7 +455,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		if(try_drone_spawn(src, over))
 			return
 
-	return ..()
+	..()
 
 /mob/observer/ghost/proc/try_possession(mob/living/M)
 	if(!config.ghost.ghosts_can_possess_animals)

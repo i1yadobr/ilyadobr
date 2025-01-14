@@ -311,9 +311,9 @@
 /obj/structure/sink/MouseDrop_T(obj/item/thing, mob/user)
 	..()
 	if(!istype(thing) || !thing.is_open_container())
-		return ..()
+		return
 	if(!usr.Adjacent(src))
-		return ..()
+		return
 	if(!thing.reagents || thing.reagents.total_volume == 0)
 		to_chat(usr, SPAN("warning", "\The [thing] is empty."))
 		return

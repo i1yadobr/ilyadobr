@@ -91,10 +91,11 @@
 			// TODO(rufus): move fingerprints to open()
 			src.add_fingerprint(usr)
 			src.open(usr)
-			return TRUE
+			return
 
 		if(!(istype(over_object, /obj/screen)))
-			return ..()
+			..()
+			return
 
 		//makes sure that the storage is equipped, so that we can't drag it into our hand from miles away.
 		if(loc != usr)

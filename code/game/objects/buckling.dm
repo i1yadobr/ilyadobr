@@ -14,7 +14,7 @@
 		user_unbuckle_mob(user)
 
 /obj/MouseDrop_T(mob/living/M, mob/living/user)
-	. = ..()
+	..()
 	if(can_buckle && istype(M))
 		user_buckle_mob(M, user)
 
