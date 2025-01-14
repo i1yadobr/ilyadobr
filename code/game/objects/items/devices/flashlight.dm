@@ -56,24 +56,25 @@
 		playsound(src.loc, activation_sound, 50, 1)
 	update_icon()
 
-/obj/item/device/flashlight/attack_self(mob/user)
+/obj/item/device/flashlight/proc/toggle(mob/user)
 	if(!isturf(user.loc))
 		to_chat(user, "You cannot turn \the [src] [on ? "off" : "on"] in this [user.loc].") //To prevent some lighting anomalities.
-		return 0
+		return
 	if(spam_flag)
-		return 0
+		return
 	spam_flag = TRUE
 	switch_light(!on)
 	user.update_action_buttons()
 	spawn(5)
 		spam_flag = FALSE
-	return 1
+
+/obj/item/device/flashlight/attack_self(mob/user)
+	toggle(user)
 
 /obj/item/device/flashlight/AltClick(mob/user)
 	if(CanPhysicallyInteract(user))
-		return attack_self(user)
-	else
-		return ..()
+		toggle(user)
+	..()
 
 /obj/item/device/flashlight/attack(mob/living/M, mob/living/user)
 	add_fingerprint(user)
@@ -131,7 +132,7 @@
 			to_chat(user, SPAN("notice", "There's visible lag between left and right pupils' reactions."))
 		if(H.get_blood_volume() <= 60)
 			to_chat(user, SPAN("notice", "\The [H]'s eyelids look pale."))
-		if(length(H.virus2)) 
+		if(length(H.virus2))
 			to_chat(user, SPAN("notice", "\The [H]'s eyes look red."))
 		else if(H.should_have_organ(BP_LIVER)) // Yea we probably do not want yellow and red eyes at the same time.
 			var/obj/item/organ/internal/liver/L = H.internal_organs_by_name[BP_LIVER]
@@ -275,7 +276,7 @@
 	set src in oview(1)
 
 	if(!usr.stat)
-		attack_self(usr)
+		toggle(usr)
 
 // FLARES
 
@@ -330,22 +331,27 @@
 	switch_light(FALSE)
 
 /obj/item/device/flashlight/flare/attack_self(mob/user)
-	if(turn_on(user))
+	if(on)
+		to_chat(user, SPAN("notice", "\The [src] is already lit."))
+		return
+	turn_on()
+	if(on)
 		user.visible_message(SPAN("notice", "\The [user] activates \the [src]."), SPAN("notice", "You pull the cord on the flare, activating it!"))
 
 /obj/item/device/flashlight/flare/proc/turn_on(mob/user)
 	if(on)
-		return FALSE
+		to_chat(user, SPAN("notice", "\The [src] is already lit."))
+		return
 	if(!fuel)
-		if(user)
-			to_chat(user, SPAN("notice", "It's out of fuel."))
-		return FALSE
+		to_chat(user, SPAN("notice", "\The [src] is out of fuel."))
+		return
 	force = on_damage
 	damtype = "fire"
 	set_next_think(world.time)
 	switch_light(TRUE)
-	return 1
 
+// TODO(rufus): merge glowstick code with flare code as they do the same thing, except for the
+// hotspot_expose which can be triggered based on a variable.
 //Glowsticks
 /obj/item/device/flashlight/glowstick
 	name = "green glowstick"
@@ -404,7 +410,6 @@
 			M.update_inv_r_hand()
 
 /obj/item/device/flashlight/glowstick/attack_self(mob/user)
-
 	if(!fuel)
 		to_chat(user,SPAN("notice", "\The [src] is spent."))
 		return
@@ -412,8 +417,8 @@
 		to_chat(user,SPAN("notice", "\The [src] is already lit."))
 		return
 
-	. = ..()
-	if(.)
+	toggle(user)
+	if(on)
 		user.visible_message(SPAN("notice", "[user] cracks and shakes the glowstick."), SPAN("notice", "You crack and shake the glowstick, turning it on!"))
 		set_next_think(world.time)
 
