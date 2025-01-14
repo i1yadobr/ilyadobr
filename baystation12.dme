@@ -153,7 +153,7 @@
 #include "code\_helpers\sorts\TimSort.dm"
 #include "code\_onclick\ai.dm"
 #include "code\_onclick\click.dm"
-#include "code\_onclick\click_delay.dm"
+#include "code\_onclick\click_cooldown.dm"
 #include "code\_onclick\click_handler.dm"
 #include "code\_onclick\cyborg.dm"
 #include "code\_onclick\drag_drop.dm"
