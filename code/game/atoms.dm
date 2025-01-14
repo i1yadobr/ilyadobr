@@ -620,12 +620,15 @@ its easier to just keep the beam vertical.
 			H.updatehealth()
 	return
 
-/atom/MouseDrop_T(mob/target, mob/user)
+// TODO(rufus): check why MouseDrop_T is a separate proc from the default MouseDrop, refactor if it's redundant.
+//
+// MouseDrop_T of the base atom type makes living mob user climb the current atom if they atom is climbable,
+// user can climb the atom and mob/target is the user.
+/atom/proc/MouseDrop_T(mob/target, mob/user)
 	var/mob/living/H = user
 	if(istype(H) && can_climb(H) && target == user)
 		do_climb(target)
-	else
-		return ..()
+		return
 
 // Called after we wrench/unwrench this object
 /obj/proc/wrenched_change()
