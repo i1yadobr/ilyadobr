@@ -222,8 +222,8 @@
 	if(possible_transfer_amounts)
 		if(CanPhysicallyInteract(user))
 			set_APTFT()
-	else
-		return ..()
+		return
+	..()
 
 /obj/item/backwear/reagent/proc/standard_dispenser_refill(mob/user, obj/structure/reagent_dispensers/target)
 	if(!istype(target))

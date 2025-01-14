@@ -194,11 +194,10 @@
 /obj/item/music_tape_box/AltClick(mob/user)
 	if(!canremove)
 		return
-
 	if((ishuman(user) || isrobot(user) || issmall(user)) && !user.incapacitated() && Adjacent(user))
 		add_fingerprint(user)
 		attack_hand(user)
-		return TRUE
+
 /obj/item/music_tape_box/newyear
 	name = "New Year tape box"
 	icon_closed = "box_xmas"

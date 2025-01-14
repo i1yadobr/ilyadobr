@@ -115,11 +115,9 @@
 /obj/item/storage/AltClick(mob/usr)
 	if(!canremove)
 		return
-
 	if((ishuman(usr) || isrobot(usr) || issmall(usr)) && !usr.incapacitated() && Adjacent(usr))
 		add_fingerprint(usr)
 		open(usr)
-		return
 
 /obj/item/storage/proc/return_inv()
 	var/list/L = list(  )

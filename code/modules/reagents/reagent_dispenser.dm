@@ -74,8 +74,8 @@
 	if(possible_transfer_amounts)
 		if(CanPhysicallyInteract(user))
 			set_APTFT()
-	else
-		return ..()
+		return
+	..()
 
 /obj/structure/reagent_dispensers/on_reagent_change()
 	..()

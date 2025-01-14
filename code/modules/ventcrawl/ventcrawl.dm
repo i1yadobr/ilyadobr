@@ -108,8 +108,8 @@ var/list/ventcrawl_machinery = list(
 /mob/living/AltClickOn(atom/A)
 	if(is_type_in_list(A,ventcrawl_machinery))
 		handle_ventcrawl(A)
-		return 1
-	return ..()
+		return
+	..()
 
 /mob/proc/start_ventcrawl()
 	var/atom/pipe
