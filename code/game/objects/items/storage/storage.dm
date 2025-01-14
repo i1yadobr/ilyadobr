@@ -118,7 +118,7 @@
 	if((ishuman(usr) || isrobot(usr) || issmall(usr)) && !usr.incapacitated() && Adjacent(usr))
 		add_fingerprint(usr)
 		open(usr)
-		return TRUE
+		return
 
 /obj/item/storage/proc/return_inv()
 	var/list/L = list(  )
@@ -146,7 +146,7 @@
 		to_chat(usr, SPAN("warning", "\The [src] is locked and cannot be opened!"))
 		return
 	if(src.use_sound)
-		playsound(src.loc, src.use_sound, 50, 1, -5)
+		playsound(src.loc, src.use_sound, 50, TRUE, -5)
 	if(isrobot(user) && user.hud_used)
 		var/mob/living/silicon/robot/robot = user
 		if(robot.shown_robot_modules) //The robot's inventory is open, need to close it first.
@@ -167,7 +167,7 @@
 		storage_ui.after_close(user)
 
 	if(src.use_sound)
-		playsound(src.loc, src.use_sound, 50, 1, -5)
+		playsound(src.loc, src.use_sound, 50, TRUE, -5)
 
 /obj/item/storage/proc/close_all()
 	if(storage_ui)
@@ -178,44 +178,42 @@
 	for(var/obj/item/I in contents)
 		. += I.get_storage_cost()
 
-//This proc return 1 if the item can be picked up and 0 if it can't.
+//This proc return TRUE if the item can be picked up and FALSE if it can't.
 //Set the stop_messages to stop it from printing messages
-/obj/item/storage/proc/can_be_inserted(obj/item/W, mob/user, stop_messages = 0)
+/obj/item/storage/proc/can_be_inserted(obj/item/W, mob/user, stop_messages = FALSE)
 	if(!istype(W))
-		return //Not an item
-
+		return FALSE
 	if(user && user.is_equipped(W) && !user.can_unequip(W))
-		return 0
+		return FALSE
 
 	if(src.loc == W)
-		return 0 //Means the item is already in the storage item
+		return FALSE //Means the item is already in the storage item
 
 	if(locked)
 		if(!stop_messages)
 			to_chat(user, SPAN("notice", "\The [src] is locked."))
-		// TODO(rufus): replace `return 0` with `return FALSE` throughout this file
-		return 0
+		return FALSE
 
 	if(storage_slots != null && contents.len >= storage_slots)
 		if(!stop_messages)
 			to_chat(user, SPAN("notice", "\The [src] is full, make some space."))
-		return 0 //Storage item is full
+		return FALSE //Storage item is full
 
 	// TODO(rufus): move anchored check before the storage check, as it doesn't make sense to report
 	//   that storage is full if item cannot be picked up anyways.
 	if(W.anchored)
-		return 0
+		return FALSE
 
 	if(length(can_hold))
 		if(!is_type_in_list(W, can_hold))
 			if(!stop_messages && ! istype(W, /obj/item/hand_labeler))
 				to_chat(user, SPAN("notice", "\The [src] cannot hold \the [W]."))
-			return 0
+			return FALSE
 		var/max_instances = can_hold[W.type]
 		if(max_instances && instances_of_type_in_list(W, contents) >= max_instances)
 			if(!stop_messages && !istype(W, /obj/item/hand_labeler))
 				to_chat(user, SPAN("notice", "\The [src] has no more space specifically for \the [W]."))
-			return 0
+			return FALSE
 
 	//If attempting to lable the storage item, silently fail to allow it
 	if(istype(W, /obj/item/hand_labeler) || istype(W, /obj/item/forensics) && user.a_intent != I_HELP)
@@ -227,38 +225,38 @@
 		var/obj/item/implanter/compressed/impr = W
 		if(!impr.safe)
 			// TODO(rufus): remove redundant variable change
-			stop_messages = 1
-			return 0
+			stop_messages = TRUE
+			return FALSE
 
 	if(length(cant_hold) && is_type_in_list(W, cant_hold))
 		if(!stop_messages)
 			to_chat(user, SPAN("notice", "\The [src] cannot hold \the [W]."))
-		return 0
+		return FALSE
 
 	if(max_w_class != null && W.w_class > max_w_class && !(override_w_class?.len && is_type_in_list(W, override_w_class)))
 		if(!stop_messages)
 			to_chat(user, SPAN("notice", "\The [W] is too big for this [src.name]."))
-		return 0
+		return FALSE
 
 	var/total_storage_space = W.get_storage_cost()
 	if(total_storage_space == ITEM_SIZE_NO_CONTAINER)
 		if(!stop_messages)
 			to_chat(user, SPAN("notice", "\The [W] cannot be placed in [src]."))
-		return 0
+		return FALSE
 
 	total_storage_space += storage_space_used() //Adds up the combined w_classes which will be in the storage item if the item is added to it.
 	if(total_storage_space > max_storage_space)
 		if(!stop_messages)
 			to_chat(user, SPAN("notice", "\The [src] is too full, make some space."))
-		return 0
+		return FALSE
 
-	return 1
+	return TRUE
 
 // TODO(rufus): replace `stop_warning` in the comment below with the current variable name, `prevent_warning`
 //This proc handles items being inserted. It does not perform any checks of whether an item can or can't be inserted. That's done by can_be_inserted()
 //The stop_warning parameter will stop the insertion message from being displayed. It is intended for cases where you are inserting multiple items at once,
 //such as when picking up all the items on a tile with one click.
-/obj/item/storage/proc/handle_item_insertion(obj/item/W, prevent_warning = 0, NoUpdate = 0)
+/obj/item/storage/proc/handle_item_insertion(obj/item/W, prevent_warning = FALSE, NoUpdate = FALSE)
 	if(QDELETED(W))
 		return FALSE
 	if(ismob(W.loc))
@@ -284,7 +282,7 @@
 	// TODO(rufus): check if sound should be played based on prevent_warning.
 	//   Or replace prevent_warning and NoUpdate with a single user_feedback parameter if splitting them is redundant.
 	if(use_sound)
-		playsound(loc, use_sound, 50, 1, -5)
+		playsound(loc, use_sound, 50, TRUE, -5)
 
 	update_icon()
 	return TRUE
@@ -302,12 +300,12 @@
 //Call this proc to handle the removal of an item from the storage item. The item will be moved to the atom sent as new_target
 // TODO(rufus): replace `NoUpdate` with an inverse `update` parameter and update respective checks to use (!update).
 //   This would remove double semantic negation in conditionals, e.g. if(not no update), which causes mental overhead
-/obj/item/storage/proc/remove_from_storage(obj/item/W as obj, atom/new_location, NoUpdate = 0)
+/obj/item/storage/proc/remove_from_storage(obj/item/W as obj, atom/new_location, NoUpdate = FALSE)
 	if(!istype(W))
-		return 0
+		return FALSE
 	if(locked)
 		to_chat(usr, SPAN("warning", "\The [W] cannot be removed because [src] is locked."))
-		return 0
+		return FALSE
 	new_location = new_location || get_turf(src)
 
 	if(storage_ui)
@@ -328,7 +326,7 @@
 	W.on_exit_storage(src)
 	if(!NoUpdate)
 		update_icon()
-	return 1
+	return TRUE
 
 // Only do ui functions for now; the obj is responsible for anything else.
 /obj/item/storage/proc/on_item_pre_deletion(obj/item/W)
@@ -340,7 +338,7 @@
 	update_ui_after_item_removal()
 	update_icon()
 
-//Run once after using remove_from_storage with NoUpdate = 1
+//Run once after using remove_from_storage with NoUpdate = TRUE
 /obj/item/storage/proc/finish_bulk_removal()
 	update_ui_after_item_removal()
 	update_icon()
@@ -411,26 +409,26 @@
 	return
 
 /obj/item/storage/proc/gather_all(turf/T, mob/user)
-	var/success = 0
-	var/failure = 0
+	var/success = FALSE
+	var/failure = FALSE
 
 	for(var/obj/item/I in T)
 		// TODO(rufus): remove outdated comment
-		if(!can_be_inserted(I, user, 0))	// Note can_be_inserted still makes noise when the answer is no
-			failure = 1
+		if(!can_be_inserted(I, user, FALSE))	// Note can_be_inserted still makes noise when the answer is no
+			failure = TRUE
 			continue
-		success = 1
+		success = TRUE
 		// TODO(rufus): replace with named parameters
-		handle_item_insertion(I, 1, 1) // First 1 is no messages, second 1 is no ui updates
+		handle_item_insertion(I, TRUE, TRUE) // First TRUE is no messages, second TRUE is no ui updates
 	if(success && !failure)
 		to_chat(user, SPAN("notice", "You put everything into \the [src]."))
 		if (src.use_sound)
-			playsound(src.loc, src.use_sound, 50, 1, -5)
+			playsound(src.loc, src.use_sound, 50, TRUE, -5)
 		update_ui_after_item_insertion()
 	else if(success)
 		to_chat(user, SPAN("notice", "You put some things into \the [src]."))
 		if (src.use_sound)
-			playsound(src.loc, src.use_sound, 50, 1, -5)
+			playsound(src.loc, src.use_sound, 50, TRUE, -5)
 		update_ui_after_item_insertion()
 	else
 		to_chat(user, SPAN("notice", "You fail to pick anything up with \the [src]."))
@@ -453,7 +451,7 @@
 	hide_from(usr)
 	for(var/obj/item/I in contents)
 		// TODO(rufus): break the loop if removal failed
-		remove_from_storage(I, T, 1)
+		remove_from_storage(I, T, TRUE)
 	finish_bulk_removal()
 
 /obj/item/storage/emp_act(severity)
@@ -471,7 +469,7 @@
 		// TODO(rufus): replace with allow_quick_empty check
 		if(src.verbs.Find(/obj/item/storage/verb/quick_empty))
 			quick_empty()
-			return 1
+			return TRUE
 
 /obj/item/storage/proc/make_exact_fit()
 	storage_slots = contents.len
