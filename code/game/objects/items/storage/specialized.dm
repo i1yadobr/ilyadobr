@@ -53,16 +53,16 @@
 	allow_quick_empty = 1
 	use_to_pickup = 1
 
-/obj/item/storage/sheetsnatcher/can_be_inserted(obj/item/W, mob/user, stop_messages = 0)
+/obj/item/storage/sheetsnatcher/can_be_inserted(obj/item/W, mob/user, feedback = TRUE)
 	if(!istype(W,/obj/item/stack/material))
-		if(!stop_messages)
+		if(feedback)
 			to_chat(user, "The snatcher does not accept [W].")
 		return 0
 	var/current = 0
 	for(var/obj/item/stack/material/S in contents)
 		current += S.amount
 	if(capacity == current)
-		if(!stop_messages)
+		if(feedback)
 			to_chat(user, SPAN("warning", "The snatcher is full."))
 		return 0
 	return 1

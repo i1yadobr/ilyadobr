@@ -471,7 +471,7 @@ var/list/global/slot_flags_enumeration = list(
 			var/allow = 0
 			if(H.back && istype(H.back, /obj/item/storage/backpack))
 				var/obj/item/storage/backpack/B = H.back
-				if(B.can_be_inserted(src,M,1))
+				if(B.can_be_inserted(src, M, feedback = FALSE))
 					allow = 1
 			if(!allow)
 				return 0

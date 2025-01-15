@@ -180,45 +180,47 @@
 	for(var/obj/item/I in contents)
 		. += I.get_storage_cost()
 
-//This proc return TRUE if the item can be picked up and FALSE if it can't.
-//Set the stop_messages to stop it from printing messages
-/obj/item/storage/proc/can_be_inserted(obj/item/W, mob/user, stop_messages = FALSE)
+// can_be_inserted performs all the checks related to inserting item W into the storage, prints a message to
+// the user's chat stating the reason if item cannot be inserted, and returns TRUE if insertion is allowed.
+//
+// The performed checks include storage capacity checks, item size checks, `can_hold`/`cant_hold` lists,
+// if item W can or cannot be moved in general, and unique edge cases for certain special items.
+//
+// User messages can be disabled by setting `feedback` parameter to FALSE.
+/obj/item/storage/proc/can_be_inserted(obj/item/W, mob/user, feedback = TRUE)
 	if(!istype(W))
 		return FALSE
 	if(user && user.is_equipped(W) && !user.can_unequip(W))
 		return FALSE
-
-	if(src.loc == W)
-		return FALSE //Means the item is already in the storage item
+	if(loc == W)
+		return FALSE
 
 	if(locked)
-		if(!stop_messages)
+		if(feedback)
 			to_chat(user, SPAN("notice", "\The [src] is locked."))
 		return FALSE
 
-	if(storage_slots != null && contents.len >= storage_slots)
-		if(!stop_messages)
-			to_chat(user, SPAN("notice", "\The [src] is full, make some space."))
-		return FALSE //Storage item is full
-
-	// TODO(rufus): move anchored check before the storage check, as it doesn't make sense to report
-	//   that storage is full if item cannot be picked up anyways.
 	if(W.anchored)
 		return FALSE
 
+	if(storage_slots != null && contents.len >= storage_slots)
+		if(feedback)
+			to_chat(user, SPAN("notice", "\The [src] is full, make some space."))
+		return FALSE
+
 	if(length(can_hold))
-		if(!is_type_in_list(W, can_hold))
-			if(!stop_messages && ! istype(W, /obj/item/hand_labeler))
+		if(!(W.type in can_hold))
+			if(feedback && !istype(W, /obj/item/hand_labeler))
 				to_chat(user, SPAN("notice", "\The [src] cannot hold \the [W]."))
 			return FALSE
 		var/max_instances = can_hold[W.type]
 		if(max_instances && instances_of_type_in_list(W, contents) >= max_instances)
-			if(!stop_messages && !istype(W, /obj/item/hand_labeler))
+			if(feedback && !istype(W, /obj/item/hand_labeler))
 				to_chat(user, SPAN("notice", "\The [src] has no more space specifically for \the [W]."))
 			return FALSE
 
-	//If attempting to lable the storage item, silently fail to allow it
-	if(istype(W, /obj/item/hand_labeler) || istype(W, /obj/item/forensics) && user.a_intent != I_HELP)
+	// If intent is not set to help, disallow insertion and let the items perform their action
+	if(user.a_intent != I_HELP && (istype(W, /obj/item/hand_labeler) || istype(W, /obj/item/forensics)))
 		return FALSE
 
 	// Don't allow insertion of unsafed compressed matter implants
@@ -226,32 +228,29 @@
 	if(istype(W, /obj/item/implanter/compressed))
 		var/obj/item/implanter/compressed/impr = W
 		if(!impr.safe)
-			// TODO(rufus): remove redundant variable change
-			stop_messages = TRUE
 			return FALSE
 
-	if(length(cant_hold) && is_type_in_list(W, cant_hold))
-		if(!stop_messages)
+	if(length(cant_hold) && (W.type in cant_hold))
+		if(feedback)
 			to_chat(user, SPAN("notice", "\The [src] cannot hold \the [W]."))
 		return FALSE
 
 	if(max_w_class != null && W.w_class > max_w_class && !(override_w_class?.len && is_type_in_list(W, override_w_class)))
-		if(!stop_messages)
-			to_chat(user, SPAN("notice", "\The [W] is too big for this [src.name]."))
+		if(feedback)
+			to_chat(user, SPAN("notice", "\The [W] is too big for this [src]."))
 		return FALSE
 
 	var/total_storage_space = W.get_storage_cost()
 	if(total_storage_space == ITEM_SIZE_NO_CONTAINER)
-		if(!stop_messages)
+		if(feedback)
 			to_chat(user, SPAN("notice", "\The [W] cannot be placed in [src]."))
 		return FALSE
 
 	total_storage_space += storage_space_used() //Adds up the combined w_classes which will be in the storage item if the item is added to it.
 	if(total_storage_space > max_storage_space)
-		if(!stop_messages)
+		if(feedback)
 			to_chat(user, SPAN("notice", "\The [src] is too full, make some space."))
 		return FALSE
-
 	return TRUE
 
 // handle_item_insertion inserts item W into the storage and optionally provides user feedback.
@@ -413,8 +412,7 @@
 	var/failure = FALSE
 
 	for(var/obj/item/I in T)
-		// TODO(rufus): remove outdated comment
-		if(!can_be_inserted(I, user, FALSE))	// Note can_be_inserted still makes noise when the answer is no
+		if(!can_be_inserted(I, user, feedback = FALSE))
 			failure = TRUE
 			continue
 		success = TRUE
