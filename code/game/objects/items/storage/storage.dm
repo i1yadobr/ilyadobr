@@ -81,24 +81,27 @@
 	QDEL_NULL(storage_ui)
 	. = ..()
 
-// TODO(rufus): refactor this function into a cleaner execution flow
-/obj/item/storage/MouseDrop(obj/over_object as obj)
-	if(!canremove)
+/obj/item/storage/MouseDrop(atom/over_object)
+	// TODO(rufus): check if issmall() can be replaced by something more sematically meaningfull
+	if(!(ishuman(usr) || isrobot(usr) || issmall(usr)))
+		return
+	if(usr.incapacitated())
 		return
 
-	if((ishuman(usr) || isrobot(usr) || issmall(usr)) && !usr.incapacitated())
-		if(over_object == usr && Adjacent(usr)) // this must come before the screen objects only block
-			src.open(usr)
+	if(over_object == usr)
+		if(!Adjacent(usr))
+			to_chat(usr, SPAN("warning", "[src] is too far away to open!"))
 			return
+		open(usr)
+		return
 
-		if(!(istype(over_object, /obj/screen)))
-			..()
-			return
-
-		//makes sure that the storage is equipped, so that we can't drag it into our hand from miles away.
+	if(istype(over_object, /obj/screen))
 		if(loc != usr)
 			return
-
+		if(!canremove)
+			to_chat(usr, "[src] cannot be removed!")
+			return
+		// TODO(rufus): checking by name is not reliable, refactor to something appropriate for type checking
 		switch(over_object.name)
 			if(BP_R_HAND)
 				if(usr.drop(src))
@@ -106,8 +109,8 @@
 			if(BP_L_HAND)
 				if(usr.drop(src))
 					usr.put_in_l_hand(src)
-			if("back")
-				usr.drop(src)
+		return
+	..()
 
 /obj/item/storage/AltClick(mob/usr)
 	if(!canremove)
