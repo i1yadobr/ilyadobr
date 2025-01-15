@@ -88,8 +88,6 @@
 
 	if((ishuman(usr) || isrobot(usr) || issmall(usr)) && !usr.incapacitated())
 		if(over_object == usr && Adjacent(usr)) // this must come before the screen objects only block
-			// TODO(rufus): move fingerprints to open()
-			src.add_fingerprint(usr)
 			src.open(usr)
 			return
 
@@ -101,7 +99,6 @@
 		if(loc != usr)
 			return
 
-		add_fingerprint(usr)
 		switch(over_object.name)
 			if(BP_R_HAND)
 				if(usr.drop(src))
@@ -116,7 +113,6 @@
 	if(!canremove)
 		return
 	if((ishuman(usr) || isrobot(usr) || issmall(usr)) && !usr.incapacitated() && Adjacent(usr))
-		add_fingerprint(usr)
 		open(usr)
 
 /obj/item/storage/proc/return_inv()
@@ -141,6 +137,7 @@
 		storage_ui.hide_from(user)
 
 /obj/item/storage/proc/open(mob/user)
+	add_fingerprint(usr)
 	if(locked)
 		to_chat(usr, SPAN("warning", "\The [src] is locked and cannot be opened!"))
 		return
