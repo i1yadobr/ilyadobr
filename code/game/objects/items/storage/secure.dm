@@ -1,15 +1,3 @@
-/*
- *	Absorbs /obj/item/secstorage.
- *	Reimplements it only slightly to use existing storage functionality.
- *
- *	Contains:
- *		Secure Briefcase
- *		Wall Safe
- */
-
-// -----------------------------
-//         Generic Item
-// -----------------------------
 /obj/item/storage/secure
 	name = "secstorage"
 	var/icon_locking = "secureb"
@@ -64,11 +52,7 @@
 					src.l_hacking = 0
 			else	src.l_hacking = 0
 			return
-		//At this point you have exhausted all the special things to do when locked
-		// ... but it's still locked.
 		return
-
-	// -> storage/attackby() what with handle insertion, etc
 	..()
 
 /obj/item/storage/secure/proc/show_lock_menu(mob/user)
@@ -153,9 +137,7 @@
 		overlays += image('icons/obj/storage.dmi', icon_locking)
 		locked = FALSE
 
-// -----------------------------
-//        Secure Briefcase
-// -----------------------------
+
 /obj/item/storage/secure/briefcase
 	name = "secure briefcase"
 	icon = 'icons/obj/storage.dmi'
@@ -171,9 +153,6 @@
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = DEFAULT_BACKPACK_STORAGE
 
-// -----------------------------
-//        Secure Safe
-// -----------------------------
 
 /obj/item/storage/secure/safe
 	name = "secure safe"
