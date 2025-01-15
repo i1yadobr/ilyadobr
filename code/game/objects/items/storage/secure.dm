@@ -114,7 +114,6 @@
 		for(var/mob/M in viewers(1, src.loc))
 			if((M.client && M.machine == src))
 				show_lock_menu(M)
-			return
 	return
 
 /obj/item/storage/secure/emag_act(remaining_charges, mob/user, emag_source, visual_feedback = "", audible_feedback = "")

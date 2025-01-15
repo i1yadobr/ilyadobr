@@ -144,7 +144,6 @@
 		for(var/mob/M in viewers(1, src.loc))
 			if((M.client && M.machine == src))
 				show_lock_menu(M)
-			return
 	return
 
 /obj/item/storage/secure/guncase/detective/spawn_set(set_name)
@@ -311,5 +310,4 @@
 		for(var/mob/M in viewers(1, loc))
 			if((M.client && M.machine == src))
 				show_lock_menu(M)
-			return
 	return
