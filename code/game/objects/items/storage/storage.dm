@@ -170,9 +170,10 @@
 	storage_ui?.close_all()
 
 /obj/item/storage/proc/storage_space_used()
-	. = 0
+	var/used = 0
 	for(var/obj/item/I in contents)
-		. += I.get_storage_cost()
+		used += I.get_storage_cost()
+	return used
 
 // can_be_inserted performs all the checks related to inserting item W into the storage, prints a message to
 // the user's chat stating the reason if item cannot be inserted, and returns TRUE if insertion is allowed.
