@@ -145,8 +145,8 @@
 	if(locked)
 		to_chat(usr, SPAN("warning", "\The [src] is locked and cannot be opened!"))
 		return
-	if(src.use_sound)
-		playsound(src.loc, src.use_sound, 50, TRUE, -5)
+	if(use_sound)
+		playsound(src, use_sound, 50, TRUE, -5)
 	if(isrobot(user) && user.hud_used)
 		var/mob/living/silicon/robot/robot = user
 		if(robot.shown_robot_modules) //The robot's inventory is open, need to close it first.
@@ -163,8 +163,8 @@
 	hide_from(user)
 	storage_ui?.after_close(user)
 
-	if(src.use_sound)
-		playsound(src.loc, src.use_sound, 50, TRUE, -5)
+	if(use_sound)
+		playsound(src, use_sound, 50, TRUE, -5)
 
 /obj/item/storage/proc/close_all()
 	storage_ui?.close_all()
@@ -347,7 +347,7 @@
 		var/obj/item/device/lightreplacer/LP = W
 		var/amt_inserted = 0
 		var/turf/T = get_turf(user)
-		for(var/obj/item/light/L in src.contents)
+		for(var/obj/item/light/L in contents)
 			if(L.status == 0)
 				if(LP.uses < LP.max_uses)
 					LP.AddUses(1)
@@ -409,13 +409,13 @@
 		handle_item_insertion(I, feedback = FALSE)
 	if(success && !failure)
 		to_chat(user, SPAN("notice", "You put everything into \the [src]."))
-		if (src.use_sound)
-			playsound(src.loc, src.use_sound, 50, TRUE, -5)
+		if(use_sound)
+			playsound(src, use_sound, 50, TRUE, -5)
 		update_ui_after_item_insertion()
 	else if(success)
 		to_chat(user, SPAN("notice", "You put some things into \the [src]."))
-		if (src.use_sound)
-			playsound(src.loc, src.use_sound, 50, TRUE, -5)
+		if(use_sound)
+			playsound(src, use_sound, 50, TRUE, -5)
 		update_ui_after_item_insertion()
 	else
 		to_chat(user, SPAN("notice", "You fail to pick anything up with \the [src]."))
@@ -432,7 +432,7 @@
 	set name = "Empty Contents"
 	set category = "Object"
 
-	if((!ishuman(usr) && (src.loc != usr)) || usr.stat || usr.restrained())
+	if((!ishuman(usr) && (loc != usr)) || usr.stat || usr.restrained())
 		return
 
 	var/turf/T = get_turf(src)
@@ -445,7 +445,7 @@
 /obj/item/storage/emp_act(severity)
 	// TODO(rufus): invert the check
 	// Mobs process EMP of their contents on their own by recursively fetching all the contents via get_contents()
-	if(!istype(src.loc, /mob/living))
+	if(!istype(loc, /mob/living))
 		for(var/obj/O in contents)
 			O.emp_act(severity)
 	..()
@@ -455,7 +455,7 @@
 	// TODO(rufus): replace redundant check
 	if(user.get_active_hand() == src)
 		// TODO(rufus): replace with allow_quick_empty check
-		if(src.verbs.Find(/obj/item/storage/verb/quick_empty))
+		if(verbs.Find(/obj/item/storage/verb/quick_empty))
 			quick_empty()
 			return
 
