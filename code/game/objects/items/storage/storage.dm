@@ -118,18 +118,21 @@
 	if((ishuman(usr) || isrobot(usr) || issmall(usr)) && !usr.incapacitated() && Adjacent(usr))
 		open(usr)
 
+// return_inv returns a flat array containing all the contents, regardless of their storage depth.
+// It recursively fetches inventories of all the nested storage items and wrapped gifts.
+// TODO(rufus): currently doesn't handle wrapped items (/obj/item/smallDelivery), check if handling of those
+//   should be added or refactor deliveries and gifts to be subtypes of storage.
 /obj/item/storage/proc/return_inv()
-	var/list/L = list(  )
-
-	L += src.contents
-
+	var/list/inv = list()
+	inv += contents
 	for(var/obj/item/storage/S in src)
-		L += S.return_inv()
+		inv += S.return_inv()
 	for(var/obj/item/gift/G in src)
-		L += G.gift
-		if (istype(G.gift, /obj/item/storage))
-			L += G.gift:return_inv()
-	return L
+		inv += G.gift
+		if(istype(G.gift, /obj/item/storage))
+			var/obj/item/storage/gift_storage = G.gift
+			inv += gift_storage.return_inv()
+	return inv
 
 /obj/item/storage/proc/show_to(mob/user)
 	if(storage_ui)
