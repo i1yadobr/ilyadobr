@@ -23,7 +23,7 @@
 
 /obj/item/storage/secure/attackby(obj/item/W, mob/user)
 	if(locked)
-		if(istype(W, /obj/item/melee/energy/blade))
+		if(istype(W, /obj/item/melee/energy))
 			emag_act(INFINITY, user, W, "You slice through the lock of \the [src]")
 			var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
 			spark_system.set_up(5, 0, src.loc)
