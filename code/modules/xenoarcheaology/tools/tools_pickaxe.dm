@@ -101,7 +101,7 @@
 	new /obj/item/pickaxe/archaeologist/five_pick(src)
 	new /obj/item/pickaxe/archaeologist/six_pick(src)
 
-/obj/item/storage/excavation/handle_item_insertion()
+/obj/item/storage/excavation/handle_item_insertion(obj/item/W, feedback = TRUE)
 	..()
 	sort_picks()
 

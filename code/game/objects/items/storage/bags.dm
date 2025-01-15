@@ -8,7 +8,7 @@
 	slot_flags = SLOT_BELT
 	use_sound = SFX_SEARCH_CLOTHES
 
-/obj/item/storage/bag/handle_item_insertion(obj/item/W as obj, prevent_warning = 0)
+/obj/item/storage/bag/handle_item_insertion(obj/item/W as obj, feedback = TRUE)
 	. = ..()
 	if(.)
 		update_w_class()

@@ -48,7 +48,7 @@
 	if(.)
 		if(istype(W,/obj/item/spacecash)) //only matters if its spacecash.
 			var/obj/item/I = new /obj/item/spacecash/bundle/c1000()
-			src.handle_item_insertion(I,1)
+			src.handle_item_insertion(I, feedback = FALSE)
 
 
 //Tajaran

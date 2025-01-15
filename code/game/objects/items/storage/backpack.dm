@@ -36,7 +36,7 @@
 		close_all()
 	..(user, slot)
 
-/obj/item/storage/backpack/handle_item_insertion(obj/item/W, prevent_warning = FALSE, NoUpdate = FALSE)
+/obj/item/storage/backpack/handle_item_insertion(obj/item/W, feedback = TRUE)
 	if(!worn_access && worn_check())
 		to_chat(usr, SPAN("warning", "You can't insert \the [W] while \the [src] is on your back."))
 		return

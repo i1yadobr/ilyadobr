@@ -248,11 +248,15 @@
 
 	return TRUE
 
-// TODO(rufus): replace `stop_warning` in the comment below with the current variable name, `prevent_warning`
-//This proc handles items being inserted. It does not perform any checks of whether an item can or can't be inserted. That's done by can_be_inserted()
-//The stop_warning parameter will stop the insertion message from being displayed. It is intended for cases where you are inserting multiple items at once,
-//such as when picking up all the items on a tile with one click.
-/obj/item/storage/proc/handle_item_insertion(obj/item/W, prevent_warning = FALSE, NoUpdate = FALSE)
+// handle_item_insertion inserts item W into the storage and optionally provides user feedback.
+//
+// It does not check storage capacity or other conditions, and assumes that can_be_inserted() proc was used by the caller
+// to confirm that insertion is actually allowed.
+//
+// The `feedback` parameter controls if chat messages, UI updates, icon updates, and sound are handled.
+// In cases where multiple items are inserted at once, e.g. with "quick_gather" mode, the `feedback` value should be set
+// to FALSE to prevent duplicate messages, sounds, and icon processing.
+/obj/item/storage/proc/handle_item_insertion(obj/item/W, feedback = TRUE)
 	if(QDELETED(W))
 		return FALSE
 	if(ismob(W.loc))
@@ -261,26 +265,22 @@
 			return FALSE
 	W.forceMove(src)
 	W.on_enter_storage(src)
-	if(usr)
-		add_fingerprint(usr)
-		if(!prevent_warning)
-			for(var/mob/M in viewers(usr, null))
-				if (M == usr)
+	add_fingerprint(usr)
+	if(feedback)
+		if(usr)
+			for(var/mob/M in viewers())
+				if(M == usr)
 					to_chat(usr, SPAN("notice", "You put \the [W] into [src]."))
-				else if (M in range(1)) //If someone is standing close enough, they can tell what it is... TODO replace with distance check
+				// If someone is standing close enough, they can see the insertion
+				else if(M in range(1))
 					M.show_message(SPAN("notice", "\The [usr] puts [W] into [src]."))
-				else if (W && W.w_class >= ITEM_SIZE_NORMAL) //Otherwise they can only see large or normal items from a distance...
+				// Otherwise, they can only see normal and large items from a distance
+				else if(W && W.w_class >= ITEM_SIZE_NORMAL)
 					M.show_message(SPAN("notice", "\The [usr] puts [W] into [src]."))
-
-		if(!NoUpdate)
-			update_ui_after_item_insertion()
-
-	// TODO(rufus): check if sound should be played based on prevent_warning.
-	//   Or replace prevent_warning and NoUpdate with a single user_feedback parameter if splitting them is redundant.
-	if(use_sound)
-		playsound(loc, use_sound, 50, TRUE, -5)
-
-	update_icon()
+		update_ui_after_item_insertion()
+		if(use_sound)
+			playsound(loc, use_sound, 50, TRUE, -5)
+		update_icon()
 	return TRUE
 
 /obj/item/storage/proc/update_ui_after_item_insertion()
@@ -293,10 +293,12 @@
 	if(storage_ui)
 		storage_ui.on_post_remove(usr)
 
-//Call this proc to handle the removal of an item from the storage item. The item will be moved to the atom sent as new_target
-// TODO(rufus): replace `NoUpdate` with an inverse `update` parameter and update respective checks to use (!update).
-//   This would remove double semantic negation in conditionals, e.g. if(not no update), which causes mental overhead
-/obj/item/storage/proc/remove_from_storage(obj/item/W as obj, atom/new_location, NoUpdate = FALSE)
+// remove_from_storage moves item W from storage to `new_location` if storage is unlocked.
+// It correctly handles updating the item's `layer` if item is moved to/from the mob.
+// It also optionally updates the UI and storage's icon if `feedback` parameter is set to TRUE.
+//
+// If `new_location` is not passed, the item is removed from the storage and placed on the turf below instead.
+/obj/item/storage/proc/remove_from_storage(obj/item/W as obj, atom/new_location, feedback = TRUE)
 	if(!istype(W))
 		return FALSE
 	if(locked)
@@ -304,8 +306,7 @@
 		return FALSE
 	new_location = new_location || get_turf(src)
 
-	if(storage_ui)
-		storage_ui.on_pre_remove(usr, W)
+	storage_ui?.on_pre_remove(usr, W)
 
 	if(ismob(loc))
 		W.dropped(usr)
@@ -315,13 +316,10 @@
 		W.reset_plane_and_layer()
 	W.forceMove(new_location)
 
-	if(usr && !NoUpdate)
+	if(feedback)
 		update_ui_after_item_removal()
-	if(W.maptext)
-		W.maptext = ""
-	W.on_exit_storage(src)
-	if(!NoUpdate)
 		update_icon()
+	W.on_exit_storage(src)
 	return TRUE
 
 // Only do ui functions for now; the obj is responsible for anything else.
@@ -414,8 +412,7 @@
 			failure = TRUE
 			continue
 		success = TRUE
-		// TODO(rufus): replace with named parameters
-		handle_item_insertion(I, TRUE, TRUE) // First TRUE is no messages, second TRUE is no ui updates
+		handle_item_insertion(I, feedback = FALSE)
 	if(success && !failure)
 		to_chat(user, SPAN("notice", "You put everything into \the [src]."))
 		if (src.use_sound)
@@ -428,6 +425,7 @@
 		update_ui_after_item_insertion()
 	else
 		to_chat(user, SPAN("notice", "You fail to pick anything up with \the [src]."))
+	update_icon()
 
 /obj/item/storage/verb/toggle_gathering_mode()
 	set name = "Switch Gathering Method"
