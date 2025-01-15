@@ -135,12 +135,10 @@
 	return inv
 
 /obj/item/storage/proc/show_to(mob/user)
-	if(storage_ui)
-		storage_ui.show_to(user)
+	storage_ui?.show_to(user)
 
 /obj/item/storage/proc/hide_from(mob/user)
-	if(storage_ui)
-		storage_ui.hide_from(user)
+	storage_ui?.hide_from(user)
 
 /obj/item/storage/proc/open(mob/user)
 	add_fingerprint(usr)
@@ -155,25 +153,21 @@
 			robot.hud_used.toggle_show_robot_modules()
 
 	prepare_ui()
-	if(storage_ui) // I guess we can afford performing double checks for such procs. Better this than hundreds of runtimes.
-		storage_ui.on_open(user)
-		storage_ui.show_to(user)
+	storage_ui?.on_open(user)
+	storage_ui?.show_to(user)
 
 /obj/item/storage/proc/prepare_ui()
-	if(storage_ui)
-		storage_ui.prepare_ui()
+	storage_ui?.prepare_ui()
 
 /obj/item/storage/proc/close(mob/user)
 	hide_from(user)
-	if(storage_ui)
-		storage_ui.after_close(user)
+	storage_ui?.after_close(user)
 
 	if(src.use_sound)
 		playsound(src.loc, src.use_sound, 50, TRUE, -5)
 
 /obj/item/storage/proc/close_all()
-	if(storage_ui)
-		storage_ui.close_all()
+	storage_ui?.close_all()
 
 /obj/item/storage/proc/storage_space_used()
 	. = 0
@@ -290,13 +284,11 @@
 
 /obj/item/storage/proc/update_ui_after_item_insertion()
 	prepare_ui()
-	if(storage_ui)
-		storage_ui.on_insertion(usr)
+	storage_ui?.on_insertion(usr)
 
 /obj/item/storage/proc/update_ui_after_item_removal()
 	prepare_ui()
-	if(storage_ui)
-		storage_ui.on_post_remove(usr)
+	storage_ui?.on_post_remove(usr)
 
 // remove_from_storage moves item W from storage to `new_location` if storage is unlocked.
 // It correctly handles updating the item's `layer` if item is moved to/from the mob.
@@ -329,8 +321,7 @@
 
 // Only do ui functions for now; the obj is responsible for anything else.
 /obj/item/storage/proc/on_item_pre_deletion(obj/item/W)
-	if(storage_ui)
-		storage_ui.on_pre_remove(usr, W)
+	storage_ui?.on_pre_remove(usr, W)
 
 // Only do ui functions for now; the obj is responsible for anything else.
 /obj/item/storage/proc/on_item_post_deletion()
@@ -402,8 +393,7 @@
 		open(user)
 	else
 		..()
-		if(storage_ui)
-			storage_ui.on_hand_attack(user)
+		storage_ui?.on_hand_attack(user)
 	add_fingerprint(user)
 	return
 
