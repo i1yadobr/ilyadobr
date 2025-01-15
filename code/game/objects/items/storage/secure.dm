@@ -198,7 +198,3 @@
 /obj/item/storage/secure/safe/attack_hand(mob/user)
 	attack_self(user)
 	return TRUE
-
-/obj/item/storage/secure/safe/HoS/New()
-	..()
-	//new /obj/item/storage/lockbox/clusterbang(src) This item is currently broken... and probably shouldnt exist to begin with (even though it's cool)
