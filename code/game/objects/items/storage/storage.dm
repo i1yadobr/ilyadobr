@@ -387,15 +387,11 @@
 			if(H.put_in_hands(src))
 				H.r_store = null
 			return
-
-	// TODO(rufus): normalize the flow of this section
 	if(loc == user)
 		open(user)
-	else
-		..()
-		storage_ui?.on_hand_attack(user)
-	add_fingerprint(user)
-	return
+		return
+	..()
+	storage_ui?.on_hand_attack(user)
 
 /obj/item/storage/proc/gather_all(turf/T, mob/user)
 	var/success = FALSE
