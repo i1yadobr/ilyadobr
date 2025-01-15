@@ -365,11 +365,11 @@
 		var/obj/item/tray/T = W
 		if(T.calc_carry() > 0)
 			if(prob(85))
-				to_chat(user, SPAN("warning", "The tray won't fit in [src]."))
+				to_chat(user, SPAN("warning", "\The [W] won't fit in \the [src]."))
 				return
 			else
 				if(user.drop(W))
-					to_chat(user, SPAN("warning", "God damnit!"))
+					to_chat(user, SPAN("warning", "You drop \the [W] trying to insert it into \the [src]. God damnit!"))
 	W.add_fingerprint(user)
 	return handle_item_insertion(W)
 
