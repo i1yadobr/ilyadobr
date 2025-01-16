@@ -353,6 +353,22 @@ its easier to just keep the beam vertical.
 	CAN_BE_REDEFINED(TRUE)
 	return
 
+// emag_act is a proc that should be overridden by atom subtypes in order to implement behavior of being hackend
+// by an emag (also known as "cryptographic sequencer", /obj/item/card/emag) or other emag-like source.
+//
+// This proc receives the `remaining_charges` of the emag or INFINITY in case of emag sources with no charge,
+// the `user` who is applying the emag, and a `emag_source` reference to the item that is being used for emagging.
+//
+// Note that `emag_source` may be any item, not necessarily a subtype of /obj/item/card/emag.
+// Type check as appropriate if there's unique handling for certain kinds of emag sources.
+// It is also up to the implementation to check if there's zero `remaining_charges`.
+//
+// The return value must be the number of emag charges that were used during your handling or
+// special NO_EMAG_ACT value which won't use any charges and cause the emag handling to exit early.
+// If return value is non-zero, the value will be subtracted from the emag's charges.
+//
+// In case of the standard emag, emag_act is called by the emag's resolve_attackby() proc.
+// See the /obj/item/card/emag/resolve_attackby() implementation for additional details.
 /atom/proc/emag_act(remaining_charges, mob/user, emag_source)
 	CAN_BE_REDEFINED(TRUE)
 	return NO_EMAG_ACT
