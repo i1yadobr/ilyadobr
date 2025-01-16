@@ -1,7 +1,7 @@
 /obj/item/storage/secure
 	name = "secstorage"
-	var/icon_locking = "secureb"
-	var/icon_sparking = "securespark"
+	var/emagged_overlay_icon_state = "secureb"
+	var/emag_sparks_overlay_icon_state = "securespark"
 	var/icon_opened = "secure0"
 	locked = TRUE
 	// TODO(rufus): document these variables or refactor
@@ -24,12 +24,7 @@
 /obj/item/storage/secure/attackby(obj/item/W, mob/user)
 	if(locked)
 		if(istype(W, /obj/item/melee/energy))
-			emag_act(INFINITY, user, W, "You slice through the lock of \the [src]")
-			var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
-			spark_system.set_up(5, 0, src.loc)
-			spark_system.start()
-			playsound(src.loc, 'sound/weapons/blade1.ogg', 50, 1)
-			playsound(src.loc, SFX_SPARK, 50, 1)
+			emag_act(INFINITY, user, W)
 			return
 		if(isScrewdriver(W))
 			if(do_after(user, 20, src))
@@ -116,25 +111,30 @@
 				show_lock_menu(M)
 	return
 
-/obj/item/storage/secure/emag_act(remaining_charges, mob/user, emag_source, visual_feedback = "", audible_feedback = "")
-	var/obj/item/melee/energy/WS = emag_source
-	if(WS.active)
-		on_hack_behavior(WS, user)
-		return TRUE
+/obj/item/storage/secure/emag_act(remaining_charges, mob/user, atom/emag_source)
+	if(istype(emag_source, /obj/item/melee/energy))
+		var/obj/item/melee/energy/energy_weapon = emag_source
+		if(!energy_weapon.active)
+			return NO_EMAG_ACT
+	if(emagged || !remaining_charges)
+		// `emag_source.name` is used to prevent automatic article insertion before the name of the emag source.
+		to_chat(user, SPAN("notice", "You swipe your [emag_source.name] through the lock mechanism of \the [src], but nothing happens."))
+		return
+	emagged = TRUE
+	locked = FALSE
+	hack_effects()
+	return 1
 
-/obj/item/storage/secure/proc/on_hack_behavior()
-	var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
-	spark_system.set_up(5, 0, src.loc)
+/obj/item/storage/secure/proc/hack_effects()
+	var/datum/effect/effect/system/spark_spread/spark_system = new
+	spark_system.set_up(5, 0, src)
 	spark_system.start()
-	playsound(src.loc, 'sound/weapons/blade1.ogg', 50, 1)
-	playsound(src.loc, "spark", 50, 1)
-	if(!emagged)
-		emagged = TRUE
-		overlays += image('icons/obj/storage.dmi', icon_sparking)
-		sleep(6)
-		overlays = null
-		overlays += image('icons/obj/storage.dmi', icon_locking)
-		locked = FALSE
+	playsound(src, 'sound/weapons/blade1.ogg', 50, 1)
+	playsound(src, SFX_SPARK, 50, 1)
+	overlays += image('icons/obj/storage.dmi', emag_sparks_overlay_icon_state)
+	spawn(6)
+		overlays.Cut()
+		overlays += image('icons/obj/storage.dmi', emagged_overlay_icon_state)
 
 
 /obj/item/storage/secure/briefcase
@@ -158,8 +158,8 @@
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "safe"
 	icon_opened = "safe0"
-	icon_locking = "safeb"
-	icon_sparking = "safespark"
+	emagged_overlay_icon_state = "safeb"
+	emag_sparks_overlay_icon_state = "safespark"
 	force = 0
 	w_class = ITEM_SIZE_NO_CONTAINER
 	max_w_class = ITEM_SIZE_HUGE
