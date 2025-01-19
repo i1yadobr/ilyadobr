@@ -38,7 +38,7 @@
 		to_chat(user, SPAN("notice", "You [locked ? "" : "un"]lock \the [src]."))
 		overlays.Cut()
 		if(!locked)
-			overlays += image(icon, icon_opened)
+			overlays += image(icon, opened_overlay_icon_state)
 		return
 	return ..()
 
@@ -184,7 +184,7 @@
 		locked = !locked
 		overlays.Cut()
 		if(!locked)
-			overlays += image(icon, icon_opened)
+			overlays += image(icon, opened_overlay_icon_state)
 		return
 	return ..()
 

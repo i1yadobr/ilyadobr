@@ -2,7 +2,7 @@
 	name = "secstorage"
 	var/emagged_overlay_icon_state = "secureb"
 	var/emag_sparks_overlay_icon_state = "securespark"
-	var/icon_opened = "secure0"
+	var/opened_overlay_icon_state = "secure0"
 	locked = TRUE
 	// TODO(rufus): document these variables or refactor
 	var/code = ""
@@ -92,7 +92,7 @@
 			else if((src.code == src.l_code) && (src.emagged == 0) && (src.l_set == 1))
 				src.locked = 0
 				src.overlays = null
-				overlays += image('icons/obj/storage.dmi', icon_opened)
+				overlays += image('icons/obj/storage.dmi', opened_overlay_icon_state)
 				src.code = null
 			else
 				src.code = "ERROR"
@@ -157,7 +157,7 @@
 	name = "secure safe"
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "safe"
-	icon_opened = "safe0"
+	opened_overlay_icon_state = "safe0"
 	emagged_overlay_icon_state = "safeb"
 	emag_sparks_overlay_icon_state = "safespark"
 	force = 0
