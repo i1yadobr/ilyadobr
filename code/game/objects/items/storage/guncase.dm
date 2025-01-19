@@ -12,23 +12,9 @@
 	var/guntype = ""
 	var/gunspawned = FALSE
 
-/obj/item/storage/secure/guncase/attack_hand(mob/user)
-	if((loc == user) && (locked == 1))
-		to_chat(usr, SPAN("warning", "[src] is locked and cannot be opened!"))
-	else if((loc == user) && (!locked))
-		open(usr)
-	else
-		// TODO(rufus): fix closing the UI on pick up (e.g. with range(2)), right now the UI
-		//   won't close if mobs are one turf apart
-		..()
-		for(var/mob/M in range(1))
-			if(M.s_active == src)
-				close(M)
-	add_fingerprint(user)
-	return
-
 /obj/item/storage/secure/guncase/proc/spawn_set(set_name)
 	return
+
 
 /obj/item/storage/secure/guncase/detective
 	name = "detective's gun case"
