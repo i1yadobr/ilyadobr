@@ -40,27 +40,34 @@
 	icon_state = "guncasedet"
 	item_state = "guncasedet"
 	desc = "A heavy-duty container with a digital locking system. This one has a wooden coating and its locks are the color of brass."
-	guntype = "M1911"
+
+/obj/item/storage/secure/guncase/detective/attackby(obj/item/W, mob/user)
+	var/obj/item/card/id/I = W.get_id_card()
+	if(I)
+		if(!(access_forensics_lockers in I.GetAccess()))
+			to_chat(user, SPAN("warning", "Access denied!"))
+			return
+		if(!guntype)
+			to_chat(user, SPAN("warning", "\The [src] blinks red. You need to make a choice first."))
+			return
+		if(!gunspawned)
+			spawn_set(guntype)
+			lock_menu.close(user)
+		locked = !locked
+		to_chat(user, SPAN("notice", "You [locked ? "" : "un"]lock \the [src]."))
+		overlays.Cut()
+		if(!locked)
+			overlays += image(icon, icon_opened)
+		return
+	return ..()
 
 /obj/item/storage/secure/guncase/detective/show_lock_menu(mob/user)
 	if(user.incapacitated() || !user.Adjacent(src) || !user.client)
 		return
 	user.set_machine(src)
-	var/dat = text("<TT>\n\nLock Status: []", (locked ? "<font color=red>LOCKED</font>" : "<font color=green>UNLOCKED</font>"))
-	var/message = "Code"
 
-	if((l_set == 0) && (!emagged) && (!l_setshort))
-		dat += text("<p>\n<b>5-DIGIT PASSCODE NOT SET.<br>ENTER NEW PASSCODE.</b>")
-	if(emagged)
-		dat += text("<p>\n<font color=red><b>LOCKING SYSTEM ERROR - 1701</b></font>")
-	if(l_setshort)
-		dat += text("<p>\n<font color=red><b>ALERT: MEMORY SYSTEM ERROR - 6040 201</b></font>")
-	message = text("[]", src.code)
-	if(!locked)
-		message = "*****"
-	// behold, the keypad, in all of its 537 character glory
-	dat += text("<HR>\n>[]<BR>\n<A href='?src=\ref[];type=1'>1</A>-<A href='?src=\ref[];type=2'>2</A>-<A href='?src=\ref[];type=3'>3</A><BR>\n<A href='?src=\ref[];type=4'>4</A>-<A href='?src=\ref[];type=5'>5</A>-<A href='?src=\ref[];type=6'>6</A><BR>\n<A href='?src=\ref[];type=7'>7</A>-<A href='?src=\ref[];type=8'>8</A>-<A href='?src=\ref[];type=9'>9</A><BR>\n<A href='?src=\ref[];type=R'>R</A>-<A href='?src=\ref[];type=0'>0</A>-<A href='?src=\ref[];type=E'>E</A><BR>\n</TT>", message, src, src, src, src, src, src, src, src, src, src, src, src)
-
+	var/dat = "The case can be unlocked by swiping your ID card across the lock."
+	dat += "\n"
 	dat += text("<p><HR>\nChosen Gun: []", guntype)
 	if(!gunspawned)
 		dat += text("<p>\n Be careful! Once you chose your weapon and unlock the gun case, you won't be able to change it.")
@@ -118,29 +125,6 @@
 			guntype = "M2019"
 		else if(href_list["type"] == "det_m9")
 			guntype = "T9 Patrol"
-		else if(href_list["type"] == "E")
-			if((l_set == 0) && (length(code) == 5) && (!l_setshort) && (code != "ERROR"))
-				l_code = src.code
-				l_set = 1
-			else if((code == l_code) && !emagged && (l_set == 1))
-				locked = 0
-				overlays.Cut()
-				overlays += image(icon, icon_opened)
-				code = null
-				if(!gunspawned)
-					spawn_set(guntype)
-			else
-				code = "ERROR"
-		else
-			if((href_list["type"] == "R") && !emagged && (!l_setshort))
-				locked = 1
-				overlays = null
-				code = null
-				close(usr)
-			else
-				code += text("[]", href_list["type"])
-				if(length(code) > 5)
-					code = "ERROR"
 		for(var/mob/M in viewers(1, src.loc))
 			if((M.client && M.machine == src))
 				show_lock_menu(M)
