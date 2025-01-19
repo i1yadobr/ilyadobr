@@ -22,8 +22,34 @@
 			choice_interface.open()
 	attack_hand(user)
 
+/obj/item/storage/guncase/attackby(obj/item/W, mob/user)
+	var/obj/item/card/id/I = W.get_id_card()
+	if(!I) // swipe with an access item is required to lock/unlock
+		return ..()
+	if(!allowed(user)) // compares required access vars to all the access sources on the user's mob, see `req_access` var
+		to_chat(user, SPAN("warning", "Access denied!"))
+		return
+	if(!guntype)
+		to_chat(user, SPAN("warning", "\The [src] blinks red. You need to make a choice first."))
+		return
+	if(!gunspawned)
+		spawn_set(guntype)
+		register_stored_guns(I.registered_name)
+		choice_interface.close(user)
+	locked = !locked
+	to_chat(user, SPAN("notice", "You [locked ? "" : "un"]lock \the [src]."))
+	overlays.Cut()
+	if(!locked)
+		overlays += image(icon, opened_overlay_icon_state)
+
 /obj/item/storage/guncase/proc/spawn_set(set_name)
 	return
+
+/obj/item/storage/guncase/proc/register_stored_guns(owner_name)
+	for(var/thing in contents)
+		if(istype(thing, /obj/item/gun/energy/security))
+			var/obj/item/gun/energy/security/gun = thing
+			gun.owner = owner_name
 
 /obj/item/storage/guncase/proc/show_choice_interface(mob/user)
 	return
@@ -34,26 +60,7 @@
 	icon_state = "guncasedet"
 	item_state = "guncasedet"
 	desc = "A heavy-duty container with a digital locking system. This one has a wooden coating and its locks are the color of brass."
-
-/obj/item/storage/guncase/detective/attackby(obj/item/W, mob/user)
-	var/obj/item/card/id/I = W.get_id_card()
-	if(I)
-		if(!(access_forensics_lockers in I.GetAccess()))
-			to_chat(user, SPAN("warning", "Access denied!"))
-			return
-		if(!guntype)
-			to_chat(user, SPAN("warning", "\The [src] blinks red. You need to make a choice first."))
-			return
-		if(!gunspawned)
-			spawn_set(guntype)
-			choice_interface.close(user)
-		locked = !locked
-		to_chat(user, SPAN("notice", "You [locked ? "" : "un"]lock \the [src]."))
-		overlays.Cut()
-		if(!locked)
-			overlays += image(icon, opened_overlay_icon_state)
-		return
-	return ..()
+	req_access = list(access_forensics_lockers)
 
 /obj/item/storage/guncase/detective/show_choice_interface(mob/user)
 	if(user.incapacitated() || !user.Adjacent(src) || !user.client)
@@ -173,33 +180,10 @@
 	icon_state = "guncasesec"
 	item_state = "guncase"
 	desc = "A heavy-duty container with an ID-based locking system. This one is painted in NT Security colors."
+	req_access = list(access_security)
 	override_w_class = list(/obj/item/gun/energy/security)
 	max_storage_space = null
 	storage_slots = 7
-
-/obj/item/storage/guncase/security/attackby(obj/item/W, mob/user)
-	var/obj/item/card/id/I = W.get_id_card()
-	if(I) // For IDs and PDAs and wallets with IDs
-		if(!(access_security in I.GetAccess()))
-			to_chat(user, SPAN("warning", "Access denied!"))
-			return
-		if(!guntype)
-			to_chat(user, SPAN("warning", "\The [src] blinks red. You need to make a choice first."))
-			return
-		if(!gunspawned)
-			spawn_set(guntype)
-			choice_interface.close(user)
-			for(var/thing in contents)
-				if(istype(thing, /obj/item/gun/energy/security))
-					var/obj/item/gun/energy/security/gun = thing
-					gun.owner = I.registered_name
-		to_chat(user, SPAN("notice", "You [locked ? "un" : ""]lock \the [src]."))
-		locked = !locked
-		overlays.Cut()
-		if(!locked)
-			overlays += image(icon, opened_overlay_icon_state)
-		return
-	return ..()
 
 /obj/item/storage/guncase/security/spawn_set(set_name)
 	if(gunspawned)
