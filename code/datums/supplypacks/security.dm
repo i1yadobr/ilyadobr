@@ -126,7 +126,7 @@
 	name = "Weapons - Security basic"
 	contains = list(/obj/item/device/flash = 4,
 					/obj/item/reagent_containers/spray/pepper = 4,
-					/obj/item/storage/secure/guncase/security = 4)
+					/obj/item/storage/guncase/security = 4)
 	cost = 50
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "\improper Weapons crate"

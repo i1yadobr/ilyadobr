@@ -237,7 +237,7 @@
 		/obj/item/reagent_containers/vessel/flask/detflask,
 		/obj/item/storage/briefcase/crimekit,
 		/obj/item/device/holowarrant,
-		/obj/item/storage/secure/guncase/detective
+		/obj/item/storage/guncase/detective
 	)
 
 /obj/structure/closet/secure_closet/injection

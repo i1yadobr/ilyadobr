@@ -1,4 +1,4 @@
-/obj/item/storage/secure/guncase
+/obj/item/storage/guncase
 	name = "guncase"
 	icon = 'icons/obj/storage.dmi'
 	force = 8
@@ -9,20 +9,33 @@
 	mod_handy = 1
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = DEFAULT_BACKPACK_STORAGE
+	locked = TRUE
+	var/opened_overlay_icon_state = "guncase0"
 	var/guntype = ""
 	var/gunspawned = FALSE
+	var/datum/browser/lock_menu
 
-/obj/item/storage/secure/guncase/proc/spawn_set(set_name)
+/obj/item/storage/guncase/attack_self(mob/user)
+	if(locked && !gunspawned)
+		show_lock_menu(user)
+		if(lock_menu?.user == user)
+			lock_menu.open()
+	attack_hand(user)
+
+/obj/item/storage/guncase/proc/spawn_set(set_name)
+	return
+
+/obj/item/storage/guncase/proc/show_lock_menu(mob/user)
 	return
 
 
-/obj/item/storage/secure/guncase/detective
+/obj/item/storage/guncase/detective
 	name = "detective's gun case"
 	icon_state = "guncasedet"
 	item_state = "guncasedet"
 	desc = "A heavy-duty container with a digital locking system. This one has a wooden coating and its locks are the color of brass."
 
-/obj/item/storage/secure/guncase/detective/attackby(obj/item/W, mob/user)
+/obj/item/storage/guncase/detective/attackby(obj/item/W, mob/user)
 	var/obj/item/card/id/I = W.get_id_card()
 	if(I)
 		if(!(access_forensics_lockers in I.GetAccess()))
@@ -42,7 +55,7 @@
 		return
 	return ..()
 
-/obj/item/storage/secure/guncase/detective/show_lock_menu(mob/user)
+/obj/item/storage/guncase/detective/show_lock_menu(mob/user)
 	if(user.incapacitated() || !user.Adjacent(src) || !user.client)
 		return
 	user.set_machine(src)
@@ -92,7 +105,7 @@
 		lock_menu.update()
 	return
 
-/obj/item/storage/secure/guncase/detective/Topic(href, href_list)
+/obj/item/storage/guncase/detective/Topic(href, href_list)
 	if((usr.stat || usr.restrained()) || (get_dist(src, usr) > 1))
 		return
 	if(href_list["type"])
@@ -111,7 +124,7 @@
 				show_lock_menu(M)
 	return
 
-/obj/item/storage/secure/guncase/detective/spawn_set(set_name)
+/obj/item/storage/guncase/detective/spawn_set(set_name)
 	if(gunspawned)
 		return
 	switch(set_name)
@@ -155,7 +168,7 @@
 	gunspawned = TRUE
 
 
-/obj/item/storage/secure/guncase/security
+/obj/item/storage/guncase/security
 	name = "security hardcase"
 	icon_state = "guncasesec"
 	item_state = "guncase"
@@ -164,7 +177,7 @@
 	max_storage_space = null
 	storage_slots = 7
 
-/obj/item/storage/secure/guncase/security/attackby(obj/item/W, mob/user)
+/obj/item/storage/guncase/security/attackby(obj/item/W, mob/user)
 	var/obj/item/card/id/I = W.get_id_card()
 	if(I) // For IDs and PDAs and wallets with IDs
 		if(!(access_security in I.GetAccess()))
@@ -188,14 +201,7 @@
 		return
 	return ..()
 
-/obj/item/storage/secure/guncase/security/attack_self(mob/user)
-	if(locked && !gunspawned)
-		show_lock_menu(user)
-		if(lock_menu?.user == user)
-			lock_menu.open()
-	attack_hand(user)
-
-/obj/item/storage/secure/guncase/security/spawn_set(set_name)
+/obj/item/storage/guncase/security/spawn_set(set_name)
 	if(gunspawned)
 		return
 	var/obj/item/gun/energy/security/gun = null
@@ -230,7 +236,7 @@
 	new /obj/item/reagent_containers/food/donut/normal(src)
 	gunspawned = TRUE
 
-/obj/item/storage/secure/guncase/security/show_lock_menu(mob/user)
+/obj/item/storage/guncase/security/show_lock_menu(mob/user)
 	if(user.incapacitated() || !user.Adjacent(src) || !user.client)
 		return
 	user.set_machine(src)
@@ -267,7 +273,7 @@
 		lock_menu.update()
 	return
 
-/obj/item/storage/secure/guncase/security/Topic(href, href_list)
+/obj/item/storage/guncase/security/Topic(href, href_list)
 	if((usr.stat || usr.restrained()) || (get_dist(src, usr) > 1))
 		return
 	if(href_list["type"])
