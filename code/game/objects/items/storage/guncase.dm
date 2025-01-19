@@ -13,19 +13,19 @@
 	var/opened_overlay_icon_state = "guncase0"
 	var/guntype = ""
 	var/gunspawned = FALSE
-	var/datum/browser/lock_menu
+	var/datum/browser/choice_interface
 
 /obj/item/storage/guncase/attack_self(mob/user)
 	if(locked && !gunspawned)
-		show_lock_menu(user)
-		if(lock_menu?.user == user)
-			lock_menu.open()
+		show_choice_interface(user)
+		if(choice_interface?.user == user)
+			choice_interface.open()
 	attack_hand(user)
 
 /obj/item/storage/guncase/proc/spawn_set(set_name)
 	return
 
-/obj/item/storage/guncase/proc/show_lock_menu(mob/user)
+/obj/item/storage/guncase/proc/show_choice_interface(mob/user)
 	return
 
 
@@ -46,7 +46,7 @@
 			return
 		if(!gunspawned)
 			spawn_set(guntype)
-			lock_menu.close(user)
+			choice_interface.close(user)
 		locked = !locked
 		to_chat(user, SPAN("notice", "You [locked ? "" : "un"]lock \the [src]."))
 		overlays.Cut()
@@ -55,7 +55,7 @@
 		return
 	return ..()
 
-/obj/item/storage/guncase/detective/show_lock_menu(mob/user)
+/obj/item/storage/guncase/detective/show_choice_interface(mob/user)
 	if(user.incapacitated() || !user.Adjacent(src) || !user.client)
 		return
 	user.set_machine(src)
@@ -97,12 +97,12 @@
 			if(!gunspawned)
 				dat += text("<p>\n Comes with three ten round 9mm magazines and two 9mm flash ten round magazines.")
 
-	if(!lock_menu || lock_menu.user != user)
-		lock_menu = new /datum/browser(user, "mob[name]", "<B>[src]</B>", 300, 280)
-		lock_menu.set_content(dat)
+	if(!choice_interface || choice_interface.user != user)
+		choice_interface = new /datum/browser(user, "mob[name]", "<B>[src]</B>", 300, 280)
+		choice_interface.set_content(dat)
 	else
-		lock_menu.set_content(dat)
-		lock_menu.update()
+		choice_interface.set_content(dat)
+		choice_interface.update()
 	return
 
 /obj/item/storage/guncase/detective/Topic(href, href_list)
@@ -121,7 +121,7 @@
 			guntype = "T9 Patrol"
 		for(var/mob/M in viewers(1, src.loc))
 			if((M.client && M.machine == src))
-				show_lock_menu(M)
+				show_choice_interface(M)
 	return
 
 /obj/item/storage/guncase/detective/spawn_set(set_name)
@@ -188,7 +188,7 @@
 			return
 		if(!gunspawned)
 			spawn_set(guntype)
-			lock_menu.close(user)
+			choice_interface.close(user)
 			for(var/thing in contents)
 				if(istype(thing, /obj/item/gun/energy/security))
 					var/obj/item/gun/energy/security/gun = thing
@@ -236,7 +236,7 @@
 	new /obj/item/reagent_containers/food/donut/normal(src)
 	gunspawned = TRUE
 
-/obj/item/storage/guncase/security/show_lock_menu(mob/user)
+/obj/item/storage/guncase/security/show_choice_interface(mob/user)
 	if(user.incapacitated() || !user.Adjacent(src) || !user.client)
 		return
 	user.set_machine(src)
@@ -265,12 +265,12 @@
 				dat += text("<p>\n A rusty-and-trusty taser. It's overall worse than the modern baseline tasers, but it still does its job. Useful for those who want to assert their robust dominance. Or, maybe, for old farts.")
 				dat += text("<p>\n Comes with a baton, a couple of handcuffs, a pair of donuts, and a drink to stay cool.")
 
-	if(!lock_menu || lock_menu.user != user)
-		lock_menu = new /datum/browser(user, "mob[name]", "<B>[src]</B>", 300, 280)
-		lock_menu.set_content(dat)
+	if(!choice_interface || choice_interface.user != user)
+		choice_interface = new /datum/browser(user, "mob[name]", "<B>[src]</B>", 300, 280)
+		choice_interface.set_content(dat)
 	else
-		lock_menu.set_content(dat)
-		lock_menu.update()
+		choice_interface.set_content(dat)
+		choice_interface.update()
 	return
 
 /obj/item/storage/guncase/security/Topic(href, href_list)
@@ -280,5 +280,5 @@
 		guntype = href_list["type"]
 		for(var/mob/M in viewers(1, loc))
 			if((M.client && M.machine == src))
-				show_lock_menu(M)
+				show_choice_interface(M)
 	return
