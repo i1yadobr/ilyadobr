@@ -60,7 +60,7 @@
 	if(!items_spawned)
 		spawn_contents()
 		register_stored_guns(I.registered_name)
-		choice_interface.close(user)
+		choice_interface.close()
 	locked = !locked
 	to_chat(user, SPAN("notice", "You [locked ? "" : "un"]lock \the [src]."))
 	update_icon()
