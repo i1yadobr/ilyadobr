@@ -1,3 +1,6 @@
+// guncase is a lockable storage with a choice UI that spawns a set of items on first unlock.
+// Following the name, it is usually used for security gun choice mechanic.
+// The spawn options are defined in guncase_spawn_options.dm as /datum/guncase_spawn_option subtypes.
 /obj/item/storage/guncase
 	name = "guncase"
 	icon = 'icons/obj/storage.dmi'
@@ -17,13 +20,15 @@
 	// Used to track if items were already spawned.
 	// If not, items from the `selected_option` will be spawned upon unlocking.
 	var/items_spawned = FALSE
-	// List of /datum/guncase_spawn_option instances that can be selected for this guncase
+	// List of /datum/guncase_spawn_option instances that can be selected for this guncase.
 	var/list/spawn_options
 	// Currently selected /datum/guncase_spawn_option from the `spawn_options` list or null if nothing was selected yet.
 	var/datum/guncase_spawn_option/selected_option
 
 	var/datum/browser/choice_interface
 
+// attack_self of the guncase opens the choice UI if items haven't been spawned yet.
+// Otherwise, it opens the storage UI.
 /obj/item/storage/guncase/attack_self(mob/user)
 	if(locked && !items_spawned)
 		show_choice_interface(user)
@@ -32,6 +37,10 @@
 		return
 	attack_hand(user)
 
+// attackby of the guncase handles ID card interactions (including items that provide ID card access like PDAs),
+// which is used to lock in the `selected_option` and spawn items or toggle the lock of the guncase if items
+// were already spawned.
+// If W does not provide ID card access, handling is delegated to the storage `attackby`.
 /obj/item/storage/guncase/attackby(obj/item/W, mob/user)
 	var/obj/item/card/id/I = W.get_id_card()
 	if(!I) // swipe with an access item is required to lock/unlock
@@ -52,6 +61,8 @@
 	if(!locked)
 		overlays += image(icon, opened_overlay_icon_state)
 
+// spawn_contents spawns the list of items defined by the currently selected spawn option.
+// See `spawn_items` var of the /datum/guncase_spawn_option type.
 /obj/item/storage/guncase/proc/spawn_contents()
 	if(items_spawned || !selected_option)
 		return
@@ -65,12 +76,18 @@
 			new item_path(src)
 	items_spawned = TRUE
 
+// register_stored_guns iterates over all the items in the guncase and applies owner registration
+// to items that can be assigned an owner.
+// This is currently only used for security tasers (/obj/item/gun/energy/security).
+// This proc is intended to be used right after the selected option items were spawned.
 /obj/item/storage/guncase/proc/register_stored_guns(owner_name)
 	for(var/thing in contents)
 		if(istype(thing, /obj/item/gun/energy/security))
 			var/obj/item/gun/energy/security/gun = thing
 			gun.owner = owner_name
 
+// show_choice_interface constructs the choice UI based on the current state of the guncase
+// and displays it to the user. The UI is updated if user is already viewing it.
 /obj/item/storage/guncase/proc/show_choice_interface(mob/user)
 	if(user.incapacitated() || !user.Adjacent(src) || !user.client)
 		return
@@ -97,6 +114,8 @@
 		choice_interface.set_content(dat)
 		choice_interface.update()
 
+// Topic handling of the guncase handles selected option switching,
+// which is initiated by the choice interface interactions.
 /obj/item/storage/guncase/Topic(href, href_list)
 	if((usr.stat || usr.restrained()) || (get_dist(src, usr) > 1))
 		return
@@ -107,6 +126,9 @@
 		if((M.client && M.machine == src))
 			show_choice_interface(M)
 
+// select_spawn_option sets `selected_option` of the guncase to the one that matches `codename` argument.
+// See `codename` var of the /datum/guncase_spawn_option type.
+// It crashes if `codename` didn't match any of the options the guncase has.
 /obj/item/storage/guncase/proc/select_spawn_option(codename)
 	for(var/datum/guncase_spawn_option/option in spawn_options)
 		if(codename == option.codename)
