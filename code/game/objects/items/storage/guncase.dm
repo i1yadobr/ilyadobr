@@ -54,27 +54,31 @@
 		return
 	attack_hand(user)
 
-// attackby of the guncase handles ID card interactions (including items that provide ID card access like PDAs),
-// which is used to lock in the `selected_option` and spawn items or toggle the lock of the guncase if items
-// were already spawned.
-// If W does not provide ID card access, handling is delegated to the storage `attackby`.
+// attackby of the guncase handles locking and unlocking if W is an item that acts as an ID card,
+// and hacking if W is a multitool.
+// If nothing of the above is the case, the call is delegated to the parent implementation for regular
+// item-storage interactions.
 /obj/item/storage/guncase/attackby(obj/item/W, mob/user)
 	var/obj/item/card/id/I = W.get_id_card()
-	if(!I) // swipe with an access item is required to lock/unlock
-		return ..()
-	if(!allowed(user)) // compares required access vars to all the access sources on the user's mob, see `req_access` var
-		to_chat(user, SPAN("warning", "Access denied!"))
+	if(istype(I))
+		if(!allowed(user)) // compares required access vars to all the access sources on the user's mob, see `req_access` var
+			to_chat(user, SPAN("warning", "Access denied!"))
+			return
+		if(!selected_option)
+			to_chat(user, SPAN("warning", "\The [src] blinks red. You need to make a choice first."))
+			return
+		if(!items_spawned)
+			spawn_contents()
+			register_stored_guns(I.registered_name)
+			choice_interface.close()
+		locked = !locked
+		to_chat(user, SPAN("notice", "You [locked ? "" : "un"]lock \the [src]."))
+		update_icon()
 		return
-	if(!selected_option)
-		to_chat(user, SPAN("warning", "\The [src] blinks red. You need to make a choice first."))
+	else if(istype(W, /obj/item/device/multitool))
+		multitool_hack(W, user)
 		return
-	if(!items_spawned)
-		spawn_contents()
-		register_stored_guns(I.registered_name)
-		choice_interface.close()
-	locked = !locked
-	to_chat(user, SPAN("notice", "You [locked ? "" : "un"]lock \the [src]."))
-	update_icon()
+	return ..()
 
 // spawn_contents spawns the list of items defined by the currently selected spawn option.
 // See `spawn_items` var of the /datum/guncase_spawn_option type.
@@ -183,6 +187,37 @@
 	overlays += image(icon, emag_sparks_overlay_icon_state)
 	spawn(6)
 		update_icon()
+
+/obj/item/storage/guncase/proc/multitool_hack(obj/item/device/multitool/mt, mob/user)
+	if(!istype(mt))
+		CRASH("multitool_hack() of the [src] called with wrong tool: expected /obj/item/device/multitool, got [mt.type] ([mt])")
+	if(hacked)
+		to_chat(user, SPAN("warning", "You check the wiring of \the [src] and find the ID system already fried!"))
+		return
+	if(mt.in_use)
+		to_chat(user, SPAN("warning", "This multitool is already in use!"))
+		return
+	mt.in_use = 1
+	// Rolling twice in favor of the player to keep things fun and fast, no need to keep them waiting too long.
+	var/required_attempts = min(rand(3, 10), rand(3, 10))
+	for(var/i in 1 to required_attempts)
+		user.visible_message(SPAN("warning", "[user] picks in the wires of \the [src] with a multitool."),
+		                     SPAN("warning", "Attempting to short circuit the ID system... ([i])"))
+		// 12 seconds per attempt gives us 2 minutes in the worst case scenario,
+		// matching the amount of time it takes to break out of handcuffs.
+		if(!do_after(user, 12 SECONDS))
+			to_chat(user, SPAN("warning", "You stop manipulating the ID system of \the [src] and it resets itself into a working state!"))
+			mt.in_use = 0
+			return
+		if(i == 5 && required_attempts > 5)
+			// Some additional text midway through the attempts so users know the system is working as intended
+			// and they just had bad luck.
+			to_chat(user, SPAN("warning", "Your attempts to crash the ID system caused a failsafe ciruit to activate. \
+			                               This will take some additional time to bypass."))
+	get_hacked()
+	mt.in_use = 0
+	user.visible_message(SPAN("warning", "[user] short ciruits ID system of \the [src] with a multitool."),
+	                     SPAN("warning", "You short circuit the ID system of \the [src]."))
 
 
 /obj/item/storage/guncase/detective
