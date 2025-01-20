@@ -27,6 +27,12 @@
 
 	var/datum/browser/choice_interface
 
+// update_icon of the guncase cleans and re-applies the overlays of the LED indicator based on the current state.
+/obj/item/storage/guncase/update_icon()
+	overlays.Cut()
+	if(!locked)
+		overlays += image(icon, opened_overlay_icon_state)
+
 // attack_self of the guncase opens the choice UI if items haven't been spawned yet.
 // Otherwise, it opens the storage UI.
 /obj/item/storage/guncase/attack_self(mob/user)
@@ -57,9 +63,7 @@
 		choice_interface.close(user)
 	locked = !locked
 	to_chat(user, SPAN("notice", "You [locked ? "" : "un"]lock \the [src]."))
-	overlays.Cut()
-	if(!locked)
-		overlays += image(icon, opened_overlay_icon_state)
+	update_icon()
 
 // spawn_contents spawns the list of items defined by the currently selected spawn option.
 // See `spawn_items` var of the /datum/guncase_spawn_option type.
