@@ -1,11 +1,13 @@
 "a" = (/turf/simulated/wall/r_wall,/area/engineering/toilet)
 "b" = (/turf/simulated/floor/tiled,/area/engineering/toilet)
 "c" = (/turf/simulated/wall/r_wall,/area/space)
+"d" = (/obj/item/melee/energy/sword/one_hand,/turf/simulated/floor/tiled,/area/engineering/toilet)
 "e" = (/mob/living/carbon/human/skrell{icon = 'icons/mob/human_races/r_skrell.dmi'; icon_state = "preview"},/turf/simulated/floor/tiled,/area/engineering/toilet)
 "f" = (/obj/effect/floor_decal/industrial/hatch/yellow,/turf/simulated/floor/tiled,/area/engineering/toilet)
 "g" = (/turf/simulated/wall,/area/engineering/toilet)
 "i" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/map_ent/trigger_button{ev_tag = "floor1_light"},/obj/machinery/button{pixel_y = 32; _wifi_id = -1},/turf/simulated/floor/tiled,/area/engineering/toilet)
 "j" = (/obj/structure/ladder/up,/turf/simulated/floor/tiled,/area/engineering/toilet)
+"k" = (/obj/item/device/multitool,/turf/simulated/floor/tiled,/area/engineering/toilet)
 "l" = (/obj/effect/landmark/start/crew,/turf/simulated/floor/tiled,/area/engineering/toilet)
 "m" = (/obj/machinery/atmospherics/unary/vent_pump/on,/turf/simulated/floor/tiled,/area/engineering/toilet)
 "n" = (/obj/machinery/atmospherics/pipe/simple/visible{dir = 5},/turf/simulated/floor/tiled,/area/engineering/toilet)
@@ -28,8 +30,10 @@
 "F" = (/obj/structure/cable{d2 = 2; icon_state = "0-2"},/obj/machinery/power/apc{dir = 8; name = "west bump"; pixel_x = -24},/turf/simulated/floor/tiled,/area/engineering/toilet)
 "G" = (/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/tiled,/area/engineering/toilet)
 "H" = (/obj/structure/cable,/obj/machinery/power/debug_items/infinite_generator,/turf/simulated/floor/tiled,/area/engineering/toilet)
+"I" = (/obj/item/card/emag,/turf/simulated/floor/tiled,/area/engineering/toilet)
 "J" = (/turf/space,/area/space)
 "K" = (/obj/map_ent/trigger_mob{pixel_x = -7; ev_tag = "mapent_write_var"; tag = "mapent_mob_trigger"},/obj/map_ent/func_write_var{pixel_y = 9; ev_activate_writer = 1; ev_read_tag = "mapent_mob_trigger"; ev_table = list("ev_tag" = "ev_triggered"); ev_write_tag = "mapent_teleporter"; tag = "mapent_write_var"},/obj/map_ent/func_teleport{pixel_x = 14; ev_dest_tag = "mapent_destination_showcase"; tag = "mapent_teleporter"},/obj/effect/floor_decal/industrial/hatch/yellow,/turf/simulated/floor/tiled,/area/engineering/toilet)
+"L" = (/obj/item/storage/toolbox/syndicate,/turf/simulated/floor/tiled,/area/engineering/toilet)
 "M" = (/obj/item/modular_computer/console/preset/command,/turf/simulated/floor/tiled,/area/engineering/toilet)
 "N" = (/obj/structure/table/woodentable,/obj/machinery/photocopier/faxmachine,/turf/simulated/floor/tiled,/area/engineering/toilet)
 "O" = (/obj/map_ent/info_maptext{ev_text = "    Teleport ->"},/turf/simulated/floor/tiled,/area/engineering/toilet)
@@ -61,9 +65,9 @@ JJJJJJJJJJJJJJJJcaTZbbYfgfbbbbbacJJJJJJJJJJJJJJJ
 JJJJJJJJJJJJJJJJcaTWbbbfifbbbbbacJJJJJJJJJJJJJJJ
 JJJJJJJJJJJJJJJJcaTRbbjfffbbbbbacJJJJJJJJJJJJJJJ
 JJJJJJJJJJJJJJJJcaTRbbbbbbbbmbbacJJJJJJJJJJJJJJJ
-JJJJJJJJJJJJyyyJcaTRbbbUXbbbnopacJJJJJJJJJJJJJJJ
-JJJJJJJJJJJJzAzccaTRbbbbrlbbbbbacJJJJJJJJJJJJJJJ
-JJJJJJJJJJJJzBzaaaTRbbbbVbbbsotacJJJJJJJJJJJJJJJ
+JJJJJJJJJJJJyyyJcaTRbbbUXbIbnopacJJJJJJJJJJJJJJJ
+JJJJJJJJJJJJzAzccaTRbbbbrldLbbbacJJJJJJJJJJJJJJJ
+JJJJJJJJJJJJzBzaaaTRbbbbVbkbsotacJJJJJJJJJJJJJJJ
 JJJJJJJJJJJJDCEuvwbbbbbbbbbbxbbacJJJJJJJJJJJJJJJ
 JJJJJJJJJJJJyyyaaabbbbbbbbbbbbbacJJJJJJJJJJJJJJJ
 JJJJJJJJJJJJJJJccaFbbbbbbbbbbbbacJJJJJJJJJJJJJJJ
