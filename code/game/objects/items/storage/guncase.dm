@@ -17,6 +17,12 @@
 	// icon_state of the overlay that will be drawn over the guncase when it's unlocked.
 	// Green LED indicator by default.
 	var/opened_overlay_icon_state = "guncase0"
+	// icon_state of the overlay that will be temporarily drawn over the guncase when it's being hacked.
+	// Sparking blinking LED indicator by default.
+	var/emag_sparks_overlay_icon_state = "guncasespark"
+	// icon_state of the overlay that will be drawn over the guncase when it's hacked. Takes precedence over other overlays.
+	// Blinking red-green LED indicator by default.
+	var/hacked_overlay_icon_state = "guncaseb"
 	// Used to track if items were already spawned.
 	// If not, items from the `selected_option` will be spawned upon unlocking.
 	var/items_spawned = FALSE
@@ -24,12 +30,17 @@
 	var/list/spawn_options
 	// Currently selected /datum/guncase_spawn_option from the `spawn_options` list or null if nothing was selected yet.
 	var/datum/guncase_spawn_option/selected_option
+	// If guncase was hacked and is no longer lockable, set by emag_act.
+	var/hacked = FALSE
 
 	var/datum/browser/choice_interface
 
 // update_icon of the guncase cleans and re-applies the overlays of the LED indicator based on the current state.
 /obj/item/storage/guncase/update_icon()
 	overlays.Cut()
+	if(hacked)
+		overlays += image(icon, hacked_overlay_icon_state)
+		return
 	if(!locked)
 		overlays += image(icon, opened_overlay_icon_state)
 
@@ -139,6 +150,39 @@
 			selected_option = option
 			return
 	CRASH("Unexpected guncase option codename for [src] ([src.type]): \"[codename]\"")
+
+// emag_act of the guncase causes the guncase to get hacked, which unlocks it and, if item's haven't been
+// spawned yet, spawns items from a random option from the `spawn_options` list.
+// If guncase is already hacked or emag doesn't have charges, emag_act reports this to the user and returns.
+/obj/item/storage/guncase/emag_act(remaining_charges, mob/user, emag_source)
+	if(hacked || !remaining_charges)
+		to_chat(user, SPAN("notice", "You swipe your [emag_source] through the lock system of \the [src], but nothing happens."))
+		return 0
+	get_hacked()
+	return 1
+
+// get_hacked unlocks the guncase, if item's haven't been spawned yet, spawns items from a random option from
+// the `spawn_options` list, and triggers visual hacking effects and sounds.
+/obj/item/storage/guncase/proc/get_hacked()
+	if(!items_spawned)
+		if(length(spawn_options) < 1)
+			CRASH("No item spawn options found while attempting to resolve emag_act of \the [src] ([src.type])")
+		selected_option = pick(spawn_options)
+		spawn_contents()
+	locked = FALSE
+	hacked = TRUE
+	choice_interface?.close()
+	hack_effects()
+
+// hack_effects proc displays overlays and plays sound effects indicating that the guncase is being hacked.
+/obj/item/storage/guncase/proc/hack_effects()
+	var/datum/effect/effect/system/spark_spread/spark_system = new
+	spark_system.set_up(5, 0, src)
+	spark_system.start()
+	playsound(src, SFX_SPARK, 50, TRUE)
+	overlays += image(icon, emag_sparks_overlay_icon_state)
+	spawn(6)
+		update_icon()
 
 
 /obj/item/storage/guncase/detective
