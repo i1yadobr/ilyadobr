@@ -364,7 +364,8 @@ its easier to just keep the beam vertical.
 // It is also up to the implementation to check if there's zero `remaining_charges`.
 //
 // The return value must be the number of emag charges that were used during your handling or
-// special NO_EMAG_ACT value which won't use any charges and cause the emag handling to exit early.
+// special NO_EMAG_ACT value which won't use any charges and make the interaction fall through
+// to the basic item interaction handling (e.g. insertion into a storage item).
 // If return value is non-zero, the value will be subtracted from the emag's charges.
 //
 // In case of the standard emag, emag_act is called by the emag's resolve_attackby() proc.
