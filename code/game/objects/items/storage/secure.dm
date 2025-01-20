@@ -31,7 +31,11 @@
 				src.open =! src.open
 				user.show_message(SPAN("notice", "You [src.open ? "open" : "close"] the service panel."))
 			return
-		if(isMultitool(W) && (src.open == 1)&& (!src.l_hacking))
+		if(isMultitool(W) && (!src.l_hacking))
+			if(!open)
+				to_chat(user, SPAN("warning", "The wiring of \the [src] is not accessible as the service panel is closed. \
+				                               You need to unscrew it first."))
+				return
 			user.show_message(SPAN("notice", "Now attempting to reset internal memory, please hold."), 1)
 			src.l_hacking = 1
 			if(do_after(usr, 100, src))
