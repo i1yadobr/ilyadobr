@@ -55,7 +55,7 @@
 	attack_hand(user)
 
 // attackby of the guncase handles locking and unlocking if W is an item that acts as an ID card,
-// and hacking if W is a multitool.
+// and hacking if W is a multitool or a melee energy weapon.
 // If nothing of the above is the case, the call is delegated to the parent implementation for regular
 // item-storage interactions.
 /obj/item/storage/guncase/attackby(obj/item/W, mob/user)
@@ -77,6 +77,12 @@
 		return
 	else if(istype(W, /obj/item/device/multitool))
 		multitool_hack(W, user)
+		return
+	else if(istype(W, /obj/item/melee/energy))
+		var/obj/item/melee/energy/energy_weapon = W
+		if(!energy_weapon.active)
+			return ..() // act as a normal item
+		get_hacked()
 		return
 	return ..()
 
