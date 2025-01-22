@@ -29,7 +29,7 @@ You can read about these features and differences in the [ZeroOnyx Features docu
 
 ## Documentation
 For contributing to the ZeroOnyx project and working with game files, it may be useful to review the documentation in the **[docs/development/](https://github.com/ZeroHubProjects/ZeroOnyx/tree/docs/readme-server-overview-update/docs/development)** folder.  
-The **[README](https://github.com/ZeroHubProjects/ZeroOnyx/blob/docs/readme-server-overview-update/docs/development/README.md)** of the aforementioned folder will guide you on what documentation is available at the moment.
+The **[README](https://github.com/ZeroHubProjects/ZeroOnyx/blob/docs/readme-server-overview-update/docs/development/README.en.md)** of the aforementioned folder will guide you on what documentation is available at the moment.
 
 ## Links to OnyxBay Source Materials
 Original project website: [https://ss13.ru/](https://ss13.ru/)  
