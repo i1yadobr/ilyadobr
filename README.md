@@ -16,7 +16,7 @@ This enables the development of unique game variants, some of which are not rela
 # General information
 > [!NOTE]  
 > - Discord community server: https://discord.gg/PM7RQmzJBG
-> - ZeroOnyx server address: `byond://zeroonyx.com:14076`
+> - ZeroOnyx server address: [byond://zeroonyx.com:14076](https://play.zeroonyx.com)
 
 ZeroOnyx is a relatively "classic" version of Space Station 13:
 - Events unfold on a space station in the 26th century

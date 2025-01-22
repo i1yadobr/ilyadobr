@@ -11,7 +11,7 @@ Space Station 13 - высокоинтерактивная многопользо
 # Основная информация
 > [!NOTE]
 > - Discord сервер сообщества: https://discord.gg/PM7RQmzJBG
-> - Адрес сервера ZeroOnyx: `byond://zeroonyx.com:14076`
+> - Адрес сервера ZeroOnyx: [byond://zeroonyx.com:14076](https://play.zeroonyx.com)
 
 ZeroOnyx является относительно "классическим" вариантом Space Station 13:
 - События развиваются на космической станции в 26 веку
