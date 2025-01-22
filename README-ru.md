@@ -24,7 +24,7 @@ ZeroOnyx является относительно "классическим" в
 
 ## Особенности сообщества и сервера ZeroOnyx
 ZeroOnyx имеет несколько особенностей и отличий от своего родительского проекта Chaotic Onyx.  
-Почитать про эти особенности и найти ответы на основные вопросы (FAQ) можно в [документе про особенности ZeroOnyx](https://github.com/ZeroHubProjects/ZeroOnyx/blob/master/docs/about-zeroonyx-ru.md).
+Почитать про эти особенности можно в [документе про особенности ZeroOnyx](https://github.com/ZeroHubProjects/ZeroOnyx/blob/master/docs/about-zeroonyx-ru.md) и [документе по основным вопросам (FAQ)](https://github.com/ZeroHubProjects/ZeroOnyx/blob/master/docs/faq-zeroonyx-ru.md).
 
 ## Документация
 Для контрибьютинга в проект ZeroOnyx и работы с игровыми файлами может быть полезным ознакомиться с документацией в папке **[docs](https://github.com/ZeroHubProjects/ZeroOnyx/tree/master/docs)**.  
