@@ -1,4 +1,4 @@
-# ZeroOnyx Community and Server Features
+# About ZeroOnyx Community and Server
 
 ---
 

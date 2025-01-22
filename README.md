@@ -28,9 +28,9 @@ The latest shared commit with the OnyxBay build is [2e02fa](https://github.com/Z
 
 Most of the information and manuals from the original project team are still relevant, but in the process of being revised or updated.
 
-## ZeroOnyx Community and Server Features
-ZeroOnyx has several features and key differences from its parent project Chaotic Onyx.  
-You can read about these features and differences in the [ZeroOnyx Features document](https://github.com/ZeroHubProjects/ZeroOnyx/blob/master/docs/about_zeroonyx/about-zeroonyx.en.md) and the [FAQ document](https://github.com/ZeroHubProjects/ZeroOnyx/blob/master/docs/about_zeroonyx/faq-zeroonyx.en.md).
+## About ZeroOnyx Community and Server
+ZeroOnyx has several key characteristics and differences from its parent project Chaotic Onyx.  
+You can read about them in the [About ZeroOnyx document](https://github.com/ZeroHubProjects/ZeroOnyx/blob/master/docs/about_zeroonyx/about-zeroonyx.en.md) and the [FAQ document](https://github.com/ZeroHubProjects/ZeroOnyx/blob/master/docs/about_zeroonyx/faq-zeroonyx.en.md).
 
 ## Documentation
 For contributing to the ZeroOnyx project and working with game files, it may be useful to review the documentation in the **[docs/development/](https://github.com/ZeroHubProjects/ZeroOnyx/tree/master/docs/development)** folder.  
