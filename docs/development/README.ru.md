@@ -4,18 +4,18 @@
 
 Ниже приведён список доступнных на данный момент документов и общее описание их содержимого:
 
-- **[База данных (ru)](https://github.com/ZeroHubProjects/ZeroOnyx/blob/docs/readme-server-overview-update/docs/development/db.ru.md)** - общая информация по подготовке, настройке, запуску и использованию базы данных для сервера. Не является обязательной для разработки или запуска билда локально.
+- **[База данных (ru)](https://github.com/ZeroHubProjects/ZeroOnyx/blob/master/docs/development/db.ru.md)** - общая информация по подготовке, настройке, запуску и использованию базы данных для сервера. Не является обязательной для разработки или запуска билда локально.
 
-- **[Контрибутинг звуков (en)](https://github.com/ZeroHubProjects/ZeroOnyx/blob/docs/readme-server-overview-update/docs/development/sound_contributing.en.md)** - набор советов и рекомендуемых практик для работы со звуками для сборки, особенно важно для добавления новых звуковых эффектов в игру.
+- **[Контрибутинг звуков (en)](https://github.com/ZeroHubProjects/ZeroOnyx/blob/master/docs/development/sound_contributing.en.md)** - набор советов и рекомендуемых практик для работы со звуками для сборки, особенно важно для добавления новых звуковых эффектов в игру.
 
 ## Документация от авторов оригинального проекта:
 > [!NOTE]  
 > Данная информация является унаследованной от оригинального проекта OnyxBay и ещё не была пересмотрена под ZeroOnyx.  
 > Используйте данные руководства в ознакомительных целях, но помните, что некоторые моменты могут быть устаревшими или неактуальными.
-- **[Руководство по разработке OnyxBay (ru)](https://github.com/ZeroHubProjects/ZeroOnyx/blob/docs/readme-server-overview-update/docs/development/contributing.ru.md)** - общие указания для контрибуторов о правилах написания кода и создании пулл реквестов.
+- **[Руководство по разработке OnyxBay (ru)](https://github.com/ZeroHubProjects/ZeroOnyx/blob/master/docs/development/contributing.ru.md)** - общие указания для контрибуторов о правилах написания кода и создании пулл реквестов.
 
-- **[Сигналы, компоненты и элементы (ru)](https://github.com/ZeroHubProjects/ZeroOnyx/blob/docs/readme-server-overview-update/docs/development/ces.ru.md)** - информация по используемой в билде системе сигналов, которая позволяет установить связь между изначально раздельными системами игры.
+- **[Сигналы, компоненты и элементы (ru)](https://github.com/ZeroHubProjects/ZeroOnyx/blob/master/docs/development/ces.ru.md)** - информация по используемой в билде системе сигналов, которая позволяет установить связь между изначально раздельными системами игры.
 
-- **[Map Entities (ru)](https://github.com/ZeroHubProjects/ZeroOnyx/blob/docs/readme-server-overview-update/docs/development/map_entities.ru.md)** - вспомогательные сущности для игровых карт, используемые для скриптования и автоматизации процессов в игровом мире и не требующие изменений в коде игры.
+- **[Map Entities (ru)](https://github.com/ZeroHubProjects/ZeroOnyx/blob/master/docs/development/map_entities.ru.md)** - вспомогательные сущности для игровых карт, используемые для скриптования и автоматизации процессов в игровом мире и не требующие изменений в коде игры.
 
-- **[Новый процессинг "think" (ru)](https://github.com/ZeroHubProjects/ZeroOnyx/blob/docs/readme-server-overview-update/docs/development/thinking.ru.md)** - информация по новой подсистеме для регулярной обработки кода объектов.
+- **[Новый процессинг "think" (ru)](https://github.com/ZeroHubProjects/ZeroOnyx/blob/master/docs/development/thinking.ru.md)** - информация по новой подсистеме для регулярной обработки кода объектов.

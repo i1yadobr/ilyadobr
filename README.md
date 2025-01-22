@@ -11,7 +11,7 @@ This enables the development of unique game variants, some of which are not rela
 > [!TIP]  
 > This readme is also available in Russian.  
 > Данный readme также доступен на русском языке.  
-> [README.ru.md](https://github.com/ZeroHubProjects/ZeroOnyx/blob/docs/readme-server-overview-update/README.ru.md).
+> [README.ru.md](https://github.com/ZeroHubProjects/ZeroOnyx/blob/master/README.ru.md).
 
 # General information
 > [!NOTE]  
@@ -30,11 +30,11 @@ Most of the information and manuals from the original project team are still rel
 
 ## ZeroOnyx Community and Server Features
 ZeroOnyx has several features and key differences from its parent project Chaotic Onyx.  
-You can read about these features and differences in the [ZeroOnyx Features document](https://github.com/ZeroHubProjects/ZeroOnyx/blob/docs/readme-server-overview-update/docs/about_zeroonyx/about-zeroonyx.en.md) and the [FAQ document](https://github.com/ZeroHubProjects/ZeroOnyx/blob/docs/readme-server-overview-update/docs/about_zeroonyx/faq-zeroonyx.en.md).
+You can read about these features and differences in the [ZeroOnyx Features document](https://github.com/ZeroHubProjects/ZeroOnyx/blob/master/docs/about_zeroonyx/about-zeroonyx.en.md) and the [FAQ document](https://github.com/ZeroHubProjects/ZeroOnyx/blob/master/docs/about_zeroonyx/faq-zeroonyx.en.md).
 
 ## Documentation
-For contributing to the ZeroOnyx project and working with game files, it may be useful to review the documentation in the **[docs/development/](https://github.com/ZeroHubProjects/ZeroOnyx/tree/docs/readme-server-overview-update/docs/development)** folder.  
-The **[README](https://github.com/ZeroHubProjects/ZeroOnyx/blob/docs/readme-server-overview-update/docs/development/README.en.md)** of the aforementioned folder will guide you on what documentation is available at the moment.
+For contributing to the ZeroOnyx project and working with game files, it may be useful to review the documentation in the **[docs/development/](https://github.com/ZeroHubProjects/ZeroOnyx/tree/master/docs/development)** folder.  
+The **[README](https://github.com/ZeroHubProjects/ZeroOnyx/blob/master/docs/development/README.en.md)** of the aforementioned folder will guide you on what documentation is available at the moment.
 
 ## Links to OnyxBay Source Materials
 Original project website: [https://ss13.ru/](https://ss13.ru/)  
