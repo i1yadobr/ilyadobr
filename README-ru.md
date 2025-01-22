@@ -24,11 +24,11 @@ ZeroOnyx является относительно "классическим" в
 
 ## Особенности сообщества и сервера ZeroOnyx
 ZeroOnyx имеет несколько особенностей и отличий от своего родительского проекта Chaotic Onyx.  
-Почитать про эти особенности можно в [документе про особенности ZeroOnyx](https://github.com/ZeroHubProjects/ZeroOnyx/blob/master/docs/about-zeroonyx-ru.md) и [документе по основным вопросам (FAQ)](https://github.com/ZeroHubProjects/ZeroOnyx/blob/master/docs/faq-zeroonyx-ru.md).
+Почитать про эти особенности можно в [документе про особенности ZeroOnyx](https://github.com/ZeroHubProjects/ZeroOnyx/blob/docs/readme-server-overview-update/docs/about_zeroonyx/about-zeroonyx-ru.md) и [документе по основным вопросам (FAQ)](https://github.com/ZeroHubProjects/ZeroOnyx/blob/docs/about_zeroonyx/readme-server-overview-update/docs/faq-zeroonyx-ru.md).
 
 ## Документация
-Для контрибьютинга в проект ZeroOnyx и работы с игровыми файлами может быть полезным ознакомиться с документацией в папке **[docs](https://github.com/ZeroHubProjects/ZeroOnyx/tree/master/docs)**.  
-**[README](https://github.com/ZeroHubProjects/ZeroOnyx/blob/master/docs/README-ru.md)** из вышеупомянутой папки подскажет какая документация доступна на данный момент.
+Для контрибьютинга в проект ZeroOnyx и работы с игровыми файлами может быть полезным ознакомиться с документацией в папке **[docs](https://github.com/ZeroHubProjects/ZeroOnyx/tree/docs/readme-server-overview-update/docs)**.  
+**[README](https://github.com/ZeroHubProjects/ZeroOnyx/blob/docs/readme-server-overview-update/docs/README-ru.md)** из вышеупомянутой папки подскажет какая документация доступна на данный момент.
 
 ## Ссылки на исходные материалы OnyxBay
 Сайт оригинального проекта: [https://ss13.ru/](https://ss13.ru/)  
