@@ -1,3 +1,8 @@
+> [!TIP]  
+> This readme is also available in Russian.  
+> Данный readme также доступен на русском языке.  
+> [README.ru.md](https://github.com/ZeroHubProjects/ZeroOnyx/blob/docs/readme-server-overview-update/docs/development/README.ru.md).
+
 # Development docs
 This folder contains documentation on some of the key systems of the project and is expanded as needed.  
 At the moment, most of the documentation is in Russian, but English versions are added as respective systems are being worked on.

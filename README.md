@@ -8,8 +8,13 @@ It is also a role-playing game where each player acts as their character and acc
 Distinctive features of Space Station 13 include an extensive development history (over 20 years!) and open-source code, which allows teams and communities to adapt and expand gameplay to their liking.
 This enables the development of unique game variants, some of which are not related to space or space stations at all.
 
+> [!TIP]  
+> This readme is also available in Russian.  
+> Данный readme также доступен на русском языке.  
+> [README.ru.md](https://github.com/ZeroHubProjects/ZeroOnyx/blob/docs/readme-server-overview-update/README.ru.md).
+
 # General information
-> [!NOTE]
+> [!NOTE]  
 > - Discord community server: https://discord.gg/PM7RQmzJBG
 > - ZeroOnyx server address: `byond://zeroonyx.com:14076`
 
