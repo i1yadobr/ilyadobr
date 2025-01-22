@@ -38,6 +38,6 @@ Github оригинального проекта: [https://github.com/ChaoticOny
 
 ## Лицензия
 
-Исходный код ZeroOnyx находится под лицензией [GNU Affero General Public License v3](http://www.gnu.org/licenses/agpl.html), наследуя её от проекта [OnyxBay](https://github.com/ChaoticOnyx/OnyxBay/blob/dev/LICENSE). Полный текст лицензии можно найти в файле [LICENSE](https://github.com/ZeroHubProjects/ZeroOnyx/blob/master/LICENSE).
+Исходный код ZeroOnyx находится под лицензией [GNU Affero General Public License v3](http://www.gnu.org/licenses/agpl.html), наследуя её от проекта [OnyxBay](https://github.com/ChaoticOnyx/OnyxBay/blob/dev/LICENSE). Полный текст лицензии можно найти в файле [LICENSE](https://github.com/ZeroHubProjects/ZeroOnyx/blob/master/LICENSE.txt).
 
-Весь код, который был внесен до коммита [6461be](https://github.com/ZeroHubProjects/ZeroOnyx/commit/6461beaf587de4e35fff02efdb7708e61ce43ed8) от 5 января 2015 10:55 GMT (`1420455300 +0000`), находится под лицензией GNU General Public License version 3, которую можно найти в файле [LICENSE-GPL3.txt](https://github.com/ZeroHubProjects/ZeroOnyx/blob/master/docs/LICENSE-AGPL3.txt).
+Весь код, который был внесен до коммита [6461be](https://github.com/ZeroHubProjects/ZeroOnyx/commit/6461beaf587de4e35fff02efdb7708e61ce43ed8) от 5 января 2015 10:55 GMT (`1420455300 +0000`), находится под лицензией GNU General Public License version 3, которую можно найти в файле [LICENSE-GPL3.txt](https://github.com/ZeroHubProjects/ZeroOnyx/blob/master/docs/LICENSE-GPL3.txt).
