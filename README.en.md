@@ -2,10 +2,11 @@
 ZeroOnyx is a [Space Station 13](https://spacestation13.com/) server based on the [OnyxBay](https://github.com/ChaoticOnyx/OnyxBay) by the [Chaotic Onyx](https://github.com/ChaoticOnyx) team.
 
 ## Space Station 13
-Space Station 13 is a highly interactive multiplayer online game, a space station simulation with complex role systems and mechanics.
+Space Station 13 is a highly interactive multiplayer online game, a space station simulator with complex systems and mechanics.  
+It is also a role-playing game where each player acts as their character and according to their assigned profession.
 
-Key features of the game include an extensive development history (over 20 years!) and open-source code, which allows teams and communities to adapt and expand gameplay to their taste.
-This enables communities to create their own variants of the game, some of which are not related to space or space station at all.
+Distinctive features of Space Station 13 include an extensive development history (over 20 years!) and open-source code, which allows teams and communities to adapt and expand gameplay to their liking.
+This enables the development of unique game variants, some of which are not related to space or space stations at all.
 
 # General information
 > [!NOTE]
