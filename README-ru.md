@@ -1,28 +1,39 @@
 # ZeroOnyx
-Данный проект является форком сборки [OnyxBay](https://github.com/ChaoticOnyx/OnyxBay) от команды [ChaoticOnyx](https://github.com/ChaoticOnyx).  
-Последним общим коммитом является [2e02fa](https://github.com/ZeroHubProjects/ZeroOnyx/commit/2e02fad116f279105439f03593ba9ea9720bd5d8) от 2 ноября 2022 года.
+ZeroOnyx является сервером по [Space Station 13](https://spacestation13.com/), основанным на сборке [OnyxBay](https://github.com/ChaoticOnyx/OnyxBay) от команды [ChaoticOnyx](https://github.com/ChaoticOnyx).
 
-Большая часть README и руководств от команды оригинального проекта актуальны, но в процессе пересмотра или обновления.
+## Space Station 13
+Space Station 13 - высокоинтерактивная многопользовательская онлайн-игра, симулятор космической станции с комплексными системами ролей и механик.
 
-> [!NOTE]  
-> **Discord** сервер сообщества: https://discord.gg/PM7RQmzJBG  
-> Адрес сервера ZeroOnyx: `byond://zeroonyx.com:14076`
+Важными особенностями игры являются обширная история разработки (больше 20 лет!) и открытый исходный код, что позволяет командам и сообществам адаптировать и расширять игровой процесс на свой вкус.  
+Это позволяет сообществам создавать свои уникальные варианты игры, некоторые из которых и вовсе не связаны с космосом или космической станцией.
 
-## OnyxBay
-Сайт оригинального проекта: [https://ss13.ru/](https://ss13.ru/)
+# Основная информация
+> [!NOTE]
+> - Discord сервер сообщества: https://discord.gg/PM7RQmzJBG
+> - Адрес сервера ZeroOnyx: `byond://zeroonyx.com:14076`
 
-Вики оригинального проекта: [https://wiki.ss13.ru/](https://wiki.ss13.ru/)
+ZeroOnyx является относительно "классическим" вариантом Space Station 13:
+- События развиваются на космической станции в 26 веку
+- Основными врагами корпорации всё ещё является Синдикат
+- Игровых карт всего две, одна из которых - "Exodus/Исход", основанная на исторической "BoxStation"
+- Основная цель экипажа - работа по назначенным профессиям и поддержание работоспособности станции
 
-## Общая информация
+Последний общий коммит со сборкой OnyxBay - [2e02fa](https://github.com/ZeroHubProjects/ZeroOnyx/commit/2e02fad116f279105439f03593ba9ea9720bd5d8) от 2 ноября 2022 года.
 
-- **[База данных](https://github.com/ZeroHubProjects/ZeroOnyx/blob/master/docs/db.md)** - общая информация по подготовке, настройке, запуску и использованию базы данных для сервера. Не является обязательной для запуска билда.
+Большая часть руководств и информации от команды оригинального проекта актуальны, но в процессе пересмотра или обновления.
 
-## Документация и информация от авторов оригинального проекта:
-- **[Руководство по разработке OnyxBay](https://github.com/ZeroHubProjects/ZeroOnyx/blob/master/docs/contributing.md)** - общие указания для контрибуторов о правилах написания кода и создании пулл реквестов.
+## Особенности сообщества и сервера ZeroOnyx
+ZeroOnyx имеет несколько особенностей и отличий от своего родительского проекта Chaotic Onyx.  
+Почитать про эти особенности и найти ответы на основные вопросы (FAQ) можно в [документе про особенности ZeroOnyx](https://github.com/ZeroHubProjects/ZeroOnyx/blob/master/docs/about-zeroonyx-ru.md).
 
-- **[Сигналы, компоненты и элементы](https://github.com/ZeroHubProjects/ZeroOnyx/blob/master/docs/ces.md)** - информация по используемой в билде системе сигналов, которая позволяет установить связь между изначально раздельными системами игры.
+## Документация
+Для контрибьютинга в проект ZeroOnyx и работы с игровыми файлами может быть полезным ознакомиться с документацией в папке **[docs](https://github.com/ZeroHubProjects/ZeroOnyx/tree/master/docs)**.  
+**[README](https://github.com/ZeroHubProjects/ZeroOnyx/blob/master/docs/README-ru.md)** из вышеупомянутой папки подскажет какая документация доступна на данный момент.
 
-- **[Новый процессинг "think"](https://github.com/ZeroHubProjects/ZeroOnyx/blob/master/docs/thinking.md)** - информация по новой подсистеме для регулярной обработки кода объектов.
+## Ссылки на исходные материалы OnyxBay
+Сайт оригинального проекта: [https://ss13.ru/](https://ss13.ru/)  
+Вики оригинального проекта: [https://wiki.ss13.ru/](https://wiki.ss13.ru/)  
+Github оригинального проекта: [https://github.com/ChaoticOnyx/OnyxBay](https://github.com/ChaoticOnyx/OnyxBay)
 
 ## Лицензия
 
