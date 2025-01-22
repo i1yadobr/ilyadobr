@@ -25,7 +25,7 @@ Most of the information and manuals from the original project team are still rel
 
 ## ZeroOnyx Community and Server Features
 ZeroOnyx has several features and key differences from its parent project Chaotic Onyx.  
-You can read about these features and differences in the [ZeroOnyx Features document](https://github.com/ZeroHubProjects/ZeroOnyx/blob/docs/readme-server-overview-update/docs/about_zeroonyx/about-zeroonyx.en.md) and the [FAQ document](https://github.com/ZeroHubProjects/ZeroOnyx/blob/docs/readme-server-overview-update/docs/about_zeroonyx/faq-zeroonyx.ru.md).
+You can read about these features and differences in the [ZeroOnyx Features document](https://github.com/ZeroHubProjects/ZeroOnyx/blob/docs/readme-server-overview-update/docs/about_zeroonyx/about-zeroonyx.en.md) and the [FAQ document](https://github.com/ZeroHubProjects/ZeroOnyx/blob/docs/readme-server-overview-update/docs/about_zeroonyx/faq-zeroonyx.en.md).
 
 ## Documentation
 For contributing to the ZeroOnyx project and working with game files, it may be useful to review the documentation in the **[docs/development/](https://github.com/ZeroHubProjects/ZeroOnyx/tree/docs/readme-server-overview-update/docs/development)** folder.  
