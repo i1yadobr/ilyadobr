@@ -22,6 +22,16 @@ The same is true in the opposite direction, the team shares their free time, and
 
 ---
 
+### Two languages
+ZeroOnyx supports both English and Russian languages. This includes communication on Discord, the game server, and in-character interactions.
+
+From an in-game perspective, these languages are considered subtypes of Galactic Common and share the same properties as their real-world counterparts. This means characters may not understand one of these languages depending on their individual skills and player preferences.
+
+For GitHub contributions such as pull requests (PRs), issues, and discussion comments, Russian may be used, but English is preferred to keep the code and documentation accessible to those who do not speak Russian.  
+This is particularly important as the development of Space Station 13 is a global effort. Codebases and communities frequently port features and improvements from one another. It would be unfair to benefit from English-language codebases without making our work similarly accessible.
+
+---
+
 ### Development direction
 The direction of development is to keep the code stable since the fork.  
 This means that the project places a **high priority** on:
