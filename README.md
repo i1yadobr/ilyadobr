@@ -1,43 +1,43 @@
 # ZeroOnyx
-ZeroOnyx является сервером по [Space Station 13](https://spacestation13.com/), основанным на сборке [OnyxBay](https://github.com/ChaoticOnyx/OnyxBay) от команды [Chaotic Onyx](https://github.com/ChaoticOnyx).
+ZeroOnyx is a [Space Station 13](https://spacestation13.com/) server based on the [OnyxBay](https://github.com/ChaoticOnyx/OnyxBay) by the [Chaotic Onyx](https://github.com/ChaoticOnyx) team.
 
 ## Space Station 13
-Space Station 13 - высокоинтерактивная многопользовательская онлайн-игра, симулятор космической станции с комплексными системами и механиками.  
-Это также ролевая игра, где каждый игрок действует от лица своего персонажа и в соответствии с назначенной профессией.
+Space Station 13 is a highly interactive multiplayer online game, a space station simulator with complex systems and mechanics.  
+It is also a role-playing game where each player acts as their character and according to their assigned profession.
 
-Отличительные черты Space Station 13 включают обширную историю разработки (больше 20 лет!) и открытый исходный код, что позволяет командам и сообществам адаптировать и расширять игровой процесс на свой вкус.  
-Это даёт возможность создавать свои уникальные варианты игры, некоторые из которых и вовсе не связаны с космосом или космической станцией.
+Distinctive features of Space Station 13 include an extensive development history (over 20 years!) and open-source code, which allows teams and communities to adapt and expand gameplay to their liking.
+This enables the development of unique game variants, some of which are not related to space or space stations at all.
 
-# Основная информация
+# General information
 > [!NOTE]
-> - Discord сервер сообщества: https://discord.gg/PM7RQmzJBG
-> - Адрес сервера ZeroOnyx: `byond://zeroonyx.com:14076`
+> - Discord community server: https://discord.gg/PM7RQmzJBG
+> - ZeroOnyx server address: `byond://zeroonyx.com:14076`
 
-ZeroOnyx является относительно "классическим" вариантом Space Station 13:
-- События развиваются на космической станции в 26 веку
-- Основными врагами корпорации всё ещё является Синдикат
-- Игровых карт всего две, одна из которых - "Exodus/Исход", основанная на исторической "BoxStation"
-- Основная цель экипажа - работа по назначенным профессиям и поддержание работоспособности станции
+ZeroOnyx is a relatively "classic" version of Space Station 13:
+- Events unfold on a space station in the 26th century
+- The main enemies of the corporation are still the Syndicate
+- There are only two game maps, one of which is "Exodus", based on the historical "BoxStation".
+- The main goal of the crew is to work according to assigned professions and maintain the station's functionality
 
-Последний общий коммит со сборкой OnyxBay - [2e02fa](https://github.com/ZeroHubProjects/ZeroOnyx/commit/2e02fad116f279105439f03593ba9ea9720bd5d8) от 2 ноября 2022 года.
+The latest shared commit with the OnyxBay build is [2e02fa](https://github.com/ZeroHubProjects/ZeroOnyx/commit/2e02fad116f279105439f03593ba9ea9720bd5d8) dated November 2, 2022.
 
-Большая часть руководств и информации от команды оригинального проекта актуальны, но в процессе пересмотра или обновления.
+Most of the information and manuals from the original project team are still relevant, but in the process of being revised or updated.
 
-## Особенности сообщества и сервера ZeroOnyx
-ZeroOnyx имеет несколько особенностей и отличий от своего родительского проекта Chaotic Onyx.  
-Почитать про эти особенности можно в [документе про особенности ZeroOnyx](https://github.com/ZeroHubProjects/ZeroOnyx/blob/docs/readme-server-overview-update/docs/about_zeroonyx/about-zeroonyx.ru.md) и [документе по основным вопросам (FAQ)](https://github.com/ZeroHubProjects/ZeroOnyx/blob/docs/readme-server-overview-update/docs/about_zeroonyx/faq-zeroonyx.ru.md).
+## ZeroOnyx Community and Server Features
+ZeroOnyx has several features and key differences from its parent project Chaotic Onyx.  
+You can read about these features and differences in the [ZeroOnyx Features document](https://github.com/ZeroHubProjects/ZeroOnyx/blob/docs/readme-server-overview-update/docs/about_zeroonyx/about-zeroonyx.en.md) and the [FAQ document](https://github.com/ZeroHubProjects/ZeroOnyx/blob/docs/readme-server-overview-update/docs/about_zeroonyx/faq-zeroonyx.en.md).
 
-## Документация
-Для контрибьютинга в проект ZeroOnyx и работы с игровыми файлами может быть полезным ознакомиться с документацией в папке **[docs/development/](https://github.com/ZeroHubProjects/ZeroOnyx/tree/docs/readme-server-overview-update/docs/development)**.  
-**[README](https://github.com/ZeroHubProjects/ZeroOnyx/blob/docs/readme-server-overview-update/docs/development/README.md)** из вышеупомянутой папки подскажет какая документация доступна на данный момент.
+## Documentation
+For contributing to the ZeroOnyx project and working with game files, it may be useful to review the documentation in the **[docs/development/](https://github.com/ZeroHubProjects/ZeroOnyx/tree/docs/readme-server-overview-update/docs/development)** folder.  
+The **[README](https://github.com/ZeroHubProjects/ZeroOnyx/blob/docs/readme-server-overview-update/docs/development/README.en.md)** of the aforementioned folder will guide you on what documentation is available at the moment.
 
-## Ссылки на исходные материалы OnyxBay
-Сайт оригинального проекта: [https://ss13.ru/](https://ss13.ru/)  
-Вики оригинального проекта: [https://wiki.ss13.ru/](https://wiki.ss13.ru/)  
-Github оригинального проекта: [https://github.com/ChaoticOnyx/OnyxBay](https://github.com/ChaoticOnyx/OnyxBay)
+## Links to OnyxBay Source Materials
+Original project website: [https://ss13.ru/](https://ss13.ru/)  
+Original project wiki: [https://wiki.ss13.ru/](https://wiki.ss13.ru/)  
+Original project Github: [https://github.com/ChaoticOnyx/OnyxBay](https://github.com/ChaoticOnyx/OnyxBay)
 
-## Лицензия
+## License
 
-Исходный код ZeroOnyx находится под лицензией [GNU Affero General Public License v3](http://www.gnu.org/licenses/agpl.html), наследуя её от проекта [OnyxBay](https://github.com/ChaoticOnyx/OnyxBay/blob/dev/LICENSE). Полный текст лицензии можно найти в файле [LICENSE](https://github.com/ZeroHubProjects/ZeroOnyx/blob/master/LICENSE.txt).
+The ZeroOnyx source code is licensed under the [GNU Affero General Public License v3](http://www.gnu.org/licenses/agpl.html), inheriting it from the [OnyxBay](https://github.com/ChaoticOnyx/OnyxBay/blob/dev/LICENSE) project. The full license text can be found in the [LICENSE](https://github.com/ZeroHubProjects/ZeroOnyx/blob/master/LICENSE.txt) file.
 
-Весь код, который был внесен до коммита [6461be](https://github.com/ZeroHubProjects/ZeroOnyx/commit/6461beaf587de4e35fff02efdb7708e61ce43ed8) от 5 января 2015 10:55 GMT (`1420455300 +0000`), находится под лицензией GNU General Public License version 3, которую можно найти в файле [LICENSE-GPL3.txt](https://github.com/ZeroHubProjects/ZeroOnyx/blob/master/docs/LICENSE-GPL3.txt).
+All code contributed before the commit [6461be](https://github.com/ZeroHubProjects/ZeroOnyx/commit/6461beaf587de4e35fff02efdb7708e61ce43ed8) dated January 5, 2015, 10:55 GMT (`1420455300 +0000`) is licensed under the GNU General Public License version 3. This license can be found in the [LICENSE-GPL3.txt](https://github.com/ZeroHubProjects/ZeroOnyx/blob/master/docs/LICENSE-GPL3.txt) file.

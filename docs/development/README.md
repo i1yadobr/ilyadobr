@@ -1,21 +1,21 @@
-# Вспомогательная документация для разрабоки
-Данная папка содержит документацию по некоторым ключевым системам проекта и дополняется по мере формирования необходимости.  
-На данный момент большая часть документации на русском языке, однако она будет дополнена английскими версиями в процессе работы с соответствующими системами.
+# Development docs
+This folder contains documentation on some of the key systems of the project and is expanded as needed.  
+At the moment, most of the documentation is in Russian, but English versions are added as respective systems are being worked on.
 
-Ниже приведён список доступнных на данный момент документов и общее описание их содержимого:
+Below is a list of currently available documents and a brief description of their contents:
 
-- **[База данных (ru)](https://github.com/ZeroHubProjects/ZeroOnyx/blob/docs/readme-server-overview-update/docs/development/db.ru.md)** - общая информация по подготовке, настройке, запуску и использованию базы данных для сервера. Не является обязательной для разработки или запуска билда локально.
+- **[Database (ru)](https://github.com/ZeroHubProjects/ZeroOnyx/blob/docs/readme-server-overview-update/docs/development/db.ru.md)** - general information on setting up, configuring, running and using the database for the server. Not required to develop or run the build locally.
 
-- **[Контрибутинг звуков (en)](https://github.com/ZeroHubProjects/ZeroOnyx/blob/docs/readme-server-overview-update/docs/development/sound_contributing.en.md)** - набор советов и рекомендуемых практик для работы со звуками для сборки, особенно важно для добавления новых звуковых эффектов в игру.
+- **[Sound contributing (en)](https://github.com/ZeroHubProjects/ZeroOnyx/blob/docs/readme-server-overview-update/docs/development/sound_contributing.en.md)** - a set of tips and recommended practices for working with sounds, especially important when adding new sound effects to the game.
 
-## Документация от авторов оригинального проекта:
+## Documentation from authors of the original project:
 > [!NOTE]  
-> Данная информация является унаследованной от оригинального проекта OnyxBay и ещё не была пересмотрена под ZeroOnyx.  
-> Используйте данные руководства в ознакомительных целях, но помните, что некоторые моменты могут быть устаревшими или неактуальными.
-- **[Руководство по разработке OnyxBay (ru)](https://github.com/ZeroHubProjects/ZeroOnyx/blob/docs/readme-server-overview-update/docs/development/contributing.ru.md)** - общие указания для контрибуторов о правилах написания кода и создании пулл реквестов.
+> This information is inherited from the original OnyxBay project and has not yet been revised for ZeroOnyx.  
+> Use these manuals for informational purposes, but keep in mind that some parts may be outdated or irrelevant.
+- **[OnyxBay contributing guide (ru)](https://github.com/ZeroHubProjects/ZeroOnyx/blob/docs/readme-server-overview-update/docs/development/contributing.ru.md)** - general guidelines for contributors on coding best practices and creation of pull requests.
 
-- **[Сигналы, компоненты и элементы (ru)](https://github.com/ZeroHubProjects/ZeroOnyx/blob/docs/readme-server-overview-update/docs/development/ces.ru.md)** - информация по используемой в билде системе сигналов, которая позволяет установить связь между изначально раздельными системами игры.
+- **[Signals, components, and elements (ru)](https://github.com/ZeroHubProjects/ZeroOnyx/blob/docs/readme-server-overview-update/docs/development/ces.ru.md)** - information on the signal system used in the build, allows to establish a link between separate game systems.
 
-- **[Map Entities (ru)](https://github.com/ZeroHubProjects/ZeroOnyx/blob/docs/readme-server-overview-update/docs/development/map_entities.ru.md)** - вспомогательные сущности для игровых карт, используемые для скриптования и автоматизации процессов в игровом мире и не требующие изменений в коде игры.
+- **[Map Entities (ru)](https://github.com/ZeroHubProjects/ZeroOnyx/blob/docs/readme-server-overview-update/docs/development/map_entities.ru.md)** - auxiliary entities for game maps, used for game world scripting and automation without code changes.
 
-- **[Новый процессинг "think" (ru)](https://github.com/ZeroHubProjects/ZeroOnyx/blob/docs/readme-server-overview-update/docs/development/thinking.ru.md)** - информация по новой подсистеме для регулярной обработки кода объектов.
+- **[New "think" processing (ru)](https://github.com/ZeroHubProjects/ZeroOnyx/blob/docs/readme-server-overview-update/docs/development/thinking.ru.md)** - information on the latest regular processing subsystem.
