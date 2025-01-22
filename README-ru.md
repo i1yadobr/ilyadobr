@@ -1,5 +1,5 @@
 # ZeroOnyx
-ZeroOnyx является сервером по [Space Station 13](https://spacestation13.com/), основанным на сборке [OnyxBay](https://github.com/ChaoticOnyx/OnyxBay) от команды [ChaoticOnyx](https://github.com/ChaoticOnyx).
+ZeroOnyx является сервером по [Space Station 13](https://spacestation13.com/), основанным на сборке [OnyxBay](https://github.com/ChaoticOnyx/OnyxBay) от команды [Chaotic Onyx](https://github.com/ChaoticOnyx).
 
 ## Space Station 13
 Space Station 13 - высокоинтерактивная многопользовательская онлайн-игра, симулятор космической станции с комплексными системами ролей и механик.
