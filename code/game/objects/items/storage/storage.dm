@@ -192,7 +192,7 @@
 
 	if(locked)
 		if(feedback)
-			to_chat(user, SPAN("notice", "\The [src] is locked."))
+			to_chat(user, SPAN("warning", "\The [src] is locked."))
 		return FALSE
 
 	if(W.anchored)
@@ -200,18 +200,18 @@
 
 	if(storage_slots != null && contents.len >= storage_slots)
 		if(feedback)
-			to_chat(user, SPAN("notice", "\The [src] is full, make some space."))
+			to_chat(user, SPAN("warning", "\The [src] is full, make some space."))
 		return FALSE
 
 	if(length(can_hold))
 		if(!is_type_in_list(W, can_hold))
 			if(feedback && !istype(W, /obj/item/hand_labeler))
-				to_chat(user, SPAN("notice", "\The [src] cannot hold \the [W]."))
+				to_chat(user, SPAN("warning", "\The [src] cannot hold \the [W]."))
 			return FALSE
 		var/max_instances = can_hold[W.type]
 		if(max_instances && instances_of_type_in_list(W, contents) >= max_instances)
 			if(feedback && !istype(W, /obj/item/hand_labeler))
-				to_chat(user, SPAN("notice", "\The [src] has no more space specifically for \the [W]."))
+				to_chat(user, SPAN("warning", "\The [src] has no more space specifically for \the [W]."))
 			return FALSE
 
 	// If intent is not set to help, disallow insertion and let the items perform their action
@@ -227,24 +227,24 @@
 
 	if(length(cant_hold) && is_type_in_list(W, cant_hold))
 		if(feedback)
-			to_chat(user, SPAN("notice", "\The [src] cannot hold \the [W]."))
+			to_chat(user, SPAN("warning", "\The [src] cannot hold \the [W]."))
 		return FALSE
 
 	if(max_w_class != null && W.w_class > max_w_class && !(override_w_class?.len && is_type_in_list(W, override_w_class)))
 		if(feedback)
-			to_chat(user, SPAN("notice", "\The [W] is too big for this [src]."))
+			to_chat(user, SPAN("warning", "\The [W] is too big for this [src]."))
 		return FALSE
 
 	var/total_storage_space = W.get_storage_cost()
 	if(total_storage_space == ITEM_SIZE_NO_CONTAINER)
 		if(feedback)
-			to_chat(user, SPAN("notice", "\The [W] cannot be placed in [src]."))
+			to_chat(user, SPAN("warning", "\The [W] cannot be placed in [src]."))
 		return FALSE
 
 	total_storage_space += storage_space_used() //Adds up the combined w_classes which will be in the storage item if the item is added to it.
 	if(total_storage_space > max_storage_space)
 		if(feedback)
-			to_chat(user, SPAN("notice", "\The [src] is too full, make some space."))
+			to_chat(user, SPAN("warning", "\The [src] is too full, make some space."))
 		return FALSE
 	return TRUE
 
