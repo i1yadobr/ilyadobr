@@ -257,7 +257,7 @@
 
 /obj/item/storage/guncase/warden
 	name = "warden's hardcase"
-	icon_state = "guncasesec"
+	icon_state = "guncasewarden"
 	item_state = "guncase"
 	desc = "A heavy-duty security case reserved for handguns, painted in NT Security colors. \
 	        It is specially designed for those responsible for the armory and brig, \
