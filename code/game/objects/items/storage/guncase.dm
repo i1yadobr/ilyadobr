@@ -252,3 +252,13 @@
 		new /datum/guncase_spawn_option/taser_smg,
 		new /datum/guncase_spawn_option/taser_rifle,
 		new /datum/guncase_spawn_option/taser_classic)
+
+/obj/item/storage/guncase/warden
+	name = "warden's hardcase"
+	icon_state = "guncasesec"
+	item_state = "guncase"
+	desc = "A heavy-duty container with an ID-based locking system. This one is painted in NT Security colors and features silver decorations."
+	req_access = list(access_armory)
+	spawn_options = list(
+		new /datum/guncase_spawn_option/egun,
+		new /datum/guncase_spawn_option/vp78wood)

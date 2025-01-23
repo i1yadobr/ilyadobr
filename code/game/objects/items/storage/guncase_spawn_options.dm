@@ -143,3 +143,37 @@
 		spawn_items += /obj/item/reagent_containers/vessel/bottle/small/darkbeer
 	else
 		spawn_items += /obj/item/reagent_containers/vessel/bottle/whiskey
+
+// Warden's guncase
+
+/datum/guncase_spawn_option/egun
+	name = "Energy Gun"
+	codename = "egun"
+	desc = "A standard issue energy gun. It's a versatile double-mode weapon: stun and laser.<br>\
+	        Comes with a baton, a handheld barrier, two sets of handcuffs, and *two* extra boxes of donuts. \
+			There's no such thing as too many donuts."
+	spawn_items = list(
+		/obj/item/gun/energy/egun,
+		/obj/item/shield/barrier,
+		/obj/item/melee/baton/loaded,
+		/obj/item/handcuffs = 2,
+		/obj/item/storage/box/donut = 2
+	)
+
+/datum/guncase_spawn_option/vp78wood
+	name = "VP78 Special"
+	codename = "vp78wood"
+	desc = "A special edition of the VP78 featuring a wooden grip. A good choice for those who prefer \
+	        a more classic look. Uses .45 rounds.<br>\
+	        Comes with additional magazines (two stun and one flash), a baton, a handheld barrier, two sets of handcuffs, \
+			a nice cigar, and a pack of wooden matches."
+	spawn_items = list(
+		/obj/item/gun/projectile/pistol/vp78/wood,
+		/obj/item/ammo_magazine/c45m/stun = 2,
+		/obj/item/ammo_magazine/c45m/flash,
+		/obj/item/shield/barrier,
+		/obj/item/melee/baton/loaded,
+		/obj/item/handcuffs = 2,
+		/obj/item/clothing/mask/smokable/cigarette/cigar/havana,
+		/obj/item/storage/box/matches
+	)
