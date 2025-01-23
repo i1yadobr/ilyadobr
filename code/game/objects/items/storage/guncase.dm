@@ -99,6 +99,7 @@
 
 		for(var/n in 1 to num)
 			new item_path(src)
+	make_exact_fit()
 	items_spawned = TRUE
 
 // register_stored_guns iterates over all the items in the guncase and applies owner registration
@@ -246,8 +247,6 @@
 	desc = "A heavy-duty container with an ID-based locking system. This one is painted in NT Security colors."
 	req_access = list(access_security)
 	override_w_class = list(/obj/item/gun/energy/security)
-	max_storage_space = null
-	storage_slots = 7
 	spawn_options = list(
 		new /datum/guncase_spawn_option/taser_pistol,
 		new /datum/guncase_spawn_option/taser_smg,
