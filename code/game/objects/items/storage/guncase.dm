@@ -231,7 +231,8 @@
 	name = "detective's gun case"
 	icon_state = "guncasedet"
 	item_state = "guncasedet"
-	desc = "A heavy-duty container with a digital locking system. This one has a wooden coating and its locks are the color of brass."
+	desc = "An elegantly crafted gun case with a vintage wooden finish and brass-colored locks, \
+	        featuring an ID-based locking system. Combines classic style with modern access control."
 	req_access = list(access_forensics_lockers)
 	spawn_options = list(
 		new /datum/guncase_spawn_option/m1911,
@@ -244,7 +245,8 @@
 	name = "security hardcase"
 	icon_state = "guncasesec"
 	item_state = "guncase"
-	desc = "A heavy-duty container with an ID-based locking system. This one is painted in NT Security colors."
+	desc = "A robust hardcase painted in the NT Security colors. \
+	        Equipped with an ID-based locking system to ensure that only authorized personnel can access the contents."
 	req_access = list(access_security)
 	override_w_class = list(/obj/item/gun/energy/security)
 	spawn_options = list(
@@ -257,7 +259,9 @@
 	name = "warden's hardcase"
 	icon_state = "guncasesec"
 	item_state = "guncase"
-	desc = "A heavy-duty container with an ID-based locking system. This one is painted in NT Security colors and features silver decorations."
+	desc = "A heavy-duty security case reserved for handguns, painted in NT Security colors. \
+	        It is specially designed for those responsible for the armory and brig, \
+	        highlighted by distinctive silver accents."
 	req_access = list(access_armory)
 	spawn_options = list(
 		new /datum/guncase_spawn_option/egun,
