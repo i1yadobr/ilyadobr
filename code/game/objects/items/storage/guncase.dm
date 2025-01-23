@@ -248,7 +248,6 @@
 	desc = "A robust hardcase painted in the NT Security colors. \
 	        Equipped with an ID-based locking system to ensure that only authorized personnel can access the contents."
 	req_access = list(access_security)
-	override_w_class = list(/obj/item/gun/energy/security)
 	spawn_options = list(
 		new /datum/guncase_spawn_option/taser_pistol,
 		new /datum/guncase_spawn_option/taser_smg,
