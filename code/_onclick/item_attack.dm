@@ -170,7 +170,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	if(!ismob(user))
 		return FALSE
 	if(can_operate(src, user) && I.do_surgery(src, user)) //Surgery
-		return FALSE
+		return TRUE
 	return I.attack(src, user, user.zone_sel.selecting)
 
 // Return value indicates if attack was handled/resolved,
