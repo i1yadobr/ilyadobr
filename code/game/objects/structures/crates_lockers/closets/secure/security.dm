@@ -151,7 +151,8 @@
 		/obj/item/device/holowarrant,
 		/obj/item/cartridge/security,
 		/obj/item/device/radio/headset/headset_sec,
-		/obj/item/device/radio/headset/tactical/sec
+		/obj/item/device/radio/headset/tactical/sec,
+		/obj/item/storage/guncase/warden
 	)
 
 /obj/structure/closet/secure_closet/security
