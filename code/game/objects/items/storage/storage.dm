@@ -204,7 +204,7 @@
 		return FALSE
 
 	if(length(can_hold))
-		if(!(W.type in can_hold))
+		if(!is_type_in_list(W, can_hold))
 			if(feedback && !istype(W, /obj/item/hand_labeler))
 				to_chat(user, SPAN("notice", "\The [src] cannot hold \the [W]."))
 			return FALSE
@@ -225,7 +225,7 @@
 		if(!impr.safe)
 			return FALSE
 
-	if(length(cant_hold) && (W.type in cant_hold))
+	if(length(cant_hold) && is_type_in_list(W, cant_hold))
 		if(feedback)
 			to_chat(user, SPAN("notice", "\The [src] cannot hold \the [W]."))
 		return FALSE
