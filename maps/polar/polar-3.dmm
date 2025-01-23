@@ -149,7 +149,7 @@
 "acT" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/structure/cable{d1 = 2; d2 = 8; icon_state = "2-8"},/obj/effect/floor_decal/rust,/turf/simulated/floor/tiled/dark,/area/polarplanet/security/checkpoint2)
 "acU" = (/obj/machinery/light{dir = 1},/obj/effect/floor_decal/industrial/warning/red{dir = 1},/turf/simulated/floor/tiled/dark/rough,/area/polarplanet/security/range)
 "acV" = (/obj/machinery/door/airlock/security{name = "Security Checkpoint"; req_access = list(1)},/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/effect/floor_decal/rust,/turf/simulated/floor/tiled/dark,/area/polarplanet/security/checkpoint2)
-"acW" = (/obj/structure/girder/reinforced,/turf/simulated/floor/plating,/area/polarplanet/security/armory)
+"acW" = (/obj/structure/girder,/turf/simulated/floor/plating,/area/polarplanet/security/armory)
 "acX" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"},/obj/structure/cable{d1 = 2; d2 = 8; icon_state = "2-8"},/obj/structure/cable{d1 = 1; d2 = 8; icon_state = "1-8"},/obj/effect/floor_decal/rust,/turf/simulated/floor/tiled/rough,/area/polarplanet/hallway/secondary/entry/aft)
 "acY" = (/obj/machinery/status_display,/turf/simulated/wall,/area/polarplanet/hallway/secondary/entry/port)
 "acZ" = (/obj/machinery/light{dir = 8},/obj/effect/decal/cleanable/dirt,/obj/machinery/deployable/barrier,/obj/effect/floor_decal/industrial/outline/red,/turf/simulated/floor/tiled/dark/mono,/area/polarplanet/security/armory)

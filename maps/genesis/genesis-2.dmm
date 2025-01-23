@@ -164,7 +164,7 @@
 "adh" = (/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 8},/obj/machinery/door/window/westleft{req_access = list()},/turf/simulated/floor/tiled/freezer,/area/prison/solitary)
 "adi" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/freezer,/area/prison/solitary)
 "adj" = (/obj/machinery/shower{dir = 8; icon_state = "shower"; pixel_x = -5; pixel_y = -2},/obj/structure/curtain/open/shower,/turf/simulated/floor/tiled/freezer,/area/prison/solitary)
-"adk" = (/obj/structure/girder/reinforced,/turf/simulated/floor/plating,/area/security/armory)
+"adk" = (/obj/structure/girder,/turf/simulated/floor/plating,/area/security/armory)
 "adl" = (/obj/machinery/atmospherics/pipe/simple/hidden/yellow,/obj/machinery/computer/general_air_control/large_tank_control{input_tag = "gas_chamber_in"; name = "Gas Chamber Control"; output_tag = "gas_chamber_out"; req_access = list(63); sensors = list("gas_chamber" = "Gas Chamber")},/turf/simulated/floor/trim/wood,/area/security/prison)
 "adm" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 4},/obj/structure/bed/chair/comfy/black{dir = 1},/turf/simulated/floor/trim/wood,/area/security/prison)
 "adn" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/obj/structure/bed/chair/comfy/black{dir = 1},/turf/simulated/floor/trim/wood,/area/security/prison)

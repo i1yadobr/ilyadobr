@@ -1923,7 +1923,7 @@
 "aLd" = (/obj/structure/table/standard,/obj/item/storage/firstaid/regular{pixel_x = 2; pixel_y = 6},/obj/item/storage/firstaid/regular{pixel_x = -2; pixel_y = 4},/obj/item/storage/firstaid/adv{pixel_x = 2; pixel_y = 2},/obj/item/storage/firstaid/adv{pixel_x = -2},/turf/unsimulated/floor{icon_state = "white"},/area/centcom/holding)
 "aLe" = (/obj/structure/table/standard,/obj/item/storage/firstaid/o2{layer = 2.8; pixel_x = 4; pixel_y = 6},/obj/item/storage/firstaid/toxin,/obj/item/storage/firstaid/fire{layer = 2.9; pixel_x = 2; pixel_y = 3},/turf/unsimulated/floor{icon_state = "white"},/area/centcom/holding)
 "aLf" = (/obj/structure/table/standard,/obj/item/clothing/glasses/hud/health,/obj/item/clothing/glasses/hud/health,/obj/item/reagent_containers/spray/cleaner,/turf/unsimulated/floor{icon_state = "white"},/area/centcom/holding)
-"aLg" = (/obj/effect/decal/cleanable/dirt,/obj/structure/girder/reinforced,/turf/unsimulated/floor{icon_state = "dark"},/area/skipjack_station/base)
+"aLg" = (/obj/effect/decal/cleanable/dirt,/obj/structure/girder,/turf/unsimulated/floor{icon_state = "dark"},/area/skipjack_station/base)
 "aLh" = (/obj/random/junk,/obj/effect/decal/cleanable/dirt,/turf/unsimulated/floor{icon_state = "dark"},/area/skipjack_station/base)
 "aLi" = (/obj/effect/wingrille_spawn/reinforced,/turf/unsimulated/floor{icon_state = "dark"},/area/skipjack_station/base)
 "aLj" = (/obj/machinery/computer/station_alert/all,/turf/unsimulated/floor{name = "plating"; icon_state = "cult"},/area/skipjack_station/base)
