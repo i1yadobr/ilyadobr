@@ -266,6 +266,13 @@
 
 	var/trans = reagents.trans_to_mob(target, amount_per_transfer_from_this, CHEM_BLOOD)
 
+	if(!trans) // secondary check as reagents might've changed during the `do_after`, e.g. when stacking clicks
+		to_chat(user, SPAN("boldannounce", "You inject \the [target] with the leftover vacuum. \
+		                                    \The [src] now contains even stronger vacuum."))
+		mode = SYRINGE_DRAW
+		update_icon()
+		return
+
 	if(target != user)
 		var/contained = reagentlist()
 		admin_inject_log(user, target, src, contained, trans)
