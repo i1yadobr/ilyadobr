@@ -25,6 +25,8 @@
 	var/nutriment_amt = 0 // Amount of nutriments that spawn in Initialize.
 	var/list/nutriment_desc = list("food" = 1) // Taste-describing data for the nutriments spawned by the var above.
 
+	var/list/cooked_types = list() // Tracks precooked food to prevent duplicates, e.g. grilled grilled grilled cereal.
+
 	var/filling_color = "#ffffff" // Used by sandwiches and stuff.
 	var/trash = null // Type that spawns upon finishing the src.
 

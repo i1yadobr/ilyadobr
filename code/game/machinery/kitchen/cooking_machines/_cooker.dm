@@ -5,10 +5,6 @@
 #define COOKED     2
 #define BURNED     3
 
-// Tracks precooked food to stop deep fried baked grilled grilled grilled diona nymph cereal.
-/obj/item/reagent_containers/food
-	var/list/cooked_types = list()
-
 // Root type for cooking machines. See following files for specific implementations.
 /obj/machinery/cooker
 	name = "cooker"
