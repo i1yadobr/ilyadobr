@@ -308,7 +308,7 @@
 "afX" = (/obj/structure/window/reinforced,/obj/structure/table/standard,/obj/item/clothing/suit/apron,/obj/item/clothing/head/flatcap,/obj/effect/decal/cleanable/dirt,/obj/machinery/light/small{dir = 8},/obj/machinery/vending/wallmed1{pixel_x = -28},/turf/simulated/floor/trim/lino,/area/security/prison)
 "afY" = (/obj/machinery/hologram/holopad,/turf/simulated/floor/tiled/dark/rough,/area/security/warden)
 "afZ" = (/obj/machinery/door/firedoor/border_only,/obj/structure/window_frame/grille/rglass,/obj/machinery/door/blast/shutters{density = 0; dir = 8; icon_state = "shutter0"; id = "warden2"; name = "Warden's Office Shutters"; opacity = 0},/obj/structure/cable{d2 = 2; icon_state = "0-2"},/turf/simulated/floor/plating,/area/security/warden)
-"aga" = (/obj/structure/table/steel,/obj/item/storage/box/donut,/obj/random/smokes,/turf/simulated/floor/tiled/dark/rough,/area/security/warden)
+"aga" = (/obj/structure/table/steel,/obj/item/storage/box/donut,/turf/simulated/floor/tiled/dark/rough,/area/security/warden)
 "agb" = (/obj/effect/wingrille_spawn/reinforced_plasma,/obj/machinery/atmospherics/pipe/simple/visible/yellow{dir = 9},/obj/machinery/door/blast/regular/open{dir = 8; id = "isolationC"},/turf/simulated/floor/plating,/area/outpost/research/isolation_c)
 "agc" = (/turf/simulated/floor/reinforced{name = "Holodeck Projector Floor"},/area/holodeck/alphadeck)
 "agd" = (/obj/machinery/portable_atmospherics/hydroponics,/turf/simulated/floor/natural/grass,/area/hydroponics)
