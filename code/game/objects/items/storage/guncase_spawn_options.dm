@@ -84,7 +84,7 @@
 
 // Security guncase
 
-/datum/guncase_spawn_option/security/taser_pistol
+/datum/guncase_spawn_option/taser_pistol
 	name = "Taser Pistol"
 	codename = "taser_pistol"
 	desc = "A taser pistol. The smallest of all the tasers. It only has a single fire mode, but each shot wields power.<br>\
@@ -97,7 +97,7 @@
 		/obj/item/reagent_containers/food/donut/normal = 2
 	)
 
-/datum/guncase_spawn_option/security/taser_smg
+/datum/guncase_spawn_option/taser_smg
 	name = "Taser SMG"
 	codename = "taser_smg"
 	desc = "A taser SMG. This model is not as powerful as pistols, but is capable of \
@@ -111,7 +111,7 @@
 		/obj/item/reagent_containers/food/donut/normal = 2
 	)
 
-/datum/guncase_spawn_option/security/taser_rifle
+/datum/guncase_spawn_option/taser_rifle
 	name = "Taser Rifle"
 	codename = "taser_rifle"
 	desc = "A taser rifle. Bulky and heavy, it must be wielded with both hands. \
@@ -125,7 +125,7 @@
 		/obj/item/reagent_containers/food/donut/normal = 2
 	)
 
-/datum/guncase_spawn_option/security/classic
+/datum/guncase_spawn_option/taser_classic
 	name = "Rusty Classic"
 	codename = "classic"
 	desc = "A rusty-and-trusty taser. It's overall worse than the modern baseline tasers, but it still \
@@ -138,7 +138,7 @@
 		/obj/item/reagent_containers/food/donut/normal = 2
 	)
 
-/datum/guncase_spawn_option/security/classic/New()
+/datum/guncase_spawn_option/taser_classic/New()
 	if(prob(70))
 		spawn_items += /obj/item/reagent_containers/vessel/bottle/small/darkbeer
 	else

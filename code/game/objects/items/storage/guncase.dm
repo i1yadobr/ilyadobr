@@ -249,7 +249,7 @@
 	max_storage_space = null
 	storage_slots = 7
 	spawn_options = list(
-		new /datum/guncase_spawn_option/security/taser_pistol,
-		new /datum/guncase_spawn_option/security/taser_smg,
-		new /datum/guncase_spawn_option/security/taser_rifle,
-		new /datum/guncase_spawn_option/security/classic)
+		new /datum/guncase_spawn_option/taser_pistol,
+		new /datum/guncase_spawn_option/taser_smg,
+		new /datum/guncase_spawn_option/taser_rifle,
+		new /datum/guncase_spawn_option/taser_classic)
