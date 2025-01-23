@@ -195,6 +195,10 @@
 	spawn(6)
 		update_icon()
 
+// multitool_hack starts a hacking interaction sequence for the user and triggers `get_hacked()` on success.
+// The hacking sequence consists of 3-10 attempts to short circuit the lock system, 12 seconds each.
+// Each attempt is a simple `do_after()` call that displays a progress bar to the user, followed by a progress
+// feedback message.
 /obj/item/storage/guncase/proc/multitool_hack(obj/item/device/multitool/mt, mob/user)
 	if(!istype(mt))
 		CRASH("multitool_hack() of the [src] called with wrong tool: expected /obj/item/device/multitool, got [mt.type] ([mt])")
