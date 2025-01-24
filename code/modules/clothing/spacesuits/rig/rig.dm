@@ -663,21 +663,11 @@
 
 /obj/item/rig/equipped(mob/living/carbon/human/M)
 	..()
-
-	if(seal_delay > 0 && istype(M) && M.back == src)
-		M.visible_message(SPAN("info", "[M] starts putting on \the [src]..."), SPAN("info", "You start putting on \the [src]..."))
-		if(!do_after(M,seal_delay,src))
-			if(M && M.back == src)
-				if(!M.drop(src))
-					return
-			forceMove(get_turf(src))
-			return
-
-	if(istype(M) && M.back == src)
-		M.visible_message(SPAN("info", "<b>[M] struggles into \the [src].</b>"), SPAN("info", "<b>You struggle into \the [src].</b>"))
-		wearer = M
-		wearer.wearing_rig = src
-		update_icon()
+	if(!istype(M))
+		return
+	wearer = M
+	wearer.wearing_rig = src
+	update_icon()
 
 /obj/item/rig/proc/toggle_piece(piece, mob/initiator, deploy_mode)
 
