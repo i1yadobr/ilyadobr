@@ -86,6 +86,20 @@
 		return
 	return ..()
 
+// can_be_inserted override for guncases forbids re-insertion of "normal" or larger items.
+// This is applied on top of the regular storage insertion restrictions. Guncases set `can_hold` based
+// on the spawned items, which allows only small items from the spawned set to be reinserted.
+// This prevents usage of guncases as unbalanced storage that holds a whole set while fitting in a backpack.
+/obj/item/storage/guncase/can_be_inserted(obj/item/W, mob/user, feedback)
+	var/res = ..()
+	if(!res)
+		return FALSE
+	if(W.w_class >= ITEM_SIZE_NORMAL)
+		to_chat(user, SPAN("warning", "The foam padding blocks won't align back into their original arrangement, \
+		                               and \the bulky [W] won't fit back into the guncase, unfortunately."))
+		return FALSE
+	return TRUE
+
 // spawn_contents spawns the list of items defined by the currently selected spawn option.
 // See `spawn_items` var of the /datum/guncase_spawn_option type.
 /obj/item/storage/guncase/proc/spawn_contents()
