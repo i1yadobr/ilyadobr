@@ -972,7 +972,9 @@
 		R.adjustBruteLoss(5)
 		R.adjustFireLoss(10)
 
-	selection.forceMove(get_turf(src))
+	// It is important to forcibly drop the item instead of forceMove()'ing it as drop does
+	// visibility and layers cleanup which includes important removal from the `client.screen`.
+	drop(selection, get_turf(src), TRUE)
 	if(!(U.l_hand && U.r_hand))
 		U.pick_or_drop(selection)
 

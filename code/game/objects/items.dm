@@ -338,6 +338,8 @@
 
 	SEND_SIGNAL(src, SIGNAL_ITEM_UNEQUIPPED, src, user)
 
+// TODO(rufus): rename to "before_pickup" or other more descriptive name as this proc doesn't actually pick up anything,
+//   and instead is just used for additional logic like icon and lighting updates.
 // called just as an item is picked up (loc is not yet changed)
 /obj/item/proc/pickup(mob/user)
 	return

@@ -186,6 +186,7 @@
 	H.update_icon()
 	user.replace_item(src, H, TRUE)
 
+// TODO(rufus): rename "hand" to "hand of cards" for clarity
 /obj/item/hand
 	name = "hand of cards"
 	desc = "Some playing cards."
