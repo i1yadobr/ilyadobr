@@ -177,3 +177,33 @@
 		/obj/item/clothing/mask/smokable/cigarette/cigar/havana,
 		/obj/item/storage/box/matches
 	)
+
+// Warden's heavy guncase
+
+/datum/guncase_spawn_option/stunrifle_crowdbuster_combo
+	name = "Non-lethal combo"
+	codename = "nonlethal_combo"
+	desc = "A combination of a stun rifle and the pepperspray's big brother, the CrowdBuster kit. \
+	        Let officers handle the dirty part, your job is to stop an odd permabrig escapee.<br>\
+	        Unfortunately, pepperspray refills are not included.<br><br>\
+	        <b>NOTE</b>: By selecting the Non-lethal combo™, you agree to NanoTrasen's \"Non-lethal\" liability waiver."
+	spawn_items = list(
+		/obj/item/gun/energy/stunrevolver/rifle,
+		/obj/item/backwear/reagent/pepper
+	)
+
+/datum/guncase_spawn_option/pump_shotgun
+	name = "Shotgun"
+	codename = "pump_shotgun"
+	desc = "A reliable pump-action shotgun, perfect for those moments when subtlety is optional.<br>\
+	        Comes with supplementary ammunition: two boxes of (relatively) non-lethal beanbags, \
+	        two boxes of slightly-more-lethal shells, and a box of heavy-duty slugs, just in case.<br><br>\
+	        <b>Limited time offer</b>: select Shotgun set™ now and get your very own bandolier! \
+	        Only 1 package left! Offer expires in 2 minutes!"
+	spawn_items = list(
+		/obj/item/gun/projectile/shotgun/pump,
+		/obj/item/storage/box/shotgun/beanbags = 2,
+		/obj/item/storage/box/shotgun/shells = 2,
+		/obj/item/storage/box/shotgun/slugs,
+		/obj/item/clothing/accessory/storage/bandolier
+	)

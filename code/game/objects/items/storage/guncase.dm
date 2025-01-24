@@ -283,3 +283,12 @@
 	spawn_options = list(
 		new /datum/guncase_spawn_option/egun,
 		new /datum/guncase_spawn_option/vp78wood)
+
+/obj/item/storage/guncase/warden/heavy
+	name = "warden's heavy weapons hardcase"
+	icon_state = "guncaseheavywarden"
+	desc = "A large, durable hardcase designed for heavy weaponry. \
+	        This one is specifically for the warden's use, as denoted by the distinctive silver accents."
+	spawn_options = list(
+		new /datum/guncase_spawn_option/stunrifle_crowdbuster_combo,
+		new /datum/guncase_spawn_option/pump_shotgun)
