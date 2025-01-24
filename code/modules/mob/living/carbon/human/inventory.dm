@@ -391,7 +391,10 @@ This saves us from having to call add_fingerprint() any time something is put in
 					item_slowdown = item_slowdown - species.strength - size_mod
 			equipment_slowdown += item_slowdown
 
-//Checks if a given slot can be accessed at this time, either to equip or unequip I
+// slot_is_accessible checks if `slot` is obstucted by any items in slots that cover it,
+// e.g. if accesss to glasses is blocked by a helmet the mob is wearing, and returns a boolean.
+//
+// The `user` parameter can be optionally provided to send feedback to the specified usser, and is not used otherwise.
 /mob/living/carbon/human/slot_is_accessible(slot, obj/item/I, mob/user=null)
 	var/obj/item/covering = null
 	var/check_flags = 0
