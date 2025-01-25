@@ -34,7 +34,7 @@ You can read about them in the [About ZeroOnyx document](https://github.com/Zero
 
 ## Documentation
 For contributing to the ZeroOnyx project and working with game files, it may be useful to review the documentation in the **[docs/development/](https://github.com/ZeroHubProjects/ZeroOnyx/tree/master/docs/development)** folder.  
-The **[README](https://github.com/ZeroHubProjects/ZeroOnyx/blob/master/docs/development/README.en.md)** of the aforementioned folder will guide you on what documentation is available at the moment.
+The **[README](https://github.com/ZeroHubProjects/ZeroOnyx/blob/master/docs/development/README.md)** of the aforementioned folder will guide you on what documentation is available at the moment.
 
 ## Links to OnyxBay Source Materials
 Original project website: [https://ss13.ru/](https://ss13.ru/)  
