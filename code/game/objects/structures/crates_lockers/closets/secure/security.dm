@@ -98,6 +98,7 @@
 		/obj/item/clothing/under/rank/head_of_security/jensen,
 		/obj/item/clothing/under/rank/head_of_security/corp,
 		/obj/item/clothing/glasses/hud/aviators/security,
+		/obj/item/clothing/accessory/storage/drop_pouches/black,
 		/obj/item/clothing/accessory/storage/black_vest,
 		/obj/item/clothing/shoes/swat,
 		/obj/item/clothing/mask/gas/clear,
