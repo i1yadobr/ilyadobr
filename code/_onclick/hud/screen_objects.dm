@@ -69,18 +69,24 @@
 /obj/screen/storage
 	name = "storage"
 
+// Click of "storage" screen objects passes the call to the insertion logic of the `master` storage or acts
+// as if `master` object was clicked normally if `master` is not a storage item.
+// It is a no-op if screen object doesn't have a master, user currently can't interact, or user is inside a mech.
 /obj/screen/storage/Click()
+	if(!master)
+		return
 	if(!usr.canClick())
 		return
 	if(usr.stat || usr.paralysis || usr.stunned || usr.weakened)
 		return
-	if (istype(usr.loc,/obj/mecha)) // stops inventory actions in a mech
+	if(istype(usr.loc, /obj/mecha))
 		return
-	if(master)
-		var/obj/item/I = usr.get_active_hand()
-		if(I)
-			usr.ClickOn(master)
-	return
+
+	if(istype(master, /obj/item/storage))
+		var/obj/item/storage/master_storage = master
+		master_storage.attackby(usr.get_active_hand(), usr)
+		return
+	usr.ClickOn(master)
 
 /obj/screen/zone_sel
 	name = "damage zone"
