@@ -101,21 +101,13 @@
 		/obj/item/clothing/accessory/storage/drop_pouches/black,
 		/obj/item/clothing/accessory/storage/black_vest,
 		/obj/item/clothing/shoes/swat,
-		/obj/item/clothing/mask/gas/clear,
-		/obj/item/device/flash,
-		/obj/item/shield/riot,
-		/obj/item/gun/energy/egun,
-		/obj/item/melee/telebaton,
-		/obj/item/melee/baton/loaded,
-		/obj/item/clothing/accessory/holster/waist,
-		/obj/item/reagent_containers/spray/pepper,
-		/obj/item/storage/box/flashbangs,
 		/obj/item/storage/belt/security,
 		/obj/item/taperoll/police,
 		/obj/item/device/holowarrant,
 		/obj/item/cartridge/hos,
 		/obj/item/device/radio/headset/heads/hos,
-		/obj/item/device/radio/headset/tactical/hos
+		/obj/item/device/radio/headset/tactical/hos,
+		/obj/item/storage/guncase/hos
 	)
 
 /obj/structure/closet/secure_closet/warden
