@@ -207,3 +207,68 @@
 		/obj/item/storage/box/shotgun/slugs,
 		/obj/item/clothing/accessory/storage/bandolier
 	)
+
+// Head of Security guncase
+
+/datum/guncase_spawn_option/coltpython
+	name = "Colt Python"
+	codename = "coltpython"
+	desc = "An exclusively powerful revolver, an iconic symbol of dominance and unforgiveness, \
+	        and a reliable tool for delivering death sentences.<br>\
+	        This is the Colt Python, a .357 high-end Lumoco Arms product designed for unmatched stopping power \
+	        and old-fashioned style.<br><br>\
+	        Package includes an explicitly visible thigh holster to demonstrate authority, \
+	        two additional speedloaders, and a single additional round for that inevitable Russian roulette scenario."
+	spawn_items = list(
+		/obj/item/gun/projectile/revolver/coltpython,
+		/obj/item/clothing/accessory/holster/thigh,
+		/obj/item/ammo_magazine/a357 = 2,
+		/obj/item/ammo_casing/a357
+	)
+
+/datum/guncase_spawn_option/accelerator_pistol
+	name = "Accelerator Pistol"
+	codename = "accelerator_pistol"
+	desc = "A less lethal choice for security staff who prefer utility and innovation over pure firepower.<br><br>\
+	        Accelerator technology is designed to fill in the gap between rechargable energy weapons and \
+	        their reliable gunpowder counterparts. While still decades from being a replacement for either, \
+	        accelerators are already being used by early adopters to stop targets with multiple non-critical \
+	        wounds or deliver a more focused punch at close range.<br><br>\
+	        Package includes a convenient waist holster, a compact telescopic baton, and a box of tactical flashbangs."
+	spawn_items = list(
+		/obj/item/gun/energy/accelerator/pistol,
+		/obj/item/clothing/accessory/holster/waist,
+		/obj/item/melee/telebaton,
+		/obj/item/storage/box/flashbangs
+	)
+
+/datum/guncase_spawn_option/toolset_combo
+	name = "Toolset Combo"
+	codename = "toolset_combo"
+	desc = "Securing the station is not always about raw firepower. An experienced Head of Security knows \
+	        that there's no one-size-fits-all tool to stop crime at their designated site.<br>\
+	        So they bring a <b>toolset</b>.<br><br>\
+	        Package includes:<br>\
+	        - Energy Gun, standard dual-mode ten-charge sidearm<br>\
+	        - Hip holster with a standard clip-on-belt mount for security employees<br>\
+	        - Stunbaton, the iconic \"non-lethal\" symbol of NanoTrasen security that ends up covered \
+	          in blood a bit more often than the company is willing to admit<br>\
+	        - Riot shield made of durable and transparent polycarbonate to block physical projectiles<br>\
+	        - Clear gas mask, another polycarbonate-based item, a panoramic replacement for the classics<br>\
+	        - Flash, a small handheld device designed to disorient unprotected target at close range<br>\
+	        - Pepperspray, additional non-lethal utility designed to blind and neutralize unprotected targets \
+	          with condensed capsaicin mist<br>\
+	        - Your very own NanoTrasen \"Brig Series\"™ bar of soap, intended for washing the dirty mouths of \
+	          arrogant prisoners and cleaning the blood off of your toolset<br>\
+	        - A complimentary tactical belt with additional pouches and clips for all your equipment."
+	spawn_items = list(
+		/obj/item/gun/energy/egun,
+		/obj/item/clothing/accessory/holster/hip,
+		/obj/item/melee/baton/loaded,
+		/obj/item/shield/riot,
+		/obj/item/clothing/mask/gas/clear,
+		/obj/item/device/flash,
+		/obj/item/reagent_containers/spray/pepper,
+		/obj/item/soap/brig,
+		/obj/item/storage/belt/security/tactical
+	)

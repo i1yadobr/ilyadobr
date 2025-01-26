@@ -292,3 +292,23 @@
 	spawn_options = list(
 		new /datum/guncase_spawn_option/stunrifle_crowdbuster_combo,
 		new /datum/guncase_spawn_option/pump_shotgun)
+
+/obj/item/storage/guncase/hos
+	name = "Head of Security hardcase"
+	icon_state = "guncasehos"
+	desc = "An expensive looking handgun case adorned with gold and silver linings. \
+	        It is designed for department leaders and usually holds unique and powerful weapons."
+	spawn_options = list(
+		new /datum/guncase_spawn_option/coltpython,
+		new /datum/guncase_spawn_option/accelerator_pistol,
+		new /datum/guncase_spawn_option/toolset_combo)
+
+// spawn_contents of HoS' handgun case spawns items from the set as usual and adds flavor text and name
+// to the casing of the Colt Python's package extra round intended for Russian roulette.
+/obj/item/storage/guncase/hos_handgun/spawn_contents()
+	..()
+	for(var/obj/item/ammo_casing/a357/roulette_round in contents)
+		roulette_round.SetName("inscribed ammo casing")
+		roulette_round.desc = "A .357 bullet casing, a crude inscription reads \"Luck's End\""
+		// this is not visible on suicide, but will show up if it's shot normally and hits someone
+		roulette_round.BB.SetName("Luck's End")
