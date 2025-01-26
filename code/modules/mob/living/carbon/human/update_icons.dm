@@ -587,7 +587,7 @@ var/global/list/damage_icon_parts = list()
 		overlays_standing[HO_SHOES_LAYER] = shoes.get_mob_overlay(src,slot_shoes_str)
 	else
 		if(feet_blood_DNA && body_build.blood_icon)
-			var/image/bloodsies = overlay_image(body_build.blood_icon, "shoeblood", hand_blood_color, RESET_COLOR)
+			var/image/bloodsies = overlay_image(body_build.blood_icon, "shoeblood", feet_blood_color, RESET_COLOR)
 			overlays_standing[HO_SHOES_LAYER] = bloodsies
 		else
 			overlays_standing[HO_SHOES_LAYER] = null
