@@ -38,6 +38,20 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	                               //Also including them lets us override already created jobs, letting us keep the datums to a minimum mostly.
 	                               //This is probably a lot longer explanation than it needs to be.
 
+	// An associative list of job types to their positions limit.
+	// Expected format example: `list(/datum/job/officer = 5, /datum/job/janitor = 2))
+	// The number represents both `total_positions` and `spawn_positions` as currently all jobs
+	// in the codebase have these vars set to the same value.
+	//
+	// The overrides are loaded on job datum initialization and assume that map is loaded
+	// in the `GLOB.using_map` variable prior to jobs starting their init.
+	//
+	// If positions override for the job is not provided, default `total_positions` and `spawn_positions`
+	// values from the job datum are used.
+	//
+	// See `/datum/job/proc/apply_map_position_overrides()` in the for more information.
+	var/list/job_positions_overrides
+
 	var/station_name  = "BAD Station"
 	var/station_short = "Baddy"
 	var/dock_name     = "THE PirateBay"
@@ -285,7 +299,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 		if(!L.has_trait(trait))
 			result += level
-	
+
 	return result
 
 /datum/map/proc/get_levels_with_trait(trait)
@@ -309,7 +323,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 			if(L.has_trait(T))
 				result += level
 				break
-	
+
 	return result
 
 /datum/map/proc/get_levels_with_all_traits(...)
@@ -323,8 +337,8 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 			if(!L.has_trait(T))
 				ok = FALSE
 				break
-		
+
 		if(ok)
 			result += level
-	
+
 	return result

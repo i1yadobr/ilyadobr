@@ -7,9 +7,8 @@
 	var/list/access = list()              // Useful for servers which either have fewer players, so each person needs to fill more than one role, or servers which like to give more access, so players can't hide forever in their super secure departments (I'm looking at you, chemistry!)
 	var/list/software_on_spawn = list()   // Defines the software files that spawn on tablets and labtops
 	var/department_flag = 0
-	// TODO(rufus): what's the difference between total_positions and spawn_positions?
-	var/total_positions = 0               // How many players can be this job
-	var/spawn_positions = 0               // How many players can spawn in as this job
+	var/total_positions = 0               // How many players in total can be this job, both roundstart and latejoin (vacancies opened from in-game consoles can extend this)
+	var/spawn_positions = 0               // How many players can spawn at roundstart as this job
 	var/current_positions = 0             // How many players have this job
 	var/availablity_chance = 100          // Percentage chance job is available each round
 	var/no_latejoin = FALSE               // Disables late join for this job
@@ -51,6 +50,22 @@
 		spawn_positions = 0
 	if(!hud_icon)
 		hud_icon = "hud[ckey(title)]"
+	apply_map_position_overrides()
+
+// apply_map_position_overrides fetches the positions override from the currently active map
+// and applies the specified positions limit to this job.
+//
+// The same limit is applied both to `total_positions` and `spawn_positions` as currently all
+// jobs have these vars set to the same value.
+//
+// See `var/list/job_positions_overrides` of the `/datum/map` type for more information.
+/datum/job/proc/apply_map_position_overrides()
+	if(!GLOB.using_map.job_positions_overrides)
+		return
+	if(src.type in GLOB.using_map.job_positions_overrides)
+		var/new_positions_limit = GLOB.using_map.job_positions_overrides[src.type]
+		total_positions = new_positions_limit
+		spawn_positions = new_positions_limit
 
 /datum/job/dd_SortValue()
 	return title
