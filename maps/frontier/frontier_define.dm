@@ -95,3 +95,17 @@
 		/area/shuttle/administration/,
 		/area/shuttle/specops/centcom,
 	)
+
+	job_positions_overrides = list(
+		/datum/job/bartender = 1,
+		/datum/job/hydro = 1,
+		/datum/job/iaa = 1,
+		/datum/job/lawyer = 1,
+		/datum/job/engineer = 3,
+		/datum/job/doctor = 3,
+		/datum/job/chemist = 1,
+		/datum/job/paramedic = 1,
+		/datum/job/scientist = 4,
+		/datum/job/roboticist = 1,
+		/datum/job/officer = 3
+	)
