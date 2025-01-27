@@ -44,12 +44,12 @@
 
 //HUMAN
 /obj/item/storage/bag/cash/infinite/remove_from_storage(obj/item/W as obj, atom/new_location)
-	. = ..()
-	if(.)
+	var/item_removed = ..()
+	if(item_removed)
 		if(istype(W,/obj/item/spacecash)) //only matters if its spacecash.
 			var/obj/item/I = new /obj/item/spacecash/bundle/c1000()
 			src.handle_item_insertion(I, feedback = FALSE)
-
+	return item_removed
 
 //Tajaran
 /datum/spell/messa_shroud

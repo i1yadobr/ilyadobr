@@ -52,12 +52,12 @@
 	. = ..()
 
 /obj/item/storage/wallet/remove_from_storage(obj/item/W as obj, atom/new_location)
-	. = ..(W, new_location)
-	if(.)
-		if(W == front_id)
-			front_id = null
-			SetName(initial(name))
-			update_icon()
+	var/item_removed = ..()
+	if(item_removed && (W == front_id))
+		front_id = null
+		SetName(initial(name))
+		update_icon()
+	return item_removed
 
 /obj/item/storage/wallet/handle_item_insertion(obj/item/W as obj, feedback = TRUE)
 	. = ..()

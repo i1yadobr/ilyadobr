@@ -14,9 +14,10 @@
 		update_w_class()
 
 /obj/item/storage/bag/remove_from_storage(obj/item/W as obj, atom/new_location)
-	. = ..()
-	if(.)
+	var/item_removed = ..()
+	if(item_removed)
 		update_w_class()
+	return item_removed
 
 /obj/item/storage/bag/can_be_inserted(obj/item/W, mob/user, feedback = TRUE)
 	if(istype(loc, /obj/item/storage))

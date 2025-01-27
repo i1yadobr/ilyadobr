@@ -19,11 +19,11 @@
 	var/hasany = 0 //if an item only changes sprite upon being used/finished, w/out displaying each key_type occasion
 
 /obj/item/storage/fancy/remove_from_storage()
-	. = ..()
-	if(!opened && .)
+	var/item_removed = ..()
+	if(!opened && item_removed)
 		opened = 1
 		update_icon()
-
+	return item_removed
 
 /obj/item/storage/fancy/update_icon()
 	if(!opened)
@@ -156,11 +156,10 @@
 	create_reagents(5 * max_storage_space)//so people can inject cigarettes without opening a packet, now with being able to inject the whole one
 
 /obj/item/storage/fancy/cigarettes/remove_from_storage(obj/item/W, atom/new_location)
-	// Don't try to transfer reagents to lighters
 	if(istype(W, /obj/item/clothing/mask/smokable/cigarette))
 		var/obj/item/clothing/mask/smokable/cigarette/C = W
 		reagents.trans_to_obj(C, (reagents.total_volume/contents.len))
-	..()
+	return ..()
 
 /obj/item/storage/fancy/cigarettes/attack(mob/living/carbon/M, mob/living/carbon/user)
 	if(!ismob(M))
@@ -341,9 +340,10 @@
 
 /obj/item/storage/fancy/cigar/remove_from_storage(obj/item/W, atom/new_location)
 	var/obj/item/clothing/mask/smokable/cigarette/cigar/C = W
-	if(!istype(C)) return
+	if(!istype(C))
+		return
 	reagents.trans_to_obj(C, (reagents.total_volume/contents.len))
-	..()
+	return ..()
 
 /*
  * Vial Box

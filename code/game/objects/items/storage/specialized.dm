@@ -120,7 +120,7 @@
 /obj/item/storage/sheetsnatcher/remove_from_storage(obj/item/W as obj, atom/new_location)
 	var/obj/item/stack/material/S = W
 	if(!istype(S))
-		return 0
+		return FALSE
 
 	//I would prefer to drop a new stack, but the item/attack_hand code
 	// that calls this can't recieve a different object than you clicked on.
@@ -132,7 +132,7 @@
 		temp.amount = S.amount - S.max_amount
 		S.amount = S.max_amount
 
-	return ..(S,new_location)
+	return ..()
 
 /obj/item/storage/sheetsnatcher/borg
 	name = "sheet snatcher 9000"

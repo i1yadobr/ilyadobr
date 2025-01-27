@@ -296,6 +296,8 @@
 // It also optionally updates the UI and storage's icon if `feedback` parameter is set to TRUE.
 //
 // If `new_location` is not passed, the item is removed from the storage and placed on the turf below instead.
+//
+// The return value indicates if removal from storage was successful and the item was moved.
 /obj/item/storage/proc/remove_from_storage(obj/item/W as obj, atom/new_location, feedback = TRUE)
 	if(!istype(W))
 		return FALSE
