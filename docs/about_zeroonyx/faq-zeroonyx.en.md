@@ -25,7 +25,7 @@ After all, the roots of ZeroOnyx lie in the chaotic essence of SS13.
 On the other hand, ZeroOnyx doesn't require constant emotes, deep immersion in the role, and doesn't have a culture of protecting sensitive souls who join a chaos and emergencies game to "have a tea", so HRP is not suitable either.  
 However, like Onyx, there are situations where deep stories between characters unfold, where shifts pass without the destruction of the station, and where tired spessmans simply gather in a bar with some music to relax from the endless chaos.
 
-Based on all this, the automatic shuttle vote is set at 3 hours from the start of the shift in favor of both extremes.  
+Based on all this, the automatic shuttle vote is set for 2 hours from the start of the shift, with consecutive votes every 30 minutes if players choose to extend the round.  
 That said, most shifts will end with an emergency evacuation much sooner one way or another.
 
 ---
