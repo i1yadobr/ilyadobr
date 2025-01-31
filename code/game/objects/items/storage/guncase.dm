@@ -303,9 +303,9 @@
 		new /datum/guncase_spawn_option/accelerator_pistol,
 		new /datum/guncase_spawn_option/toolset_combo)
 
-// spawn_contents of HoS' handgun case spawns items from the set as usual and adds flavor text and name
+// spawn_contents of HoS' guncase spawns items from the set as usual and adds flavor text and name
 // to the casing of the Colt Python's package extra round intended for Russian roulette.
-/obj/item/storage/guncase/hos_handgun/spawn_contents()
+/obj/item/storage/guncase/hos/spawn_contents()
 	..()
 	for(var/obj/item/ammo_casing/a357/roulette_round in contents)
 		roulette_round.SetName("inscribed ammo casing")
