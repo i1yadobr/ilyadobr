@@ -15,7 +15,7 @@ This enables the development of unique game variants, some of which are not rela
 
 # General information
 > [!NOTE]  
-> - Discord community server: https://discord.gg/PM7RQmzJBG
+> - Discord community server: https://discord.zeroonyx.com
 > - ZeroOnyx server address: [byond://zeroonyx.com:14076](https://play.zeroonyx.com)
 
 ZeroOnyx is a relatively "classic" version of Space Station 13:

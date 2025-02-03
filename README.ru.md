@@ -10,7 +10,7 @@ Space Station 13 - высокоинтерактивная многопользо
 
 # Основная информация
 > [!NOTE]
-> - Discord сервер сообщества: https://discord.gg/PM7RQmzJBG
+> - Discord сервер сообщества: https://discord.zeroonyx.com
 > - Адрес сервера ZeroOnyx: [byond://zeroonyx.com:14076](https://play.zeroonyx.com)
 
 ZeroOnyx является относительно "классическим" вариантом Space Station 13:
