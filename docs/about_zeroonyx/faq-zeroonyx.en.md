@@ -1,3 +1,8 @@
+> [!TIP]  
+> This document is also available in Russian.  
+> Данный документ также доступен на русском языке.  
+> [faq-zeroonyx.ru.md](https://github.com/ZeroHubProjects/ZeroOnyx/blob/master/docs/about_zeroonyx/faq-zeroonyx.ru.md).
+
 # FAQ
 
 ---
