@@ -96,12 +96,11 @@ var/world_topic_spam_protect_time = world.timeofday
 	return TRUE
 
 /world/proc/update_status()
-	// TODO(rufus): come up with a good description and potentially sprinkle some features on top, keeping it minimal for now
-	var/server_name = config?.general?.server_name || "Server Initializing"
-	var/limited_access_string = ""
-	if (!config.game.enter_allowed || config.game.use_whitelist)
-		limited_access_string = ", Limited Access"
-	status = "[server_name][limited_access_string]"
+	var/status_html = "RU/EN - ZeroOnyx - Inspired by 2022 OnyxBay<br>\
+	Focused on a mostly classic, controversy-free experience.<br>\
+	Everyone is welcome!<br>\
+	Learn more: <a href=\"https://about.zeroonyx.com\">about ZeroOnyx</a> and <a href=\"https://faq.zeroonyx.com\">FAQ</a>."
+	status = status_html
 
 // TODO(rufus): there is zero reason for these to be impossible to find a reference to macros, refactor
 #define WORLD_LOG_START(X) WRITE_FILE(GLOB.world_##X##_log, "\n\nStarting up round ID [game_id]. [time2text(world.realtime, "DD.MM.YY hh:mm")]\n---------------------")
