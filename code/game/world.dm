@@ -99,7 +99,7 @@ var/world_topic_spam_protect_time = world.timeofday
 	var/status_html = "RU/EN - ZeroOnyx - Inspired by 2022 OnyxBay<br>\
 	Focused on a mostly classic, controversy-free experience.<br>\
 	Everyone is welcome!<br>\
-	Learn more: <a href=\"https://about.zeroonyx.com\">about ZeroOnyx</a> and <a href=\"https://faq.zeroonyx.com\">FAQ</a>."
+	Learn more: <a href=\"https://about.zeroonyx.com\">about ZeroOnyx</a> and <a href=\"https://faq.zeroonyx.com\">FAQ</a>"
 	status = status_html
 
 // TODO(rufus): there is zero reason for these to be impossible to find a reference to macros, refactor
