@@ -21,7 +21,7 @@ This enables the development of unique game variants, some of which are not rela
 ZeroOnyx is a relatively "classic" version of Space Station 13:
 - Events unfold on a space station in the 26th century
 - The main enemies of the corporation are still the Syndicate
-- There are only two game maps, one of which is "Exodus", based on the historical "BoxStation".
+- There are only two game maps, one of which is "Exodus", based on the historical "BoxStation"
 - The main goal of the crew is to work according to assigned professions and maintain the station's functionality
 
 The latest shared commit with the OnyxBay build is [2e02fa](https://github.com/ZeroHubProjects/ZeroOnyx/commit/2e02fad116f279105439f03593ba9ea9720bd5d8) dated November 2, 2022.
