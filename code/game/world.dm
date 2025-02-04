@@ -96,7 +96,7 @@ var/world_topic_spam_protect_time = world.timeofday
 	return TRUE
 
 /world/proc/update_status()
-	var/status_html = "RU/EN - ZeroOnyx - Inspired by 2022 OnyxBay<br>\
+	var/status_html = "<b>RU/EN - ZeroOnyx - Inspired by 2022 OnyxBay</b><br>\
 	Focused on a mostly classic, controversy-free experience.<br>\
 	Everyone is welcome!<br>\
 	Learn more: <a href=\"https://about.zeroonyx.com\">about ZeroOnyx</a> and <a href=\"https://faq.zeroonyx.com\">FAQ</a>"
