@@ -69,6 +69,11 @@
 
 // Interact with the electronics to set access requirements.
 /obj/item/airlock_brace/attack_self(mob/user as mob)
+	// TODO(rufus): this doesn't work and won't open the UI as electronics are inside the brace, and thus are considered
+	//   inacessible to the user as they don't pass the /mob/living/proc/shared_living_ui_distance() check.
+	//   The fix might be an ejectable circuit or a more complex effort on passing some sort of flag to TGUI interactions
+	//   that would indicate that distance checks are not relevant for this object. The latter might already have
+	//   implementations in the codebase, e.g. OOC UIs like settings.
 	electronics.attack_self(user)
 
 
