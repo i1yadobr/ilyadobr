@@ -205,9 +205,6 @@
 						wear_hat(item_to_add)
 						usr.visible_message(SPAN_WARNING("[usr] puts \the [item_to_add] on [name]."))
 
-
-
-/mob/living/simple_animal/corgi/attackby(obj/item/O as obj, mob/user as mob)  // Marker -Agouri
 /mob/living/simple_animal/corgi/attackby(obj/item/O, mob/user)  // Marker -Agouri
 	if(user.a_intent == I_HELP && istype(O, /obj/item/clothing/head)) 	// Equiping corgi with a cool hat!
 		if(istype(O, /obj/item/clothing/head/helmet)) 					// Looks too bad on corgi
