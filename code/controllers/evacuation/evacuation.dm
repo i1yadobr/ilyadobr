@@ -181,9 +181,6 @@ var/datum/evacuation_controller/evacuation_controller
 /datum/evacuation_controller/proc/get_evac_option(option_target)
 	return null
 
-/datum/evacuation_controller/proc/should_call_autotransfer_vote()
-	return (state == EVAC_IDLE)
-
 /datum/evacuation_controller/proc/toggle_emergency_light(state)
 	for(var/area/A in GLOB.hallway)
 		A.set_lighting_mode(LIGHTMODE_EVACUATION, state)
