@@ -3,15 +3,15 @@
 	question = "End the shift?"
 
 /datum/vote/transfer/can_run(mob/creator, automatic)
+	if(GAME_STATE <= RUNLEVEL_SETUP)
+		return FALSE
 	if(evacuation_controller?.state != EVAC_IDLE)
 		return FALSE
-	if(!automatic && (!config.vote.allow_vote_restart || !is_admin(creator)))
-		return FALSE // Admins and autovotes bypass the config setting.
-	if(check_rights(R_INVESTIGATE, 0, creator))
-		return //Mods bypass further checks.
-	if(GAME_STATE <= RUNLEVEL_SETUP)
-		to_chat(creator, "The crew transfer button has been disabled!")
-		return FALSE
+	if(automatic)
+		return TRUE
+	if(config.vote.allow_vote_restart || is_admin(creator))
+		return TRUE
+	return FALSE
 
 /datum/vote/transfer/setup_vote(mob/creator, automatic)
 	choices = list("Initiate Crew Transfer", "Extend the Round ([config.vote.autotransfer_interval / 600] minutes)")
