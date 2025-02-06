@@ -755,13 +755,13 @@ Ccomp's first proc.
 
 	if(!check_rights(R_ADMIN))	return
 
-	if(alert(src, "Are you sure?", "Confirm", "Yes", "No") != "Yes") return
-
 	if(SSticker.mode.auto_recall_shuttle)
 		if(input("The evacuation will just be cancelled if you call it. Call anyway?") in list("Confirm", "Cancel") != "Confirm")
 			return
 
-	var/choice = input("Is this an emergency evacuation or a crew transfer?") in list("Emergency", "Crew Transfer")
+	var/choice = input("Is this an emergency evacuation or a crew transfer?") as null|anything in list("Emergency", "Crew Transfer")
+	if(!choice)
+		return
 	evacuation_controller.call_evacuation(usr, (choice == "Emergency"))
 
 	feedback_add_details("admin_verb","CSHUT") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
