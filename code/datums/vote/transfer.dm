@@ -3,8 +3,6 @@
 	question = "End the shift?"
 
 /datum/vote/transfer/can_run(mob/creator, automatic)
-	if(!(. = ..()))
-		return
 	if(evacuation_controller?.state != EVAC_IDLE)
 		return FALSE
 	if(!automatic && (!config.vote.allow_vote_restart || !is_admin(creator)))
