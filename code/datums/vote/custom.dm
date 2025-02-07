@@ -6,7 +6,7 @@
 	return is_admin(creator)
 
 /datum/vote/custom/setup_vote(mob/creator, automatic)
-	question = sanitizeSafe(input(creator,"What is the vote for?") as text|null)
+	question = sanitize(input(creator, "What is the vote for?") as text|null)
 	if(!question)
 		abort = 1
 		return
