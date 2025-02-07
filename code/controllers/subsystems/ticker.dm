@@ -6,15 +6,11 @@ SUBSYSTEM_DEF(ticker)
 	flags = SS_NO_TICK_CHECK | SS_KEEP_TIMING
 	runlevels = RUNLEVEL_LOBBY | RUNLEVELS_DEFAULT
 
-	var/list/gamemode_vote_results  //Will be a list, in order of preference, of form list(config_tag = number of votes).
-	var/bypass_gamemode_vote = TRUE //Intended for use with admin tools. Will avoid voting and ignore any results.
-
 	var/master_mode = "secret"    //The underlying game mode (so "secret" or the voted mode). Saved to default back to previous round's mode in case the vote failed. This is a config_tag.
 	var/datum/game_mode/mode        //The actual gamemode, if selected.
 	var/round_progressing = 1       //Whether the lobby clock is ticking down.
 
 	var/list/bad_modes = list()     //Holds modes we tried to start and failed to.
-	var/revotes_allowed = 0         //How many times a game mode revote might be attempted before giving up.
 
 	var/end_game_state = END_GAME_NOT_OVER
 	var/delay_end = 0               //Can be set true to postpone restart.
@@ -57,10 +53,6 @@ SUBSYSTEM_DEF(ticker)
 		Master.SetRunLevel(RUNLEVEL_SETUP)
 		return
 
-	if(!bypass_gamemode_vote && (pregame_timeleft <= config.vote.autogamemode_timeleft SECONDS) && !gamemode_vote_results)
-		if(!SSvote.active_vote)
-			SSvote.initiate_vote(/datum/vote/gamemode, automatic = 1)
-
 /datum/controller/subsystem/ticker/proc/setup_tick()
 	switch(choose_gamemode())
 		if(CHOOSE_GAMEMODE_SILENT_REDO)
@@ -70,13 +62,6 @@ SUBSYSTEM_DEF(ticker)
 			Master.SetRunLevel(RUNLEVEL_LOBBY)
 			bad_modes = list()
 			to_world("<B>Unable to choose playable game mode.</B> Reverting to pre-game lobby to try again.")
-			return
-		if(CHOOSE_GAMEMODE_REVOTE)
-			revotes_allowed--
-			pregame_timeleft = initial(pregame_timeleft)
-			gamemode_vote_results = null
-			Master.SetRunLevel(RUNLEVEL_LOBBY)
-			to_world("<B>Unable to choose playable game mode.</B> Reverting to pre-game lobby for a revote.")
 			return
 		if(CHOOSE_GAMEMODE_RESTART)
 			to_world("<B>Unable to choose playable game mode.</B> Restarting world.")
@@ -198,8 +183,6 @@ SUBSYSTEM_DEF(ticker)
 
 /datum/controller/subsystem/ticker/Recover()
 	pregame_timeleft = SSticker.pregame_timeleft
-	gamemode_vote_results = SSticker.gamemode_vote_results
-	bypass_gamemode_vote = SSticker.bypass_gamemode_vote
 
 	master_mode = SSticker.master_mode
 	mode = SSticker.mode
@@ -216,19 +199,10 @@ Helpers
 */
 
 /datum/controller/subsystem/ticker/proc/choose_gamemode()
-	. = (revotes_allowed && !bypass_gamemode_vote) ? CHOOSE_GAMEMODE_REVOTE : CHOOSE_GAMEMODE_RETRY
+	. = CHOOSE_GAMEMODE_RETRY
 
 	var/mode_to_try = master_mode //This is the config tag
 	var/datum/game_mode/mode_datum
-
-	//Decide on the mode to try.
-	if(!bypass_gamemode_vote && gamemode_vote_results)
-		gamemode_vote_results -= bad_modes
-		if(length(gamemode_vote_results))
-			mode_to_try = gamemode_vote_results[1]
-			. = CHOOSE_GAMEMODE_RETRY //Worth it to try again at least once.
-		else
-			mode_to_try = "extended"
 
 	if(!mode_to_try)
 		return
@@ -415,9 +389,6 @@ Helpers
 /datum/controller/subsystem/ticker/proc/start_now(mob/user)
 	if(!(GAME_STATE == RUNLEVEL_LOBBY))
 		return
-	if(istype(SSvote.active_vote, /datum/vote/gamemode))
-		SSvote.cancel_vote(user)
-		bypass_gamemode_vote = 1
 	Master.SetRunLevel(RUNLEVEL_SETUP)
 	return 1
 

@@ -459,7 +459,6 @@
 #include "code\datums\vote\add_antag.dm"
 #include "code\datums\vote\custom.dm"
 #include "code\datums\vote\end.dm"
-#include "code\datums\vote\gamemode.dm"
 #include "code\datums\vote\map.dm"
 #include "code\datums\vote\restart.dm"
 #include "code\datums\vote\storyteller.dm"
