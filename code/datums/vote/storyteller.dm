@@ -2,9 +2,11 @@
 	name = "storyteller"
 
 /datum/vote/storyteller/can_run(mob/creator, automatic)
-	if(!automatic && !is_admin(creator))
-		return FALSE // Must be an admin.
-	return TRUE
+	if(automatic)
+		return TRUE
+	if(is_admin(creator))
+		return TRUE
+	return FALSE
 
 /datum/vote/storyteller/setup_vote(mob/creator, automatic)
 	initiator = (!automatic && istype(creator)) ? creator.ckey : "the server"
