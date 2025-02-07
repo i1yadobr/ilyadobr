@@ -3,8 +3,7 @@
 	var/automatic = 0 //Handled slightly differently.
 
 /datum/vote/add_antagonist/can_run(mob/creator, automatic)
-	if(!SSvote.is_addantag_allowed(creator, automatic)) //This handles the config setting and admin checking.
-		return FALSE
+	return SSvote.is_addantag_allowed(creator, automatic)
 
 /datum/vote/add_antagonist/setup_vote(mob/creator, automatic)
 	var/list/all_antag_types = GLOB.all_antag_types_
