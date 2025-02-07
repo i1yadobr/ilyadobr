@@ -3,9 +3,9 @@
 	choices = list("End the Round", "Continue Playing")
 
 /datum/vote/end_round/can_run(mob/creator, automatic)
-	if(GAME_STATE !=  RUNLEVEL_GAME)
+	if(GAME_STATE != RUNLEVEL_GAME)
 		return FALSE
-	if(automatic || check_rights(R_SERVER, FALSE, creator))
+	if(automatic || is_admin(creator))
 		return TRUE
 
 /datum/vote/end_round/report_result()
