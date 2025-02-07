@@ -1,6 +1,3 @@
-var/global/antag_add_finished // Used in antag type voting.
-var/global/list/additional_antag_types = list()
-
 /datum/game_mode
 	var/name = "invalid"
 	var/round_description = "How did you even vote this in?"
@@ -27,7 +24,6 @@ var/global/list/additional_antag_types = list()
 	var/round_autoantag = 0                  // Will this round attempt to periodically spawn more antagonists?
 	var/antag_scaling_coeff = 5              // Coefficient for scaling max antagonists to player count. How many players for one antag
 	var/require_all_templates = 0            // Will only start if all templates are checked and can spawn.
-	var/addantag_allowed = ADDANTAG_ADMIN | ADDANTAG_AUTO
 
 	var/station_was_nuked = 0                // See nuclearbomb.dm and malfunction.dm.
 	var/explosion_in_progress = 0            // Sit back and relax
@@ -97,9 +93,8 @@ var/global/list/additional_antag_types = list()
 			to_chat(usr, "Cannot remove core mode antag type.")
 			return
 		var/datum/antagonist/antag = GLOB.all_antag_types_[href_list["remove_antag_type"]]
-		if(antag_templates && antag_templates.len && antag && (antag in antag_templates) && (antag.id in additional_antag_types))
+		if(antag_templates && antag_templates.len && antag && (antag in antag_templates))
 			antag_templates -= antag
-			additional_antag_types -= antag.id
 			message_admins("Admin [key_name_admin(usr)] removed [antag.role_text] template from game mode.")
 	else if(href_list["add_antag_type"])
 		var/choice = input("Which type do you wish to add?") as null|anything in GLOB.all_antag_types_
@@ -347,15 +342,8 @@ var/global/list/additional_antag_types = list()
 			if(antag)
 				antag_templates |= antag
 
-	if(additional_antag_types && additional_antag_types.len)
-		if(!antag_templates)
-			antag_templates = list()
-		for(var/antag_type in additional_antag_types)
-			var/datum/antagonist/antag = all_antag_types[antag_type]
-			if(antag)
-				antag_templates |= antag
-
 	shuffle(antag_templates) //In the case of multiple antag types
+	// TODO(rufus): move out of create_antagonists proc to gamemode setup.
 	newscaster_announcements = pick(newscaster_standard_feeds)
 
 /datum/game_mode/proc/print_roundend()

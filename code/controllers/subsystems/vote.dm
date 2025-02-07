@@ -6,11 +6,9 @@ SUBSYSTEM_DEF(vote)
 	runlevels = RUNLEVELS_DEFAULT | RUNLEVEL_LOBBY
 
 	var/last_started_time        //To enforce delay between votes.
-	var/antag_added              //Enforces a maximum of one added antag per round.
 
 	var/datum/vote/active_vote   //The current vote. This handles most voting activity.
 	var/list/old_votes           //Stores completed votes for reference.
-	var/queued_auto_vote         //Used if a vote queues another vote to happen after it.
 
 	var/list/voting = list()     //Clients recieving UI updates.
 	var/list/vote_prototypes     //To run checks on whether they are available.
@@ -25,9 +23,6 @@ SUBSYSTEM_DEF(vote)
 
 /datum/controller/subsystem/vote/fire(resumed = 0)
 	if(!active_vote)
-		if(queued_auto_vote)
-			initiate_vote(queued_auto_vote, automatic = 1)
-			queued_auto_vote = null
 		return
 
 	switch(active_vote.Process())
@@ -50,9 +45,7 @@ SUBSYSTEM_DEF(vote)
 
 /datum/controller/subsystem/vote/Recover()
 	last_started_time = SSvote.last_started_time
-	antag_added = SSvote.antag_added
 	active_vote = SSvote.active_vote
-	queued_auto_vote = SSvote.queued_auto_vote
 
 /datum/controller/subsystem/vote/proc/reset()
 	active_vote = null
@@ -172,20 +165,6 @@ SUBSYSTEM_DEF(vote)
 	sleep(50)
 	log_game("Rebooting due to restart vote")
 	world.Reboot()
-
-// Helper proc for determining whether addantag vote can be called.
-/datum/controller/subsystem/vote/proc/is_addantag_allowed(mob/creator, automatic)
-	if(!config.vote.allow_extra_antags)
-		return 0
-	// Gamemode has to be determined before we can add antagonists, so we can respect gamemode's add antag vote settings.
-	if((GAME_STATE <= RUNLEVEL_SETUP) || !SSticker.mode)
-		return 0
-	if(automatic)
-		return (SSticker.mode.addantag_allowed & ADDANTAG_AUTO) && !antag_added
-	if(is_admin(creator))
-		return SSticker.mode.addantag_allowed & (ADDANTAG_ADMIN|ADDANTAG_PLAYER)
-	else
-		return (SSticker.mode.addantag_allowed & ADDANTAG_PLAYER) && !antag_added
 
 /mob/verb/vote()
 	set category = "OOC"

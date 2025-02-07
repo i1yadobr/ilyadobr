@@ -20,8 +20,6 @@ SUBSYSTEM_DEF(ticker)
 	var/force_end = FALSE
 
 	var/list/minds = list()         //Minds of everyone in the game.
-	var/list/antag_pool = list()
-	var/looking_for_antags = 0
 
 	var/pregame_timeleft
 	var/restart_timeout
@@ -287,49 +285,6 @@ Helpers
 		for(var/mob/M in GLOB.player_list)
 			if(!istype(M, /mob/new_player))
 				to_chat(M, "Captainship not forced on anyone.")
-
-/datum/controller/subsystem/ticker/proc/attempt_late_antag_spawn(list/antag_choices)
-	var/datum/antagonist/antag = antag_choices[1]
-	while(antag_choices.len && antag)
-		var/needs_ghost = antag.flags & (ANTAG_OVERRIDE_JOB | ANTAG_OVERRIDE_MOB)
-		if (needs_ghost)
-			looking_for_antags = 1
-			antag_pool.Cut()
-			to_world("<b>A ghost is needed to spawn \a [antag.role_text].</b>\nGhosts may enter the antag pool by making sure their [antag.role_text] preference is set to high, then using the toggle-add-antag-candidacy verb. You have 3 minutes to enter the pool.")
-
-			sleep(3 MINUTES)
-			looking_for_antags = 0
-			antag.update_current_antag_max(mode)
-			antag.build_candidate_list(mode, needs_ghost)
-			for(var/datum/mind/candidate in antag.candidates)
-				if(!(candidate in antag_pool))
-					antag.candidates -= candidate
-					log_debug("[candidate.key] was not in the antag pool and could not be selected.")
-		else
-			antag.update_current_antag_max(mode)
-			antag.build_candidate_list(mode, needs_ghost)
-			for(var/datum/mind/candidate in antag.candidates)
-				if(isghostmind(candidate))
-					antag.candidates -= candidate
-					log_debug("[candidate.key] is a ghost and can not be selected.")
-		if(length(antag.candidates) >= antag.initial_spawn_req)
-			antag.attempt_spawn()
-			antag.finalize_spawn()
-			additional_antag_types.Add(antag.id)
-			return 1
-		else
-			if(antag.initial_spawn_req > 1)
-				to_world("Failed to find enough [antag.role_text_plural].")
-
-			else
-				to_world("Failed to find a [antag.role_text].")
-
-			antag_choices -= antag
-			if(length(antag_choices))
-				antag = antag_choices[1]
-				if(antag)
-					to_world("Attempting to spawn [antag.role_text_plural].")
-	return 0
 
 /datum/controller/subsystem/ticker/proc/game_finished()
 	if(mode.explosion_in_progress)

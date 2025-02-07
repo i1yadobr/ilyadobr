@@ -404,10 +404,6 @@ preferred_biodome = "random"
 ## Allow players to initiate a restart vote.
 allow_vote_restart = false
 
-## TODO(rufus): test if this works, sounds like a great option
-## If true, votes can be called to add extra antags to the round.
-allow_extra_antags = false
-
 ## Min delay (deciseconds) between voting sessions (default 10 minutes).
 delay = 6000
 

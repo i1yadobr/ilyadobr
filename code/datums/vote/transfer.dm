@@ -15,8 +15,6 @@
 
 /datum/vote/transfer/setup_vote(mob/creator, automatic)
 	choices = list("Initiate Crew Transfer", "Extend the Round ([config.vote.autotransfer_interval / 600] minutes)")
-	if (config.vote.allow_extra_antags && SSvote.is_addantag_allowed(creator, automatic))
-		choices += "Add Antagonist"
 	..()
 
 /datum/vote/transfer/handle_default_votes()
@@ -42,8 +40,6 @@
 		return 1
 	if(result[1] == "Initiate Crew Transfer")
 		init_autotransfer()
-	else if(result[1] == "Add Antagonist")
-		SSvote.queued_auto_vote = /datum/vote/add_antagonist
 
 /datum/vote/transfer/mob_not_participating(mob/user)
 	if((. = ..()))

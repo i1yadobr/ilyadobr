@@ -114,8 +114,6 @@
 			return global.WALLITEMS;
 		if("_all_globals")
 			return global._all_globals;
-		if("additional_antag_types")
-			return global.additional_antag_types;
 		if("admin_datums")
 			return global.admin_datums;
 		if("admin_ranks")
@@ -190,8 +188,6 @@
 			return global.all_ui_styles;
 		if("announced_news_types")
 			return global.announced_news_types;
-		if("antag_add_finished")
-			return global.antag_add_finished;
 		if("appearance_manager")
 			return global.appearance_manager;
 		if("area_repository")
@@ -945,8 +941,6 @@
 			global.WALLITEMS=newval;
 		if("_all_globals")
 			global._all_globals=newval;
-		if("additional_antag_types")
-			global.additional_antag_types=newval;
 		if("admin_datums")
 			global.admin_datums=newval;
 		if("admin_ranks")
@@ -1023,8 +1017,6 @@
 			global.all_virtual_listeners=newval;
 		if("announced_news_types")
 			global.announced_news_types=newval;
-		if("antag_add_finished")
-			global.antag_add_finished=newval;
 		if("appearance_manager")
 			global.appearance_manager=newval;
 		if("area_repository")
@@ -1727,7 +1719,6 @@
 	"_client_preferences_by_key",
 	"_client_preferences_by_type",
 	"account_hack_attempted",
-	"additional_antag_types",
 	"admin_datums",
 	"admin_ranks",
 	"admin_secrets",
@@ -1766,7 +1757,6 @@
 	"all_ui_styles",
 	"all_virtual_listeners",
 	"announced_news_types",
-	"antag_add_finished",
 	"appearance_manager",
 	"area_repository",
 	"artefact_feedback",
