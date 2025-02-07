@@ -2,11 +2,11 @@
 	name = "map"
 
 /datum/vote/map/can_run(mob/creator, automatic)
-	if(!config.game.map_switching)
-		return FALSE
-	if(!automatic && !is_admin(creator))
-		return FALSE // Must be an admin.
-	return TRUE
+	if(automatic)
+		return TRUE
+	if(is_admin(creator)) // manual map votes can only be started by admins
+		return TRUE
+	return FALSE
 
 /datum/vote/map/setup_vote()
 	for(var/name in GLOB.all_maps)
