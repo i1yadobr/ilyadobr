@@ -2,7 +2,6 @@
 	name = "vote"
 
 	var/allow_vote_restart = TRUE
-	var/allow_vote_mode = TRUE
 	var/allow_extra_antags = FALSE
 	var/delay = 6000
 	var/period = 600
@@ -14,7 +13,6 @@
 
 /datum/configuration_section/vote/load_data(list/data)
 	CONFIG_LOAD_BOOL(allow_vote_restart, data["allow_vote_restart"])
-	CONFIG_LOAD_BOOL(allow_vote_mode, data["allow_vote_mode"])
 	CONFIG_LOAD_BOOL(allow_extra_antags, data["allow_extra_antags"])
 	CONFIG_LOAD_NUM(delay, data["delay"])
 	CONFIG_LOAD_NUM(period, data["period"])
