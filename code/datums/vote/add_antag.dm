@@ -3,8 +3,6 @@
 	var/automatic = 0 //Handled slightly differently.
 
 /datum/vote/add_antagonist/can_run(mob/creator, automatic)
-	if(!(. = ..()))
-		return
 	if(!SSvote.is_addantag_allowed(creator, automatic)) //This handles the config setting and admin checking.
 		return FALSE
 

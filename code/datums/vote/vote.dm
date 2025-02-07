@@ -35,7 +35,8 @@
 	start_vote()
 	return TRUE
 
-//Checks any conditions required for the vote to run. The argument is optional, in case a player started the vote.
+// can_run of the base vote type always returns TRUE.
+// It is intended to be overriden by subtypes that should only be available based on certain conditions.
 /datum/vote/proc/can_run(mob/creator, automatic)
 	return TRUE
 

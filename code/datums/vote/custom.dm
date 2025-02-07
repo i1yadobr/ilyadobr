@@ -9,7 +9,7 @@
 		return FALSE
 	if(abort)
 		return FALSE
-	return ..()
+	return TRUE
 
 /datum/vote/custom/setup_vote(mob/creator, automatic)
 	question = sanitizeSafe(input(creator,"What is the vote for?") as text|null)

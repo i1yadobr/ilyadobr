@@ -9,7 +9,7 @@
 		return FALSE // Admins and autovotes bypass the config setting.
 	if(GAME_STATE >= RUNLEVEL_GAME)
 		return FALSE
-	return ..()
+	return TRUE
 
 /datum/vote/gamemode/Process()
 	if(GAME_STATE >= RUNLEVEL_GAME)
