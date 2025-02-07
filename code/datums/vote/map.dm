@@ -10,6 +10,9 @@
 
 /datum/vote/map/setup_vote()
 	for(var/name in GLOB.all_maps)
+		// NOTE(rufus): Genesis is excluded as a legacy map, Pathos-I and Sunset are disabled as
+		//   not maintained and polished enough to be accessible by default.
+		//   They can still be set manually via the "Change map" admin verb.
 		if(name in list("Example", "Genesis", "Pathos-I", "Sunset"))
 			continue
 		choices += name
