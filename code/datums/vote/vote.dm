@@ -1,7 +1,7 @@
 /datum/vote
 	var/name = "default vote"
-	var/initiator
-	var/question
+	var/initiator // client `key` of the user who initiated the vote, presented in `start_vote()`
+	var/question // main topic of the vote, displayed as a vote header in the UI
 	var/list/choices = list()
 
 	var/list/display_choices = list() // What's actually shown to the users.
@@ -28,8 +28,8 @@
 	if(!can_run(creator, automatic))
 		qdel(src)
 		return FALSE
-	setup_vote(creator, automatic)
-	if(!can_run(creator, automatic))
+	var/vote_set_up = setup_vote(creator, automatic)
+	if(!vote_set_up)
 		qdel(src)
 		return FALSE
 	start_vote()
@@ -40,11 +40,21 @@
 /datum/vote/proc/can_run(mob/creator, automatic)
 	return TRUE
 
-//Performs functions relating to setting up the question and choices, if relevant.
+// setup_vote of the base vote type stores the initiator's ckey if available and
+// defaults all choices to display as is.
+//
+// It can be extended or overridden by vote subtypes to define functionality that should happen when
+// the vote is created, e.g. dynamically generating a list of choices or assigning choices a different
+// display value.
+//
+// Return value is a boolean that indicates if vote setup was successful, with FALSE value cancelling the
+// vote creation.
 /datum/vote/proc/setup_vote(mob/creator, automatic)
-	initiator = (!automatic && istype(creator)) ? creator.ckey : "the server"
+	if(!automatic && istype(creator) && creator.client)
+		initiator = creator.key
 	for(var/choice in choices)
-		display_choices[choice] = choice // Default behavior is that the choice name is displayed directly.
+		display_choices[choice] = choice
+	return TRUE
 
 /datum/vote/proc/start_vote()
 	start_time = world.time
@@ -58,7 +68,7 @@
 	sound_to(world, sound('sound/misc/vote.ogg', repeat = 0, wait = 0, volume = 50, channel = 3))
 
 /datum/vote/proc/get_start_text()
-	return "[capitalize(name)] vote started by [initiator]."
+	return "[capitalize(name)] vote started by [initiator || "the server"]."
 
 //Modifies the vote totals based on non-voting mobs.
 /datum/vote/proc/handle_default_votes()

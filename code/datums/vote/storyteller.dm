@@ -9,7 +9,8 @@
 	return FALSE
 
 /datum/vote/storyteller/setup_vote(mob/creator, automatic)
-	initiator = (!automatic && istype(creator)) ? creator.ckey : "the server"
+	if(!automatic && istype(creator) && creator.client)
+		initiator = creator.key
 
 	for(var/datum/storyteller_character/C in GLOB.all_storytellers)
 		choices += C
@@ -17,6 +18,7 @@
 
 	choices += "Random"
 	display_choices["Random"] = "Random"
+	return TRUE
 
 /datum/vote/storyteller/report_result()
 	if(..())

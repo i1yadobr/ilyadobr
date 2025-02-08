@@ -16,7 +16,7 @@
 		if(name in list("Example", "Genesis", "Pathos-I", "Sunset"))
 			continue
 		choices += name
-	..()
+	return ..()
 
 /datum/vote/map/report_result()
 	if(..())

@@ -15,7 +15,7 @@
 
 /datum/vote/transfer/setup_vote(mob/creator, automatic)
 	choices = list("Initiate Crew Transfer", "Extend the Round ([config.vote.autotransfer_interval / 600] minutes)")
-	..()
+	return ..()
 
 /datum/vote/transfer/handle_default_votes()
 	if(config.vote.default_no_vote)
