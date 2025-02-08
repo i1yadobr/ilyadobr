@@ -9,16 +9,11 @@
 	return FALSE
 
 /datum/vote/storyteller/setup_vote(mob/creator, automatic)
-	if(!automatic && istype(creator) && creator.client)
-		initiator = creator.key
-
 	for(var/datum/storyteller_character/C in GLOB.all_storytellers)
 		choices += C
 		display_choices[C] = "[C.name] - [C.desc]"
-
 	choices += "Random"
-	display_choices["Random"] = "Random"
-	return TRUE
+	return ..()
 
 /datum/vote/storyteller/report_result()
 	if(..())

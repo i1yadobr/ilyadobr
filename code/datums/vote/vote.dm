@@ -40,11 +40,12 @@
 /datum/vote/proc/can_run(mob/creator, automatic)
 	return TRUE
 
-// setup_vote of the base vote type stores the initiator's ckey if available and
-// defaults all choices to display as is.
+// setup_vote of the base vote type stores the initiator's ckey if available and fills all unassigned
+// `display_choices` to show their respective choices as is.
+// For `display_choices`, BYOND's native conversion to text will be used, see `interface()` proc.
 //
-// It can be extended or overridden by vote subtypes to define functionality that should happen when
-// the vote is created, e.g. dynamically generating a list of choices or assigning choices a different
+// setup_vote can be extended or overridden by vote subtypes to define functionality that should happen when
+// the vote is created, e.g. dynamically generating a list of choices or assigning choices a non-standard
 // display value.
 //
 // Return value is a boolean that indicates if vote setup was successful, with FALSE value cancelling the
@@ -53,7 +54,8 @@
 	if(!automatic && istype(creator) && creator.client)
 		initiator = creator.key
 	for(var/choice in choices)
-		display_choices[choice] = choice
+		if(!display_choices[choice])
+			display_choices[choice] = choice
 	return TRUE
 
 /datum/vote/proc/start_vote()
