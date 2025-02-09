@@ -246,6 +246,7 @@
 /obj/structure/closet/secure_closet/psychiatry/WillContain()
 	return list(
 		/obj/item/clothing/suit/straight_jacket,
+		/obj/item/clothing/mask/muzzle,
 		/obj/item/reagent_containers/vessel/bottle/chemical/stoxin,
 		/obj/item/reagent_containers/syringe,
 		/obj/item/storage/pill_bottle/citalopram,
