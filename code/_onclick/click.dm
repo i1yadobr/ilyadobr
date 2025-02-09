@@ -165,10 +165,18 @@
 		M.click_action(A, src)
 		return
 
-	if(restrained() && istype(A, /mob/living/carbon/human) && A == src)
-		var/mob/living/carbon/human/H = A
-		H.RestrainedSelfClick()
-		return
+	if(restrained())
+		// NOTE(rufus): currently only human clicks are allowed for restrained mobs,
+		//   the rest of the code is not adapted to restrained clicks yet and doesn't
+		//   handle them properly.
+		if(!istype(A, /mob/living/carbon/human))
+			return
+		if(A == src)
+			var/mob/living/carbon/human/H = A
+			H.RestrainedSelfClick()
+			return
+		// the click falls through to regular interaction, attack code will
+		// recognize the restrained state on its own and default to bites/kicks
 
 	if(in_throw_mode)
 		if(isturf(A) || isturf(A.loc))
