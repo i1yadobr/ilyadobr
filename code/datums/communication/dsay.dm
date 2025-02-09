@@ -116,8 +116,7 @@
 	return DSAY_ASK_BASE
 
 /decl/dsay_communication/admin/get_message(client/communicator, mob/M, message)
-	var/stafftype = uppertext(communicator.holder.rank)
-	return "[SPAN("name", "[stafftype]([communicator.key])")] says, [SPAN("message", "\"[message]\"")]"
+	return "[SPAN("name", "[communicator.key]")] says, [SPAN("message", "\"[message]\"")]"
 
 /decl/dsay_communication/admin/adjust_channel(decl/communication_channel/dsay)
 	dsay.log_proc = /proc/log_say
