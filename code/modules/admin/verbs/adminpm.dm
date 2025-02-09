@@ -49,8 +49,6 @@
 		to_chat(src, SPAN("warning", "Error: Private-Message: Client not found. They may have lost connection!"))
 		return
 
-	var/recieve_pm_type = holder?.rank || "Player"
-
 	msg = sanitize(msg)
 	msg = emoji_parse(C, msg)
 
@@ -99,7 +97,7 @@
 	var/recieve_message
 
 	if(holder && !C.holder)
-		recieve_message = SPAN("pm", "[SPAN("howto", "<b>-- Click the [recieve_pm_type]'s name to reply --</b>")]")
+		recieve_message = SPAN("pm", "[SPAN("howto", "<b>-- Click the admin's name to reply --</b>")]")
 		recieve_message += "\n"
 		if(C.adminhelped)
 			to_chat(C, recieve_message)
@@ -113,7 +111,7 @@
 		sender_message += ": [SPAN("message linkify", "[msg]")]"
 	to_chat(src, SPAN("pm", SPAN("out", sender_message)))
 
-	var/receiver_message = create_text_tag("pm_in", "") + " <b>\[[recieve_pm_type] PM\]</b> [SPAN("name", "[get_options_bar(src, C.holder ? 1 : 0, C.holder ? 1 : 0, 1)]")]"
+	var/receiver_message = create_text_tag("pm_in", "") + " <b>\[Ahelp PM\]</b> [SPAN("name", "[get_options_bar(src, C.holder ? 1 : 0, C.holder ? 1 : 0, 1)]")]"
 	if(C.holder)
 		receiver_message += " (<a href='?_src_=holder;take_ticket=\ref[ticket]'>[(ticket.status == TICKET_OPEN) ? "TAKE" : "JOIN"]</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>)"
 		receiver_message += ": [SPAN("message linkify", "[generate_ahelp_key_words(C.mob, msg)]")]"
