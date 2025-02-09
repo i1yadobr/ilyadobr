@@ -701,7 +701,7 @@
 
 // facing verbs
 /mob/proc/canface()
-	return !incapacitated()
+	return !incapacitated(incapacitation_flags = INCAPACITATION_NO_MOVEMENT)
 
 // Not sure what to call this. Used to check if humans are wearing an AI-controlled exosuit and hence don't need to fall over yet.
 /mob/proc/can_stand_overridden()
