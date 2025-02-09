@@ -37,7 +37,7 @@ var/list/ticket_panels = list()
 
 	return 1
 
-/datum/ticket/proc/take(datum/client_lite/assigned_admin)
+/datum/ticket/proc/take(datum/client_lite/assigned_admin, notify_receiver = TRUE)
 	if(status == TICKET_CLOSED)
 		return
 
@@ -51,7 +51,8 @@ var/list/ticket_panels = list()
 	src.status = TICKET_ASSIGNED
 
 	message_staff(SPAN("notice", "<b>[assigned_admin.key_name(0)]</b> has assigned themself to <b>[src.owner.key_name(0)]'s</b> ticket."))
-	to_chat(client_by_ckey(src.owner.ckey), SPAN("notice", "<b>[assigned_admin.ckey] has added themself to your ticket and should respond shortly. Thanks for your patience!</b>"))
+	if(notify_receiver)
+		to_chat(client_by_ckey(src.owner.ckey), SPAN("notice", "<b>[assigned_admin.ckey] has added themself to your ticket and should respond shortly. Thanks for your patience!</b>"))
 
 	update_ticket_panels()
 

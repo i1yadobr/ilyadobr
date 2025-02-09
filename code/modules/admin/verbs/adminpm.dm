@@ -77,11 +77,12 @@
 		else
 			ticket = get_open_ticket_by_client(sender_lite) // lastly, check player with ticket -> admin
 
-
+	var/admin_initiated_pm = FALSE
 	if(isnull(ticket)) // finally, accept that no ticket exists
 		if(holder && sender_lite.ckey != receiver_lite.ckey)
 			ticket = new /datum/ticket(receiver_lite)
-			ticket.take(sender_lite)
+			ticket.take(sender_lite, notify_receiver = FALSE)
+			admin_initiated_pm = TRUE
 		else
 			to_chat(src, SPAN("notice", "You do not have an open ticket. Please use the adminhelp verb to open a ticket."))
 			return
@@ -99,7 +100,7 @@
 	if(holder && !C.holder)
 		recieve_message = SPAN("pm", "[SPAN("howto", "<b>-- Click the admin's name to reply --</b>")]")
 		recieve_message += "\n"
-		if(C.adminhelped)
+		if(C.adminhelped || admin_initiated_pm)
 			to_chat(C, recieve_message)
 			C.adminhelped = 0
 
