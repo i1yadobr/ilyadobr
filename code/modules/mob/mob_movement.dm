@@ -196,10 +196,6 @@
 /mob/proc/Allow_Spacemove(check_drift = 0)
 	if(!Check_Dense_Object()) //Nothing to push off of so end here
 		return 0
-
-	if(restrained()) //Check to see if we can do things
-		return 0
-
 	return -1
 
 //Checks if a mob has solid ground to stand on

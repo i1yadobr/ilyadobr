@@ -86,10 +86,6 @@
 	return (. + human_delay)
 
 /mob/living/carbon/human/Allow_Spacemove(check_drift = 0)
-	//Can we act?
-	if(restrained())
-		return 0
-
 	//Do we have a working jetpack?
 	var/obj/item/tank/jetpack/thrust
 	if(back)
