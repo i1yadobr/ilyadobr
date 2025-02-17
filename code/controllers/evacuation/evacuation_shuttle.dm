@@ -33,11 +33,11 @@
 
 	for (var/datum/shuttle/autodock/ferry/escape_pod/pod in escape_pods)
 		if (!pod.arming_controller || pod.arming_controller.armed)
-			pod.move_time = (evac_transit_delay/10)
+			pod.move_time = evac_transit_delay
 			pod.launch(src)
 
 	if(autopilot && shuttle.moving_status == SHUTTLE_IDLE)
-		evac_arrival_time = world.time + (shuttle.move_time*10) + (shuttle.warmup_time*10)
+		evac_arrival_time = world.time + shuttle.move_time + (shuttle.warmup_time*10)
 		shuttle.launch(src)
 	// Announcements, state changes and such are handled by the shuttle itself to prevent desync.
 

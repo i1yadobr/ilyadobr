@@ -97,7 +97,7 @@
 		if(moving_status == SHUTTLE_IDLE)
 			return	//someone cancelled the launch
 
-		arrive_time = world.time + travel_time*10
+		arrive_time = world.time + travel_time
 		moving_status = SHUTTLE_INTRANSIT
 		if(attempt_move(interim))
 			var/fwooshed = 0

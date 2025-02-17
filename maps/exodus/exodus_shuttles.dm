@@ -195,7 +195,7 @@
 /datum/shuttle/autodock/ferry/research
 	name = "Research"
 	warmup_time = 10
-	move_time = 10
+	move_time = 10 SECONDS
 	location = 1
 	shuttle_area = /area/shuttle/research/station
 	dock_target = "research_shuttle"
@@ -225,7 +225,7 @@
 /datum/shuttle/autodock/ferry/engie
 	name = "Engineering"
 	warmup_time = 10
-	move_time = 10
+	move_time = 10 SECONDS
 	location = 0
 	shuttle_area = /area/shuttle/constructionsite
 	dock_target = "engineering_shuttle"
@@ -254,7 +254,7 @@
 /datum/shuttle/autodock/ferry/mining
 	name = "Mining"
 	warmup_time = 10
-	move_time = 10
+	move_time = 10 SECONDS
 	location = 0
 	shuttle_area = /area/shuttle/mining
 	dock_target = "mining_shuttle"
@@ -299,7 +299,7 @@
 	current_location = "nav_rescue_start"
 	landmark_transition = "nav_rescue_transition"
 	home_waypoint = "nav_rescue_start"
-	move_time = 120
+	move_time = 2 MINUTES
 
 /obj/effect/shuttle_landmark/rescue/start
 	name = "Rescue Base"
@@ -428,7 +428,7 @@
 	announcer = "NMV Icarus Sensor Array"
 	home_waypoint = "nav_merc_start"
 	cloaked = 0
-	move_time = 120
+	move_time = 2 MINUTES
 	arrival_message = "Attention, you have a large signature approaching the station - looks unarmed to surface scans. We're too far out to intercept - brace for visitors."
 	departure_message = "Your visitors are on their way out of the system, burning delta-v like it's nothing. Good riddance."
 
@@ -489,7 +489,7 @@
 	current_location = "nav_emerc_start"
 	landmark_transition = "nav_emerc_transition"
 	home_waypoint = "nav_emerc_start"
-	move_time = 120
+	move_time = 2 MINUTES
 
 /obj/effect/shuttle_landmark/elite_syndicate/start
 	name = "Elite Syndicate Operative Base"
@@ -532,7 +532,7 @@
 	landmark_transition = "nav_deathsquad_transition"
 	waypoint_station = "nav_deathsquad_centcom"
 	waypoint_offsite = "nav_deathsquad_station"
-	move_time = 120
+	move_time = 2 MINUTES
 
 /obj/effect/shuttle_landmark/deathsquad/centcom
 	name = "Centcom"
@@ -569,7 +569,7 @@
 	dock_target = "merchant_ship_dock"
 	home_waypoint = "nav_merchant_start"
 	cloaked = 1
-	move_time = 60
+	move_time = 1 MINUTE
 	announcer = "NMV Icarus Sensor Array"
 	arrival_message = "Attention, you have an unarmed cargo vessel, which appears to be a merchant ship, approaching the station."
 
@@ -625,7 +625,7 @@
 	landmark_transition = "nav_skipjack_transition"
 	home_waypoint = "nav_skipjack_start"
 	cloaked = 1
-	move_time = 120
+	move_time = 2 MINUTES
 	announcer = "NMV Icarus Sensor Array"
 	arrival_message = "Attention, you have a large signature approaching the station - looks unarmed to surface scans. We're too far out to intercept - brace for visitors."
 	departure_message = "Your visitors are on their way out of the system, burning delta-v like it's nothing. Good riddance."

@@ -13,7 +13,7 @@
 	var/datum/computer/file/embedded_program/docking/active_docking_controller
 
 	var/obj/effect/shuttle_landmark/landmark_transition  //This variable is type-abused initially: specify the landmark_tag, not the actual landmark.
-	var/move_time = 240		//the time spent in the transition area
+	var/move_time = 4 MINUTES // time the shuttle spends in the transit area before jumping to the destination
 
 	category = /datum/shuttle/autodock
 	flags = SHUTTLE_FLAGS_PROCESS
