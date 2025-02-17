@@ -70,7 +70,7 @@
 	waypoint_offsite = "nav_train_dock"
 	landmark_transition = "nav_train_transition"
 	dock_target = "train_shuttle"
-	warmup_time = 5
+	warmup_time = 5 SECONDS
 	move_time = 5 SECONDS
 
 /datum/shuttle/autodock/ferry/train/New()

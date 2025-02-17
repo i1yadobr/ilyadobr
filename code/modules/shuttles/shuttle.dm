@@ -2,7 +2,10 @@
 
 /datum/shuttle
 	var/name = ""
-	// TODO(rufus): uncommented variable
+	// Time it takes for the shuttle to "spin up its thrusters" and prepare for the jump to the next location.
+	// Warmup is mostly used for flavor, but includes sound effects and provides padding for airlocks to close.
+	// After the warmup time has passed, the shuttle immediately attempts to jump to the transit space or
+	// its destination, depending on jump type.
 	var/warmup_time = 0
 	var/moving_status = SHUTTLE_IDLE
 
@@ -77,7 +80,7 @@
 	moving_status = SHUTTLE_WARMUP
 	if(sound_takeoff)
 		playsound(current_location, sound_takeoff, 30, 20, 0.2)
-	spawn(warmup_time*10)
+	spawn(warmup_time)
 		if (moving_status == SHUTTLE_IDLE)
 			return //someone cancelled the launch
 
@@ -93,7 +96,7 @@
 	moving_status = SHUTTLE_WARMUP
 	if(sound_takeoff)
 		playsound(current_location, sound_takeoff, 30, 20, 0.2)
-	spawn(warmup_time*10)
+	spawn(warmup_time)
 		if(moving_status == SHUTTLE_IDLE)
 			return	//someone cancelled the launch
 

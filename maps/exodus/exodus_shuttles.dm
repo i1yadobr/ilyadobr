@@ -110,7 +110,7 @@
 /datum/shuttle/autodock/ferry/supply/drone
 	name = "Supply"
 	location = 1
-	warmup_time = 10
+	warmup_time = 10 SECONDS
 	shuttle_area = /area/supply/dock
 	dock_target = "supply_shuttle"
 	waypoint_offsite = "nav_cargo_start"
@@ -133,7 +133,7 @@
 	name = "Cargo Elevator"
 	//category = /datum/shuttle/autodock/ferry/supply
 	shuttle_area = /area/shuttle/supply/elevator/upper
-	warmup_time = 4
+	warmup_time = 4 SECONDS
 	waypoint_station = "nav_cargo_elevator_top"
 	waypoint_offsite = "nav_cargo_elevator_bottom"
 	sound_takeoff = 'sound/effects/lift_heavy_start.ogg'
@@ -156,7 +156,7 @@
 
 /datum/shuttle/autodock/multi/antag/mining
 	name = "Creaker"
-	warmup_time = 15
+	warmup_time = 15 SECONDS
 	destination_tags = list(
 		"nav_creaker_station",
 		"nav_creaker_north",
@@ -194,7 +194,7 @@
 
 /datum/shuttle/autodock/ferry/research
 	name = "Research"
-	warmup_time = 10
+	warmup_time = 10 SECONDS
 	move_time = 10 SECONDS
 	location = 1
 	shuttle_area = /area/shuttle/research/station
@@ -224,7 +224,7 @@
 
 /datum/shuttle/autodock/ferry/engie
 	name = "Engineering"
-	warmup_time = 10
+	warmup_time = 10 SECONDS
 	move_time = 10 SECONDS
 	location = 0
 	shuttle_area = /area/shuttle/constructionsite
@@ -253,7 +253,7 @@
 //Mining shuttle
 /datum/shuttle/autodock/ferry/mining
 	name = "Mining"
-	warmup_time = 10
+	warmup_time = 10 SECONDS
 	move_time = 10 SECONDS
 	location = 0
 	shuttle_area = /area/shuttle/mining
@@ -283,7 +283,7 @@
 
 /datum/shuttle/autodock/multi/antag/rescue
 	name = "Rescue"
-	warmup_time = 10
+	warmup_time = 10 SECONDS
 	destination_tags = list(
 		"nav_rescue_start",
 		"nav_rescue_station",
@@ -354,7 +354,7 @@
 /datum/shuttle/autodock/ferry/emergency/centcom
 	name = "Escape"
 	location = 1
-	warmup_time = 10
+	warmup_time = 10 SECONDS
 	shuttle_area = /area/shuttle/escape/centcom
 	dock_target = "escape_shuttle"
 	landmark_transition = "nav_escape_transition"
@@ -383,7 +383,7 @@
 /datum/shuttle/autodock/ferry/administration
 	name = "Administration"
 	location = 1
-	warmup_time = 10
+	warmup_time = 10 SECONDS
 	shuttle_area = /area/shuttle/administration/centcom
 	dock_target = "admin_shuttle"
 	landmark_transition = "nav_admin_transition"
@@ -411,7 +411,7 @@
 
 /datum/shuttle/autodock/multi/antag/syndicate
 	name = "Syndicate"
-	warmup_time = 10
+	warmup_time = 10 SECONDS
 	destination_tags = list(
 		"nav_merc_start",
 		"nav_merc_dock",
@@ -476,7 +476,7 @@
 
 /datum/shuttle/autodock/multi/antag/elite_syndicate
 	name = "Elite Syndicate Operative"
-	warmup_time = 10
+	warmup_time = 10 SECONDS
 	destination_tags = list(
 		"nav_emerc_start",
 		"nav_emerc_nw",
@@ -525,7 +525,7 @@
 
 /datum/shuttle/autodock/ferry/deathsquad
 	name = "Deathsquad"
-	warmup_time = 10
+	warmup_time = 10 SECONDS
 	location = 0
 	shuttle_area = /area/shuttle/deathsquad/centcom
 	dock_target = "deathsquad_shuttle_port"
@@ -555,7 +555,7 @@
 
 /datum/shuttle/autodock/multi/antag/merchant
 	name = "Merchant"
-	warmup_time = 10
+	warmup_time = 10 SECONDS
 	destination_tags = list(
 		"nav_merchant_start",
 		"nav_merchant_out",
@@ -611,7 +611,7 @@
 
 /datum/shuttle/autodock/multi/antag/skipjack
 	name = "Skipjack"
-	warmup_time = 10
+	warmup_time = 10 SECONDS
 	destination_tags = list(
 		"nav_skipjack_start",
 		"nav_skipjack_nw",
