@@ -25,23 +25,28 @@
 
 /datum/evacuation_controller/starship/finish_preparing_evac()
 	. = ..()
-	// Arm the escape pods.
-	if (emergency_evacuation)
-		for (var/datum/shuttle/autodock/ferry/escape_pod/pod in escape_pods)
-			if (pod.arming_controller)
+	// TODO(rufus): deduplicate pod arming code across shuttle and starship controllers
+	// Arm the escape pods if security code is elevated or it's an emergency evac
+	var/decl/security_state/secstate = decls_repository.get_decl(GLOB.using_map.security_state)
+	var/decl/security_level/min_elevated_code = decls_repository.get_decl(/decl/security_level/default/code_blue)
+	var/elevated_code = secstate.current_security_level_is_same_or_higher_than(min_elevated_code)
+	if(emergency_evacuation || elevated_code)
+		for(var/datum/shuttle/autodock/ferry/escape_pod/pod in escape_pods)
+			if(pod.arming_controller)
 				pod.arming_controller.arm()
 
 /datum/evacuation_controller/starship/launch_evacuation()
-
 	state = EVAC_IN_TRANSIT
 
-	if (emergency_evacuation)
+	var/decl/security_state/secstate = decls_repository.get_decl(GLOB.using_map.security_state)
+	var/decl/security_level/min_elevated_code = decls_repository.get_decl(/decl/security_level/default/code_blue)
+	var/elevated_code = secstate.current_security_level_is_same_or_higher_than(min_elevated_code)
+	if(emergency_evacuation || elevated_code)
 		// Abondon Ship
-		for (var/datum/shuttle/autodock/ferry/escape_pod/pod in escape_pods) // Launch the pods!
-			if (!pod.arming_controller || pod.arming_controller.armed)
+		for(var/datum/shuttle/autodock/ferry/escape_pod/pod in escape_pods) // Launch the pods!
+			if(!pod.arming_controller || pod.arming_controller.armed)
 				pod.move_time = evac_transit_delay
 				pod.launch(src)
-
 		priority_announcement.Announce(replacetext(replacetext(GLOB.using_map.emergency_shuttle_leaving_dock, "%dock_name%", "[GLOB.using_map.dock_name]"),  "%ETA%", "[round(get_eta()/60,1)] minute\s"))
 	else
 		// Bluespace Jump

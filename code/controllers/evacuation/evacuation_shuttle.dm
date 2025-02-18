@@ -46,10 +46,14 @@
 	evac_launch_time = world.time + evac_launch_delay
 
 	. = ..()
-	// Arm the escape pods.
-	if (emergency_evacuation)
-		for (var/datum/shuttle/autodock/ferry/escape_pod/pod in escape_pods)
-			if (pod.arming_controller)
+	// TODO(rufus): deduplicate pod arming code across shuttle and starship controllers
+	// Arm the escape pods if security code is elevated or it's an emergency evac
+	var/decl/security_state/secstate = decls_repository.get_decl(GLOB.using_map.security_state)
+	var/decl/security_level/min_elevated_code = decls_repository.get_decl(/decl/security_level/default/code_blue)
+	var/elevated_code = secstate.current_security_level_is_same_or_higher_than(min_elevated_code)
+	if(emergency_evacuation || elevated_code)
+		for(var/datum/shuttle/autodock/ferry/escape_pod/pod in escape_pods)
+			if(pod.arming_controller)
 				pod.arming_controller.arm()
 
 /datum/evacuation_controller/shuttle/call_evacuation(mob/user, _emergency_evac, forced, skip_announce, autotransfer)
