@@ -102,9 +102,9 @@
 
 /datum/evacuation_controller/shuttle/proc/get_long_jump_time()
 	if (shuttle.location)
-		return round(evac_prep_delay/10)/2
+		return round(evac_prep_delay)/2
 	else
-		return round(evac_transit_delay/10)
+		return round(evac_transit_delay)
 
 /datum/evacuation_controller/shuttle/available_evac_options()
 	if (!shuttle.location)
