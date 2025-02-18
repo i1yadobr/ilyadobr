@@ -135,8 +135,6 @@ var/list/escape_pods_by_name = list()
 
 
 /datum/computer/file/embedded_program/docking/simple/escape_pod/receive_user_command(command)
-	if (!armed)
-		return
 	..(command)
 
 /datum/computer/file/embedded_program/docking/simple/escape_pod/process()
