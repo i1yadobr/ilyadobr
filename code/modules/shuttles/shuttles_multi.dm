@@ -46,7 +46,7 @@
 /datum/shuttle/autodock/multi/antag/shuttle_moved()
 	if(current_location == home_waypoint)
 		announce_arrival()
-	else if(next_location == home_waypoint)
+	else if(current_location.landmark_tag != landmark_transition.landmark_tag && next_location == home_waypoint)
 		announce_departure()
 	..()
 
