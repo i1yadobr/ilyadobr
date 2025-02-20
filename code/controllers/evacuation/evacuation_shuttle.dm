@@ -27,14 +27,13 @@
 	return (!autopilot || (shuttle && shuttle.is_launching()))
 
 /datum/evacuation_controller/shuttle/launch_evacuation()
+	for(var/datum/shuttle/autodock/ferry/escape_pod/pod in escape_pods)
+		if(!pod.arming_controller || pod.arming_controller.armed)
+			pod.move_time = evac_transit_delay
+			pod.launch(src)
 
 	if(waiting_to_leave())
 		return
-
-	for (var/datum/shuttle/autodock/ferry/escape_pod/pod in escape_pods)
-		if (!pod.arming_controller || pod.arming_controller.armed)
-			pod.move_time = evac_transit_delay
-			pod.launch(src)
 
 	if(autopilot && shuttle.moving_status == SHUTTLE_IDLE)
 		evac_arrival_time = world.time + shuttle.move_time + shuttle.warmup_time
