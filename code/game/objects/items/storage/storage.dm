@@ -215,7 +215,7 @@
 			return FALSE
 
 	// If intent is not set to help, disallow insertion and let the items perform their action
-	if(user.a_intent != I_HELP && (istype(W, /obj/item/hand_labeler) || istype(W, /obj/item/forensics)))
+	if(user?.a_intent != I_HELP && (istype(W, /obj/item/hand_labeler) || istype(W, /obj/item/forensics)))
 		return FALSE
 
 	// Don't allow insertion of unsafed compressed matter implants
