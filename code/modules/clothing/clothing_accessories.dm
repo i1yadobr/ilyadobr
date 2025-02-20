@@ -16,7 +16,8 @@
 			return
 
 		var/obj/item/clothing/accessory/A = I
-		if(can_attach_accessory(A) && user.drop(A))
+		if(can_attach_accessory(A))
+			user.drop(A, force = TRUE)
 			attach_accessory(user, A)
 			return
 		else
