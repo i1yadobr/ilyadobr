@@ -92,7 +92,8 @@
 
 /obj/item/pen/crayon
 	var/datum/browser/popup
-	var/turf/last_target
+	var/turf/last_clicked_on
+	var/turf/drawing_on
 
 /obj/item/pen/crayon/proc/update_popup(mob/user)
 	if(!user)
@@ -139,37 +140,37 @@
 /obj/item/pen/crayon/afterattack(atom/target, mob/user as mob, proximity)
 	if(!proximity) return
 	if(istype(target,/turf/simulated/floor) || istype(target,/turf/simulated/wall))
-		last_target = target
+		last_clicked_on = target
 		update_popup(user)
 		popup.open()
 	return
 
 /obj/item/pen/crayon/Topic(href, href_list, state = GLOB.physical_state)
 	. = ..()
-	if(!last_target.Adjacent(usr))
+	if(!last_clicked_on.Adjacent(usr))
 		to_chat(usr, SPAN_WARNING("You moved too far away!"))
 		popup.close()
 		return
 	if(usr.incapacitated())
 		return
+	if(drawing_on && drawing_on.Adjacent(usr))
+		to_chat(usr, SPAN("warning", "You must finish your drawing on \the [drawing_on] first, art is all about focus."))
+		return
 
 	var/drawing = href_list["drawing"] ? href_list["drawing"] : "rune"
 	var/visible_name = href_list["type"] ? replacetext(href_list["type"], "_", " ") : "drawing"
 	popup.close()
-	usr.visible_message(SPAN_NOTICE("[usr] starts drawing something on \the [last_target]."), SPAN_NOTICE("You start drawing on \the [last_target]"))
-	var/turf/multiple_check = last_target
+	usr.visible_message(SPAN_NOTICE("[usr] starts drawing something on \the [last_clicked_on]."), SPAN_NOTICE("You start drawing on \the [last_clicked_on]"))
+	drawing_on = last_clicked_on
 	if(instant || do_after(usr, 50))
-		if(multiple_check != last_target)
-			return // Someone is trying to draw is several adjacent places using one crayon
-		if(!last_target)
-			last_target = get_turf(usr)
 		if(drawing == "rune")
 			drawing = "rune[rand(1,6)]"
-		new /obj/effect/decal/cleanable/crayon(last_target, colour, shadeColour, drawing, visible_name)
-		usr.visible_message(SPAN_NOTICE("[usr] finished drawing [visible_name] on \the [last_target]."), \
-							SPAN_NOTICE("You finished drawing [visible_name] on \the [last_target]"))
-		last_target.add_fingerprint(usr)
+		new /obj/effect/decal/cleanable/crayon(drawing_on, colour, shadeColour, drawing, visible_name)
+		usr.visible_message(SPAN_NOTICE("[usr] finished drawing [visible_name] on \the [drawing_on]."), \
+							SPAN_NOTICE("You finished drawing [visible_name] on \the [drawing_on]"))
+		drawing_on.add_fingerprint(usr)
 		reduce_uses()
+	drawing_on = null
 
 /obj/item/pen/crayon/attack(mob/living/carbon/M as mob, mob/user as mob)
 	if(istype(M) && M == user)
