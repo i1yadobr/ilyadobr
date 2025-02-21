@@ -1,4 +1,4 @@
-#define UPLOAD_LIMIT		10485760	//Restricts client uploads to the server to 10MB
+#define UPLOAD_LIMIT		20971520	//Restricts client uploads to the server to 10MB
 #define MIN_CLIENT_VERSION	513
 
 #define LIMITER_SIZE	5
