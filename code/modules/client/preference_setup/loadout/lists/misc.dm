@@ -83,6 +83,11 @@
 	display_name = "ashtray, plastic"
 	path = /obj/item/material/ashtray/plastic
 
+/datum/gear/cigarettes
+	display_name = "smoke pack selection"
+	path = /obj/item/storage/fancy/cigarettes
+	flags = GEAR_HAS_TYPE_SELECTION
+
 /datum/gear/cigars
 	display_name = "fancy cigar case"
 	path = /obj/item/storage/fancy/cigar
