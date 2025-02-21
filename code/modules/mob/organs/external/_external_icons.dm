@@ -130,7 +130,7 @@ var/list/limb_icon_cache = list()
 				ADD_SORTED(sorted, list(list(M.draw_order, I, M)), /proc/cmp_marking_order)
 		for(var/entry in sorted)
 			overlays |= entry[2]
-			mob_icon.Blend(entry[2], entry[3]["layer_blend"])
+			mob_icon.Blend(entry[2], entry[3]?.layer_blend)
 
 		if(body_hair && islist(h_col) && h_col.len >= 3)
 			var/cache_key = "[body_hair]-[icon_name]-[h_col[1]][h_col[2]][h_col[3]]"
