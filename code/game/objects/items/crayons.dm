@@ -130,6 +130,11 @@
 	else
 		popup.set_content(dat)
 		popup.update()
+	// NOTE(rufus): a temporary hacky solution to give graffiti previews one more chance to load until the
+	// preview system is refactored to not rely on intermediate files that aren't always loaded in time
+	spawn(10)
+		popup.set_content(dat)
+		popup.update()
 
 /obj/item/pen/crayon/afterattack(atom/target, mob/user as mob, proximity)
 	if(!proximity) return
