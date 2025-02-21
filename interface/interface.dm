@@ -19,12 +19,12 @@
 		to_chat(src, SPAN("warning", "The Discord URL is not set in the server configuration."))
 	return
 
-/client/verb/bugreport()
-	set name = "Bug Report"
-	set desc = "Create bug report to developers."
+/client/verb/github()
+	set name = "Github"
+	set desc = "Visit Github repository of the server."
 	set hidden = 1
 	if( config.link.github )
-		send_link(src, "[config.link.github]/issues")
+		send_link(src, config.link.github)
 	else
 		to_chat(src, SPAN("warning", "The Github URL is not set in the server configuration."))
 	return
