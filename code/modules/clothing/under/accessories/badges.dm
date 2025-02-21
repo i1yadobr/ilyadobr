@@ -152,3 +152,28 @@
 	desc = "A leather-backed plastic badge displaying that the owner is certified press personnel."
 	icon_state = "pressbadge"
 	badge_string = "Journalist"
+
+/obj/item/clothing/accessory/badge/military_dogtag
+	name = "military dog tag"
+	desc = "A standard-issue metal dog tag engraved with the wearer's identification details. \
+	        Used by military personnel for identification in case of injury or death, or as a memento of service."
+	icon_state = "military_dogtag"
+	slot_flags = SLOT_TIE
+	var/blood_type
+	var/religion
+
+/obj/item/clothing/accessory/badge/military_dogtag/_examine_text(mob/user)
+	var/text = ..()
+	if(stored_name && blood_type && religion)
+		text += "\nName: [stored_name], Blood Type: [blood_type], Religion: [religion]"
+	return text
+
+/obj/item/clothing/accessory/badge/military_dogtag/attack_self(mob/user)
+	var/info
+	if(stored_name && blood_type && religion)
+		info = "Name: [stored_name], Blood Type: [blood_type], Religion: [religion]"
+	else
+		info = "As you examine the dog tag closely, you notice that some of the crucial details are worn \
+		        away, making them difficult to make out. The metal is scratched and tarnished, \
+		        obscuring the information that once identified its owner."
+	to_chat(user, "You inspect \the [src].\n[info]")
