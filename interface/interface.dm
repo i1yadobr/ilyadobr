@@ -9,36 +9,6 @@
 		to_chat(src, SPAN("warning", "The wiki URL is not set in the server configuration."))
 	return
 
-/client/verb/rules()
-	set name = "Rules"
-	set desc = "Show Server Rules."
-	set hidden = 1
-	if( config.link.rules )
-		send_link(src, config.link.rules)
-	else
-		to_chat(src, SPAN("warning", "The rules URL is not set in the server configuration."))
-	return
-
-/client/verb/backstory()
-	set name = "Backstory"
-	set desc = "Show server Backstory."
-	set hidden = 1
-	if( config.link.backstory )
-		send_link(src, config.link.backstory)
-	else
-		to_chat(src, SPAN("warning", "The backstory URL is not set in the server configuration."))
-	return
-
-/client/verb/forum()
-	set name = "Forum"
-	set desc = "Visit the forum."
-	set hidden = 1
-	if( config.link.forum )
-		send_link(src, config.link.forum)
-	else
-		to_chat(src, SPAN("warning", "The forum URL is not set in the server configuration."))
-	return
-
 /client/verb/discord()
 	set name = "Discord"
 	set desc = "Visit the community Discord."

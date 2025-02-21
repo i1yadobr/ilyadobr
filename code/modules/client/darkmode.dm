@@ -28,19 +28,6 @@ Thanks to spacemaniac and mcdonald for help with the JS side of this.
 	mainwindow.background-color = none;
 	mainvsplit.background-color = none;
 
-	rulesb.background-color = none;
-	rulesb.text-color = #000000;
-	wikib.background-color = none;
-	wikib.text-color = #000000;
-	discordb.background-color = none;
-	discordb.text-color = #000000;
-	backstoryb.background-color = none;
-	backstoryb.text-color = #000000;
-	bugreportb.background-color = none;
-	bugreportb.text-color = #000000;
-	storeb.background-color = none;
-	storeb.text-color = #000000;
-
 	output.background-color = none;
 	output.text-color = #000000;
 	outputwindow.background-color = none;
@@ -85,19 +72,6 @@ Thanks to spacemaniac and mcdonald for help with the JS side of this.
 	mainwindow.background-color = [COLOR_DARKMODE_BACKGROUND];
 	mainvsplit.background-color = [COLOR_DARKMODE_BACKGROUND];
 
-	rulesb.background-color = #494949;
-	rulesb.text-color = [COLOR_DARKMODE_TEXT];
-	wikib.background-color = #494949;
-	wikib.text-color = [COLOR_DARKMODE_TEXT];
-	discordb.background-color = #494949;
-	discordb.text-color = [COLOR_DARKMODE_TEXT];
-	backstoryb.background-color = #494949;
-	backstoryb.text-color = [COLOR_DARKMODE_TEXT];
-	bugreportb.background-color = #494949;
-	bugreportb.text-color = [COLOR_DARKMODE_TEXT];
-	storeb.background-color = #494949;
-	storeb.text-color = [COLOR_DARKMODE_TEXT];
-
 	output.background-color = [COLOR_DARKMODE_DARKBACKGROUND];
 	output.text-color = [COLOR_DARKMODE_TEXT];
 	outputwindow.background-color = [COLOR_DARKMODE_DARKBACKGROUND];
@@ -141,19 +115,6 @@ Thanks to spacemaniac and mcdonald for help with the JS side of this.
 	outputwindow.text-color = [COLOR_MARINEMODE_TEXT];
 	mainwindow.background-color = [COLOR_MARINEMODE_BACKGROUND];
 	mainvsplit.background-color = [COLOR_MARINEMODE_BACKGROUND];
-
-	rulesb.background-color = [COLOR_MARINEMODE_GRAYBUTTON];
-	rulesb.text-color = [COLOR_MARINEMODE_TEXT];
-	wikib.background-color = [COLOR_MARINEMODE_GRAYBUTTON];
-	wikib.text-color = [COLOR_MARINEMODE_TEXT];
-	discordb.background-color = [COLOR_MARINEMODE_GRAYBUTTON];
-	discordb.text-color = [COLOR_MARINEMODE_TEXT];
-	backstoryb.background-color = [COLOR_MARINEMODE_GRAYBUTTON];
-	backstoryb.text-color = [COLOR_MARINEMODE_TEXT];
-	bugreportb.background-color = [COLOR_MARINEMODE_GRAYBUTTON];
-	bugreportb.text-color = [COLOR_MARINEMODE_TEXT];
-	storeb.background-color = [COLOR_MARINEMODE_GRAYBUTTON];
-	storeb.text-color = [COLOR_MARINEMODE_TEXT];
 
 	output.background-color = [COLOR_MARINEMODE_BACKGROUND];
 	output.text-color = [COLOR_MARINEMODE_TEXT];
