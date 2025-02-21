@@ -117,9 +117,12 @@
 		dat += "<a href='?\ref[src];type=arrow;drawing=[drawing]'>[arrows[drawing]]</a> "
 
 	dat += "<hr>Draw graffiti: "
+	// TODO(rufus): replace with a different system as crayon preview images not always have enough time
+	// to load on the client. This is due to the system relying on generating intermediate files and using
+	// them as image sources in the generated html.
 	for(var/drawing in icon_states('icons/effects/crayongraffiti.dmi'))
 		if(length(drawing) > 2 && copytext(drawing, -2) != "_s")
-			dat += "<a href='?\ref[src];type=graffiti;drawing=[drawing]'><img src=\"[get_crayon_preview(colour, shadeColour, drawing, user)]\" style=\"width: 32px; height: 32px;\"></a> "
+			dat += "<a href='?\ref[src];type=graffiti;drawing=[drawing]'><img src=\"[get_graffiti_preview(colour, shadeColour, drawing, user)]\" style=\"width: 32px; height: 32px;\"></a> "
 
 	if(!popup || popup.user != user)
 		popup = new /datum/browser(user, "crayon", "Choose drawing", 960, 230)
